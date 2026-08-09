@@ -45,10 +45,13 @@
   table.div th,table.div td{border:1px solid var(--line);padding:3px 12px;text-align:center}
   table.div td:last-child{font-weight:700;color:var(--blue)}
   /* dial */
-  .dialwrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .dialwrap{display:grid;grid-template-columns:minmax(300px,440px) 280px;gap:18px;align-items:start}
+  @media(max-width:800px){.dialwrap{grid-template-columns:1fr}}
+  .dialwrap svg{width:100%;height:auto;max-width:440px}
+  .dialside{min-width:0}
   .legendbox{font-size:.8rem}
   .legendbox span.sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-  #dialread{font-size:.95rem;margin-top:.6rem}
+  #dialread{font-size:.95rem;margin-top:.6rem;min-height:6.2em}
   #dialread b{font-family:"Roboto Mono",monospace}
   .ovf{color:var(--sign);font-weight:700}
   /* fp32 */
@@ -104,7 +107,7 @@
   the bits, the physical fact. The four rings are four <i>conventions</i> for reading it. Spin the needle and watch the readings disagree.</p>
   <div class="dialwrap">
     <svg id="dial" width="430" height="430" viewBox="0 0 430 430"></svg>
-    <div>
+    <div class="dialside">
       <div class="legendbox">
         <div><span class="sw" style="background:#22262a"></span><b>pattern</b> (the bits)</div>
         <div><span class="sw" style="background:#0056b8"></span>unsigned ring</div>
