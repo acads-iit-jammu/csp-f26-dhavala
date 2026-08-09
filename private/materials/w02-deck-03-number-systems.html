@@ -145,6 +145,14 @@ const SLIDES = [
      "About 7 decimal digits of precision; magnitudes from ~10⁻³⁸ to ~10³⁸",
      "A warning you will meet in C: <b>0.1 has no exact binary costume</b> — it is a repeating binary fraction, stored rounded. Never test real numbers with =="))},
 
+{title:"“But my Python prints 0.1 back just fine…”", body:()=> e(F,null,
+  html("p",'A fair objection: floats cannot store 0.1 exactly — yet type <span class="mono">0.1</span> into a Python terminal and it cheerfully prints <span class="mono">0.1</span>. Caught between two claims, always run the experiment. Here is what is actually happening:'),
+  li("What gets <b>stored</b> is the nearest representable double: <span class='mono'>0.1000000000000000055511151231257827…</span> — the impostor is real",
+     "What gets <b>printed</b> is a choice. Modern languages compute the <b>shortest decimal string that would decode back to exactly the same stored bits</b> — and “0.1” is that string. The terminal is being <i>polite</i>, not honest",
+     "The mask slips the moment arithmetic happens: <span class='mono'>0.1 + 0.2</span> → <span class='mono'>0.30000000000000004</span>, because the sum's bits are <i>not</i> 0.3's bits — so the shortest honest string is the ugly one",
+     "Interrogate directly: <span class='mono'>format(0.1, '.20f')</span> → <span class='mono'>0.10000000000000000555</span>"),
+  html("div",'<div class="note">Python floats are 64-bit (1 sign + 11 exponent + 52 fraction — same anatomy as FP32, bigger costume, same disease). Lesson for the week: <b>even what a terminal prints is a representation choice</b> — one more reader, one more convention.</div>'))},
+
 {title:"How much number do you actually need?", body:()=> e(F,null,
   e("div",{className:"quote"},"32 bits per number. Says who?",
     e("small",null,"Your bank disagrees with your video game, and both disagree with an AI chip. Representation is an engineering choice — range vs precision vs speed vs energy. This week's PAGAL column follows that question to its 2026 frontier: the AI industry now runs neural networks on numbers just FOUR bits wide. How? Read the column — the answer reuses everything on this deck.")))},

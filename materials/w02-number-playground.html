@@ -162,6 +162,17 @@
     <button class="preset" data-v="Infinity">∞</button>
     <button class="preset" data-v="NaN">NaN</button>
   </div>
+  <details style="margin-top:.6rem">
+    <summary style="cursor:pointer;color:var(--blue-mid);font-size:.9rem">“But typing 0.1 in Python prints 0.1 back — so is it stored exactly after all?”</summary>
+    <p style="font-size:.85rem">No — and the explanation is worth keeping. What is <b>stored</b> is the nearest representable
+    value (the impostor on the “exactly stored” line above). What is <b>printed</b> is a courtesy: modern languages compute the
+    <b>shortest decimal string that would decode back to exactly the same stored bits</b>, and for that particular double the
+    shortest such string happens to be “0.1”. Politeness, not honesty. The mask slips when arithmetic makes new bits:
+    try <span class="mono">0.1 + 0.2</span> in any Python terminal → <span class="mono">0.30000000000000004</span> — the sum's
+    bits are not 0.3's bits, so no short string exists. Or interrogate directly:
+    <span class="mono">format(0.1, '.20f')</span> → <span class="mono">0.10000000000000000555</span>.
+    Even what a terminal prints is a representation choice — one more reader, one more convention.</p>
+  </details>
   <div class="hint"><b>Try this:</b> encode <b>0.1</b> and read the “exactly stored” line — the machine keeps a rounded
   impostor, which is why C programmers never compare reals with <span class="mono">==</span>. Then flip the sign bit of 6.5.
   Then flip one exponent bit and watch the value leap — exponent bits move <i>worlds</i>, fraction bits move <i>whiskers</i>.</div>

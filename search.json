@@ -261,7 +261,7 @@
     "href": "weeks/w02.html#after-class",
     "title": "W02: Number Systems",
     "section": "After Class",
-    "text": "After Class\n\nConvert 100, 255, and your roll number to binary and hexadecimal; write −77 in 8-bit two’s complement; decode the FP32 pattern 0 10000010 01000000000000000000000.\nVerify one of your conversions the machine’s way: does 42 + (−42) really give all zeros in 8 bits?",
+    "text": "After Class\n\nConvert 100, 255, and your roll number to binary and hexadecimal; write −77 in 8-bit two’s complement; decode the FP32 pattern 0 10000010 01000000000000000000000.\nVerify one of your conversions the machine’s way: does 42 + (−42) really give all zeros in 8 bits?\nA terminal experiment: in Python, type 0.1 (prints 0.1 — looks exact!), then 0.1 + 0.2, then format(0.1, '.20f'). Reconcile what you see with the FP32 slide — the resolution is in Deck 03 and the Playground.",
     "crumbs": [
       "Weekly Notes",
       "W02: Number Systems"
