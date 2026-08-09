@@ -1,4 +1,4 @@
-# W02: Number Systems I {.unnumbered}
+# W02: Number Systems {.unnumbered}
 
 **Dates:** Mon Aug 10 & Tue Aug 11, 2026 · 8:00–8:50 am · 12LH3004
 
@@ -6,16 +6,39 @@
 
 ## Pre-read
 
-*To be posted (typically by the weekend before).*
+- Last week's take-home question: *why does 72 mean H?* Codes are conventions — this week we go one level deeper: how does 72 *itself* live in a machine?
+- Skim [Lec 3](../cs1100-cse-iitm-2021/slides/Lec3.pdf) — *The Computing Machine* (Prof. Shweta Agrawal, IIT Madras): computer organization, bits and bytes, and first contact with binary.
 
 ## In Class
 
-- Notes (to be posted) — decimal & binary; unsigned and signed integers (sign-magnitude, one's & two's complement)
+- 📽️ [**Deck 03 — Number Systems**](../materials/w02-deck-03-number-systems.html) — the week's slides:
+  - **Radix-q positional systems** — one idea behind every numeral (value = digits × powers of q); tally marks (q=1) to ternary to the popular costumes: decimal (q=10, courtesy of anatomy) and hexadecimal (q=16, binary's shorthand). **Binary (q=2) is what computers wear** — because switches have two reliable states.
+  - **Conversions**, both directions: binary→decimal by weights, decimal→binary by repeated division; hex ↔ binary four bits at a time.
+  - **Negative integers** — there is no minus sign in a cell: sign-magnitude, one's complement, and the winner, **two's complement** (one adder does everything).
+  - **Real numbers** — fixed point (the stuck ruler) and **floating point** (binary scientific notation), ending at the world standard: **IEEE FP32** — 1 sign + 8 exponent (bias 127) + 23 fraction bits, worked example and the `0.1 != 0.1` warning.
+- [Lec 3](../cs1100-cse-iitm-2021/slides/Lec3.pdf) — companion slides (Prof. Shweta Agrawal, IIT Madras)
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+- Convert 100, 255, and your roll number to binary and hexadecimal; write −77 in 8-bit two's complement; decode the FP32 pattern `0 10000010 01000000000000000000000`.
+- Verify one of your conversions the machine's way: does 42 + (−42) really give all zeros in 8 bits?
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning: the week's informal column.*
+
+**How many bits does a number deserve? (FP32 → FP16 → NVFP4)**
+
+This week you met IEEE FP32 — the 32-bit costume the world agreed real numbers should wear: 1 sign bit, 8 exponent bits, 23 fraction bits, about seven trustworthy decimal digits. For thirty years that was simply what "a real number" meant in a computer. Then the AI industry asked a heretical question: *who says a number deserves 32 bits?*
+
+The first cut was gentle. **FP16** — "half precision" — keeps the same three-part anatomy but on a diet: 1 sign, 5 exponent, 10 fraction bits. Half the memory, twice the numbers per second through the same hardware, and for neural networks it mostly… worked. That "mostly" is the interesting part: a neural network is not a bank ledger. It is a huge fabric of approximate quantities whose *collective pattern* matters far more than any individual value's seventh decimal digit. Precision, it turns out, was being spent where nobody was reading it — and this week's deepest idea (*meaning lives in the reader*) applies to precision too.
+
+So the diet continued: 8 bits, then four. NVIDIA's current answer, introduced with its Blackwell chips, is **NVFP4** (the official name — often misheard as "NFP4"). A single NVFP4 value is four bits in **E2M1** anatomy: 1 sign, 2 exponent, 1 fraction bit. Stop and let that register against Deck 03: two exponent bits and one fraction bit can express only **sixteen distinct values**, with magnitudes no larger than ±6. As a stand-alone number format, that is almost comically poor — you could not price vegetables with it.
+
+The rescue is a trick worth remembering, because it is pure Week-2 thinking. NVFP4 numbers never travel alone: they live in **blocks of 16**, and each block carries one shared **scale factor** — itself a small floating-point number (FP8, E4M3 anatomy) — with one full-precision **FP32 scale over the whole tensor** on top. Each little 4-bit value means "my sixteenth of the pattern, *times my block's scale, times the tensor's scale*." The costume didn't get smarter; the *convention around it* did — two levels of shared context squeeze meaning through a four-bit needle. It is positional notation's own trick, one storey up: digits are cheap because the *position* carries the magnitude; here, values are cheap because the *block* carries it.
+
+Why go through these contortions? Because at AI scale, bits are physics. A model with a trillion parameters stored in FP32 is four terabytes that must be fetched, again and again, through memory systems that burn energy per byte moved. Cut each number from 32 bits to 4 (plus a sliver for shared scales) and you have cut memory, bandwidth, and much of the energy bill by nearly 8× — which is the difference between an AI that runs in a datacenter and one that runs on your phone.
+
+Three take-homes, all of them this course in miniature. **Representation is a design choice, not a fact of nature** — FP32 was never sacred, just convenient. **The right representation depends on the reader** — a bank reads every paisa; a neural network reads a pattern; giving both the same 32 bits wastes somebody's silicon. And **the frontier of computing in 2026 is being decided by exactly what you practised this week** — exponents, fractions, biases, and the art of meaning more with fewer bits. The people designing whatever comes after NVFP4 are doing your Week 2 homework, for very high stakes.
+
+*Sources: [NVIDIA Transformer Engine documentation on FP8/FP4](https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/examples/fp8_primer.html) · [NVFP4 format overview](https://zeroentropy.dev/concepts/nvfp4/) · [NVFP4 vs MXFP4 decision guide](https://www.spheron.network/blog/nvfp4-vs-mxfp4-gpu-cloud-4bit-quantization-guide/).*
