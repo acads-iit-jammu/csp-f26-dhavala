@@ -137,6 +137,11 @@
     <span class="tag" style="background:var(--mant)">fraction · 23 bits (hidden 1.)</span>
   </div>
   <div class="fpbits" id="fpbits"></div>
+  <div class="formula" style="font-size:.95rem;border-bottom:1px dashed var(--line);padding-bottom:.4rem">
+    value = (−1)<sup><span class="s">s</span></sup> × (1 + <span class="m">f</span> ⁄ 2<sup>23</sup>) × 2<sup>(<span class="e">e</span> − 127)</sup>
+    <span style="color:#8aa;font-size:.78em">&nbsp; (normal numbers; <span class="s">s</span> = sign bit, <span class="e">e</span> = stored exponent, <span class="m">f</span> = fraction as an integer · e=0 → subnormal: (1+f⁄2²³) becomes (0+f⁄2²³) and e−127 becomes −126)</span>
+  </div>
+  <div style="font-size:.75rem;color:#556;margin:.4rem 0 .1rem">this pattern, plugged in:</div>
   <div class="formula" id="fpformula"></div>
   <div class="row">
     <span>value: <span class="bigval" id="fpval">0</span></span>
