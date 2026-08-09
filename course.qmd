@@ -60,7 +60,7 @@ Each week's page carries Pre-read, In-Class, and After-Class sections — and en
 | Week | Dates (Mon, Tue) | Topics | Materials |
 |:---:|---|---|---|
 | [01](weeks/w01.qmd) | Aug 3, Aug 4 | Introduction: computer science, algorithms, computer hardware & software | [Lec 1](cs1100-cse-iitm-2021/slides/Lec1.pdf) · [Lec 3](cs1100-cse-iitm-2021/slides/Lec3.pdf) |
-| [02](weeks/w02.qmd) | Aug 10, Aug 11 | Number systems: radix-q, binary & hexadecimal, conversions; signed integers (sign-magnitude, one's & two's complement); fixed & floating point, IEEE FP32 | [Deck 03](materials/w02-deck-03-number-systems.html) · [Lec 3](cs1100-cse-iitm-2021/slides/Lec3.pdf) |
+| [02](weeks/w02.qmd) | Aug 10, Aug 11 | *Mon:* the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). *Tue:* number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32 | [Deck 04](materials/w02-deck-04-computer-revisited.html) · [Toy Computer](materials/w02-toy-computer.html) · [Deck 03](materials/w02-deck-03-number-systems.html) · [Lec 3](cs1100-cse-iitm-2021/slides/Lec3.pdf) |
 | [03](weeks/w03.qmd) | Aug 17, Aug 18 | Number systems (contd.): binary arithmetic, floating point; conversions. *Class Test-1 window opens Aug 19* | Notes (TBP) |
 | [04](weeks/w04.qmd) | Aug 24, Aug 25 | Programming types (declarative, imperative); structure of a C program; our first C program | [Lec 4](cs1100-cse-iitm-2021/slides/Lec4.pdf) |
 | [05](weeks/w05.qmd) | Aug 31, Sep 1 | Compilation pipeline: source, assembly and object files, linker, loader; compiler vs. interpreter | [Lec 6](cs1100-cse-iitm-2021/slides/Lec6.pdf) |

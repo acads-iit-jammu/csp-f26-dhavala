@@ -1,8 +1,8 @@
-# W02: Number Systems {.unnumbered}
+# W02: The Computer, Revisited · Number Systems {.unnumbered}
 
 **Dates:** Mon Aug 10 & Tue Aug 11, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 2 — Number systems, conversions, and arithmetic (4 h)
+**Syllabus module:** 1 wrap-up (computer hardware & software) · 2 — Number systems, conversions, and arithmetic
 
 ## Pre-read
 
@@ -10,6 +10,13 @@
 - Skim [Lec 3](../cs1100-cse-iitm-2021/slides/Lec3.pdf) — *The Computing Machine* (Prof. Shweta Agrawal, IIT Madras): computer organization, bits and bytes, and first contact with binary.
 
 ## In Class
+
+**Monday — the computer, revisited (and programmed):**
+
+- 📽️ [**Deck 04 — The Computer, Revisited**](../materials/w02-deck-04-computer-revisited.html) — the recap that closes Week 1's loop: what the Turtle taught (programming) and what the Display machine taught (the stored procedure), the design's proper name — **von Neumann architecture** — and the discussion trap: *the Toy Computer adds and subtracts… so isn't it just a calculator?* (The dividing line is where the procedure lives.)
+- 🧮 [**The Toy Computer**](../materials/w02-toy-computer.html) — a complete von Neumann machine you can see all of at once: 40 cells (instructions tinted blue, data green — the machine can't tell), ACC and PC on display, ten instructions, and a diary narrating every fetch–decode–execute. Work the six-rung ladder: one problem (adding two integers), one new idea per rung, ending at the recursion wall.
+
+**Tuesday — number systems:**
 
 - 📽️ [**Deck 03 — Number Systems**](../materials/w02-deck-03-number-systems.html) — the week's slides:
   - **Radix-q positional systems** — one idea behind every numeral (value = digits × powers of q); tally marks (q=1) to ternary to the popular costumes: decimal (q=10, courtesy of anatomy) and hexadecimal (q=16, binary's shorthand). **Binary (q=2) is what computers wear** — because switches have two reliable states.
@@ -21,6 +28,7 @@
 
 ## After Class
 
+- Toy Computer: climb rungs 1–4 yourself; predict every step before pressing it. Brave? Run rung 6 and explain *to a friend* why the answer is stranded in memory.
 - Convert 100, 255, and your roll number to binary and hexadecimal; write −77 in 8-bit two's complement; decode the FP32 pattern `0 10000010 01000000000000000000000`.
 - Verify one of your conversions the machine's way: does 42 + (−42) really give all zeros in 8 bits?
 - A terminal experiment: in Python, type `0.1` (prints `0.1` — looks exact!), then `0.1 + 0.2`, then `format(0.1, '.20f')`. Reconcile what you see with the FP32 slide — the resolution is in Deck 03 and the Playground.
