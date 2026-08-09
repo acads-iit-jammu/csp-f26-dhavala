@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Number Playground · CS-1-01 (MO)</title>
+<style>
+  :root{
+    --blue:#003f87; --blue-dark:#002d63; --blue-mid:#0056b8; --blue-sky:#4da3ff; --blue-pale:#eaf3ff;
+    --ink:#22262a; --paper:#fff; --grey:#f4f6f8; --line:#d7e3f2;
+    --sign:#a40e26; --expo:#b35c00; --mant:#1a7f37; --star:#f4b400;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Roboto,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       font-size:14.5px;color:var(--ink);background:var(--grey);line-height:1.5}
+  header{background:var(--blue);color:#fff;padding:.7rem 1.2rem}
+  header h1{font-family:"Roboto Slab",Georgia,serif;font-size:1.25rem;margin:0;font-weight:600}
+  header .sub{opacity:.85;font-size:.85rem}
+  main{max-width:1000px;margin:0 auto;padding:12px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+  .card h2{font-family:"Roboto Slab",Georgia,serif;font-size:1.05rem;color:var(--blue-dark);
+           margin:.1rem 0 .5rem;border-bottom:2px solid var(--blue-pale);padding-bottom:.3rem}
+  .hint{background:var(--blue-pale);border-left:4px solid var(--blue);padding:.4rem .8rem;
+        border-radius:0 8px 8px 0;font-size:.85rem;margin:.7rem 0 0}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:.5rem 0}
+  .mono{font-family:"Roboto Mono",monospace}
+  button{font:inherit;border:1.5px solid var(--blue);background:#fff;color:var(--blue);border-radius:8px;
+         padding:6px 12px;cursor:pointer}
+  button:hover{background:var(--blue-pale)}
+  button.primary{background:var(--blue);color:#fff}
+  input[type=number],input[type=text]{font-family:"Roboto Mono",monospace;font-size:1rem;border:1.5px solid var(--line);
+        border-radius:8px;padding:6px 10px;width:110px}
+  /* bit toggles */
+  .bitrow{display:flex;gap:5px;flex-wrap:wrap}
+  .bit{width:46px;text-align:center;cursor:pointer;user-select:none}
+  .bit .b{display:block;font-family:"Roboto Mono",monospace;font-size:1.35rem;font-weight:700;border:2px solid var(--line);
+          border-radius:8px;padding:4px 0;background:#fff;color:#aab7c4;transition:all .12s}
+  .bit.on .b{border-color:var(--blue);background:var(--blue-pale);color:var(--blue)}
+  .bit .w{display:block;font-size:.68rem;color:#8aa;margin-top:2px}
+  .bit.on .w{color:var(--blue-mid);font-weight:700}
+  .eq{font-family:"Roboto Mono",monospace;font-size:1.05rem;color:var(--blue-dark);margin:.6rem 0;min-height:1.4em}
+  .bigval{font-family:"Roboto Mono",monospace;font-size:1.5rem;color:var(--blue);font-weight:700}
+  table.div{border-collapse:collapse;font-family:"Roboto Mono",monospace;font-size:.85rem;margin:.4rem 0}
+  table.div th{background:var(--blue-pale);color:var(--blue-dark);font-family:Roboto,sans-serif;font-size:.72rem}
+  table.div th,table.div td{border:1px solid var(--line);padding:3px 12px;text-align:center}
+  table.div td:last-child{font-weight:700;color:var(--blue)}
+  /* dial */
+  .dialwrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .legendbox{font-size:.8rem}
+  .legendbox span.sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  #dialread{font-size:.95rem;margin-top:.6rem}
+  #dialread b{font-family:"Roboto Mono",monospace}
+  .ovf{color:var(--sign);font-weight:700}
+  /* fp32 */
+  .fpbits{display:flex;gap:2px;flex-wrap:wrap}
+  .fpbit{width:24px;text-align:center;cursor:pointer;user-select:none}
+  .fpbit .b{display:block;font-family:"Roboto Mono",monospace;font-size:.95rem;font-weight:700;border:1.5px solid var(--line);
+            border-radius:5px;padding:2px 0;background:#fff;color:#aab7c4}
+  .fpbit.on .b{color:#fff}
+  .fpbit.s.on .b{background:var(--sign);border-color:var(--sign)}
+  .fpbit.e.on .b{background:var(--expo);border-color:var(--expo)}
+  .fpbit.m.on .b{background:var(--mant);border-color:var(--mant)}
+  .fpbit.s .b{border-color:#e7b3bc}.fpbit.e .b{border-color:#eccfae}.fpbit.m .b{border-color:#bfe0c8}
+  .fpbit .lbl{font-size:.55rem;color:#8aa}
+  .fieldtags{display:flex;gap:8px;font-size:.75rem;margin:.3rem 0}
+  .tag{border-radius:6px;padding:1px 10px;color:#fff}
+  .formula{font-family:"Roboto Mono",monospace;font-size:1.05rem;margin:.6rem 0;color:var(--blue-dark)}
+  .formula .s{color:var(--sign)} .formula .e{color:var(--expo)} .formula .m{color:var(--mant)}
+  .special{font-size:.85rem;color:var(--star);font-weight:700}
+  footer{color:#78838d;text-align:center;font-size:.75rem;padding:0 0 14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Number Playground</h1>
+  <div class="sub">three little machines for Week 2 — bits you can poke, a dial you can spin, a float you can dissect · CS-1-01 (MO), IIT Jammu</div>
+</header>
+<main>
+
+<!-- ============ Widget A: binary <-> decimal ============ -->
+<section class="card">
+  <h2>1 · Binary ⇄ decimal — poke the bits</h2>
+  <div class="bitrow" id="bits8"></div>
+  <div class="eq" id="eq8"></div>
+  <div class="row">
+    <span>value: <span class="bigval" id="dec8">0</span></span>
+    <span class="mono" style="color:#667">= hex <b id="hex8">00</b></span>
+    <span style="margin-left:18px">or type a number:</span>
+    <input type="number" id="decIn" min="0" max="255" value="0">
+    <span style="font-size:.8rem;color:#667">(0–255)</span>
+  </div>
+  <details style="margin-top:.4rem">
+    <summary style="cursor:pointer;color:var(--blue-mid);font-size:.9rem">show the divide-by-2 story for this number</summary>
+    <table class="div" id="divtab"></table>
+    <p style="font-size:.8rem;color:#667">Read the remainder column bottom-to-top — that's the binary above.</p>
+  </details>
+  <div class="hint"><b>Try this:</b> make 42. Then make 255 (all lamps on). Then type your roll number's last two digits — and read its hex name.</div>
+</section>
+
+<!-- ============ Widget B: the complement sundial ============ -->
+<section class="card">
+  <h2>2 · The complement sundial — one shadow, four dials</h2>
+  <p style="font-size:.9rem;margin:.2rem 0 .4rem">Sixteen 4-bit patterns around a dial. The needle is the <i>pattern</i> —
+  the bits, the physical fact. The four rings are four <i>conventions</i> for reading it. Spin the needle and watch the readings disagree.</p>
+  <div class="dialwrap">
+    <svg id="dial" width="430" height="430" viewBox="0 0 430 430"></svg>
+    <div>
+      <div class="legendbox">
+        <div><span class="sw" style="background:#22262a"></span><b>pattern</b> (the bits)</div>
+        <div><span class="sw" style="background:#0056b8"></span>unsigned ring</div>
+        <div><span class="sw" style="background:#b35c00"></span>sign-magnitude ring</div>
+        <div><span class="sw" style="background:#7a5cb3"></span>one's-complement ring</div>
+        <div><span class="sw" style="background:#1a7f37"></span><b>two's-complement ring</b></div>
+      </div>
+      <div class="row" style="margin-top:.8rem">
+        <button id="minus1">− 1</button>
+        <button id="plus1" class="primary">+ 1</button>
+        <button id="negBtn">negate (flip + 1)</button>
+      </div>
+      <div id="dialread"></div>
+    </div>
+  </div>
+  <div class="hint"><b>Try this:</b> park the needle at 0111 (+7 everywhere) and press <b>+1</b> — watch the two's ring
+  jump to <b>−8</b>: that cliff is <i>overflow</i>. Then find the two zeros on the sign-magnitude and one's rings
+  (0000 and… where?). Two's complement has only one zero — one of the reasons it won.</div>
+</section>
+
+<!-- ============ Widget C: FP32 explorer ============ -->
+<section class="card">
+  <h2>3 · IEEE FP32, dissected — flip a bit, move a world</h2>
+  <div class="fieldtags">
+    <span class="tag" style="background:var(--sign)">sign · 1 bit</span>
+    <span class="tag" style="background:var(--expo)">exponent · 8 bits (bias 127)</span>
+    <span class="tag" style="background:var(--mant)">fraction · 23 bits (hidden 1.)</span>
+  </div>
+  <div class="fpbits" id="fpbits"></div>
+  <div class="formula" id="fpformula"></div>
+  <div class="row">
+    <span>value: <span class="bigval" id="fpval">0</span></span>
+    <span class="special" id="fpspecial"></span>
+  </div>
+  <div class="row" style="font-size:.85rem;color:#667">
+    <span>exactly stored: <span class="mono" id="fpexact"></span></span>
+  </div>
+  <div class="row">
+    <span>encode a number:</span>
+    <input type="text" id="fpIn" value="6.5" style="width:130px">
+    <button id="fpGo" class="primary">encode</button>
+    <span style="font-size:.8rem;color:#667">presets:</span>
+    <button class="preset" data-v="1">1</button>
+    <button class="preset" data-v="6.5">6.5</button>
+    <button class="preset" data-v="0.1">0.1</button>
+    <button class="preset" data-v="-42">−42</button>
+    <button class="preset" data-v="Infinity">∞</button>
+    <button class="preset" data-v="NaN">NaN</button>
+  </div>
+  <div class="hint"><b>Try this:</b> encode <b>0.1</b> and read the “exactly stored” line — the machine keeps a rounded
+  impostor, which is why C programmers never compare reals with <span class="mono">==</span>. Then flip the sign bit of 6.5.
+  Then flip one exponent bit and watch the value leap — exponent bits move <i>worlds</i>, fraction bits move <i>whiskers</i>.</div>
+</section>
+
+</main>
+<footer>CS-1-01 (MO), Monsoon 2026 · a number is an idea; a numeral is a costume — here are three wardrobes</footer>
+
+<script>
+"use strict";
+/* ================= pure logic (testable) ================= */
+/* 4-bit reading schemes; -0 reported as the string "-0" where it exists */
+function readPattern(b){ // b: 0..15
+  const neg = (b & 8) !== 0;
+  return {
+    pattern: b.toString(2).padStart(4,"0"),
+    unsigned: b,
+    signmag: neg ? (b===8 ? "-0" : -(b & 7)) : b,
+    ones:    neg ? (b===15 ? "-0" : b - 15) : b,
+    twos:    neg ? b - 16 : b
+  };
+}
+const negate4 = b => ((~b & 15) + 1) & 15;    // flip + 1, 4-bit wrap
+/* 8-bit binary <-> decimal */
+const toBits8 = n => Array.from({length:8},(_,i)=>(n>>(7-i))&1);
+const fromBits8 = bits => bits.reduce((v,b)=>(v<<1)|b,0);
+function divSteps(n){ const rows=[]; if(n===0) return [[0,0,0]];
+  while(n>0){ rows.push([n, Math.floor(n/2), n%2]); n=Math.floor(n/2); } return rows; }
+/* FP32 encode/decode via typed arrays */
+const _f32=new Float32Array(1), _u32=new Uint32Array(_f32.buffer);
+function floatToBits(x){ _f32[0]=x; const u=_u32[0];
+  return Array.from({length:32},(_,i)=>(u>>>(31-i))&1); }
+function bitsToFloat(bits){ let u=0; for(const b of bits) u=((u<<1)|b)>>>0; _u32[0]=u; return _f32[0]; }
+function fpFields(bits){
+  const s=bits[0], eBits=bits.slice(1,9), mBits=bits.slice(9);
+  const e=eBits.reduce((v,b)=>(v<<1)|b,0);
+  const mInt=mBits.reduce((v,b)=>(v<<1)|b,0);
+  const frac=mInt/Math.pow(2,23);
+  let kind="normal";
+  if(e===255) kind = mInt? "nan":"inf";
+  else if(e===0) kind = mInt? "subnormal":"zero";
+  return {s,e,mInt,frac,kind,mantissa:1+frac,expUnbiased:e-127};
+}
+
+/* ================= Widget A ================= */
+const $=id=>document.getElementById(id);
+let bits8=toBits8(0);
+function buildBits8(){
+  const el=$("bits8"); el.innerHTML="";
+  bits8.forEach((b,i)=>{
+    const w=1<<(7-i);
+    const d=document.createElement("div");
+    d.className="bit"+(b?" on":"");
+    d.innerHTML=`<span class="b">${b}</span><span class="w">${w}</span>`;
+    d.addEventListener("click",()=>{ bits8[i]^=1; renderA(); });
+    el.appendChild(d);
+  });
+}
+function renderA(){
+  buildBits8();
+  const n=fromBits8(bits8);
+  const terms=bits8.map((b,i)=>b?String(1<<(7-i)):null).filter(Boolean);
+  $("eq8").textContent = terms.length? terms.join(" + ")+" = "+n : "no lamps lit = 0";
+  $("dec8").textContent=n;
+  $("hex8").textContent=n.toString(16).toUpperCase().padStart(2,"0");
+  $("decIn").value=n;
+  const tab=$("divtab");
+  tab.innerHTML="<tr><th>divide</th><th>quotient</th><th>remainder</th></tr>"+
+    divSteps(n).map(([a,q,r])=>`<tr><td>${a} ÷ 2</td><td>${q}</td><td>${r}</td></tr>`).join("");
+}
+$("decIn").addEventListener("input",e=>{
+  let n=parseInt(e.target.value,10); if(isNaN(n))return;
+  n=Math.max(0,Math.min(255,n)); bits8=toBits8(n); renderA(); });
+
+/* ================= Widget B: the sundial ================= */
+let pat=7; // start at 0111
+const RINGS=[
+  {key:"pattern", r:185, color:"#22262a", size:12, mono:true},
+  {key:"unsigned",r:150, color:"#0056b8", size:12},
+  {key:"signmag", r:120, color:"#b35c00", size:11},
+  {key:"ones",    r:92,  color:"#7a5cb3", size:11},
+  {key:"twos",    r:64,  color:"#1a7f37", size:12}
+];
+function drawDial(){
+  const C=215, svg=[];
+  svg.push(`<circle cx="${C}" cy="${C}" r="200" fill="#fbfdff" stroke="#d7e3f2" stroke-width="2"/>`);
+  for(const ring of RINGS)
+    svg.push(`<circle cx="${C}" cy="${C}" r="${ring.r-14}" fill="none" stroke="#eef3fa" stroke-width="1"/>`);
+  // highlight wedge
+  const a0=(pat-0.5)*22.5-90, a1=(pat+0.5)*22.5-90;
+  const rad=a=>a*Math.PI/180;
+  const x0=C+200*Math.cos(rad(a0)), y0=C+200*Math.sin(rad(a0));
+  const x1=C+200*Math.cos(rad(a1)), y1=C+200*Math.sin(rad(a1));
+  svg.push(`<path d="M${C},${C} L${x0},${y0} A200,200 0 0 1 ${x1},${y1} Z" fill="#f4b40022"/>`);
+  for(let i=0;i<16;i++){
+    const ang=rad(i*22.5-90), read=readPattern(i);
+    for(const ring of RINGS){
+      const x=C+ring.r*Math.cos(ang), y=C+ring.r*Math.sin(ang)+4;
+      const v=read[ring.key];
+      const bold=(i===pat);
+      svg.push(`<text x="${x}" y="${y}" text-anchor="middle" `+
+        `style="font:${bold?700:400} ${ring.size+(bold?1:0)}px ${ring.mono?"'Roboto Mono',monospace":"Roboto,sans-serif"};`+
+        `fill:${ring.color};opacity:${bold?1:.55}">${v}</text>`);
+    }
+  }
+  // needle
+  const ang=rad(pat*22.5-90);
+  svg.push(`<line x1="${C}" y1="${C}" x2="${C+42*Math.cos(ang)}" y2="${C+42*Math.sin(ang)}" stroke="#f4b400" stroke-width="5" stroke-linecap="round"/>`);
+  svg.push(`<circle cx="${C}" cy="${C}" r="7" fill="#003f87"/>`);
+  $("dial").innerHTML=svg.join("");
+  const r=readPattern(pat);
+  $("dialread").innerHTML=`the needle points at pattern <b>${r.pattern}</b>, which reads as:<br>`+
+    `unsigned <b style="color:#0056b8">${r.unsigned}</b> · sign-mag <b style="color:#b35c00">${r.signmag}</b> · `+
+    `one's <b style="color:#7a5cb3">${r.ones}</b> · two's <b style="color:#1a7f37">${r.twos}</b>`+
+    (pat===8? ` <span class="ovf">← just fell off the +7 cliff (overflow)</span>`:"");
+}
+$("plus1").addEventListener("click",()=>{ pat=(pat+1)&15; drawDial(); });
+$("minus1").addEventListener("click",()=>{ pat=(pat+15)&15; drawDial(); });
+$("negBtn").addEventListener("click",()=>{ pat=negate4(pat); drawDial(); });
+
+/* ================= Widget C: FP32 ================= */
+let fbits=floatToBits(6.5);
+function buildFP(){
+  const el=$("fpbits"); el.innerHTML="";
+  fbits.forEach((b,i)=>{
+    const cls=i===0?"s":i<9?"e":"m";
+    const d=document.createElement("div");
+    d.className=`fpbit ${cls}`+(b?" on":"");
+    d.innerHTML=`<span class="b">${b}</span><span class="lbl">${i===0?"±":i<9?"e"+(8-i):(i-8)%5===1?"f"+(i-8):"&nbsp;"}</span>`;
+    d.addEventListener("click",()=>{ fbits[i]^=1; renderFP(); });
+    el.appendChild(d);
+  });
+}
+function renderFP(){
+  buildFP();
+  const x=bitsToFloat(fbits), f=fpFields(fbits);
+  let formula="", special="";
+  if(f.kind==="normal"){
+    formula=`(−1)<span class="s">${f.s}</span> × <span class="m">${f.mantissa.toPrecision(8).replace(/0+$/,"").replace(/\.$/,".0")}</span> × 2<sup><span class="e">${f.e}−127 = ${f.expUnbiased}</span></sup>`;
+  } else if(f.kind==="zero"){ formula="all-zero exponent &amp; fraction"; special=(f.s?"−":"+")+"0 — zero (one of two!)"; }
+  else if(f.kind==="subnormal"){ formula=`(−1)<span class="s">${f.s}</span> × <span class="m">0.${String(f.frac).slice(2,10)}…</span> × 2<sup><span class="e">−126</span></sup>`; special="subnormal — the tiny numbers below normal range"; }
+  else if(f.kind==="inf"){ formula="exponent all ones, fraction zero"; special=(f.s?"−":"+")+"∞ — infinity"; }
+  else { formula="exponent all ones, fraction non-zero"; special="NaN — not a number (0/0 lives here)"; }
+  $("fpformula").innerHTML=formula;
+  $("fpspecial").textContent=special;
+  $("fpval").textContent = f.kind==="nan"? "NaN" : String(x);
+  $("fpexact").textContent = (f.kind==="normal"||f.kind==="subnormal") ? x.toPrecision(21) : "—";
+}
+$("fpGo").addEventListener("click",()=>{ const v=Number($("fpIn").value); fbits=floatToBits(v); renderFP(); });
+$("fpIn").addEventListener("keydown",e=>{ if(e.key==="Enter") $("fpGo").click(); });
+document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>{
+  $("fpIn").value=b.dataset.v; fbits=floatToBits(Number(b.dataset.v)); renderFP(); }));
+
+renderA(); drawDial(); renderFP();
+</script>
+</body>
+</html>

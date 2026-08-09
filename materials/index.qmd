@@ -9,6 +9,7 @@ Interactive artifacts, handouts, and other student-facing files used in lectures
 | 📽️ [Deck 02 — What is a Computer?](w01-deck-02-what-is-a-computer.html) | Lecture 2 slides: computing vs computer vs programming vs computational thinking; the stored-program dividing line. | [Week 01](../weeks/w01.qmd) |
 | 🖨️ [Hello, World — all the way down](w01-hello-under-the-hood.html) | printf, honestly: five instructions (read · write · move · count · check), a finger, and a code book. Act 1 prints “abba” in a two-letter world; Act 2 grows the book to ASCII and prints Hello, world! — same program, bigger data. | [Week 01](../weeks/w01.qmd) |
 | 📽️ [Deck 03 — Number Systems](w02-deck-03-number-systems.html) | Week 02 slides: radix-q systems, binary↔decimal conversion, two's complement, fixed point, and IEEE FP32 — ending at “how many bits does a number deserve?” | [Week 02](../weeks/w02.qmd) |
+| 🎡 [The Number Playground](w02-number-playground.html) | Three interactive machines: poke 8 bits and watch the decimal form; spin the complement sundial (one pattern, four reading conventions — find the overflow cliff and the double zeros); dissect a live IEEE FP32 bit by bit. | [Week 02](../weeks/w02.qmd) |
 | 🐢 [The Turtle Computer](w01-turtle-computer.html) | Your first programming language: ten words, one turtle, no typing. Six missions in which each new word is *invented* because a problem demands it — and the reward comes only when the machine's output matches your intention. | [Week 01](../weeks/w01.qmd), Lab 01 |
 
 : {tbl-colwidths="[30,50,20]"}

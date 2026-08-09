@@ -16,6 +16,7 @@
   - **Conversions**, both directions: binary→decimal by weights, decimal→binary by repeated division; hex ↔ binary four bits at a time.
   - **Negative integers** — there is no minus sign in a cell: sign-magnitude, one's complement, and the winner, **two's complement** (one adder does everything).
   - **Real numbers** — fixed point (the stuck ruler) and **floating point** (binary scientific notation), ending at the world standard: **IEEE FP32** — 1 sign + 8 exponent (bias 127) + 23 fraction bits, worked example and the `0.1 != 0.1` warning.
+- 🎡 [**The Number Playground**](../materials/w02-number-playground.html) — three interactive machines for this week: toggle 8 bits and watch the weights sum; spin the **complement sundial** (the same pattern read by four conventions — find the overflow cliff at 0111→1000, and the double zeros); and dissect **IEEE FP32** live — flip an exponent bit and watch the value leap worlds.
 - [Lec 3](../cs1100-cse-iitm-2021/slides/Lec3.pdf) — companion slides (Prof. Shweta Agrawal, IIT Madras)
 
 ## After Class
