@@ -137,6 +137,8 @@ const SLIDES = [
     ["sign","1","0 = +, 1 = −"],
     ["exponent","8","stored with a <b>bias of 127</b>: stored 129 means e = 2"],
     ["fraction","23","the digits after the hidden leading 1"]]),
+  html("p",'<span class="big mono">value = (−1)<sup>s</sup> × (1 + f ⁄ 2²³) × 2<sup>(e − 127)</sup></span>'),
+  html("p",'<span style="font-size:.85em;color:#667">— the exact formula for normal numbers, where s is the sign bit, e the stored 8-bit exponent (1…254), and f the 23-bit fraction read as an integer. (For e = 0: value = (−1)<sup>s</sup> × (f ⁄ 2²³) × 2<sup>−126</sup> — the subnormals.)</span>'),
   html("p",'<b>Worked example — 6.5:</b> &nbsp;6.5 = <span class="mono">110.1</span> = <span class="mono">1.101 × 2²</span> → sign <span class="mono">0</span>, exponent 2+127 = 129 = <span class="mono">10000001</span>, fraction <span class="mono">101</span>0000…'),
   html("p",'<span class="mono">0 10000001 10100000000000000000000</span>'),
   li("Special costumes reserved: all-zeros exponent (zero &amp; tiny “subnormals”), all-ones (infinity and <b>NaN</b> — not-a-number)",
