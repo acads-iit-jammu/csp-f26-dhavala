@@ -142,7 +142,7 @@ const SLIDES = [
   html("p",'<b>Worked example — 6.5:</b> &nbsp;6.5 = <span class="mono">110.1</span> = <span class="mono">1.101 × 2²</span> → sign <span class="mono">0</span>, exponent 2+127 = 129 = <span class="mono">10000001</span>, fraction <span class="mono">101</span>0000…'),
   html("p",'<span class="mono">0 10000001 10100000000000000000000</span>'),
   li("Special costumes reserved: all-zeros exponent (zero &amp; tiny “subnormals”), all-ones (infinity and <b>NaN</b> — not-a-number)",
-     "About 7 decimal digits of precision; magnitudes from ~10⁻³⁸ to ~10³⁸",
+     "Precision: 23 stored bits + the hidden 1 = <b>24 significant bits</b>. One binary digit is worth log₁₀2 ≈ 0.301 decimal digits, so 24 × 0.301 ≈ <b>7.2 decimal digits</b> — that is where “about 7 digits” comes from (2²⁴ ≈ 16.7 million distinct significands). Magnitudes: ~10⁻³⁸ to ~10³⁸",
      "A warning you will meet in C: <b>0.1 has no exact binary costume</b> — it is a repeating binary fraction, stored rounded. Never test real numbers with =="))},
 
 {title:"“But my Python prints 0.1 back just fine…”", body:()=> e(F,null,
