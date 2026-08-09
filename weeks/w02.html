@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W02: Number Systems I – CS-1-01 (MO)</title>
+<title>W02: Number Systems – CS-1-01 (MO)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w02.html">W02: Number Systems I</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w02.html">W02: Number Systems</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -156,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w02.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">W02: Number Systems I</span></a>
+ <span class="menu-text">W02: Number Systems</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -412,9 +412,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w02.html">W02: Number Systems I</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w02.html">W02: Number Systems</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W02: Number Systems I</h1>
+<h1 class="title">W02: Number Systems</h1>
 </div>
 
 
@@ -435,21 +435,42 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Syllabus module:</strong> 2 — Number systems, conversions, and arithmetic (4 h)</p>
 <section id="pre-read" class="level2">
 <h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
+<ul>
+<li>Last week’s take-home question: <em>why does 72 mean H?</em> Codes are conventions — this week we go one level deeper: how does 72 <em>itself</em> live in a machine?</li>
+<li>Skim <a href="../cs1100-cse-iitm-2021/slides/Lec3.pdf">Lec 3</a> — <em>The Computing Machine</em> (Prof.&nbsp;Shweta Agrawal, IIT Madras): computer organization, bits and bytes, and first contact with binary.</li>
+</ul>
 </section>
 <section id="in-class" class="level2">
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
 <ul>
-<li>Notes (to be posted) — decimal &amp; binary; unsigned and signed integers (sign-magnitude, one’s &amp; two’s complement)</li>
+<li>📽️ <a href="../materials/w02-deck-03-number-systems.html"><strong>Deck 03 — Number Systems</strong></a> — the week’s slides:
+<ul>
+<li><strong>Radix-q positional systems</strong> — one idea behind every numeral (value = digits × powers of q); tally marks (q=1) to ternary to the popular costumes: decimal (q=10, courtesy of anatomy) and hexadecimal (q=16, binary’s shorthand). <strong>Binary (q=2) is what computers wear</strong> — because switches have two reliable states.</li>
+<li><strong>Conversions</strong>, both directions: binary→decimal by weights, decimal→binary by repeated division; hex ↔︎ binary four bits at a time.</li>
+<li><strong>Negative integers</strong> — there is no minus sign in a cell: sign-magnitude, one’s complement, and the winner, <strong>two’s complement</strong> (one adder does everything).</li>
+<li><strong>Real numbers</strong> — fixed point (the stuck ruler) and <strong>floating point</strong> (binary scientific notation), ending at the world standard: <strong>IEEE FP32</strong> — 1 sign + 8 exponent (bias 127) + 23 fraction bits, worked example and the <code>0.1 != 0.1</code> warning.</li>
+</ul></li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec3.pdf">Lec 3</a> — companion slides (Prof.&nbsp;Shweta Agrawal, IIT Madras)</li>
 </ul>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<ul>
+<li>Convert 100, 255, and your roll number to binary and hexadecimal; write −77 in 8-bit two’s complement; decode the FP32 pattern <code>0 10000010 01000000000000000000000</code>.</li>
+<li>Verify one of your conversions the machine’s way: does 42 + (−42) really give all zeros in 8 bits?</li>
+</ul>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning: the week’s informal column.</em></p>
+<p><strong>How many bits does a number deserve? (FP32 → FP16 → NVFP4)</strong></p>
+<p>This week you met IEEE FP32 — the 32-bit costume the world agreed real numbers should wear: 1 sign bit, 8 exponent bits, 23 fraction bits, about seven trustworthy decimal digits. For thirty years that was simply what “a real number” meant in a computer. Then the AI industry asked a heretical question: <em>who says a number deserves 32 bits?</em></p>
+<p>The first cut was gentle. <strong>FP16</strong> — “half precision” — keeps the same three-part anatomy but on a diet: 1 sign, 5 exponent, 10 fraction bits. Half the memory, twice the numbers per second through the same hardware, and for neural networks it mostly… worked. That “mostly” is the interesting part: a neural network is not a bank ledger. It is a huge fabric of approximate quantities whose <em>collective pattern</em> matters far more than any individual value’s seventh decimal digit. Precision, it turns out, was being spent where nobody was reading it — and this week’s deepest idea (<em>meaning lives in the reader</em>) applies to precision too.</p>
+<p>So the diet continued: 8 bits, then four. NVIDIA’s current answer, introduced with its Blackwell chips, is <strong>NVFP4</strong> (the official name — often misheard as “NFP4”). A single NVFP4 value is four bits in <strong>E2M1</strong> anatomy: 1 sign, 2 exponent, 1 fraction bit. Stop and let that register against Deck 03: two exponent bits and one fraction bit can express only <strong>sixteen distinct values</strong>, with magnitudes no larger than ±6. As a stand-alone number format, that is almost comically poor — you could not price vegetables with it.</p>
+<p>The rescue is a trick worth remembering, because it is pure Week-2 thinking. NVFP4 numbers never travel alone: they live in <strong>blocks of 16</strong>, and each block carries one shared <strong>scale factor</strong> — itself a small floating-point number (FP8, E4M3 anatomy) — with one full-precision <strong>FP32 scale over the whole tensor</strong> on top. Each little 4-bit value means “my sixteenth of the pattern, <em>times my block’s scale, times the tensor’s scale</em>.” The costume didn’t get smarter; the <em>convention around it</em> did — two levels of shared context squeeze meaning through a four-bit needle. It is positional notation’s own trick, one storey up: digits are cheap because the <em>position</em> carries the magnitude; here, values are cheap because the <em>block</em> carries it.</p>
+<p>Why go through these contortions? Because at AI scale, bits are physics. A model with a trillion parameters stored in FP32 is four terabytes that must be fetched, again and again, through memory systems that burn energy per byte moved. Cut each number from 32 bits to 4 (plus a sliver for shared scales) and you have cut memory, bandwidth, and much of the energy bill by nearly 8× — which is the difference between an AI that runs in a datacenter and one that runs on your phone.</p>
+<p>Three take-homes, all of them this course in miniature. <strong>Representation is a design choice, not a fact of nature</strong> — FP32 was never sacred, just convenient. <strong>The right representation depends on the reader</strong> — a bank reads every paisa; a neural network reads a pattern; giving both the same 32 bits wastes somebody’s silicon. And <strong>the frontier of computing in 2026 is being decided by exactly what you practised this week</strong> — exponents, fractions, biases, and the art of meaning more with fewer bits. The people designing whatever comes after NVFP4 are doing your Week 2 homework, for very high stakes.</p>
+<p><em>Sources: <a href="https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/examples/fp8_primer.html">NVIDIA Transformer Engine documentation on FP8/FP4</a> · <a href="https://zeroentropy.dev/concepts/nvfp4/">NVFP4 format overview</a> · <a href="https://www.spheron.network/blog/nvfp4-vs-mxfp4-gpu-cloud-4bit-quantization-guide/">NVFP4 vs MXFP4 decision guide</a>.</em></p>
 
 
 </section>
