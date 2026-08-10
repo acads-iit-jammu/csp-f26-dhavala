@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Under the Hood · CS-1-01 (MO)</title>
+<style>
+  :root{
+    --blue:#003f87; --blue-dark:#002d63; --blue-mid:#0056b8;
+    --blue-sky:#4da3ff; --blue-pale:#eaf3ff;
+    --ink:#22262a; --paper:#fff; --grey:#f4f6f8; --line:#d7e3f2;
+    --hi:#0056b8; --lo:#aab7c4; --flash:#ffd34d; --warn:#b35c00; --bad:#a40e26;
+    --lampon:#ffc94d; --lampoff:#e8edf2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Roboto,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       font-size:15px;color:var(--ink);background:var(--grey);line-height:1.5}
+  header{background:var(--blue);color:#fff;padding:.7rem 1.2rem}
+  header h1{font-family:"Roboto Slab",Georgia,serif;font-size:1.3rem;margin:0;font-weight:600}
+  header .sub{opacity:.85;font-size:.85rem}
+  /* stepper */
+  nav{display:flex;gap:4px;flex-wrap:wrap;background:var(--blue-dark);padding:6px 12px;position:sticky;top:0;z-index:5}
+  nav button{font-size:.78rem;border:1px solid transparent;background:transparent;color:#cfe3ff;
+             border-radius:14px;padding:3px 11px;cursor:pointer}
+  nav button.cur{background:#fff;color:var(--blue);font-weight:600}
+  nav button:hover{border-color:#cfe3ff}
+  main{max-width:900px;margin:0 auto;padding:16px}
+  section.station{display:none}
+  section.station.show{display:block;animation:fade .25s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  h2{font-family:"Roboto Slab",Georgia,serif;color:var(--blue-dark);font-size:1.25rem;margin:.4rem 0 .2rem}
+  .promise{color:var(--blue-mid);font-size:.95rem;margin:0 0 .8rem;font-style:italic}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+  .card h3{margin:.1rem 0 .5rem;font-size:1rem;color:var(--blue-dark);font-family:"Roboto Slab",Georgia,serif}
+  .trythis{background:var(--blue-pale);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.88rem}
+  .trythis b{color:var(--blue-dark)}
+  .own{border-left:4px solid var(--blue);padding:.4rem .8rem;background:#fff;border-radius:0 8px 8px 0;
+       font-size:.92rem;margin:12px 0;color:var(--blue-dark)}
+  .navbtns{display:flex;justify-content:space-between;margin:18px 0 8px}
+  button.big{font:inherit;border:1px solid var(--blue);background:var(--blue);color:#fff;border-radius:8px;
+             padding:8px 18px;cursor:pointer;font-size:.95rem}
+  button.big.ghost{background:#fff;color:var(--blue)}
+  button.big:hover{filter:brightness(1.12)}
+  /* widgets */
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:.5rem 0}
+  .toggle{font-family:"Roboto Mono",monospace;font-size:.95rem;border:1.5px solid var(--line);background:#fff;
+          color:var(--lo);border-radius:8px;padding:6px 14px;cursor:pointer;min-width:64px}
+  .toggle.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .pulse{font-family:"Roboto Mono",monospace;border:1.5px solid var(--warn);background:#fff;color:var(--warn);
+         border-radius:8px;padding:6px 14px;cursor:pointer}
+  .pulse:active{background:var(--warn);color:#fff}
+  .lamp{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);background:var(--lampoff);
+        display:inline-block;vertical-align:middle;transition:background .15s;position:relative}
+  .lamp.on{background:var(--lampon);border-color:var(--warn);box-shadow:0 0 12px 2px #ffd34d88}
+  .lamp small{position:absolute;top:38px;left:50%;transform:translateX(-50%);font-size:.68rem;color:#667;white-space:nowrap}
+  .wirebox{font-family:"Roboto Mono",monospace}
+  svg .wire{stroke:var(--lo);stroke-width:2.5;fill:none}
+  svg .wire.hot{stroke:var(--warn)}
+  svg text{font:11px Roboto,sans-serif;fill:#556}
+  svg .sw{stroke:var(--blue);stroke-width:2.5}
+  /* truth tables */
+  table.tt{border-collapse:collapse;font-family:"Roboto Mono",monospace;font-size:.85rem}
+  table.tt th{background:var(--blue-pale);color:var(--blue-dark)}
+  table.tt th,table.tt td{border:1px solid var(--line);padding:3px 12px;text-align:center;color:#bbb}
+  table.tt tr.found td{color:var(--ink);font-weight:600;background:#fff}
+  table.tt tr.now td{background:var(--flash)}
+  .disc{font-size:.8rem;color:var(--blue-mid)}
+  /* timing charts */
+  .chart{overflow-x:auto;background:#fbfdff;border:1px solid var(--line);border-radius:8px;padding:6px}
+  .tname{font:600 10px Roboto,sans-serif;fill:#556}
+  .twave{stroke:var(--blue);stroke-width:1.6;fill:none}
+  .tclk{stroke:#889;stroke-width:1.2;fill:none}
+  .tbus{fill:var(--blue-pale);stroke:var(--line)}
+  .tbustext{font:10px "Roboto Mono",monospace;fill:var(--blue-dark)}
+  /* flip-flop boxes (station 6) */
+  .bits{display:flex;gap:4px}
+  .ff{border:1px solid var(--line);border-radius:5px;padding:2px 4px;text-align:center;background:#fff;min-width:36px}
+  .ff .lbl{font-size:.58rem;color:#8aa;display:block}
+  .ff .d,.ff .q{font-family:"Roboto Mono",monospace;font-size:.8rem;display:block}
+  .ff .d{color:#98a6b3}.ff .q{font-weight:700}
+  .ff.one .q{color:var(--hi)}.ff.zero .q{color:var(--lo)}
+  .ff.flash{background:var(--flash)}
+  .ff[title]{cursor:help}
+  .block{border:1.5px solid var(--line);border-radius:8px;padding:6px 8px;background:#fbfdff;min-width:110px}
+  .block.active{border-color:var(--warn);box-shadow:0 0 0 1.5px var(--warn)}
+  .block h4{margin:0 0 4px;font-size:.7rem;letter-spacing:.05em;color:var(--blue-dark);text-transform:uppercase;
+            display:flex;justify-content:space-between;gap:8px}
+  .block h4 .dec{color:var(--blue);font-family:"Roboto Mono",monospace}
+  .stage{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin:.5rem 0}
+  .lamp2{display:inline-block;min-width:52px;text-align:center;border-radius:12px;border:1px solid var(--line);
+        font-size:.72rem;padding:2px 8px;font-family:"Roboto Mono",monospace;background:#fff;color:var(--lo)}
+  .lamp2.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .keypad{display:flex;gap:4px;flex-wrap:wrap}
+  .keypad button{background:#fff;color:var(--blue);border:1px solid var(--line);padding:4px 9px;
+                 font-family:"Roboto Mono",monospace;border-radius:6px;cursor:pointer}
+  .keypad button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  #s6log{font-size:.8rem;height:130px;overflow-y:auto;background:#fbfdff;border:1px solid var(--line);
+         border-radius:6px;padding:6px 8px;line-height:1.5}
+  #s6log .op{color:var(--blue);font-weight:600}
+  #s6log div{border-bottom:1px dashed #edf2f8;padding:1px 0}
+  #s6prompt{background:var(--blue-pale);border:1px solid var(--line);border-radius:6px;padding:6px 10px;
+            font-size:.85rem;color:var(--blue-dark)}
+  /* ladder (station 7) */
+  .lvl{border:1.5px solid var(--line);border-radius:8px;padding:8px 14px;margin:6px 0;background:#fff;
+       display:flex;gap:14px;align-items:baseline;opacity:.55;transition:all .2s}
+  .lvl.cur{opacity:1;border-color:var(--blue);box-shadow:0 0 0 1.5px var(--blue)}
+  .lvl .tag{font-size:.68rem;letter-spacing:.06em;color:var(--blue-dark);min-width:105px;text-transform:uppercase;font-weight:700}
+  .lvl code{font-family:"Roboto Mono",monospace;font-size:.88rem;color:var(--blue)}
+  .code{font-family:"Roboto Mono",monospace;background:#fbfdff;border:1px solid var(--line);border-radius:6px;
+        padding:2px 8px;color:var(--blue)}
+  footer{color:#78838d;text-align:center;font-size:.75rem;padding:8px 0 16px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Under the Hood — from a switch to <span style="font-family:'Roboto Mono',monospace">c&nbsp;=&nbsp;a&nbsp;+&nbsp;b;</span></h1>
+  <div class="sub">Part 2 · Memory & Time — the loop and the bell · a guided climb through every floor of a computer · nothing here is magic · CS-1-01 (MO), IIT Jammu</div>
+</header>
+<nav id="stepper"></nav>
+<main id="stations"></main>
+<footer>CS-1-01 (MO), Monsoon 2026 · every floor is a specification for the floor below</footer>
+
+<script>
+"use strict";
+/* ================= pure logic (testable) ================= */
+const AND=(a,b)=>a&b, OR=(a,b)=>a|b, NOT=a=>1-a, XOR=(a,b)=>a^b, NOR=(a,b)=>1-(a|b);
+function halfAdd(a,b){ return {s:XOR(a,b), c:AND(a,b)}; }
+function fullAdd(a,b,cin){ const x=XOR(a,b);
+  return {s:XOR(x,cin), cout:OR(AND(a,b),AND(cin,x)), w:{axb:x,ab:AND(a,b),cx:AND(cin,x)}}; }
+const toBits=n=>[n&1,(n>>1)&1,(n>>2)&1,(n>>3)&1];
+const fromBits=b=>b.reduce((v,x,i)=>v+(x<<i),0);
+const fromBits5=b=>b[0]+2*b[1]+4*b[2]+8*b[3]+16*b[4];
+const bstr=b=>b.slice().reverse().join("");
+function add4(A,B){ const fas=[]; let c=0;
+  for(let i=0;i<4;i++){ const r=fullAdd(A[i],B[i],c); fas.push({a:A[i],b:B[i],cin:c,...r}); c=r.cout; }
+  return {s:[fas[0].s,fas[1].s,fas[2].s,fas[3].s,c], fas}; }
+/* ripple with time: at settle-tick t, carries have propagated only t positions */
+function rippleStates(A,B){
+  const states=[];
+  for(let t=0;t<=4;t++){
+    let c=0; const sums=[]; const carries=[];
+    for(let i=0;i<4;i++){
+      const cin=c;
+      const r=fullAdd(A[i],B[i],cin);
+      sums.push(r.s); carries.push(r.cout);
+      c = (i<t)? r.cout : 0;           // carry only travels t hops so far
+    }
+    const top = (t>=4)? carries[3] : 0;
+    states.push({t, sum:[...sums, top], val:fromBits5([...sums,top])});
+  }
+  return states;
+}
+/* clocked capture: a metronome ringing every P ticks over an adder that
+   needs 4 ticks to settle; each ring captures, then hands the adder new
+   inputs (so the ripple restarts). Pure & testable. */
+function clockSim(P,nT,A,B){
+  const states=rippleStates(A||toBits(7),B||toBits(5));
+  const good=states[4].val;
+  let r=4, out=null; const hist=[],captures=[];
+  for(let t=0;t<nT;t++){
+    const edge=(t>0)&&(t%P===0);
+    if(edge){ out=states[r].val; captures.push({v:out,ok:out===good}); r=0; }
+    else if(t>0) r=Math.min(r+1,4);
+    hist.push({clk:(t%P)<Math.ceil(P/2)?1:0, edge, adder:states[r].val, out:out===null?"—":out,
+               ok:out===null?null:out===good});
+  }
+  return {hist,captures,good};
+}
+/* SR latch from two cross-coupled NORs; settle by iterating */
+function srStep(state,s,r){
+  let q=state.q, qb=state.qb;
+  for(let i=0;i<4;i++){ const nqb=NOR(s,q); const nq=NOR(r,nqb); qb=nqb; q=nq; }
+  return {q,qb};
+}
+/* station-6 machine */
+const STATES=["LOAD_A","LOAD_B","LATCH","DONE"];
+function machineEdge(m){
+  const ev=[];
+  if(m.state===0){ m.A=toBits(m.keypad); ev.push(`enA is on → register A wrote down the bus (<b>${m.keypad}</b> = ${bstr(m.A)})`); m.state=1; }
+  else if(m.state===1){ m.B=toBits(m.keypad); ev.push(`enB is on → register B wrote down the bus (<b>${m.keypad}</b> = ${bstr(m.B)})`); m.state=2; }
+  else if(m.state===2){ const r=add4(m.A,m.B); m.OUT=r.s.slice();
+    ev.push(`enOUT is on → the output register wrote down the adder's answer: ${bstr(m.OUT)} = <b>${fromBits5(m.OUT)}</b>`); m.state=3; }
+  else ev.push("state DONE — no notebook is listening; bell-rings change nothing now. Press Reset for a new sum.");
+  ev.push(`the control notebooks now hold ${(m.state>>1)&1}${m.state&1} (${STATES[m.state]})`);
+  return ev;
+}
+
+/* ================= tiny framework ================= */
+const $=id=>document.getElementById(id);
+function h(html){ const t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstChild; }
+
+/* timing chart: tracks = [[label,key]], buses = [[label,fn]] */
+function drawChart(el,hist,tracks,buses){
+  const W=26,H0=16,RH=26,BH=18,n=hist.length;
+  const width=76+Math.max(n,1)*W, height=H0+tracks.length*RH+buses.length*(BH+8)+8;
+  let s=`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">`;
+  tracks.forEach((t,ti)=>{
+    const y0=H0+ti*RH, hi=y0, lo=y0+RH-12;
+    s+=`<text x="4" y="${lo}" class="tname">${t[0]}</text>`;
+    let d="",prev=null;
+    hist.forEach((hh,i)=>{
+      const v=hh[t[1]], x=76+i*W, y=v?hi:lo;
+      if(prev===null) d+=`M${x},${y}`;
+      else if((prev?hi:lo)!==y) d+=`L${x},${prev?hi:lo}L${x},${y}`;
+      d+=`L${x+W},${y}`; prev=v;
+    });
+    s+=`<path class="${t[0]==='CLK'||t[0]==='BELL'?'tclk':'twave'}" d="${d}"/>`;
+  });
+  buses.forEach((b,bi)=>{
+    const y=H0+tracks.length*RH+bi*(BH+8);
+    s+=`<text x="4" y="${y+13}" class="tname">${b[0]}</text>`;
+    let i=0;
+    while(i<n){
+      let j=i; while(j<n && String(b[1](hist[j]))===String(b[1](hist[i]))) j++;
+      const x=76+i*W,w=(j-i)*W;
+      s+=`<rect class="tbus" x="${x}" y="${y}" width="${w}" height="${BH}" rx="3"/>`+
+         `<text class="tbustext" x="${x+w/2}" y="${y+13}" text-anchor="middle">${b[1](hist[i])}</text>`;
+      i=j;
+    }
+  });
+  s+="</svg>";
+  el.innerHTML=s; el.scrollLeft=1e9;
+}
+
+/* truth table with discovery */
+function makeTT(el, cols, rows){
+  const found=new Set();
+  el.innerHTML="";
+  const table=h(`<table class="tt"><tr>${cols.map(c=>`<th>${c}</th>`).join("")}</tr></table>`);
+  const trs=rows.map(r=>{ const tr=h(`<tr>${r.map(v=>`<td>${v}</td>`).join("")}</tr>`); table.appendChild(tr); return tr;});
+  el.appendChild(table);
+  const disc=h(`<div class="disc">rows discovered: 0/${rows.length} — try every combination!</div>`);
+  el.appendChild(disc);
+  return {mark(idx){ found.add(idx);
+      trs.forEach((tr,i)=>{tr.className=(i===idx?"found now":found.has(i)?"found":"");});
+      disc.textContent = found.size===rows.length
+        ? `all ${rows.length} rows discovered — that table is this device's ENTIRE personality. Nothing else to know.`
+        : `rows discovered: ${found.size}/${rows.length} — try every combination!`; }};
+}
+
+/* simple series/parallel circuit pictures */
+function circuitSVG(kind,a,b,lampOn){
+  const wire=(x1,y1,x2,y2,hot)=>`<path class="wire ${hot?'hot':''}" d="M${x1},${y1}L${x2},${y2}"/>`;
+  const sw=(x,y,on,lbl)=>(on?`<line class="sw" x1="${x}" y1="${y}" x2="${x+34}" y2="${y}"/>`
+                            :`<line class="sw" x1="${x}" y1="${y}" x2="${x+30}" y2="${y-14}"/>`)+
+                          `<circle cx="${x}" cy="${y}" r="3" fill="#003f87"/><circle cx="${x+34}" cy="${y}" r="3" fill="#003f87"/>`+
+                          `<text x="${x+8}" y="${y+16}">${lbl}</text>`;
+  const lamp=(x,y,on)=>`<circle cx="${x}" cy="${y}" r="11" fill="${on?'#ffc94d':'#e8edf2'}" stroke="${on?'#b35c00':'#d7e3f2'}" stroke-width="2"/>`+
+                       `<text x="${x-14}" y="${y+26}">lamp</text>`;
+  const bat=(x,y)=>`<text x="${x-6}" y="${y-10}">⎓</text><text x="${x-28}" y="${y+24}">battery</text>`+
+                   `<line class="sw" x1="${x-6}" y1="${y}" x2="${x+6}" y2="${y}"/>`;
+  if(kind==="series"){
+    const hot1=true, hot2=a===1, hot3=a===1&&b===1;
+    return `<svg width="330" height="86">${bat(30,44)}${wire(36,44,60,44,hot1)}${sw(60,44,a===1,"A")}
+      ${wire(94,44,130,44,hot2)}${sw(130,44,b===1,"B")}${wire(164,44,214,44,hot3)}${lamp(226,44,lampOn)}
+      ${wire(237,44,300,44,lampOn)}<text x="250" y="36">back to battery</text></svg>`;
+  }
+  if(kind==="parallel"){
+    const hotA=a===1, hotB=b===1, hotOut=lampOn;
+    return `<svg width="330" height="110">${bat(30,56)}${wire(36,56,52,56,true)}
+      ${wire(52,56,52,30,true)}${wire(52,30,80,30,true)}${sw(80,30,a===1,"A")}${wire(114,30,168,30,hotA)}
+      ${wire(52,56,52,84,true)}${wire(52,84,80,84,true)}${sw(80,84,b===1,"B")}${wire(114,84,168,84,hotB)}
+      ${wire(168,30,168,84,hotOut)}${wire(168,56,214,56,hotOut)}${lamp(226,56,lampOn)}</svg>`;
+  }
+  // single switch (station 1)
+  return `<svg width="330" height="86">${bat(30,44)}${wire(36,44,90,44,true)}${sw(90,44,a===1,"control wire pulls the switch")}
+    ${wire(124,44,214,44,a===1)}${lamp(226,44,lampOn)}${wire(237,44,300,44,lampOn)}</svg>`;
+}
+
+/* ================= stations ================= */
+const stationDefs=[];
+function station(title, short, build){ stationDefs.push({title, short, build}); }
+
+/* ---------- Station 4 ---------- */
+station("Memory","4 · Memory",(sec)=>{
+  sec.append(h(`<div>
+  <h2>Station 4 — The loop that remembers</h2>
+  <p class="promise">Everything you have built so far forgets instantly. Let's fix that — with one sneaky trick.</p>
+  <div class="card"><h3>The problem</h3>
+    <p style="font-size:.9rem">Your gates are <b>forgetful</b>: the lamp follows the switches <i>right now</i> and keeps
+    no diary. Release the switch, the answer is gone. But a computer must <i>hold</i> numbers — your marks,
+    this page, the sum you just made. Where can a circuit keep a thing?</p>
+  </div>
+  <div class="card"><h3>The trick: feed a gate its own output</h3>
+    <p style="font-size:.9rem">Take two "neither-nor" gates (NOR — an OR followed by NOT, on only when <i>both</i> inputs are 0)
+    and cross their wires: each one's output feeds the other's input. The circuit now has a private conversation
+    with itself — <b>a loop</b>. Give the loop a nudge and it keeps repeating the story to itself forever:</p>
+    <div class="row">
+      <button class="pulse" id="s4set">pulse SET</button>
+      <button class="pulse" id="s4rst">pulse RESET</button>
+      <span class="lamp" id="s4q" style="margin-left:14px"><small>Q — what it remembers</small></span>
+    </div>
+    <div id="s4svg" style="margin:20px 0 6px"></div>
+    <p style="font-size:.85rem;color:#556">Follow the loop with a finger: the top gate's output <b>Q</b> runs down into the
+    bottom gate; the bottom gate's output <b>Q̄</b> (read "Q-bar", always Q's opposite) runs back up into the top gate.
+    Each output holds the other in place — like two cards leaning against each other. <i>That lean is the memory.</i>
+    Orange wires carry 1, grey wires carry 0 — watch them trade places when you pulse.</p>
+    <div class="chart" id="s4chart" style="margin-top:10px"></div>
+    <div class="trythis"><b>Try this:</b> pulse SET once — Q lights. Now do <i>nothing</i>. It stays lit.
+    That persistence is new: no gate so far could do it. Pulse RESET — it forgets. Congratulations:
+    you have built one bit of <b>memory</b> out of two forgetful gates and a loop.
+    (House rule: never pulse both at once — that's a shouting match with no winner.)</p>
+  </div>
+  <div class="card"><h3>Add a bell: the one-bit notebook</h3>
+    <p style="font-size:.9rem">One flaw: the loop listens <i>all the time</i> — any electrical sneeze rewrites it.
+    We want a notebook that is sealed except at agreed moments. So we put the loop behind a door
+    that only opens when a <b>bell</b> rings: a D wire says <i>what</i> to write; the bell says <i>when</i>.</p>
+    <div class="row">
+      <button class="toggle" id="s4d">D: 0</button>
+      <button class="pulse" id="s4bell">ring the bell 🔔</button>
+      <span class="lamp" id="s4q2" style="margin-left:14px"><small>Q — the page of the notebook</small></span>
+    </div>
+    <div class="chart" id="s4chart2" style="margin-top:26px"></div>
+    <div class="trythis"><b>Try this:</b> wiggle D up and down — Q ignores you completely. Now ring the bell:
+    Q snaps to whatever D was <i>at that ring</i>. Wiggle D again — Q holds the old value until the next ring.</p>
+    <p style="font-size:.9rem;margin-top:.6rem">A name is now earned: engineers call this one-bit notebook a
+    <b>flip-flop</b>. When we say "a register holds the number 7," we mean: four flip-flops, holding 0111.
+    <i>(Peek inside, if you like: bell AND D pulses the loop's SET; bell AND (NOT D) pulses its RESET.
+    Nothing new — just Station 2 parts guarding Station 4's loop.)</i></p>
+  </div>
+  <div class="own">You now own: memory — a feedback loop of gates — and the flip-flop, a bell-guarded one-bit notebook.</div>
+  </div>`));
+  { const hist=[]; let st={q:0,qb:1};
+    const q=sec.querySelector.bind(sec);
+    /* live picture: two NOR gates, outputs crossed back into each other */
+    const srSVG=(s,r,qv,qb)=>{
+      const w=(pts,hot)=>`<polyline points="${pts}" class="wire ${hot?'hot':''}" fill="none"/>`;
+      const gate=(x,y,label)=>`<rect x="${x}" y="${y}" width="80" height="50" rx="10"
+          fill="#fbfdff" stroke="#003f87" stroke-width="2"/>
+        <text x="${x+40}" y="${y+30}" text-anchor="middle" style="font:600 13px 'Roboto Slab',serif;fill:#002d63">${label}</text>
+        <circle cx="${x+86}" cy="${y+25}" r="5" fill="#fff" stroke="#003f87" stroke-width="2"/>`;
+      const dot=(x,y,on)=>`<circle cx="${x}" cy="${y}" r="7" fill="${on?'#ffc94d':'#e8edf2'}" stroke="${on?'#b35c00':'#aab7c4'}" stroke-width="2"/>`;
+      return `<svg width="470" height="230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+        <!-- inputs -->
+        <text x="8" y="47">RESET = ${r}</text> ${w("70,42 160,42",r===1)}
+        <text x="8" y="197">SET = ${s}</text>  ${w("70,192 160,192",s===1)}
+        <!-- gates -->
+        ${gate(160,30,"NOR")} ${gate(160,165,"NOR")}
+        <text x="145" y="20" style="font:11px Roboto;fill:#8aa">neither-nor: out is 1 only when BOTH inputs are 0</text>
+        <!-- outputs -->
+        ${w("251,55 400,55",qv===1)}   <text x="408" y="59">Q = ${qv}</text>  ${dot(396,55,qv===1)}
+        ${w("251,190 400,190",qb===1)} <text x="408" y="194">Q̄ = ${qb}</text> ${dot(396,190,qb===1)}
+        <!-- the crossover: each output loops back into the OTHER gate -->
+        ${w("290,55 290,100 140,168 160,178",qv===1)}
+        ${w("290,190 290,145 140,78 160,68",qb===1)}
+        <text x="298" y="126" style="font:11px Roboto;fill:#0056b8">the crossover — this X is the whole trick</text>
+      </svg>`;
+    };
+    const draw=(ps,pr)=>{ drawChart(q("#s4chart"),hist,[["SET","s"],["RESET","r"],["Q","q"]],[]);
+      q("#s4q").className="lamp"+(st.q?" on":"");
+      q("#s4svg").innerHTML=srSVG(ps||0,pr||0,st.q,st.qb); };
+    const pulse=(s,r)=>{ st=srStep(st,s,r); hist.push({s,r,q:st.q});
+      draw(s,r);                                   // show the pulse hitting the gate...
+      st=srStep(st,0,0); hist.push({s:0,r:0,q:st.q});
+      if(hist.length>26){hist.shift();hist.shift();}
+      setTimeout(()=>draw(0,0),450); };            // ...then the loop holding on its own
+    q("#s4set").addEventListener("click",()=>pulse(1,0));
+    q("#s4rst").addEventListener("click",()=>pulse(0,1));
+    hist.push({s:0,r:0,q:0}); draw(0,0); }
+  { const hist=[]; let d=0,Q=0;
+    const q=sec.querySelector.bind(sec);
+    const draw=()=>{ q("#s4d").textContent="D: "+d; q("#s4d").className="toggle"+(d?" on":"");
+      q("#s4q2").className="lamp"+(Q?" on":"");
+      drawChart(q("#s4chart2"),hist,[["D","d"],["BELL","b"],["Q","q"]],[]); };
+    q("#s4d").addEventListener("click",()=>{ d^=1; hist.push({d,b:0,q:Q}); if(hist.length>26)hist.shift(); draw(); });
+    q("#s4bell").addEventListener("click",()=>{ Q=d; hist.push({d,b:1,q:Q}); hist.push({d,b:0,q:Q});
+      if(hist.length>26){hist.shift();hist.shift();} draw(); });
+    hist.push({d:0,b:0,q:0}); draw(); }
+});
+
+/* ---------- Station 5 ---------- */
+station("The clock","5 · Clock",(sec)=>{
+  sec.append(h(`<div>
+  <h2>Station 5 — The clock: a bell on a rhythm</h2>
+  <p class="promise">Station 3 left a loose thread: the ripple takes time. Station 4 gave us a bell. Now: <b>how often do we dare ring it?</b></p>
+  <div class="card">
+    <p style="font-size:.9rem">A computer doesn't ring its bell once — it must ring it <b>over and over</b>, millions of
+    times per second, because there is always a next number to add. Each ring does two jobs at once:
+    ① the output notebook <b>captures</b> whatever the adder is saying <i>right now</i>, and
+    ② the adder is handed its <b>next</b> inputs — so its ripple starts all over again.</p>
+    <p style="font-size:.9rem">A bell on a strict, repeating rhythm has a name: a <b>clock</b>. And its designer faces
+    exactly one question: <b>how many ticks between rings?</b> Ring too soon, and job ① captures a half-rippled answer —
+    garbage, faithfully remembered. You choose the rhythm:</p>
+    <div class="row">
+      <label class="small"><b>ring every</b></label>
+      <input type="range" id="s5period" min="1" max="8" value="2" style="width:180px">
+      <span class="code" id="s5plabel">2 ticks</span>
+      <span class="small" style="color:#8aa">(this adder's ripple needs 4 ticks to settle)</span>
+    </div>
+    <div class="row">
+      <button class="big" id="s5run">Start the clock</button>
+      <span class="lamp2" id="s5bell">🔔</span>
+      <span class="wirebox">adder says: <span class="code" id="s5adder">12</span></span>
+      <span class="wirebox">notebook holds: <span class="code" id="s5out">—</span> <span id="s5okmark"></span></span>
+    </div>
+    <div class="row wirebox" style="font-size:.85rem">captures so far: <span id="s5tape"></span>
+      <span id="s5score" style="margin-left:10px;color:#556"></span></div>
+    <div class="chart" id="s5chart"></div>
+    <div class="trythis"><b>Try this:</b> start the clock at <b>2 ticks</b> and watch the notebook fill with garbage —
+    red ✗ after red ✗ — while the adder never gets time to finish. Now slide to <b>4</b>: every capture turns green.
+    You have just discovered the one law of clock design: <b>the rhythm must be no faster than the slowest ripple.</b>
+    (At exactly 4 it <i>just barely</i> works — real engineers always add a safety margin on top.)</div>
+  </div>
+  <div class="card"><h3>So what is "3 GHz", really?</h3>
+    <p style="font-size:.9rem">It is this slider, in a phone. Three billion rings every second — and the chip's designers
+    have proved that even the slowest ripple anywhere on the chip settles between two rings.
+    Faster chip = shorter ripples = a slider you can push further. Same law you just found.</p>
+  </div>
+  <div class="own">You now own: the clock — a repeating bell whose rhythm is a promise: "no ring before the ripple rests."</div>
+  </div>`));
+  const q=sec.querySelector.bind(sec);
+  let timer=null, t=0, P=2, r=4, out="—", okNow=null; const hist=[], tape=[];
+  const states=rippleStates(toBits(7),toBits(5)); const good=states[4].val;
+  const draw=()=>{
+    q("#s5plabel").textContent=P+(P===1?" tick":" ticks");
+    q("#s5adder").textContent=states[r].val + (r<4?" (still rippling…)":"");
+    q("#s5out").textContent=out;
+    q("#s5okmark").innerHTML = okNow===null? "" : okNow?
+      `<span style="color:#1a7f37;font-weight:700">✓</span>`:`<span style="color:#a40e26;font-weight:700">✗ garbage!</span>`;
+    q("#s5tape").innerHTML = tape.slice(-14).map(c=>`<span style="color:${c.ok?'#1a7f37':'#a40e26'};font-weight:600">${c.v}${c.ok?'✓':'✗'}</span>`).join("&thinsp; ");
+    const ng=tape.filter(c=>c.ok).length;
+    q("#s5score").textContent = tape.length? `(${ng}/${tape.length} correct — 7+5 is ${good})`:"";
+    drawChart(q("#s5chart"),hist,[["CLK","clk"]],
+      [["adder (settling)",hh=>hh.adder],["notebook",hh=>hh.out+(hh.ok===null?"":hh.ok?" ✓":" ✗")]]);
+  };
+  const tick=()=>{
+    const edge=(t>0)&&(t%P===0);
+    if(edge){ out=states[r].val; okNow=(out===good); tape.push({v:out,ok:okNow}); r=0;
+      q("#s5bell").className="lamp2 on"; }
+    else { if(t>0) r=Math.min(r+1,4); q("#s5bell").className="lamp2"; }
+    hist.push({clk:(t%P)<Math.ceil(P/2)?1:0, adder:states[r].val, out, ok:okNow});
+    if(hist.length>34)hist.shift();
+    t++; draw();
+  };
+  const stop=()=>{ if(timer){clearInterval(timer);timer=null;q("#s5run").textContent="Start the clock";} };
+  q("#s5run").addEventListener("click",()=>{ if(timer){stop();return;}
+    q("#s5run").textContent="Stop the clock"; timer=setInterval(tick,340); });
+  q("#s5period").addEventListener("input",e=>{ P=+e.target.value; t=0; draw(); });
+  draw();
+});
+
+
+/* ================= stepper (cross-file) ================= */
+const ALLSTATIONS=[
+    ["0 · Promise","w02-under-the-hood-1-parts.html",0],
+    ["1 · Switch","w02-under-the-hood-1-parts.html",1],
+    ["2 · Gates","w02-under-the-hood-1-parts.html",2],
+    ["3 · Adder","w02-under-the-hood-1-parts.html",3],
+    ["4 · Memory","w02-under-the-hood-2-memory.html",0],
+    ["5 · Clock","w02-under-the-hood-2-memory.html",1],
+    ["6 · Machine","w02-under-the-hood-3-machine.html",0],
+    ["7 · The ladder","w02-under-the-hood-3-machine.html",1]];
+const THISFILE="w02-under-the-hood-2-memory.html";
+(function(){
+  const nav=$("stepper"), mainEl=$("stations");
+  const localGlobals=ALLSTATIONS.map((s,g)=>s[1]===THISFILE?g:-1).filter(g=>g>=0);
+  const secs={};
+  stationDefs.forEach((sd,li)=>{
+    const g=localGlobals[li];
+    const sec=document.createElement("section"); sec.className="station"; mainEl.appendChild(sec);
+    sd.build(sec);
+    const last=(g===ALLSTATIONS.length-1);
+    const btns=h(`<div class="navbtns">
+      <button class="big ghost">← back</button>
+      <button class="big">${last? "climb again ↺" : "next station →"}</button></div>`);
+    btns.children[0].addEventListener("click",()=>go(Math.max(0,g-1)));
+    btns.children[1].addEventListener("click",()=>go(last?0:g+1));
+    if(g===0) btns.children[0].style.visibility="hidden";
+    sec.appendChild(btns);
+    secs[g]=sec;
+  });
+  ALLSTATIONS.forEach((s,g)=>{
+    const b=document.createElement("button"); b.textContent=s[0];
+    b.addEventListener("click",()=>go(g)); nav.appendChild(b);
+  });
+  function go(g){
+    const [_,file,li]=[null,ALLSTATIONS[g][1],ALLSTATIONS[g][2]];
+    if(file!==THISFILE){ location.href=file+"?s="+g; return; }
+    Object.entries(secs).forEach(([gg,s])=>s.className="station"+(+gg===g?" show":""));
+    nav.querySelectorAll("button").forEach((b,j)=>b.className=(j===g?"cur":""));
+    window.scrollTo({top:0});
+  }
+  const want=parseInt(new URLSearchParams(location.search).get("s"));
+  go(Number.isInteger(want)&&ALLSTATIONS[want]&&ALLSTATIONS[want][1]===THISFILE ? want : localGlobals[0]);
+})();
+</script>
+</body>
+</html>

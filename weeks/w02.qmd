@@ -16,6 +16,8 @@
 - 📽️ [**Deck 04 — The Computer, Revisited**](../materials/w02-deck-04-computer-revisited.html) — the recap that closes Week 1's loop: what the Turtle taught (programming) and what the Display machine taught (the stored procedure), the design's proper name — **von Neumann architecture** — and the discussion trap: *the Toy Computer adds and subtracts… so isn't it just a calculator?* (The dividing line is where the procedure lives.)
 - 🧮 [**The Toy Computer**](../materials/w02-toy-computer.html) — a complete von Neumann machine you can see all of at once: 40 cells (instructions tinted blue, data green — the machine can't tell), ACC and PC on display, ten instructions, and a diary narrating every fetch–decode–execute. Work the six-rung ladder: one problem (adding two integers), one new idea per rung, ending at the recursion wall.
 
+- 🔧 **Under the Hood** (a guided climb, in three parts: [The Parts](../materials/w02-under-the-hood-1-parts.html) · [Memory & Time](../materials/w02-under-the-hood-2-memory.html) · [The Machine](../materials/w02-under-the-hood-3-machine.html)) — and what is the Toy Computer *made of*? Build every floor yourself: a switch flipped by a wire → gates → an adder → a flip-flop (from two NOR gates and a loop) → the clock → a complete flip-flop machine with a timing diagram. One precision to savour: Part 3's machine is honestly built from flip-flops but its plan is **frozen in its wiring** — by Monday's own dividing line, it is a *calculator*. The Toy Computer is the one with the stored program. The pair of them, side by side, **are** the lesson.
+
 **Tuesday — number systems:**
 
 - 📽️ [**Deck 03 — Number Systems**](../materials/w02-deck-03-number-systems.html) — the week's slides:

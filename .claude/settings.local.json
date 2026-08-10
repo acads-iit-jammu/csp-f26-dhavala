@@ -27,7 +27,8 @@
       "Bash(git -C private commit -q -m 'Toy computer v2 \\(the spine: 6-step concept ladder on adding integers\\) + under-the-hood v1 \\(flip-flop-level adder machine with clock and timing diagram\\); both headlessly tested *)",
       "WebSearch",
       "Bash(git -C private commit -q -m 'Deck 03: Number Systems \\(radix-q, conversions, two'\\\\''s complement, fixed/floating point, IEEE FP32\\) *)",
-      "Bash(git commit -q -m 'W02: Deck 03 + week page with FP32 content; PAGAL note on FP32/FP16/NVFP4 *)"
+      "Bash(git commit -q -m 'W02: Deck 03 + week page with FP32 content; PAGAL note on FP32/FP16/NVFP4 *)",
+      "Bash(git commit -q -m 'Graduate Under the Hood \\(3 parts\\) to W02: the flip-flop machine as the Toy Computer'\\\\''s counterpart across the calculator/computer dividing line *)"
     ]
   }
 }
