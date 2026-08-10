@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Under the Hood · CS-1-01 (MO)</title>
+<style>
+  :root{
+    --blue:#003f87; --blue-dark:#002d63; --blue-mid:#0056b8;
+    --blue-sky:#4da3ff; --blue-pale:#eaf3ff;
+    --ink:#22262a; --paper:#fff; --grey:#f4f6f8; --line:#d7e3f2;
+    --hi:#0056b8; --lo:#aab7c4; --flash:#ffd34d; --warn:#b35c00; --bad:#a40e26;
+    --lampon:#ffc94d; --lampoff:#e8edf2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Roboto,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       font-size:15px;color:var(--ink);background:var(--grey);line-height:1.5}
+  header{background:var(--blue);color:#fff;padding:.7rem 1.2rem}
+  header h1{font-family:"Roboto Slab",Georgia,serif;font-size:1.3rem;margin:0;font-weight:600}
+  header .sub{opacity:.85;font-size:.85rem}
+  /* stepper */
+  nav{display:flex;gap:4px;flex-wrap:wrap;background:var(--blue-dark);padding:6px 12px;position:sticky;top:0;z-index:5}
+  nav button{font-size:.78rem;border:1px solid transparent;background:transparent;color:#cfe3ff;
+             border-radius:14px;padding:3px 11px;cursor:pointer}
+  nav button.cur{background:#fff;color:var(--blue);font-weight:600}
+  nav button:hover{border-color:#cfe3ff}
+  main{max-width:900px;margin:0 auto;padding:16px}
+  section.station{display:none}
+  section.station.show{display:block;animation:fade .25s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  h2{font-family:"Roboto Slab",Georgia,serif;color:var(--blue-dark);font-size:1.25rem;margin:.4rem 0 .2rem}
+  .promise{color:var(--blue-mid);font-size:.95rem;margin:0 0 .8rem;font-style:italic}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+  .card h3{margin:.1rem 0 .5rem;font-size:1rem;color:var(--blue-dark);font-family:"Roboto Slab",Georgia,serif}
+  .trythis{background:var(--blue-pale);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.88rem}
+  .trythis b{color:var(--blue-dark)}
+  .own{border-left:4px solid var(--blue);padding:.4rem .8rem;background:#fff;border-radius:0 8px 8px 0;
+       font-size:.92rem;margin:12px 0;color:var(--blue-dark)}
+  .navbtns{display:flex;justify-content:space-between;margin:18px 0 8px}
+  button.big{font:inherit;border:1px solid var(--blue);background:var(--blue);color:#fff;border-radius:8px;
+             padding:8px 18px;cursor:pointer;font-size:.95rem}
+  button.big.ghost{background:#fff;color:var(--blue)}
+  button.big:hover{filter:brightness(1.12)}
+  /* widgets */
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:.5rem 0}
+  .toggle{font-family:"Roboto Mono",monospace;font-size:.95rem;border:1.5px solid var(--line);background:#fff;
+          color:var(--lo);border-radius:8px;padding:6px 14px;cursor:pointer;min-width:64px}
+  .toggle.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .pulse{font-family:"Roboto Mono",monospace;border:1.5px solid var(--warn);background:#fff;color:var(--warn);
+         border-radius:8px;padding:6px 14px;cursor:pointer}
+  .pulse:active{background:var(--warn);color:#fff}
+  .lamp{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);background:var(--lampoff);
+        display:inline-block;vertical-align:middle;transition:background .15s;position:relative}
+  .lamp.on{background:var(--lampon);border-color:var(--warn);box-shadow:0 0 12px 2px #ffd34d88}
+  .lamp small{position:absolute;top:38px;left:50%;transform:translateX(-50%);font-size:.68rem;color:#667;white-space:nowrap}
+  .wirebox{font-family:"Roboto Mono",monospace}
+  svg .wire{stroke:var(--lo);stroke-width:2.5;fill:none}
+  svg .wire.hot{stroke:var(--warn)}
+  svg text{font:11px Roboto,sans-serif;fill:#556}
+  svg .sw{stroke:var(--blue);stroke-width:2.5}
+  /* truth tables */
+  table.tt{border-collapse:collapse;font-family:"Roboto Mono",monospace;font-size:.85rem}
+  table.tt th{background:var(--blue-pale);color:var(--blue-dark)}
+  table.tt th,table.tt td{border:1px solid var(--line);padding:3px 12px;text-align:center;color:#bbb}
+  table.tt tr.found td{color:var(--ink);font-weight:600;background:#fff}
+  table.tt tr.now td{background:var(--flash)}
+  .disc{font-size:.8rem;color:var(--blue-mid)}
+  /* timing charts */
+  .chart{overflow-x:auto;background:#fbfdff;border:1px solid var(--line);border-radius:8px;padding:6px}
+  .tname{font:600 10px Roboto,sans-serif;fill:#556}
+  .twave{stroke:var(--blue);stroke-width:1.6;fill:none}
+  .tclk{stroke:#889;stroke-width:1.2;fill:none}
+  .tbus{fill:var(--blue-pale);stroke:var(--line)}
+  .tbustext{font:10px "Roboto Mono",monospace;fill:var(--blue-dark)}
+  /* flip-flop boxes (station 6) */
+  .bits{display:flex;gap:4px}
+  .ff{border:1px solid var(--line);border-radius:5px;padding:2px 4px;text-align:center;background:#fff;min-width:36px}
+  .ff .lbl{font-size:.58rem;color:#8aa;display:block}
+  .ff .d,.ff .q{font-family:"Roboto Mono",monospace;font-size:.8rem;display:block}
+  .ff .d{color:#98a6b3}.ff .q{font-weight:700}
+  .ff.one .q{color:var(--hi)}.ff.zero .q{color:var(--lo)}
+  .ff.flash{background:var(--flash)}
+  .ff[title]{cursor:help}
+  .block{border:1.5px solid var(--line);border-radius:8px;padding:6px 8px;background:#fbfdff;min-width:110px}
+  .block.active{border-color:var(--warn);box-shadow:0 0 0 1.5px var(--warn)}
+  .block h4{margin:0 0 4px;font-size:.7rem;letter-spacing:.05em;color:var(--blue-dark);text-transform:uppercase;
+            display:flex;justify-content:space-between;gap:8px}
+  .block h4 .dec{color:var(--blue);font-family:"Roboto Mono",monospace}
+  .stage{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin:.5rem 0}
+  .lamp2{display:inline-block;min-width:52px;text-align:center;border-radius:12px;border:1px solid var(--line);
+        font-size:.72rem;padding:2px 8px;font-family:"Roboto Mono",monospace;background:#fff;color:var(--lo)}
+  .lamp2.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .keypad{display:flex;gap:4px;flex-wrap:wrap}
+  .keypad button{background:#fff;color:var(--blue);border:1px solid var(--line);padding:4px 9px;
+                 font-family:"Roboto Mono",monospace;border-radius:6px;cursor:pointer}
+  .keypad button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  #s6log{font-size:.8rem;height:130px;overflow-y:auto;background:#fbfdff;border:1px solid var(--line);
+         border-radius:6px;padding:6px 8px;line-height:1.5}
+  #s6log .op{color:var(--blue);font-weight:600}
+  #s6log div{border-bottom:1px dashed #edf2f8;padding:1px 0}
+  #s6prompt{background:var(--blue-pale);border:1px solid var(--line);border-radius:6px;padding:6px 10px;
+            font-size:.85rem;color:var(--blue-dark)}
+  /* ladder (station 7) */
+  .lvl{border:1.5px solid var(--line);border-radius:8px;padding:8px 14px;margin:6px 0;background:#fff;
+       display:flex;gap:14px;align-items:baseline;opacity:.55;transition:all .2s}
+  .lvl.cur{opacity:1;border-color:var(--blue);box-shadow:0 0 0 1.5px var(--blue)}
+  .lvl .tag{font-size:.68rem;letter-spacing:.06em;color:var(--blue-dark);min-width:105px;text-transform:uppercase;font-weight:700}
+  .lvl code{font-family:"Roboto Mono",monospace;font-size:.88rem;color:var(--blue)}
+  .code{font-family:"Roboto Mono",monospace;background:#fbfdff;border:1px solid var(--line);border-radius:6px;
+        padding:2px 8px;color:var(--blue)}
+  footer{color:#78838d;text-align:center;font-size:.75rem;padding:8px 0 16px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Under the Hood — from a switch to <span style="font-family:'Roboto Mono',monospace">c&nbsp;=&nbsp;a&nbsp;+&nbsp;b;</span></h1>
+  <div class="sub">Part 1 · The Parts — switch → gates → adder · a guided climb through every floor of a computer · nothing here is magic · CS-1-01 (MO), IIT Jammu</div>
+</header>
+<nav id="stepper"></nav>
+<main id="stations"></main>
+<footer>CS-1-01 (MO), Monsoon 2026 · every floor is a specification for the floor below</footer>
+
+<script>
+"use strict";
+/* ================= pure logic (testable) ================= */
+const AND=(a,b)=>a&b, OR=(a,b)=>a|b, NOT=a=>1-a, XOR=(a,b)=>a^b, NOR=(a,b)=>1-(a|b);
+function halfAdd(a,b){ return {s:XOR(a,b), c:AND(a,b)}; }
+function fullAdd(a,b,cin){ const x=XOR(a,b);
+  return {s:XOR(x,cin), cout:OR(AND(a,b),AND(cin,x)), w:{axb:x,ab:AND(a,b),cx:AND(cin,x)}}; }
+const toBits=n=>[n&1,(n>>1)&1,(n>>2)&1,(n>>3)&1];
+const fromBits=b=>b.reduce((v,x,i)=>v+(x<<i),0);
+const fromBits5=b=>b[0]+2*b[1]+4*b[2]+8*b[3]+16*b[4];
+const bstr=b=>b.slice().reverse().join("");
+function add4(A,B){ const fas=[]; let c=0;
+  for(let i=0;i<4;i++){ const r=fullAdd(A[i],B[i],c); fas.push({a:A[i],b:B[i],cin:c,...r}); c=r.cout; }
+  return {s:[fas[0].s,fas[1].s,fas[2].s,fas[3].s,c], fas}; }
+/* ripple with time: at settle-tick t, carries have propagated only t positions */
+function rippleStates(A,B){
+  const states=[];
+  for(let t=0;t<=4;t++){
+    let c=0; const sums=[]; const carries=[];
+    for(let i=0;i<4;i++){
+      const cin=c;
+      const r=fullAdd(A[i],B[i],cin);
+      sums.push(r.s); carries.push(r.cout);
+      c = (i<t)? r.cout : 0;           // carry only travels t hops so far
+    }
+    const top = (t>=4)? carries[3] : 0;
+    states.push({t, sum:[...sums, top], val:fromBits5([...sums,top])});
+  }
+  return states;
+}
+/* clocked capture: a metronome ringing every P ticks over an adder that
+   needs 4 ticks to settle; each ring captures, then hands the adder new
+   inputs (so the ripple restarts). Pure & testable. */
+function clockSim(P,nT,A,B){
+  const states=rippleStates(A||toBits(7),B||toBits(5));
+  const good=states[4].val;
+  let r=4, out=null; const hist=[],captures=[];
+  for(let t=0;t<nT;t++){
+    const edge=(t>0)&&(t%P===0);
+    if(edge){ out=states[r].val; captures.push({v:out,ok:out===good}); r=0; }
+    else if(t>0) r=Math.min(r+1,4);
+    hist.push({clk:(t%P)<Math.ceil(P/2)?1:0, edge, adder:states[r].val, out:out===null?"—":out,
+               ok:out===null?null:out===good});
+  }
+  return {hist,captures,good};
+}
+/* SR latch from two cross-coupled NORs; settle by iterating */
+function srStep(state,s,r){
+  let q=state.q, qb=state.qb;
+  for(let i=0;i<4;i++){ const nqb=NOR(s,q); const nq=NOR(r,nqb); qb=nqb; q=nq; }
+  return {q,qb};
+}
+/* station-6 machine */
+const STATES=["LOAD_A","LOAD_B","LATCH","DONE"];
+function machineEdge(m){
+  const ev=[];
+  if(m.state===0){ m.A=toBits(m.keypad); ev.push(`enA is on → register A wrote down the bus (<b>${m.keypad}</b> = ${bstr(m.A)})`); m.state=1; }
+  else if(m.state===1){ m.B=toBits(m.keypad); ev.push(`enB is on → register B wrote down the bus (<b>${m.keypad}</b> = ${bstr(m.B)})`); m.state=2; }
+  else if(m.state===2){ const r=add4(m.A,m.B); m.OUT=r.s.slice();
+    ev.push(`enOUT is on → the output register wrote down the adder's answer: ${bstr(m.OUT)} = <b>${fromBits5(m.OUT)}</b>`); m.state=3; }
+  else ev.push("state DONE — no notebook is listening; bell-rings change nothing now. Press Reset for a new sum.");
+  ev.push(`the control notebooks now hold ${(m.state>>1)&1}${m.state&1} (${STATES[m.state]})`);
+  return ev;
+}
+
+/* ================= tiny framework ================= */
+const $=id=>document.getElementById(id);
+function h(html){ const t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstChild; }
+
+/* timing chart: tracks = [[label,key]], buses = [[label,fn]] */
+function drawChart(el,hist,tracks,buses){
+  const W=26,H0=16,RH=26,BH=18,n=hist.length;
+  const width=76+Math.max(n,1)*W, height=H0+tracks.length*RH+buses.length*(BH+8)+8;
+  let s=`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">`;
+  tracks.forEach((t,ti)=>{
+    const y0=H0+ti*RH, hi=y0, lo=y0+RH-12;
+    s+=`<text x="4" y="${lo}" class="tname">${t[0]}</text>`;
+    let d="",prev=null;
+    hist.forEach((hh,i)=>{
+      const v=hh[t[1]], x=76+i*W, y=v?hi:lo;
+      if(prev===null) d+=`M${x},${y}`;
+      else if((prev?hi:lo)!==y) d+=`L${x},${prev?hi:lo}L${x},${y}`;
+      d+=`L${x+W},${y}`; prev=v;
+    });
+    s+=`<path class="${t[0]==='CLK'||t[0]==='BELL'?'tclk':'twave'}" d="${d}"/>`;
+  });
+  buses.forEach((b,bi)=>{
+    const y=H0+tracks.length*RH+bi*(BH+8);
+    s+=`<text x="4" y="${y+13}" class="tname">${b[0]}</text>`;
+    let i=0;
+    while(i<n){
+      let j=i; while(j<n && String(b[1](hist[j]))===String(b[1](hist[i]))) j++;
+      const x=76+i*W,w=(j-i)*W;
+      s+=`<rect class="tbus" x="${x}" y="${y}" width="${w}" height="${BH}" rx="3"/>`+
+         `<text class="tbustext" x="${x+w/2}" y="${y+13}" text-anchor="middle">${b[1](hist[i])}</text>`;
+      i=j;
+    }
+  });
+  s+="</svg>";
+  el.innerHTML=s; el.scrollLeft=1e9;
+}
+
+/* truth table with discovery */
+function makeTT(el, cols, rows){
+  const found=new Set();
+  el.innerHTML="";
+  const table=h(`<table class="tt"><tr>${cols.map(c=>`<th>${c}</th>`).join("")}</tr></table>`);
+  const trs=rows.map(r=>{ const tr=h(`<tr>${r.map(v=>`<td>${v}</td>`).join("")}</tr>`); table.appendChild(tr); return tr;});
+  el.appendChild(table);
+  const disc=h(`<div class="disc">rows discovered: 0/${rows.length} — try every combination!</div>`);
+  el.appendChild(disc);
+  return {mark(idx){ found.add(idx);
+      trs.forEach((tr,i)=>{tr.className=(i===idx?"found now":found.has(i)?"found":"");});
+      disc.textContent = found.size===rows.length
+        ? `all ${rows.length} rows discovered — that table is this device's ENTIRE personality. Nothing else to know.`
+        : `rows discovered: ${found.size}/${rows.length} — try every combination!`; }};
+}
+
+/* simple series/parallel circuit pictures */
+function circuitSVG(kind,a,b,lampOn){
+  const wire=(x1,y1,x2,y2,hot)=>`<path class="wire ${hot?'hot':''}" d="M${x1},${y1}L${x2},${y2}"/>`;
+  const sw=(x,y,on,lbl)=>(on?`<line class="sw" x1="${x}" y1="${y}" x2="${x+34}" y2="${y}"/>`
+                            :`<line class="sw" x1="${x}" y1="${y}" x2="${x+30}" y2="${y-14}"/>`)+
+                          `<circle cx="${x}" cy="${y}" r="3" fill="#003f87"/><circle cx="${x+34}" cy="${y}" r="3" fill="#003f87"/>`+
+                          `<text x="${x+8}" y="${y+16}">${lbl}</text>`;
+  const lamp=(x,y,on)=>`<circle cx="${x}" cy="${y}" r="11" fill="${on?'#ffc94d':'#e8edf2'}" stroke="${on?'#b35c00':'#d7e3f2'}" stroke-width="2"/>`+
+                       `<text x="${x-14}" y="${y+26}">lamp</text>`;
+  const bat=(x,y)=>`<text x="${x-6}" y="${y-10}">⎓</text><text x="${x-28}" y="${y+24}">battery</text>`+
+                   `<line class="sw" x1="${x-6}" y1="${y}" x2="${x+6}" y2="${y}"/>`;
+  if(kind==="series"){
+    const hot1=true, hot2=a===1, hot3=a===1&&b===1;
+    return `<svg width="330" height="86">${bat(30,44)}${wire(36,44,60,44,hot1)}${sw(60,44,a===1,"A")}
+      ${wire(94,44,130,44,hot2)}${sw(130,44,b===1,"B")}${wire(164,44,214,44,hot3)}${lamp(226,44,lampOn)}
+      ${wire(237,44,300,44,lampOn)}<text x="250" y="36">back to battery</text></svg>`;
+  }
+  if(kind==="parallel"){
+    const hotA=a===1, hotB=b===1, hotOut=lampOn;
+    return `<svg width="330" height="110">${bat(30,56)}${wire(36,56,52,56,true)}
+      ${wire(52,56,52,30,true)}${wire(52,30,80,30,true)}${sw(80,30,a===1,"A")}${wire(114,30,168,30,hotA)}
+      ${wire(52,56,52,84,true)}${wire(52,84,80,84,true)}${sw(80,84,b===1,"B")}${wire(114,84,168,84,hotB)}
+      ${wire(168,30,168,84,hotOut)}${wire(168,56,214,56,hotOut)}${lamp(226,56,lampOn)}</svg>`;
+  }
+  // single switch (station 1)
+  return `<svg width="330" height="86">${bat(30,44)}${wire(36,44,90,44,true)}${sw(90,44,a===1,"control wire pulls the switch")}
+    ${wire(124,44,214,44,a===1)}${lamp(226,44,lampOn)}${wire(237,44,300,44,lampOn)}</svg>`;
+}
+
+/* ================= stations ================= */
+const stationDefs=[];
+function station(title, short, build){ stationDefs.push({title, short, build}); }
+
+/* ---------- Station 0 ---------- */
+station("The promise","0 · Promise",(sec)=>{
+  sec.append(h(`<div>
+  <h2>Station 0 — The promise</h2>
+  <p class="promise">One line of C. Eight short stations. Zero magic.</p>
+  <div class="card"><p style="font-size:1.35rem;text-align:center;margin:.6rem 0"><span class="code">c&nbsp;=&nbsp;a&nbsp;+&nbsp;b;</span></p>
+  <p>In a few weeks you will write this line in the C language and think nothing of it.
+  Today, we ask an unreasonable question: <b>what does the universe actually have to do to make this line happen?</b></p>
+  <p>The answer turns out to be a building with several floors. On the top floor, you write
+  <span class="code">c = a + b;</span>. In the basement, tiny switches flip — billions of times per second.
+  This page walks you down, floor by floor, and lets you <b>build every floor yourself</b> from the one below it.</p>
+  <p>By Station 6 you will have assembled — from parts you built — a real (toy) computer that adds two numbers.
+  By Station 7 you will know exactly what happens, at every level, when a program runs.</p>
+  <p><b>Rule of the climb:</b> no word appears before you have built the thing it names. If you meet a term
+  you don't know, we made a mistake — tell your instructor.</p></div>
+  <div class="own">You own, right now: curiosity. That's the only prerequisite.</div>
+  </div>`));
+});
+
+/* ---------- Station 1 ---------- */
+station("The switch","1 · Switch",(sec)=>{
+  sec.append(h(`<div>
+  <h2>Station 1 — A switch flipped by a wire</h2>
+  <p class="promise">The only electronics you need all semester, in one sentence.</p>
+  <div class="card">
+    <p>You know what a light switch is: press it, the circuit closes, the lamp lights.
+    A <b>transistor</b> is just a switch with one twist — it is pressed <b>not by a finger, but by another wire</b>.
+    If the control wire carries "pressure" (a high voltage — think of water pressure in a pipe, that's the only
+    physics we'll ever use), the switch closes. No pressure, it opens. That's it. That is the entire basement
+    of every computer on Earth.</p>
+    <div class="row"><button class="toggle" id="s1c">control: 0</button>
+      <div id="s1circ"></div></div>
+    <div class="trythis"><b>Try this:</b> click the control a few times — on, off, on, off. Watch the lamp copy it. Then look below.</div>
+  </div>
+  <div class="card">
+    <h3>Your first timing diagram</h3>
+    <p style="font-size:.88rem">This strip records your clicks, like an ECG for wires: time runs left to right, and each
+    line shows one wire — up means 1 (pressure), down means 0 (no pressure). Engineers stare at these all day.
+    You will read them easily by Station 6.</p>
+    <div class="chart" id="s1chart"></div>
+  </div>
+  <p style="font-size:.9rem">One more thing for later: switches also come in a <i>contrary</i> flavour that does the opposite —
+  <b>closed until pressed</b>. Remember it exists; we'll need it in the next station.</p>
+  <div class="own">You now own: the transistor = a wire-controlled switch, and how to read a timing diagram.</div>
+  </div>`));
+  let c=0; const hist=[];
+  const render=()=>{ $("s1c").textContent="control: "+c; $("s1c").className="toggle"+(c?" on":"");
+    $("s1circ").innerHTML=circuitSVG("single",c,0,c===1);
+    hist.push({c,lamp:c}); if(hist.length>28)hist.shift();
+    drawChart($("s1chart"),hist,[["control","c"],["lamp","lamp"]],[]); };
+  $("s1c")?0:0; sec.querySelector("#s1c").addEventListener("click",()=>{c^=1;render();});
+  render();
+});
+
+/* ---------- Station 2 ---------- */
+station("Gates","2 · Gates",(sec)=>{
+  sec.append(h(`<div>
+  <h2>Station 2 — Switches in company: gates</h2>
+  <p class="promise">Put two switches in a row, or side by side, and something clever happens.</p>
+  <div class="card"><h3>Two in a row — the lamp demands BOTH</h3>
+    <div class="row"><button class="toggle" id="s2a1">A: 0</button><button class="toggle" id="s2b1">B: 0</button>
+    <div id="s2c1"></div></div>
+    <div class="row"><div id="s2t1"></div></div>
+    <p style="font-size:.88rem">Current must pass through A <i>and then</i> B — so the lamp lights only when
+    <b>both</b> are on. Engineers box this up and call it an <b>AND gate</b>. You just built one.</p>
+  </div>
+  <div class="card"><h3>Two side by side — EITHER will do</h3>
+    <div class="row"><button class="toggle" id="s2a2">A: 0</button><button class="toggle" id="s2b2">B: 0</button>
+    <div id="s2c2"></div></div>
+    <div class="row"><div id="s2t2"></div></div>
+    <p style="font-size:.88rem">Now the current has two roads; either switch opens a path. This is the <b>OR gate</b>.</p>
+  </div>
+  <div class="card"><h3>The contrary switch — NOT</h3>
+    <div class="row"><button class="toggle" id="s2a3">A: 0</button>
+      <span class="lamp" id="s2l3"><small>lamp</small></span>
+      <div id="s2t3" style="margin-left:24px"></div></div>
+    <p style="font-size:.88rem">Remember Station 1's contrary flavour — closed until pressed? Alone, it flips whatever
+    you give it: 0 becomes 1, 1 becomes 0. The <b>NOT gate</b>.</p>
+  </div>
+  <div class="card"><h3>Build-your-own: the disagreement detector (XOR)</h3>
+    <div class="row"><button class="toggle" id="s2a4">A: 0</button><button class="toggle" id="s2b4">B: 0</button>
+      <span class="lamp" id="s2l4"><small>lamp</small></span>
+      <div id="s2t4" style="margin-left:24px"></div></div>
+    <p style="font-size:.88rem">Wire the three gates you own like this: <span class="code">(A OR B) AND NOT (A AND B)</span> —
+    "at least one, but not both." The lamp lights exactly when A and B <b>disagree</b>.
+    Engineers call it <b>XOR</b>. Keep it warm: it is about to do arithmetic.</p>
+  </div>
+  <div class="trythis"><b>Try this:</b> for each device, find <b>all</b> its table rows. A gate has no moods and no memory —
+  its whole life story fits in four lines.</div>
+  <div class="own">You now own: AND, OR, NOT, XOR — all of them just switches in company.</div>
+  </div>`));
+  const mk=(aid,bid,circid,ttid,fn,kind,lampid)=>{
+    let a=0,b=0;
+    const tt=makeTT(sec.querySelector("#"+ttid),["A","B","lamp"],[[0,0,fn(0,0)],[0,1,fn(0,1)],[1,0,fn(1,0)],[1,1,fn(1,1)]]);
+    const render=()=>{ const q=sec.querySelector.bind(sec);
+      q("#"+aid).textContent="A: "+a; q("#"+aid).className="toggle"+(a?" on":"");
+      if(bid){ q("#"+bid).textContent="B: "+b; q("#"+bid).className="toggle"+(b?" on":""); }
+      const out=fn(a,b);
+      if(circid) q("#"+circid).innerHTML=circuitSVG(kind,a,b,out===1);
+      if(lampid) q("#"+lampid).className="lamp"+(out?" on":"");
+      tt.mark(bid? a*2+b : a);
+    };
+    sec.querySelector("#"+aid).addEventListener("click",()=>{a^=1;render();});
+    if(bid) sec.querySelector("#"+bid).addEventListener("click",()=>{b^=1;render();});
+    render();
+  };
+  mk("s2a1","s2b1","s2c1","s2t1",AND,"series",null);
+  mk("s2a2","s2b2","s2c2","s2t2",OR,"parallel",null);
+  { let a=0; const tt=makeTT(sec.querySelector("#s2t3"),["A","lamp"],[[0,1],[1,0]]);
+    const r=()=>{ sec.querySelector("#s2a3").textContent="A: "+a;
+      sec.querySelector("#s2a3").className="toggle"+(a?" on":"");
+      sec.querySelector("#s2l3").className="lamp"+(NOT(a)?" on":""); tt.mark(a); };
+    sec.querySelector("#s2a3").addEventListener("click",()=>{a^=1;r();}); r(); }
+  mk("s2a4","s2b4",null,"s2t4",XOR,null,"s2l4");
+});
+
+/* ---------- Station 3 ---------- */
+station("The adder","3 · Adder",(sec)=>{
+  sec.append(h(`<div>
+  <h2>Station 3 — Arithmetic is wiring</h2>
+  <p class="promise">You are about to make electricity do maths.</p>
+  <div class="card"><h3>Adding two bits (and hitting a snag)</h3>
+    <p style="font-size:.9rem">Bits are just 0s and 1s. 0+0=0, 0+1=1 ... and 1+1=<b>2</b> — but there is no "2" on one wire!
+    In binary, two is written <span class="code">10</span> — so the answer needs <b>two wires</b>:
+    a <b>sum</b> wire and a <b>carry</b> wire. Look at the table you are about to discover:
+    sum is exactly your XOR, carry is exactly your AND. Addition was hiding inside Station 2 all along.</p>
+    <div class="row"><button class="toggle" id="s3a">A: 0</button><button class="toggle" id="s3b">B: 0</button>
+      <span class="lamp" id="s3s"><small>sum</small></span><span class="lamp" id="s3c" style="margin-left:14px"><small>carry</small></span>
+      <div id="s3tt" style="margin-left:28px"></div></div>
+    <p style="font-size:.88rem">This little box — one XOR + one AND — is called a <b>half adder</b>.
+    (Half, because it can't yet accept a carry <i>coming in</i> from a previous digit. Add a second half adder
+    and an OR to merge their carries, and you get a <b>full adder</b>: three bits in — A, B, carry-in — sum and carry-out.)</p>
+  </div>
+  <div class="card"><h3>Chain four of them: a real adder</h3>
+    <p style="font-size:.9rem">Now add whole numbers the way you add on paper: digit by digit, right to left, carrying as you go.
+    Four full adders, each passing its carry to the next. Set the bits of two numbers and <b>watch the carry ripple</b>:</p>
+    <div class="row wirebox"><span>A =</span><span id="s3Adec" class="code">7</span><span id="s3Abits"></span></div>
+    <div class="row wirebox"><span>B =</span><span id="s3Bdec" class="code">5</span><span id="s3Bbits"></span></div>
+    <div class="row" id="s3fas"></div>
+    <div class="row wirebox">answer settles to: <span class="code" id="s3out">…</span></div>
+    <div class="chart" id="s3chart"></div>
+    <div class="trythis"><b>Try this:</b> set A=7 (0111) and B=5 (0101), and watch the carry hop cell to cell,
+    one small delay at a time, before the answer settles at 12. <b>Remember that the ripple takes time.</b>
+    That detail will matter enormously in Station 5.</div>
+  </div>
+  <div class="own">You now own: a machine, made of your own gates, that genuinely adds numbers. Arithmetic is wiring.</div>
+  </div>`));
+  { let a=0,b=0;
+    const tt=makeTT(sec.querySelector("#s3tt"),["A","B","sum","carry"],[[0,0,0,0],[0,1,1,0],[1,0,1,0],[1,1,0,1]]);
+    const r=()=>{ const q=sec.querySelector.bind(sec); const {s,c}=halfAdd(a,b);
+      q("#s3a").textContent="A: "+a; q("#s3a").className="toggle"+(a?" on":"");
+      q("#s3b").textContent="B: "+b; q("#s3b").className="toggle"+(b?" on":"");
+      q("#s3s").className="lamp"+(s?" on":""); q("#s3c").className="lamp"+(c?" on":"");
+      tt.mark(a*2+b); };
+    sec.querySelector("#s3a").addEventListener("click",()=>{a^=1;r();});
+    sec.querySelector("#s3b").addEventListener("click",()=>{b^=1;r();}); r(); }
+  { let A=toBits(7), B=toBits(5); const hist=[]; let timer=null;
+    const q=sec.querySelector.bind(sec);
+    const bitBtns=(el,bits,cb)=>{ el.innerHTML="";
+      [3,2,1,0].forEach(i=>{ const bb=h(`<button class="toggle" style="min-width:40px">${bits[i]}</button>`);
+        bb.className="toggle"+(bits[i]?" on":"");
+        bb.addEventListener("click",()=>{bits[i]^=1;cb();}); el.appendChild(bb); }); };
+    const renderBits=()=>{ bitBtns(q("#s3Abits"),A,onChange); bitBtns(q("#s3Bbits"),B,onChange); };
+    const onChange=()=>{ renderBits(); settle(); };   // keep buttons in sync with the bits they show
+    const settle=()=>{ if(timer)clearInterval(timer);
+      const states=rippleStates(A,B); let k=0;
+      q("#s3Adec").textContent=fromBits(A); q("#s3Bdec").textContent=fromBits(B);
+      q("#s3out").textContent="…rippling…";
+      timer=setInterval(()=>{
+        const st=states[k];
+        q("#s3fas").innerHTML=[3,2,1,0].map(i=>{
+          const f=fullAdd(A[i],B[i], i===0?0:(i<=st.t? add4(A,B).fas[i].cin:0));
+          return `<div class="ff ${st.sum[i]?'one':'zero'}"><span class="lbl">FA${i}${i<st.t?' ✓':''}</span>
+            <span class="d">${A[i]}+${B[i]}</span><span class="q">s:${st.sum[i]}</span></div>`;}).join("");
+        hist.push({c1:st.t>=1?add4(A,B).fas[0].cout:0, c2:st.t>=2?add4(A,B).fas[1].cout:0,
+                   c3:st.t>=3?add4(A,B).fas[2].cout:0, v:st.val});
+        if(hist.length>30)hist.shift();
+        drawChart(q("#s3chart"),hist,[["carry1","c1"],["carry2","c2"],["carry3","c3"]],[["adder says",hh=>hh.v]]);
+        if(k===4){ clearInterval(timer);timer=null; q("#s3out").textContent=`${st.val}  (binary ${bstr(st.sum)})`; }
+        k++;
+      },420);
+    };
+    renderBits(); settle();
+  }
+});
+
+
+/* ================= stepper (cross-file) ================= */
+const ALLSTATIONS=[
+    ["0 · Promise","w02-under-the-hood-1-parts.html",0],
+    ["1 · Switch","w02-under-the-hood-1-parts.html",1],
+    ["2 · Gates","w02-under-the-hood-1-parts.html",2],
+    ["3 · Adder","w02-under-the-hood-1-parts.html",3],
+    ["4 · Memory","w02-under-the-hood-2-memory.html",0],
+    ["5 · Clock","w02-under-the-hood-2-memory.html",1],
+    ["6 · Machine","w02-under-the-hood-3-machine.html",0],
+    ["7 · The ladder","w02-under-the-hood-3-machine.html",1]];
+const THISFILE="w02-under-the-hood-1-parts.html";
+(function(){
+  const nav=$("stepper"), mainEl=$("stations");
+  const localGlobals=ALLSTATIONS.map((s,g)=>s[1]===THISFILE?g:-1).filter(g=>g>=0);
+  const secs={};
+  stationDefs.forEach((sd,li)=>{
+    const g=localGlobals[li];
+    const sec=document.createElement("section"); sec.className="station"; mainEl.appendChild(sec);
+    sd.build(sec);
+    const last=(g===ALLSTATIONS.length-1);
+    const btns=h(`<div class="navbtns">
+      <button class="big ghost">← back</button>
+      <button class="big">${last? "climb again ↺" : "next station →"}</button></div>`);
+    btns.children[0].addEventListener("click",()=>go(Math.max(0,g-1)));
+    btns.children[1].addEventListener("click",()=>go(last?0:g+1));
+    if(g===0) btns.children[0].style.visibility="hidden";
+    sec.appendChild(btns);
+    secs[g]=sec;
+  });
+  ALLSTATIONS.forEach((s,g)=>{
+    const b=document.createElement("button"); b.textContent=s[0];
+    b.addEventListener("click",()=>go(g)); nav.appendChild(b);
+  });
+  function go(g){
+    const [_,file,li]=[null,ALLSTATIONS[g][1],ALLSTATIONS[g][2]];
+    if(file!==THISFILE){ location.href=file+"?s="+g; return; }
+    Object.entries(secs).forEach(([gg,s])=>s.className="station"+(+gg===g?" show":""));
+    nav.querySelectorAll("button").forEach((b,j)=>b.className=(j===g?"cur":""));
+    window.scrollTo({top:0});
+  }
+  const want=parseInt(new URLSearchParams(location.search).get("s"));
+  go(Number.isInteger(want)&&ALLSTATIONS[want]&&ALLSTATIONS[want][1]===THISFILE ? want : localGlobals[0]);
+})();
+</script>
+</body>
+</html>

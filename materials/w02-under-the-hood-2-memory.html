@@ -114,7 +114,7 @@
 <body>
 <header>
   <h1>Under the Hood — from a switch to <span style="font-family:'Roboto Mono',monospace">c&nbsp;=&nbsp;a&nbsp;+&nbsp;b;</span></h1>
-  <div class="sub">Part 3 · The Machine — and the whole ladder · a guided climb through every floor of a computer · nothing here is magic · CS-1-01 (MO), IIT Jammu</div>
+  <div class="sub">Part 2 · Memory & Time — the loop and the bell · a guided climb through every floor of a computer · nothing here is magic · CS-1-01 (MO), IIT Jammu</div>
 </header>
 <nav id="stepper"></nav>
 <main id="stations"></main>
@@ -271,172 +271,186 @@ function circuitSVG(kind,a,b,lampOn){
 const stationDefs=[];
 function station(title, short, build){ stationDefs.push({title, short, build}); }
 
-/* ---------- Station 6 ---------- */
-station("The machine","6 · Machine",(sec)=>{
+/* ---------- Station 4 ---------- */
+station("Memory","4 · Memory",(sec)=>{
   sec.append(h(`<div>
-  <h2>Station 6 — Assemble the machine</h2>
-  <p class="promise">Registers, an adder, a clock, a plan. Every part below is one you built. Nothing has been added.</p>
-  <div class="card">
-    <div id="s6prompt"></div>
-    <div class="row">
-      <label style="font-size:.8rem;color:#556">input switches (one shared bus — both registers see it; only the <i>enabled</i> one writes it down):</label>
-      <div class="keypad" id="s6keypad"></div>
-      <span class="lamp2" id="s6bus">bus 0000</span>
-    </div>
-    <div class="row">
-      <button class="big" id="s6tick">Half-tick the clock</button>
-      <button class="big ghost" id="s6cycle">Full cycle</button>
-      <button class="big ghost" id="s6auto">Auto clock</button>
-      <button class="big ghost" id="s6reset">Reset</button>
-      <span class="lamp2" id="s6clk">CLK 0</span>
-    </div>
-    <div class="stage">
-      <div class="block" id="s6blkA"><h4>Register A — 4 notebooks <span class="dec" id="s6decA">0</span></h4><div class="bits" id="s6bitsA"></div></div>
-      <div class="block" id="s6blkB"><h4>Register B <span class="dec" id="s6decB">0</span></h4><div class="bits" id="s6bitsB"></div></div>
-      <div class="block"><h4>Ripple adder (Station 3) <span class="dec" id="s6decS">0</span></h4><div class="bits" id="s6bitsFA"></div>
-        <div style="font-size:.66rem;color:#8aa;margin-top:2px">no bell needed — it never remembers, it only computes. Click an FA to see its Station-2 gates.</div></div>
-      <div class="block" id="s6blkO"><h4>Output register <span class="dec" id="s6decO">0</span></h4><div class="bits" id="s6bitsO"></div></div>
-    </div>
-    <div class="stage">
-      <div class="block"><h4>Control — 2 notebooks holding the PLAN's current step</h4>
-        <div class="row" style="margin:0"><div class="bits" id="s6bitsS"></div>
-          <span class="lamp2" id="s6st">LOAD_A</span><span class="lamp2" id="s6enA">enA</span>
-          <span class="lamp2" id="s6enB">enB</span><span class="lamp2" id="s6enO">enOUT</span></div>
-        <div style="font-size:.66rem;color:#8aa;margin-top:2px">the plan: LOAD_A → LOAD_B → LATCH → DONE. Even the <i>plan</i> is just bits in flip-flops.</div></div>
-      <div class="block" style="flex:1;min-width:220px"><h4>Inside <span id="s6faName">FA0</span> — Station 2, alive</h4>
-        <table class="tt" id="s6gates" style="width:100%"></table></div>
-    </div>
+  <h2>Station 4 — The loop that remembers</h2>
+  <p class="promise">Everything you have built so far forgets instantly. Let's fix that — with one sneaky trick.</p>
+  <div class="card"><h3>The problem</h3>
+    <p style="font-size:.9rem">Your gates are <b>forgetful</b>: the lamp follows the switches <i>right now</i> and keeps
+    no diary. Release the switch, the answer is gone. But a computer must <i>hold</i> numbers — your marks,
+    this page, the sum you just made. Where can a circuit keep a thing?</p>
   </div>
-  <div class="card"><h3>The heartbeat, recorded</h3><div class="chart" id="s6timing"></div></div>
-  <div class="card"><h3>The machine's diary</h3><div id="s6log"></div></div>
-  <div class="trythis"><b>Try this:</b> add 7 and 5. Set the switches to 7, run a full cycle; set them to 5, cycle;
-  cycle once more to latch the sum. Then the sabotage: reset, set 3, cycle — <b>then change the switches to 9</b>
-  and look at register A. It kept 3! Whatever is on the bus <i>at the ring</i> is what gets remembered. Timing is meaning.</div>
-  <div class="own">You now own: a computer. Small, honest, and built floor by floor with your own hands.</div>
+  <div class="card"><h3>The trick: feed a gate its own output</h3>
+    <p style="font-size:.9rem">Take two "neither-nor" gates (NOR — an OR followed by NOT, on only when <i>both</i> inputs are 0)
+    and cross their wires: each one's output feeds the other's input. The circuit now has a private conversation
+    with itself — <b>a loop</b>. Give the loop a nudge and it keeps repeating the story to itself forever:</p>
+    <div class="row">
+      <button class="pulse" id="s4set">pulse SET</button>
+      <button class="pulse" id="s4rst">pulse RESET</button>
+      <span class="lamp" id="s4q" style="margin-left:14px"><small>Q — what it remembers</small></span>
+    </div>
+    <div id="s4svg" style="margin:20px 0 6px"></div>
+    <p style="font-size:.85rem;color:#556">Follow the loop with a finger: the top gate's output <b>Q</b> runs down into the
+    bottom gate; the bottom gate's output <b>Q̄</b> (read "Q-bar", always Q's opposite) runs back up into the top gate.
+    Each output holds the other in place — like two cards leaning against each other. <i>That lean is the memory.</i>
+    Orange wires carry 1, grey wires carry 0 — watch them trade places when you pulse.</p>
+    <div class="chart" id="s4chart" style="margin-top:10px"></div>
+    <div class="trythis"><b>Try this:</b> pulse SET once — Q lights. Now do <i>nothing</i>. It stays lit.
+    That persistence is new: no gate so far could do it. Pulse RESET — it forgets. Congratulations:
+    you have built one bit of <b>memory</b> out of two forgetful gates and a loop.
+    (House rule: never pulse both at once — that's a shouting match with no winner.)</p>
+  </div>
+  <div class="card"><h3>Add a bell: the one-bit notebook</h3>
+    <p style="font-size:.9rem">One flaw: the loop listens <i>all the time</i> — any electrical sneeze rewrites it.
+    We want a notebook that is sealed except at agreed moments. So we put the loop behind a door
+    that only opens when a <b>bell</b> rings: a D wire says <i>what</i> to write; the bell says <i>when</i>.</p>
+    <div class="row">
+      <button class="toggle" id="s4d">D: 0</button>
+      <button class="pulse" id="s4bell">ring the bell 🔔</button>
+      <span class="lamp" id="s4q2" style="margin-left:14px"><small>Q — the page of the notebook</small></span>
+    </div>
+    <div class="chart" id="s4chart2" style="margin-top:26px"></div>
+    <div class="trythis"><b>Try this:</b> wiggle D up and down — Q ignores you completely. Now ring the bell:
+    Q snaps to whatever D was <i>at that ring</i>. Wiggle D again — Q holds the old value until the next ring.</p>
+    <p style="font-size:.9rem;margin-top:.6rem">A name is now earned: engineers call this one-bit notebook a
+    <b>flip-flop</b>. When we say "a register holds the number 7," we mean: four flip-flops, holding 0111.
+    <i>(Peek inside, if you like: bell AND D pulses the loop's SET; bell AND (NOT D) pulses its RESET.
+    Nothing new — just Station 2 parts guarding Station 4's loop.)</i></p>
+  </div>
+  <div class="own">You now own: memory — a feedback loop of gates — and the flip-flop, a bell-guarded one-bit notebook.</div>
   </div>`));
-  const m={clk:0,state:0,keypad:0,A:[0,0,0,0],B:[0,0,0,0],OUT:[0,0,0,0,0]};
-  const hist=[]; let selFA=0, flash=[], timer=null;
-  const q=sec.querySelector.bind(sec);
-  const note=(html)=>{ const d=document.createElement("div"); d.innerHTML=html;
-    const log=q("#s6log"); log.appendChild(d);
-    while(log.children.length>200) log.removeChild(log.firstChild); log.scrollTop=1e9; };
-  const sample=()=>{ const r=add4(m.A,m.B);
-    hist.push({clk:m.clk,state:m.state,enA:+(m.state===0),enB:+(m.state===1),enO:+(m.state===2),
-      A:fromBits(m.A),B:fromBits(m.B),SUM:fromBits5(r.s),OUT:fromBits5(m.OUT)});
-    if(hist.length>34)hist.shift(); };
-  const ffTitle="one of Station 4's notebooks: D = what it would write; Q = what it remembers; it writes only on the bell";
-  const ffBox=(lbl,d,qv,extra)=>`<div class="ff ${qv?'one':'zero'} ${extra||''}" title="${ffTitle}">
-      <span class="lbl">${lbl}</span><span class="d">D:${d}</span><span class="q">Q:${qv}</span></div>`;
-  const render=()=>{
-    const kb=toBits(m.keypad), r=add4(m.A,m.B);
-    q("#s6bus").textContent="bus "+bstr(kb);
-    q("#s6clk").textContent="CLK "+m.clk; q("#s6clk").className="lamp2"+(m.clk?" on":"");
-    const fl=s=>flash.includes(s)?"flash":"";
-    q("#s6bitsA").innerHTML=[3,2,1,0].map(i=>ffBox("A"+i,kb[i],m.A[i],fl("A"))).join("");
-    q("#s6bitsB").innerHTML=[3,2,1,0].map(i=>ffBox("B"+i,kb[i],m.B[i],fl("B"))).join("");
-    q("#s6bitsO").innerHTML=[4,3,2,1,0].map(i=>ffBox("O"+i,r.s[i],m.OUT[i],fl("O"))).join("");
-    q("#s6decA").textContent=fromBits(m.A); q("#s6decB").textContent=fromBits(m.B);
-    q("#s6decO").textContent=fromBits5(m.OUT); q("#s6decS").textContent=fromBits5(r.s);
-    q("#s6bitsFA").innerHTML=[3,2,1,0].map(i=>{const f=r.fas[i];
-      return `<div class="ff ${f.s?'one':'zero'}" data-fa="${i}" style="cursor:pointer;${i===selFA?'outline:2px solid var(--blue-sky)':''}">
-        <span class="lbl">FA${i}</span><span class="d">${f.a}+${f.b}+c${f.cin}</span><span class="q">s:${f.s} c:${f.cout}</span></div>`;}).join("");
-    q("#s6bitsFA").querySelectorAll("[data-fa]").forEach(e=>e.addEventListener("click",()=>{selFA=+e.dataset.fa;render();}));
-    q("#s6bitsS").innerHTML=[1,0].map(i=>ffBox("S"+i,(m.state>>i)&1,(m.state>>i)&1)).join("");
-    q("#s6st").textContent=STATES[m.state]; q("#s6st").className="lamp2 on";
-    q("#s6enA").className="lamp2"+(m.state===0?" on":""); q("#s6enB").className="lamp2"+(m.state===1?" on":"");
-    q("#s6enO").className="lamp2"+(m.state===2?" on":"");
-    q("#s6blkA").className="block"+(m.state===0?" active":""); q("#s6blkB").className="block"+(m.state===1?" active":"");
-    q("#s6blkO").className="block"+(m.state===2?" active":"");
-    const f=r.fas[selFA]; q("#s6faName").textContent="FA"+selFA;
-    q("#s6gates").innerHTML=
-      `<tr class="found"><td>XOR: a⊕b = ${f.a}⊕${f.b}</td><td>${f.w.axb}</td></tr>
-       <tr class="found"><td>XOR: ⊕carry-in → sum</td><td>${f.s}</td></tr>
-       <tr class="found"><td>AND: a·b</td><td>${f.w.ab}</td></tr>
-       <tr class="found"><td>AND: cin·(a⊕b)</td><td>${f.w.cx}</td></tr>
-       <tr class="found"><td>OR → carry-out</td><td>${f.cout}</td></tr>`;
-    q("#s6keypad").querySelectorAll("button").forEach((b,i)=>b.className=i===m.keypad?"on":"");
-    const P={0:"Step LOAD_A — set the switches to your <b>first</b> number, then clock a full cycle. Only register A is listening (enA).",
-             1:"Step LOAD_B — set the switches to your <b>second</b> number and cycle again. Now only B listens.",
-             2:"Step LATCH — look: the adder has <i>already</i> settled on the answer (it never sleeps). One more rising edge and the output notebooks write it down.",
-             3:"Step DONE — the sum is held safely in flip-flops. Reset to add two new numbers."};
-    q("#s6prompt").innerHTML=P[m.state];
-    drawChart(q("#s6timing"),hist,
-      [["CLK","clk"],["enA","enA"],["enB","enB"],["enOUT","enO"]],
-      [["STEP",hh=>STATES[hh.state]],["A",hh=>hh.A],["B",hh=>hh.B],["adder",hh=>hh.SUM],["OUT",hh=>hh.OUT]]);
-  };
-  const halfTick=()=>{ m.clk^=1;
-    if(m.clk===1){ flash=m.state===0?["A"]:m.state===1?["B"]:m.state===2?["O"]:[];
-      note(`<span class="op">rising edge ↑ (the bell)</span> — `+machineEdge(m).join("; ")+".");
-    } else { note("falling edge ↓ — no bell; wires keep rippling."); flash=[]; }
-    sample(); render(); };
-  const stopAuto=()=>{ if(timer){clearInterval(timer);timer=null;q("#s6auto").textContent="Auto clock";} };
-  const reset=()=>{ stopAuto(); m.clk=0;m.state=0;m.A=[0,0,0,0];m.B=[0,0,0,0];m.OUT=[0,0,0,0,0];
-    hist.length=0; flash=[]; q("#s6log").innerHTML="";
-    note("reset — every notebook wiped; the plan says LOAD_A."); sample(); render(); };
-  const kp=q("#s6keypad");
-  for(let d=0;d<=9;d++){ const b=document.createElement("button"); b.textContent=d;
-    b.addEventListener("click",()=>{ m.keypad=d;
-      note(`switches set to ${d} (${bstr(toBits(d))}) — nothing remembered yet; that takes a bell.`); render(); });
-    kp.appendChild(b); }
-  q("#s6tick").addEventListener("click",()=>{stopAuto();halfTick();});
-  q("#s6cycle").addEventListener("click",()=>{stopAuto();halfTick();halfTick();});
-  q("#s6auto").addEventListener("click",()=>{ if(timer){stopAuto();return;}
-    q("#s6auto").textContent="Stop clock"; timer=setInterval(halfTick,700); });
-  q("#s6reset").addEventListener("click",reset);
-  reset();
+  { const hist=[]; let st={q:0,qb:1};
+    const q=sec.querySelector.bind(sec);
+    /* live picture: two NOR gates, outputs crossed back into each other */
+    const srSVG=(s,r,qv,qb)=>{
+      const w=(pts,hot)=>`<polyline points="${pts}" class="wire ${hot?'hot':''}" fill="none"/>`;
+      const gate=(x,y,label)=>`<rect x="${x}" y="${y}" width="80" height="50" rx="10"
+          fill="#fbfdff" stroke="#003f87" stroke-width="2"/>
+        <text x="${x+40}" y="${y+30}" text-anchor="middle" style="font:600 13px 'Roboto Slab',serif;fill:#002d63">${label}</text>
+        <circle cx="${x+86}" cy="${y+25}" r="5" fill="#fff" stroke="#003f87" stroke-width="2"/>`;
+      const dot=(x,y,on)=>`<circle cx="${x}" cy="${y}" r="7" fill="${on?'#ffc94d':'#e8edf2'}" stroke="${on?'#b35c00':'#aab7c4'}" stroke-width="2"/>`;
+      return `<svg width="470" height="230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+        <!-- inputs -->
+        <text x="8" y="47">RESET = ${r}</text> ${w("70,42 160,42",r===1)}
+        <text x="8" y="197">SET = ${s}</text>  ${w("70,192 160,192",s===1)}
+        <!-- gates -->
+        ${gate(160,30,"NOR")} ${gate(160,165,"NOR")}
+        <text x="145" y="20" style="font:11px Roboto;fill:#8aa">neither-nor: out is 1 only when BOTH inputs are 0</text>
+        <!-- outputs -->
+        ${w("251,55 400,55",qv===1)}   <text x="408" y="59">Q = ${qv}</text>  ${dot(396,55,qv===1)}
+        ${w("251,190 400,190",qb===1)} <text x="408" y="194">Q̄ = ${qb}</text> ${dot(396,190,qb===1)}
+        <!-- the crossover: each output loops back into the OTHER gate -->
+        ${w("290,55 290,100 140,168 160,178",qv===1)}
+        ${w("290,190 290,145 140,78 160,68",qb===1)}
+        <text x="298" y="126" style="font:11px Roboto;fill:#0056b8">the crossover — this X is the whole trick</text>
+      </svg>`;
+    };
+    const draw=(ps,pr)=>{ drawChart(q("#s4chart"),hist,[["SET","s"],["RESET","r"],["Q","q"]],[]);
+      q("#s4q").className="lamp"+(st.q?" on":"");
+      q("#s4svg").innerHTML=srSVG(ps||0,pr||0,st.q,st.qb); };
+    const pulse=(s,r)=>{ st=srStep(st,s,r); hist.push({s,r,q:st.q});
+      draw(s,r);                                   // show the pulse hitting the gate...
+      st=srStep(st,0,0); hist.push({s:0,r:0,q:st.q});
+      if(hist.length>26){hist.shift();hist.shift();}
+      setTimeout(()=>draw(0,0),450); };            // ...then the loop holding on its own
+    q("#s4set").addEventListener("click",()=>pulse(1,0));
+    q("#s4rst").addEventListener("click",()=>pulse(0,1));
+    hist.push({s:0,r:0,q:0}); draw(0,0); }
+  { const hist=[]; let d=0,Q=0;
+    const q=sec.querySelector.bind(sec);
+    const draw=()=>{ q("#s4d").textContent="D: "+d; q("#s4d").className="toggle"+(d?" on":"");
+      q("#s4q2").className="lamp"+(Q?" on":"");
+      drawChart(q("#s4chart2"),hist,[["D","d"],["BELL","b"],["Q","q"]],[]); };
+    q("#s4d").addEventListener("click",()=>{ d^=1; hist.push({d,b:0,q:Q}); if(hist.length>26)hist.shift(); draw(); });
+    q("#s4bell").addEventListener("click",()=>{ Q=d; hist.push({d,b:1,q:Q}); hist.push({d,b:0,q:Q});
+      if(hist.length>26){hist.shift();hist.shift();} draw(); });
+    hist.push({d:0,b:0,q:0}); draw(); }
 });
 
-/* ---------- Station 7 ---------- */
-station("Back up the ladder","7 · The ladder",(sec)=>{
+/* ---------- Station 5 ---------- */
+station("The clock","5 · Clock",(sec)=>{
   sec.append(h(`<div>
-  <h2>Station 7 — Back up the ladder</h2>
-  <p class="promise">Same computation, every floor. Slide down, then climb back up — and keep the view.</p>
+  <h2>Station 5 — The clock: a bell on a rhythm</h2>
+  <p class="promise">Station 3 left a loose thread: the ripple takes time. Station 4 gave us a bell. Now: <b>how often do we dare ring it?</b></p>
   <div class="card">
-    <div class="row"><b style="font-size:.9rem">Descend:</b>
-      <input type="range" id="s7slider" min="0" max="4" value="0" style="flex:1">
+    <p style="font-size:.9rem">A computer doesn't ring its bell once — it must ring it <b>over and over</b>, millions of
+    times per second, because there is always a next number to add. Each ring does two jobs at once:
+    ① the output notebook <b>captures</b> whatever the adder is saying <i>right now</i>, and
+    ② the adder is handed its <b>next</b> inputs — so its ripple starts all over again.</p>
+    <p style="font-size:.9rem">A bell on a strict, repeating rhythm has a name: a <b>clock</b>. And its designer faces
+    exactly one question: <b>how many ticks between rings?</b> Ring too soon, and job ① captures a half-rippled answer —
+    garbage, faithfully remembered. You choose the rhythm:</p>
+    <div class="row">
+      <label class="small"><b>ring every</b></label>
+      <input type="range" id="s5period" min="1" max="8" value="2" style="width:180px">
+      <span class="code" id="s5plabel">2 ticks</span>
+      <span class="small" style="color:#8aa">(this adder's ripple needs 4 ticks to settle)</span>
     </div>
-    <div id="s7lvls"></div>
-    <div class="card" style="background:#fbfdff" id="s7expl"></div>
+    <div class="row">
+      <button class="big" id="s5run">Start the clock</button>
+      <span class="lamp2" id="s5bell">🔔</span>
+      <span class="wirebox">adder says: <span class="code" id="s5adder">12</span></span>
+      <span class="wirebox">notebook holds: <span class="code" id="s5out">—</span> <span id="s5okmark"></span></span>
+    </div>
+    <div class="row wirebox" style="font-size:.85rem">captures so far: <span id="s5tape"></span>
+      <span id="s5score" style="margin-left:10px;color:#556"></span></div>
+    <div class="chart" id="s5chart"></div>
+    <div class="trythis"><b>Try this:</b> start the clock at <b>2 ticks</b> and watch the notebook fill with garbage —
+    red ✗ after red ✗ — while the adder never gets time to finish. Now slide to <b>4</b>: every capture turns green.
+    You have just discovered the one law of clock design: <b>the rhythm must be no faster than the slowest ripple.</b>
+    (At exactly 4 it <i>just barely</i> works — real engineers always add a safety margin on top.)</div>
   </div>
-  <div class="card"><h3>The moral of the whole climb</h3>
-    <p style="font-size:.92rem">Each floor is a <b>specification for the floor below it</b>: "make <i>this</i> true; I don't care how."
-    And each floor <b>up</b> buys expressive power — one line of C commands thousands of switch-flips you never think about.
-    Nobody could write the basement by hand. That is <i>why</i> the floors exist, and why <b>compilers</b> —
-    translators down one floor — are among the most important programs ever written.</p>
-    <p style="font-size:.92rem">One more floor is being built above C in your lifetime: you tell an AI
-    "<i>add these two numbers</i>", and it writes the C for you. The tower didn't change — the descent still happens,
-    every time, all the way to the switches. But every floor needs people who can <b>check</b> it: state precisely
-    what "correct" means, and audit whether the floor below delivered it. That skill — specification and verification —
-    is what this course is really about. Welcome to CS-1-01.</p>
+  <div class="card"><h3>So what is "3 GHz", really?</h3>
+    <p style="font-size:.9rem">It is this slider, in a phone. Three billion rings every second — and the chip's designers
+    have proved that even the slowest ripple anywhere on the chip settles between two rings.
+    Faster chip = shorter ripples = a slider you can push further. Same law you just found.</p>
   </div>
-  <div class="own">You now own: the whole building — and a compass for the semester.</div>
+  <div class="own">You now own: the clock — a repeating bell whose rhythm is a promise: "no ring before the ripple rests."</div>
   </div>`));
-  const LV=[
-    ["FLOOR 5 · C","<code>c = a + b;</code>","You will write this in Week 4. It is a <b>specification</b>: “c must become the sum of a and b.” It says nothing about registers, bells, or carries — gloriously ignorant, wonderfully short."],
-    ["FLOOR 4 · instructions","<code>LDA A&nbsp;&nbsp;·&nbsp;&nbsp;ADD B&nbsp;&nbsp;·&nbsp;&nbsp;STA C</code>","A compiler translates the C line into the Toy Computer's language: fetch a, add b, store into c. Three instructions. (Meet the Toy Computer — the software floors of this same building — in its own page.)"],
-    ["FLOOR 3 · bell-rings","<code>≈ 12 rising edges</code>","Each instruction takes a few rings of Station 6's bell: enable a register, ring, move on. What you clicked by hand, a control unit does three billion times a second."],
-    ["FLOOR 2 · gates","<code>≈ 150 gate decisions</code>","Every ring, your Station 2 and 3 gates recompute: XORs summing, ANDs carrying, the ripple settling before the next bell — Station 5's promise, kept every time."],
-    ["FLOOR 1 · switches","<code>≈ 600 switch flips</code>","And at the very bottom, Station 1: wire-controlled switches, opening and closing. That's all a computer has ever been. No magic — you checked every floor yourself."]];
   const q=sec.querySelector.bind(sec);
-  q("#s7lvls").innerHTML=LV.map((l,i)=>`<div class="lvl" id="s7l${i}"><span class="tag">${l[0]}</span><span>${l[1]}</span></div>`).join("");
-  const upd=()=>{ const v=+q("#s7slider").value;
-    LV.forEach((l,i)=>q("#s7l"+i).className="lvl"+(i===v?" cur":""));
-    q("#s7expl").innerHTML=`<p style="font-size:.9rem;margin:.2rem 0">${LV[v][2]}</p>`; };
-  q("#s7slider").addEventListener("input",upd); upd();
+  let timer=null, t=0, P=2, r=4, out="—", okNow=null; const hist=[], tape=[];
+  const states=rippleStates(toBits(7),toBits(5)); const good=states[4].val;
+  const draw=()=>{
+    q("#s5plabel").textContent=P+(P===1?" tick":" ticks");
+    q("#s5adder").textContent=states[r].val + (r<4?" (still rippling…)":"");
+    q("#s5out").textContent=out;
+    q("#s5okmark").innerHTML = okNow===null? "" : okNow?
+      `<span style="color:#1a7f37;font-weight:700">✓</span>`:`<span style="color:#a40e26;font-weight:700">✗ garbage!</span>`;
+    q("#s5tape").innerHTML = tape.slice(-14).map(c=>`<span style="color:${c.ok?'#1a7f37':'#a40e26'};font-weight:600">${c.v}${c.ok?'✓':'✗'}</span>`).join("&thinsp; ");
+    const ng=tape.filter(c=>c.ok).length;
+    q("#s5score").textContent = tape.length? `(${ng}/${tape.length} correct — 7+5 is ${good})`:"";
+    drawChart(q("#s5chart"),hist,[["CLK","clk"]],
+      [["adder (settling)",hh=>hh.adder],["notebook",hh=>hh.out+(hh.ok===null?"":hh.ok?" ✓":" ✗")]]);
+  };
+  const tick=()=>{
+    const edge=(t>0)&&(t%P===0);
+    if(edge){ out=states[r].val; okNow=(out===good); tape.push({v:out,ok:okNow}); r=0;
+      q("#s5bell").className="lamp2 on"; }
+    else { if(t>0) r=Math.min(r+1,4); q("#s5bell").className="lamp2"; }
+    hist.push({clk:(t%P)<Math.ceil(P/2)?1:0, adder:states[r].val, out, ok:okNow});
+    if(hist.length>34)hist.shift();
+    t++; draw();
+  };
+  const stop=()=>{ if(timer){clearInterval(timer);timer=null;q("#s5run").textContent="Start the clock";} };
+  q("#s5run").addEventListener("click",()=>{ if(timer){stop();return;}
+    q("#s5run").textContent="Stop the clock"; timer=setInterval(tick,340); });
+  q("#s5period").addEventListener("input",e=>{ P=+e.target.value; t=0; draw(); });
+  draw();
 });
 
 
 /* ================= stepper (cross-file) ================= */
 const ALLSTATIONS=[
-    ["0 · Promise","w01-under-the-hood-1-parts.html",0],
-    ["1 · Switch","w01-under-the-hood-1-parts.html",1],
-    ["2 · Gates","w01-under-the-hood-1-parts.html",2],
-    ["3 · Adder","w01-under-the-hood-1-parts.html",3],
-    ["4 · Memory","w01-under-the-hood-2-memory.html",0],
-    ["5 · Clock","w01-under-the-hood-2-memory.html",1],
-    ["6 · Machine","w01-under-the-hood-3-machine.html",0],
-    ["7 · The ladder","w01-under-the-hood-3-machine.html",1]];
-const THISFILE="w01-under-the-hood-3-machine.html";
+    ["0 · Promise","w02-under-the-hood-1-parts.html",0],
+    ["1 · Switch","w02-under-the-hood-1-parts.html",1],
+    ["2 · Gates","w02-under-the-hood-1-parts.html",2],
+    ["3 · Adder","w02-under-the-hood-1-parts.html",3],
+    ["4 · Memory","w02-under-the-hood-2-memory.html",0],
+    ["5 · Clock","w02-under-the-hood-2-memory.html",1],
+    ["6 · Machine","w02-under-the-hood-3-machine.html",0],
+    ["7 · The ladder","w02-under-the-hood-3-machine.html",1]];
+const THISFILE="w02-under-the-hood-2-memory.html";
 (function(){
   const nav=$("stepper"), mainEl=$("stations");
   const localGlobals=ALLSTATIONS.map((s,g)=>s[1]===THISFILE?g:-1).filter(g=>g>=0);

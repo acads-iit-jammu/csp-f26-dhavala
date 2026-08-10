@@ -4,12 +4,12 @@ files with cross-file navigation. Edit the master, then re-run this."""
 import re, os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-master = open(os.path.join(HERE, "w01-under-the-hood.html")).read()
+master = open(os.path.join(HERE, "w02-under-the-hood.html")).read()
 
 PARTS = [
-    ("w01-under-the-hood-1-parts.html",   "Part 1 · The Parts — switch → gates → adder",      [0, 1, 2, 3]),
-    ("w01-under-the-hood-2-memory.html",  "Part 2 · Memory & Time — the loop and the bell",   [4, 5]),
-    ("w01-under-the-hood-3-machine.html", "Part 3 · The Machine — and the whole ladder",      [6, 7]),
+    ("w02-under-the-hood-1-parts.html",   "Part 1 · The Parts — switch → gates → adder",      [0, 1, 2, 3]),
+    ("w02-under-the-hood-2-memory.html",  "Part 2 · Memory & Time — the loop and the bell",   [4, 5]),
+    ("w02-under-the-hood-3-machine.html", "Part 3 · The Machine — and the whole ladder",      [6, 7]),
 ]
 SHORTS = ["0 · Promise", "1 · Switch", "2 · Gates", "3 · Adder",
           "4 · Memory", "5 · Clock", "6 · Machine", "7 · The ladder"]

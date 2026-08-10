@@ -460,15 +460,15 @@ station("The adder","3 · Adder",(sec)=>{
 
 /* ================= stepper (cross-file) ================= */
 const ALLSTATIONS=[
-    ["0 · Promise","w01-under-the-hood-1-parts.html",0],
-    ["1 · Switch","w01-under-the-hood-1-parts.html",1],
-    ["2 · Gates","w01-under-the-hood-1-parts.html",2],
-    ["3 · Adder","w01-under-the-hood-1-parts.html",3],
-    ["4 · Memory","w01-under-the-hood-2-memory.html",0],
-    ["5 · Clock","w01-under-the-hood-2-memory.html",1],
-    ["6 · Machine","w01-under-the-hood-3-machine.html",0],
-    ["7 · The ladder","w01-under-the-hood-3-machine.html",1]];
-const THISFILE="w01-under-the-hood-1-parts.html";
+    ["0 · Promise","w02-under-the-hood-1-parts.html",0],
+    ["1 · Switch","w02-under-the-hood-1-parts.html",1],
+    ["2 · Gates","w02-under-the-hood-1-parts.html",2],
+    ["3 · Adder","w02-under-the-hood-1-parts.html",3],
+    ["4 · Memory","w02-under-the-hood-2-memory.html",0],
+    ["5 · Clock","w02-under-the-hood-2-memory.html",1],
+    ["6 · Machine","w02-under-the-hood-3-machine.html",0],
+    ["7 · The ladder","w02-under-the-hood-3-machine.html",1]];
+const THISFILE="w02-under-the-hood-1-parts.html";
 (function(){
   const nav=$("stepper"), mainEl=$("stations");
   const localGlobals=ALLSTATIONS.map((s,g)=>s[1]===THISFILE?g:-1).filter(g=>g>=0);
