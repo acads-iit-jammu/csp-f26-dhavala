@@ -5,6 +5,7 @@ project:
     - cs1100-cse-iitm-2021/slides/
     - materials/
     - notebooks/
+    - labs/
 
 book:
   title: "CS-1-01 (MO)"

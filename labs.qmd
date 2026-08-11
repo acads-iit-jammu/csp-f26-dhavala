@@ -2,11 +2,11 @@
 
 The Computer Lab (Slot FL, 1 credit, 0-0-2) runs for two hours each week:
 
-| Branch | Day | Time |
-|---|---|---|
-| Electrical | Tuesday | 2:00–4:00 pm |
-| Mechanical | Wednesday | 2:00–4:00 pm |
-| Materials | Wednesday | 2:00–4:00 pm |
+| Branch | Day | Time | Room |
+|---|---|---|---|
+| Electrical | Tuesday | 2:00–4:00 pm | Lab 4022 |
+| Mechanical | Wednesday | 2:00–4:00 pm | Lab 4022 |
+| Metallurgy & Materials | Wednesday | 2:00–4:00 pm | Lab 4021 |
 
 Bring your laptop if you have one. You can also work in the browser with [OnlineGDB](https://www.onlinegdb.com/online_c_compiler) — no installation needed. We will show you how to set up a local C toolchain (gcc/clang) in the first lab.
 
@@ -39,6 +39,16 @@ The schedule below is **tentative** and covers all 11 practical modules of the [
 ::: {.callout-note}
 The syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 13 sessions = 26 hours. The remaining 2 hours of problem solving will be covered through a make-up lab session (date TBA) and problems embedded in earlier lab sheets.
 :::
+
+## Lab Packs (downloads)
+
+Every lab ships as a pack — extract, run `./install.sh`, follow the lab sheet. Students and staff use the **same file**.
+
+| Pack | Fetch it |
+|---|---|
+| [lab01.tar.gz](labs/lab01.tar.gz) | `wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz` |
+
+: {tbl-colwidths="[20,80]"}
 
 ## Useful Tools
 
