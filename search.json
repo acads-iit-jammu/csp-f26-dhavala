@@ -170,6 +170,16 @@
     ]
   },
   {
+    "objectID": "labs.html#lab-packs-downloads",
+    "href": "labs.html#lab-packs-downloads",
+    "title": "Labs",
+    "section": "Lab Packs (downloads)",
+    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz",
+    "crumbs": [
+      "Labs"
+    ]
+  },
+  {
     "objectID": "labs.html#useful-tools",
     "href": "labs.html#useful-tools",
     "title": "Labs",
@@ -886,34 +896,133 @@
   {
     "objectID": "labsheets/lab01.html",
     "href": "labsheets/lab01.html",
-    "title": "Lab 01: Basic Input/Output & Setup",
+    "title": "Lab 01: Move-In Day",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "What you’ll be able to do after this lab",
     "crumbs": [
       "Lab Sheets",
-      "Lab 01: Basic Input/Output & Setup"
+      "Lab 01: Move-In Day"
     ]
   },
   {
-    "objectID": "labsheets/lab01.html#exercises",
-    "href": "labsheets/lab01.html#exercises",
-    "title": "Lab 01: Basic Input/Output & Setup",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "objectID": "labsheets/lab01.html#what-youll-be-able-to-do-after-this-lab",
+    "href": "labsheets/lab01.html#what-youll-be-able-to-do-after-this-lab",
+    "title": "Lab 01: Move-In Day",
+    "section": "",
+    "text": "Identity & orientation\npwd, whoami, hostname, uname, history, clear\n\n\nFiles & navigation\nls (-l -a -R), cd, mkdir, touch, cp, mv, rm -i, cat, less, nano\n\n\nGetting code\ntar, wget\n\n\nToolchain & composition\ngcc, ./prog, &gt; , |, wc, man, --help, tab-completion\n\n\nPermissions\nreading rwx, chmod +x, octal 755 (yes — that’s binary, from this week’s lecture)\n\n\nProcesses\nCtrl-C, &, ps, kill — the fire extinguisher\n\n\nSystem info\ndf -h, du -sh, env, echo $PATH",
     "crumbs": [
       "Lab Sheets",
-      "Lab 01: Basic Input/Output & Setup"
+      "Lab 01: Move-In Day"
     ]
   },
   {
-    "objectID": "labsheets/lab01.html#submission",
-    "href": "labsheets/lab01.html#submission",
-    "title": "Lab 01: Basic Input/Output & Setup",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "objectID": "labsheets/lab01.html#pre-lab-at-home-30-min-strongly-recommended",
+    "href": "labsheets/lab01.html#pre-lab-at-home-30-min-strongly-recommended",
+    "title": "Lab 01: Move-In Day",
+    "section": "Pre-lab (at home, ~30 min, strongly recommended)",
+    "text": "Pre-lab (at home, ~30 min, strongly recommended)\nPlay the first four modules of Linux Survival — a simulated terminal, impossible to break. If you want a real one in your browser: Webminal.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 01: Basic Input/Output & Setup"
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#one-idea-before-you-type-anything",
+    "href": "labsheets/lab01.html#one-idea-before-you-type-anything",
+    "title": "Lab 01: Move-In Day",
+    "section": "One idea before you type anything",
+    "text": "One idea before you type anything\nThe terminal is the course’s third machine. It has a vocabulary of words; it runs the ritual you have already watched twice — read a command → execute it → print → repeat — and it does exactly what you say, never what you mean. Everything you learned from the Turtle applies. Everything.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#act-0-install-10-min",
+    "href": "labsheets/lab01.html#act-0-install-10-min",
+    "title": "Lab 01: Move-In Day",
+    "section": "Act 0 · Install (10 min)",
+    "text": "Act 0 · Install (10 min)\nThe lab pack is pre-placed on each machine (ask where). If it isn’t — or you’re at home — fetch it from the course site:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\nThen:\ntar xzf lab01.tar.gz\ncd lab01\n./install.sh\nThe installer will tell you which branch it thinks you are (it reads the machine’s name and today’s date — ask yourself: how?), ask for your team’s roll number(s), and build your session workspace: /home/student/csp_labs_f26/w02-l01-&lt;branch&gt;-sd. (Practising at home, where that path doesn’t exist? The installer switches to practice mode and creates the workspace right where you ran it — everything else works identically.) This machine is shared and forgets everything — your workspace lives for today only; your work leaves with you at the end (Act 5).\nNow the most important command of the day. Go to your workspace and start the recorder:\ncd /home/student/csp_labs_f26/w02-l01-*-sd\nscript session.txt\nEverything you type and see is now being recorded — your lab’s own machine diary. (To stop it later: exit.)",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#act-1-claim-the-machine-10-min",
+    "href": "labsheets/lab01.html#act-1-claim-the-machine-10-min",
+    "title": "Lab 01: Move-In Day",
+    "section": "Act 1 · Claim the machine (10 min)",
+    "text": "Act 1 · Claim the machine (10 min)\nWho are you, where are you, on what? Run each, predict its output first where you can, then capture the passport:\nwhoami          # surprise: you are ALL 'student'. Remember this for Act 5.\nhostname\nuname -a\ndf -h .\nNow make the machine’s passport — your first redirection (&gt; sends output into a file instead of the screen):\nwhoami &gt; passport.txt\nhostname &gt;&gt; passport.txt\nuname -a &gt;&gt; passport.txt\ndf -h . &gt;&gt; passport.txt\ncat passport.txt",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#act-2-build-the-home-25-min",
+    "href": "labsheets/lab01.html#act-2-build-the-home-25-min",
+    "title": "Lab 01: Move-In Day",
+    "section": "Act 2 · Build the home (25 min)",
+    "text": "Act 2 · Build the home (25 min)\nMissions, each a mini spec-card: the ENSURES tells you what must be true when you’re done — you build it. Before every ls, say out loud what it will print — then press Enter.\n\nCreate a notes/ directory — your lab notebook. Two files will live in it: README.txt (one line saying what lives where in this workspace) and answers.txt, where you’ll write your answers to the think-questions this sheet asks along the way (they’re marked ✍️). Your notebook travels home in your bundle — we read it. ENSURES: cat notes/README.txt prints your line. (Tools: mkdir, nano.)\nBuild a practice/ tree, from nothing, yourself — you are the one creating every directory and file here. Target shape:\npractice/\n├── a/one.txt\n├── a/two.txt\n└── b/one.txt\nRules of the game: make the directories (mkdir -p practice/a practice/b), create the first file empty (touch), but the other two files may not be created by touch — one must be born as a copy (cp) and one must arrive by being moved (mv) from somewhere else you made. (So you’ll create a scratch file and move it — that’s the point.) ENSURES: ls -R practice matches the diagram exactly. Predict the output on paper first.\nNow remove your practice/ tree — your first rm. Do it the careful way: rm -ri practice and read every question it asks before answering. rm has no undo, no bin, no mercy. Respect it today, every day. ENSURES: ls no longer shows practice. (notes/ stays — it’s real; practice/ was scaffolding.)\nRescue skills — get stuck on purpose: open man ls, find what -a does, quit (q). Try ls --help. Press Tab twice after typing pass. These three moves answer 90% of the questions you’d otherwise ask us.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#act-3-make-it-speak-20-min",
+    "href": "labsheets/lab01.html#act-3-make-it-speak-20-min",
+    "title": "Lab 01: Move-In Day",
+    "section": "Act 3 · Make it speak (20 min)",
+    "text": "Act 3 · Make it speak (20 min)\nYour starter files are already in the workspace (the installer fetched them — at home you’d wget them from the course site).\nnano hello.c        # change CHANGE_ME to your name (both of you, for pairs)\ngcc hello.c -o hello\n./hello\n./hello &gt; output.txt\ncat output.txt | wc -w\nYou just compiled a real C program — the same printf whose descent you watched, floor by floor, in Week 1. You’ll understand every line by Week 4; today it’s the telescope check. ✍️ Think-question 1, into notes/answers.txt: why the ./? Run echo $PATH and reason it out — ask us at the end if it doesn’t click.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#act-4-kill-the-runaway-15-min",
+    "href": "labsheets/lab01.html#act-4-kill-the-runaway-15-min",
+    "title": "Lab 01: Move-In Day",
+    "section": "Act 4 · Kill the runaway (15 min)",
+    "text": "Act 4 · Kill the runaway (15 min)\nWeek 2’s Toy Computer trapped itself in an infinite ping-pong and could only be Reset. Real machines give you a fire extinguisher. The starter loop.c is a program that never stops on purpose:\ngcc loop.c -o loop\n./loop                 # watch it run away... then Ctrl-C  (extinguisher #1)\n./loop &               # now it runs in the BACKGROUND — no Ctrl-C can reach it\nps                     # find its PID (the process's roll number)\nkill &lt;PID&gt;             # extinguisher #2\nps                     # verify the fire is out\nEvery programmer writes an infinite loop eventually. Now you’ve already survived one.\n\n\n\n\n\n\nNote the PID you just killed — and remember this: these three commands (./loop &, ps, kill &lt;PID&gt;) are one-time commands. They must NOT go into your replay.sh in Act 5. That PID number was true for one moment on one machine; replayed later it could kill someone else’s process.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#act-5-lock-up-leave-a-diary-take-your-work-20-min",
+    "href": "labsheets/lab01.html#act-5-lock-up-leave-a-diary-take-your-work-20-min",
+    "title": "Lab 01: Move-In Day",
+    "section": "Act 5 · Lock up, leave a diary, take your work (20 min)",
+    "text": "Act 5 · Lock up, leave a diary, take your work (20 min)\n\nLook at a permission string: ls -l hello. Decode rwxr-xr-x on paper: three groups of three bits — 111 101 101 = octal 755. This week’s number systems, wearing work clothes.\nTry chmod 600 passport.txt, then ls -l passport.txt. ✍️ Think-question 2, into notes/answers.txt: you are all logged in as student — so who exactly did you just lock out? (Honest answer: nobody in this room. chmod guards between users, and this whole room is one user. That is what permissions really are — and why real systems give each person their own account.)\nYour recorded history is a log. Now turn it into a program:\nhistory &gt; replay.sh\nnano replay.sh        # edit! — rules below\n\n\n\n\n\n\nEditing rules — read before touching replay.sh:\n\nEvery line starts with a number (501  ./hello). Those are history bookkeeping, not commands — a replay would try to run a program called 501. Delete every line number.\nMake the very first line exactly: #!/bin/sh — it tells the machine which language this program speaks.\nKEEP only commands that make sense every time they run: ./hello, cat output.txt | wc -w, ls -l.\nDELETE ./loop & — a replay would start a runaway with nobody watching.\nDELETE ps and kill &lt;PID&gt; — that PID was true for one moment of one afternoon. Replay it tomorrow on this shared machine and you might kill a stranger’s process.\nThe self-check runs your replay.sh and fails it if any of this is still wrong. That is deliberate.\n\n\n\n\nNow run it — before doing anything else:\n./replay.sh\nPermission denied! This is not an error — it is a lesson. A freshly created file is not allowed to run; you must grant it the execute permission yourself:\nchmod +x replay.sh\n./replay.sh\n✍️ Bonus for notes/answers.txt: in one line, what is the difference between a log and a program? (Hint: a log records what happened; a program must be true whenever it runs.) Anything you can do, you can automate — but only the repeatable parts.\nStop the recorder (exit — you’ll see “Script done”), then run the self-check and make it all green:\n./check.sh\nRed lines tell you what’s missing, never how — that’s your job. When green (or when time is up — an imperfect bundle beats no bundle; the verdicts travel with it):\n./check.sh --bundle\nThe bundle (../lab01_&lt;rolls&gt;_&lt;branch&gt;_w02.tar.gz) is your work. Copy it out — Moodle upload (link announced in lab), and always also email yourself a copy. Then leave the machine clean: your workspace will be swept automatically before the next lab.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#reflect",
+    "href": "labsheets/lab01.html#reflect",
+    "title": "Lab 01: Move-In Day",
+    "section": "Reflect",
+    "text": "Reflect\n✍️ Think-question 3, the last line of notes/answers.txt: which single command surprised you most today, and why?",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab01.html#stretch-fast-finishers",
+    "href": "labsheets/lab01.html#stretch-fast-finishers",
+    "title": "Lab 01: Move-In Day",
+    "section": "Stretch (fast finishers)",
+    "text": "Stretch (fast finishers)\n\ncmdchallenge.com — one-line shell puzzles, rising difficulty. How far can you get?\ndu -sh /home/student/csp_labs_f26 — how much disk did today’s whole class use?\nIn man chmod, work out what chmod 640 would permit. Write the 9 bits on paper first.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 01: Move-In Day"
     ]
   },
   {
@@ -1317,7 +1426,7 @@
     "href": "materials/index.html",
     "title": "Materials",
     "section": "",
-    "text": "Interactive artifacts, handouts, and other student-facing files used in lectures and labs. Items are added here as the semester progresses, and are linked from the relevant weekly notes and lab sheets.\n\n\n\n\n\n\n\n\nItem\nWhat it is\nUsed in\n\n\n\n\n📽️ Deck 01 — Logistics\nOpening lecture slides: schedule, assessment, tools, and how the course works. (Slide deck — use arrow keys.)\nWeek 01\n\n\n📽️ PAGAL: Programming in the Age of AI\nThe PAGAL column in slide form: the Specify–Verify loop, why programming is becoming a commodity, and Computational X — computation as every discipline’s second half.\nWeek 01\n\n\n📽️ Deck 02 — What is a Computer?\nLecture 2 slides: computing vs computer vs programming vs computational thinking; the stored-program dividing line.\nWeek 01\n\n\n🖨️ Hello, World — all the way down\nprintf, honestly: five instructions (read · write · move · count · check), a finger, and a code book. Act 1 prints “abba” in a two-letter world; Act 2 grows the book to ASCII and prints Hello, world! — same program, bigger data.\nWeek 01\n\n\n📽️ Deck 03 — Number Systems\nWeek 02 slides: radix-q systems, binary↔︎decimal conversion, two’s complement, fixed point, and IEEE FP32 — ending at “how many bits does a number deserve?”\nWeek 02\n\n\n🎡 The Number Playground\nThree interactive machines: poke 8 bits and watch the decimal form; spin the complement sundial (one pattern, four reading conventions — find the overflow cliff and the double zeros); dissect a live IEEE FP32 bit by bit.\nWeek 02\n\n\n📽️ Deck 04 — The Computer, Revisited\nRecap of the Week-1 machines, the von Neumann architecture named, and the calculator-vs-computer dividing line: where does the procedure live?\nWeek 02\n\n\n🧮 The Toy Computer\nA complete von Neumann machine in 40 visible cells: program it in ten instructions, watch fetch–decode–execute narrated, and climb the six-rung ladder from sequencing to the recursion wall.\nWeek 02\n\n\n🔧 Under the Hood — Part 1: The Parts\nThe guided climb, stations 0–3: a switch flipped by a wire (the logical transistor), gates discovered by wiring switches in series and parallel, and a real ripple adder — arithmetic is wiring.\nWeek 02\n\n\n🔧 Under the Hood — Part 2: Memory & Time\nStations 4–5: feed a gate its own output and it remembers (build a flip-flop from two NOR gates), then the clock — set the bell’s rhythm too fast and watch the notebook faithfully record garbage.\nWeek 02\n\n\n🔧 Under the Hood — Part 3: The Machine\nStations 6–7: a machine built entirely from your own parts — registers of flip-flops, a control unit that is itself two flip-flops, a hand-cranked clock and live timing diagram — then the ladder back up to c = a + b;.\nWeek 02\n\n\n🐢 The Turtle Computer\nYour first programming language: ten words, one turtle, no typing. Six missions in which each new word is invented because a problem demands it — and the reward comes only when the machine’s output matches your intention.\nWeek 01, Lab 01",
+    "text": "Interactive artifacts, handouts, and other student-facing files used in lectures and labs. Items are added here as the semester progresses, and are linked from the relevant weekly notes and lab sheets.\n\n\n\n\n\n\n\n\nItem\nWhat it is\nUsed in\n\n\n\n\n📽️ Deck 01 — Logistics\nOpening lecture slides: schedule, assessment, tools, and how the course works. (Slide deck — use arrow keys.)\nWeek 01\n\n\n📽️ PAGAL: Programming in the Age of AI\nThe PAGAL column in slide form: the Specify–Verify loop, why programming is becoming a commodity, and Computational X — computation as every discipline’s second half.\nWeek 01\n\n\n📽️ Deck 02 — What is a Computer?\nLecture 2 slides: computing vs computer vs programming vs computational thinking; the stored-program dividing line.\nWeek 01\n\n\n🖨️ Hello, World — all the way down\nprintf, honestly: five instructions (read · write · move · count · check), a finger, and a code book. Act 1 prints “abba” in a two-letter world; Act 2 grows the book to ASCII and prints Hello, world! — same program, bigger data.\nWeek 01\n\n\n📽️ Deck 03 — Number Systems\nWeek 02 slides: radix-q systems, binary↔︎decimal conversion, two’s complement, fixed point, and IEEE FP32 — ending at “how many bits does a number deserve?”\nWeek 02\n\n\n🎡 The Number Playground\nThree interactive machines: poke 8 bits and watch the decimal form; spin the complement sundial (one pattern, four reading conventions — find the overflow cliff and the double zeros); dissect a live IEEE FP32 bit by bit.\nWeek 02\n\n\n📽️ Deck 04 — The Computer, Revisited\nRecap of the Week-1 machines, the von Neumann architecture named, and the calculator-vs-computer dividing line: where does the procedure live?\nWeek 02\n\n\n🧮 The Toy Computer\nA complete von Neumann machine in 40 visible cells: program it in ten instructions, watch fetch–decode–execute narrated, and climb the six-rung ladder from sequencing to the recursion wall.\nWeek 02\n\n\n🔧 Under the Hood — Part 1: The Parts\nThe guided climb, stations 0–3: a switch flipped by a wire (the logical transistor), gates discovered by wiring switches in series and parallel, and a real ripple adder — arithmetic is wiring.\nWeek 02\n\n\n🔧 Under the Hood — Part 2: Memory & Time\nStations 4–5: feed a gate its own output and it remembers (build a flip-flop from two NOR gates), then the clock — set the bell’s rhythm too fast and watch the notebook faithfully record garbage.\nWeek 02\n\n\n🔧 Under the Hood — Part 3: The Machine\nStations 6–7: a machine built entirely from your own parts — registers of flip-flops, a control unit that is itself two flip-flops, a hand-cranked clock and live timing diagram — then the ladder back up to c = a + b;.\nWeek 02\n\n\n📦 lab01.tar.gz\nThe Lab 01 pack: installer (infers your branch from the machine), starters, and the self-check. Extract, ./install.sh, follow the lab sheet.\nLab 01\n\n\n🐢 The Turtle Computer\nYour first programming language: ten words, one turtle, no typing. Six missions in which each new word is invented because a problem demands it — and the reward comes only when the machine’s output matches your intention.\nWeek 01, Lab 01",
     "crumbs": [
       "Materials & Notebooks",
       "Materials"

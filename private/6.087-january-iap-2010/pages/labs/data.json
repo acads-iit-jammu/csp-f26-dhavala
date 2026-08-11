@@ -1,0 +1,15 @@
+
+{
+  "content": "<p>This section contains the labs and final project.</p>\n\n    <h3 id=\"lab-assignments\">Lab Assignments</h3>\n\n<p><table>\n\n<thead>\n\n<tr>\n\n<th>\n\nLAB #\n</th>\n\n<th>\n\nLABS\n</th>\n\n<th>\n\nSOLUTIONS\n</th>\n</p>\n</tr>\n\n<p></thead>\n\n<tr>\n\n<td>\n\nLab 1: Game of life\n</td>\n\n<td>\n</p>\n<p>(<a href=\"../../resources/mit6_087iap10_lab01/index.html\">PDF</a>)</p>\n<p>(<a href=\"../../resources/lab-1-game-of-life-zip/index.html\">ZIP</a>) (This ZIP file contains: 3 .txt files, 3 .c files and 1 .h file.)</p>\n<p></td>\n\n<td>\n\n(<a href=\"../../resources/lab-1-game-of-life-solutions-zip/index.html\">ZIP</a>) (This ZIP file contains: 1 .txt file, 1 .h file and 4 .c files.)\n</td>\n</p>\n<p></tr>\n\n<tr>\n\n<td>\n\nLab 2: Data compression\n</td>\n\n<td>\n</p>\n<p>(<a href=\"../../resources/mit6_087iap10_lab02/index.html\">PDF</a>)</p>\n<p>(<a href=\"../../resources/lab-2-data-compression-zip/index.html\">ZIP</a>) (This ZIP file contains: 4 .txt files and 2 .c files.)</p>\n<p></td>\n\n<td>\n\n \n</td>\n</p>\n</tr>\n\n</table>\n\n\n    <h3 id=\"final-project\">Final Project</h3>\n\n<p>Final project description (<a href=\"../../resources/mit6_087iap10_project/index.html\">PDF</a>)</p>\n",
+  "content_type": "page",
+  "description": "This section provides the lab assignments, supporting files, solutions, and a description of the final project for the course.",
+  "draft": false,
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Laboratory Assignments"
+  ],
+  "ocw_type": "CourseSection",
+  "title": "Labs",
+  "uid": "2f28fa7b-829f-cc2f-5677-bdcc7f44d928"
+}
+
