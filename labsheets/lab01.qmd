@@ -48,7 +48,7 @@ And the single most important fact of the day: **you are always standing somewhe
 :::
 
 ::: {.callout-tip}
-**Copying commands.** Only the **command boxes** on this page carry a copy button (top-right of the box) — everything else is for reading, not pasting. And careful: pasting into a terminal is **not** Ctrl+V — use **Ctrl+Shift+V** (and **Ctrl+Shift+C** to copy *from* the terminal). For short commands, though: type them. Fingers learn what eyes only skim.
+**Copying commands.** Only the **command boxes** on this page carry a copy button (top-right of the box) — everything else is for reading, not pasting. **One box = one step:** run a box, *read what the machine said*, then take the next box — never paste your way through three boxes blind. And careful: pasting into a terminal is **not** Ctrl+V — use **Ctrl+Shift+V** (and **Ctrl+Shift+C** to copy *from* the terminal). For short commands, though: type them. Fingers learn what eyes only skim.
 :::
 
 ## Act 0 · Install (10 min)
@@ -83,22 +83,44 @@ script session.txt
 
 ## Act 1 · Claim the machine (10 min)
 
-Who are you, where are you, on what? Run each of these, **predicting the output first**. The first answer is a surprise: you are *all* `student` — remember that for Act 5.
+Who are you, where are you, on what? One box per question — **predict the output before each Enter**.
+
+Who am I? (The answer is a surprise: you are *all* `student` — remember that for Act 5.)
 
 ```bash
 whoami
+```
+
+Which machine is this?
+
+```bash
 hostname
+```
+
+What operating system, exactly?
+
+```bash
 uname -a
+```
+
+How much disk is free here?
+
+```bash
 df -h .
 ```
 
-Now make the machine's passport — your first *redirection*: `>` sends a command's output into a file instead of the screen, and `>>` appends instead of overwriting:
+Now make the machine's passport — your first *redirection*: `>` sends a command's output into a file instead of the screen, and `>>` appends instead of overwriting. Writing the passport is one step (nothing appears on screen — that's the point; it went into the file):
 
 ```bash
 whoami > passport.txt
 hostname >> passport.txt
 uname -a >> passport.txt
 df -h . >> passport.txt
+```
+
+Verifying it is the next step:
+
+```bash
 cat passport.txt
 ```
 
@@ -134,12 +156,27 @@ Your starter files are already in the workspace (the installer put them there). 
 nano hello.c
 ```
 
-Then compile it, run it, capture its output into a file, and count that file's words by *piping* it through `wc`:
+Compile it (silence means success — the compiler only speaks when something is wrong):
 
 ```bash
 gcc hello.c -o hello
+```
+
+Run it:
+
+```bash
 ./hello
+```
+
+Run it again, capturing the output into a file this time (screen stays quiet — where did it go?):
+
+```bash
 ./hello > output.txt
+```
+
+Count that file's words by *piping* it through `wc`:
+
+```bash
 cat output.txt | wc -w
 ```
 
@@ -149,24 +186,39 @@ You just compiled a real C program — the same `printf` whose descent you watch
 
 ## Act 4 · Kill the runaway (10 min)
 
-Week 2's Toy Computer trapped itself in an infinite ping-pong and could only be Reset. Real machines give you a fire extinguisher. The starter `loop.c` is a program that *never stops on purpose* (it runs silently, so your terminal stays calm). Compile it and run it in the foreground — then put it out with **extinguisher #1: `Ctrl-C`**:
+Week 2's Toy Computer trapped itself in an infinite ping-pong and could only be Reset. Real machines give you a fire extinguisher. The starter `loop.c` is a program that *never stops on purpose* (it runs silently, so your terminal stays calm). Compile it:
 
 ```bash
 gcc loop.c -o loop
+```
+
+Run it in the foreground and watch it not stop — then put it out with **extinguisher #1: `Ctrl-C`**:
+
+```bash
 ./loop
 ```
 
-Now start it in the **background** (that's the `&`), where `Ctrl-C` cannot reach it. `pgrep loop` prints the runaway's PID — its roll number, just the number:
+Now start it in the **background** (that's the `&`), where `Ctrl-C` cannot reach it:
 
 ```bash
 ./loop &
+```
+
+Find it. `pgrep loop` prints the runaway's PID — its roll number, just the number:
+
+```bash
 pgrep loop
 ```
 
-Kill that number — **extinguisher #2** — replacing `12345` with the number *your* `pgrep` printed. Then confirm the fire is out: `pgrep` printing *nothing* means no such process remains.
+Kill that number — **extinguisher #2** — replacing `12345` with the number *your* `pgrep` printed:
 
 ```bash
 kill 12345
+```
+
+Confirm the fire is out — `pgrep` printing *nothing* means no such process remains:
+
+```bash
 pgrep loop
 ```
 
@@ -206,6 +258,11 @@ Your recorded history is a *log*. Turn it into a *program*:
 
 ```bash
 history > replay.sh
+```
+
+Open it and edit — rules below:
+
+```bash
 nano replay.sh
 ```
 
@@ -226,10 +283,15 @@ Now run it — **before** doing anything else:
 ./replay.sh
 ```
 
-`Permission denied`! **This is not an error — it is a lesson.** A freshly created file is not allowed to run; you must grant it the execute permission yourself, then run it again:
+`Permission denied`! **This is not an error — it is a lesson.** A freshly created file is not allowed to run; you must grant it the execute permission yourself:
 
 ```bash
 chmod +x replay.sh
+```
+
+Now it runs:
+
+```bash
 ./replay.sh
 ```
 
