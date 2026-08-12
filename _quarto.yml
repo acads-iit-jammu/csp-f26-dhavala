@@ -76,6 +76,7 @@ book:
 
 format:
   html:
+    code-copy: true
     theme:
       - cosmo
       - iitjammu.scss

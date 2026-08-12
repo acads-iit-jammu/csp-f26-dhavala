@@ -28,7 +28,10 @@
       "WebSearch",
       "Bash(git -C private commit -q -m 'Deck 03: Number Systems \\(radix-q, conversions, two'\\\\''s complement, fixed/floating point, IEEE FP32\\) *)",
       "Bash(git commit -q -m 'W02: Deck 03 + week page with FP32 content; PAGAL note on FP32/FP16/NVFP4 *)",
-      "Bash(git commit -q -m 'Graduate Under the Hood \\(3 parts\\) to W02: the flip-flop machine as the Toy Computer'\\\\''s counterpart across the calculator/computer dividing line *)"
+      "Bash(git commit -q -m 'Graduate Under the Hood \\(3 parts\\) to W02: the flip-flop machine as the Toy Computer'\\\\''s counterpart across the calculator/computer dividing line *)",
+      "Bash(sed -i '' 's|inst\\(\\){ CSP_BASE=\"$BASE\" CSP_DATE=\"$1\" CSP_HOSTNAME=\"$2\" CSP_TEAM=\"$3\" CSP_ASSUME_YES=1 ${4:+CSP_BRANCH=$4} \"$SRC/install.sh\" </dev/null >/dev/null 2>&1; }|inst\\(\\){ env CSP_BASE=\"$BASE\" CSP_DATE=\"$1\" CSP_HOSTNAME=\"$2\" CSP_TEAM=\"$3\" CSP_ASSUME_YES=1 ${4:+CSP_BRANCH=\"$4\"} bash \"$SRC/install.sh\" </dev/null >/dev/null 2>&1; }|' /private/tmp/claude-501/-Users-somadhavala-work-iitjmu-acad-courses-CS-1-01-MO-F26-DHAVALA/de98768f-69af-49d6-ac0f-88525ae50135/scratchpad/labtest/run.sh)",
+      "Bash(/private/tmp/claude-501/-Users-somadhavala-work-iitjmu-acad-courses-CS-1-01-MO-F26-DHAVALA/de98768f-69af-49d6-ac0f-88525ae50135/scratchpad/labtest/run.sh)",
+      "Bash(git -C private status --short)"
     ]
   }
 }

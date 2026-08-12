@@ -29,6 +29,32 @@ Play the first four modules of [Linux Survival](https://linuxsurvival.com/welcom
 
 The terminal is the course's third machine. It has a vocabulary of words; it runs the ritual you have already watched twice — **read a command → execute it → print → repeat** — and it does *exactly what you say, never what you mean*. Everything you learned from the Turtle applies. Everything.
 
+## The map — read this aloud together before typing (5 min)
+
+Everything stored on this computer lives in **one big tree**. A **folder** (directory) is a box that can hold files and other boxes; a **file** is a page inside a box; a **path** is an address, read from the root `/` downward:
+
+```
+/                            ← the root: everything starts here
+└── home
+    └── student              ← the shared home
+        └── csp_labs_f26
+            └── w02-l01-…    ← YOUR workspace today
+```
+
+And the single most important fact of the day: **you are always standing somewhere in this tree.** Every command you type acts *from where you stand*. Three commands are your legs and eyes:
+
+- `pwd` — *where am I standing?*
+- `ls` — *what can I see from here?*
+- `cd <somewhere>` — *walk there* (`cd ..` walks one level up)
+
+::: {.callout-important}
+**When the machine says `No such file or directory`** it means: *"from where I'm standing, I can't see that name."* Do not panic, do not retype harder. Run the compass: **1)** `pwd` — where am I? **2)** `ls` — what's actually here? **3)** `cd` to the right place, then try again. Nine out of ten errors in this lab are cured by exactly this.
+:::
+
+::: {.callout-tip}
+**Copying commands.** Every grey code box on this page has a **copy button** (top-right corner of the box). But careful — pasting into a terminal is **not** Ctrl+V: use **Ctrl+Shift+V** (and **Ctrl+Shift+C** to copy *from* the terminal). Old Linux trick: select any text with the mouse, then press the middle mouse button to paste it. For short commands, though — type them. Fingers learn what eyes only skim.
+:::
+
 ## Act 0 · Install (10 min)
 
 The lab pack is pre-placed on each machine (ask where). If it isn't — or you're at home — fetch it from the course site:
@@ -77,7 +103,7 @@ df -h . >> passport.txt
 cat passport.txt
 ```
 
-## Act 2 · Build the home (25 min)
+## Act 2 · Build the home (20 min)
 
 Missions, each a mini spec-card: the **ENSURES** tells you what must be true when you're done — *you* build it. Before every `ls`, say out loud what it will print — *then* press Enter.
 
@@ -96,7 +122,7 @@ Missions, each a mini spec-card: the **ENSURES** tells you what must be true whe
    **ENSURES:** `ls` no longer shows `practice`. (`notes/` stays — it's real; `practice/` was scaffolding.)
 4. **Rescue skills** — get stuck on purpose: open `man ls`, find what `-a` does, quit (`q`). Try `ls --help`. Press Tab twice after typing `pass`. These three moves answer 90% of the questions you'd otherwise ask us.
 
-## Act 3 · Make it speak (20 min)
+## Act 3 · Make it speak (15 min)
 
 Your starter files are already in the workspace (the installer fetched them — at home you'd `wget` them from the course site).
 
@@ -110,18 +136,20 @@ cat output.txt | wc -w
 
 You just compiled a real C program — the same `printf` whose descent you watched, floor by floor, in Week 1. You'll understand every line by Week 4; today it's the telescope check. ✍️ *Think-question 1, into `notes/answers.txt`:* why the `./`? Run `echo $PATH` and reason it out — ask us at the end if it doesn't click.
 
-## Act 4 · Kill the runaway (15 min)
+## Act 4 · Kill the runaway (10 min)
 
-Week 2's Toy Computer trapped itself in an infinite ping-pong and could only be Reset. Real machines give you a fire extinguisher. The starter `loop.c` is a program that *never stops on purpose*:
+Week 2's Toy Computer trapped itself in an infinite ping-pong and could only be Reset. Real machines give you a fire extinguisher. The starter `loop.c` is a program that *never stops on purpose* (it runs silently, so your terminal stays calm):
 
 ```
 gcc loop.c -o loop
-./loop                 # watch it run away... then Ctrl-C  (extinguisher #1)
-./loop &               # now it runs in the BACKGROUND — no Ctrl-C can reach it
-ps                     # find its PID (the process's roll number)
-kill <PID>             # extinguisher #2
-ps                     # verify the fire is out
+./loop                 # it's running... and won't stop. Ctrl-C  (extinguisher #1)
+./loop &               # now it runs in the BACKGROUND — Ctrl-C can't reach it
+pgrep loop             # prints the runaway's PID (its roll number) — just the number
+kill <PID>             # extinguisher #2 — type the number pgrep printed
+pgrep loop             # prints nothing = the fire is out
 ```
+
+(Curious what `pgrep` is shorthand for? Run plain `ps` and find your loop in the crowd — that's the long way, and on a shared machine it *is* a crowd.)
 
 Every programmer writes an infinite loop eventually. Now you've already survived one.
 
@@ -129,46 +157,53 @@ Every programmer writes an infinite loop eventually. Now you've already survived
 **Note the PID you just killed — and remember this:** these three commands (`./loop &`, `ps`, `kill <PID>`) are **one-time** commands. They must **NOT** go into your `replay.sh` in Act 5. That PID number was true for one moment on one machine; replayed later it could kill someone else's process.
 :::
 
-## Act 5 · Lock up, leave a diary, take your work (20 min)
+## Act 5 · Lock up and take your work (15 min)
 
 1. Look at a permission string: `ls -l hello`. Decode `rwxr-xr-x` on paper: three groups of three bits — `111 101 101` = octal `755`. **This week's number systems, wearing work clothes.**
 2. Try `chmod 600 passport.txt`, then `ls -l passport.txt`. ✍️ *Think-question 2, into `notes/answers.txt`:* you are *all* logged in as `student` — so who exactly did you just lock out? (Honest answer: nobody in this room. `chmod` guards between *users*, and this whole room is one user. That is what permissions really are — and why real systems give each person their own account.)
-3. Your recorded history is a *log*. Now turn it into a *program*:
-   ```
-   history > replay.sh
-   nano replay.sh        # edit! — rules below
-   ```
-   ::: {.callout-important}
-   **Editing rules — read before touching `replay.sh`:**
-
-   1. Every line starts with a **number** (`  501  ./hello`). Those are history bookkeeping, **not commands** — a replay would try to run a program called `501`. **Delete every line number.**
-   2. Make the very first line exactly: `#!/bin/sh` — it tells the machine which language this program speaks.
-   3. **KEEP** only commands that make sense *every* time they run: `./hello`, `cat output.txt | wc -w`, `ls -l`.
-   4. **DELETE** `./loop &` — a replay would start a runaway with nobody watching.
-   5. **DELETE** `ps` and `kill <PID>` — that PID was true for one moment of one afternoon. Replay it tomorrow on this shared machine and you might kill a stranger's process.
-   6. The self-check **runs your replay.sh** and fails it if any of this is still wrong. That is deliberate.
-   :::
-
-   Now run it — **before** doing anything else:
-   ```
-   ./replay.sh
-   ```
-   `Permission denied`! **This is not an error — it is a lesson.** A freshly created file is not allowed to run; you must grant it the execute permission yourself:
-   ```
-   chmod +x replay.sh
-   ./replay.sh
-   ```
-
-   ✍️ *Bonus for `notes/answers.txt`:* in one line, what is the difference between a log and a program? (Hint: a log records what *happened*; a program must be true *whenever* it runs.) Anything you can do, you can automate — but only the repeatable parts.
-4. Stop the recorder (`exit` — you'll see "Script done"), then run the self-check and make it all green:
+3. Stop the recorder (`exit` — you'll see "Script done"), then run the self-check:
    ```
    ./check.sh
    ```
-   Red lines tell you *what's* missing, never *how* — that's your job. When green (or when time is up — an imperfect bundle beats no bundle; the verdicts travel with it):
+   Red lines tell you *what's* missing, never *how* — that's your job. `bonus-open` lines are **not required today** (they're Act 6, at home). When the required lines are green — or when time is up; an imperfect bundle beats no bundle — run:
    ```
    ./check.sh --bundle
    ```
-5. The bundle (`../lab01_<rolls>_<branch>_w02.tar.gz`) **is your work**. Copy it out — Moodle upload (link announced in lab), and *always* also email yourself a copy. Then leave the machine clean: your workspace will be swept automatically before the next lab.
+4. The bundle (`../lab01_<rolls>_<branch>_w02.tar.gz`) **is your work**. Copy it out — Moodle upload (link announced in lab), and *always* also email yourself a copy. Then leave the machine clean: your workspace will be swept automatically before the next lab.
+
+## Act 6 · Bonus, at home: your history becomes a program
+
+Do this on any machine — extract the lab pack anywhere and `./install.sh` puts a practice workspace right where you run it.
+
+Your recorded history is a *log*. Turn it into a *program*:
+
+```
+history > replay.sh
+nano replay.sh        # edit! — rules below
+```
+
+::: {.callout-important}
+**Editing rules — read before touching `replay.sh`:**
+
+1. Every line starts with a **number** (`  501  ./hello`). Those are history bookkeeping, **not commands** — a replay would try to run a program called `501`. **Delete every line number.**
+2. Make the very first line exactly: `#!/bin/sh` — it tells the machine which language this program speaks.
+3. **KEEP** only commands that make sense *every* time they run: `./hello`, `cat output.txt | wc -w`, `ls -l`.
+4. **DELETE** `./loop &` — a replay would start a runaway with nobody watching.
+5. **DELETE** `pgrep`/`ps` and `kill <PID>` — that PID was true for one moment of one afternoon. Replay it tomorrow and you might kill a stranger's process.
+6. The self-check **runs your replay.sh** and reports it as a bonus item.
+:::
+
+Now run it — **before** doing anything else:
+```
+./replay.sh
+```
+`Permission denied`! **This is not an error — it is a lesson.** A freshly created file is not allowed to run; you must grant it the execute permission yourself:
+```
+chmod +x replay.sh
+./replay.sh
+```
+
+✍️ *Bonus for `notes/answers.txt`:* in one line, what is the difference between a log and a program? (Hint: a log records what *happened*; a program must be true *whenever* it runs.) Anything you can do, you can automate — but only the repeatable parts.
 
 ## Reflect
 
