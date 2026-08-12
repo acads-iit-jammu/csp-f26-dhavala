@@ -578,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Copying commands.</strong> Only the <strong>command boxes</strong> on this page carry a copy button (top-right of the box) — everything else is for reading, not pasting. And careful: pasting into a terminal is <strong>not</strong> Ctrl+V — use <strong>Ctrl+Shift+V</strong> (and <strong>Ctrl+Shift+C</strong> to copy <em>from</em> the terminal). For short commands, though: type them. Fingers learn what eyes only skim.</p>
+<p><strong>Copying commands.</strong> Only the <strong>command boxes</strong> on this page carry a copy button (top-right of the box) — everything else is for reading, not pasting. <strong>One box = one step:</strong> run a box, <em>read what the machine said</em>, then take the next box — never paste your way through three boxes blind. And careful: pasting into a terminal is <strong>not</strong> Ctrl+V — use <strong>Ctrl+Shift+V</strong> (and <strong>Ctrl+Shift+C</strong> to copy <em>from</em> the terminal). For short commands, though: type them. Fingers learn what eyes only skim.</p>
 </div>
 </div>
 </div>
@@ -599,17 +599,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="act-1-claim-the-machine-10-min" class="level2">
 <h2 class="anchored" data-anchor-id="act-1-claim-the-machine-10-min">Act 1 · Claim the machine (10 min)</h2>
-<p>Who are you, where are you, on what? Run each of these, <strong>predicting the output first</strong>. The first answer is a surprise: you are <em>all</em> <code>student</code> — remember that for Act 5.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">uname</span> <span class="at">-a</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now make the machine’s passport — your first <em>redirection</em>: <code>&gt;</code> sends a command’s output into a file instead of the screen, and <code>&gt;&gt;</code> appends instead of overwriting:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span> <span class="op">&gt;</span> passport.txt</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span> <span class="op">&gt;&gt;</span> passport.txt</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">uname</span> <span class="at">-a</span> <span class="op">&gt;&gt;</span> passport.txt</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> . <span class="op">&gt;&gt;</span> passport.txt</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> passport.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Who are you, where are you, on what? One box per question — <strong>predict the output before each Enter</strong>.</p>
+<p>Who am I? (The answer is a surprise: you are <em>all</em> <code>student</code> — remember that for Act 5.)</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which machine is this?</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What operating system, exactly?</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">uname</span> <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>How much disk is free here?</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now make the machine’s passport — your first <em>redirection</em>: <code>&gt;</code> sends a command’s output into a file instead of the screen, and <code>&gt;&gt;</code> appends instead of overwriting. Writing the passport is one step (nothing appears on screen — that’s the point; it went into the file):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span> <span class="op">&gt;</span> passport.txt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span> <span class="op">&gt;&gt;</span> passport.txt</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">uname</span> <span class="at">-a</span> <span class="op">&gt;&gt;</span> passport.txt</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> . <span class="op">&gt;&gt;</span> passport.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Verifying it is the next step:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> passport.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="act-2-build-the-home-20-min" class="level2">
 <h2 class="anchored" data-anchor-id="act-2-build-the-home-20-min">Act 2 · Build the home (20 min)</h2>
@@ -629,26 +634,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="act-3-make-it-speak-15-min" class="level2">
 <h2 class="anchored" data-anchor-id="act-3-make-it-speak-15-min">Act 3 · Make it speak (15 min)</h2>
 <p>Your starter files are already in the workspace (the installer put them there). Open <code>hello.c</code> and put <strong>your name</strong> inside the quotes (both names, for pairs):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> hello.c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then compile it, run it, capture its output into a file, and count that file’s words by <em>piping</em> it through <code>wc</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> hello.c <span class="at">-o</span> hello</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./hello</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./hello</span> <span class="op">&gt;</span> output.txt</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output.txt <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-w</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> hello.c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Compile it (silence means success — the compiler only speaks when something is wrong):</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> hello.c <span class="at">-o</span> hello</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run it:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./hello</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run it again, capturing the output into a file this time (screen stays quiet — where did it go?):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./hello</span> <span class="op">&gt;</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Count that file’s words by <em>piping</em> it through <code>wc</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output.txt <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-w</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You just compiled a real C program — the same <code>printf</code> whose descent you watched, floor by floor, in Week 1. You’ll understand every line by Week 4; today it’s the telescope check.</p>
 <p>✍️ <em>Think-question 1, into <code>notes/answers.txt</code>:</em> why the <code>./</code> in <code>./hello</code>? Run <code>echo $PATH</code> and reason it out — ask us at the end if it doesn’t click.</p>
 </section>
 <section id="act-4-kill-the-runaway-10-min" class="level2">
 <h2 class="anchored" data-anchor-id="act-4-kill-the-runaway-10-min">Act 4 · Kill the runaway (10 min)</h2>
-<p>Week 2’s Toy Computer trapped itself in an infinite ping-pong and could only be Reset. Real machines give you a fire extinguisher. The starter <code>loop.c</code> is a program that <em>never stops on purpose</em> (it runs silently, so your terminal stays calm). Compile it and run it in the foreground — then put it out with <strong>extinguisher #1: <code>Ctrl-C</code></strong>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> loop.c <span class="at">-o</span> loop</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./loop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now start it in the <strong>background</strong> (that’s the <code>&amp;</code>), where <code>Ctrl-C</code> cannot reach it. <code>pgrep loop</code> prints the runaway’s PID — its roll number, just the number:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./loop</span> <span class="kw">&amp;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pgrep</span> loop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Kill that number — <strong>extinguisher #2</strong> — replacing <code>12345</code> with the number <em>your</em> <code>pgrep</code> printed. Then confirm the fire is out: <code>pgrep</code> printing <em>nothing</em> means no such process remains.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> 12345</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pgrep</span> loop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Week 2’s Toy Computer trapped itself in an infinite ping-pong and could only be Reset. Real machines give you a fire extinguisher. The starter <code>loop.c</code> is a program that <em>never stops on purpose</em> (it runs silently, so your terminal stays calm). Compile it:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> loop.c <span class="at">-o</span> loop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run it in the foreground and watch it not stop — then put it out with <strong>extinguisher #1: <code>Ctrl-C</code></strong>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./loop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now start it in the <strong>background</strong> (that’s the <code>&amp;</code>), where <code>Ctrl-C</code> cannot reach it:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./loop</span> <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Find it. <code>pgrep loop</code> prints the runaway’s PID — its roll number, just the number:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pgrep</span> loop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Kill that number — <strong>extinguisher #2</strong> — replacing <code>12345</code> with the number <em>your</em> <code>pgrep</code> printed:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> 12345</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Confirm the fire is out — <code>pgrep</code> printing <em>nothing</em> means no such process remains:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pgrep</span> loop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>(Curious what <code>pgrep</code> is shorthand for? Run plain <code>ps</code> and find your loop in the crowd — that’s the long way, and on a shared machine it <em>is</em> a crowd.)</p>
 <div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
@@ -668,9 +679,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Look at a permission string: <code>ls -l hello</code>. Decode <code>rwxr-xr-x</code> on paper: three groups of three bits — <code>111 101 101</code> = octal <code>755</code>. <strong>This week’s number systems, wearing work clothes.</strong></p></li>
 <li><p>Try <code>chmod 600 passport.txt</code>, then <code>ls -l passport.txt</code>. ✍️ <em>Think-question 2, into <code>notes/answers.txt</code>:</em> you are <em>all</em> logged in as <code>student</code> — so who exactly did you just lock out? (Honest answer: nobody in this room. <code>chmod</code> guards between <em>users</em>, and this whole room is one user. That is what permissions really are — and why real systems give each person their own account.)</p></li>
 <li><p>Stop the recorder (type <code>exit</code> — you’ll see “Script done”), then run the self-check:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Red lines tell you <em>what’s</em> missing, never <em>how</em> — that’s your job. <code>bonus-open</code> lines are <strong>not required today</strong> (they’re Act 6, at home). When the required lines are green — or when time is up; an imperfect bundle beats no bundle — bundle up:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>The bundle (<code>../lab01_&lt;rolls&gt;_&lt;branch&gt;_w02.tar.gz</code>) <strong>is your work</strong>. Copy it out — Moodle upload (link announced in lab), and <em>always</em> also email yourself a copy. Then leave the machine clean: your workspace will be swept automatically before the next lab.</p></li>
 </ol>
 </section>
@@ -678,8 +689,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="act-6-bonus-at-home-your-history-becomes-a-program">Act 6 · Bonus, at home: your history becomes a program</h2>
 <p>Do this on any machine — extract the lab pack anywhere and <code>./install.sh</code> puts a practice workspace right where you run it.</p>
 <p>Your recorded history is a <em>log</em>. Turn it into a <em>program</em>:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> <span class="op">&gt;</span> replay.sh</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> replay.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> <span class="op">&gt;</span> replay.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Open it and edit — rules below:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> replay.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -699,10 +711,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Now run it — <strong>before</strong> doing anything else:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./replay.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>Permission denied</code>! <strong>This is not an error — it is a lesson.</strong> A freshly created file is not allowed to run; you must grant it the execute permission yourself, then run it again:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x replay.sh</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./replay.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./replay.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Permission denied</code>! <strong>This is not an error — it is a lesson.</strong> A freshly created file is not allowed to run; you must grant it the execute permission yourself:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x replay.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now it runs:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./replay.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>✍️ <em>Bonus for <code>notes/answers.txt</code>:</em> in one line, what is the difference between a log and a program? (Hint: a log records what <em>happened</em>; a program must be true <em>whenever</em> it runs.) Anything you can do, you can automate — but only the repeatable parts.</p>
 </section>
 <section id="reflect" class="level2">
