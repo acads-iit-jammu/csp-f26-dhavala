@@ -39,7 +39,7 @@ Everything stored on this computer lives in **one big tree**. A **folder** (dire
     └── student              ← the shared home
         └── csp_labs_f26
             └── w02-l01-…    ← YOUR workspace today
-```
+```bash
 
 And the single most important fact of the day: **you are always standing somewhere in this tree.** Every command you type acts *from where you stand*. Three commands are your legs and eyes:
 
@@ -61,7 +61,7 @@ The lab pack is pre-placed on each machine (ask where). If it isn't — or you'r
 
 ```
 wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz
-```
+```bash
 
 Then:
 
@@ -69,7 +69,7 @@ Then:
 tar xzf lab01.tar.gz
 cd lab01
 ./install.sh
-```
+```bash
 
 The installer will *tell you* which branch it thinks you are (it reads the machine's name and today's date — ask yourself: how?), ask for your team's roll number(s), and build your session workspace: `/home/student/csp_labs_f26/w02-l01-<branch>-sd`. (Practising at home, where that path doesn't exist? The installer switches to *practice mode* and creates the workspace right where you ran it — everything else works identically.) **This machine is shared and forgets everything** — your workspace lives for today only; your work leaves with you at the end (Act 5).
 
@@ -78,7 +78,7 @@ Now the most important command of the day. Go to your workspace and start the re
 ```
 cd /home/student/csp_labs_f26/w02-l01-*-sd
 script session.txt
-```
+```bash
 
 Everything you type and see is now being recorded — your lab's own machine diary. (To stop it later: `exit`.)
 
@@ -91,7 +91,7 @@ whoami          # surprise: you are ALL 'student'. Remember this for Act 5.
 hostname
 uname -a
 df -h .
-```
+```bash
 
 Now make the machine's passport — your first *redirection* (`>` sends output into a file instead of the screen):
 
@@ -101,7 +101,7 @@ hostname >> passport.txt
 uname -a >> passport.txt
 df -h . >> passport.txt
 cat passport.txt
-```
+```bash
 
 ## Act 2 · Build the home (20 min)
 
@@ -115,7 +115,7 @@ Missions, each a mini spec-card: the **ENSURES** tells you what must be true whe
    ├── a/one.txt
    ├── a/two.txt
    └── b/one.txt
-   ```
+   ```bash
    Rules of the game: make the directories (`mkdir -p practice/a practice/b`), create the *first* file empty (`touch`), but the other two files may **not** be created by `touch` — one must be born as a **copy** (`cp`) and one must *arrive* by being **moved** (`mv`) from somewhere else you made. (So you'll create a scratch file and move it — that's the point.)
    **ENSURES:** `ls -R practice` matches the diagram exactly. Predict the output on paper first.
 3. Now **remove your `practice/` tree** — your first `rm`. Do it the careful way: `rm -ri practice` and read every question it asks before answering. `rm` has no undo, no bin, no mercy. Respect it today, every day.
@@ -132,7 +132,7 @@ gcc hello.c -o hello
 ./hello
 ./hello > output.txt
 cat output.txt | wc -w
-```
+```bash
 
 You just compiled a real C program — the same `printf` whose descent you watched, floor by floor, in Week 1. You'll understand every line by Week 4; today it's the telescope check. ✍️ *Think-question 1, into `notes/answers.txt`:* why the `./`? Run `echo $PATH` and reason it out — ask us at the end if it doesn't click.
 
@@ -147,7 +147,7 @@ gcc loop.c -o loop
 pgrep loop             # prints the runaway's PID (its roll number) — just the number
 kill <PID>             # extinguisher #2 — type the number pgrep printed
 pgrep loop             # prints nothing = the fire is out
-```
+```bash
 
 (Curious what `pgrep` is shorthand for? Run plain `ps` and find your loop in the crowd — that's the long way, and on a shared machine it *is* a crowd.)
 
@@ -164,11 +164,11 @@ Every programmer writes an infinite loop eventually. Now you've already survived
 3. Stop the recorder (`exit` — you'll see "Script done"), then run the self-check:
    ```
    ./check.sh
-   ```
+   ```bash
    Red lines tell you *what's* missing, never *how* — that's your job. `bonus-open` lines are **not required today** (they're Act 6, at home). When the required lines are green — or when time is up; an imperfect bundle beats no bundle — run:
    ```
    ./check.sh --bundle
-   ```
+   ```bash
 4. The bundle (`../lab01_<rolls>_<branch>_w02.tar.gz`) **is your work**. Copy it out — Moodle upload (link announced in lab), and *always* also email yourself a copy. Then leave the machine clean: your workspace will be swept automatically before the next lab.
 
 ## Act 6 · Bonus, at home: your history becomes a program
@@ -180,7 +180,7 @@ Your recorded history is a *log*. Turn it into a *program*:
 ```
 history > replay.sh
 nano replay.sh        # edit! — rules below
-```
+```bash
 
 ::: {.callout-important}
 **Editing rules — read before touching `replay.sh`:**
@@ -196,7 +196,7 @@ nano replay.sh        # edit! — rules below
 Now run it — **before** doing anything else:
 ```
 ./replay.sh
-```
+```bash
 `Permission denied`! **This is not an error — it is a lesson.** A freshly created file is not allowed to run; you must grant it the execute permission yourself:
 ```
 chmod +x replay.sh
