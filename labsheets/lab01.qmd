@@ -232,6 +232,8 @@ Every programmer writes an infinite loop eventually. Now you've already survived
 
 ## Act 5 · Lock up and take your work (15 min)
 
+**Why permissions exist — thirty seconds of Unix's soul.** Your laptop or phone pretends to be *yours alone*. Unix never pretended: it was born in 1969 on machines that whole teams shared, and it is still built on that assumption — *many people, one computer* (exactly like this lab). So every file carries a small contract stating **who may do what**: three audiences — the file's **owner** (`u`), the owner's **group** (`g`), and **others** (`o`, everyone else) — times three rights — **r**ead, **w**rite, e**x**ecute. That's the `rwxr-xr-x` you see in `ls -l`: owner may read/write/execute; group may read/execute; others may read/execute. `chmod` ("change mode") is how the owner rewrites that contract. Fifty years later, the same nine letters guard every server, every phone app's sandbox, every cloud machine — because *everything serious is shared*.
+
 1. Look at a permission string: `ls -l hello`. Decode `rwxr-xr-x` on paper: three groups of three bits — `111 101 101` = octal `755`. **This week's number systems, wearing work clothes.**
 
 2. Try `chmod 600 passport.txt`, then `ls -l passport.txt`. ✍️ *Think-question 2, into `notes/answers.txt`:* you are *all* logged in as `student` — so who exactly did you just lock out? (Honest answer: nobody in this room. `chmod` guards between *users*, and this whole room is one user. That is what permissions really are — and why real systems give each person their own account.)
