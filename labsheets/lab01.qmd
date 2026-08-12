@@ -69,10 +69,15 @@ cd lab01
 
 The installer will *tell you* which branch it thinks you are (it reads the machine's name and today's date — ask yourself: how?), ask for your team's roll number(s), and build your session workspace: `/home/student/csp_labs_f26/w02-l01-<branch>-sd`. (Practising at home, where that path doesn't exist? The installer switches to *practice mode* and creates the workspace right where you ran it — everything else works identically.) **This machine is shared and forgets everything** — your workspace lives for today only; your work leaves with you at the end (Act 5).
 
-Now the most important step of the day: go to your workspace and start the session recorder. Everything you type and see from here on is recorded — your lab's own machine diary. (To stop it later: type `exit`.)
+Now walk to your workspace. **Do not type any `*`** — your workspace's exact name depends on your branch, and the installer just printed it for you under **"Next steps"**. Type the `cd` line *it* printed. It will look like this (yours may say `ee`, `me` or `mt`, and can end in `-2` if another team used this machine first):
+
+```
+cd /home/student/csp_labs_f26/w02-l01-me-sd
+```
+
+Then the most important step of the day — start the session recorder. Everything you type and see from here on is recorded: your lab's own machine diary. (To stop it later: type `exit`.)
 
 ```bash
-cd /home/student/csp_labs_f26/w02-l01-*-sd
 script session.txt
 ```
 
