@@ -48,6 +48,7 @@ Ungraded, but the full machinery runs at zero stakes. Teams of 1–2 per machine
 | `./hello: No such file or directory` | typed `hello` without `./`, or gcc failed silently earlier | "$PATH question from Act 3 — and did gcc print anything?" |
 | `session.txt` missing at check | forgot `script`, or ran it after work | restart recorder, redo Act 4 (fast) — the kill-evidence check reads the recording |
 | "command not found" / "No such file" spiral | wrong directory | do NOT fix it for them: "run the compass" (pwd → ls → cd) |
+| `cd .../w02-l01-*-sd: No such file` (or "too many arguments") | typed the `*` literally from an old sheet | "the installer printed your exact path — scroll up / re-run install.sh, it resumes" |
 | Locked themselves out (`chmod 000`) | Act 5 experimentation | teachable: `chmod 644` fixes it — *why* can they fix it? (owner!) |
 | Killed the wrong PID | `ps` shows the whole shared machine | teachable moment: on shared systems, read before you kill; their neighbour will vividly agree |
 | Two teams, one workspace quarrel | second team answered another team's rolls | re-run install with own rolls → gets `-2` suffix automatically |
