@@ -6,9 +6,11 @@ set -u
 QUIET=0; BUNDLE=0
 for a in "$@"; do case "$a" in --quiet) QUIET=1;; --bundle) BUNDLE=1;; esac; done
 
-pass=0; fail=0
+pass=0; fail=0; bpass=0; bmiss=0
 ok(){ pass=$((pass+1)); [ "$QUIET" = 1 ] || printf 'PASS  %s\n' "$1"; }
 no(){ fail=$((fail+1)); [ "$QUIET" = 1 ] || printf 'FAIL  %s\n' "$1"; }
+bok(){ bpass=$((bpass+1)); [ "$QUIET" = 1 ] || printf 'BONUS-PASS  %s\n' "$1"; }
+bno(){ bmiss=$((bmiss+1)); [ "$QUIET" = 1 ] || printf 'bonus-open  %s (home practice — not required today)\n' "$1"; }
 
 # 1. identity
 if [ -s TEAM.txt ] && grep -q '^rolls: [A-Za-z0-9]' TEAM.txt; then ok "TEAM.txt names your team"; else no "TEAM.txt with your roll number(s)"; fi
@@ -28,14 +30,14 @@ if [ -f replay.sh ] && [ -x replay.sh ] && ! grep -qE '(^|[[:space:]])(kill|ps)(
   if command -v timeout >/dev/null 2>&1; then timeout 15 ./replay.sh >/dev/null 2>&1 && replay_ok=1
   else ./replay.sh >/dev/null 2>&1 && replay_ok=1; fi
 fi
-if [ "$replay_ok" = 1 ]; then ok "replay.sh runs cleanly, end to end"; else no "a replay.sh that actually RUNS: strip the history line-numbers, first line #!/bin/sh, chmod +x, and no kill/ps/loop (a PID is true only once!)"; fi
+if [ "$replay_ok" = 1 ]; then bok "replay.sh runs cleanly, end to end"; else bno "a replay.sh that actually RUNS (strip history numbers, #!/bin/sh first line, chmod +x, no kill/ps/loop)"; fi
 # 8. session recorded
 if [ -f session.txt ] && [ "$(wc -c < session.txt)" -gt 200 ]; then ok "session.txt recorded (script ran)"; else no "a session.txt of real size (did you start 'script session.txt' first?)"; fi
 # 9. the runaway was fought
-if [ -f session.txt ] && grep -q 'kill' session.txt; then ok "evidence of kill in your session (Act 4)"; else no "evidence you found and killed the runaway (ps, kill) in session.txt"; fi
+if [ -f session.txt ] && grep -q 'kill' session.txt; then ok "evidence of kill in your session (Act 4)"; else no "evidence you found and killed the runaway (pgrep, kill) in session.txt"; fi
 
 echo "----------------------------------------"
-echo "check: $pass passed, $fail failed"
+echo "check: $pass passed, $fail failed (bonus: $bpass done, $bmiss open)"
 if [ "$fail" -eq 0 ]; then echo "All green. Bundle and go: ./check.sh --bundle"; fi
 
 if [ "$BUNDLE" = 1 ]; then

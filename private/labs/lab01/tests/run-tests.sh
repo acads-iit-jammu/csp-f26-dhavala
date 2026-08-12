@@ -59,16 +59,16 @@ printf 'student\ncse-lab4021-pc01\nLinux cse-lab4021 6.8.0 GNU/Linux\n/dev/sda 4
 printf '#!/bin/sh\necho replayed\n' > replay.sh && chmod +x replay.sh
 { printf 'Script started\n$ ps aux | grep loop\n$ kill 12345\n'; head -c 300 /dev/zero | tr '\0' 'x'; } > session.txt
 out="$("./check.sh" 2>&1)"; rc=$?
-[ "$rc" -eq 0 ] && echo "$out" | grep -q '9 passed, 0 failed' && ok "t8 complete workspace: 9/9 PASS" || { no "t8"; echo "$out"; }
+[ "$rc" -eq 0 ] && echo "$out" | grep -q '8 passed, 0 failed (bonus: 1 done' && ok "t8 complete workspace: 8/8 required + bonus done" || { no "t8"; echo "$out"; }
 
-# t8b: replay.sh containing a kill/PID must FAIL the replayability check
+# t8b: replay.sh containing a kill/PID -> bonus-open, but NOT a required failure
 printf '#!/bin/sh\nkill 12345\n./hello\n' > replay.sh && chmod +x replay.sh
-out="$(./check.sh --quiet 2>&1)"; rc=$?
-[ "$rc" -eq 1 ] && ok "t8b replay.sh with kill PID is rejected" || no "t8b rc=$rc"
-# t8c: un-stripped history line numbers must fail (checker actually runs it)
+out="$(./check.sh 2>&1)"; rc=$?
+[ "$rc" -eq 0 ] && echo "$out" | grep -q 'bonus-open' && ok "t8b bad replay = bonus-open, rc stays 0" || no "t8b rc=$rc"
+# t8c: un-stripped history numbers -> same: bonus-open, not a required failure
 printf '  501  ./hello\n  502  ls -l\n' > replay.sh && chmod +x replay.sh
-out="$(./check.sh --quiet 2>&1)"; rc=$?
-[ "$rc" -eq 1 ] && ok "t8c replay.sh with history numbers is rejected" || no "t8c rc=$rc"
+out="$(./check.sh 2>&1)"; rc=$?
+[ "$rc" -eq 0 ] && echo "$out" | grep -q 'bonus-open' && ok "t8c numbered replay = bonus-open, rc stays 0" || no "t8c rc=$rc"
 printf '#!/bin/sh\necho replayed\n' > replay.sh && chmod +x replay.sh   # restore good replay
 
 # t9: bundle naming
@@ -78,7 +78,7 @@ printf '#!/bin/sh\necho replayed\n' > replay.sh && chmod +x replay.sh   # restor
 # t10: degraded workspace -> failures counted, no bundle
 rm replay.sh output.txt
 out="$(./check.sh --quiet 2>&1)"; rc=$?
-[ "$rc" -eq 2 ] && ok "t10a two regressions -> exit 2" || no "t10a rc=$rc: $out"
+[ "$rc" -eq 1 ] && ok "t10a required regression -> exit 1 (missing replay is only bonus)" || no "t10a rc=$rc: $out"
 rm -f ../lab01_*.tar.gz
 ./check.sh --quiet --bundle >/dev/null 2>&1
 ls ../lab01_*.tar.gz >/dev/null 2>&1 && ok "t10b bundle proceeds even with FAILs (submit-as-is)" || no "t10b"

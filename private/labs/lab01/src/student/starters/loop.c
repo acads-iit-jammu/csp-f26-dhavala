@@ -4,10 +4,9 @@
 #include <unistd.h>
 
 int main(void) {
-    long n = 0;
+    printf("runaway started - I will now run FOREVER, silently.\n");
+    printf("find me:   pgrep loop        stop me:   kill <that number>\n");
     while (1) {
-        printf("still running... %ld\n", n);
-        n = n + 1;
         sleep(1);
     }
     return 0;

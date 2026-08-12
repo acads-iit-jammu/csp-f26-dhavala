@@ -3,19 +3,25 @@
 Sessions: EE Tue Aug 11 (Lab 4022) · ME Wed Aug 12 (4022) · MT Wed Aug 12 (4021), all 2:00–4:00 pm.
 Ungraded, but the full machinery runs at zero stakes. Teams of 1–2 per machine.
 
-## Timing plan (120 min)
+## Timing plan (120 min) — v2 after the EE session
 
 | Clock | Act | Watch for |
 |---|---|---|
-| 0:00–0:10 | Welcome + "third machine" framing; pairs assigned, roles explained | nobody opens a terminal yet |
-| 0:10–0:20 | Act 0 install | see failure table below |
-| 0:20–0:30 | Act 1 claim | `script` actually started (spot-check: `ls session.txt`) |
-| 0:30–0:55 | Act 2 build | predictions said *aloud* before `ls` |
-| 0:55–1:00 | **half-time whistle — pairs swap roles** | actually swap |
-| 1:00–1:20 | Act 3 compile | both names in hello for pairs |
-| 1:20–1:35 | Act 4 runaway | nobody `kill`s another team's PID |
-| 1:35–1:55 | Act 5 lock/diary/bundle + check green | bundles actually leave the room |
-| 1:55–2:00 | Reflect + close | collect the surprise-command answers verbally |
+| 0:00–0:12 | Welcome + **the blackboard prologue** (below) — nobody touches a keyboard | draw the tree; say "you are always standing somewhere" twice |
+| 0:12–0:22 | Act 0 install | see failure table below |
+| 0:22–0:32 | Act 1 claim | `script` actually started (spot-check: `ls session.txt`) |
+| 0:32–0:52 | Act 2 build | predictions said *aloud* before `ls` |
+| 0:52–0:55 | **half-time whistle — pairs swap roles** | actually swap |
+| 0:55–1:15 | Act 3 compile | both names in hello for pairs |
+| 1:15–1:28 | Act 4 runaway (quiet loop, pgrep) | nobody `kill`s another team's PID |
+| 1:28–1:50 | Act 5 permissions + check + bundle | bundles actually leave the room |
+| 1:50–2:00 | Reflect + point at Act 6 (home bonus) | collect surprise-command answers verbally |
+
+## The blackboard prologue (write these three things up BEFORE students arrive)
+
+1. The tree: `/ → home → student → csp_labs_f26 → w02-l01-…` — "a folder is a box, a file is a page, a path is an address."
+2. The compass, boxed: `pwd` (where am I) · `ls` (what's here) · `cd` (walk) — "when it says *No such file or directory*, run the compass."
+3. Survival keys: `q` quits man/less · `Ctrl-C` stops a program · terminal paste is `Ctrl+Shift+V`.
 
 ## Before the lab (morning-of, on ONE machine per room)
 
@@ -40,7 +46,8 @@ Ungraded, but the full machinery runs at zero stakes. Teams of 1–2 per machine
 | Stuck in a full-screen thing | they ran `less`/`man` | "press q" (write it on the board pre-emptively) |
 | Stuck in `vi`/`vim` | muscle memory from somewhere | `Esc :q!` — then "use nano today" |
 | `./hello: No such file or directory` | typed `hello` without `./`, or gcc failed silently earlier | "$PATH question from Act 3 — and did gcc print anything?" |
-| `session.txt` missing at check | forgot `script`, or ran it after work | restart recorder, redo Act 4 (fast) — the check needs kill-evidence in the recording |
+| `session.txt` missing at check | forgot `script`, or ran it after work | restart recorder, redo Act 4 (fast) — the kill-evidence check reads the recording |
+| "command not found" / "No such file" spiral | wrong directory | do NOT fix it for them: "run the compass" (pwd → ls → cd) |
 | Locked themselves out (`chmod 000`) | Act 5 experimentation | teachable: `chmod 644` fixes it — *why* can they fix it? (owner!) |
 | Killed the wrong PID | `ps` shows the whole shared machine | teachable moment: on shared systems, read before you kill; their neighbour will vividly agree |
 | Two teams, one workspace quarrel | second team answered another team's rolls | re-run install with own rolls → gets `-2` suffix automatically |

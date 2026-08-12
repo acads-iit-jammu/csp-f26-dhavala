@@ -13,7 +13,7 @@ From Lab 02, the same sheet carries the per-lab share of the 20% lab component.
 | 4 | hello compiles and runs | 10 |
 | 5 | output.txt matches ./hello exactly | 10 |
 | 6 | notes/README.txt | 5 |
-| 7 | replay.sh executable *and* replayable (no one-time PID commands) | 10 |
+| 7 | *(bonus)* replay.sh runs cleanly | +5 |
 | 8 | session.txt recorded (script ran) | 5 |
 | 9 | kill-evidence in session (Act 4 done) | 5 |
 
