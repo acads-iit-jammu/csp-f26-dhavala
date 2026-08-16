@@ -34,7 +34,9 @@
       "Bash(git -C private status --short)",
       "Bash(git commit -q -m 'Lab sheet: tag command blocks as bash so copy buttons render *)",
       "Bash(git -C private commit -q -m 'W03 decks: 05 complements & overflow \\(worked examples, Ariane/Gangnam/2038\\), 06 first C program \\(annotated gcc and ./, variables, %d\\) *)",
-      "Bash(git commit -q -m 'W03: complements/overflow + first C program — week page, both decks, PAGAL overflow column, CT-1 notice *)"
+      "Bash(git commit -q -m 'W03: complements/overflow + first C program — week page, both decks, PAGAL overflow column, CT-1 notice *)",
+      "Bash(git -C private commit -q -m 'Deck 07: types, assignments, operators & precedence \\(completes Lec 4\\) *)",
+      "Bash(git commit -q -m 'W03 reordered: Mon Deck 06 \\(first C\\), Tue Deck 07 \\(types/operators, Lec 4 complete\\); Deck 05 as CT-1 revision *)"
     ]
   }
 }

@@ -15,14 +15,18 @@
 
 ## In Class
 
-**Monday — negative numbers, worked; and overflow:**
+**Monday — your first C program:**
 
-- 📽️ [**Deck 05 — Complements & Overflow**](../materials/w03-deck-05-complements-overflow.html) — one's complement (flip; the two zeros), two's complement (flip + 1) with −5 and −42 worked in 8 bits; why one adder does everything (42 + (−42) with the ninth bit falling off the edge; 25 + (−42) = −17); the asymmetric range −128…+127; and **overflow**: 100 + 50 = −106, the two-positives-make-a-negative smell test, and why silent wrong numbers matter (Ariane 5 · Gangnam Style · Year 2038).
+- 📽️ [**Deck 06 — Your First C Program**](../materials/w03-deck-06-first-c-program.html) — the three-step ritual (write → compile → run) you already performed on faith in Lab 01, now understood: `hello.c` dissected line by line; the compile command annotated word by word (`gcc hello.c -o hello`); the run command annotated (`./hello` and why the `./`); the peek inside — source in, executable out, nothing in between is magic; variables as *named cells with a reading convention* (`int` = two's complement); `%d` as printf's code book; and two worked programs including the integer-division surprise (7/2 = 3).
 
-**Tuesday — your first C program:**
+**Tuesday — completing Lec 4: types, assignments, operators:**
 
-- 📽️ [**Deck 06 — Your First C Program**](../materials/w03-deck-06-first-c-program.html) — the three-step ritual (write → compile → run) you already performed on faith in Lab 01, now understood: `hello.c` dissected line by line; the compile command annotated word by word (`gcc hello.c -o hello`); the run command annotated (`./hello` and why the `./`); the peek inside — source in, executable out, nothing in between is magic; variables as *named cells with a reading convention* (`int` = two's complement, with yesterday's cliff inside); `%d` as printf's code book; and two worked programs including the integer-division surprise (7/2 = 3).
+- 📽️ [**Deck 07 — Types, Assignments & Operators**](../materials/w03-deck-07-types-operators.html) — the wardrobe of basic types (`char`/`int`/`float`/`double` as *size + reading convention*, each with the edge of its world); `sizeof`; declaration vs initialization vs assignment, and the line that breaks school algebra (`x = x + 1` — read `=` as "gets"); the arithmetic operators with `/` and `%` as Week 2's quotient-and-remainder in costume; **operator precedence and associativity** (the grammar table, `10−4−3`, `a = b = 0`); mixed types — promotion, silent truncation, casts; and six predict-before-you-run exams including the classic traps `1/2*10` and `double d = 7/2`.
 - [Lec 4](../cs1100-cse-iitm-2021/slides/Lec4.pdf) — companion slides (Prof. Shweta Agrawal, IIT Madras)
+
+**Revision (for CT-1):**
+
+- 📽️ [**Deck 05 — Complements & Overflow**](../materials/w03-deck-05-complements-overflow.html) — the fully-worked complements and overflow reference: −5 and −42 in 8 bits, arithmetic with the ninth bit falling off, 100+50 = −106, and the Ariane/Gangnam/2038 stories. Revise this for Class Test 1.
 
 ## After Class
 
