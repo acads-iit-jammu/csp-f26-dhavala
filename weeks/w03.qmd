@@ -1,25 +1,49 @@
-# W03: Number Systems II {.unnumbered}
+# W03: Complements, Overflow · First C Program {.unnumbered}
 
 **Dates:** Mon Aug 17 & Tue Aug 18, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 2 — Number systems, conversions, and arithmetic (4 h)
+**Syllabus module:** 2 wrap-up (number systems & arithmetic) · 3 begins (C program structure)
 
 ::: {.callout-important}
-**Class Test-1 window opens Wed Aug 19** (through Aug 25); exact date/time announced in class.
+**Class Test 1 window opens Wednesday Aug 19** (through Aug 25). Scope: Weeks 1–3 — what a computer is, number systems, complements & overflow. Exact date/time announced in class and here.
 :::
 
 ## Pre-read
 
-*To be posted (typically by the weekend before).*
+- Revisit the [Number Playground](../materials/w02-number-playground.html) — especially the sundial's +1 button: walk it around the full circle once and narrate each cliff.
+- Skim [Lec 3](../cs1100-cse-iitm-2021/slides/Lec3.pdf) (the number-system portions) and the first half of [Lec 4](../cs1100-cse-iitm-2021/slides/Lec4.pdf) — *Our first C program* (Prof. Shweta Agrawal, IIT Madras).
 
 ## In Class
 
-- Notes (to be posted) — binary arithmetic; floating point; conversions
+**Monday — negative numbers, worked; and overflow:**
+
+- 📽️ [**Deck 05 — Complements & Overflow**](../materials/w03-deck-05-complements-overflow.html) — one's complement (flip; the two zeros), two's complement (flip + 1) with −5 and −42 worked in 8 bits; why one adder does everything (42 + (−42) with the ninth bit falling off the edge; 25 + (−42) = −17); the asymmetric range −128…+127; and **overflow**: 100 + 50 = −106, the two-positives-make-a-negative smell test, and why silent wrong numbers matter (Ariane 5 · Gangnam Style · Year 2038).
+
+**Tuesday — your first C program:**
+
+- 📽️ [**Deck 06 — Your First C Program**](../materials/w03-deck-06-first-c-program.html) — the three-step ritual (write → compile → run) you already performed on faith in Lab 01, now understood: `hello.c` dissected line by line; the compile command annotated word by word (`gcc hello.c -o hello`); the run command annotated (`./hello` and why the `./`); the peek inside — source in, executable out, nothing in between is magic; variables as *named cells with a reading convention* (`int` = two's complement, with yesterday's cliff inside); `%d` as printf's code book; and two worked programs including the integer-division surprise (7/2 = 3).
+- [Lec 4](../cs1100-cse-iitm-2021/slides/Lec4.pdf) — companion slides (Prof. Shweta Agrawal, IIT Madras)
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+- Write −77 and −128 in 8-bit two's complement; compute 90 + 90 in 8 bits and explain what you get; verify that −(−128) = −128.
+- Type, compile, and run both of Tuesday's programs. Then break things on purpose — delete the semicolon, misspell `printf`, drop the `./` — and read each error message aloud.
+- Find values of `a` and `b` that make `int c = a + b;` overflow. What does C print? (Bring your answer — it opens next Monday.)
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning: the week's informal column.*
+
+**Three overflows: a rocket, a pop song, and a date in 2038**
+
+This week you computed 100 + 50 on eight bits and got −106 — a wrong answer delivered with total confidence, no alarm rung. It is worth knowing how far that little cliff scales.
+
+**June 4, 1996.** The European Space Agency launches the first Ariane 5. Thirty-seven seconds later it tears itself apart. The inquiry traced it to one conversion: a 64-bit floating-point value — the rocket's horizontal velocity — stuffed into a **16-bit signed integer**, whose edge of the world is 32,767. The guidance software had been reused from Ariane 4, a slower rocket whose velocities always fit. Ariane 5 flew faster than its inherited representation imagined; the value overflowed; the guidance computers gave up; roughly half a billion dollars of rocket and satellites rained into a mangrove swamp. Notice *what kind* of mistake this is: not bad arithmetic — a **GIVEN that silently changed** while the spec stayed frozen. Week 1's lesson, at orbital velocity: the spec is a model of the world, and the world had a new rocket in it.
+
+**December 2014.** PSY's "Gangnam Style" approaches **2,147,483,647 views** — 2³¹ − 1, the +127 of the 32-bit world — and YouTube announces its view counter must move to 64 bits. The same number that ends your `int` ends a pop career's counter. (YouTube, enjoying itself, made the counter spin when you hovered on it.)
+
+**January 19, 2038, 03:14:07 UTC.** Unix systems that store time as *seconds since 1970* in a signed 32-bit integer will hit the edge and wrap — to 1901. This is not retro trivia: embedded controllers, industrial systems, and careless new code written *this year* will still be running in 2038. Some of you will spend early-career months on exactly this — the way an earlier generation spent 1999 on Y2K.
+
+The through-line, and the week's moral: **a representation is a promise about the future** — "the values will always fit here." Ariane's promise was broken by a faster rocket, YouTube's by an unexpected hit, Unix's simply by time passing. When you choose `int` next week — and you will, hundreds of times — you are signing that promise. The engineers' habit is to ask, every time: *what happens at the edge, and who will be standing there when it arrives?*
+
+*Sources: [Ariane flight V88 — Wikipedia](https://en.wikipedia.org/wiki/Ariane_flight_V88) · [UMN case archive: the Ariane 5 explosion](https://www-users.cse.umn.edu/~arnold/disasters/ariane.html) · [TechCrunch on the Gangnam Style counter](https://techcrunch.com/2014/12/03/gangnam-style-has-been-viewed-so-many-times-it-broke-youtubes-code/) · [The Year 2038 problem — Epoch Converter](https://www.epochconverter.com/year-2038-problem).*
