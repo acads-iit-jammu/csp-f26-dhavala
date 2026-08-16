@@ -79,11 +79,12 @@ const SLIDES = [
 
 {title:"The wardrobe: C's basic types", body:()=> e(F,null,
   table(["Type","Size*","Reading convention","Edge of its world"],[
-    ["<span class='mono'>char</span>","1 byte","a small integer — usually worn with the <b>code book</b> (ASCII): 72 = 'H'","−128 … 127"],
+    ["<span class='mono'>char</span>","1 byte","a small integer — usually worn with the <b>code book</b> (ASCII): 72 = 'H'","−128…127 <i>on our machines</i> — see below*"],
     ["<span class='mono'>int</span>","4 bytes","two's complement — Monday's guest of honour","±2,147,483,647 (the Gangnam number)"],
     ["<span class='mono'>float</span>","4 bytes","IEEE FP32 — you dissected it bit by bit in Week 2","~7 digits, ~10³⁸"],
     ["<span class='mono'>double</span>","8 bytes","FP64 — same anatomy, bigger costume (this is what Python uses)","~16 digits, ~10³⁰⁸"]]),
-  li("*Sizes are “on our machines” — C only promises minimums; <span class='mono'>sizeof(int)</span> asks the machine itself. Try it: <span class='mono'>printf(\"%zu\\n\", sizeof(int));</span>",
+  li("*A confession about <span class='mono'>char</span>: whether plain char is signed is <b>the machine's choice</b> — the standard offers <span class='mono'>signed char</span> (−128…127) and <span class='mono'>unsigned char</span> (0…255) for when you care, and leaves plain <span class='mono'>char</span> implementation-defined. Our gcc/x86 lab machines make it signed, so <span class='mono'>char c = -5;</span> genuinely works there. ASCII needs only 0–127 — safe under either choice, which is exactly why the standard could afford to leave it loose",
+     "Sizes are also “on our machines” — C promises only minimums; <span class='mono'>sizeof(int)</span> asks the machine itself. Try it: <span class='mono'>printf(\"%zu\\n\", sizeof(int));</span>",
      "The deep point, again: <span class='mono'>char c = 'H';</span> and <span class='mono'>char c = 72;</span> put the <i>same bits</i> in the cell. The type and the format specifier decide the reading: <span class='mono'>%c</span> prints H, <span class='mono'>%d</span> prints 72"))},
 
 {title:"Declaration, initialization, assignment", body:()=> e(F,null,
