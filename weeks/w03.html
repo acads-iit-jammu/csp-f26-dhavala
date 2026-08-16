@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W03: Number Systems II – CS-1-01 (MO)</title>
+<title>W03: Complements, Overflow · First C Program – CS-1-01 (MO)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w03.html">W03: Number Systems II</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w03.html">W03: Complements, Overflow · First C Program</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w03.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">W03: Number Systems II</span></a>
+ <span class="menu-text">W03: Complements, Overflow · First C Program</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -412,9 +412,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w03.html">W03: Number Systems II</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w03.html">W03: Complements, Overflow · First C Program</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W03: Number Systems II</h1>
+<h1 class="title">W03: Complements, Overflow · First C Program</h1>
 </div>
 
 
@@ -432,34 +432,54 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Dates:</strong> Mon Aug 17 &amp; Tue Aug 18, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 2 — Number systems, conversions, and arithmetic (4 h)</p>
+<p><strong>Syllabus module:</strong> 2 wrap-up (number systems &amp; arithmetic) · 3 begins (C program structure)</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Class Test-1 window opens Wed Aug 19</strong> (through Aug 25); exact date/time announced in class.</p>
+<p><strong>Class Test 1 window opens Wednesday Aug 19</strong> (through Aug 25). Scope: Weeks 1–3 — what a computer is, number systems, complements &amp; overflow. Exact date/time announced in class and here.</p>
 </div>
 </div>
 </div>
 <section id="pre-read" class="level2">
 <h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
+<ul>
+<li>Revisit the <a href="../materials/w02-number-playground.html">Number Playground</a> — especially the sundial’s +1 button: walk it around the full circle once and narrate each cliff.</li>
+<li>Skim <a href="../cs1100-cse-iitm-2021/slides/Lec3.pdf">Lec 3</a> (the number-system portions) and the first half of <a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a> — <em>Our first C program</em> (Prof.&nbsp;Shweta Agrawal, IIT Madras).</li>
+</ul>
 </section>
 <section id="in-class" class="level2">
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
+<p><strong>Monday — negative numbers, worked; and overflow:</strong></p>
 <ul>
-<li>Notes (to be posted) — binary arithmetic; floating point; conversions</li>
+<li>📽️ <a href="../materials/w03-deck-05-complements-overflow.html"><strong>Deck 05 — Complements &amp; Overflow</strong></a> — one’s complement (flip; the two zeros), two’s complement (flip + 1) with −5 and −42 worked in 8 bits; why one adder does everything (42 + (−42) with the ninth bit falling off the edge; 25 + (−42) = −17); the asymmetric range −128…+127; and <strong>overflow</strong>: 100 + 50 = −106, the two-positives-make-a-negative smell test, and why silent wrong numbers matter (Ariane 5 · Gangnam Style · Year 2038).</li>
+</ul>
+<p><strong>Tuesday — your first C program:</strong></p>
+<ul>
+<li>📽️ <a href="../materials/w03-deck-06-first-c-program.html"><strong>Deck 06 — Your First C Program</strong></a> — the three-step ritual (write → compile → run) you already performed on faith in Lab 01, now understood: <code>hello.c</code> dissected line by line; the compile command annotated word by word (<code>gcc hello.c -o hello</code>); the run command annotated (<code>./hello</code> and why the <code>./</code>); the peek inside — source in, executable out, nothing in between is magic; variables as <em>named cells with a reading convention</em> (<code>int</code> = two’s complement, with yesterday’s cliff inside); <code>%d</code> as printf’s code book; and two worked programs including the integer-division surprise (7/2 = 3).</li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a> — companion slides (Prof.&nbsp;Shweta Agrawal, IIT Madras)</li>
 </ul>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<ul>
+<li>Write −77 and −128 in 8-bit two’s complement; compute 90 + 90 in 8 bits and explain what you get; verify that −(−128) = −128.</li>
+<li>Type, compile, and run both of Tuesday’s programs. Then break things on purpose — delete the semicolon, misspell <code>printf</code>, drop the <code>./</code> — and read each error message aloud.</li>
+<li>Find values of <code>a</code> and <code>b</code> that make <code>int c = a + b;</code> overflow. What does C print? (Bring your answer — it opens next Monday.)</li>
+</ul>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning: the week’s informal column.</em></p>
+<p><strong>Three overflows: a rocket, a pop song, and a date in 2038</strong></p>
+<p>This week you computed 100 + 50 on eight bits and got −106 — a wrong answer delivered with total confidence, no alarm rung. It is worth knowing how far that little cliff scales.</p>
+<p><strong>June 4, 1996.</strong> The European Space Agency launches the first Ariane 5. Thirty-seven seconds later it tears itself apart. The inquiry traced it to one conversion: a 64-bit floating-point value — the rocket’s horizontal velocity — stuffed into a <strong>16-bit signed integer</strong>, whose edge of the world is 32,767. The guidance software had been reused from Ariane 4, a slower rocket whose velocities always fit. Ariane 5 flew faster than its inherited representation imagined; the value overflowed; the guidance computers gave up; roughly half a billion dollars of rocket and satellites rained into a mangrove swamp. Notice <em>what kind</em> of mistake this is: not bad arithmetic — a <strong>GIVEN that silently changed</strong> while the spec stayed frozen. Week 1’s lesson, at orbital velocity: the spec is a model of the world, and the world had a new rocket in it.</p>
+<p><strong>December 2014.</strong> PSY’s “Gangnam Style” approaches <strong>2,147,483,647 views</strong> — 2³¹ − 1, the +127 of the 32-bit world — and YouTube announces its view counter must move to 64 bits. The same number that ends your <code>int</code> ends a pop career’s counter. (YouTube, enjoying itself, made the counter spin when you hovered on it.)</p>
+<p><strong>January 19, 2038, 03:14:07 UTC.</strong> Unix systems that store time as <em>seconds since 1970</em> in a signed 32-bit integer will hit the edge and wrap — to 1901. This is not retro trivia: embedded controllers, industrial systems, and careless new code written <em>this year</em> will still be running in 2038. Some of you will spend early-career months on exactly this — the way an earlier generation spent 1999 on Y2K.</p>
+<p>The through-line, and the week’s moral: <strong>a representation is a promise about the future</strong> — “the values will always fit here.” Ariane’s promise was broken by a faster rocket, YouTube’s by an unexpected hit, Unix’s simply by time passing. When you choose <code>int</code> next week — and you will, hundreds of times — you are signing that promise. The engineers’ habit is to ask, every time: <em>what happens at the edge, and who will be standing there when it arrives?</em></p>
+<p><em>Sources: <a href="https://en.wikipedia.org/wiki/Ariane_flight_V88">Ariane flight V88 — Wikipedia</a> · <a href="https://www-users.cse.umn.edu/~arnold/disasters/ariane.html">UMN case archive: the Ariane 5 explosion</a> · <a href="https://techcrunch.com/2014/12/03/gangnam-style-has-been-viewed-so-many-times-it-broke-youtubes-code/">TechCrunch on the Gangnam Style counter</a> · <a href="https://www.epochconverter.com/year-2038-problem">The Year 2038 problem — Epoch Converter</a>.</em></p>
 
 
 </section>
