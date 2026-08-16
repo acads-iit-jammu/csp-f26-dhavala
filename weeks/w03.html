@@ -452,14 +452,18 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="in-class" class="level2">
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<p><strong>Monday — negative numbers, worked; and overflow:</strong></p>
+<p><strong>Monday — your first C program:</strong></p>
 <ul>
-<li>📽️ <a href="../materials/w03-deck-05-complements-overflow.html"><strong>Deck 05 — Complements &amp; Overflow</strong></a> — one’s complement (flip; the two zeros), two’s complement (flip + 1) with −5 and −42 worked in 8 bits; why one adder does everything (42 + (−42) with the ninth bit falling off the edge; 25 + (−42) = −17); the asymmetric range −128…+127; and <strong>overflow</strong>: 100 + 50 = −106, the two-positives-make-a-negative smell test, and why silent wrong numbers matter (Ariane 5 · Gangnam Style · Year 2038).</li>
+<li>📽️ <a href="../materials/w03-deck-06-first-c-program.html"><strong>Deck 06 — Your First C Program</strong></a> — the three-step ritual (write → compile → run) you already performed on faith in Lab 01, now understood: <code>hello.c</code> dissected line by line; the compile command annotated word by word (<code>gcc hello.c -o hello</code>); the run command annotated (<code>./hello</code> and why the <code>./</code>); the peek inside — source in, executable out, nothing in between is magic; variables as <em>named cells with a reading convention</em> (<code>int</code> = two’s complement); <code>%d</code> as printf’s code book; and two worked programs including the integer-division surprise (7/2 = 3).</li>
 </ul>
-<p><strong>Tuesday — your first C program:</strong></p>
+<p><strong>Tuesday — completing Lec 4: types, assignments, operators:</strong></p>
 <ul>
-<li>📽️ <a href="../materials/w03-deck-06-first-c-program.html"><strong>Deck 06 — Your First C Program</strong></a> — the three-step ritual (write → compile → run) you already performed on faith in Lab 01, now understood: <code>hello.c</code> dissected line by line; the compile command annotated word by word (<code>gcc hello.c -o hello</code>); the run command annotated (<code>./hello</code> and why the <code>./</code>); the peek inside — source in, executable out, nothing in between is magic; variables as <em>named cells with a reading convention</em> (<code>int</code> = two’s complement, with yesterday’s cliff inside); <code>%d</code> as printf’s code book; and two worked programs including the integer-division surprise (7/2 = 3).</li>
+<li>📽️ <a href="../materials/w03-deck-07-types-operators.html"><strong>Deck 07 — Types, Assignments &amp; Operators</strong></a> — the wardrobe of basic types (<code>char</code>/<code>int</code>/<code>float</code>/<code>double</code> as <em>size + reading convention</em>, each with the edge of its world); <code>sizeof</code>; declaration vs initialization vs assignment, and the line that breaks school algebra (<code>x = x + 1</code> — read <code>=</code> as “gets”); the arithmetic operators with <code>/</code> and <code>%</code> as Week 2’s quotient-and-remainder in costume; <strong>operator precedence and associativity</strong> (the grammar table, <code>10−4−3</code>, <code>a = b = 0</code>); mixed types — promotion, silent truncation, casts; and six predict-before-you-run exams including the classic traps <code>1/2*10</code> and <code>double d = 7/2</code>.</li>
 <li><a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a> — companion slides (Prof.&nbsp;Shweta Agrawal, IIT Madras)</li>
+</ul>
+<p><strong>Revision (for CT-1):</strong></p>
+<ul>
+<li>📽️ <a href="../materials/w03-deck-05-complements-overflow.html"><strong>Deck 05 — Complements &amp; Overflow</strong></a> — the fully-worked complements and overflow reference: −5 and −42 in 8 bits, arithmetic with the ninth bit falling off, 100+50 = −106, and the Ariane/Gangnam/2038 stories. Revise this for Class Test 1.</li>
 </ul>
 </section>
 <section id="after-class" class="level2">
