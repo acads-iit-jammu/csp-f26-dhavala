@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 02: Conditional Statements – CS-1-01 (MO)</title>
+<title>Lab 02: First C Programs – CS-1-01 (MO)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab02.html">Lab 02: Conditional Statements</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab02.html">Lab 02: First C Programs</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -275,7 +309,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab02.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab 02: Conditional Statements</span></a>
+ <span class="menu-text">Lab 02: First C Programs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -402,18 +436,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#warm-up-circuit-8-min-predict-first" id="toc-warm-up-circuit-8-min-predict-first" class="nav-link active" data-scroll-target="#warm-up-circuit-8-min-predict-first">Warm-up circuit (8 min, predict first)</a></li>
+  <li><a href="#editing-with-nano-the-whole-card" id="toc-editing-with-nano-the-whole-card" class="nav-link" data-scroll-target="#editing-with-nano-the-whole-card">Editing with nano — the whole card</a></li>
+  <li><a href="#act-0-install-10-min" id="toc-act-0-install-10-min" class="nav-link" data-scroll-target="#act-0-install-10-min">Act 0 · Install (10 min)</a></li>
+  <li><a href="#act-1-playground-watch-run-tinker-25-min-with-us" id="toc-act-1-playground-watch-run-tinker-25-min-with-us" class="nav-link" data-scroll-target="#act-1-playground-watch-run-tinker-25-min-with-us">Act 1 · Playground — watch, run, tinker (25 min, with us)</a></li>
+  <li><a href="#act-2-the-graded-five-50-min-solo" id="toc-act-2-the-graded-five-50-min-solo" class="nav-link" data-scroll-target="#act-2-the-graded-five-50-min-solo">Act 2 · The graded five (50 min, solo)</a></li>
+  <li><a href="#act-3-check-fix-bundle-15-min" id="toc-act-3-check-fix-bundle-15-min" class="nav-link" data-scroll-target="#act-3-check-fix-bundle-15-min">Act 3 · Check, fix, bundle (15 min)</a></li>
+  <li><a href="#stretch-fast-finishers" id="toc-stretch-fast-finishers" class="nav-link" data-scroll-target="#stretch-fast-finishers">Stretch (fast finishers)</a></li>
+  <li><a href="#reflect" id="toc-reflect" class="nav-link" data-scroll-target="#reflect">Reflect</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab02.html">Lab 02: Conditional Statements</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab02.html">Lab 02: First C Programs</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 02: Conditional Statements</h1>
+<h1 class="title">Lab 02: First C Programs</h1>
 </div>
 
 
@@ -431,39 +470,209 @@ ul.task-list li input[type="checkbox"] {
 
 
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>Electrical</th>
-<th>Mechanical &amp; Materials</th>
+<th>Mechanical</th>
+<th>Metallurgy &amp; Materials</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Date</strong></td>
-<td>Tue Aug 11, 2026</td>
-<td>Wed Aug 12, 2026</td>
+<td>Tue Aug 18</td>
+<td>Wed Aug 19</td>
+<td>Wed Aug 19</td>
 </tr>
 <tr class="even">
-<td><strong>Time</strong></td>
-<td>2:00–4:00 pm</td>
-<td>2:00–4:00 pm</td>
+<td><strong>Time &amp; Room</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4021</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical module:</strong> 2 — Writing programs related to conditional statements</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<p><strong>Evaluation:</strong> <strong>graded</strong> — this lab carries its equal share of the 20% lab component. Five problems, checked by a program (details below), plus observed work and a short viva. Teams of 1–2 as before; pairs swap driver/navigator at half-time, and <em>both</em> members must be able to explain every line.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Work ONLY inside your workspace.</strong> The installer prints its exact path — <code>cd</code> there and stay there. Files created anywhere else are invisible to the checker, will not be bundled, and get swept by next week’s cleanup. Lost? Run the compass: <code>pwd</code> → <code>ls</code> → <code>cd</code>.</p>
+</div>
+</div>
+</div>
+<section id="warm-up-circuit-8-min-predict-first" class="level2">
+<h2 class="anchored" data-anchor-id="warm-up-circuit-8-min-predict-first">Warm-up circuit (8 min, predict first)</h2>
+<p>One box, one step — say the prediction out loud before Enter:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /home/student/csp_labs_f26</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>How many processes is this <em>shared</em> machine juggling right now? Compose two programs to count them:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="editing-with-nano-the-whole-card" class="level2">
+<h2 class="anchored" data-anchor-id="editing-with-nano-the-whole-card">Editing with nano — the whole card</h2>
+<p>You met <code>nano</code> in Lab 01. Everything you need today:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Save</td>
+<td><code>Ctrl+O</code>, then Enter</td>
+</tr>
+<tr class="even">
+<td>Exit</td>
+<td><code>Ctrl+X</code></td>
+</tr>
+<tr class="odd">
+<td>Cut / paste a line</td>
+<td><code>Ctrl+K</code> / <code>Ctrl+U</code></td>
+</tr>
+<tr class="even">
+<td>Search</td>
+<td><code>Ctrl+W</code></td>
+</tr>
+<tr class="odd">
+<td>Search &amp; replace</td>
+<td><code>Ctrl+\</code></td>
+</tr>
+<tr class="even">
+<td>Where am I / help</td>
+<td><code>Ctrl+C</code> / <code>Ctrl+G</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>(Prof.&nbsp;Aroof’s manual teaches the same lab with <code>vim</code> — a more powerful editor worth meeting someday. Today: nano.)</em></p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="act-0-install-10-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-0-install-10-min">Act 0 · Install (10 min)</h2>
+<p>Pack pre-placed on machines, or:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf lab02.tar.gz</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab02</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./install.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then <code>cd</code> into the workspace <strong>it prints</strong> (never type a <code>*</code>), and start the recorder:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="act-1-playground-watch-run-tinker-25-min-with-us" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-playground-watch-run-tinker-25-min-with-us">Act 1 · Playground — watch, run, tinker (25 min, with us)</h2>
+<p>Three programs are already in your workspace. For each: <strong>run it first</strong>, then follow the <em>tinker table</em> in its header comment — one change at a time, prediction before every run.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it teaches</th>
+<th>The tinker that teaches it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>p1_first_words.c</code></td>
+<td><code>printf</code>, <code>\n</code>, <code>\t</code>, escape characters</td>
+<td>swap <code>\n</code> for <code>\t</code>; delete the last newline</td>
+</tr>
+<tr class="even">
+<td><code>p2_scanf_basics.c</code></td>
+<td><code>scanf</code> and the <code>&amp;</code></td>
+<td>remove the <code>&amp;</code> and watch the wreckage</td>
+</tr>
+<tr class="odd">
+<td><code>p3_char_and_division.c</code></td>
+<td>the space before <code>%c</code>; integer division</td>
+<td>delete the space; make <code>7/2</code> into <code>7.0/2</code></td>
+</tr>
+</tbody>
+</table>
+<p>These are not graded. They are where the graded problems’ mistakes go to be met <em>safely</em>.</p>
+</section>
+<section id="act-2-the-graded-five-50-min-solo" class="level2">
+<h2 class="anchored" data-anchor-id="act-2-the-graded-five-50-min-solo">Act 2 · The graded five (50 min, solo)</h2>
+<p>Five files, <code>e1.c</code> … <code>e5.c</code>, already in your workspace. <strong>The spec is the comment at the top of each file</strong> — GIVEN, ENSURES, one public example. In brief:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Task</th>
+<th>Final line ends with exactly</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>e1.c</code></td>
+<td>sum &amp; average of three integers (one <code>scanf</code>)</td>
+<td><code>sum=&lt;S&gt; avg=&lt;A&gt;</code> (avg <code>%.2f</code>)</td>
+</tr>
+<tr class="even">
+<td><code>e2.c</code></td>
+<td>circle area &amp; circumference; <strong>π must be a named constant <code>3.14159</code></strong>; radius in a <code>float</code></td>
+<td><code>area=&lt;A&gt; circ=&lt;C&gt;</code> (<code>%.3f</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>e3.c</code></td>
+<td>quotient, remainder, decimal quotient</td>
+<td><code>q=&lt;Q&gt; r=&lt;R&gt; qf=&lt;F&gt;</code> (qf <code>%.2f</code>)</td>
+</tr>
+<tr class="even">
+<td><code>e4.c</code></td>
+<td>seconds → hours minutes seconds (<code>/</code> and <code>%</code> only)</td>
+<td><code>&lt;H&gt; h &lt;M&gt; m &lt;S&gt; s</code></td>
+</tr>
+<tr class="odd">
+<td><code>e5.c</code></td>
+<td>a character’s ASCII code and its successor</td>
+<td><code>code=&lt;N&gt; next=&lt;C&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>How checking works — read this once, it’s the rules of the game:</strong></p>
+<ul>
+<li><code>./check.sh e1</code> compiles <em>your source</em> and runs it on test inputs; <code>./check.sh</code> runs everything.</li>
+<li><strong>Public inputs</strong> (in each spec) you can test by hand. The checker <em>also</em> draws <strong>fresh random inputs from the GIVEN</strong> — its ranges are stated, nothing outside them is ever tested. So a program that merely memorizes the examples fails the next draw; only a program that <em>computes</em> survives. That is the point.</li>
+<li>Your prompts are welcome — the checker only requires that the final line <strong>ends with</strong> the contract text.</li>
+<li>Verdicts are honest: <code>COMPILE-FAIL</code> shows the compiler’s words; <code>WRONG</code> shows the input, your final line, and the expected line — play spot-the-difference.</li>
+</ul>
+</section>
+<section id="act-3-check-fix-bundle-15-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-3-check-fix-bundle-15-min">Act 3 · Check, fix, bundle (15 min)</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Fix, re-check, repeat. Then — green or time-up (an imperfect bundle beats no bundle):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Carry <code>../lab02_&lt;rolls&gt;_&lt;branch&gt;_w03.tar.gz</code> out with you (Moodle + email yourself). The machine forgets.</p>
+</section>
+<section id="stretch-fast-finishers" class="level2">
+<h2 class="anchored" data-anchor-id="stretch-fast-finishers">Stretch (fast finishers)</h2>
+<ul>
+<li>The triangle pattern from Prof.&nbsp;Aroof’s manual: read one character, print a 4-row triangle of it — <em>one <code>printf</code> per line</em> (no loops yet!).</li>
+<li>Make <code>e1</code> overflow: what three in-range inputs would break it if the GIVEN allowed 10-digit numbers? Write the answer in <code>notes/answers.txt</code>.</li>
+</ul>
+</section>
+<section id="reflect" class="level2">
+<h2 class="anchored" data-anchor-id="reflect">Reflect</h2>
+<p>✍️ Into <code>notes/answers.txt</code>: the checker passed your program on numbers you had never seen. In one sentence — <em>why</em> was that possible?</p>
 
 
 </section>

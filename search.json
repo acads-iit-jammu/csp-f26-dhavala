@@ -164,7 +164,7 @@
     "href": "labs.html#lab-schedule",
     "title": "Labs",
     "section": "",
-    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 11\nAug 12\nConditional statements\n2\n\n\n3\nAug 18\nAug 19\nfor loops\n5\n\n\n4\nAug 25\nSep 2\nwhile and do-while loops\n6\n\n\n5\nSep 1\nSep 9\nLists and strings: arrays, strings as character arrays\n3\n\n\n6\nSep 8\nSep 16\nUsing libraries (string.h, math.h, etc.)\n10\n\n\n7\nSep 15\nSep 30\nFunctions and recursion\n7\n\n\n8\nSep 29\nOct 7\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 6\nOct 14\nFile handling\n8\n\n\n10\nOct 13\nOct 21\nError handling\n9\n\n\n11\nOct 27\nOct 28\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 3\nNov 4\nProblem solving II\n11\n\n\n13\nNov 17\nNov 18\nProblem solving III\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 13 sessions = 26 hours. The remaining 2 hours of problem solving will be covered through a make-up lab session (date TBA) and problems embedded in earlier lab sheets.",
+    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 18\nAug 19\nfor loops\n5\n\n\n4\nAug 25\nSep 2\nwhile and do-while loops\n6\n\n\n5\nSep 1\nSep 9\nLists and strings: arrays, strings as character arrays\n3\n\n\n6\nSep 8\nSep 16\nUsing libraries (string.h, math.h, etc.)\n10\n\n\n7\nSep 15\nSep 30\nFunctions and recursion\n7\n\n\n8\nSep 29\nOct 7\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 6\nOct 14\nFile handling\n8\n\n\n10\nOct 13\nOct 21\nError handling\n9\n\n\n11\nOct 27\nOct 28\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 3\nNov 4\nProblem solving II\n11\n\n\n13\nNov 17\nNov 18\nProblem solving III\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 13 sessions = 26 hours. The remaining 2 hours of problem solving will be covered through a make-up lab session (date TBA) and problems embedded in earlier lab sheets.",
     "crumbs": [
       "Labs"
     ]
@@ -174,7 +174,7 @@
     "href": "labs.html#lab-packs-downloads",
     "title": "Labs",
     "section": "Lab Packs (downloads)",
-    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz",
+    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\n\n\nlab02.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz",
     "crumbs": [
       "Labs"
     ]
@@ -1061,34 +1061,100 @@
   {
     "objectID": "labsheets/lab02.html",
     "href": "labsheets/lab02.html",
-    "title": "Lab 02: Conditional Statements",
+    "title": "Lab 02: First C Programs",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Warm-up circuit (8 min, predict first)\nOne box, one step — say the prediction out loud before Enter:\nHow many processes is this shared machine juggling right now? Compose two programs to count them:",
     "crumbs": [
       "Lab Sheets",
-      "Lab 02: Conditional Statements"
+      "Lab 02: First C Programs"
     ]
   },
   {
-    "objectID": "labsheets/lab02.html#exercises",
-    "href": "labsheets/lab02.html#exercises",
-    "title": "Lab 02: Conditional Statements",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "objectID": "labsheets/lab02.html#warm-up-circuit-8-min-predict-first",
+    "href": "labsheets/lab02.html#warm-up-circuit-8-min-predict-first",
+    "title": "Lab 02: First C Programs",
+    "section": "",
+    "text": "pwd\nls /home/student/csp_labs_f26\nps\n\nps | wc -l",
     "crumbs": [
       "Lab Sheets",
-      "Lab 02: Conditional Statements"
+      "Lab 02: First C Programs"
     ]
   },
   {
-    "objectID": "labsheets/lab02.html#submission",
-    "href": "labsheets/lab02.html#submission",
-    "title": "Lab 02: Conditional Statements",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "objectID": "labsheets/lab02.html#editing-with-nano-the-whole-card",
+    "href": "labsheets/lab02.html#editing-with-nano-the-whole-card",
+    "title": "Lab 02: First C Programs",
+    "section": "Editing with nano — the whole card",
+    "text": "Editing with nano — the whole card\nYou met nano in Lab 01. Everything you need today:\n\n\n\nTask\nKeys\n\n\n\n\nSave\nCtrl+O, then Enter\n\n\nExit\nCtrl+X\n\n\nCut / paste a line\nCtrl+K / Ctrl+U\n\n\nSearch\nCtrl+W\n\n\nSearch & replace\nCtrl+\\\n\n\nWhere am I / help\nCtrl+C / Ctrl+G\n\n\n\n(Prof. Aroof’s manual teaches the same lab with vim — a more powerful editor worth meeting someday. Today: nano.)",
     "crumbs": [
       "Lab Sheets",
-      "Lab 02: Conditional Statements"
+      "Lab 02: First C Programs"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab02.html#act-0-install-10-min",
+    "href": "labsheets/lab02.html#act-0-install-10-min",
+    "title": "Lab 02: First C Programs",
+    "section": "Act 0 · Install (10 min)",
+    "text": "Act 0 · Install (10 min)\nPack pre-placed on machines, or:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\ntar xzf lab02.tar.gz\ncd lab02\n./install.sh\nThen cd into the workspace it prints (never type a *), and start the recorder:\nscript session.txt",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 02: First C Programs"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab02.html#act-1-playground-watch-run-tinker-25-min-with-us",
+    "href": "labsheets/lab02.html#act-1-playground-watch-run-tinker-25-min-with-us",
+    "title": "Lab 02: First C Programs",
+    "section": "Act 1 · Playground — watch, run, tinker (25 min, with us)",
+    "text": "Act 1 · Playground — watch, run, tinker (25 min, with us)\nThree programs are already in your workspace. For each: run it first, then follow the tinker table in its header comment — one change at a time, prediction before every run.\n\n\n\n\n\n\n\n\nFile\nWhat it teaches\nThe tinker that teaches it\n\n\n\n\np1_first_words.c\nprintf, \\n, \\t, escape characters\nswap \\n for \\t; delete the last newline\n\n\np2_scanf_basics.c\nscanf and the &\nremove the & and watch the wreckage\n\n\np3_char_and_division.c\nthe space before %c; integer division\ndelete the space; make 7/2 into 7.0/2\n\n\n\nThese are not graded. They are where the graded problems’ mistakes go to be met safely.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 02: First C Programs"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab02.html#act-2-the-graded-five-50-min-solo",
+    "href": "labsheets/lab02.html#act-2-the-graded-five-50-min-solo",
+    "title": "Lab 02: First C Programs",
+    "section": "Act 2 · The graded five (50 min, solo)",
+    "text": "Act 2 · The graded five (50 min, solo)\nFive files, e1.c … e5.c, already in your workspace. The spec is the comment at the top of each file — GIVEN, ENSURES, one public example. In brief:\n\n\n\n\n\n\n\n\nProblem\nTask\nFinal line ends with exactly\n\n\n\n\ne1.c\nsum & average of three integers (one scanf)\nsum=&lt;S&gt; avg=&lt;A&gt; (avg %.2f)\n\n\ne2.c\ncircle area & circumference; π must be a named constant 3.14159; radius in a float\narea=&lt;A&gt; circ=&lt;C&gt; (%.3f)\n\n\ne3.c\nquotient, remainder, decimal quotient\nq=&lt;Q&gt; r=&lt;R&gt; qf=&lt;F&gt; (qf %.2f)\n\n\ne4.c\nseconds → hours minutes seconds (/ and % only)\n&lt;H&gt; h &lt;M&gt; m &lt;S&gt; s\n\n\ne5.c\na character’s ASCII code and its successor\ncode=&lt;N&gt; next=&lt;C&gt;\n\n\n\nHow checking works — read this once, it’s the rules of the game:\n\n./check.sh e1 compiles your source and runs it on test inputs; ./check.sh runs everything.\nPublic inputs (in each spec) you can test by hand. The checker also draws fresh random inputs from the GIVEN — its ranges are stated, nothing outside them is ever tested. So a program that merely memorizes the examples fails the next draw; only a program that computes survives. That is the point.\nYour prompts are welcome — the checker only requires that the final line ends with the contract text.\nVerdicts are honest: COMPILE-FAIL shows the compiler’s words; WRONG shows the input, your final line, and the expected line — play spot-the-difference.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 02: First C Programs"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab02.html#act-3-check-fix-bundle-15-min",
+    "href": "labsheets/lab02.html#act-3-check-fix-bundle-15-min",
+    "title": "Lab 02: First C Programs",
+    "section": "Act 3 · Check, fix, bundle (15 min)",
+    "text": "Act 3 · Check, fix, bundle (15 min)\n./check.sh\nFix, re-check, repeat. Then — green or time-up (an imperfect bundle beats no bundle):\n./check.sh --bundle\nCarry ../lab02_&lt;rolls&gt;_&lt;branch&gt;_w03.tar.gz out with you (Moodle + email yourself). The machine forgets.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 02: First C Programs"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab02.html#stretch-fast-finishers",
+    "href": "labsheets/lab02.html#stretch-fast-finishers",
+    "title": "Lab 02: First C Programs",
+    "section": "Stretch (fast finishers)",
+    "text": "Stretch (fast finishers)\n\nThe triangle pattern from Prof. Aroof’s manual: read one character, print a 4-row triangle of it — one printf per line (no loops yet!).\nMake e1 overflow: what three in-range inputs would break it if the GIVEN allowed 10-digit numbers? Write the answer in notes/answers.txt.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 02: First C Programs"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab02.html#reflect",
+    "href": "labsheets/lab02.html#reflect",
+    "title": "Lab 02: First C Programs",
+    "section": "Reflect",
+    "text": "Reflect\n✍️ Into notes/answers.txt: the checker passed your program on numbers you had never seen. In one sentence — why was that possible?",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 02: First C Programs"
     ]
   },
   {
