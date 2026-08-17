@@ -1096,7 +1096,7 @@
     "href": "labsheets/lab02.html#act-0-install-10-min",
     "title": "Lab 02: First C Programs",
     "section": "Act 0 · Install (10 min)",
-    "text": "Act 0 · Install (10 min)\nPack pre-placed on machines, or:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\ntar xzf lab02.tar.gz\ncd lab02\n./install.sh\nThen cd into the workspace it prints (never type a *), and start the recorder:\nscript session.txt",
+    "text": "Act 0 · Install (10 min)\nPack pre-placed on machines, or:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\ntar xzf lab02.tar.gz\ncd lab02\n./install.sh\nThen cd into the workspace it prints (never type a *), and start the recorder:\nscript session.txt\nThe recorder protects you: the transcript travels in your bundle and is the proof of your own work — the record of your edits, compiles, and fixes. If a question about copying ever arises, it is your best witness.",
     "crumbs": [
       "Lab Sheets",
       "Lab 02: First C Programs"

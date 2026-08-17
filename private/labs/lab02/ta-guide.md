@@ -30,6 +30,15 @@ Spot-check ritual: while circulating, ask any student to run `pwd` aloud. Twice 
 - e2 has one structural check (a named PI) — it is stated in the stub; not a trick.
 - Contract is a SUFFIX of the final line: prompts may share the line. If a student's prompt *contains* digits+equals that collide... it won't. Don't overthink; the grader shows both strings on WRONG.
 
+## The session transcript (session.txt)
+
+It is required in every bundle but **no automated check reads its content** — its job
+is the audit trail. Grading judges outcomes; the transcript records *process*. When a
+copy or freeriding question arises, open it: forty minutes of edit-compile-fail-fix
+reads very differently from one paste with zero compile attempts. Inspect at your
+discretion; it is also a natural anchor for Band B ("walk me through this part of
+your session").
+
 ## Common failure modes
 
 | Symptom | Cause | Nudge |
