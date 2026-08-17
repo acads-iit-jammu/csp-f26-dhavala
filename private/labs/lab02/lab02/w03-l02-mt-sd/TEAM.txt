@@ -1,0 +1,8 @@
+workspace: w03-l02-mt-sd
+rolls: 01
+date: 2026-08-17
+host: asankhya.local
+user: somadhavala
+lab: 02
+week: 3
+branch: mt

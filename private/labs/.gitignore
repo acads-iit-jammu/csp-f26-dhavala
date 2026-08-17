@@ -1,0 +1,2 @@
+# generated bundles — build.sh recreates them; the student copy lives in the PUBLIC repo (labs/)
+lab*/lab*.tar.gz
