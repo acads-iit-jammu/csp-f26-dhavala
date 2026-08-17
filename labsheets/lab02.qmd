@@ -70,6 +70,8 @@ Then `cd` into the workspace **it prints** (never type a `*`), and start the rec
 script session.txt
 ```
 
+The recorder protects *you*: the transcript travels in your bundle and is the proof of your own work — the record of your edits, compiles, and fixes. If a question about copying ever arises, it is your best witness.
+
 ## Act 1 · Playground — watch, run, tinker (25 min, with us)
 
 Three programs are already in your workspace. For each: **run it first**, then follow the *tinker table* in its header comment — one change at a time, prediction before every run.
