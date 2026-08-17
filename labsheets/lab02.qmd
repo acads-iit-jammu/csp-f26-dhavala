@@ -48,7 +48,7 @@ You met `nano` in Lab 01. Everything you need today:
 | Search & replace | `Ctrl+\` |
 | Where am I / help | `Ctrl+C` / `Ctrl+G` |
 
-*(Prof. Aroof's manual teaches the same lab with `vim` — a more powerful editor worth meeting someday. Today: nano.)*
+*(There are more powerful terminal editors — `vim` above all — worth meeting later in the semester. Today: nano.)*
 
 ## Act 0 · Install (10 min)
 
@@ -117,7 +117,16 @@ Carry `../lab02_<rolls>_<branch>_w03.tar.gz` out with you (Moodle + email yourse
 
 ## Stretch (fast finishers)
 
-- The triangle pattern from Prof. Aroof's manual: read one character, print a 4-row triangle of it — *one `printf` per line* (no loops yet!).
+- **The triangle.** Read a single character from the user, then print this 4-row pattern built from it — shown here for input `*`. No loops yet, so: *one `printf` per line*, using spaces (or `\t`) for the alignment. Getting the leading spaces right is the whole puzzle.
+
+  ```
+  Enter a character: *
+
+     *
+    * *
+   * * *
+  * * * *
+  ```
 - Make `e1` overflow: what three in-range inputs would break it if the GIVEN allowed 10-digit numbers? Write the answer in `notes/answers.txt`.
 
 ## Reflect
