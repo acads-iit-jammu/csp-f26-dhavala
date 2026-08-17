@@ -70,7 +70,7 @@ Then `cd` into the workspace **it prints** (never type a `*`), and start the rec
 script session.txt
 ```
 
-The recorder protects *you*: the transcript travels in your bundle and is the proof of your own work — the record of your edits, compiles, and fixes. If a question about copying ever arises, it is your best witness.
+The recorder protects *you*: the transcript travels in your bundle and is the proof of your own work — the record of your edits, compiles, and fixes.
 
 ## Act 1 · Playground — watch, run, tinker (25 min, with us)
 
