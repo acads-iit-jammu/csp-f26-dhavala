@@ -1,22 +1,123 @@
-# Lab 02: Conditional Statements {.unnumbered}
+# Lab 02: First C Programs {.unnumbered}
 
-| | Electrical | Mechanical & Materials |
+| | Electrical | Mechanical | Metallurgy & Materials |
+|---|---|---|---|
+| **Date** | Tue Aug 18 | Wed Aug 19 | Wed Aug 19 |
+| **Time & Room** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4021** |
+
+**Evaluation:** **graded** — this lab carries its equal share of the 20% lab component. Five problems, checked by a program (details below), plus observed work and a short viva. Teams of 1–2 as before; pairs swap driver/navigator at half-time, and *both* members must be able to explain every line.
+
+::: {.callout-important}
+**Work ONLY inside your workspace.** The installer prints its exact path — `cd` there and stay there. Files created anywhere else are invisible to the checker, will not be bundled, and get swept by next week's cleanup. Lost? Run the compass: `pwd` → `ls` → `cd`.
+:::
+
+## Warm-up circuit (8 min, predict first)
+
+One box, one step — say the prediction out loud before Enter:
+
+```bash
+pwd
+```
+
+```bash
+ls /home/student/csp_labs_f26
+```
+
+```bash
+ps
+```
+
+How many processes is this *shared* machine juggling right now? Compose two programs to count them:
+
+```bash
+ps | wc -l
+```
+
+## Editing with nano — the whole card
+
+You met `nano` in Lab 01. Everything you need today:
+
+| Task | Keys |
+|---|---|
+| Save | `Ctrl+O`, then Enter |
+| Exit | `Ctrl+X` |
+| Cut / paste a line | `Ctrl+K` / `Ctrl+U` |
+| Search | `Ctrl+W` |
+| Search & replace | `Ctrl+\` |
+| Where am I / help | `Ctrl+C` / `Ctrl+G` |
+
+*(Prof. Aroof's manual teaches the same lab with `vim` — a more powerful editor worth meeting someday. Today: nano.)*
+
+## Act 0 · Install (10 min)
+
+Pack pre-placed on machines, or:
+
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz
+```
+
+```bash
+tar xzf lab02.tar.gz
+cd lab02
+./install.sh
+```
+
+Then `cd` into the workspace **it prints** (never type a `*`), and start the recorder:
+
+```bash
+script session.txt
+```
+
+## Act 1 · Playground — watch, run, tinker (25 min, with us)
+
+Three programs are already in your workspace. For each: **run it first**, then follow the *tinker table* in its header comment — one change at a time, prediction before every run.
+
+| File | What it teaches | The tinker that teaches it |
 |---|---|---|
-| **Date** | Tue Aug 11, 2026 | Wed Aug 12, 2026 |
-| **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
+| `p1_first_words.c` | `printf`, `\n`, `\t`, escape characters | swap `\n` for `\t`; delete the last newline |
+| `p2_scanf_basics.c` | `scanf` and the `&` | remove the `&` and watch the wreckage |
+| `p3_char_and_division.c` | the space before `%c`; integer division | delete the space; make `7/2` into `7.0/2` |
 
-**Syllabus practical module:** 2 — Writing programs related to conditional statements
+These are not graded. They are where the graded problems' mistakes go to be met *safely*.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+## Act 2 · The graded five (50 min, solo)
 
-## Pre-Lab
+Five files, `e1.c` … `e5.c`, already in your workspace. **The spec is the comment at the top of each file** — GIVEN, ENSURES, one public example. In brief:
 
-*To be posted — what to read/install before the session.*
+| Problem | Task | Final line ends with exactly |
+|---|---|---|
+| `e1.c` | sum & average of three integers (one `scanf`) | `sum=<S> avg=<A>` (avg `%.2f`) |
+| `e2.c` | circle area & circumference; **π must be a named constant `3.14159`**; radius in a `float` | `area=<A> circ=<C>` (`%.3f`) |
+| `e3.c` | quotient, remainder, decimal quotient | `q=<Q> r=<R> qf=<F>` (qf `%.2f`) |
+| `e4.c` | seconds → hours minutes seconds (`/` and `%` only) | `<H> h <M> m <S> s` |
+| `e5.c` | a character's ASCII code and its successor | `code=<N> next=<C>` |
 
-## Exercises
+**How checking works — read this once, it's the rules of the game:**
 
-*To be posted before the session.*
+- `./check.sh e1` compiles *your source* and runs it on test inputs; `./check.sh` runs everything.
+- **Public inputs** (in each spec) you can test by hand. The checker *also* draws **fresh random inputs from the GIVEN** — its ranges are stated, nothing outside them is ever tested. So a program that merely memorizes the examples fails the next draw; only a program that *computes* survives. That is the point.
+- Your prompts are welcome — the checker only requires that the final line **ends with** the contract text.
+- Verdicts are honest: `COMPILE-FAIL` shows the compiler's words; `WRONG` shows the input, your final line, and the expected line — play spot-the-difference.
 
-## Submission
+## Act 3 · Check, fix, bundle (15 min)
 
-Submission instructions will be provided in the lab.
+```bash
+./check.sh
+```
+
+Fix, re-check, repeat. Then — green or time-up (an imperfect bundle beats no bundle):
+
+```bash
+./check.sh --bundle
+```
+
+Carry `../lab02_<rolls>_<branch>_w03.tar.gz` out with you (Moodle + email yourself). The machine forgets.
+
+## Stretch (fast finishers)
+
+- The triangle pattern from Prof. Aroof's manual: read one character, print a 4-row triangle of it — *one `printf` per line* (no loops yet!).
+- Make `e1` overflow: what three in-range inputs would break it if the GIVEN allowed 10-digit numbers? Write the answer in `notes/answers.txt`.
+
+## Reflect
+
+✍️ Into `notes/answers.txt`: the checker passed your program on numbers you had never seen. In one sentence — *why* was that possible?
