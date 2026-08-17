@@ -1085,7 +1085,7 @@
     "href": "labsheets/lab02.html#editing-with-nano-the-whole-card",
     "title": "Lab 02: First C Programs",
     "section": "Editing with nano — the whole card",
-    "text": "Editing with nano — the whole card\nYou met nano in Lab 01. Everything you need today:\n\n\n\nTask\nKeys\n\n\n\n\nSave\nCtrl+O, then Enter\n\n\nExit\nCtrl+X\n\n\nCut / paste a line\nCtrl+K / Ctrl+U\n\n\nSearch\nCtrl+W\n\n\nSearch & replace\nCtrl+\\\n\n\nWhere am I / help\nCtrl+C / Ctrl+G\n\n\n\n(Prof. Aroof’s manual teaches the same lab with vim — a more powerful editor worth meeting someday. Today: nano.)",
+    "text": "Editing with nano — the whole card\nYou met nano in Lab 01. Everything you need today:\n\n\n\nTask\nKeys\n\n\n\n\nSave\nCtrl+O, then Enter\n\n\nExit\nCtrl+X\n\n\nCut / paste a line\nCtrl+K / Ctrl+U\n\n\nSearch\nCtrl+W\n\n\nSearch & replace\nCtrl+\\\n\n\nWhere am I / help\nCtrl+C / Ctrl+G\n\n\n\n(There are more powerful terminal editors — vim above all — worth meeting later in the semester. Today: nano.)",
     "crumbs": [
       "Lab Sheets",
       "Lab 02: First C Programs"
@@ -1140,7 +1140,7 @@
     "href": "labsheets/lab02.html#stretch-fast-finishers",
     "title": "Lab 02: First C Programs",
     "section": "Stretch (fast finishers)",
-    "text": "Stretch (fast finishers)\n\nThe triangle pattern from Prof. Aroof’s manual: read one character, print a 4-row triangle of it — one printf per line (no loops yet!).\nMake e1 overflow: what three in-range inputs would break it if the GIVEN allowed 10-digit numbers? Write the answer in notes/answers.txt.",
+    "text": "Stretch (fast finishers)\n\nThe triangle. Read a single character from the user, then print this 4-row pattern built from it — shown here for input *. No loops yet, so: one printf per line, using spaces (or \\t) for the alignment. Getting the leading spaces right is the whole puzzle.\nEnter a character: *\n\n   *\n  * *\n * * *\n* * * *\nMake e1 overflow: what three in-range inputs would break it if the GIVEN allowed 10-digit numbers? Write the answer in notes/answers.txt.",
     "crumbs": [
       "Lab Sheets",
       "Lab 02: First C Programs"

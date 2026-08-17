@@ -1,30 +1,30 @@
-# Lab 02 — Scoring Sheet  (first graded lab)
+# Lab 02 — Scoring Sheet (standard two-band pattern)
 
-## Band A · Auto (60 pts) — from check-ta.sh over bundled SOURCE
-
-| Item | pts |
-|---|---|
-| e1 vectors (6 × 1.5) | 9 |
-| e2 vectors (6 × 1.5) + PI structural | 9+1 |
-| e3 vectors (6 × 1.5) | 9 |
-| e4 vectors (6 × 1.5) | 9 |
-| e5 vectors (6 × 1.5) | 9 |
-| workspace items (TEAM, session) | 5 |
-| all five compile | 9 |
-
-## Band B · Observed (20 pts)
+## Band A · Automated — 80 pts (from check-ta.sh over bundled SOURCE)
 
 | Item | pts |
 |---|---|
-| Playground tinkers actually performed (see terminal / ask) | 8 |
-| Predictions before runs; compass used when lost | 6 |
-| Worked inside the workspace all session | 6 |
+| e1 vectors (6 × 2.5) | 15 |
+| e2 vectors (6 × 2.5) incl. PI structural | 15 |
+| e3 vectors (6 × 2.5) | 15 |
+| e4 vectors (6 × 2.5) | 15 |
+| e5 vectors (6 × 2.5) | 15 |
+| workspace items (TEAM.txt, session.txt) | 5 |
 
-## Band C · Viva (20 pts) — 2 questions per member
+Re-derived at grading time by recompiling and re-running the grader on the
+bundled source — results files in the bundle are ignored.
 
-| Item | pts |
-|---|---|
-| Explains own code line-by-line on request | 10 |
-| Explains a concept (integer division, %c space, why random vectors pass) | 10 |
+## Band B · Discretionary — 20 pts
 
-Rule: cannot explain own code → resubmit solo. CSV per team into `results/`.
+One judgment per team: engagement, independence, working in the workspace,
+and — the usual instrument — **ask a member to explain their own code**.
+
+- **Full (20)** — the default. No note needed.
+- **Partial (10)** — one-line note required (e.g., "could not explain e3").
+- **Minimal (0)** — one-line note required.
+
+Band B may also reward stretch work (the triangle pattern, notes/answers.txt
+insight) — say so in the note. A member who cannot explain their own code
+resubmits solo regardless of band scores.
+
+CSV per team into `results/`: band A auto-filled, band B one number + note.
