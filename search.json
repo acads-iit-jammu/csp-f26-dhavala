@@ -164,7 +164,7 @@
     "href": "labs.html#lab-schedule",
     "title": "Labs",
     "section": "",
-    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 18\nAug 19\nfor loops\n5\n\n\n4\nAug 25\nSep 2\nwhile and do-while loops\n6\n\n\n5\nSep 1\nSep 9\nLists and strings: arrays, strings as character arrays\n3\n\n\n6\nSep 8\nSep 16\nUsing libraries (string.h, math.h, etc.)\n10\n\n\n7\nSep 15\nSep 30\nFunctions and recursion\n7\n\n\n8\nSep 29\nOct 7\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 6\nOct 14\nFile handling\n8\n\n\n10\nOct 13\nOct 21\nError handling\n9\n\n\n11\nOct 27\nOct 28\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 3\nNov 4\nProblem solving II\n11\n\n\n13\nNov 17\nNov 18\nProblem solving III\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 13 sessions = 26 hours. The remaining 2 hours of problem solving will be covered through a make-up lab session (date TBA) and problems embedded in earlier lab sheets.",
+    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 25\nSep 2\nSolid ground — consolidation: types, operators, precedence, integer vs. real division\n1\n\n\n4\nSep 1\nSep 9\nLoops: for, while and do-while, and converting between them\n5, 6\n\n\n5\nSep 8\nSep 16\nLists and strings: arrays, strings as character arrays\n3\n\n\n6\nSep 15\nSep 30\nUsing libraries (string.h, math.h, etc.)\n10\n\n\n7\nSep 29\nOct 7\nFunctions and recursion\n7\n\n\n8\nOct 6\nOct 14\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 13\nOct 21\nFile handling\n8\n\n\n10\nOct 27\nOct 28\nError handling\n9\n\n\n11\nNov 3\nNov 4\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 17\nNov 18\nProblem solving II\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 12 sessions = 24 hours. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (for, while and do-while are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.",
     "crumbs": [
       "Labs"
     ]
@@ -174,7 +174,7 @@
     "href": "labs.html#lab-packs-downloads",
     "title": "Labs",
     "section": "Lab Packs (downloads)",
-    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\n\n\nlab02.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz",
+    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\n\n\nlab02.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\n\n\nlab03.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz",
     "crumbs": [
       "Labs"
     ]
@@ -1160,67 +1160,133 @@
   {
     "objectID": "labsheets/lab03.html",
     "href": "labsheets/lab03.html",
-    "title": "Lab 03: for Loops",
+    "title": "Lab 03: Solid Ground",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "The two things that went wrong last time\nWe fixed both in the pack, so read this once:\n1. People got lost. So this week the installer does not tell you where to go — it puts you there, and changes your prompt to prove it:\nIf you can see [lab03 OK ...] at the left of your cursor, you are in the right place. If you cannot, you are not. There is now exactly one command to remember, and it works from anywhere at all:\nIt never changes anything. It tells you where you are, where your workspace is, and prints the exact line to copy to get back.\n2. People lost marks on formatting, not on thinking. So this week the final printf is already written for you in every file. You cannot get the output format wrong, because you are not writing it. If the checker says WRONG, it means your computation is wrong — which is a much more useful thing to be told.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 03: for Loops"
+      "Lab 03: Solid Ground"
     ]
   },
   {
-    "objectID": "labsheets/lab03.html#exercises",
-    "href": "labsheets/lab03.html#exercises",
-    "title": "Lab 03: for Loops",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "objectID": "labsheets/lab03.html#the-two-things-that-went-wrong-last-time",
+    "href": "labsheets/lab03.html#the-two-things-that-went-wrong-last-time",
+    "title": "Lab 03: Solid Ground",
+    "section": "",
+    "text": "[lab03 OK w04-l03-ee-sd]$\n\n./where.sh",
     "crumbs": [
       "Lab Sheets",
-      "Lab 03: for Loops"
+      "Lab 03: Solid Ground"
     ]
   },
   {
-    "objectID": "labsheets/lab03.html#submission",
-    "href": "labsheets/lab03.html#submission",
-    "title": "Lab 03: for Loops",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "objectID": "labsheets/lab03.html#act-0-land-10-min",
+    "href": "labsheets/lab03.html#act-0-land-10-min",
+    "title": "Lab 03: Solid Ground",
+    "section": "Act 0 · Land (10 min)",
+    "text": "Act 0 · Land (10 min)\nPack pre-placed on machines, or:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz\ntar xzf lab03.tar.gz\ncd lab03\n./install.sh\nIt will drop you inside your workspace with the new prompt. Then start the recorder:\nscript session.txt\nThe transcript travels in your bundle and is the proof of your own work.\n\n\n\n\n\n\nDo not go any further until your prompt shows [lab03 OK ...]. If it does not, run ./where.sh and paste the line it gives you.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 03: for Loops"
+      "Lab 03: Solid Ground"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab03.html#act-1-drills-predict-then-run-35-min",
+    "href": "labsheets/lab03.html#act-1-drills-predict-then-run-35-min",
+    "title": "Lab 03: Solid Ground",
+    "section": "Act 1 · Drills — predict, then run (35 min)",
+    "text": "Act 1 · Drills — predict, then run (35 min)\nSixteen tiny programs. For each one you will see the code, write down what you think it prints, and only then run it.\n./drill.sh --all\nPredicting is the exercise. Running is only the marking. A wrong prediction is worth exactly as many marks as a right one — but only if you actually write it down first, so be honest with yourself. The one thing that earns nothing is running the program before you have committed to an answer.\nWhat they cover:\n\n\n\n\n\n\n\nDrills\nTerritory\n\n\n\n\nd01–d04\ninteger vs. real division, % with negatives, where a cast goes\n\n\nd05–d08\nprecedence, associativity, *=, chained assignment\n\n\nd09–d12\ncharacters as numbers, truncation, deriving the case gap\n\n\nd13–d14\nwhat printf rounds, pads, and refuses to add\n\n\ns1–s2\n(stretch) a comparison is a value; why % refuses floats\n\n\n\n./drill.sh on its own shows your progress. ./drill.sh 7 re-runs just number 7.\n\n\n\n\n\n\nDrill 04 is the single most expensive misconception in this course. If you get it wrong, stop and stare at it until it is obvious — it comes back in f2, f5 and e2.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 03: Solid Ground"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab03.html#act-2-fill-in-the-blanks-35-min",
+    "href": "labsheets/lab03.html#act-2-fill-in-the-blanks-35-min",
+    "title": "Lab 03: Solid Ground",
+    "section": "Act 2 · Fill in the blanks (35 min)",
+    "text": "Act 2 · Fill in the blanks (35 min)\nFive complete programs. The declarations are written, the scanf is written, the final printf is written. Only the expressions are missing, marked /* TODO */.\n\n\n\nFile\nProgram\nBlanks\n\n\n\n\nf1_money.c\npaise → rupees and paise\n2\n\n\nf2_average.c\naverage of three integers, 2 decimals\n1\n\n\nf3_swap.c\nswap two variables\n3 — and the order matters\n\n\nf4_upper.c\na lowercase letter → uppercase + its code\n2\n\n\nf5_temp.c\nCelsius → Fahrenheit\n1\n\n\n\nCheck them one at a time as you go:\n./check.sh f1\nThe shipped files do not compile until you fill the blanks — that is expected, and the compiler will point straight at the /* TODO */ you have not done yet.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 03: Solid Ground"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab03.html#act-3-the-graded-three-30-min-solo",
+    "href": "labsheets/lab03.html#act-3-the-graded-three-30-min-solo",
+    "title": "Lab 03: Solid Ground",
+    "section": "Act 3 · The graded three (30 min, solo)",
+    "text": "Act 3 · The graded three (30 min, solo)\nSame shape: everything written except the computation.\n\n\n\n\n\n\n\n\nProblem\nTask\nFinal line ends with exactly\n\n\n\n\ne1.c\ntotal inches → feet and inches\nfeet=&lt;F&gt; inches=&lt;I&gt;\n\n\ne2.c\npercentage scored, 2 decimals\npct=&lt;P&gt;\n\n\ne3.c\nan uppercase letter → lowercase + its code\nlower=&lt;C&gt; code=&lt;N&gt;\n\n\n\nEach one is a relative of something you have already done today: e1 is f1 with a different divisor, e2 is the f2 trap in new clothes, and e3 is f4 held up to a mirror — same gap, opposite direction. Work out the direction rather than guessing it.\nHow checking works — as in Lab 02: ./check.sh e1 compiles your source and runs it on the public inputs from the spec and on fresh random inputs drawn from the GIVEN. A program that memorises the example fails the next draw. Only one that computes survives.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 03: Solid Ground"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab03.html#act-4-check-fix-bundle-10-min",
+    "href": "labsheets/lab03.html#act-4-check-fix-bundle-10-min",
+    "title": "Lab 03: Solid Ground",
+    "section": "Act 4 · Check, fix, bundle (10 min)",
+    "text": "Act 4 · Check, fix, bundle (10 min)\n./check.sh\nFix, re-check, repeat. Then — green or time-up (an imperfect bundle beats no bundle):\n./check.sh --bundle\nCarry ../lab03_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz out with you (Moodle + email yourself). The machine forgets.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 03: Solid Ground"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab03.html#stretch-fast-finishers",
+    "href": "labsheets/lab03.html#stretch-fast-finishers",
+    "title": "Lab 03: Solid Ground",
+    "section": "Stretch (fast finishers)",
+    "text": "Stretch (fast finishers)\n\nDo drills s1 and s2 if you skipped them.\nRound, don’t truncate. e1 throws away the leftover inches. Using only /, % and +, print the number of feet rounded to the nearest foot instead. No if, no library. (Hint: what happens if you add half a foot before dividing?)\nBreak f2. Find three inputs in the GIVEN where an average computed with /3 and one computed with /3.0 differ by as much as possible. Put them in notes/answers.txt.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 03: Solid Ground"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab03.html#reflect",
+    "href": "labsheets/lab03.html#reflect",
+    "title": "Lab 03: Solid Ground",
+    "section": "Reflect",
+    "text": "Reflect\n✍️ Into notes/answers.txt: look back at your notes/drills.log. Pick the one drill you got most wrong. In two sentences — what did you believe before you ran it, and what do you believe now?",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 03: Solid Ground"
     ]
   },
   {
     "objectID": "labsheets/lab04.html",
     "href": "labsheets/lab04.html",
-    "title": "Lab 04: while & do-while Loops",
+    "title": "Lab 04: Loops",
     "section": "",
     "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 04: while & do-while Loops"
+      "Lab 04: Loops"
     ]
   },
   {
     "objectID": "labsheets/lab04.html#exercises",
     "href": "labsheets/lab04.html#exercises",
-    "title": "Lab 04: while & do-while Loops",
+    "title": "Lab 04: Loops",
     "section": "Exercises",
     "text": "Exercises\nTo be posted before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 04: while & do-while Loops"
+      "Lab 04: Loops"
     ]
   },
   {
     "objectID": "labsheets/lab04.html#submission",
     "href": "labsheets/lab04.html#submission",
-    "title": "Lab 04: while & do-while Loops",
+    "title": "Lab 04: Loops",
     "section": "Submission",
     "text": "Submission\nSubmission instructions will be provided in the lab.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 04: while & do-while Loops"
+      "Lab 04: Loops"
     ]
   },
   {
@@ -1485,39 +1551,6 @@
     "crumbs": [
       "Lab Sheets",
       "Lab 12: Problem Solving II"
-    ]
-  },
-  {
-    "objectID": "labsheets/lab13.html",
-    "href": "labsheets/lab13.html",
-    "title": "Lab 13: Problem Solving III",
-    "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
-    "crumbs": [
-      "Lab Sheets",
-      "Lab 13: Problem Solving III"
-    ]
-  },
-  {
-    "objectID": "labsheets/lab13.html#exercises",
-    "href": "labsheets/lab13.html#exercises",
-    "title": "Lab 13: Problem Solving III",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
-    "crumbs": [
-      "Lab Sheets",
-      "Lab 13: Problem Solving III"
-    ]
-  },
-  {
-    "objectID": "labsheets/lab13.html#submission",
-    "href": "labsheets/lab13.html#submission",
-    "title": "Lab 13: Problem Solving III",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
-    "crumbs": [
-      "Lab Sheets",
-      "Lab 13: Problem Solving III"
     ]
   },
   {

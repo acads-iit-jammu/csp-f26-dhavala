@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 04: while &amp; do-while Loops – CS-1-01 (MO)</title>
+<title>Lab 04: Loops – CS-1-01 (MO)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab04.html">Lab 04: while &amp; do-while Loops</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab04.html">Lab 04: Loops</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,13 +281,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 03: for Loops</span></a>
+ <span class="menu-text">Lab 03: Solid Ground</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab04.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab 04: while &amp; do-while Loops</span></a>
+ <span class="menu-text">Lab 04: Loops</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -336,12 +336,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 12: Problem Solving II</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labsheets/lab13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 13: Problem Solving III</span></a>
   </div>
 </li>
       </ul>
@@ -411,9 +405,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab04.html">Lab 04: while &amp; do-while Loops</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab04.html">Lab 04: Loops</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 04: while &amp; do-while Loops</h1>
+<h1 class="title">Lab 04: Loops</h1>
 </div>
 
 
@@ -441,8 +435,8 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><strong>Date</strong></td>
-<td>Tue Aug 25, 2026</td>
-<td>Wed Sep 2, 2026</td>
+<td>Tue Sep 1, 2026</td>
+<td>Wed Sep 9, 2026</td>
 </tr>
 <tr class="even">
 <td><strong>Time</strong></td>
@@ -451,7 +445,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical module:</strong> 6 — Writing programs using <code>while</code> and <code>do-while</code> loops</p>
+<p><strong>Syllabus practical modules:</strong> 5 and 6 — <code>for</code> loops, and <code>while</code> / <code>do-while</code> loops. They are taught together: the three forms are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart.</p>
 <p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
 <section id="pre-lab" class="level2">
 <h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
@@ -896,8 +890,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../labsheets/lab03.html" class="pagination-link" aria-label="Lab 03: for Loops">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 03: for Loops</span>
+      <a href="../labsheets/lab03.html" class="pagination-link" aria-label="Lab 03: Solid Ground">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 03: Solid Ground</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
