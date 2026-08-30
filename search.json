@@ -84,7 +84,7 @@
     "href": "course.html#weekly-plan-lectures",
     "title": "Course",
     "section": "Weekly Plan (Lectures)",
-    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates (Mon, Tue)\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nProgramming types (declarative, imperative); structure of a C program; our first C program\nLec 4\n\n\n05\nAug 31, Sep 1\nCompilation pipeline: source, assembly and object files, linker, loader; compiler vs. interpreter\nLec 6\n\n\n06\nSep 7, Sep 8\nData & expressions: literals, variables, identifiers, data types; operators, precedence; printf/scanf\nLec 5\n\n\n07\nSep 14, Sep 15\nControl structures: boolean expressions, selection (if, if-else, switch)\nLec 7 · Lec 8\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: Iteration: while, do-while, for. Tue: Problem-solving session — loop workouts: mini calculator, primes, GCD, min\nLec 9 · Lec 12 · Lec 13 · Lec 14 · Lec 16\n\n\n10\nOct 5, Oct 6\nArrays: one-dimensional and character arrays; examples\nLec 15\n\n\n11\nOct 12, Oct 13\nStrings and string processing; multi-dimensional arrays; matrix operations. Class Test-2 window opens Oct 14\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27\nFunctions and modular programming; scope; recursion\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nPointers; dynamic memory allocation (malloc, calloc, realloc, free)\nLec 27 (pointers part) · Lec 28 · OCW L11\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes\n—\n\n\n16\nNov 16, Nov 17\nFunction pointers; structures & unions\nLec 29 · Lec 30 · OCW L6 · OCW L8\n\n\nMU-1\nTBA\nMake-up class: file handling and error handling (fopen/fclose, formatted file I/O, errno, perror); header files and modular builds\nOCW L4 · OCW L10 · OCW L3\n\n\nMU-2\nTBA\nMake-up class: applications; brief of object-oriented programming; course wrap-up\nWrap-up · Notes (TBP)\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They will be scheduled on designated compensatory days and announced in class and here. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
+    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates (Mon, Tue)\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nNumber systems completed on Lec 4 (post CT-1); data types — char/int/float/double as size + reading convention, sizeof\nLec 4 · Deck 07\n\n\n05\nAug 31, Sep 1\nMon: precedence drill, then the compilation pipeline — preprocessor, compiler, assembler, linker, each stopped and inspected (gcc -E/-S/-c, nm). Tue: loops — while, do-while, for as one idea in three costumes (straight into Lab 04)\nDeck 08 · Lec 6 · Lec 9 · Lec 12\n\n\n06\nSep 7, Sep 8\nData & expressions: literals, variables, identifiers, data types; operators, precedence; printf/scanf\nLec 5\n\n\n07\nSep 14, Sep 15\nControl structures: boolean expressions, selection (if, if-else, switch)\nLec 7 · Lec 8\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: Iteration: while, do-while, for. Tue: Problem-solving session — loop workouts: mini calculator, primes, GCD, min\nLec 9 · Lec 12 · Lec 13 · Lec 14 · Lec 16\n\n\n10\nOct 5, Oct 6\nArrays: one-dimensional and character arrays; examples\nLec 15\n\n\n11\nOct 12, Oct 13\nStrings and string processing; multi-dimensional arrays; matrix operations. Class Test-2 window opens Oct 14\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27\nFunctions and modular programming; scope; recursion\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nPointers; dynamic memory allocation (malloc, calloc, realloc, free)\nLec 27 (pointers part) · Lec 28 · OCW L11\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes\n—\n\n\n16\nNov 16, Nov 17\nFunction pointers; structures & unions\nLec 29 · Lec 30 · OCW L6 · OCW L8\n\n\nMU-1\nTBA\nMake-up class: file handling and error handling (fopen/fclose, formatted file I/O, errno, perror); header files and modular builds\nOCW L4 · OCW L10 · OCW L3\n\n\nMU-2\nTBA\nMake-up class: applications; brief of object-oriented programming; course wrap-up\nWrap-up · Notes (TBP)\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They will be scheduled on designated compensatory days and announced in class and here. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
     "crumbs": [
       "Course"
     ]
@@ -94,7 +94,7 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Basic Information",
+    "text": "Basic Information\nThis page reproduces the official course template for CS-1-01 (MO) / EFL001U1M — Computers and Programming (called Computer System and Programming in the timetable). The course is an Institute Core (Engineering Foundations) for all B.Tech. programmes.",
     "crumbs": [
       "Syllabus"
     ]
@@ -154,7 +154,7 @@
     "href": "labs.html",
     "title": "Labs",
     "section": "",
-    "text": "Lab Schedule\nThe schedule below is tentative and covers all 11 practical modules of the syllabus (the module column refers to the syllabus practical table). Lab handouts are self-contained: where a lab reaches a construct before its full lecture treatment, the handout introduces just enough of it to do the exercises. Because institute holidays fall on different weekdays, the Tuesday (EE) and Wednesday (Mech/Materials) batches drift by a week in places — go by the session number, not the date.\nNo lab on: Wed Aug 26 (Milad-un-Nabi), Tue Sep 22 & Wed Sep 23 (mid-semester exams), Tue Oct 20 (Dussehra), Tue Nov 10 & Wed Nov 11 (holidays).",
+    "text": "Lab Schedule\nThe Computer Lab (Slot FL, 1 credit, 0-0-2) runs for two hours each week:\nBring your laptop if you have one. You can also work in the browser with OnlineGDB — no installation needed. We will show you how to set up a local C toolchain (gcc/clang) in the first lab.\nEvaluation: regular lab work counts for 20% of the course grade (see Assessment). Lab 1 is a setup session and is not graded; every lab from Lab 2 onwards is evaluated with equal weight.\nThe schedule below is tentative and covers all 11 practical modules of the syllabus (the module column refers to the syllabus practical table). Lab handouts are self-contained: where a lab reaches a construct before its full lecture treatment, the handout introduces just enough of it to do the exercises. Because institute holidays fall on different weekdays, the Tuesday (EE) and Wednesday (Mech/Materials) batches drift by a week in places — go by the session number, not the date.\nNo lab on: Wed Aug 26 (Milad-un-Nabi), Tue Sep 22 & Wed Sep 23 (mid-semester exams), Tue Oct 20 (Dussehra), Tue Nov 10 & Wed Nov 11 (holidays).",
     "crumbs": [
       "Labs"
     ]
@@ -170,11 +170,21 @@
     ]
   },
   {
+    "objectID": "labs.html#lab-manual-reference",
+    "href": "labs.html#lab-manual-reference",
+    "title": "Labs",
+    "section": "Lab Manual (reference)",
+    "text": "Lab Manual (reference)\nThe department’s shared lab manual for this course covers the ground every section works from, and several lab sheets and lecture decks refer to it by section number:\n\n\n\n\n\n\n\nManual\nSections worth bookmarking\n\n\n\n\n📕 The C Programming Laboratory (PDF, 12 pp.)\n§1 the vim editor · §2.5 the C compilation model (preprocessor → compiler → assembler → linker) · §2.7–2.8 variables, types, #define vs const, escape sequences · §2.9–2.10 operators and the full precedence table · §3 printf and scanf\n\n\n\nPrepared by Aroof Aimen, Department of Computer Science & Engineering, IIT Jammu — Laboratory Manual Part II, August 2026. Shared across all sections of CS-1-01 (MO); reproduced here with thanks.",
+    "crumbs": [
+      "Labs"
+    ]
+  },
+  {
     "objectID": "labs.html#lab-packs-downloads",
     "href": "labs.html#lab-packs-downloads",
     "title": "Labs",
     "section": "Lab Packs (downloads)",
-    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\n\n\nlab02.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\n\n\nlab03.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz",
+    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\n\n\nlab02.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\n\n\nlab03.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz\n\n\nlab04.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab04.tar.gz",
     "crumbs": [
       "Labs"
     ]
@@ -194,7 +204,7 @@
     "href": "weeks/w01.html",
     "title": "W01: Introduction",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Aug 3 & Tue Aug 4, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 1 — Introduction: computer science, algorithms, computer hardware & software (2 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W01: Introduction"
@@ -238,7 +248,7 @@
     "href": "weeks/w02.html",
     "title": "W02: The Computer, Revisited · Number Systems",
     "section": "",
-    "text": "Pre-read",
+    "text": "Pre-read\nDates: Mon Aug 10 & Tue Aug 11, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 1 wrap-up (computer hardware & software) · 2 — Number systems, conversions, and arithmetic",
     "crumbs": [
       "Weekly Notes",
       "W02: The Computer, Revisited · Number Systems"
@@ -293,7 +303,7 @@
     "href": "weeks/w03.html",
     "title": "W03: Complements, Overflow · First C Program",
     "section": "",
-    "text": "Pre-read",
+    "text": "Pre-read\nDates: Mon Aug 17 & Tue Aug 18, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 2 wrap-up (number systems & arithmetic) · 3 begins (C program structure)",
     "crumbs": [
       "Weekly Notes",
       "W03: Complements, Overflow · First C Program"
@@ -346,89 +356,100 @@
   {
     "objectID": "weeks/w04.html",
     "href": "weeks/w04.html",
-    "title": "W04: C Program Structure",
+    "title": "W04: Number Systems (Lec 4) · Data Types",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "In Class\nDates: Mon Aug 24 & Tue Aug 25, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 2 close-out (number systems) · 3 — C program structure; data types",
     "crumbs": [
       "Weekly Notes",
-      "W04: C Program Structure"
+      "W04: Number Systems (Lec 4) · Data Types"
     ]
   },
   {
     "objectID": "weeks/w04.html#in-class",
     "href": "weeks/w04.html#in-class",
-    "title": "W04: C Program Structure",
-    "section": "In Class",
-    "text": "In Class\n\nLec 4 — Our first C program; basic data types, operators, keywords\nNotes (to be posted) — declarative vs. imperative programming",
+    "title": "W04: Number Systems (Lec 4) · Data Types",
+    "section": "",
+    "text": "Number systems, from Lec 4 — the representation thread closed out on Prof. Agrawal’s slides, after CT-1. Reference decks: Deck 03 — Number Systems and Deck 05 — Complements & Overflow.\nData types — the wardrobe of basic types (char, int, float, double) as size + reading convention, each with the edge of its world; sizeof. Deck: Deck 07 — Types, Assignments & Operators.",
     "crumbs": [
       "Weekly Notes",
-      "W04: C Program Structure"
+      "W04: Number Systems (Lec 4) · Data Types"
     ]
   },
   {
     "objectID": "weeks/w04.html#after-class",
     "href": "weeks/w04.html#after-class",
-    "title": "W04: C Program Structure",
+    "title": "W04: Number Systems (Lec 4) · Data Types",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\n\nRun sizeof on every basic type on your own machine and write the table down. Which of those numbers are guaranteed by C, and which are just what our compiler chose?\nFor each type, name a value it cannot hold. What happens if you try?",
     "crumbs": [
       "Weekly Notes",
-      "W04: C Program Structure"
+      "W04: Number Systems (Lec 4) · Data Types"
     ]
   },
   {
     "objectID": "weeks/w04.html#pagal-notes",
     "href": "weeks/w04.html#pagal-notes",
-    "title": "W04: C Program Structure",
+    "title": "W04: Number Systems (Lec 4) · Data Types",
     "section": "PAGAL Notes",
     "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W04: C Program Structure"
+      "W04: Number Systems (Lec 4) · Data Types"
     ]
   },
   {
     "objectID": "weeks/w05.html",
     "href": "weeks/w05.html",
-    "title": "W05: Compilation & the Toolchain",
+    "title": "W05: From Source to Executable",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Aug 31 & Tue Sep 1, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 3 — C program structure; compiler, interpreter (4 h)",
     "crumbs": [
       "Weekly Notes",
-      "W05: Compilation & the Toolchain"
+      "W05: From Source to Executable"
+    ]
+  },
+  {
+    "objectID": "weeks/w05.html#pre-read",
+    "href": "weeks/w05.html#pre-read",
+    "title": "W05: From Source to Executable",
+    "section": "",
+    "text": "Open the shared lab manual (CLab3) at §2.5 — The C Compilation Model, and look at the four-box diagram. You have been running all four boxes since Lab 01 without naming any of them.\nKeep §2.10 (order of precedence) to hand — Monday opens with a live drill against it (predict every line before it runs).\nOptional: skim Lec 6 — Execution of programs, compilers (Prof. Shweta Agrawal, IIT Madras).",
+    "crumbs": [
+      "Weekly Notes",
+      "W05: From Source to Executable"
     ]
   },
   {
     "objectID": "weeks/w05.html#in-class",
     "href": "weeks/w05.html#in-class",
-    "title": "W05: Compilation & the Toolchain",
+    "title": "W05: From Source to Executable",
     "section": "In Class",
-    "text": "In Class\n\nLec 6 — Execution of programs, compilers\nNotes (to be posted) — source/assembly/object files, linker, loader; compiler vs. interpreter",
+    "text": "In Class\nMonday — what happens between gcc hello.c and ./hello:\n\n📽️ Deck 08 — From Source to Executable — the week’s slides:\n\nLab 03 closed out — the checked three worked together: e1 (inches → feet, one division read twice), e2 (the 100.0 that is the whole problem), e3 ('a' - 'A' — derive the gap, never write 32). Everyone meets these again in Lab 04.\nThe bridge: who decided that marks * 100 / total was integer division? Not the running program — the compiler, before a single instruction executed. Precedence and type rules are settled at compile time, and gcc -S shows it.\nThe four programs, not one: gcc is a driver. Preprocessor (-E) → compiler (-S) → assembler (-c) → linker, each stopped and inspected in turn.\nThe centrepiece: nm hello.o prints T main and U printf. That single U — undefined — is the reason the linker exists.\nAn audit on your own manual: §2.9 claims x++ is faster than x = x + 1. It is not, and you can prove it in eight seconds with diff.\nTwo kinds of error: the compiler catches syntax and never intent. Four tools stand between your source and your executable, and none of them has read the problem statement.\n\nLec 6 — companion slides (Prof. Shweta Agrawal, IIT Madras)\n\nTuesday — loops:\n\nwhile, do-while and for — the three forms as one idea in three costumes, and how to convert between them. Loop conditions are where Monday’s drills pay off: a comparison is a value, and 1 &lt; x &lt; 3 is always true.\nStraight into Lab 04 the same afternoon (EE, 2:00 pm), which is built on exactly this.\nLec 9 — First loop construct: while · Lec 12 — for loop (Prof. Shweta Agrawal, IIT Madras)",
     "crumbs": [
       "Weekly Notes",
-      "W05: Compilation & the Toolchain"
+      "W05: From Source to Executable"
     ]
   },
   {
     "objectID": "weeks/w05.html#after-class",
     "href": "weeks/w05.html#after-class",
-    "title": "W05: Compilation & the Toolchain",
+    "title": "W05: From Source to Executable",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\n\nRun the five commands on your own hello.c. Keep hello.i, hello.s and hello.o — how many lines each, how many bytes, and which of them will run?\ngcc -E hello.c | tail        # preprocessor: stdio.h really was pasted in\ngcc -S hello.c               # compiler:     read hello.s — this is the assembly\ngcc -c hello.c               # assembler:    hello.o — machine code that will not run\nnm hello.o                   # the evidence: T main, U printf\ngcc hello.o -o hello         # linker:       the U is resolved; now ./hello runs\nRun the audit yourself. Compile x++ and x = x + 1 to assembly and diff them. Bring the output — or a counter-example, if you find one.\nPredict, then check: add #define SIZE 10 to a program, use SIZE twice, and find both substitutions in the gcc -E output. Where did the word SIZE go?\nBreak it on purpose: call a function you never defined — foo(); — then compile with gcc -c (it succeeds!) and without it (it fails). Which stage complained, and why only that one?",
     "crumbs": [
       "Weekly Notes",
-      "W05: Compilation & the Toolchain"
+      "W05: From Source to Executable"
     ]
   },
   {
     "objectID": "weeks/w05.html#pagal-notes",
     "href": "weeks/w05.html#pagal-notes",
-    "title": "W05: Compilation & the Toolchain",
+    "title": "W05: From Source to Executable",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning: the week’s informal column.\nThe oldest version of “code you didn’t write”\nThis week you ran nm hello.o and found a single letter waiting for you: U printf. Undefined. Your program called a function you never wrote, never read, and — until Monday — never thought about. It compiled anyway. It ran anyway. It printed anyway.\nSit with how strange that is. Since Lab 01 you have been shipping programs whose behaviour depends on code you have not audited. Not a little of it: printf alone is thousands of lines of format-string parsing, buffering, and system calls. You trusted it completely, and you were right to — but notice that you never decided to trust it. The trust arrived pre-installed, in the shape of a #include line the lab sheet told you to type.\nThis is the oldest version of the problem everyone is arguing about in 2026. “Code you did not write, running in your program, doing things you have not verified” is not something AI invented. It is what a library is, and it is what the linker does for a living: take your unresolved promises and quietly bind them to somebody else’s implementation. The industry has been doing this since the 1950s. What has changed is not the nature of the problem but its scale and its provenance — the stranger’s code now arrives faster, in larger quantities, and from a source that cannot tell you where it came from.\nSo the interesting question is not “should I use code I didn’t write?” — you already do, hundreds of thousands of lines of it, every time you type gcc. The question is what makes trust reasonable. And the C library gives a genuinely good answer, worth naming because you will spend a career looking for it again: printf is trustworthy because it has a specification (the C standard says precisely what %d must do), because that specification is stable (code written in 1990 still works), and because it has been checked against that specification by more people, for longer, than almost any other artifact in engineering. Not because it is famous. Not because it usually works. Because someone wrote down what it must do, and then the world spent thirty-five years trying to catch it not doing that.\nMeasure the new stranger by the same ruler. When a machine hands you forty lines of C, ask the three questions the linker’s stranger can answer: what is it supposed to do, stated precisely enough to check? does that statement stay true tomorrow? and who has actually checked? Very often the honest answers are: nothing written down, no, and nobody. That is not a reason to refuse the code. It is a precise description of what you now have to supply — which is exactly the work this course keeps handing you, and exactly why your Lab 02 checker tested your program on numbers you had never seen.\nThere is a coda, and Monday earned it. Four programs stood between your source and your executable — preprocessor, compiler, assembler, linker — and every one of them inspected your code with great rigour. Not one of them asked whether it solved the problem. The most sophisticated tooling in your possession is structurally incapable of the one check that matters most. That was true in 1975 and it is true of the newest model released this year: tools verify form; only you verify intent. The U was undefined until someone resolved it. So is the question of whether your program is right.",
     "crumbs": [
       "Weekly Notes",
-      "W05: Compilation & the Toolchain"
+      "W05: From Source to Executable"
     ]
   },
   {
@@ -436,7 +457,7 @@
     "href": "weeks/w06.html",
     "title": "W06: Data & Expressions",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Sep 7 & Tue Sep 8, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 4 — Data and expressions; control structures (5 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W06: Data & Expressions"
@@ -480,7 +501,7 @@
     "href": "weeks/w07.html",
     "title": "W07: Selection Control",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Sep 14 & Tue Sep 15, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 4 — Data and expressions; control structures (5 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W07: Selection Control"
@@ -535,7 +556,7 @@
     "href": "weeks/w09.html",
     "title": "W09: Iteration & Problem Solving",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Sep 28 & Tue Sep 29, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 4 — Iterative control (Mon) · 7 — Problem-solving session (Tue)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W09: Iteration & Problem Solving"
@@ -579,7 +600,7 @@
     "href": "weeks/w10.html",
     "title": "W10: Arrays",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Oct 5 & Tue Oct 6, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W10: Arrays"
@@ -623,7 +644,7 @@
     "href": "weeks/w11.html",
     "title": "W11: Strings & Multi-dimensional Arrays",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Oct 12 & Tue Oct 13, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W11: Strings & Multi-dimensional Arrays"
@@ -678,7 +699,7 @@
     "href": "weeks/w13.html",
     "title": "W13: Functions & Recursion",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Oct 26 & Tue Oct 27, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W13: Functions & Recursion"
@@ -722,7 +743,7 @@
     "href": "weeks/w14.html",
     "title": "W14: Pointers & Dynamic Memory",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Nov 2 & Tue Nov 3, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W14: Pointers & Dynamic Memory"
@@ -777,7 +798,7 @@
     "href": "weeks/w16.html",
     "title": "W16: Function Pointers, Structures & Unions",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Nov 16 & Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 6 — Function pointers; structure, union; file handling; error handling (3 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "W16: Function Pointers, Structures & Unions"
@@ -821,7 +842,7 @@
     "href": "weeks/mu1.html",
     "title": "MU-1: File & Error Handling (Make-up)",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Date TBA (compensatory day) · 8:00–8:50 am · 12LH3004\nSyllabus module: 6 — Function pointers; structure, union; file handling; error handling (3 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "MU-1: File & Error Handling (Make-up)"
@@ -865,7 +886,7 @@
     "href": "weeks/mu2.html",
     "title": "MU-2: Applications & Wrap-up (Make-up)",
     "section": "",
-    "text": "Pre-read\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Date TBA (compensatory day) · 8:00–8:50 am · 12LH3004\nSyllabus module: 8 — Applications; brief of object-oriented programming (1 h)\nTo be posted (typically by the weekend before).",
     "crumbs": [
       "Weekly Notes",
       "MU-2: Applications & Wrap-up (Make-up)"
@@ -909,7 +930,7 @@
     "href": "labsheets/lab01.html",
     "title": "Lab 01: Move-In Day",
     "section": "",
-    "text": "What you’ll be able to do after this lab",
+    "text": "What you’ll be able to do after this lab\nEvaluation: not graded — this is the setup lab. But the full machinery (self-check, bundle, submission) runs anyway, at zero stakes: learn the system today, be graded by it from Lab 02.\nTeams: one or two students per machine. Pairs: one of you drives (keyboard), the other navigates (owns the sheet, calls the predictions). Swap roles at the half-time whistle. Both of you must be able to explain every command afterwards.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.",
     "crumbs": [
       "Lab Sheets",
       "Lab 01: Move-In Day"
@@ -1063,7 +1084,7 @@
     "href": "labsheets/lab02.html",
     "title": "Lab 02: First C Programs",
     "section": "",
-    "text": "Warm-up circuit (8 min, predict first)\nOne box, one step — say the prediction out loud before Enter:\nHow many processes is this shared machine juggling right now? Compose two programs to count them:",
+    "text": "Warm-up circuit (8 min, predict first)\nLab pack: lab02.tar.gz — pre-placed on lab machines, downloadable for home practice.\nEvaluation: graded — this lab carries its equal share of the 20% lab component. Five problems, checked by a program (details below), plus observed work and a short viva. Teams of 1–2 as before; pairs swap driver/navigator at half-time, and both members must be able to explain every line.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nOne box, one step — say the prediction out loud before Enter:\nHow many processes is this shared machine juggling right now? Compose two programs to count them:",
     "crumbs": [
       "Lab Sheets",
       "Lab 02: First C Programs"
@@ -1162,7 +1183,7 @@
     "href": "labsheets/lab03.html",
     "title": "Lab 03: Solid Ground",
     "section": "",
-    "text": "The two things that went wrong last time\nWe fixed both in the pack, so read this once:\n1. People got lost. So this week the installer does not tell you where to go — it puts you there, and changes your prompt to prove it:\nIf you can see [lab03 OK ...] at the left of your cursor, you are in the right place. If you cannot, you are not. There is now exactly one command to remember, and it works from anywhere at all:\nIt never changes anything. It tells you where you are, where your workspace is, and prints the exact line to copy to get back.\n2. People lost marks on formatting, not on thinking. So this week the final printf is already written for you in every file. You cannot get the output format wrong, because you are not writing it. If the checker says WRONG, it means your computation is wrong — which is a much more useful thing to be told.",
+    "text": "The two things that went wrong last time\nLab pack: lab03.tar.gz — pre-placed on lab machines, downloadable for home practice.\nEvaluation: graded — equal share of the 20% lab component. Three graded problems, five fill-in-the-blank programs, and sixteen drills, plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nWe fixed both in the pack, so read this once:\n1. People got lost. So this week the installer does not tell you where to go — it puts you there, and changes your prompt to prove it:\nIf you can see [lab03 OK ...] at the left of your cursor, you are in the right place. If you cannot, you are not. There is now exactly one command to remember, and it works from anywhere at all:\nIt never changes anything. It tells you where you are, where your workspace is, and prints the exact line to copy to get back.\n2. People lost marks on formatting, not on thinking. So this week the final printf is already written for you in every file. You cannot get the output format wrong, because you are not writing it. If the checker says WRONG, it means your computation is wrong — which is a much more useful thing to be told.",
     "crumbs": [
       "Lab Sheets",
       "Lab 03: Solid Ground"
@@ -1261,29 +1282,95 @@
     "href": "labsheets/lab04.html",
     "title": "Lab 04: Loops",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "What changes today\nLab pack: lab04.tar.gz — pre-placed on lab machines, downloadable for home practice.\nSyllabus practical modules: 5 and 6 — for loops, and while / do-while loops. They are taught together on purpose: the three forms are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart.\nEvaluation: Graded — equal weight within the 20% lab component. Ten drills, five fill-in-the-blank programs, and three checked problems, plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nYou write the scanf now. Until last week the reading was done for you and you supplied the thinking. From today the starters give you the declarations and the final printf — nothing else. The scaffolding comes away one plank at a time; this is the first plank.\nAnd the starters do not compile as shipped. That is deliberate. Every blank is a name the compiler has never heard of, so instead of a wrong answer you get a message naming the exact line still waiting for you:",
     "crumbs": [
       "Lab Sheets",
       "Lab 04: Loops"
     ]
   },
   {
-    "objectID": "labsheets/lab04.html#exercises",
-    "href": "labsheets/lab04.html#exercises",
+    "objectID": "labsheets/lab04.html#what-changes-today",
+    "href": "labsheets/lab04.html#what-changes-today",
     "title": "Lab 04: Loops",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "section": "",
+    "text": "e3.c:19:5: error: use of undeclared identifier 'TODO_read_a_and_b'",
     "crumbs": [
       "Lab Sheets",
       "Lab 04: Loops"
     ]
   },
   {
-    "objectID": "labsheets/lab04.html#submission",
-    "href": "labsheets/lab04.html#submission",
+    "objectID": "labsheets/lab04.html#act-0-land-10-min",
+    "href": "labsheets/lab04.html#act-0-land-10-min",
     "title": "Lab 04: Loops",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "section": "Act 0 · Land (10 min)",
+    "text": "Act 0 · Land (10 min)\nPack pre-placed on machines, or:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab04.tar.gz\ntar xzf lab04.tar.gz\ncd lab04\n./install.sh\nIt puts you inside your workspace and changes your prompt to prove it. Then start the recorder:\nscript session.txt\n\n\n\n\n\n\nDo not go further until your prompt shows [lab04 OK ...]. If it does not, run ./where.sh — it changes nothing, and it prints the exact line to copy to get back.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 04: Loops"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab04.html#act-1-drills-predict-then-run-25-min",
+    "href": "labsheets/lab04.html#act-1-drills-predict-then-run-25-min",
+    "title": "Lab 04: Loops",
+    "section": "Act 1 · Drills — predict, then run (25 min)",
+    "text": "Act 1 · Drills — predict, then run (25 min)\nTen drills. For each: see it, write down what you think happens, and only then run it.\n./drill.sh --all\n\n\n\n\n\n\n\nDrills\nTerritory\n\n\n\n\nt01\none type conversion, to keep it warm — does a float variable rescue an int division?\n\n\np01–p04\nprecedence, aimed straight at loop conditions: a comparison is a value; 0 &lt; n &lt; 3 lies; &lt; vs &lt;= at the boundary; and = is not ==\n\n\nL1–L5\nthe compiler pipeline, by hand — the four stages from Monday’s lecture, one command each, ending at nm and the U printf that explains why linkers exist\n\n\n\nA wrong prediction scores exactly as much as a right one — but only if you write it down first. L1–L5 are self-marked; marking yourself right when you were not simply throws away the one record that shows you what to revise.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 04: Loops"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab04.html#act-2-fill-the-blanks-25-min",
+    "href": "labsheets/lab04.html#act-2-fill-the-blanks-25-min",
+    "title": "Lab 04: Loops",
+    "section": "Act 2 · Fill the blanks (25 min)",
+    "text": "Act 2 · Fill the blanks (25 min)\nFive programs, each missing its scanf and the lines that make the loop move.\n\n\n\n\n\n\n\nFile\nWhat it does\n\n\n\n\nb1_sum_while.c\nadd 1 + 2 + … + n, with a while\n\n\nb2_sum_for.c\nthe same sum, as a for — convert it; do not copy it\n\n\nb3_digits.c\nhow many digits does n have? (/10 until it runs out)\n\n\nb4_factorial.c\nn! — and the GIVEN stops at 12. Work out why\n\n\nb5_digits0.c\ndigits again, but n may be 0\n\n\n\n\n\n\n\n\n\nDo b3 first, then feed your answer 0. It says zero digits — wrong, because a while checks before it runs, so the body never runs at all. b5 is the same problem with do-while, which checks after. That contrast is the entire reason C has three loops instead of one.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 04: Loops"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab04.html#act-3-the-checked-three-40-min-solo",
+    "href": "labsheets/lab04.html#act-3-the-checked-three-40-min-solo",
+    "title": "Lab 04: Loops",
+    "section": "Act 3 · The checked three (40 min, solo)",
+    "text": "Act 3 · The checked three (40 min, solo)\n\n\n\n\n\n\n\n\nProblem\nTask\nFinal line ends with exactly\n\n\n\n\ne1.c\nsum and count of the even numbers up to n\nsum=&lt;S&gt; count=&lt;C&gt;\n\n\ne2.c\nreverse the digits of n\nrev=&lt;R&gt;\n\n\ne3.c\ngreatest common divisor of two numbers\ngcd=&lt;G&gt;\n\n\n\ne2 has a public example worth reading twice: 900 → rev=9. Reversed, 900 is 009, and a number has no leading zeros. The checker will draw numbers ending in zero.\ne3 is Euclid, 300 BC. The whole algorithm rests on one fact — gcd(a, b) is the same number as gcd(b, a % b). Check it by hand on 48 and 18 before you write anything. The pair keeps changing; the answer never does. That unchanging thing is a loop invariant, and it is why you may stop the moment b reaches 0.\nHow checking works — as before: ./check.sh e1 compiles your source and runs it on the public examples and on fresh random inputs drawn from the GIVEN. A program that memorises an example fails the next draw. New this week: if the checker says TIMEOUT, your loop never ends — nothing is wrong with the machine.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 04: Loops"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab04.html#act-4-check-fix-bundle-10-min",
+    "href": "labsheets/lab04.html#act-4-check-fix-bundle-10-min",
+    "title": "Lab 04: Loops",
+    "section": "Act 4 · Check, fix, bundle (10 min)",
+    "text": "Act 4 · Check, fix, bundle (10 min)\n./check.sh\nFix, re-check, repeat. Then — green or time-up (an imperfect bundle beats no bundle):\n./check.sh --bundle\nCarry ../lab04_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz out with you (Moodle + email yourself). The machine forgets.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 04: Loops"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab04.html#stretch-fast-finishers",
+    "href": "labsheets/lab04.html#stretch-fast-finishers",
+    "title": "Lab 04: Loops",
+    "section": "Stretch (fast finishers)",
+    "text": "Stretch (fast finishers)\n\nThe triangle, properly. Lab 02’s stretch made you print a 4-row triangle with one printf per line, because you had no loops. Write it again with nested loops, and make the number of rows something the user types. Then read the two versions side by side — that diff is three weeks of progress.\nConvert all three. Rewrite e1 as a while, e2 as a for, e3 as a do-while. One of the three will fight you. Which, and why?\nCount the rounds. Add a counter to e3 and print how many times the loop ran for 48 18, then for two large numbers close together. Euclid is fast — how fast?",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 04: Loops"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab04.html#reflect",
+    "href": "labsheets/lab04.html#reflect",
+    "title": "Lab 04: Loops",
+    "section": "Reflect",
+    "text": "Reflect\n✍️ Into notes/answers.txt: look at notes/drills.log and pick the drill you got most wrong. In two sentences — what did you believe before you ran it, and what do you believe now?",
     "crumbs": [
       "Lab Sheets",
       "Lab 04: Loops"
@@ -1294,7 +1381,7 @@
     "href": "labsheets/lab05.html",
     "title": "Lab 05: Lists & Strings",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 3 — Writing programs related to lists and strings\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 05: Lists & Strings"
@@ -1327,7 +1414,7 @@
     "href": "labsheets/lab06.html",
     "title": "Lab 06: Using Libraries",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 10 — Writing programs using libraries (string, math, etc.) in C\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 06: Using Libraries"
@@ -1360,7 +1447,7 @@
     "href": "labsheets/lab07.html",
     "title": "Lab 07: Functions & Recursion",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 7 — Writing programs using functions and recursion\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 07: Functions & Recursion"
@@ -1393,7 +1480,7 @@
     "href": "labsheets/lab08.html",
     "title": "Lab 08: Structures (Tuples & Dictionaries, C-style)",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 4 — Writing programs related to tuples and dictionaries\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 08: Structures (Tuples & Dictionaries, C-style)"
@@ -1426,7 +1513,7 @@
     "href": "labsheets/lab09.html",
     "title": "Lab 09: File Handling",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 8 — Writing programs related to file handling\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 09: File Handling"
@@ -1459,7 +1546,7 @@
     "href": "labsheets/lab10.html",
     "title": "Lab 10: Error Handling",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 9 — Writing programs related to error handling\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 10: Error Handling"
@@ -1492,7 +1579,7 @@
     "href": "labsheets/lab11.html",
     "title": "Lab 11: Problem Solving I",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 11 — Problem solving (GATE, ACM ICPC)\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 11: Problem Solving I"
@@ -1525,7 +1612,7 @@
     "href": "labsheets/lab12.html",
     "title": "Lab 12: Problem Solving II",
     "section": "",
-    "text": "Pre-Lab\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 11 — Problem solving (GATE, ACM ICPC)\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
       "Lab 12: Problem Solving II"
@@ -1558,7 +1645,7 @@
     "href": "materials/index.html",
     "title": "Materials",
     "section": "",
-    "text": "Interactive artifacts, handouts, and other student-facing files used in lectures and labs. Items are added here as the semester progresses, and are linked from the relevant weekly notes and lab sheets.\n\n\n\n\n\n\n\n\nItem\nWhat it is\nUsed in\n\n\n\n\n📽️ Deck 01 — Logistics\nOpening lecture slides: schedule, assessment, tools, and how the course works. (Slide deck — use arrow keys.)\nWeek 01\n\n\n📽️ PAGAL: Programming in the Age of AI\nThe PAGAL column in slide form: the Specify–Verify loop, why programming is becoming a commodity, and Computational X — computation as every discipline’s second half.\nWeek 01\n\n\n📽️ Deck 02 — What is a Computer?\nLecture 2 slides: computing vs computer vs programming vs computational thinking; the stored-program dividing line.\nWeek 01\n\n\n🖨️ Hello, World — all the way down\nprintf, honestly: five instructions (read · write · move · count · check), a finger, and a code book. Act 1 prints “abba” in a two-letter world; Act 2 grows the book to ASCII and prints Hello, world! — same program, bigger data.\nWeek 01\n\n\n📽️ Deck 03 — Number Systems\nWeek 02 slides: radix-q systems, binary↔︎decimal conversion, two’s complement, fixed point, and IEEE FP32 — ending at “how many bits does a number deserve?”\nWeek 02\n\n\n🎡 The Number Playground\nThree interactive machines: poke 8 bits and watch the decimal form; spin the complement sundial (one pattern, four reading conventions — find the overflow cliff and the double zeros); dissect a live IEEE FP32 bit by bit.\nWeek 02\n\n\n📽️ Deck 04 — The Computer, Revisited\nRecap of the Week-1 machines, the von Neumann architecture named, and the calculator-vs-computer dividing line: where does the procedure live?\nWeek 02\n\n\n🧮 The Toy Computer\nA complete von Neumann machine in 40 visible cells: program it in ten instructions, watch fetch–decode–execute narrated, and climb the six-rung ladder from sequencing to the recursion wall.\nWeek 02\n\n\n🔧 Under the Hood — Part 1: The Parts\nThe guided climb, stations 0–3: a switch flipped by a wire (the logical transistor), gates discovered by wiring switches in series and parallel, and a real ripple adder — arithmetic is wiring.\nWeek 02\n\n\n🔧 Under the Hood — Part 2: Memory & Time\nStations 4–5: feed a gate its own output and it remembers (build a flip-flop from two NOR gates), then the clock — set the bell’s rhythm too fast and watch the notebook faithfully record garbage.\nWeek 02\n\n\n🔧 Under the Hood — Part 3: The Machine\nStations 6–7: a machine built entirely from your own parts — registers of flip-flops, a control unit that is itself two flip-flops, a hand-cranked clock and live timing diagram — then the ladder back up to c = a + b;.\nWeek 02\n\n\n📦 lab01.tar.gz\nThe Lab 01 pack: installer (infers your branch from the machine), starters, and the self-check. Extract, ./install.sh, follow the lab sheet.\nLab 01\n\n\n📽️ Deck 07 — Types, Assignments & Operators\nW03 Tuesday: the type wardrobe (size + reading convention), = as “gets”, operator precedence & associativity, promotion/truncation/casts, and six predict-the-output traps.\nWeek 03\n\n\n📽️ Deck 05 — Complements & Overflow\nW03 Monday: one’s & two’s complement fully worked, arithmetic with them, and overflow — the silent cliff, from 8-bit examples to Ariane 5.\nWeek 03\n\n\n📽️ Deck 06 — Your First C Program\nW03 Tuesday: hello.c line by line; gcc and ./ annotated word by word; variables as named cells with a reading convention; the integer-division surprise.\nWeek 03\n\n\n🐢 The Turtle Computer\nYour first programming language: ten words, one turtle, no typing. Six missions in which each new word is invented because a problem demands it — and the reward comes only when the machine’s output matches your intention.\nWeek 01, Lab 01",
+    "text": "Interactive artifacts, handouts, and other student-facing files used in lectures and labs. Items are added here as the semester progresses, and are linked from the relevant weekly notes and lab sheets.\n\n\n\n\n\n\n\n\nItem\nWhat it is\nUsed in\n\n\n\n\n📽️ Deck 01 — Logistics\nOpening lecture slides: schedule, assessment, tools, and how the course works. (Slide deck — use arrow keys.)\nWeek 01\n\n\n📽️ PAGAL: Programming in the Age of AI\nThe PAGAL column in slide form: the Specify–Verify loop, why programming is becoming a commodity, and Computational X — computation as every discipline’s second half.\nWeek 01\n\n\n📽️ Deck 02 — What is a Computer?\nLecture 2 slides: computing vs computer vs programming vs computational thinking; the stored-program dividing line.\nWeek 01\n\n\n🖨️ Hello, World — all the way down\nprintf, honestly: five instructions (read · write · move · count · check), a finger, and a code book. Act 1 prints “abba” in a two-letter world; Act 2 grows the book to ASCII and prints Hello, world! — same program, bigger data.\nWeek 01\n\n\n📽️ Deck 03 — Number Systems\nWeek 02 slides: radix-q systems, binary↔︎decimal conversion, two’s complement, fixed point, and IEEE FP32 — ending at “how many bits does a number deserve?”\nWeek 02\n\n\n🎡 The Number Playground\nThree interactive machines: poke 8 bits and watch the decimal form; spin the complement sundial (one pattern, four reading conventions — find the overflow cliff and the double zeros); dissect a live IEEE FP32 bit by bit.\nWeek 02\n\n\n📽️ Deck 04 — The Computer, Revisited\nRecap of the Week-1 machines, the von Neumann architecture named, and the calculator-vs-computer dividing line: where does the procedure live?\nWeek 02\n\n\n🧮 The Toy Computer\nA complete von Neumann machine in 40 visible cells: program it in ten instructions, watch fetch–decode–execute narrated, and climb the six-rung ladder from sequencing to the recursion wall.\nWeek 02\n\n\n🔧 Under the Hood — Part 1: The Parts\nThe guided climb, stations 0–3: a switch flipped by a wire (the logical transistor), gates discovered by wiring switches in series and parallel, and a real ripple adder — arithmetic is wiring.\nWeek 02\n\n\n🔧 Under the Hood — Part 2: Memory & Time\nStations 4–5: feed a gate its own output and it remembers (build a flip-flop from two NOR gates), then the clock — set the bell’s rhythm too fast and watch the notebook faithfully record garbage.\nWeek 02\n\n\n🔧 Under the Hood — Part 3: The Machine\nStations 6–7: a machine built entirely from your own parts — registers of flip-flops, a control unit that is itself two flip-flops, a hand-cranked clock and live timing diagram — then the ladder back up to c = a + b;.\nWeek 02\n\n\n📦 lab01.tar.gz\nThe Lab 01 pack: installer (infers your branch from the machine), starters, and the self-check. Extract, ./install.sh, follow the lab sheet.\nLab 01\n\n\n📽️ Deck 07 — Types, Assignments & Operators\nW03 Tuesday: the type wardrobe (size + reading convention), = as “gets”, operator precedence & associativity, promotion/truncation/casts, and six predict-the-output traps.\nWeek 03\n\n\n📽️ Deck 05 — Complements & Overflow\nW03 Monday: one’s & two’s complement fully worked, arithmetic with them, and overflow — the silent cliff, from 8-bit examples to Ariane 5.\nWeek 03\n\n\n📽️ Deck 06 — Your First C Program\nW03 Tuesday: hello.c line by line; gcc and ./ annotated word by word; variables as named cells with a reading convention; the integer-division surprise.\nWeek 03\n\n\n📽️ Deck 08 — From Source to Executable\nW05 Monday: Lab 03’s checked three worked through, then the compilation pipeline — preprocessor, compiler, assembler, linker — each stage stopped and inspected, ending at nm and the U printf that explains why linkers exist.\nWeek 05\n\n\n🐢 The Turtle Computer\nYour first programming language: ten words, one turtle, no typing. Six missions in which each new word is invented because a problem demands it — and the reward comes only when the machine’s output matches your intention.\nWeek 01, Lab 01",
     "crumbs": [
       "Materials & Notebooks",
       "Materials"
@@ -1580,7 +1667,7 @@
     "href": "cs1100-cse-iitm-2021/index.html",
     "title": "CS1100 Lectures (IIT Madras)",
     "section": "",
-    "text": "These lecture slides are from CS1100: Introduction to Programming, taught by Prof. Shweta Agrawal at IIT Madras (Trimester 3, April–June 2021). They are mirrored here, and adapted where needed, for use in CS-1-01 (MO) at IIT Jammu.\n\n\n\n\n\n\nAcknowledgement\n\n\n\nWe are deeply grateful to Prof. Shweta Agrawal and the Department of Computer Science & Engineering, IIT Madras, for generously permitting the reuse and modification of this material. The original course page is here.\n\n\n\n\n\n\n\n\n\n\nLecture\nTopic\nSlides\n\n\n\n\n1\nIntroduction to Programming\nPDF\n\n\n2\nMore on Turtle\nPDF\n\n\n3\nThe Computing Machine\nPDF\n\n\n4\nOur first C program. Basic data types, operators, keywords in C\nPDF\n\n\n5\nMore details: operators, scanf, printf, sizeof, ranges of different data types\nPDF\n\n\n6\nExecution of programs, compilers\nPDF\n\n\n7\nModifying control flow. Arithmetic, relational and logical operators; precedence and associativity; single selection (if)\nPDF\n\n\n8\nMultiple selection (switch). More examples of if-then-else\nPDF\n\n\n9\nFirst loop construct: while\nPDF\n\n\n12\nfor loop: syntax, semantics, continue, examples\nPDF\n\n\n13\nExample problems: mini calculator\nPDF\n\n\n14\nMore loop examples: primality testing, primes in an interval, minimum, GCD\nPDF\n\n\n15\nIntroduction to arrays; integer and character arrays; histogram of marks; evaluating a polynomial\nPDF\n\n\n16\nRevision of loops: printing patterns, first k primes, prime factorization, staircase of numbers, approximate square roots\nPDF\n\n\n17\nCharacter arrays: string length, comparing strings, palindromes; multi-dimensional arrays\nPDF\n\n\n18\nCharacter arrays and standard library support; matrix operations: addition, multiplication, transpose; character grids; reversing an array\nPDF\n\n\n19\nMore on character grids; introduction to functions; blocks and scope of variables\nPDF\n\n\n20\nMore functions: factorial, sums, co-primeness, matrix multiplication, primes, swapping, binary-to-decimal, Tic-Tac-Toe\nPDF\n\n\n21\nTic-Tac-Toe; macros; enumerated constants; three-dimensional arrays\nPDF\n\n\n24\nRecursive functions: factorial, binomial coefficient, Virahanka/Fibonacci numbers, largest element in an array\nPDF\n\n\n25\nSearching: linear and binary search\nPDF\n\n\n26\nMore on recursive functions — finding max recursively; binary search; introduction to sorting\nPDF\n\n\n27\nSorting: selection and insertion sort, overview of merge sort; introduction to pointers\nPDF\n\n\n28\nMore on pointers\nPDF\n\n\n29\nIntroduction to structures\nPDF\n\n\n30\nMore on structures\nPDF\n\n\n—\nCourse wrap-up: summary and takeaways\nPDF\n\n\n\n(Lectures 10, 11, 22, 23 in the original course were revision/quiz sessions with no slides; lecture numbering is preserved from the original site.)",
+    "text": "These lecture slides are from CS1100: Introduction to Programming, taught by Prof. Shweta Agrawal at IIT Madras (Trimester 3, April–June 2021). They are mirrored here, and adapted where needed, for use in CS-1-01 (MO) at IIT Jammu.\n\n\n\n\n\n\nNoteAcknowledgement\n\n\n\nWe are deeply grateful to Prof. Shweta Agrawal and the Department of Computer Science & Engineering, IIT Madras, for generously permitting the reuse and modification of this material. The original course page is here.\n\n\n\n\n\n\n\n\n\n\nLecture\nTopic\nSlides\n\n\n\n\n1\nIntroduction to Programming\nPDF\n\n\n2\nMore on Turtle\nPDF\n\n\n3\nThe Computing Machine\nPDF\n\n\n4\nOur first C program. Basic data types, operators, keywords in C\nPDF\n\n\n5\nMore details: operators, scanf, printf, sizeof, ranges of different data types\nPDF\n\n\n6\nExecution of programs, compilers\nPDF\n\n\n7\nModifying control flow. Arithmetic, relational and logical operators; precedence and associativity; single selection (if)\nPDF\n\n\n8\nMultiple selection (switch). More examples of if-then-else\nPDF\n\n\n9\nFirst loop construct: while\nPDF\n\n\n12\nfor loop: syntax, semantics, continue, examples\nPDF\n\n\n13\nExample problems: mini calculator\nPDF\n\n\n14\nMore loop examples: primality testing, primes in an interval, minimum, GCD\nPDF\n\n\n15\nIntroduction to arrays; integer and character arrays; histogram of marks; evaluating a polynomial\nPDF\n\n\n16\nRevision of loops: printing patterns, first k primes, prime factorization, staircase of numbers, approximate square roots\nPDF\n\n\n17\nCharacter arrays: string length, comparing strings, palindromes; multi-dimensional arrays\nPDF\n\n\n18\nCharacter arrays and standard library support; matrix operations: addition, multiplication, transpose; character grids; reversing an array\nPDF\n\n\n19\nMore on character grids; introduction to functions; blocks and scope of variables\nPDF\n\n\n20\nMore functions: factorial, sums, co-primeness, matrix multiplication, primes, swapping, binary-to-decimal, Tic-Tac-Toe\nPDF\n\n\n21\nTic-Tac-Toe; macros; enumerated constants; three-dimensional arrays\nPDF\n\n\n24\nRecursive functions: factorial, binomial coefficient, Virahanka/Fibonacci numbers, largest element in an array\nPDF\n\n\n25\nSearching: linear and binary search\nPDF\n\n\n26\nMore on recursive functions — finding max recursively; binary search; introduction to sorting\nPDF\n\n\n27\nSorting: selection and insertion sort, overview of merge sort; introduction to pointers\nPDF\n\n\n28\nMore on pointers\nPDF\n\n\n29\nIntroduction to structures\nPDF\n\n\n30\nMore on structures\nPDF\n\n\n—\nCourse wrap-up: summary and takeaways\nPDF\n\n\n\n(Lectures 10, 11, 22, 23 in the original course were revision/quiz sessions with no slides; lecture numbering is preserved from the original site.)",
     "crumbs": [
       "Reference Material",
       "CS1100 Lectures (IIT Madras)"
@@ -1624,7 +1711,7 @@
     "href": "resources.html#online-material",
     "title": "Resources",
     "section": "Online Material",
-    "text": "Online Material\n\nMIT OCW 6.087: Practical Programming in C\nMIT OpenCourseWare 6.087 (IAP 2010) is an excellent, compact companion to this course, with full lecture notes, labs, and assignments (with solutions):\n\nLecture notes\nLabs\nAssignments\n\nCourtesy of MIT OpenCourseWare; used under CC BY-NC-SA.\n\n\nCS1100: Introduction to Programming (IIT Madras)\nLecture slides from Prof. Shweta Agrawal’s CS1100 are mirrored on the CS1100 lectures page, reused with permission from Prof. Agrawal and the CSE Department, IIT Madras.",
+    "text": "Online Material\n\nThe C Programming Laboratory (IIT Jammu lab manual)\n📕 The C Programming Laboratory — the department’s shared lab manual for this course: the vim editor, the C compilation model (§2.5), variables and types, the operator precedence table (§2.10), and printf/scanf. Lecture decks and lab sheets cite it by section number, so it is worth keeping open.\nPrepared by Aroof Aimen, Dept. of CSE, IIT Jammu — Laboratory Manual Part II, August 2026. Reproduced here with thanks.\n\n\nMIT OCW 6.087: Practical Programming in C\nMIT OpenCourseWare 6.087 (IAP 2010) is an excellent, compact companion to this course, with full lecture notes, labs, and assignments (with solutions):\n\nLecture notes\nLabs\nAssignments\n\nCourtesy of MIT OpenCourseWare; used under CC BY-NC-SA.\n\n\nCS1100: Introduction to Programming (IIT Madras)\nLecture slides from Prof. Shweta Agrawal’s CS1100 are mirrored on the CS1100 lectures page, reused with permission from Prof. Agrawal and the CSE Department, IIT Madras.",
     "crumbs": [
       "Reference Material",
       "Resources"

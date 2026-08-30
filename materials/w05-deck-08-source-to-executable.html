@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deck 08 — From Source to Executable · CS-1-01 (MO)</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003f87; --blue-dark:#002d63; --blue-mid:#0056b8; --blue-sky:#4da3ff; --blue-pale:#eaf3ff;
+    --ink:#22262a; --star:#f4b400;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#0b1e3a;font-family:Roboto,system-ui,sans-serif;color:var(--ink)}
+  #root{height:100%}
+  .deck{height:100%;display:flex;flex-direction:column;overflow:hidden}
+  .slide{flex:1;display:flex;flex-direction:column;justify-content:center;padding:5vh 8vw;
+         background:#fff;overflow:auto}
+  .slide.title{background:linear-gradient(160deg,var(--blue-dark) 0%,var(--blue) 70%,var(--blue-mid) 100%);color:#fff}
+  .slide.accent{background:linear-gradient(160deg,#f6faff,var(--blue-pale))}
+  h1{font-family:"Roboto Slab",serif;font-size:clamp(1.8rem,4.5vw,3.2rem);margin:.2em 0;line-height:1.15}
+  h2{font-family:"Roboto Slab",serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--blue-dark);margin:.2em 0 .6em;
+     border-bottom:3px solid var(--blue-pale);padding-bottom:.25em}
+  .title h2{color:#cfe3ff;border:none;font-weight:400;font-size:clamp(1rem,2vw,1.5rem)}
+  .kicker{font-size:clamp(.8rem,1.4vw,1rem);letter-spacing:.14em;text-transform:uppercase;color:var(--blue-sky)}
+  p,li{font-size:clamp(1rem,1.9vw,1.35rem);line-height:1.55}
+  li{margin:.35em 0}
+  .big{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:500;color:var(--blue-dark)}
+  table{border-collapse:collapse;font-size:clamp(.95rem,1.7vw,1.25rem);margin:.4em 0;width:100%}
+  th{background:var(--blue);color:#fff;text-align:left}
+  th,td{border:1px solid #cfdcec;padding:.35em .7em}
+  tr:nth-child(even) td{background:#f4f8fd}
+  code,.mono{font-family:"Roboto Mono",monospace;color:var(--blue-mid)}
+  .cols{display:flex;gap:4vw;flex-wrap:wrap}
+  .cols>div{flex:1;min-width:260px}
+  .note{background:var(--blue-pale);border-left:5px solid var(--blue);padding:.5em 1em;border-radius:0 8px 8px 0;
+        font-size:clamp(.95rem,1.7vw,1.2rem)}
+  .quote{font-family:"Roboto Slab",serif;font-size:clamp(1.4rem,3.4vw,2.4rem);color:var(--blue-dark);
+         text-align:center;line-height:1.4;margin:auto 0}
+  .quote small{display:block;font-family:Roboto,sans-serif;font-size:.55em;color:#667;margin-top:1em}
+  /* chrome */
+  .bar{height:5px;background:#12305c}
+  .bar>div{height:100%;background:var(--blue-sky);transition:width .25s}
+  .foot{display:flex;justify-content:space-between;align-items:center;background:#0b1e3a;color:#8fb4e8;
+        font-size:.75rem;padding:6px 14px;font-family:"Roboto Mono",monospace}
+  .foot b{color:#cfe3ff;font-weight:500}
+  .navhint{opacity:.7}
+  pre{background:#f4f8fd;border:1px solid #cfdcec;border-left:5px solid var(--blue-mid);
+      border-radius:0 8px 8px 0;padding:.6em 1em;overflow-x:auto;font-family:"Roboto Mono",monospace;
+      color:var(--blue-dark);font-size:clamp(.8rem,1.45vw,1.05rem);line-height:1.5;white-space:pre-wrap}
+  ol{font-size:clamp(.95rem,1.7vw,1.2rem);line-height:1.5;padding-left:1.4em}
+  ol li{margin:.3em 0}
+  .clickzone{position:fixed;top:0;bottom:30px;width:18vw;cursor:pointer;z-index:5}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+"use strict";
+const e = React.createElement;
+const F = React.Fragment;
+
+/* ---------- content ---------- */
+const li = (...items)=> e("ul",null, ...items.map(t=> e("li",{dangerouslySetInnerHTML:{__html:t}})));
+const html = (tag,s)=> e(tag,{dangerouslySetInnerHTML:{__html:s}});
+const table = (head,rows)=> e("table",null,
+  e("thead",null, e("tr",null, ...head.map(hh=>e("th",null,hh)))),
+  e("tbody",null, ...rows.map(r=> e("tr",null, ...r.map(c=> html("td",c))))));
+
+const SLIDES = [
+{cls:"title", body:()=> e(F,null,
+  e("div",{className:"kicker"},"CS-1-01 (MO) · Monsoon 2026 · W05 · Lecture 1"),
+  e("h1",null,"From Source to Executable"),
+  e("h2",null,"Deck 08 — what really happens between gcc hello.c and ./hello"),
+  e("p",{style:{marginTop:"2em",color:"#cfe3ff"}},"Soma S Dhavala · Electrical / Mechanical / Materials"),
+  e("p",{style:{color:"#8fb4e8",fontSize:"1rem"}},"→ arrow keys or click the right edge to advance"))},
+
+{title:"Where we are", body:()=> e(F,null,
+  li("You have written C, compiled it, and run it — in Lab 01, in Lab 02, and in the shared lab manual's Section 1.4. The ritual works",
+     "You also know the <b>grammar</b> now: types, assignment, operators, and <b>precedence</b> — which expression means what",
+     "Today we open the box you have been trusting: the <b>four programs</b> standing between your <span class='mono'>.c</span> file and a thing the machine will run"),
+  html("div",'<div class="note">Your lab manual already contains today\'s reference: <b>Section 2.5, The C Compilation Model</b>. Keep it open — we are going to make its diagram <i>execute</i>.<br><span class="mono" style="font-size:.85em">Don\'t have it? It is on the course site: <b>Labs &rarr; Lab Manual</b>, or acads-iit-jammu.github.io/csp-f26-dhavala/labs/CLab3_Aroof.pdf</span></div>'))},
+
+{title:"Lab 03, closed out — the checked three", body:()=> e(F,null,
+  html("p",'Everyone meets these again in <b>Lab 04</b>, so we work them together now. Each is a technique, not a puzzle:'),
+  table(["","Task","Spec says","The technique"],[
+    ["<span class='mono'>e1</span>","total inches → feet and inches","input <span class='mono'>100</span> → <span class='mono'>feet=8 inches=4</span>","one division, read <i>twice</i>"],
+    ["<span class='mono'>e2</span>","marks and total → percentage, 2 dp","input <span class='mono'>47 60</span> → <span class='mono'>pct=78.33</span>","the int-division trap, in new clothes"],
+    ["<span class='mono'>e3</span>","uppercase letter → lowercase + its code","input <span class='mono'>Q</span> → <span class='mono'>lower=q code=113</span>","derive the gap, never memorise it"]]),
+  html("div",'<div class="note">The checker runs your source on the spec\'s example <b>and on fresh random inputs drawn from the GIVEN</b>. A program that memorises <span class="mono">100 → 8, 4</span> fails the very next draw. Only one that <i>computes</i> survives — which is the whole course in one sentence.</div>'))},
+
+{title:"The three, worked", body:()=> e(F,null,
+  html("pre",'e1:   feet   = total / 12;        inches = total % 12;\n\ne2:   pct    = marks * 100.0 / total;\n\ne3:   lower  = c + (\'a\' - \'A\');   then print it with %c AND %d'),
+  li("<b>e1</b> — <span class='mono'>/</span> and <span class='mono'>%</span> are not two operations. They are <i>one</i> division, and you are asking for its two halves: the quotient and what was left over. Week 2 built this by hand",
+     "<b>e2</b> — the whole problem is the <span class='mono'>100.0</span>. Write <span class='mono'>marks * 100 / total</span> and 47/60 prints <span class='mono'>78.00</span>, not <span class='mono'>78.33</span>: int × int ÷ int stays int, and the fraction is gone before the <span class='mono'>%.2f</span> ever sees it",
+     "<b>e3</b> — do <b>not</b> write 32. Write <span class='mono'>'a' - 'A'</span> and let the machine compute the gap: it says what you <i>mean</i>, and it survives a reader who does not have the ASCII table memorised"),
+  html("div",'<div class="note">Notice who made the decision in <span class="mono">e2</span>. Nothing ran; nobody divided anything yet. <b>The compiler</b> looked at <span class="mono">marks * 100 / total</span>, saw three ints, and chose integer division — before your program executed a single instruction. Which is exactly where we go next.</div>'))},
+
+{title:"But who decided that?", body:()=> e(F,null,
+  html("p",'<span class="big">Precedence is not settled while your program runs. It is settled <b>while your program is being compiled</b>.</span>'),
+  li("The table in Section 2.10 is a rule of C's <b>grammar</b>. A program — the compiler — reads your expression and fixes its shape <i>once</i>, before the machine has executed anything",
+     "You can watch it happen. Put <span class='mono'>a + b * c</span> in a file and ask for the assembly:"),
+  html("pre",'gcc -S drill.c && cat drill.s'),
+  html("p",'The multiply is emitted <b>first</b>, as its own instruction, with the add consuming its result. The grammar you just memorised is visible in the output.'),
+  html("div",'<div class="note">Which raises the question for the rest of the hour: <b>what else is that program doing to my code?</b></div>'))},
+
+{title:"The C compilation model — four programs, not one", body:()=> e(F,null,
+  html("p",'This is the diagram in <b>Section 2.5</b> of your manual. <span class="mono">gcc</span> is not <i>the compiler</i> — it is a <b>driver</b> that runs four tools in sequence:'),
+  table(["#","Stage","Input → Output","Ask it to stop here"],[
+    ["1","<b>Preprocessor</b>","<span class='mono'>.c</span> → expanded <span class='mono'>.c</span>","<span class='mono'>gcc -E</span>"],
+    ["2","<b>Compiler</b>","expanded <span class='mono'>.c</span> → <span class='mono'>.s</span> (assembly)","<span class='mono'>gcc -S</span>"],
+    ["3","<b>Assembler</b>","<span class='mono'>.s</span> → <span class='mono'>.o</span> (object code)","<span class='mono'>gcc -c</span>"],
+    ["4","<b>Linker</b>","<span class='mono'>.o</span> + libraries → executable","<span class='mono'>gcc</span> (the default: all four)"]]),
+  html("div",'<div class="note">Every error message you have ever seen came from <b>one</b> of these four — and knowing which one is half of debugging. Today you meet all four by name.</div>'))},
+
+{title:"Stage 1 — the preprocessor: a very literal clerk", body:()=> e(F,null,
+  html("pre",'gcc -E hello.c > hello.i\nwc -l hello.i'),
+  li("Your four-line <span class='mono'>hello.c</span> becomes <b>several hundred lines</b>. <span class='mono'>#include &lt;stdio.h&gt;</span> did exactly what it says: it <b>pasted the file in</b>",
+     "<span class='mono'>#define</span> is <b>textual substitution</b>, performed before the compiler ever sees your code. Look at the last line of the expanded file:"),
+  html("pre",'#define GREETING "Hello, world!"\n\nprintf("%s\\n", GREETING);     becomes     printf("%s\\n", "Hello, world!");'),
+  html("div",'<div class="note">This is why your Lab 02 <span class="mono">e2</span> could say <span class="mono">#define PI 3.14159</span> and then use <span class="mono">PI</span> everywhere: by the time the compiler reads your program, <b>the word PI is gone</b> — only the number remains. The preprocessor understands no C at all. It moves text.</div>'))},
+
+{title:"Stage 2 — the compiler: C in, assembly out", body:()=> e(F,null,
+  html("pre",'gcc -S hello.c && cat hello.s'),
+  li("The output is <b>assembly</b>: still text, still readable by a human, but now one line per <i>machine instruction</i> — and specific to <b>this</b> processor",
+     "You have met this shape before. The Toy Computer's <span class='mono'>LDA / ADD / STA</span> was assembly with the serial numbers filed off; <i>Under the Hood</i> built the circuits that execute exactly such instructions",
+     "Find the line that calls printf — <span class='mono'>call printf</span> on the lab's x86 machines (<span class='mono'>bl _printf</span> on an Apple/ARM laptop)"),
+  html("div",'<div class="note">This is the floor where the two halves of the course meet: <b>your C above, your transistors below.</b> The compiler is the staircase between them.</div>'))},
+
+{title:"Stage 3 — the assembler: text becomes bits", body:()=> e(F,null,
+  html("pre",'gcc -c hello.c        # produces hello.o\n./hello.o             # try to run it'),
+  html("p",'The machine refuses: <span class="mono">Exec format error</span>.'),
+  li("<span class='mono'>hello.o</span> holds <b>real machine instructions</b> — the assembler has done its whole job. And yet it will not run",
+     "Your manual says why, in one sentence (Section 2.5): <i>“Object code cannot yet be run, because it may refer to library functions such as <span class='mono'>printf</span> whose code is elsewhere.”</i>",
+     "<b>Elsewhere.</b> That word is the whole of stage 4"),
+  html("div",'<div class="note">You never wrote <span class="mono">printf</span>. You have never seen its code. You have been calling a stranger\'s program since Lab 01 — and something has to make the introduction.</div>'))},
+
+{title:"Stage 4 — the linker, and one letter of proof", body:()=> e(F,null,
+  html("pre",'nm hello.o'),
+  table(["What you see","How to read it"],[
+    ["<span class='mono'>0000000000000000 T main</span>","<b>T</b> = <i>Text</i>: defined right here, at this address. This is your code"],
+    ["<span class='mono'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;U printf</span>","<b>U</b> = <b>Undefined</b>. Named, called — and <i>missing</i>. No address, because there is nothing here to point at"]]),
+  html("p",'<span class="big">That single <span class="mono">U</span> is the reason the linker exists.</span>'),
+  html("pre",'gcc hello.o -o hello     # the linker finds printf in the C library, fills in the address\n./hello                  # Hello, world!'),
+  html("div",'<div class="note">Run <span class="mono">nm hello</span> on the finished executable and watch the <span class="mono">U</span> disappear. <b>Linking is the act of resolving every promise your code made.</b> (On macOS the names carry a leading underscore: <span class="mono">_main</span>, <span class="mono">_printf</span>.)</div>'))},
+
+{title:"The whole pipeline, in five commands", body:()=> e(F,null,
+  html("pre",'gcc -E hello.c | tail        # 1. preprocessor: stdio.h really was pasted in\ngcc -S hello.c               # 2. compiler:     read hello.s — this is the assembly\ngcc -c hello.c               # 3. assembler:    hello.o — machine code that will not run\nnm hello.o                   # 4. the evidence: T main, U printf\ngcc hello.o -o hello         # 5. linker:       the U is resolved; now ./hello runs'),
+  li("Do this yourself tonight, on your own <span class='mono'>hello.c</span>. Five commands, four artifacts, one afternoon's worth of mystery removed",
+     "Curious how <span class='mono'>gcc</span> orchestrates it? Run <span class='mono'>gcc -v hello.c -o hello</span> and watch it call each tool by name"))},
+
+{title:"An audit, on your own manual", body:()=> e(F,null,
+  html("p",'Your lab manual (<span class="mono">Labs &rarr; Lab Manual</span> on the course site), <b>Section 2.9</b>, states in print:'),
+  html("div",'<div class="note"><i>“Increment <span class="mono">++</span> and decrement <span class="mono">--</span> are more efficient than their longhand equivalents: <span class="mono">x++</span> is faster than <span class="mono">x = x + 1</span>.”</i></div>'),
+  html("p",'You now own the instrument to <b>check that claim</b> instead of believing it:'),
+  html("pre",'printf \'int f(int x){ x++; return x; }\\n\'      > a.c\nprintf \'int f(int x){ x = x + 1; return x; }\\n\' > b.c\ngcc -S a.c -o a.s && gcc -S b.c -o b.s\ndiff a.s b.s'),
+  html("p",'<span class="big"><span class="mono">diff</span> prints nothing. The two forms compile to the <b>identical instruction</b> — with optimisation and without.</span>'),
+  html("div",'<div class="note">The claim was true in 1975, when compilers were simpler, and it has been repeated ever since. Write <span class="mono">x++</span> because it is <b>shorter to read</b>, never because it is faster. And notice what just happened: a printed, plausible, widely-repeated claim — <i>checked against the machine, in eight seconds, by you.</i> Week 1 said the same about a Dijkstra quote. This time you held the instrument.</div>'))},
+
+{title:"Two kinds of error — and the one nobody catches", body:()=> e(F,null,
+  table(["","Syntax error","Logical error"],[
+    ["<b>Who catches it</b>","the <b>compiler</b> — stage 2, before anything runs","<b>nobody</b>, automatically"],
+    ["<b>Example</b>","missing semicolon, misspelled <span class='mono'>printf</span>","<span class='mono'>area = 2 * PI * r</span> when you meant <span class='mono'>PI * r * r</span>"],
+    ["<b>Result</b>","no executable is produced — the machine refuses","a program that compiles, runs, and is <b>confidently wrong</b>"]]),
+  li("Your Lab 02 checker was an auditor of the second kind: your program compiled cleanly <i>and still failed</i>, on inputs you had never seen. That is what a spec is for",
+     "The compiler is the <b>first</b> auditor your code meets — and its only question is <i>“is this legal C?”</i> It never asks <i>“is this what was asked for?”</i>"),
+  html("div",'<div class="note">Four programs stand between your source and your executable. <b>Not one of them has read the problem statement.</b> Only you have.</div>'))},
+
+{cls:"accent", body:()=> e(F,null,
+  e("div",{className:"quote"},"“It compiled” means the grammar was legal. Nothing more.",
+    e("small",null,"Four tools checked your syntax. Zero of them checked your intent. So who checks the spec?")))},
+
+{title:"This week", body:()=> e(F,null,
+  li("<b>Run the five commands</b> on your own <span class='mono'>hello.c</span>. Keep <span class='mono'>hello.i</span>, <span class='mono'>hello.s</span> and <span class='mono'>hello.o</span> — how many lines each, how many bytes, and which one will run?",
+     "<b>Run the audit</b> on Section 2.9's <span class='mono'>x++</span> claim yourself. Bring the <span class='mono'>diff</span> output — or a counter-example, if you find one. Say so loudly if you do",
+     "<b>Predict, then check:</b> add <span class='mono'>#define SIZE 10</span> to a program, use <span class='mono'>SIZE</span> twice, and find both substitutions in the <span class='mono'>gcc -E</span> output",
+     "<b>Break it on purpose:</b> call a function you never defined — <span class='mono'>foo();</span> — then compile with <span class='mono'>gcc -c</span> (it succeeds!) and without it (it fails). <i>Which stage complained, and why only that one?</i>"),
+  html("div",'<div class="note">Next: repetition — <span class="mono">while</span>, <span class="mono">do-while</span> and <span class="mono">for</span>: one idea in three costumes. The program finally gets to <b>repeat itself</b> — and Lab 04 puts it to work the same afternoon.</div>'))},
+
+];
+
+/* ---------- deck engine ---------- */
+function Deck(){
+  const [i,setI] = React.useState(()=>{
+    const n=parseInt(location.hash.slice(1)); return Number.isInteger(n)&&n>=0&&n<SLIDES.length? n:0; });
+  const go = React.useCallback(d=>{
+    setI(cur=>{ const n=Math.min(SLIDES.length-1, Math.max(0, cur+d)); location.hash="#"+n; return n; });
+  },[]);
+  React.useEffect(()=>{
+    const k=ev=>{ if(["ArrowRight","PageDown"," "].includes(ev.key)) go(1);
+                  else if(["ArrowLeft","PageUp"].includes(ev.key)) go(-1);
+                  else if(ev.key==="Home"){ setI(0); location.hash="#0"; } };
+    window.addEventListener("keydown",k); return ()=>window.removeEventListener("keydown",k);
+  },[go]);
+  const s=SLIDES[i];
+  return e("div",{className:"deck"},
+    e("div",{className:"clickzone",style:{left:0},onClick:()=>go(-1)}),
+    e("div",{className:"clickzone",style:{right:0},onClick:()=>go(1)}),
+    e("div",{className:"slide "+(s.cls||"")},
+      s.title? e("h2",null,s.title):null,
+      s.body()),
+    e("div",{className:"bar"}, e("div",{style:{width:((i+1)/SLIDES.length*100)+"%"}})),
+    e("div",{className:"foot"},
+      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 08 · From Source to Executable"),
+      e("span",{className:"navhint"},"← → to navigate"),
+      e("span",null, (i+1)+" / "+SLIDES.length)));
+}
+ReactDOM.createRoot(document.getElementById("root")).render(e(Deck));
+</script>
+</body>
+</html>
