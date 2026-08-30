@@ -1,22 +1,174 @@
-# Lab 03: for Loops {.unnumbered}
+# Lab 03: Solid Ground {.unnumbered}
 
-| | Electrical | Mechanical & Materials |
+| | Electrical | Mechanical | Metallurgy & Materials |
+|---|---|---|---|
+| **Date** | Tue Aug 25 | Wed Sep 2 | Wed Sep 2 |
+| **Time & Room** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4021** |
+
+**Lab pack:** [lab03.tar.gz](../labs/lab03.tar.gz) — pre-placed on lab machines, downloadable for home practice.
+
+**Evaluation:** **graded** — equal share of the 20% lab component. Three graded problems, five fill-in-the-blank programs, and sixteen drills, plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.
+
+::: {.callout-note}
+**Nothing new today.** No new constructs, no new syntax. Everything here is Week 3 —
+types, variables, assignment, operators and precedence — met again, from a different
+angle, until it is automatic. Lab 02 asked you to *write* programs. Today mostly asks
+you to *predict* them, which is harder and more useful.
+:::
+
+## The two things that went wrong last time
+
+We fixed both in the pack, so read this once:
+
+**1. People got lost.** So this week the installer does not tell you where to go — it
+**puts you there**, and changes your prompt to prove it:
+
+```
+[lab03 OK w04-l03-ee-sd]$
+```
+
+If you can see `[lab03 OK ...]` at the left of your cursor, you are in the right place.
+If you cannot, you are not. There is now exactly one command to remember, and it works
+from anywhere at all:
+
+```bash
+./where.sh
+```
+
+It never changes anything. It tells you where you are, where your workspace is, and
+prints the exact line to copy to get back.
+
+**2. People lost marks on formatting, not on thinking.** So this week **the final
+`printf` is already written for you** in every file. You cannot get the output format
+wrong, because you are not writing it. If the checker says `WRONG`, it means your
+*computation* is wrong — which is a much more useful thing to be told.
+
+## Act 0 · Land (10 min)
+
+Pack pre-placed on machines, or:
+
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz
+```
+
+```bash
+tar xzf lab03.tar.gz
+cd lab03
+./install.sh
+```
+
+It will drop you inside your workspace with the new prompt. Then start the recorder:
+
+```bash
+script session.txt
+```
+
+The transcript travels in your bundle and is the proof of your own work.
+
+::: {.callout-important}
+Do not go any further until your prompt shows `[lab03 OK ...]`. If it does not, run
+`./where.sh` and paste the line it gives you.
+:::
+
+## Act 1 · Drills — predict, then run (35 min)
+
+Sixteen tiny programs. For each one you will **see the code, write down what you think
+it prints, and only then run it**.
+
+```bash
+./drill.sh --all
+```
+
+Predicting is the exercise. Running is only the marking. A wrong prediction is worth
+exactly as many marks as a right one — but only if you actually write it down first, so
+be honest with yourself. The one thing that earns nothing is running the program before
+you have committed to an answer.
+
+What they cover:
+
+| Drills | Territory |
+|---|---|
+| d01–d04 | integer vs. real division, `%` with negatives, where a cast goes |
+| d05–d08 | precedence, associativity, `*=`, chained assignment |
+| d09–d12 | characters as numbers, truncation, deriving the case gap |
+| d13–d14 | what `printf` rounds, pads, and refuses to add |
+| s1–s2 | *(stretch)* a comparison is a value; why `%` refuses floats |
+
+`./drill.sh` on its own shows your progress. `./drill.sh 7` re-runs just number 7.
+
+::: {.callout-tip}
+Drill 04 is the single most expensive misconception in this course. If you get it wrong,
+stop and stare at it until it is obvious — it comes back in `f2`, `f5` and `e2`.
+:::
+
+## Act 2 · Fill in the blanks (35 min)
+
+Five complete programs. The declarations are written, the `scanf` is written, the final
+`printf` is written. **Only the expressions are missing**, marked `/* TODO */`.
+
+| File | Program | Blanks |
 |---|---|---|
-| **Date** | Tue Aug 18, 2026 | Wed Aug 19, 2026 |
-| **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
+| `f1_money.c` | paise → rupees and paise | 2 |
+| `f2_average.c` | average of three integers, 2 decimals | 1 |
+| `f3_swap.c` | swap two variables | 3 — *and the order matters* |
+| `f4_upper.c` | a lowercase letter → uppercase + its code | 2 |
+| `f5_temp.c` | Celsius → Fahrenheit | 1 |
 
-**Syllabus practical module:** 5 — Writing programs using `for` loops
+Check them one at a time as you go:
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+```bash
+./check.sh f1
+```
 
-## Pre-Lab
+The shipped files **do not compile** until you fill the blanks — that is expected, and
+the compiler will point straight at the `/* TODO */` you have not done yet.
 
-*To be posted — what to read/install before the session.*
+## Act 3 · The graded three (30 min, solo)
 
-## Exercises
+Same shape: everything written except the computation.
 
-*To be posted before the session.*
+| Problem | Task | Final line ends with exactly |
+|---|---|---|
+| `e1.c` | total inches → feet and inches | `feet=<F> inches=<I>` |
+| `e2.c` | percentage scored, 2 decimals | `pct=<P>` |
+| `e3.c` | an uppercase letter → lowercase + its code | `lower=<C> code=<N>` |
 
-## Submission
+Each one is a relative of something you have already done today: `e1` is `f1` with a
+different divisor, `e2` is the `f2` trap in new clothes, and `e3` is `f4` held up to a
+mirror — same gap, opposite direction. Work out the direction rather than guessing it.
 
-Submission instructions will be provided in the lab.
+**How checking works** — as in Lab 02: `./check.sh e1` compiles *your source* and runs
+it on the public inputs from the spec **and on fresh random inputs drawn from the
+GIVEN**. A program that memorises the example fails the next draw. Only one that
+computes survives.
+
+## Act 4 · Check, fix, bundle (10 min)
+
+```bash
+./check.sh
+```
+
+Fix, re-check, repeat. Then — green or time-up (an imperfect bundle beats no bundle):
+
+```bash
+./check.sh --bundle
+```
+
+Carry `../lab03_<rolls>_<branch>_w<NN>.tar.gz` out with you (Moodle + email yourself).
+The machine forgets.
+
+## Stretch (fast finishers)
+
+- Do drills `s1` and `s2` if you skipped them.
+- **Round, don't truncate.** `e1` throws away the leftover inches. Using only `/`, `%`
+  and `+`, print the number of feet *rounded to the nearest foot* instead. No `if`, no
+  library. (Hint: what happens if you add half a foot before dividing?)
+- **Break `f2`.** Find three inputs in the GIVEN where an average computed with `/3`
+  and one computed with `/3.0` differ by as much as possible. Put them in
+  `notes/answers.txt`.
+
+## Reflect
+
+✍️ Into `notes/answers.txt`: look back at your `notes/drills.log`. Pick the one drill you
+got most wrong. In two sentences — what did you believe before you ran it, and what do
+you believe now?

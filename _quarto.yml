@@ -6,6 +6,8 @@ project:
     - materials/
     - notebooks/
     - labs/
+    - "!private/**"
+    - "!private/"
 
 book:
   title: "CS-1-01 (MO)"
@@ -64,7 +66,8 @@ book:
         - labsheets/lab10.qmd
         - labsheets/lab11.qmd
         - labsheets/lab12.qmd
-        - labsheets/lab13.qmd
+        # lab13.qmd unlisted: holidays leave 12 lab sessions, not 13.
+        # The file is kept on disk — re-add this line if a 13th slot appears.
     - part: "Materials & Notebooks"
       chapters:
         - materials/index.qmd

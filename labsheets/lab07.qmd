@@ -2,7 +2,7 @@
 
 | | Electrical | Mechanical & Materials |
 |---|---|---|
-| **Date** | Tue Sep 15, 2026 | Wed Sep 30, 2026 |
+| **Date** | Tue Sep 29, 2026 | Wed Oct 7, 2026 |
 | **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
 
 **Syllabus practical module:** 7 — Writing programs using functions and recursion

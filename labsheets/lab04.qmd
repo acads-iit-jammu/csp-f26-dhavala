@@ -1,11 +1,13 @@
-# Lab 04: while & do-while Loops {.unnumbered}
+# Lab 04: Loops {.unnumbered}
 
 | | Electrical | Mechanical & Materials |
 |---|---|---|
-| **Date** | Tue Aug 25, 2026 | Wed Sep 2, 2026 |
+| **Date** | Tue Sep 1, 2026 | Wed Sep 9, 2026 |
 | **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
 
-**Syllabus practical module:** 6 — Writing programs using `while` and `do-while` loops
+**Syllabus practical modules:** 5 and 6 — `for` loops, and `while` / `do-while` loops.
+They are taught together: the three forms are one idea in three costumes, and converting
+between them is a better exercise than meeting them a week apart.
 
 **Evaluation:** Graded — equal weight within the 20% lab component.
 
