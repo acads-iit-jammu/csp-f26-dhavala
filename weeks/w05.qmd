@@ -1,22 +1,64 @@
-# W05: Compilation & the Toolchain {.unnumbered}
+# W05: From Source to Executable {.unnumbered}
 
 **Dates:** Mon Aug 31 & Tue Sep 1, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 3 — Programming types; C program structure; compiler, interpreter (4 h)
+**Syllabus module:** 3 — C program structure; compiler, interpreter (4 h)
 
 ## Pre-read
 
-*To be posted (typically by the weekend before).*
+- Open the **shared lab manual** ([CLab3](../labs/CLab3_Aroof.pdf)) at **§2.5 — The C Compilation Model**, and look at the four-box diagram. You have been running all four boxes since Lab 01 without naming any of them.
+- Keep **§2.10 (order of precedence)** to hand — Monday opens with a live drill against it (predict every line before it runs).
+- Optional: skim [Lec 6](../cs1100-cse-iitm-2021/slides/Lec6.pdf) — *Execution of programs, compilers* (Prof. Shweta Agrawal, IIT Madras).
 
 ## In Class
 
-- [Lec 6](../cs1100-cse-iitm-2021/slides/Lec6.pdf) — Execution of programs, compilers
-- Notes (to be posted) — source/assembly/object files, linker, loader; compiler vs. interpreter
+**Monday — what happens between `gcc hello.c` and `./hello`:**
+
+- 📽️ [**Deck 08 — From Source to Executable**](../materials/w05-deck-08-source-to-executable.html) — the week's slides:
+  - **Lab 03 closed out** — the checked three worked together: `e1` (inches → feet, one division read twice), `e2` (the `100.0` that is the whole problem), `e3` (`'a' - 'A'` — derive the gap, never write 32). Everyone meets these again in Lab 04.
+  - **The bridge:** who decided that `marks * 100 / total` was integer division? Not the running program — **the compiler**, before a single instruction executed. Precedence and type rules are settled at compile time, and `gcc -S` shows it.
+  - **The four programs, not one:** `gcc` is a driver. Preprocessor (`-E`) → compiler (`-S`) → assembler (`-c`) → linker, each stopped and inspected in turn.
+  - **The centrepiece:** `nm hello.o` prints `T main` and `U printf`. That single **U** — *undefined* — is the reason the linker exists.
+  - **An audit on your own manual:** §2.9 claims `x++` is faster than `x = x + 1`. It is not, and you can prove it in eight seconds with `diff`.
+  - **Two kinds of error:** the compiler catches syntax and never intent. Four tools stand between your source and your executable, and *none of them has read the problem statement*.
+- [Lec 6](../cs1100-cse-iitm-2021/slides/Lec6.pdf) — companion slides (Prof. Shweta Agrawal, IIT Madras)
+
+**Tuesday — loops:**
+
+- `while`, `do-while` and `for` — the three forms as **one idea in three costumes**, and how to convert between them. Loop conditions are where Monday's drills pay off: a comparison is a *value*, and `1 < x < 3` is always true.
+- Straight into **Lab 04** the same afternoon (EE, 2:00 pm), which is built on exactly this.
+- [Lec 9](../cs1100-cse-iitm-2021/slides/Lec9.pdf) — *First loop construct: `while`* · [Lec 12](../cs1100-cse-iitm-2021/slides/Lec12.pdf) — *`for` loop* (Prof. Shweta Agrawal, IIT Madras)
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+- **Run the five commands** on your own `hello.c`. Keep `hello.i`, `hello.s` and `hello.o` — how many lines each, how many bytes, and which of them will run?
+
+  ```bash
+  gcc -E hello.c | tail        # preprocessor: stdio.h really was pasted in
+  gcc -S hello.c               # compiler:     read hello.s — this is the assembly
+  gcc -c hello.c               # assembler:    hello.o — machine code that will not run
+  nm hello.o                   # the evidence: T main, U printf
+  gcc hello.o -o hello         # linker:       the U is resolved; now ./hello runs
+  ```
+
+- **Run the audit yourself.** Compile `x++` and `x = x + 1` to assembly and `diff` them. Bring the output — or a counter-example, if you find one.
+- **Predict, then check:** add `#define SIZE 10` to a program, use `SIZE` twice, and find both substitutions in the `gcc -E` output. Where did the word `SIZE` go?
+- **Break it on purpose:** call a function you never defined — `foo();` — then compile with `gcc -c` (it succeeds!) and without it (it fails). Which stage complained, and why only that one?
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning: the week's informal column.*
+
+**The oldest version of "code you didn't write"**
+
+This week you ran `nm hello.o` and found a single letter waiting for you: `U printf`. Undefined. Your program called a function you never wrote, never read, and — until Monday — never thought about. It compiled anyway. It ran anyway. It printed anyway.
+
+Sit with how strange that is. Since Lab 01 you have been shipping programs whose behaviour depends on code you have not audited. Not a little of it: `printf` alone is thousands of lines of format-string parsing, buffering, and system calls. You trusted it completely, and you were right to — but notice that you never *decided* to trust it. The trust arrived pre-installed, in the shape of a `#include` line the lab sheet told you to type.
+
+This is the oldest version of the problem everyone is arguing about in 2026. "Code you did not write, running in your program, doing things you have not verified" is not something AI invented. It is what a **library** is, and it is what the **linker** does for a living: take your unresolved promises and quietly bind them to somebody else's implementation. The industry has been doing this since the 1950s. What has changed is not the nature of the problem but its *scale* and its *provenance* — the stranger's code now arrives faster, in larger quantities, and from a source that cannot tell you where it came from.
+
+So the interesting question is not *"should I use code I didn't write?"* — you already do, hundreds of thousands of lines of it, every time you type `gcc`. The question is **what makes trust reasonable**. And the C library gives a genuinely good answer, worth naming because you will spend a career looking for it again: `printf` is trustworthy because it has a **specification** (the C standard says precisely what `%d` must do), because that specification is **stable** (code written in 1990 still works), and because it has been **checked against that specification** by more people, for longer, than almost any other artifact in engineering. Not because it is famous. Not because it usually works. Because someone wrote down what it must do, and then the world spent thirty-five years trying to catch it not doing that.
+
+Measure the new stranger by the same ruler. When a machine hands you forty lines of C, ask the three questions the linker's stranger can answer: *what is it supposed to do, stated precisely enough to check? does that statement stay true tomorrow? and who has actually checked?* Very often the honest answers are: nothing written down, no, and nobody. That is not a reason to refuse the code. It is a precise description of what **you** now have to supply — which is exactly the work this course keeps handing you, and exactly why your Lab 02 checker tested your program on numbers you had never seen.
+
+There is a coda, and Monday earned it. Four programs stood between your source and your executable — preprocessor, compiler, assembler, linker — and every one of them inspected your code with great rigour. Not one of them asked whether it solved the problem. The most sophisticated tooling in your possession is *structurally incapable* of the one check that matters most. That was true in 1975 and it is true of the newest model released this year: tools verify form; only you verify intent. The `U` was undefined until someone resolved it. So is the question of whether your program is right.

@@ -39,6 +39,21 @@ The schedule below is **tentative** and covers all 11 practical modules of the [
 The syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave **12 sessions = 24 hours**. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (`for`, `while` and `do-while` are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.
 :::
 
+## Lab Manual (reference)
+
+The department's shared lab manual for this course covers the ground every section works
+from, and several lab sheets and lecture decks refer to it by section number:
+
+| Manual | Sections worth bookmarking |
+|---|---|
+| 📕 [**The C Programming Laboratory**](labs/CLab3_Aroof.pdf) (PDF, 12 pp.) | **§1** the `vim` editor · **§2.5** the C compilation model (preprocessor → compiler → assembler → linker) · **§2.7–2.8** variables, types, `#define` vs `const`, escape sequences · **§2.9–2.10** operators and the full **precedence table** · **§3** `printf` and `scanf` |
+
+: {tbl-colwidths="[28,72]"}
+
+*Prepared by [Aroof Aimen](https://www.iitjammu.ac.in/faculty/~aroofaimen), Department of
+Computer Science & Engineering, IIT Jammu — Laboratory Manual Part II, August 2026. Shared
+across all sections of CS-1-01 (MO); reproduced here with thanks.*
+
 ## Lab Packs (downloads)
 
 Every lab ships as a pack — extract, run `./install.sh`, follow the lab sheet. Students and staff use the **same file**.
@@ -48,6 +63,7 @@ Every lab ships as a pack — extract, run `./install.sh`, follow the lab sheet.
 | [lab01.tar.gz](labs/lab01.tar.gz) | `wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz` |
 | [lab02.tar.gz](labs/lab02.tar.gz) | `wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz` |
 | [lab03.tar.gz](labs/lab03.tar.gz) | `wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz` |
+| [lab04.tar.gz](labs/lab04.tar.gz) | `wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab04.tar.gz` |
 
 : {tbl-colwidths="[20,80]"}
 

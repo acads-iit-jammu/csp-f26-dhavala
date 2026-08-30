@@ -13,6 +13,16 @@
 
 ## Online Material
 
+### The C Programming Laboratory (IIT Jammu lab manual)
+
+📕 [**The C Programming Laboratory**](labs/CLab3_Aroof.pdf) — the department's shared lab
+manual for this course: the `vim` editor, the C compilation model (§2.5), variables and
+types, the operator **precedence table** (§2.10), and `printf`/`scanf`. Lecture decks and
+lab sheets cite it by section number, so it is worth keeping open.
+
+*Prepared by [Aroof Aimen](https://www.iitjammu.ac.in/faculty/~aroofaimen), Dept. of CSE,
+IIT Jammu — Laboratory Manual Part II, August 2026. Reproduced here with thanks.*
+
 ### MIT OCW 6.087: Practical Programming in C
 
 [MIT OpenCourseWare 6.087 (IAP 2010)](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/) is an excellent, compact companion to this course, with full lecture notes, labs, and assignments (with solutions):

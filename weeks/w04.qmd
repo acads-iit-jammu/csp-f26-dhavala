@@ -1,21 +1,18 @@
-# W04: C Program Structure {.unnumbered}
+# W04: Number Systems (Lec 4) · Data Types {.unnumbered}
 
 **Dates:** Mon Aug 24 & Tue Aug 25, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 3 — Programming types; C program structure; compiler, interpreter (4 h)
-
-## Pre-read
-
-*To be posted (typically by the weekend before).*
+**Syllabus module:** 2 close-out (number systems) · 3 — C program structure; data types
 
 ## In Class
 
-- [Lec 4](../cs1100-cse-iitm-2021/slides/Lec4.pdf) — Our first C program; basic data types, operators, keywords
-- Notes (to be posted) — declarative vs. imperative programming
+- **Number systems, from [Lec 4](../cs1100-cse-iitm-2021/slides/Lec4.pdf)** — the representation thread closed out on Prof. Agrawal's slides, after CT-1. Reference decks: [Deck 03 — Number Systems](../materials/w02-deck-03-number-systems.html) and [Deck 05 — Complements & Overflow](../materials/w03-deck-05-complements-overflow.html).
+- **Data types** — the wardrobe of basic types (`char`, `int`, `float`, `double`) as *size + reading convention*, each with the edge of its world; `sizeof`. Deck: [Deck 07 — Types, Assignments & Operators](../materials/w03-deck-07-types-operators.html).
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+- Run `sizeof` on every basic type on your own machine and write the table down. Which of those numbers are guaranteed by C, and which are just what *our* compiler chose?
+- For each type, name a value it cannot hold. What happens if you try?
 
 ## PAGAL Notes
 

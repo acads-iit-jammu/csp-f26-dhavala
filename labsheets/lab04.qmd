@@ -1,24 +1,149 @@
 # Lab 04: Loops {.unnumbered}
 
-| | Electrical | Mechanical & Materials |
-|---|---|---|
-| **Date** | Tue Sep 1, 2026 | Wed Sep 9, 2026 |
-| **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
+| | Electrical | Mechanical | Metallurgy & Materials |
+|---|---|---|---|
+| **Date** | Tue Sep 1 | Wed Sep 9 | Wed Sep 9 |
+| **Time & Room** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4021** |
+
+**Lab pack:** [lab04.tar.gz](../labs/lab04.tar.gz) — pre-placed on lab machines, downloadable for home practice.
 
 **Syllabus practical modules:** 5 and 6 — `for` loops, and `while` / `do-while` loops.
-They are taught together: the three forms are one idea in three costumes, and converting
-between them is a better exercise than meeting them a week apart.
+They are taught together on purpose: the three forms are one idea in three costumes, and
+converting between them is a better exercise than meeting them a week apart.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Evaluation:** Graded — equal weight within the 20% lab component. Ten drills, five
+fill-in-the-blank programs, and three checked problems, plus observed work and a short
+viva. Teams of 1–2; pairs swap driver/navigator at half-time.
 
-## Pre-Lab
+**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
 
-*To be posted — what to read/install before the session.*
+## What changes today
 
-## Exercises
+**You write the `scanf` now.** Until last week the reading was done for you and you
+supplied the thinking. From today the starters give you the declarations and the final
+`printf` — nothing else. The scaffolding comes away one plank at a time; this is the
+first plank.
 
-*To be posted before the session.*
+**And the starters do not compile as shipped.** That is deliberate. Every blank is a
+name the compiler has never heard of, so instead of a wrong answer you get a message
+naming the exact line still waiting for you:
 
-## Submission
+```
+e3.c:19:5: error: use of undeclared identifier 'TODO_read_a_and_b'
+```
 
-Submission instructions will be provided in the lab.
+## Act 0 · Land (10 min)
+
+Pack pre-placed on machines, or:
+
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab04.tar.gz
+```
+
+```bash
+tar xzf lab04.tar.gz
+cd lab04
+./install.sh
+```
+
+It puts you *inside* your workspace and changes your prompt to prove it. Then start the
+recorder:
+
+```bash
+script session.txt
+```
+
+::: {.callout-important}
+Do not go further until your prompt shows `[lab04 OK ...]`. If it does not, run
+`./where.sh` — it changes nothing, and it prints the exact line to copy to get back.
+:::
+
+## Act 1 · Drills — predict, then run (25 min)
+
+Ten drills. For each: **see it, write down what you think happens, and only then run it.**
+
+```bash
+./drill.sh --all
+```
+
+| Drills | Territory |
+|---|---|
+| `t01` | one type conversion, to keep it warm — does a `float` variable rescue an `int` division? |
+| `p01`–`p04` | precedence, aimed straight at **loop conditions**: a comparison is a *value*; `0 < n < 3` lies; `<` vs `<=` at the boundary; and `=` is not `==` |
+| `L1`–`L5` | **the compiler pipeline, by hand** — the four stages from Monday's lecture, one command each, ending at `nm` and the `U printf` that explains why linkers exist |
+
+A wrong prediction scores exactly as much as a right one — but only if you write it down
+first. `L1`–`L5` are self-marked; marking yourself right when you were not simply throws
+away the one record that shows you what to revise.
+
+## Act 2 · Fill the blanks (25 min)
+
+Five programs, each missing its `scanf` and the lines that make the loop move.
+
+| File | What it does |
+|---|---|
+| `b1_sum_while.c` | add 1 + 2 + … + n, with a `while` |
+| `b2_sum_for.c` | **the same sum, as a `for`** — convert it; do not copy it |
+| `b3_digits.c` | how many digits does n have? (`/10` until it runs out) |
+| `b4_factorial.c` | n! — and the GIVEN stops at 12. Work out why |
+| `b5_digits0.c` | digits again, but n may be **0** |
+
+::: {.callout-tip}
+Do `b3` first, then feed your answer `0`. It says **zero digits** — wrong, because a
+`while` checks *before* it runs, so the body never runs at all. `b5` is the same problem
+with `do-while`, which checks *after*. That contrast is the entire reason C has three
+loops instead of one.
+:::
+
+## Act 3 · The checked three (40 min, solo)
+
+| Problem | Task | Final line ends with exactly |
+|---|---|---|
+| `e1.c` | sum and count of the even numbers up to n | `sum=<S> count=<C>` |
+| `e2.c` | reverse the digits of n | `rev=<R>` |
+| `e3.c` | greatest common divisor of two numbers | `gcd=<G>` |
+
+`e2` has a public example worth reading twice: `900` → `rev=9`. Reversed, 900 is 009, and
+a number has no leading zeros. The checker *will* draw numbers ending in zero.
+
+`e3` is Euclid, 300 BC. The whole algorithm rests on one fact — **`gcd(a, b)` is the same
+number as `gcd(b, a % b)`**. Check it by hand on 48 and 18 before you write anything. The
+pair keeps changing; the answer never does. That unchanging thing is a **loop invariant**,
+and it is why you may stop the moment `b` reaches 0.
+
+**How checking works** — as before: `./check.sh e1` compiles *your source* and runs it on
+the public examples **and on fresh random inputs drawn from the GIVEN**. A program that
+memorises an example fails the next draw. New this week: if the checker says **`TIMEOUT`**,
+your loop never ends — nothing is wrong with the machine.
+
+## Act 4 · Check, fix, bundle (10 min)
+
+```bash
+./check.sh
+```
+
+Fix, re-check, repeat. Then — green or time-up (an imperfect bundle beats no bundle):
+
+```bash
+./check.sh --bundle
+```
+
+Carry `../lab04_<rolls>_<branch>_w<NN>.tar.gz` out with you (Moodle + email yourself).
+The machine forgets.
+
+## Stretch (fast finishers)
+
+- **The triangle, properly.** Lab 02's stretch made you print a 4-row triangle with *one
+  `printf` per line*, because you had no loops. Write it again with nested loops, and make
+  the number of rows something the user types. Then read the two versions side by side —
+  that diff is three weeks of progress.
+- **Convert all three.** Rewrite `e1` as a `while`, `e2` as a `for`, `e3` as a `do-while`.
+  One of the three will fight you. Which, and why?
+- **Count the rounds.** Add a counter to `e3` and print how many times the loop ran for
+  `48 18`, then for two large numbers close together. Euclid is fast — how fast?
+
+## Reflect
+
+✍️ Into `notes/answers.txt`: look at `notes/drills.log` and pick the drill you got most
+wrong. In two sentences — what did you believe before you ran it, and what do you believe
+now?

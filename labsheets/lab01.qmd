@@ -9,6 +9,8 @@
 
 **Teams:** one or two students per machine. Pairs: one of you *drives* (keyboard), the other *navigates* (owns the sheet, calls the predictions). **Swap roles at the half-time whistle.** Both of you must be able to explain every command afterwards.
 
+**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
+
 ## What you'll be able to do after this lab
 
 | | |

@@ -16,6 +16,8 @@ angle, until it is automatic. Lab 02 asked you to *write* programs. Today mostly
 you to *predict* them, which is harder and more useful.
 :::
 
+**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
+
 ## The two things that went wrong last time
 
 We fixed both in the pack, so read this once:

@@ -13,6 +13,8 @@
 **Work ONLY inside your workspace.** The installer prints its exact path — `cd` there and stay there. Files created anywhere else are invisible to the checker, will not be bundled, and get swept by next week's cleanup. Lost? Run the compass: `pwd` → `ls` → `cd`.
 :::
 
+**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
+
 ## Warm-up circuit (8 min, predict first)
 
 One box, one step — say the prediction out loud before Enter:
