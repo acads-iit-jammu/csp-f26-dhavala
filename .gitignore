@@ -4,3 +4,5 @@ private/
 /_site/
 *.quarto_ipynb
 .claude/settings.local.json
+
+**/*.quarto_ipynb
