@@ -491,6 +491,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>An audit on your own manual:</strong> §2.9 claims <code>x++</code> is faster than <code>x = x + 1</code>. It is not, and you can prove it in eight seconds with <code>diff</code>.</li>
 <li><strong>Two kinds of error:</strong> the compiler catches syntax and never intent. Four tools stand between your source and your executable, and <em>none of them has read the problem statement</em>.</li>
 </ul></li>
+<li>📽️ <a href="../materials/w05-deck-09-why-linkers.html"><strong>Deck 09 — Why Assemblers and Linkers Exist</strong></a> — the companion deck: not <em>what</em> the stages do but <strong>why anyone built it that way</strong>. Separate compilation; object files that are <em>deliberately</em> incomplete; relocation, visible with <code>objdump -r</code>; what <code>#include</code> really gives you (a promise, not an implementation); static vs dynamic linking; and the principle underneath it all — <strong>delay a decision until it reaches the component that has enough information to make it</strong>.</li>
+<li>🖨️ <a href="../materials/w05-linkers-notes.html"><strong>Why Assemblers and Linkers Exist — notes</strong></a> — the same material as a printable handout, including the two-minute experiment worth doing with your own hands.</li>
 <li><a href="../cs1100-cse-iitm-2021/slides/Lec6.pdf">Lec 6</a> — companion slides (Prof.&nbsp;Shweta Agrawal, IIT Madras)</li>
 </ul>
 <p><strong>Tuesday — loops:</strong></p>
