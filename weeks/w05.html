@@ -440,6 +440,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#pre-read" id="toc-pre-read" class="nav-link active" data-scroll-target="#pre-read">Pre-read</a></li>
   <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
+  <li><a href="#loop-workouts-tuesday" id="toc-loop-workouts-tuesday" class="nav-link" data-scroll-target="#loop-workouts-tuesday">Loop Workouts (Tuesday)</a>
+  <ul class="collapse">
+  <li><a href="#reverse-the-digits" id="toc-reverse-the-digits" class="nav-link" data-scroll-target="#reverse-the-digits">1 · Reverse the digits</a></li>
+  <li><a href="#sum-of-evens-and-odds-until-1" id="toc-sum-of-evens-and-odds-until-1" class="nav-link" data-scroll-target="#sum-of-evens-and-odds-until-1">2 · Sum of evens and odds, until −1</a></li>
+  <li><a href="#count-the-passes" id="toc-count-the-passes" class="nav-link" data-scroll-target="#count-the-passes">3 · Count the passes</a></li>
+  </ul></li>
   <li><a href="#practice-pack" id="toc-practice-pack" class="nav-link" data-scroll-target="#practice-pack">Practice Pack</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
@@ -503,24 +509,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><a href="../cs1100-cse-iitm-2021/slides/Lec9.pdf">Lec 9</a> — <em>First loop construct: <code>while</code></em> · <a href="../cs1100-cse-iitm-2021/slides/Lec12.pdf">Lec 12</a> — <em><code>for</code> loop</em> (Prof.&nbsp;Shweta Agrawal, IIT Madras)</p></li>
 </ul>
 </section>
+<section id="loop-workouts-tuesday" class="level2">
+<h2 class="anchored" data-anchor-id="loop-workouts-tuesday">Loop Workouts (Tuesday)</h2>
+<p>Four small programs. <strong>Predict the output before you compile any of them</strong> — that habit is the whole point, not the typing. Every one of these fits in a <code>while</code> loop and needs nothing you have not already met.</p>
+<section id="reverse-the-digits" class="level3">
+<h3 class="anchored" data-anchor-id="reverse-the-digits">1 · Reverse the digits</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n<span class="op">,</span> rev <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Enter n: "</span><span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>n<span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>n <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        rev <span class="op">=</span> rev <span class="op">*</span> <span class="dv">10</span> <span class="op">+</span> n <span class="op">%</span> <span class="dv">10</span><span class="op">;</span>   <span class="co">/* catch the last digit, and carry the rest left */</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> n <span class="op">/</span> <span class="dv">10</span><span class="op">;</span>                <span class="co">/* throw that digit away */</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"rev=</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> rev<span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Two moves you already know: <code>% 10</code> takes the last digit off, <code>/ 10</code> discards it. The only new idea is where a caught digit <em>goes</em> — <code>rev * 10</code> shifts everything left to make room.</p>
+<p>Try <code>1204</code> → <code>4021</code>. Then try <strong><code>900</code></strong>, and explain the answer before you object to it. And notice what the loop did to <code>n</code>: it consumed it. If you needed <code>n</code> afterwards, you would have to keep a copy — a loop that destroys its own input is a real bug in waiting.</p>
+</section>
+<section id="sum-of-evens-and-odds-until-1" class="level3">
+<h3 class="anchored" data-anchor-id="sum-of-evens-and-odds-until-1">2 · Sum of evens and odds, until −1</h3>
+<p>The first loop where the <em>number of passes is not known in advance</em>. It runs until the user says stop. That sentinel value, <code>-1</code>, is part of the specification — not a magic number you invented.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">,</span> sum_even <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> sum_odd <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Enter numbers, -1 to stop: "</span><span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>x<span class="op">);</span>              <span class="co">/* read the FIRST one before the loop */</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>x <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            sum_even <span class="op">=</span> sum_even <span class="op">+</span> x<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            sum_odd <span class="op">=</span> sum_odd <span class="op">+</span> x<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>x<span class="op">);</span>          <span class="co">/* read the NEXT one at the end of the body */</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"even=</span><span class="sc">%d</span><span class="st"> odd=</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> sum_even<span class="op">,</span> sum_odd<span class="op">);</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is the <strong>read-ahead</strong> pattern, and the two <code>scanf</code> calls are not a mistake: the loop condition has to be able to look at a value <em>before</em> deciding whether to process it. Move the read to the top of the body and <code>-1</code> gets added to a total — try it and see.</p>
+<p>It is also the first time an <code>if</code> lives <em>inside</em> a loop. Say the invariant out loud: <em><code>sum_even</code> holds the total of every even number seen so far.</em> If that sentence stays true every pass, the program is right.</p>
+<p>Three questions worth arguing about:</p>
+<ul>
+<li>What does <code>-7 % 2</code> give? Is <code>-7</code> counted as odd by this program? (Predict, then check.)</li>
+<li>What happens if the very first number typed is <code>-1</code>?</li>
+<li>What if the user types a letter? Where does <code>scanf</code> leave you, and how would you know?</li>
+</ul>
+</section>
+<section id="count-the-passes" class="level3">
+<h3 class="anchored" data-anchor-id="count-the-passes">3 · Count the passes</h3>
+<p>Take either program above and add one line — <code>int passes = 0;</code> — with <code>passes++</code> inside the loop, and print it at the end. Now you can <em>measure</em> a loop instead of guessing about it. For the digit-reverser, how does the count relate to the number you typed?</p>
+<p>That single habit — counting the passes — is what turns “this feels slow” into an engineering argument. There is a worked example of exactly that in the <a href="../materials/w05-floor-ceil-notes.html">floor and ceiling notes</a>, where counting is what exposes the difference between a loop that takes a <em>billion</em> passes and one that takes fifty.</p>
+</section>
+</section>
 <section id="practice-pack" class="level2">
 <h2 class="anchored" data-anchor-id="practice-pack">Practice Pack</h2>
 <p>📦 <a href="../materials/w05-practice.tar.gz"><strong>w05-practice.tar.gz</strong></a> — everything we did in class, to do again yourself. Twenty-five predict-then-run items: the <strong>14 precedence drills</strong> (<code>p01</code>–<code>p14</code>) and the <strong>11 pipeline steps</strong> (<code>c01</code>–<code>c11</code>).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/materials/w05-practice.tar.gz</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf w05-practice.tar.gz</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> w05-practice</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./practice.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/materials/w05-practice.tar.gz</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf w05-practice.tar.gz</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> w05-practice</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./practice.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>./practice.sh</code> shows what is left · <code>--prec</code> or <code>--pipeline</code> for one half · <code>./practice.sh c07</code> for a single item. Same rule as the lab: <strong>predict first, then run.</strong> A wrong prediction is worth as much as a right one — but only if you wrote it down. Your answers land in <code>notes/practice.log</code>.</p>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
 <ul>
 <li><p><strong>Run the five commands</strong> on your own <code>hello.c</code>. Keep <code>hello.i</code>, <code>hello.s</code> and <code>hello.o</code> — how many lines each, how many bytes, and which of them will run?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-E</span> hello.c <span class="kw">|</span> <span class="fu">tail</span>        <span class="co"># preprocessor: stdio.h really was pasted in</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-S</span> hello.c               <span class="co"># compiler:     read hello.s — this is the assembly</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> hello.c               <span class="co"># assembler:    hello.o — machine code that will not run</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nm</span> hello.o                   <span class="co"># the evidence: T main, U printf</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> hello.o <span class="at">-o</span> hello         <span class="co"># linker:       the U is resolved; now ./hello runs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-E</span> hello.c <span class="kw">|</span> <span class="fu">tail</span>        <span class="co"># preprocessor: stdio.h really was pasted in</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-S</span> hello.c               <span class="co"># compiler:     read hello.s — this is the assembly</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-c</span> hello.c               <span class="co"># assembler:    hello.o — machine code that will not run</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nm</span> hello.o                   <span class="co"># the evidence: T main, U printf</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> hello.o <span class="at">-o</span> hello         <span class="co"># linker:       the U is resolved; now ./hello runs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Run the audit yourself.</strong> Compile <code>x++</code> and <code>x = x + 1</code> to assembly and <code>diff</code> them. Bring the output — or a counter-example, if you find one.</p></li>
 <li><p><strong>Predict, then check:</strong> add <code>#define SIZE 10</code> to a program, use <code>SIZE</code> twice, and find both substitutions in the <code>gcc -E</code> output. Where did the word <code>SIZE</code> go?</p></li>
 <li><p><strong>Break it on purpose:</strong> call a function you never defined — <code>foo();</code> — then compile with <code>gcc -c</code> (it succeeds!) and without it (it fails). Which stage complained, and why only that one?</p></li>

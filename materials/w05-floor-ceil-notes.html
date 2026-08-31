@@ -60,7 +60,77 @@
 <p>A cast truncates <strong>towards zero</strong>. For positive numbers that happens to agree with <code>floor</code>; for negative numbers it does not. So a one-line answer that passes every test you would casually try is <em>wrong on half the number line</em>.</p>
 <div class="note">This is worth sitting with for a moment. The bug is not in the arithmetic — it is in the <strong>specification</strong>. "Chop off the decimals" and "the largest integer not above X" are different requirements that agree on the examples you happened to pick. Twenty lines of loop follow from taking the spec seriously.</div>
 
-<h2><span class="n">2.</span> The plan: bracket, then bisect</h2>
+<h2><span class="n">2.</span> The simple answer: just count</h2>
+<p>Before reaching for anything clever, write the obvious loop. To find <code>floor(X)</code>,
+start at 0 and step towards X one integer at a time:</p>
+<pre>long long f = 0;
+
+if (X &gt;= 0) {
+    while (f + 1 &lt;= X)   /* can I take one more step without passing X? */
+        f++;
+} else {
+    while (f &gt; X)        /* still above X? keep going down */
+        f--;
+}
+
+printf("floor=%lld\n", f);</pre>
+<p>That is it. Two loops, no interval, no midpoint, nothing to prove. And it is <strong>correct</strong>
+— including for negatives, which is where the cast failed:</p>
+<pre>X =  3.70   floor =  3
+X = -3.70   floor = -4        <-- the cast said -3
+X =  5.00   floor =  5
+X = -0.50   floor = -1</pre>
+<p>Write this one first. A simple correct program you understand completely is worth more
+than a clever one you are guessing at, and it gives you something to check the clever one
+<em>against</em>.</p>
+
+<h2><span class="n">3.</span> And then ceiling is easy… isn't it?</h2>
+<p>Once you have the floor, the ceiling looks free:</p>
+<pre>long long c = f + 1;     /* ceil = floor + 1 */</pre>
+<p>Try it on <code>3.7</code>: floor 3, ceiling 4. Correct. Try <code>-3.7</code>: floor &minus;4, ceiling &minus;3.
+Correct. Try <code>-0.5</code>: floor &minus;1, ceiling 0. Correct.</p>
+<p>Now try <code>5.0</code>.</p>
+<table>
+  <tr><th>X</th><th>floor</th><th><code>floor + 1</code></th><th>correct ceil</th></tr>
+  <tr><td><code>3.7</code></td><td>3</td><td>4</td><td>4 &nbsp;✔</td></tr>
+  <tr><td><code>-3.7</code></td><td>&minus;4</td><td>&minus;3</td><td>&minus;3 &nbsp;✔</td></tr>
+  <tr><td><code>5.0</code></td><td>5</td><td><strong>6</strong></td><td><strong>5</strong> &nbsp;✘</td></tr>
+  <tr><td><code>-5.0</code></td><td>&minus;5</td><td><strong>&minus;4</strong></td><td><strong>&minus;5</strong> &nbsp;✘</td></tr>
+  <tr><td><code>0.0</code></td><td>0</td><td><strong>1</strong></td><td><strong>0</strong> &nbsp;✘</td></tr>
+</table>
+<p>When X is <em>already an integer</em>, floor and ceiling are the same number — and
+<code>floor + 1</code> is wrong every single time. The fix is one line:</p>
+<pre>long long c = ((double) f == X) ? f : f + 1;</pre>
+<div class="note">Look at the shape of this mistake, because it is the <strong>same shape</strong> as
+&sect;1. <code>floor + 1</code> is right for every non-integer and wrong for every integer;
+the cast was right for every positive and wrong for every negative. Both are rules that
+work on the examples you would naturally try. <strong>The cases you do not think to test are
+exactly the ones where a plausible shortcut breaks</strong> — which is why the specification, not
+the examples, has to be the thing you check against.</div>
+
+<h2><span class="n">4.</span> Correct, and unusable</h2>
+<p>So the counting loop works. Why write anything else? Count its passes:</p>
+<table>
+  <tr><th>X</th><th>counting up, one at a time</th><th>bracket-and-bisect</th></tr>
+  <tr><td><code>1 000.5</code></td><td>1 000 steps</td><td>19 steps</td></tr>
+  <tr><td><code>1 000 000.5</code></td><td>1 000 000 steps</td><td>39 steps</td></tr>
+  <tr><td><code>1 000 000 000.5</code></td><td>1 000 000 000 steps</td><td>59 steps</td></tr>
+  <tr><td><code>10<sup>18</sup> + 0.5</code></td><td>10<sup>18</sup> steps</td><td>101 steps</td></tr>
+</table>
+<p>The last row is the one to dwell on. A <code>double</code> holds 10<sup>18</sup> without
+complaint, so it is a perfectly ordinary input. At a billion steps per second — faster than
+this loop really runs — counting would take <strong>about 32 years</strong>. Bisecting takes
+101 steps, which is to say: no time at all.</p>
+<p class="big">Both programs are correct. Only one of them finishes.</p>
+<div class="note"><strong>This is what "efficiency" means, and note what it is not.</strong> It is not
+that the counting loop is ugly, or that a professional would sneer at it. It is that for
+inputs the specification plainly allows, one program returns an answer and the other does
+not — and no amount of a faster computer closes that gap. Doubling the machine speed halves
+32 years. Changing the algorithm removes them.</div>
+<p>So keep the counting loop. It is your reference implementation: simple enough to trust,
+and the thing you test the fast version against on small inputs. Then build the fast one.</p>
+
+<h2><span class="n">5.</span> The plan: bracket, then bisect</h2>
 <p>Two phases, two loops, two different jobs.</p>
 <table>
   <tr><th>Phase</th><th>What the loop does</th><th>Stops when</th></tr>
@@ -69,7 +139,7 @@
 </table>
 <p>And then you are done, with no final calculation at all: if <code>L &lt; X &lt; U</code> and <code>U - L == 1</code>, then <code>L</code> <em>is</em> <code>floor(X)</code> and <code>U</code> <em>is</em> <code>ceil(X)</code>. That is what the definitions say.</p>
 
-<h2><span class="n">3.</span> Phase 1: how to search a space with no known size</h2>
+<h2><span class="n">6.</span> Phase 1: how to search a space with no known size</h2>
 <p>We are not told how big X might be. So don't guess an upper bound — <strong>double until you have one</strong>. Starting from <code>[0,1]</code> with X = 100:</p>
 <pre>L = 1,   U = 2
 L = 2,   U = 4
@@ -80,7 +150,7 @@ L = 32,  U = 64
 L = 64,  U = 128       <-- 100 is inside. Seven steps, not a hundred.</pre>
 <p>This has a name: <strong>exponential search</strong> (or <em>galloping</em> search). It is the standard move when the search space is unbounded, and it costs about <code>log&#8322;X</code> steps to find a bound.</p>
 
-<h2><span class="n">4.</span> Phase 2: the invariant is the correctness argument</h2>
+<h2><span class="n">7.</span> Phase 2: the invariant is the correctness argument</h2>
 <p>Now halve the interval, over and over. With X = &minus;3.7 in <code>[-10, 0]</code>:</p>
 <pre>L = -10, U =  0, mid = -5   mid &lt; X, so L = mid   -> [-5, 0]
 L =  -5, U =  0, mid = -3   mid &gt; X, so U = mid   -> [-5,-3]
@@ -91,8 +161,8 @@ U - L is 1. Stop.           floor = -4,  ceil = -3</pre>
 <div class="note"><strong>What does this loop refuse to break?</strong> If you cannot say, you do not yet know whether it is correct — you only know it did not crash on your example.</div>
 <p>And the loop must <em>stop</em>: <code>U - L</code> is a positive integer that strictly decreases every pass. A decreasing positive integer cannot go on forever. That is a termination argument, and it is separate from correctness.</p>
 
-<h2><span class="n">5.</span> What does it cost?</h2>
-<p>The instrumented version counts its own steps. Starting from <code>[0,1]</code>:</p>
+<h2><span class="n">8.</span> What does it cost?</h2>
+<p>&sect;4 compared bisecting against counting. Now look at bisecting on its own, across four sizes, because the <em>shape</em> of the growth is the thing to see. The instrumented version counts its own steps; starting from <code>[0,1]</code>:</p>
 <table>
   <tr><th>X</th><th>expansions</th><th>shrinks</th><th>total steps</th></tr>
   <tr><td><code>3.7</code></td><td>2</td><td>1</td><td>3</td></tr>
@@ -104,7 +174,7 @@ U - L is 1. Stop.           floor = -4,  ceil = -3</pre>
 <p>That is what <strong>logarithmic</strong> means — here about <code>2 &times; log&#8322;X</code> steps. A number with a hundred digits would cost roughly 660 steps. This is the entire reason anyone cares about binary search, and you can see it in four rows of a table without knowing the word.</p>
 <div class="note">One more thing the table shows: for an <em>integer</em> X the shrink phase exits early, because <code>mid == X</code> is spotted before the interval is narrow. Same algorithm, different cost, depending on the input. That is the difference between best case and worst case.</div>
 
-<h2><span class="n">6.</span> Breaking it on purpose</h2>
+<h2><span class="n">9.</span> Breaking it on purpose</h2>
 <p>Try <code>X = 1e19</code> — just past the largest <code>long long</code>, 9223372036854775807. Watch the expansion loop:</p>
 <pre>L = 2882303761517117440,  U = 5764607523034234880
 L = 5764607523034234880,  U = -6917529027641081856   <-- ??
@@ -121,22 +191,23 @@ L = 0,                    U = 0                      <-- forever</pre>
 }</pre>
 <div class="note">Notice the shape of that check: <em>the loop may only take a step if the step is representable.</em> It is a precondition on the loop body. And an honest error message is a result — a hang is not.</div>
 
-<h2><span class="n">7.</span> One surprise that is not the algorithm's fault</h2>
+<h2><span class="n">10.</span> One surprise that is not the algorithm's fault</h2>
 <pre>Enter X: 9007199254740993        (that is 2^53 + 1)
 floor(X) = 9007199254740992
 ceil(X)  = 9007199254740992</pre>
 <p>Off by one, and the loop is blameless. A <code>double</code> has 53 bits of significand, so beyond 2&#8309;&#179; it cannot represent every integer. <code>scanf</code> rounded your number <em>on the way in</em>; the program then computed the exactly correct floor of the number it actually received.</p>
 <p>Week 2 is still collecting debts. It also means the phrase "X is exactly an integer" is doing something subtler than it looks.</p>
 
-<h2><span class="n">8.</span> Four things to take away</h2>
+<h2><span class="n">11.</span> Four things to take away</h2>
 <ul>
+  <li><strong>Write the simple version first, and keep it.</strong> The counting loop is correct, obvious, and hopeless on large inputs — which makes it the perfect reference to test the fast version against on small ones.</li>
   <li><strong>Read the specification, not the examples.</strong> The cast agrees with <code>floor</code> on every positive number you would casually test.</li>
   <li><strong>Name your invariant.</strong> <code>L &lt; X &lt; U</code> is not a comment; it is the reason the program is right.</li>
   <li><strong>Correctness and termination are two separate arguments.</strong> The invariant gives the first; a strictly decreasing positive integer gives the second.</li>
   <li><strong>Cost is measurable, not a feeling.</strong> Count the steps, tabulate, and the shape of the growth tells you which class of algorithm you wrote.</li>
 </ul>
 
-<h2><span class="n">9.</span> Try it yourself</h2>
+<h2><span class="n">12.</span> Try it yourself</h2>
 <ul>
   <li>Rewrite Phase 2 as a <code>do-while</code>. Does anything break for <code>X = 0.5</code> in <code>[0,1]</code>, where the loop should not run at all?</li>
   <li>The integer case is handled in <em>three</em> different places in the program. Can you make it one? Should you?</li>
