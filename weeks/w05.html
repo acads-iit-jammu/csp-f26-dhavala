@@ -497,9 +497,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>Tuesday — loops:</strong></p>
 <ul>
-<li><code>while</code>, <code>do-while</code> and <code>for</code> — the three forms as <strong>one idea in three costumes</strong>, and how to convert between them. Loop conditions are where Monday’s drills pay off: a comparison is a <em>value</em>, and <code>1 &lt; x &lt; 3</code> is always true.</li>
-<li>Straight into <strong>Lab 04</strong> the same afternoon (EE, 2:00 pm), which is built on exactly this.</li>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec9.pdf">Lec 9</a> — <em>First loop construct: <code>while</code></em> · <a href="../cs1100-cse-iitm-2021/slides/Lec12.pdf">Lec 12</a> — <em><code>for</code> loop</em> (Prof.&nbsp;Shweta Agrawal, IIT Madras)</li>
+<li><p>🖨️ <a href="../materials/w05-floor-ceil-notes.html"><strong>Floor and Ceiling — one problem, two loops</strong></a> — the day’s worked example, as a handout. Given <code>X</code>, find <code>floor(X)</code> and <code>ceil(X)</code>. Casting to <code>int</code> is <em>not</em> <code>floor</code> (it says −3 for −3.7); so: <strong>bracket, then bisect</strong>. Two loops with different jobs, the invariant <code>L &lt; X &lt; U</code> that makes the second one correct, a cost table you can read the shape of (×1000 input → <strong>+20</strong> steps), and two ways the program can lie to you — signed overflow into an infinite loop, and 2⁵³.</p></li>
+<li><p><code>while</code>, <code>do-while</code> and <code>for</code> — the three forms as <strong>one idea in three costumes</strong>, and how to convert between them. Loop conditions are where Monday’s drills pay off: a comparison is a <em>value</em>, and <code>1 &lt; x &lt; 3</code> is always true.</p></li>
+<li><p>Straight into <strong>Lab 04</strong> the same afternoon (EE, 2:00 pm), which is built on exactly this.</p></li>
+<li><p><a href="../cs1100-cse-iitm-2021/slides/Lec9.pdf">Lec 9</a> — <em>First loop construct: <code>while</code></em> · <a href="../cs1100-cse-iitm-2021/slides/Lec12.pdf">Lec 12</a> — <em><code>for</code> loop</em> (Prof.&nbsp;Shweta Agrawal, IIT Madras)</p></li>
 </ul>
 </section>
 <section id="practice-pack" class="level2">
