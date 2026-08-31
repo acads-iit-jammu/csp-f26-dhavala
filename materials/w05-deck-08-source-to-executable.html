@@ -16,7 +16,7 @@
   html,body{margin:0;height:100%;background:#0b1e3a;font-family:Roboto,system-ui,sans-serif;color:var(--ink)}
   #root{height:100%}
   .deck{height:100%;display:flex;flex-direction:column;overflow:hidden}
-  .slide{flex:1;display:flex;flex-direction:column;justify-content:center;padding:5vh 8vw;
+  .slide{flex:1;display:flex;flex-direction:column;justify-content:safe center;padding:4vh 7vw;
          background:#fff;overflow:auto}
   .slide.title{background:linear-gradient(160deg,var(--blue-dark) 0%,var(--blue) 70%,var(--blue-mid) 100%);color:#fff}
   .slide.accent{background:linear-gradient(160deg,#f6faff,var(--blue-pale))}
@@ -36,7 +36,7 @@
   .cols{display:flex;gap:4vw;flex-wrap:wrap}
   .cols>div{flex:1;min-width:260px}
   .note{background:var(--blue-pale);border-left:5px solid var(--blue);padding:.5em 1em;border-radius:0 8px 8px 0;
-        font-size:clamp(.95rem,1.7vw,1.2rem)}
+        margin:.35em 0;font-size:clamp(.9rem,1.55vw,1.1rem)}
   .quote{font-family:"Roboto Slab",serif;font-size:clamp(1.4rem,3.4vw,2.4rem);color:var(--blue-dark);
          text-align:center;line-height:1.4;margin:auto 0}
   .quote small{display:block;font-family:Roboto,sans-serif;font-size:.55em;color:#667;margin-top:1em}
@@ -48,8 +48,9 @@
   .foot b{color:#cfe3ff;font-weight:500}
   .navhint{opacity:.7}
   pre{background:#f4f8fd;border:1px solid #cfdcec;border-left:5px solid var(--blue-mid);
-      border-radius:0 8px 8px 0;padding:.6em 1em;overflow-x:auto;font-family:"Roboto Mono",monospace;
-      color:var(--blue-dark);font-size:clamp(.8rem,1.45vw,1.05rem);line-height:1.5;white-space:pre-wrap}
+      border-radius:0 8px 8px 0;padding:.5em 1em;margin:.35em 0;overflow-x:auto;
+      font-family:"Roboto Mono",monospace;color:var(--blue-dark);
+      font-size:clamp(.8rem,1.45vw,1.05rem);line-height:1.45;white-space:pre-wrap}
   ol{font-size:clamp(.95rem,1.7vw,1.2rem);line-height:1.5;padding-left:1.4em}
   ol li{margin:.3em 0}
   .clickzone{position:fixed;top:0;bottom:30px;width:18vw;cursor:pointer;z-index:5}
@@ -93,9 +94,9 @@ const SLIDES = [
 
 {title:"The three, worked", body:()=> e(F,null,
   html("pre",'e1:   feet   = total / 12;        inches = total % 12;\n\ne2:   pct    = marks * 100.0 / total;\n\ne3:   lower  = c + (\'a\' - \'A\');   then print it with %c AND %d'),
-  li("<b>e1</b> — <span class='mono'>/</span> and <span class='mono'>%</span> are not two operations. They are <i>one</i> division, and you are asking for its two halves: the quotient and what was left over. Week 2 built this by hand",
-     "<b>e2</b> — the whole problem is the <span class='mono'>100.0</span>. Write <span class='mono'>marks * 100 / total</span> and 47/60 prints <span class='mono'>78.00</span>, not <span class='mono'>78.33</span>: int × int ÷ int stays int, and the fraction is gone before the <span class='mono'>%.2f</span> ever sees it",
-     "<b>e3</b> — do <b>not</b> write 32. Write <span class='mono'>'a' - 'A'</span> and let the machine compute the gap: it says what you <i>mean</i>, and it survives a reader who does not have the ASCII table memorised"),
+  li("<b>e1</b> — <span class='mono'>/</span> and <span class='mono'>%</span> are not two operations. They are <i>one</i> division, and you want both halves: quotient and remainder",
+     "<b>e2</b> — the whole problem is the <span class='mono'>100.0</span>. Write <span class='mono'>marks * 100 / total</span> and 47/60 gives <span class='mono'>78.00</span>, not <span class='mono'>78.33</span> — the fraction is gone before <span class='mono'>%.2f</span> ever sees it",
+     "<b>e3</b> — do <b>not</b> write 32. Write <span class='mono'>'a' - 'A'</span> and let the machine compute the gap — it says what you <i>mean</i>"),
   html("div",'<div class="note">Notice who made the decision in <span class="mono">e2</span>. Nothing ran; nobody divided anything yet. <b>The compiler</b> looked at <span class="mono">marks * 100 / total</span>, saw three ints, and chose integer division — before your program executed a single instruction. Which is exactly where we go next.</div>'))},
 
 {title:"But who decided that?", body:()=> e(F,null,
@@ -140,11 +141,10 @@ const SLIDES = [
 {title:"Stage 4 — the linker, and one letter of proof", body:()=> e(F,null,
   html("pre",'nm hello.o'),
   table(["What you see","How to read it"],[
-    ["<span class='mono'>0000000000000000 T main</span>","<b>T</b> = <i>Text</i>: defined right here, at this address. This is your code"],
-    ["<span class='mono'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;U printf</span>","<b>U</b> = <b>Undefined</b>. Named, called — and <i>missing</i>. No address, because there is nothing here to point at"]]),
+    ["<span class='mono'>0000000000000000 T main</span>","<b>T</b> = <i>Text</i>: defined right here, at this address — your code"],
+    ["<span class='mono'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U printf</span>","<b>U</b> = <b>Undefined</b>: named, called — and <i>missing</i>. No address, because there is nothing here to point at"]]),
   html("p",'<span class="big">That single <span class="mono">U</span> is the reason the linker exists.</span>'),
-  html("pre",'gcc hello.o -o hello     # the linker finds printf in the C library, fills in the address\n./hello                  # Hello, world!'),
-  html("div",'<div class="note">Run <span class="mono">nm hello</span> on the finished executable and the <span class="mono">U</span> is <b>still there</b> — because the linker did not copy printf in; it recorded <i>which shared library</i> provides it, and the final binding happens when the program starts (<span class="mono">ldd</span> shows the library). <b>Linking is the act of resolving every promise your code made</b> — sometimes by pasting the answer in, sometimes by writing down where to find it. (On macOS the names carry a leading underscore: <span class="mono">_main</span>, <span class="mono">_printf</span>.)</div>'))},
+  html("div",'<div class="note">Link it and run <span class="mono">nm hello</span> again — the <span class="mono">U</span> is <b>still there</b>. The linker did not copy printf in; it recorded <i>which shared library</i> provides it, and the binding happens when the program starts (<span class="mono">ldd</span> shows the library). <b>Linking resolves every promise your code made</b> — sometimes by pasting in the answer, sometimes by writing down where to find it.<br><span style="font-size:.85em">(macOS prefixes an underscore: <span class="mono">_main</span>, <span class="mono">_printf</span>.)</span></div>'))},
 
 {title:"The whole pipeline, in five commands", body:()=> e(F,null,
   html("pre",'gcc -E hello.c | tail        # 1. preprocessor: stdio.h really was pasted in\ngcc -S hello.c               # 2. compiler:     read hello.s — this is the assembly\ngcc -c hello.c               # 3. assembler:    hello.o — machine code that will not run\nnm hello.o                   # 4. the evidence: T main, U printf\ngcc hello.o -o hello         # 5. linker:       the U is resolved; now ./hello runs'),
@@ -154,10 +154,10 @@ const SLIDES = [
 {title:"An audit, on your own manual", body:()=> e(F,null,
   html("p",'Your lab manual (<span class="mono">Labs &rarr; Lab Manual</span> on the course site), <b>Section 2.9</b>, states in print:'),
   html("div",'<div class="note"><i>“Increment <span class="mono">++</span> and decrement <span class="mono">--</span> are more efficient than their longhand equivalents: <span class="mono">x++</span> is faster than <span class="mono">x = x + 1</span>.”</i></div>'),
-  html("p",'You now own the instrument to <b>check that claim</b> instead of believing it:'),
+  html("p",'You own the instrument to <b>check it</b> rather than believe it:'),
   html("pre",'printf \'int f(int x){ x++; return x; }\\n\'      > a.c\nprintf \'int f(int x){ x = x + 1; return x; }\\n\' > b.c\ngcc -S a.c -o a.s && gcc -S b.c -o b.s\ndiff a.s b.s'),
-  html("p",'<span class="big"><span class="mono">diff</span> prints nothing. The two forms compile to the <b>identical instruction</b> — with optimisation and without.</span>'),
-  html("div",'<div class="note">The claim was true in 1975, when compilers were simpler, and it has been repeated ever since. Write <span class="mono">x++</span> because it is <b>shorter to read</b>, never because it is faster. And notice what just happened: a printed, plausible, widely-repeated claim — <i>checked against the machine, in eight seconds, by you.</i> Week 1 said the same about a Dijkstra quote. This time you held the instrument.</div>'))},
+  html("p",'<span class="big"><span class="mono">diff</span> prints nothing — <b>identical instructions</b>, with optimisation and without.</span>'),
+  html("div",'<div class="note">True in 1975, when compilers were simpler; repeated ever since. Write <span class="mono">x++</span> because it is <b>shorter to read</b>, never because it is faster. And notice what just happened: a printed, plausible, widely-repeated claim — <i>checked against the machine, in eight seconds, by you.</i></div>'))},
 
 {title:"Two kinds of error — and the one nobody catches", body:()=> e(F,null,
   table(["","Syntax error","Logical error"],[
