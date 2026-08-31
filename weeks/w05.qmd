@@ -27,6 +27,8 @@
 
 **Tuesday — loops:**
 
+- 🖨️ [**Floor and Ceiling — one problem, two loops**](../materials/w05-floor-ceil-notes.html) — the day's worked example, as a handout. Given `X`, find `floor(X)` and `ceil(X)`. Casting to `int` is *not* `floor` (it says −3 for −3.7); so: **bracket, then bisect**. Two loops with different jobs, the invariant `L < X < U` that makes the second one correct, a cost table you can read the shape of (×1000 input → **+20** steps), and two ways the program can lie to you — signed overflow into an infinite loop, and 2⁵³.
+
 - `while`, `do-while` and `for` — the three forms as **one idea in three costumes**, and how to convert between them. Loop conditions are where Monday's drills pay off: a comparison is a *value*, and `1 < x < 3` is always true.
 - Straight into **Lab 04** the same afternoon (EE, 2:00 pm), which is built on exactly this.
 - [Lec 9](../cs1100-cse-iitm-2021/slides/Lec9.pdf) — *First loop construct: `while`* · [Lec 12](../cs1100-cse-iitm-2021/slides/Lec12.pdf) — *`for` loop* (Prof. Shweta Agrawal, IIT Madras)

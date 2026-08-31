@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floor and Ceiling — one problem, two loops · CS-1-01 (MO)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#003f87;--blue-dark:#002d63;--blue-mid:#0056b8;--blue-pale:#eaf3ff;--ink:#22262a}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4f7fb;font-family:Roboto,system-ui,sans-serif;color:var(--ink);line-height:1.6}
+  .page{max-width:52rem;margin:0 auto;background:#fff;padding:3rem 3.5rem 4rem;
+        box-shadow:0 1px 20px rgba(0,40,90,.08);min-height:100vh}
+  header{border-bottom:4px solid var(--blue-pale);padding-bottom:1.2rem;margin-bottom:2rem}
+  .kicker{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-mid);font-weight:500}
+  h1{font-family:"Roboto Slab",serif;font-size:2rem;color:var(--blue-dark);margin:.3em 0 .2em;line-height:1.2}
+  .sub{color:#5a6672;font-size:1.05rem;margin:0}
+  h2{font-family:"Roboto Slab",serif;font-size:1.3rem;color:var(--blue-dark);margin:2.2rem 0 .6rem;
+     border-bottom:2px solid var(--blue-pale);padding-bottom:.25rem}
+  h2 .n{color:var(--blue-mid);font-weight:400;margin-right:.4em}
+  h3{font-size:1.02rem;color:var(--blue-dark);margin:1.4rem 0 .3rem}
+  p,li{font-size:1rem}
+  li{margin:.3em 0}
+  code{font-family:"Roboto Mono",monospace;font-size:.9em;color:var(--blue-mid);
+       background:#f2f6fc;padding:.1em .35em;border-radius:3px}
+  pre{background:#f4f8fd;border:1px solid #cfdcec;border-left:5px solid var(--blue-mid);
+      border-radius:0 6px 6px 0;padding:.8em 1.1em;overflow-x:auto;
+      font-family:"Roboto Mono",monospace;font-size:.85rem;line-height:1.5;color:var(--blue-dark)}
+  pre code{background:none;padding:0;color:inherit}
+  table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.95rem}
+  th{background:var(--blue);color:#fff;text-align:left}
+  th,td{border:1px solid #cfdcec;padding:.45em .8em;vertical-align:top}
+  tr:nth-child(even) td{background:#f7fafd}
+  .note{background:var(--blue-pale);border-left:5px solid var(--blue);padding:.8em 1.1em;
+        border-radius:0 6px 6px 0;margin:1em 0}
+  .big{font-family:"Roboto Slab",serif;font-size:1.15rem;color:var(--blue-dark);font-weight:600}
+  .punch{background:linear-gradient(160deg,#f6faff,var(--blue-pale));border:1px solid #cfdcec;
+         border-radius:8px;padding:1.4em 1.6em;margin:2rem 0 0;text-align:center}
+  .punch .big{font-size:1.35rem;display:block;margin-bottom:.4em}
+  footer{margin-top:3rem;padding-top:1rem;border-top:2px solid var(--blue-pale);
+         color:#6b7784;font-size:.85rem}
+  a{color:var(--blue-mid)}
+  @media print{body{background:#fff}.page{box-shadow:none;padding:0}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="kicker">CS-1-01 (MO) · Week 05 · loops · notes</div>
+  <h1>Floor and Ceiling</h1>
+  <p class="sub">One sentence of a problem. Two loops. And a correctness argument that fits in five words: <em>L &lt; X &lt; U</em>.</p>
+</header>
+
+<p><strong>The problem.</strong> Given a real number <code>X</code>, find <code>floor(X)</code> (the largest integer not above it) and <code>ceil(X)</code> (the smallest integer not below it). That is the whole statement. It is short enough to hold in your head, and it will take us through loop invariants, two different search strategies, algorithmic cost, and two ways a program can lie to you.</p>
+
+<h2><span class="n">1.</span> The obvious answer is wrong</h2>
+<p>Just cast it, surely?</p>
+<pre>(int) 3.7  =  3          <-- looks right
+(int)-3.7  = -3          <-- floor(-3.7) is -4</pre>
+<p>A cast truncates <strong>towards zero</strong>. For positive numbers that happens to agree with <code>floor</code>; for negative numbers it does not. So a one-line answer that passes every test you would casually try is <em>wrong on half the number line</em>.</p>
+<div class="note">This is worth sitting with for a moment. The bug is not in the arithmetic — it is in the <strong>specification</strong>. "Chop off the decimals" and "the largest integer not above X" are different requirements that agree on the examples you happened to pick. Twenty lines of loop follow from taking the spec seriously.</div>
+
+<h2><span class="n">2.</span> The plan: bracket, then bisect</h2>
+<p>Two phases, two loops, two different jobs.</p>
+<table>
+  <tr><th>Phase</th><th>What the loop does</th><th>Stops when</th></tr>
+  <tr><td><strong>1 — bracket</strong></td><td><em>grows</em> an interval <code>[L, U]</code> until X is trapped inside it</td><td><code>L &lt;= X &lt;= U</code></td></tr>
+  <tr><td><strong>2 — bisect</strong></td><td><em>shrinks</em> the interval, always keeping X inside</td><td><code>U - L == 1</code></td></tr>
+</table>
+<p>And then you are done, with no final calculation at all: if <code>L &lt; X &lt; U</code> and <code>U - L == 1</code>, then <code>L</code> <em>is</em> <code>floor(X)</code> and <code>U</code> <em>is</em> <code>ceil(X)</code>. That is what the definitions say.</p>
+
+<h2><span class="n">3.</span> Phase 1: how to search a space with no known size</h2>
+<p>We are not told how big X might be. So don't guess an upper bound — <strong>double until you have one</strong>. Starting from <code>[0,1]</code> with X = 100:</p>
+<pre>L = 1,   U = 2
+L = 2,   U = 4
+L = 4,   U = 8
+L = 8,   U = 16
+L = 16,  U = 32
+L = 32,  U = 64
+L = 64,  U = 128       <-- 100 is inside. Seven steps, not a hundred.</pre>
+<p>This has a name: <strong>exponential search</strong> (or <em>galloping</em> search). It is the standard move when the search space is unbounded, and it costs about <code>log&#8322;X</code> steps to find a bound.</p>
+
+<h2><span class="n">4.</span> Phase 2: the invariant is the correctness argument</h2>
+<p>Now halve the interval, over and over. With X = &minus;3.7 in <code>[-10, 0]</code>:</p>
+<pre>L = -10, U =  0, mid = -5   mid &lt; X, so L = mid   -> [-5, 0]
+L =  -5, U =  0, mid = -3   mid &gt; X, so U = mid   -> [-5,-3]
+L =  -5, U = -3, mid = -4   mid &lt; X, so L = mid   -> [-4,-3]
+U - L is 1. Stop.           floor = -4,  ceil = -3</pre>
+<p class="big">At every line above, <code>L &lt; X &lt; U</code> was still true.</p>
+<p>That sentence is the <strong>loop invariant</strong> — the thing the loop is careful never to break. It is not decoration; it <em>is</em> the proof. Because the invariant holds and the interval has shrunk to width 1, the answer follows immediately. Ask this of every loop you write:</p>
+<div class="note"><strong>What does this loop refuse to break?</strong> If you cannot say, you do not yet know whether it is correct — you only know it did not crash on your example.</div>
+<p>And the loop must <em>stop</em>: <code>U - L</code> is a positive integer that strictly decreases every pass. A decreasing positive integer cannot go on forever. That is a termination argument, and it is separate from correctness.</p>
+
+<h2><span class="n">5.</span> What does it cost?</h2>
+<p>The instrumented version counts its own steps. Starting from <code>[0,1]</code>:</p>
+<table>
+  <tr><th>X</th><th>expansions</th><th>shrinks</th><th>total steps</th></tr>
+  <tr><td><code>3.7</code></td><td>2</td><td>1</td><td>3</td></tr>
+  <tr><td><code>1 000.5</code></td><td>10</td><td>9</td><td>19</td></tr>
+  <tr><td><code>1 000 000.5</code></td><td>20</td><td>19</td><td>39</td></tr>
+  <tr><td><code>1 000 000 000.5</code></td><td>30</td><td>29</td><td>59</td></tr>
+</table>
+<p>Read the table before reading the next sentence. <strong>X grows a thousandfold each row. The cost grows by twenty steps.</strong> Not a thousandfold. Not double. A fixed amount, every time you multiply the input.</p>
+<p>That is what <strong>logarithmic</strong> means — here about <code>2 &times; log&#8322;X</code> steps. A number with a hundred digits would cost roughly 660 steps. This is the entire reason anyone cares about binary search, and you can see it in four rows of a table without knowing the word.</p>
+<div class="note">One more thing the table shows: for an <em>integer</em> X the shrink phase exits early, because <code>mid == X</code> is spotted before the interval is narrow. Same algorithm, different cost, depending on the input. That is the difference between best case and worst case.</div>
+
+<h2><span class="n">6.</span> Breaking it on purpose</h2>
+<p>Try <code>X = 1e19</code> — just past the largest <code>long long</code>, 9223372036854775807. Watch the expansion loop:</p>
+<pre>L = 2882303761517117440,  U = 5764607523034234880
+L = 5764607523034234880,  U = -6917529027641081856   <-- ??
+L = -6917529027641081856, U = 4611686018427387904
+L = 4611686018427387904,  U = -9223372036854775808
+L = -9223372036854775808, U = 0
+L = 0,                    U = 0                      <-- forever</pre>
+<p><code>W = 2 * W</code> overflowed. <code>U</code> wrapped round to a huge <em>negative</em> number, everything collapsed to zero, and the loop condition <code>X &gt; U</code> became permanently true. <strong>The program never stops.</strong></p>
+<p>Two lessons collide here. Week 3's: overflow is <em>silent</em> — nothing warned you. Week 5's: a loop whose guard can never become false is the most expensive bug you can write, because it does not fail, it just never finishes.</p>
+<p>The fix is three lines, and it goes <em>before</em> the doubling, not after:</p>
+<pre>if (W &gt; LLONG_MAX / 2 || U &gt; LLONG_MAX - W) {
+    printf("STOP: X is too large in magnitude for long long.\n");
+    return 2;
+}</pre>
+<div class="note">Notice the shape of that check: <em>the loop may only take a step if the step is representable.</em> It is a precondition on the loop body. And an honest error message is a result — a hang is not.</div>
+
+<h2><span class="n">7.</span> One surprise that is not the algorithm's fault</h2>
+<pre>Enter X: 9007199254740993        (that is 2^53 + 1)
+floor(X) = 9007199254740992
+ceil(X)  = 9007199254740992</pre>
+<p>Off by one, and the loop is blameless. A <code>double</code> has 53 bits of significand, so beyond 2&#8309;&#179; it cannot represent every integer. <code>scanf</code> rounded your number <em>on the way in</em>; the program then computed the exactly correct floor of the number it actually received.</p>
+<p>Week 2 is still collecting debts. It also means the phrase "X is exactly an integer" is doing something subtler than it looks.</p>
+
+<h2><span class="n">8.</span> Four things to take away</h2>
+<ul>
+  <li><strong>Read the specification, not the examples.</strong> The cast agrees with <code>floor</code> on every positive number you would casually test.</li>
+  <li><strong>Name your invariant.</strong> <code>L &lt; X &lt; U</code> is not a comment; it is the reason the program is right.</li>
+  <li><strong>Correctness and termination are two separate arguments.</strong> The invariant gives the first; a strictly decreasing positive integer gives the second.</li>
+  <li><strong>Cost is measurable, not a feeling.</strong> Count the steps, tabulate, and the shape of the growth tells you which class of algorithm you wrote.</li>
+</ul>
+
+<h2><span class="n">9.</span> Try it yourself</h2>
+<ul>
+  <li>Rewrite Phase 2 as a <code>do-while</code>. Does anything break for <code>X = 0.5</code> in <code>[0,1]</code>, where the loop should not run at all?</li>
+  <li>The integer case is handled in <em>three</em> different places in the program. Can you make it one? Should you?</li>
+  <li>Add a counter to Phase 2 and find an X that maximises the shrink steps for a fixed starting interval. What kind of number is it?</li>
+  <li>What happens for <code>L = -5, U = 5, X = 0</code>? Predict before running.</li>
+</ul>
+<footer>
+CS-1-01 (MO) · Computer System and Programming · Monsoon 2026 · IIT Jammu ·
+the loops lecture, W05 · demo driver: <code>private/materials/w05-round-demo/teach.sh</code>
+</footer>
+</div>
+</body>
+</html>
