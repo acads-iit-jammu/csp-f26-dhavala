@@ -21,6 +21,8 @@
   - **The centrepiece:** `nm hello.o` prints `T main` and `U printf`. That single **U** — *undefined* — is the reason the linker exists.
   - **An audit on your own manual:** §2.9 claims `x++` is faster than `x = x + 1`. It is not, and you can prove it in eight seconds with `diff`.
   - **Two kinds of error:** the compiler catches syntax and never intent. Four tools stand between your source and your executable, and *none of them has read the problem statement*.
+- 📽️ [**Deck 09 — Why Assemblers and Linkers Exist**](../materials/w05-deck-09-why-linkers.html) — the companion deck: not *what* the stages do but **why anyone built it that way**. Separate compilation; object files that are *deliberately* incomplete; relocation, visible with `objdump -r`; what `#include` really gives you (a promise, not an implementation); static vs dynamic linking; and the principle underneath it all — **delay a decision until it reaches the component that has enough information to make it**.
+- 🖨️ [**Why Assemblers and Linkers Exist — notes**](../materials/w05-linkers-notes.html) — the same material as a printable handout, including the two-minute experiment worth doing with your own hands.
 - [Lec 6](../cs1100-cse-iitm-2021/slides/Lec6.pdf) — companion slides (Prof. Shweta Agrawal, IIT Madras)
 
 **Tuesday — loops:**

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Assemblers and Linkers Exist — notes · CS-1-01 (MO)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#003f87;--blue-dark:#002d63;--blue-mid:#0056b8;--blue-pale:#eaf3ff;--ink:#22262a}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4f7fb;font-family:Roboto,system-ui,sans-serif;color:var(--ink);line-height:1.6}
+  .page{max-width:52rem;margin:0 auto;background:#fff;padding:3rem 3.5rem 4rem;
+        box-shadow:0 1px 20px rgba(0,40,90,.08);min-height:100vh}
+  header{border-bottom:4px solid var(--blue-pale);padding-bottom:1.2rem;margin-bottom:2rem}
+  .kicker{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-mid);font-weight:500}
+  h1{font-family:"Roboto Slab",serif;font-size:2rem;color:var(--blue-dark);margin:.3em 0 .2em;line-height:1.2}
+  .sub{color:#5a6672;font-size:1.05rem;margin:0}
+  h2{font-family:"Roboto Slab",serif;font-size:1.3rem;color:var(--blue-dark);margin:2.2rem 0 .6rem;
+     border-bottom:2px solid var(--blue-pale);padding-bottom:.25rem}
+  h2 .n{color:var(--blue-mid);font-weight:400;margin-right:.4em}
+  h3{font-size:1.02rem;color:var(--blue-dark);margin:1.4rem 0 .3rem}
+  p,li{font-size:1rem}
+  li{margin:.3em 0}
+  code{font-family:"Roboto Mono",monospace;font-size:.9em;color:var(--blue-mid);
+       background:#f2f6fc;padding:.1em .35em;border-radius:3px}
+  pre{background:#f4f8fd;border:1px solid #cfdcec;border-left:5px solid var(--blue-mid);
+      border-radius:0 6px 6px 0;padding:.8em 1.1em;overflow-x:auto;
+      font-family:"Roboto Mono",monospace;font-size:.85rem;line-height:1.5;color:var(--blue-dark)}
+  pre code{background:none;padding:0;color:inherit}
+  table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.95rem}
+  th{background:var(--blue);color:#fff;text-align:left}
+  th,td{border:1px solid #cfdcec;padding:.45em .8em;vertical-align:top}
+  tr:nth-child(even) td{background:#f7fafd}
+  .note{background:var(--blue-pale);border-left:5px solid var(--blue);padding:.8em 1.1em;
+        border-radius:0 6px 6px 0;margin:1em 0}
+  .big{font-family:"Roboto Slab",serif;font-size:1.15rem;color:var(--blue-dark);font-weight:600}
+  .punch{background:linear-gradient(160deg,#f6faff,var(--blue-pale));border:1px solid #cfdcec;
+         border-radius:8px;padding:1.4em 1.6em;margin:2rem 0 0;text-align:center}
+  .punch .big{font-size:1.35rem;display:block;margin-bottom:.4em}
+  footer{margin-top:3rem;padding-top:1rem;border-top:2px solid var(--blue-pale);
+         color:#6b7784;font-size:.85rem}
+  a{color:var(--blue-mid)}
+  @media print{body{background:#fff}.page{box-shadow:none;padding:0}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="kicker">CS-1-01 (MO) · Week 05 · notes</div>
+  <h1>Why Assemblers and Linkers Exist</h1>
+  <p class="sub">A <code>.o</code> file is not a broken executable. It is <em>deliberately</em> incomplete — and that is the whole idea.</p>
+</header>
+
+<p>Deck 08 showed you <em>what</em> the four stages do, one command at a time. These notes answer the harder question: <strong>why is it built this way at all?</strong> Why not one program that takes source and hands back something that runs?</p>
+
+<p class="big">Because humans, compilers and machines each want a different representation of the same program — and because at each stage, nobody yet knows enough to finish the job.</p>
+
+<h2><span class="n">1.</span> Why we need an assembler</h2>
+<p>The machine wants raw binary instructions. Humans will not write those. So a symbolic layer was invented:</p>
+<pre>machine code    10110000 01100001
+assembly        MOV AL, 61h          <-- the same instruction</pre>
+<p>The <strong>assembler</strong> translates symbolic machine instructions into the actual bytes.</p>
+<p>But why is it a <em>separate program</em>? A compiler could emit bytes directly. It emits text instead because that text is a <strong>clean interface</strong>: one assembler can serve many compilers, and a human can read, check, and hand-tune what came out. You used that interface yesterday — <code>gcc -S</code> is only possible <em>because</em> the boundary exists.</p>
+
+<h2><span class="n">2.</span> Why we need a linker</h2>
+<p>The linker solves a different problem: programs became too large to write and compile as one file.</p>
+<pre>main.c    math.c    io.c    sort.c</pre>
+<p>If every small change required recompiling everything, development would crawl. The solution is to compile each source file <strong>independently</strong> and join the results later:</p>
+<pre>main.c -> main.o  \
+math.c -> math.o   }--- linker ---> executable
+io.c   -> io.o    /</pre>
+<p>Edit only <code>math.c</code>? Recompile only <code>math.c</code>, then relink. That is <strong>separate compilation</strong>, and it is why the linker was invented.</p>
+
+<h2><span class="n">3.</span> Object files are deliberately incomplete</h2>
+<p>Here is the clever part. Suppose <code>main.c</code> says:</p>
+<pre>int x = add(3, 4);</pre>
+<p>but <code>add()</code> is defined in another file. When <code>main.c</code> is compiled, the compiler <strong>does not need to know</strong> where <code>add</code> will finally live in memory. It leaves a note:</p>
+<pre>CALL add
+     ^
+     address not known yet</pre>
+<table>
+  <tr><th><code>main.o</code> says</th><th><code>math.o</code> says</th></tr>
+  <tr><td><code>undefined symbol: add</code></td><td><code>defined symbol: add</code></td></tr>
+</table>
+<p>The linker matches them.</p>
+<p class="big">Compile now; decide final addresses later.</p>
+<div class="note">This is the <code>U printf</code> you saw in <code>nm hello.o</code>, seen from the other side. The <strong>U</strong> was never damage. It is a question left open <em>on purpose</em>.</div>
+
+<h2><span class="n">4.</span> Relocation — you can see the note</h2>
+<p>The compiler does not just leave a vague gap. It records exactly where the hole is and what must fill it:</p>
+<pre>$ objdump -r main.o
+
+RELOCATION RECORDS FOR [__text]:
+OFFSET            TYPE                    VALUE
+0000000000000018  ARM64_RELOC_BRANCH26    _add</pre>
+<p>Read it as a sentence: <em>“at byte 24 of my code there is a branch instruction; when you know where <strong>add</strong> is, patch it in.”</em> Later the linker discovers <code>add is at 0x401230</code> and writes that address into the hole. The patching is called <strong>relocation</strong>.</p>
+<p>On the lab's Linux machines the same line reads <code>R_X86_64_PLT32&nbsp;&nbsp;add</code> — same sentence, different processor.</p>
+
+<h2><span class="n">5.</span> The experiment: when does the error appear?</h2>
+<p>Do this yourself. It takes two minutes and it settles the question permanently.</p>
+<pre>/* main.c */
+int add(int, int);                 /* a PROMISE, not a definition */
+
+int main(void)
+{
+    return add(2, 3);
+}</pre>
+<p>Compile without linking:</p>
+<pre>$ gcc -c main.c
+$          <-- it succeeds</pre>
+<p>Most people expect an error here, because <code>add()</code> does not exist. The compiler is satisfied anyway: it was <em>told</em> <code>int add(int, int);</code> and it trusts that declaration. Now link:</p>
+<pre>$ gcc main.o -o main
+undefined reference to `add'</pre>
+<table>
+  <tr><th></th><th>Its only question</th></tr>
+  <tr><td><strong>Compiler</strong></td><td>“Is this valid C, <em>given the declarations I was shown</em>?”</td></tr>
+  <tr><td><strong>Linker</strong></td><td>“Can I actually <em>find</em> everything you promised existed?”</td></tr>
+</table>
+<p>Now write the other half and link both:</p>
+<pre>/* add.c */
+int add(int a, int b) { return a + b; }
+
+$ gcc -c add.c
+$ gcc main.o add.o -o main       <-- now the linker is satisfied
+$ ./main; echo $?
+5</pre>
+<div class="note">The compiler trusted your word. The <strong>linker</strong> is the one that checks whether you kept it. Knowing <em>which</em> of the two complained is half of debugging — and it is why <code>undefined reference</code> is never a syntax problem.</div>
+
+<h2><span class="n">6.</span> So what does <code>#include</code> actually do?</h2>
+<p>Two things you have been told, which sound contradictory:</p>
+<ul>
+  <li><code>#include &lt;stdio.h&gt;</code> <strong>pastes the file in</strong> — you watched it happen with <code>gcc -E</code>.</li>
+  <li><code>#include &lt;stdio.h&gt;</code> does <strong>not</strong> give you <code>printf</code>.</li>
+</ul>
+<p>Both are true, and the gap between them is the point.</p>
+<table>
+  <tr><th>What <code>stdio.h</code> contains</th><th>What it does <em>not</em> contain</th></tr>
+  <tr><td>the <strong>declaration</strong>: <code>int printf(const char *, ...);</code> — printf exists, and this is its shape</td>
+      <td>the <strong>implementation</strong> — the thousands of lines that actually format and print</td></tr>
+</table>
+<p>So the preprocessor really does paste in a file. That file is a <strong>list of promises</strong>, not a body of code. The compiler reads the promise and is content; the linker goes looking for whoever keeps it.</p>
+<div class="note"><strong>Header = the contract. Library = the implementation.</strong> This is exactly the <em>GIVEN / ENSURES</em> habit you use on your own programs. C has been doing it to you since Lab 01.</div>
+
+<h2><span class="n">7.</span> Static and dynamic linking</h2>
+<table>
+  <tr><th>Static linking</th><th>Dynamic linking</th></tr>
+  <tr><td>the library's code is <strong>copied into</strong> your executable</td>
+      <td>your executable records <strong>which library</strong> to load when it starts</td></tr>
+  <tr><td>bigger file; self-contained; no surprises at run time</td>
+      <td>smaller file; one <code>libc</code> on disk serves every program on the machine</td></tr>
+  <tr><td>library updated → you must <strong>relink</strong></td>
+      <td>library updated → every program gets the fix</td></tr>
+</table>
+<pre>Program A --\
+Program B ---+---> libc.so ---> printf
+Program C --/</pre>
+<div class="note">This is why <code>nm hello</code> on the finished executable <em>still</em> showed <code>U printf</code>. Your program was dynamically linked: the linker did not paste printf in — it <strong>wrote down where to find it</strong>. Run <code>ldd hello</code> (or <code>otool -L hello</code> on a Mac) and you will see the library it intends to ask.</div>
+
+<h2><span class="n">8.</span> The deeper design principle</h2>
+<p class="big">Delay a decision until it reaches the component that has enough information to make it.</p>
+<table>
+  <tr><th>Stage</th><th>Knows</th><th>Cannot yet know</th></tr>
+  <tr><td><strong>Compiler</strong></td><td>which instructions are needed</td><td>the final addresses</td></tr>
+  <tr><td><strong>Assembler</strong></td><td>how instructions become bytes</td><td>where external functions live</td></tr>
+  <tr><td><strong>Linker</strong></td><td><em>all the object files at once</em></td><td>which machine will run it</td></tr>
+  <tr><td><strong>Loader</strong></td><td>the actual memory it is given</td><td>—</td></tr>
+</table>
+<pre>C programmer  ->  symbolic program
+Compiler      ->  symbolic machine-level intentions
+Assembler     ->  machine code with holes and references
+Linker        ->  a complete address space
+Loader        ->  the program placed in memory and executed</pre>
+<p>Notice this is not a fact about C. It is an engineering habit: <strong>do not force a decision at a point where the information is missing — carry it forward instead.</strong> You will meet it again in interfaces, in APIs, and in every system that has to be built by more than one person.</p>
+
+<div class="punch">
+  <span class="big">A <code>.o</code> file is not a broken executable. It is deliberately incomplete.</span>
+  That incompleteness is what makes separate compilation, libraries, and modular programming possible at all.
+</div>
+
+<h2><span class="n">9.</span> Try it yourself</h2>
+<p>The Week 05 practice pack has all of this as predict-then-run steps — <code>c05</code> to <code>c09</code> are the linker half:</p>
+<pre>wget https://acads-iit-jammu.github.io/csp-f26-dhavala/materials/w05-practice.tar.gz
+tar xzf w05-practice.tar.gz && cd w05-practice
+./practice.sh --pipeline</pre>
+<p>And the two-minute experiment from section 5 is worth doing with your own hands before you read anyone's explanation of it, including this one.</p>
+
+<footer>
+CS-1-01 (MO) · Computer System and Programming · Monsoon 2026 · IIT Jammu ·
+companion to <a href="w05-deck-09-why-linkers.html">Deck 09</a> and <a href="w05-deck-08-source-to-executable.html">Deck 08</a>
+</footer>
+</div>
+</body>
+</html>

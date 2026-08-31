@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deck 09 — Why Assemblers and Linkers Exist · CS-1-01 (MO)</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003f87; --blue-dark:#002d63; --blue-mid:#0056b8; --blue-sky:#4da3ff; --blue-pale:#eaf3ff;
+    --ink:#22262a; --star:#f4b400;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#0b1e3a;font-family:Roboto,system-ui,sans-serif;color:var(--ink)}
+  #root{height:100%}
+  .deck{height:100%;display:flex;flex-direction:column;overflow:hidden}
+  .slide{flex:1;display:flex;flex-direction:column;justify-content:safe center;padding:4vh 7vw;
+         background:#fff;overflow:auto}
+  .slide.title{background:linear-gradient(160deg,var(--blue-dark) 0%,var(--blue) 70%,var(--blue-mid) 100%);color:#fff}
+  .slide.accent{background:linear-gradient(160deg,#f6faff,var(--blue-pale))}
+  h1{font-family:"Roboto Slab",serif;font-size:clamp(1.8rem,4.5vw,3.2rem);margin:.2em 0;line-height:1.15}
+  h2{font-family:"Roboto Slab",serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--blue-dark);margin:.2em 0 .6em;
+     border-bottom:3px solid var(--blue-pale);padding-bottom:.25em}
+  .title h2{color:#cfe3ff;border:none;font-weight:400;font-size:clamp(1rem,2vw,1.5rem)}
+  .kicker{font-size:clamp(.8rem,1.4vw,1rem);letter-spacing:.14em;text-transform:uppercase;color:var(--blue-sky)}
+  p,li{font-size:clamp(1rem,1.9vw,1.35rem);line-height:1.55}
+  li{margin:.35em 0}
+  .big{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:500;color:var(--blue-dark)}
+  table{border-collapse:collapse;font-size:clamp(.95rem,1.7vw,1.25rem);margin:.4em 0;width:100%}
+  th{background:var(--blue);color:#fff;text-align:left}
+  th,td{border:1px solid #cfdcec;padding:.35em .7em}
+  tr:nth-child(even) td{background:#f4f8fd}
+  code,.mono{font-family:"Roboto Mono",monospace;color:var(--blue-mid)}
+  .cols{display:flex;gap:4vw;flex-wrap:wrap}
+  .cols>div{flex:1;min-width:260px}
+  .note{background:var(--blue-pale);border-left:5px solid var(--blue);padding:.5em 1em;border-radius:0 8px 8px 0;
+        margin:.35em 0;font-size:clamp(.9rem,1.55vw,1.1rem)}
+  .quote{font-family:"Roboto Slab",serif;font-size:clamp(1.4rem,3.4vw,2.4rem);color:var(--blue-dark);
+         text-align:center;line-height:1.4;margin:auto 0}
+  .quote small{display:block;font-family:Roboto,sans-serif;font-size:.55em;color:#667;margin-top:1em}
+  /* chrome */
+  .bar{height:5px;background:#12305c}
+  .bar>div{height:100%;background:var(--blue-sky);transition:width .25s}
+  .foot{display:flex;justify-content:space-between;align-items:center;background:#0b1e3a;color:#8fb4e8;
+        font-size:.75rem;padding:6px 14px;font-family:"Roboto Mono",monospace}
+  .foot b{color:#cfe3ff;font-weight:500}
+  .navhint{opacity:.7}
+  pre{background:#f4f8fd;border:1px solid #cfdcec;border-left:5px solid var(--blue-mid);
+      border-radius:0 8px 8px 0;padding:.5em 1em;margin:.35em 0;overflow-x:auto;
+      font-family:"Roboto Mono",monospace;color:var(--blue-dark);
+      font-size:clamp(.8rem,1.45vw,1.05rem);line-height:1.45;white-space:pre-wrap}
+  .clickzone{position:fixed;top:0;bottom:30px;width:18vw;cursor:pointer;z-index:5}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+"use strict";
+const e = React.createElement;
+const F = React.Fragment;
+
+/* ---------- content ---------- */
+const li = (...items)=> e("ul",null, ...items.map(t=> e("li",{dangerouslySetInnerHTML:{__html:t}})));
+const html = (tag,s)=> e(tag,{dangerouslySetInnerHTML:{__html:s}});
+const table = (head,rows)=> e("table",null,
+  e("thead",null, e("tr",null, ...head.map(hh=>e("th",null,hh)))),
+  e("tbody",null, ...rows.map(r=> e("tr",null, ...r.map(c=> html("td",c))))));
+
+const SLIDES = [
+{cls:"title", body:()=> e(F,null,
+  e("div",{className:"kicker"},"CS-1-01 (MO) · Monsoon 2026 · W05 · companion to Deck 08"),
+  e("h1",null,"Why Assemblers and Linkers Exist"),
+  e("h2",null,"Deck 09 — a .o file is not broken. It is deliberately incomplete."),
+  e("p",{style:{marginTop:"2em",color:"#cfe3ff"}},"Soma S Dhavala · Electrical / Mechanical / Materials"),
+  e("p",{style:{color:"#8fb4e8",fontSize:"1rem"}},"→ arrow keys or click the right edge to advance"))},
+
+{title:"One sentence carries the whole deck", body:()=> e(F,null,
+  html("p",'<span class="big">Humans, compilers and machines each want a <b>different representation</b> of the same program.</span>'),
+  li("You met the four stages yesterday and watched each one run. Today: <i>why is it built that way at all?</i> Why not one program, source straight to executable?",
+     "Every stage exists because somebody needed the program in a different shape — and because <b>nobody at that point knew enough to finish the job</b>"),
+  html("div",'<div class="note">Yesterday was <i>what happens</i>. Today is <i>why anyone chose this</i> — which is the more useful half, because the same reasoning turns up everywhere else in engineering.</div>'))},
+
+{title:"Why an assembler", body:()=> e(F,null,
+  html("p",'The machine wants raw binary. Humans will not write it. So: a <b>symbolic layer</b>.'),
+  html("pre",'machine code    10110000 01100001\nassembly        MOV AL, 61h        <- the same instruction'),
+  li("The <b>assembler</b> translates symbolic instructions into the actual bytes. One mnemonic, one instruction — a thin, honest layer",
+     "<b>But why a separate program?</b> The compiler could emit bytes directly. It emits <i>text</i> instead because that text is a <b>clean interface</b>: one assembler serves many compilers, and a human can read, check, and hand-tune what came out",
+     "You used that interface yesterday. <span class='mono'>gcc -S</span> was only possible <i>because</i> the boundary exists"))},
+
+{title:"Why a linker: programs got too big", body:()=> e(F,null,
+  html("p",'A real program is not one file:'),
+  html("pre",'main.c    math.c    io.c    sort.c'),
+  li("If every one-line change meant recompiling <b>everything</b>, development would crawl. On a large program that is minutes per keystroke-sized edit",
+     "So: compile each file <b>independently</b>, join the results later"),
+  html("pre",'main.c -> main.o \\\nmath.c -> math.o  }-- linker --> executable\nio.c   -> io.o   /'),
+  html("div",'<div class="note">Edit only <span class="mono">math.c</span>? Recompile <i>only</i> <span class="mono">math.c</span>, then relink. That is <b>separate compilation</b>, and it is the entire reason the linker was invented.</div>'))},
+
+{title:"The clever idea: deliberately unfinished", body:()=> e(F,null,
+  html("p",'<span class="mono">main.c</span> says <span class="mono">int x = add(3, 4);</span> — but <span class="mono">add()</span> lives in another file.'),
+  li("When <span class='mono'>main.c</span> is compiled, the compiler <b>does not need to know</b> where <span class='mono'>add</span> will end up in memory. It leaves a note instead:"),
+  html("pre",'CALL add\n     ^\n     address not known yet'),
+  table(["main.o says","math.o says"],[
+    ["<span class='mono'>undefined symbol: add</span>","<span class='mono'>defined symbol: add</span>"]]),
+  html("p",'<span class="big">Compile now; decide final addresses later.</span>'),
+  html("div",'<div class="note">This is the <span class="mono">U printf</span> from yesterday, seen from the other side. The U was never damage. It was a <b>question left open on purpose</b>.</div>'))},
+
+{title:"Relocation — you can actually see the note", body:()=> e(F,null,
+  html("p",'The compiler records exactly where the hole is and what must fill it. Look:'),
+  html("pre",'$ objdump -r main.o\n\nRELOCATION RECORDS FOR [__text]:\nOFFSET            TYPE                    VALUE\n0000000000000018  ARM64_RELOC_BRANCH26    _add'),
+  li("Read it as a sentence: <i>“at byte 24 of my code there is a branch instruction; when you know where <b>add</b> is, patch it in.”</i>",
+     "The linker later finds <span class='mono'>add is at 0x401230</span> and writes that address into the hole. That patching is called <b>relocation</b>"),
+  html("div",'<div class="note">On the lab machines the line reads <span class="mono">R_X86_64_PLT32 &nbsp; add</span> — same sentence, different processor.</div>'))},
+
+{title:"The experiment: who asks what?", body:()=> e(F,null,
+  html("pre",'/* main.c */                       /* nothing else yet */\nint add(int, int);                 <- a PROMISE\nint main(void){ return add(2,3); }'),
+  html("pre",'$ gcc -c main.c        # succeeds!  <- surprising?\n$ gcc main.o -o main   # undefined reference to `add`'),
+  table(["","Its only question"],[
+    ["<b>Compiler</b>","“Is this valid C, <i>given the declarations I was shown</i>?”"],
+    ["<b>Linker</b>","“Can I actually <i>find</i> everything you promised existed?”"]]),
+  html("div",'<div class="note">Write <span class="mono">add.c</span>, then <span class="mono">gcc main.o add.o -o main</span> — and it links. The compiler <b>trusted your declaration</b>. The linker is the one that checks whether you kept your word.</div>'))},
+
+{title:"So what does #include actually do?", body:()=> e(F,null,
+  html("p",'Yesterday: <span class="mono">#include &lt;stdio.h&gt;</span> <b>pastes the file in</b>. Today: it does <b>not</b> give you printf. Both are true — and the gap between them is the whole point.'),
+  table(["What stdio.h contains","What it does NOT contain"],[
+    ["the <b>declaration</b>: <span class='mono'>int printf(const char*, ...);</span> — printf exists, and this is its shape","the <b>implementation</b> — the thousands of lines that actually format and print"]]),
+  li("So the preprocessor really does paste in a file. That file is a <b>list of promises</b>, not a body of code",
+     "The compiler reads the promise and is satisfied. The <b>linker</b> goes looking for who keeps it"),
+  html("div",'<div class="note">Header = the contract. Library = the implementation. This is <i>exactly</i> the GIVEN/ENSURES habit you use on your own programs — C has been doing it to you since Lab 01.</div>'))},
+
+{title:"Two ways to keep the promise", body:()=> e(F,null,
+  table(["Static linking","Dynamic linking"],[
+    ["the library's code is <b>copied into</b> your executable","your executable records <b>which library</b> to load at start-up"],
+    ["bigger file, self-contained, no surprises","smaller file; one <span class='mono'>libc</span> on disk serves every program"],
+    ["update the library → <b>relink everything</b>","update the library → every program gets the fix"]]),
+  html("pre",'Program A --\\\nProgram B ---+--> libc.so --> printf\nProgram C --/'),
+  html("div",'<div class="note">This is why <span class="mono">nm hello</span> still showed <span class="mono">U printf</span> yesterday. Your program was dynamically linked: the linker did not paste printf in, it <b>wrote down where to find it</b>. <span class="mono">ldd</span> shows exactly which library it will ask.</div>'))},
+
+{title:"The design principle", body:()=> e(F,null,
+  html("p",'<span class="big">Delay a decision until it reaches the component that has enough information to make it.</span>'),
+  table(["Stage","Knows","Cannot yet know"],[
+    ["<b>Compiler</b>","which instructions are needed","the final addresses"],
+    ["<b>Assembler</b>","how instructions become bytes","where external functions live"],
+    ["<b>Linker</b>","<i>all the object files at once</i>","which machine will run it"],
+    ["<b>Loader</b>","the actual memory it is given","—"]]),
+  html("div",'<div class="note">Notice this is not a fact about C. It is an engineering habit: <b>do not force a decision at a point where the information is missing — carry it forward instead.</b> You will meet it again in interfaces, in APIs, in every system that has to be built by more than one person.</div>'))},
+
+{cls:"accent", body:()=> e(F,null,
+  e("div",{className:"quote"},"A .o file is not a broken executable. It is deliberately incomplete.",
+    e("small",null,"And that incompleteness is what makes libraries, separate compilation, and modular programming possible at all.")))},
+];
+
+/* ---------- deck engine ---------- */
+function Deck(){
+  const [i,setI] = React.useState(()=>{
+    const n=parseInt(location.hash.slice(1)); return Number.isInteger(n)&&n>=0&&n<SLIDES.length? n:0; });
+  const go = React.useCallback(d=>{
+    setI(cur=>{ const n=Math.min(SLIDES.length-1, Math.max(0, cur+d)); location.hash="#"+n; return n; });
+  },[]);
+  React.useEffect(()=>{
+    const k=ev=>{ if(["ArrowRight","PageDown"," "].includes(ev.key)) go(1);
+                  else if(["ArrowLeft","PageUp"].includes(ev.key)) go(-1);
+                  else if(ev.key==="Home"){ setI(0); location.hash="#0"; } };
+    window.addEventListener("keydown",k); return ()=>window.removeEventListener("keydown",k);
+  },[go]);
+  const s=SLIDES[i];
+  return e("div",{className:"deck"},
+    e("div",{className:"clickzone",style:{left:0},onClick:()=>go(-1)}),
+    e("div",{className:"clickzone",style:{right:0},onClick:()=>go(1)}),
+    e("div",{className:"slide "+(s.cls||"")},
+      s.title? e("h2",null,s.title):null,
+      s.body()),
+    e("div",{className:"bar"}, e("div",{style:{width:((i+1)/SLIDES.length*100)+"%"}})),
+    e("div",{className:"foot"},
+      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 09 · Why Assemblers and Linkers Exist"),
+      e("span",{className:"navhint"},"← → to navigate"),
+      e("span",null, (i+1)+" / "+SLIDES.length)));
+}
+ReactDOM.createRoot(document.getElementById("root")).render(e(Deck));
+</script>
+</body>
+</html>
