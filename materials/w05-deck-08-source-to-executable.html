@@ -173,7 +173,8 @@ const SLIDES = [
     e("small",null,"Four tools checked your syntax. Zero of them checked your intent. So who checks the spec?")))},
 
 {title:"This week", body:()=> e(F,null,
-  li("<b>Run the five commands</b> on your own <span class='mono'>hello.c</span>. Keep <span class='mono'>hello.i</span>, <span class='mono'>hello.s</span> and <span class='mono'>hello.o</span> — how many lines each, how many bytes, and which one will run?",
+  li("<b>The practice pack</b> — everything from today, to do again yourself: <span class='mono'>materials/w05-practice.tar.gz</span> on the course site. 25 predict-then-run items (14 precedence, 11 pipeline). <span class='mono'>tar xzf</span> it, then <span class='mono'>./practice.sh --all</span>",
+     "<b>Run the five commands</b> on your own <span class='mono'>hello.c</span>. Keep <span class='mono'>hello.i</span>, <span class='mono'>hello.s</span> and <span class='mono'>hello.o</span> — how many lines each, and which one will run?",
      "<b>Run the audit</b> on Section 2.9's <span class='mono'>x++</span> claim yourself. Bring the <span class='mono'>diff</span> output — or a counter-example, if you find one. Say so loudly if you do",
      "<b>Predict, then check:</b> add <span class='mono'>#define SIZE 10</span> to a program, use <span class='mono'>SIZE</span> twice, and find both substitutions in the <span class='mono'>gcc -E</span> output",
      "<b>Break it on purpose:</b> call a function you never defined — <span class='mono'>foo();</span> — then compile with <span class='mono'>gcc -c</span> (it succeeds!) and without it (it fails). <i>Which stage complained, and why only that one?</i>"),
