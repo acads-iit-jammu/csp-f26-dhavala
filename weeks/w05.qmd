@@ -33,6 +33,95 @@
 - Straight into **Lab 04** the same afternoon (EE, 2:00 pm), which is built on exactly this.
 - [Lec 9](../cs1100-cse-iitm-2021/slides/Lec9.pdf) — *First loop construct: `while`* · [Lec 12](../cs1100-cse-iitm-2021/slides/Lec12.pdf) — *`for` loop* (Prof. Shweta Agrawal, IIT Madras)
 
+## Loop Workouts (Tuesday)
+
+Four small programs. **Predict the output before you compile any of them** — that habit is
+the whole point, not the typing. Every one of these fits in a `while` loop and needs
+nothing you have not already met.
+
+### 1 · Reverse the digits
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int n, rev = 0;
+
+    printf("Enter n: ");
+    scanf("%d", &n);
+
+    while (n > 0) {
+        rev = rev * 10 + n % 10;   /* catch the last digit, and carry the rest left */
+        n = n / 10;                /* throw that digit away */
+    }
+
+    printf("rev=%d\n", rev);
+    return 0;
+}
+```
+
+Two moves you already know: `% 10` takes the last digit off, `/ 10` discards it. The only
+new idea is where a caught digit *goes* — `rev * 10` shifts everything left to make room.
+
+Try `1204` → `4021`. Then try **`900`**, and explain the answer before you object to it.
+And notice what the loop did to `n`: it consumed it. If you needed `n` afterwards, you
+would have to keep a copy — a loop that destroys its own input is a real bug in waiting.
+
+### 2 · Sum of evens and odds, until −1
+
+The first loop where the *number of passes is not known in advance*. It runs until the
+user says stop. That sentinel value, `-1`, is part of the specification — not a magic
+number you invented.
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int x, sum_even = 0, sum_odd = 0;
+
+    printf("Enter numbers, -1 to stop: ");
+    scanf("%d", &x);              /* read the FIRST one before the loop */
+
+    while (x != -1) {
+        if (x % 2 == 0)
+            sum_even = sum_even + x;
+        else
+            sum_odd = sum_odd + x;
+
+        scanf("%d", &x);          /* read the NEXT one at the end of the body */
+    }
+
+    printf("even=%d odd=%d\n", sum_even, sum_odd);
+    return 0;
+}
+```
+
+This is the **read-ahead** pattern, and the two `scanf` calls are not a mistake: the loop
+condition has to be able to look at a value *before* deciding whether to process it. Move
+the read to the top of the body and `-1` gets added to a total — try it and see.
+
+It is also the first time an `if` lives *inside* a loop. Say the invariant out loud:
+*`sum_even` holds the total of every even number seen so far.* If that sentence stays
+true every pass, the program is right.
+
+Three questions worth arguing about:
+
+- What does `-7 % 2` give? Is `-7` counted as odd by this program? (Predict, then check.)
+- What happens if the very first number typed is `-1`?
+- What if the user types a letter? Where does `scanf` leave you, and how would you know?
+
+### 3 · Count the passes
+
+Take either program above and add one line — `int passes = 0;` — with `passes++` inside
+the loop, and print it at the end. Now you can *measure* a loop instead of guessing about
+it. For the digit-reverser, how does the count relate to the number you typed?
+
+That single habit — counting the passes — is what turns "this feels slow" into an
+engineering argument. There is a worked example of exactly that in the
+[floor and ceiling notes](../materials/w05-floor-ceil-notes.html), where counting is what
+exposes the difference between a loop that takes a *billion* passes and one that takes
+fifty.
+
 ## Practice Pack
 
 📦 [**w05-practice.tar.gz**](../materials/w05-practice.tar.gz) — everything we did in
