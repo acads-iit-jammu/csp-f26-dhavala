@@ -29,6 +29,24 @@
 - Straight into **Lab 04** the same afternoon (EE, 2:00 pm), which is built on exactly this.
 - [Lec 9](../cs1100-cse-iitm-2021/slides/Lec9.pdf) — *First loop construct: `while`* · [Lec 12](../cs1100-cse-iitm-2021/slides/Lec12.pdf) — *`for` loop* (Prof. Shweta Agrawal, IIT Madras)
 
+## Practice Pack
+
+📦 [**w05-practice.tar.gz**](../materials/w05-practice.tar.gz) — everything we did in
+class, to do again yourself. Twenty-five predict-then-run items: the **14 precedence
+drills** (`p01`–`p14`) and the **11 pipeline steps** (`c01`–`c11`).
+
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/materials/w05-practice.tar.gz
+tar xzf w05-practice.tar.gz
+cd w05-practice
+./practice.sh --all
+```
+
+`./practice.sh` shows what is left · `--prec` or `--pipeline` for one half ·
+`./practice.sh c07` for a single item. Same rule as the lab: **predict first, then run.**
+A wrong prediction is worth as much as a right one — but only if you wrote it down. Your
+answers land in `notes/practice.log`.
+
 ## After Class
 
 - **Run the five commands** on your own `hello.c`. Keep `hello.i`, `hello.s` and `hello.o` — how many lines each, how many bytes, and which of them will run?
