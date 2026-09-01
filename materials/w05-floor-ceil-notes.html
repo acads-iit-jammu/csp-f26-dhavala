@@ -85,9 +85,20 @@ than a clever one you are guessing at, and it gives you something to check the c
 <em>against</em>.</p>
 
 <h2><span class="n">3.</span> And then ceiling is easy… isn't it?</h2>
-<p>Once you have the floor, the ceiling looks free:</p>
+<p>Once you have the floor, the ceiling appears to be free:</p>
 <pre>long long c = f + 1;     /* ceil = floor + 1 */</pre>
-<p>Try it on <code>3.7</code>: floor 3, ceiling 4. Correct. Try <code>-3.7</code>: floor &minus;4, ceiling &minus;3.
+<p>You could also just count again, symmetrically — step <em>up</em> until you reach or pass X:</p>
+<pre>long long c = 0;
+
+if (X &gt;= 0) {
+    while (c &lt; X)        /* not there yet? take another step up */
+        c++;
+} else {
+    while (c - 1 &gt;= X)   /* could I go one lower and still not pass X? */
+        c--;
+}</pre>
+<p>That works too, and it is worth writing once so the pair is symmetric in your head. But
+if you already have the floor, the ceiling looks free — try it on <code>3.7</code>: floor 3, ceiling 4. Correct. Try <code>-3.7</code>: floor &minus;4, ceiling &minus;3.
 Correct. Try <code>-0.5</code>: floor &minus;1, ceiling 0. Correct.</p>
 <p>Now try <code>5.0</code>.</p>
 <table>
@@ -118,9 +129,46 @@ the examples, has to be the thing you check against.</div>
   <tr><td><code>10<sup>18</sup> + 0.5</code></td><td>10<sup>18</sup> steps</td><td>101 steps</td></tr>
 </table>
 <p>The last row is the one to dwell on. A <code>double</code> holds 10<sup>18</sup> without
-complaint, so it is a perfectly ordinary input. At a billion steps per second — faster than
-this loop really runs — counting would take <strong>about 32 years</strong>. Bisecting takes
-101 steps, which is to say: no time at all.</p>
+complaint, so it is a perfectly ordinary input to hand this program.</p>
+
+<h3>Watch it happen, rather than take my word for it</h3>
+<p>Put a clock around the loop and feed it bigger and bigger numbers:</p>
+<pre>#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+int main(void) {
+    double X; long long f = 0, steps = 0;
+    printf("Enter X: ");
+    scanf("%lf", &amp;X);
+
+    clock_t t0 = clock();
+    while (f + 1 &lt;= X) { f++; steps++; }
+    double secs = (double)(clock() - t0) / CLOCKS_PER_SEC;
+
+    printf("floor=%lld  steps=%lld  time=%.2f s
+", f, steps, secs);
+    return 0;
+}</pre>
+<p>Measured, compiled with no optimisation — exactly how you compile it:</p>
+<table>
+  <tr><th>X</th><th>steps</th><th>time</th></tr>
+  <tr><td><code>10<sup>7</sup></code></td><td>10 000 000</td><td>0.03 s</td></tr>
+  <tr><td><code>10<sup>9</sup></code></td><td>1 000 000 000</td><td>0.47 s</td></tr>
+  <tr><td><code>10<sup>10</sup></code></td><td>10 000 000 000</td><td>3.95 s &nbsp; <em>&larr; you can feel this one</em></td></tr>
+</table>
+<p>Ten times the input, ten times the wait. That is the whole shape of the problem, and now
+you can extrapolate it yourself — at the roughly 2.5 billion steps per second this machine
+managed:</p>
+<table>
+  <tr><th>X</th><th>counting up would take</th><th>bracket-and-bisect</th></tr>
+  <tr><td><code>10<sup>12</sup></code></td><td>about 7 minutes</td><td>&lt; 80 steps</td></tr>
+  <tr><td><code>10<sup>15</sup></code></td><td>about 4.6 days</td><td>&lt; 90 steps</td></tr>
+  <tr><td><code>10<sup>18</sup></code></td><td><strong>about 13 years</strong></td><td><strong>101 steps</strong></td></tr>
+</table>
+<p>Your laptop is faster or slower than the one that produced those seconds, so the exact
+figures will differ — and it does not matter in the slightest. Halve them, double them,
+buy a machine ten times quicker: 13 years becomes 1.3 years, and the program is still
+useless. <strong>The shape of the growth is the thing, not the constant in front of it.</strong></p>
 <p class="big">Both programs are correct. Only one of them finishes.</p>
 <div class="note"><strong>This is what "efficiency" means, and note what it is not.</strong> It is not
 that the counting loop is ugly, or that a professional would sneer at it. It is that for
