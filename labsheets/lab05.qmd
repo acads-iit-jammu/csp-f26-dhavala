@@ -1,24 +1,138 @@
-# Lab 05: Lists & Strings {.unnumbered}
+# Lab 05: Decisions {.unnumbered}
 
-| | Electrical | Mechanical & Materials |
-|---|---|---|
-| **Date** | Tue Sep 8, 2026 | Wed Sep 16, 2026 |
-| **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
+| | Electrical | Mechanical | Metallurgy & Materials |
+|---|---|---|---|
+| **Date** | Tue Sep 8 | Wed Sep 16 | Wed Sep 16 |
+| **Time & Room** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4021** |
 
-**Syllabus practical module:** 3 — Writing programs related to lists and strings
+**Lab pack:** [lab05.tar.gz](../labs/lab05.tar.gz) — pre-placed on lab machines, downloadable for home practice.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Syllabus practical module:** 2 — Writing programs related to conditional statements
+
+**Evaluation:** Graded — equal weight within the 20% lab component. Ten drills, five
+fill-in-the-blank programs, and three checked problems, plus observed work and a short
+viva. Teams of 1–2; pairs swap driver/navigator at half-time.
 
 **Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
 
-## Pre-Lab
+## The one sentence to leave with
 
-*To be posted — what to read/install before the session.*
+> **`break` leaves exactly one construct — the nearest enclosing loop or `switch`.**
 
-## Exercises
+Almost everything that goes wrong today is that sentence, not yet believed. You will meet
+it again next week, when a `break` in the inner loop of a matrix search does not stop the
+outer one.
 
-*To be posted before the session.*
+## Act 0 · Land (10 min)
 
-## Submission
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab05.tar.gz
+```
 
-Submission instructions will be provided in the lab.
+```bash
+tar xzf lab05.tar.gz
+cd lab05
+./install.sh
+```
+
+Then start the recorder:
+
+```bash
+script session.txt
+```
+
+::: {.callout-important}
+Do not go further until your prompt shows `[lab05 OK ...]`. If it does not, run
+`./where.sh` — it changes nothing, and prints the exact line to copy.
+:::
+
+## Act 1 · Drills — predict, then run (25 min)
+
+```bash
+./drill.sh --all
+```
+
+| Drills | Territory |
+|---|---|
+| `d01`–`d02` | the two classic `if` bugs: one equals sign, and an `else` that belongs to the wrong `if` |
+| `d03`–`d04` | `switch`: fall-through with no `break`, and what `%2` does to a **negative** number |
+| `d05`–`d07` | **`break` and `continue`, and where they actually land** |
+| `d08`–`d10` | short-circuit `&&`, a ladder in the wrong order, and a `switch` that matches nothing |
+
+::: {.callout-warning}
+**`d07` never stops.** That is deliberate, and it is the point. Every drill run is capped
+at five seconds so it cannot hang the machine — but predict *before* you run it, and look
+carefully at where `i++` lives.
+:::
+
+A wrong prediction scores exactly as much as a right one — but only if you write it down
+first.
+
+## Act 2 · Fill the blanks (25 min)
+
+| File | What it does |
+|---|---|
+| `b1_evenodd.c` | even or odd, with `if`/`else` — and it is tested on negatives |
+| `b2_vowel.c` | vowel or consonant — a `switch` where **fall-through is the point**: five cases, one body |
+| `b3_ticket.c` | ticket price by age bracket — an else-if **ladder** |
+| `b4_grade.c` | a grade from marks — the same shape, built in the opposite direction |
+| `b5_calc.c` | a mini calculator — `switch` on a character, every case with its own `break` |
+
+::: {.callout-tip}
+`b2` and `d03` use the same mechanism and reach opposite verdicts. In `d03` the missing
+`break` is a **bug**; in `b2` the shared body is the **feature**. Be able to say why.
+:::
+
+## Act 3 · The checked three (40 min, solo)
+
+| Problem | Task | Final line ends with exactly |
+|---|---|---|
+| `e1.c` | classify a triangle from three sides | `type=equilateral` \| `type=isosceles` \| `type=scalene` \| `type=invalid` |
+| `e2.c` | is n prime? if not, its **smallest** divisor | `n=<N> prime` or `n=<N> divisor=<D>` |
+| `e3.c` | a PIN, and three attempts | `access=granted tries=<N>` or `access=denied` |
+
+`e1` — check **validity first**. Three lengths make a triangle only if every pair adds up
+to more than the third: `5 5 8` is a triangle, `2 3 9` is three sticks that will not meet.
+Then ask of your ladder: *do my cases cover every possibility?*
+
+`e2` — search upward from 2 and **`break` the moment you find a divisor**; the spec asks
+for the smallest, and there is no reason to keep looking. Then look at your upper limit:
+going to `n-1` works, and stopping at `i*i <= n` also works — for 97 that is 9 passes
+instead of 95. Add a counter and see.
+
+`e3` — a loop that can end for **two different reasons**: the right PIN (you `break` out)
+or the attempts running out (the condition ends it). After the loop, your program has to
+know *which* happened. That is exactly what the two output lines are asking you to prove.
+
+**How checking works** — `./check.sh e1` compiles *your source* and runs it on the public
+examples **and on fresh random inputs drawn from the GIVEN**. A program that memorises an
+example fails the next draw.
+
+## Act 4 · Check, fix, bundle (10 min)
+
+```bash
+./check.sh
+```
+
+Fix, re-check, repeat. Then — green or time-up:
+
+```bash
+./check.sh --bundle
+```
+
+Carry `../lab05_<rolls>_<branch>_w<NN>.tar.gz` out with you (Moodle + email yourself).
+
+## Stretch (fast finishers)
+
+- **The bank menu.** A `while` loop showing a menu — balance, deposit, withdraw, quit —
+  with a `switch` on the choice. Make `quit` actually quit. If your first attempt keeps
+  looping, you have just rediscovered `d05` with your own hands, which is the best way to
+  learn it.
+- **Count the passes in `e2`.** Compare `i < n` against `i*i <= n` for n = 97 and n = 99.
+- **Break `e1` on purpose.** Find three sides where your program says `scalene` but the
+  right answer is `invalid`. Then explain why the order of your tests caused it.
+
+## Reflect
+
+✍️ Into `notes/answers.txt`: in `d05` the `break` ran and the loop kept going. In one
+sentence — what exactly did that `break` leave?
