@@ -1491,7 +1491,7 @@
     "href": "labsheets/lab05.html#act-4-check-fix-bundle-10-min",
     "title": "Lab 05: Decisions",
     "section": "Act 4 · Check, fix, bundle (10 min)",
-    "text": "Act 4 · Check, fix, bundle (10 min)\n./check.sh\nFix, re-check, repeat. Then — green or time-up:\n./check.sh --bundle\nCarry ../lab05_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz out with you (Moodle + email yourself).",
+    "text": "Act 4 · Check, fix, bundle (10 min)\n./check.sh\nIt now prints your marks, problem by problem:\n    b3  3/5 vectors    3 of  5 marks\n    e4  2/6 vectors    3 of 10 marks\n    e5  0/6 vectors    0 of 10 marks\n    ---------------------------------------------\n                      56 of 75 marks\nMarks are partial — every vector you pass earns its share, so fixing one failing case is always worth doing, right up to the last minute. Treat the total as an estimate: the random vectors are drawn fresh on every run, so it can move a mark or two.\nFix, re-check, repeat. Then — green or time-up:\n./check.sh --bundle\nCarry ../lab05_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz out with you (Moodle + email yourself).",
     "crumbs": [
       "Lab Sheets",
       "Lab 05: Decisions"

@@ -686,8 +686,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="act-4-check-fix-bundle-10-min" class="level2">
 <h2 class="anchored" data-anchor-id="act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It now prints <strong>your marks, problem by problem</strong>:</p>
+<pre><code>    b3  3/5 vectors    3 of  5 marks
+    e4  2/6 vectors    3 of 10 marks
+    e5  0/6 vectors    0 of 10 marks
+    ---------------------------------------------
+                      56 of 75 marks</code></pre>
+<p>Marks are <strong>partial</strong> — every vector you pass earns its share, so fixing one failing case is always worth doing, right up to the last minute. Treat the total as an estimate: the random vectors are drawn fresh on every run, so it can move a mark or two.</p>
 <p>Fix, re-check, repeat. Then — green or time-up:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Carry <code>../lab05_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz</code> out with you (Moodle + email yourself).</p>
 </section>
 <section id="stretch-fast-finishers" class="level2">
