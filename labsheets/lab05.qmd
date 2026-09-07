@@ -10,8 +10,8 @@
 **Syllabus practical module:** 2 — Writing programs related to conditional statements
 
 **Evaluation:** Graded — equal weight within the 20% lab component. **Only the exercises
-carry marks**: five fill-in-the-blank programs (3 each) and five checked problems
-(13 each). The ten drills are **not scored** — they are how you find out what you have
+carry marks**: five fill-in-the-blank programs (**5 marks each**) and five checked
+problems (**10 marks each**). The ten drills are **not scored** — they are how you find out what you have
 wrong before it costs you. Plus observed work and a short viva. Teams of 1–2; pairs swap
 driver/navigator at half-time.
 
@@ -77,7 +77,7 @@ These carry **no marks at all**. A wrong prediction costs you nothing — which 
 why you should write it down before pressing Enter. `d05` and `d07` in particular are
 about to reappear in the graded problems.
 
-## Act 2 · Fill the blanks (20 min · 3 marks each)
+## Act 2 · Fill the blanks (20 min · 5 marks each)
 
 | File | What it does |
 |---|---|
@@ -93,7 +93,7 @@ about to reappear in the graded problems.
 say why.
 :::
 
-## Act 3 · The checked five (60 min, solo · 13 marks each)
+## Act 3 · The checked five (60 min, solo · 10 marks each)
 
 | Problem | Task | Final line ends with exactly |
 |---|---|---|
