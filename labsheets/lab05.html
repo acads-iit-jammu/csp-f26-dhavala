@@ -505,6 +505,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Syllabus practical module:</strong> 2 — Writing programs related to conditional statements</p>
 <p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component. Ten drills, five fill-in-the-blank programs, and three checked problems, plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.</p>
 <p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The <a href="../weeks/w06.html">Week 06 lecture notes</a> carry eight worked programs on this material. They are your <strong>reference</strong>, not your answers — none of the problems below is solved there. Read them for the technique, then write these yourself.</p>
+</div>
+</div>
+</div>
 <section id="the-one-sentence-to-leave-with" class="level2">
 <h2 class="anchored" data-anchor-id="the-one-sentence-to-leave-with">The one sentence to leave with</h2>
 <blockquote class="blockquote">
@@ -591,24 +601,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>b1_evenodd.c</code></td>
-<td>even or odd, with <code>if</code>/<code>else</code> — and it is tested on negatives</td>
+<td><code>b1_sign.c</code></td>
+<td>positive, negative or <strong>zero</strong> — three outcomes, so <code>if</code>/<code>else</code> is not enough</td>
 </tr>
 <tr class="even">
-<td><code>b2_vowel.c</code></td>
-<td>vowel or consonant — a <code>switch</code> where <strong>fall-through is the point</strong>: five cases, one body</td>
+<td><code>b2_days.c</code></td>
+<td>days in a month — a <code>switch</code> where <strong>fall-through is the point</strong>: four months, one body</td>
 </tr>
 <tr class="odd">
-<td><code>b3_ticket.c</code></td>
-<td>ticket price by age bracket — an else-if <strong>ladder</strong></td>
+<td><code>b3_bill.c</code></td>
+<td>an electricity bill by tariff slab — an else-if <strong>ladder</strong></td>
 </tr>
 <tr class="even">
 <td><code>b4_grade.c</code></td>
 <td>a grade from marks — the same shape, built in the opposite direction</td>
 </tr>
 <tr class="odd">
-<td><code>b5_calc.c</code></td>
-<td>a mini calculator — <code>switch</code> on a character, every case with its own <code>break</code></td>
+<td><code>b5_convert.c</code></td>
+<td>a temperature converter — <code>switch</code> on a character, each case with its own <code>break</code>, and one Week-3 trap hiding in the formulae</td>
 </tr>
 </tbody>
 </table>
@@ -618,7 +628,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>b2</code> and <code>d03</code> use the same mechanism and reach opposite verdicts. In <code>d03</code> the missing <code>break</code> is a <strong>bug</strong>; in <code>b2</code> the shared body is the <strong>feature</strong>. Be able to say why.</p>
+<p><code>b2</code> and <code>d03</code> use the same mechanism and reach opposite verdicts. In <code>d03</code> the missing <code>break</code> is a <strong>bug</strong>; in <code>b2</code> four months sharing one body is the <strong>feature</strong>. Be able to say why.</p>
 </div>
 </div>
 </div>
@@ -646,19 +656,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>e2.c</code></td>
-<td>is n prime? if not, its <strong>smallest</strong> divisor</td>
-<td><code>n=&lt;N&gt; prime</code> or <code>n=&lt;N&gt; divisor=&lt;D&gt;</code></td>
+<td>do a and b share a factor? the <strong>smallest</strong> one</td>
+<td><code>a=&lt;A&gt; b=&lt;B&gt; common=&lt;D&gt;</code> or <code>a=&lt;A&gt; b=&lt;B&gt; coprime</code></td>
 </tr>
 <tr class="odd">
 <td><code>e3.c</code></td>
-<td>a PIN, and three attempts</td>
-<td><code>access=granted tries=&lt;N&gt;</code> or <code>access=denied</code></td>
+<td>the <strong>first</strong> multiple of 7 among five numbers</td>
+<td><code>found=&lt;X&gt; at=&lt;N&gt;</code> or <code>none in 5</code></td>
 </tr>
 </tbody>
 </table>
 <p><code>e1</code> — check <strong>validity first</strong>. Three lengths make a triangle only if every pair adds up to more than the third: <code>5 5 8</code> is a triangle, <code>2 3 9</code> is three sticks that will not meet. Then ask of your ladder: <em>do my cases cover every possibility?</em></p>
-<p><code>e2</code> — search upward from 2 and <strong><code>break</code> the moment you find a divisor</strong>; the spec asks for the smallest, and there is no reason to keep looking. Then look at your upper limit: going to <code>n-1</code> works, and stopping at <code>i*i &lt;= n</code> also works — for 97 that is 9 passes instead of 95. Add a counter and see.</p>
-<p><code>e3</code> — a loop that can end for <strong>two different reasons</strong>: the right PIN (you <code>break</code> out) or the attempts running out (the condition ends it). After the loop, your program has to know <em>which</em> happened. That is exactly what the two output lines are asking you to prove.</p>
+<p><code>e2</code> — search upward from 2 and <strong><code>break</code> the moment you find a number that divides both</strong>; the spec asks for the smallest, so there is no reason to look further. Two numbers sharing no factor above 1 are <strong>coprime</strong> — and you met their <code>gcd</code> in Lab 04. What is it? Predict what your program should print for <code>13 13</code> before you run it.</p>
+<p><code>e3</code> — a loop that can end for <strong>two different reasons</strong>: you found one and broke out, or you ran out of numbers. After the loop your program still has to know <em>which</em> — that is what the two output lines demand. A search that keeps searching after it has found the answer reports the <strong>last</strong> hit, not the first.</p>
 <p><strong>How checking works</strong> — <code>./check.sh e1</code> compiles <em>your source</em> and runs it on the public examples <strong>and on fresh random inputs drawn from the GIVEN</strong>. A program that memorises an example fails the next draw.</p>
 </section>
 <section id="act-4-check-fix-bundle-10-min" class="level2">
@@ -672,7 +682,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="stretch-fast-finishers">Stretch (fast finishers)</h2>
 <ul>
 <li><strong>The bank menu.</strong> A <code>while</code> loop showing a menu — balance, deposit, withdraw, quit — with a <code>switch</code> on the choice. Make <code>quit</code> actually quit. If your first attempt keeps looping, you have just rediscovered <code>d05</code> with your own hands, which is the best way to learn it.</li>
-<li><strong>Count the passes in <code>e2</code>.</strong> Compare <code>i &lt; n</code> against <code>i*i &lt;= n</code> for n = 97 and n = 99.</li>
+<li><strong>Prime, from <code>e2</code>.</strong> Adapt your <code>e2</code> loop into a primality test, then compare an upper limit of <code>n-1</code> against <code>i*i &lt;= n</code>: for 97 that is 95 passes against 9. Add a counter.</li>
 <li><strong>Break <code>e1</code> on purpose.</strong> Find three sides where your program says <code>scalene</code> but the right answer is <code>invalid</code>. Then explain why the order of your tests caused it.</li>
 </ul>
 </section>
