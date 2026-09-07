@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deck 10 — One Session at a Bank · CS-1-01 (MO)</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003f87; --blue-dark:#002d63; --blue-mid:#0056b8; --blue-sky:#4da3ff; --blue-pale:#eaf3ff;
+    --ink:#22262a; --star:#f4b400;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#0b1e3a;font-family:Roboto,system-ui,sans-serif;color:var(--ink)}
+  #root{height:100%}
+  .deck{height:100%;display:flex;flex-direction:column;overflow:hidden}
+  .slide{flex:1;display:flex;flex-direction:column;justify-content:safe center;padding:4vh 7vw;
+         background:#fff;overflow:auto}
+  .slide.title{background:linear-gradient(160deg,var(--blue-dark) 0%,var(--blue) 70%,var(--blue-mid) 100%);color:#fff}
+  .slide.accent{background:linear-gradient(160deg,#f6faff,var(--blue-pale))}
+  h1{font-family:"Roboto Slab",serif;font-size:clamp(1.8rem,4.5vw,3.2rem);margin:.2em 0;line-height:1.15}
+  h2{font-family:"Roboto Slab",serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--blue-dark);margin:.2em 0 .6em;
+     border-bottom:3px solid var(--blue-pale);padding-bottom:.25em}
+  .title h2{color:#cfe3ff;border:none;font-weight:400;font-size:clamp(1rem,2vw,1.5rem)}
+  .kicker{font-size:clamp(.8rem,1.4vw,1rem);letter-spacing:.14em;text-transform:uppercase;color:var(--blue-sky)}
+  p,li{font-size:clamp(1rem,1.9vw,1.35rem);line-height:1.55}
+  li{margin:.35em 0}
+  .big{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:500;color:var(--blue-dark)}
+  table{border-collapse:collapse;font-size:clamp(.95rem,1.7vw,1.25rem);margin:.4em 0;width:100%}
+  th{background:var(--blue);color:#fff;text-align:left}
+  th,td{border:1px solid #cfdcec;padding:.35em .7em}
+  tr:nth-child(even) td{background:#f4f8fd}
+  code,.mono{font-family:"Roboto Mono",monospace;color:var(--blue-mid)}
+  .cols{display:flex;gap:4vw;flex-wrap:wrap}
+  .cols>div{flex:1;min-width:260px}
+  .note{background:var(--blue-pale);border-left:5px solid var(--blue);padding:.5em 1em;border-radius:0 8px 8px 0;
+        margin:.35em 0;font-size:clamp(.9rem,1.55vw,1.1rem)}
+  .quote{font-family:"Roboto Slab",serif;font-size:clamp(1.4rem,3.4vw,2.4rem);color:var(--blue-dark);
+         text-align:center;line-height:1.4;margin:auto 0}
+  .quote small{display:block;font-family:Roboto,sans-serif;font-size:.55em;color:#667;margin-top:1em}
+  /* chrome */
+  .bar{height:5px;background:#12305c}
+  .bar>div{height:100%;background:var(--blue-sky);transition:width .25s}
+  .foot{display:flex;justify-content:space-between;align-items:center;background:#0b1e3a;color:#8fb4e8;
+        font-size:.75rem;padding:6px 14px;font-family:"Roboto Mono",monospace}
+  .foot b{color:#cfe3ff;font-weight:500}
+  .navhint{opacity:.7}
+  pre{background:#f4f8fd;border:1px solid #cfdcec;border-left:5px solid var(--blue-mid);
+      border-radius:0 8px 8px 0;padding:.5em 1em;margin:.35em 0;overflow-x:auto;
+      font-family:"Roboto Mono",monospace;color:var(--blue-dark);
+      font-size:clamp(.72rem,1.32vw,1rem);line-height:1.4;white-space:pre}
+  .clickzone{position:fixed;top:0;bottom:30px;width:18vw;cursor:pointer;z-index:5}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+"use strict";
+const e = React.createElement;
+const F = React.Fragment;
+
+/* ---------- content ---------- */
+const li = (...items)=> e("ul",null, ...items.map(t=> e("li",{dangerouslySetInnerHTML:{__html:t}})));
+const html = (tag,s)=> e(tag,{dangerouslySetInnerHTML:{__html:s}});
+const table = (head,rows)=> e("table",null,
+  e("thead",null, e("tr",null, ...head.map(hh=>e("th",null,hh)))),
+  e("tbody",null, ...rows.map(r=> e("tr",null, ...r.map(c=> html("td",c))))));
+
+const SLIDES = [
+{cls:"title", body:()=> e(F,null,
+  e("div",{className:"kicker"},"CS-1-01 (MO) · Monsoon 2026 · W06 · Deck 10"),
+  e("h1",null,"One Session at a Bank"),
+  e("h2",null,"Where every construct you met this week turns out to be the only sensible answer"),
+  e("p",{style:{marginTop:"2em",color:"#cfe3ff"}},"Soma S Dhavala · Electrical / Mechanical / Materials"),
+  e("p",{style:{color:"#8fb4e8",fontSize:"1rem"}},"→ arrow keys or click the right edge to advance"))},
+
+{title:"You have five constructs and no reason to prefer any of them", body:()=> e(F,null,
+  li("<span class='mono'>if</span> / <span class='mono'>else</span> · <span class='mono'>switch</span> · <span class='mono'>while</span> · <span class='mono'>for</span> · <span class='mono'>break</span> · <span class='mono'>continue</span> — six rules, learned one at a time, each perfectly clear on its own",
+     "And a fair question after that: <i>when would I actually reach for one rather than another?</i> A rule you cannot choose between is not yet a tool",
+     "So: <b>one realistic job</b>, start to finish. An ATM session. Not a new construct in sight — every single one you already have, and each one arriving because the problem demanded it"),
+  html("div",'<div class="note">We are not going to write this program today. We are going to <b>design</b> it — and watch each construct fall out of a question about the <i>shape</i> of the work.</div>'))},
+
+{title:"The whole shape, on one screen", body:()=> e(F,null,
+  html("pre",'                       START\n                         |\n         +-----------------------------+\n         |  AUTHENTICATE   max 3 tries |  <-- how many tries?\n         +-----------------------------+      THREE. Known in advance.\n                         |\n                  authenticated?\n                   /           \\\n                 no             yes\n                 |               |\n                END     +------------------+\n                        |  SESSION         |  <-- how many commands?\n                        |  until they quit |      NOBODY KNOWS.\n                        +------------------+\n                                |\n                         read one command\n                                |\n                     +----------------------+\n                     |       dispatch       |  <-- five discrete choices\n                     +----------------------+\n                    B     D     W     T     Q\n                    |     |     |     |     |\n                  bal   dep   with   txn   quit'),
+  html("div",'<div class="note">Three questions, three different answers. That is the whole deck.</div>'))},
+
+{title:"Stage 1 — “at most three attempts”", body:()=> e(F,null,
+  html("p",'<span class="big">How many times will this repeat? <b>Three. A number I know before I start.</b></span>'),
+  html("pre",'for (attempt = 1; attempt <= 3; attempt++) {\n    ... ask for the PIN ...\n    if (correct) { ... remember that it worked ... break; }\n    ... tell them it was wrong ...\n}'),
+  li("A <span class='mono'>for</span> loop puts all three parts of a <i>counted</i> repetition in one place: where to start, when to stop, how to step. When the count is known, <b>hiding it inside the body is a worse program</b>",
+     "<span class='mono'>break</span> is here for one reason: a correct PIN on the first try means attempts two and three are pointless work. Searching after you have found the answer is always a bug in the making"),
+  html("div",'<div class="note">This loop can end <b>two ways</b> — you broke out, or you ran out of attempts. When it ends, your program has to know <i>which</i>. That is not a detail; it is the entire result of stage 1.</div>'))},
+
+{title:"The gate", body:()=> e(F,null,
+  html("pre",'if (!authenticated) {\n    printf("card retained. goodbye.\\n");\n    return 1;                       /* nothing below here is allowed to run */\n}'),
+  li("One decision, two futures, and no third possibility — so: <span class='mono'>if</span>. No <span class='mono'>switch</span>, no loop. <b>Match the construct to the number of outcomes</b>",
+     "Everything after this line may safely assume the customer is who they claim to be. That assumption has a name you have been using since Lab 02: it is a <b>precondition</b> for the whole session"),
+  html("div",'<div class="note">Notice what the gate buys you: the code below it gets <i>simpler</i>, because it no longer has to wonder. A well-placed decision removes decisions later.</div>'))},
+
+{title:"Stage 2 — “until they say stop”", body:()=> e(F,null,
+  html("p",'<span class="big">How many commands will they type? <b>Nobody knows. Not even them.</b></span>'),
+  html("pre",'running = 1;\n\nwhile (running) {\n    ... show the menu ...\n    ... read one command ...\n    ... act on it ...\n}'),
+  table(["The question","The construct"],[
+    ["I know the count before I start","<span class='mono'>for</span>"],
+    ["The data decides when to stop","<span class='mono'>while</span>"],
+    ["It must run at least once, then decide","<span class='mono'>do-while</span>"]]),
+  html("div",'<div class="note">This is the honest reason C has three loops rather than one. Not three syntaxes for the same thing — <b>three different shapes of not-knowing.</b></div>'))},
+
+{title:"Inside the loop — one value, five destinations", body:()=> e(F,null,
+  html("pre",'switch (command) {\n    case \'B\': ... balance ...     break;\n    case \'D\': ... deposit ...     break;\n    case \'W\': ... withdraw ...    break;\n    case \'T\': ... transactions ... break;\n    case \'Q\': ... quit ...        break;\n    default : printf("no such option\\n");\n}'),
+  li("Five <b>discrete, equal, mutually exclusive</b> cases tested against <i>one</i> value. That is exactly the shape <span class='mono'>switch</span> exists for — a ladder of five <span class='mono'>else if</span>s would work, and would read as though the five options were somehow ranked",
+     "The <span class='mono'>default</span> is not decoration. A customer <i>will</i> press the wrong key, and a program with no <span class='mono'>default</span> answers that by doing nothing at all — the least informative failure available to you"))},
+
+{title:"When a command is refused — `continue`", body:()=> e(F,null,
+  html("p",'Withdraw 5000 from a balance of 1200. What should the program do?'),
+  html("pre",'case \'W\':\n    ... read the amount ...\n    if (amount > balance) {\n        printf("insufficient funds\\n");\n        continue;              /* abandon THIS command, back to the menu */\n    }\n    ... perform the withdrawal ...\n    break;'),
+  li("Not <span class='mono'>return</span> — the customer has done nothing wrong and the session is fine. Not <span class='mono'>break</span> either, though it would happen to work here",
+     "<span class='mono'>continue</span> says precisely the right thing: <b>this pass is over, the loop is not.</b> Show the menu again"),
+  html("div",'<div class="note">A rejected transaction is <i>not</i> an error in the program. Knowing the difference between "this request cannot be served" and "this program is broken" is most of what error handling turns out to be — and it is why <span class="mono">continue</span> and <span class="mono">return</span> are not interchangeable.</div>'))},
+
+{title:"And when they choose Quit — the trap", body:()=> e(F,null,
+  html("p",'The obvious thing to write. It does not work:'),
+  html("pre",'while (running) {\n    switch (command) {\n        case \'Q\':\n            printf("goodbye\\n");\n            break;          /* <-- leaves the SWITCH. The while never hears. */\n    }\n}'),
+  html("p",'<span class="big">The menu reappears. Forever.</span>'),
+  html("pre",'case \'Q\':\n    running = 0;        /* THIS is what the while is watching */\n    break;              /* and this still just leaves the switch */'),
+  html("div",'<div class="note"><b><span class="mono">break</span> leaves exactly one construct — the nearest enclosing loop or <span class="mono">switch</span>.</b> Inside a <span class="mono">switch</span> inside a loop, it leaves the <span class="mono">switch</span>. The fix is never a cleverer <span class="mono">break</span>; it is giving the loop a condition of its own to look at.</div>'))},
+
+{title:"The whole thing, as a table of questions", body:()=> e(F,null,
+  table(["What the problem said","What you write","Why"],[
+    ["“at most three attempts”","<span class='mono'>for</span>","the count is known before you start"],
+    ["“stop as soon as it is right”","<span class='mono'>break</span>","searching on after success is wasted work"],
+    ["“wrong PIN? then no session”","<span class='mono'>if</span>","one decision, two futures"],
+    ["“until the customer quits”","<span class='mono'>while</span>","the data decides when to stop"],
+    ["“one of five options”","<span class='mono'>switch</span>","discrete, equal, mutually exclusive cases"],
+    ["“refuse this, carry on”","<span class='mono'>continue</span>","this pass is over; the loop is not"],
+    ["“end the session”","a flag the <span class='mono'>while</span> reads","because <span class='mono'>break</span> cannot reach it from inside a <span class='mono'>switch</span>"]]),
+  html("div",'<div class="note">The <b>complete, running</b> version of the menu loop and of the three-attempt gate is in this week&rsquo;s <span class="mono">Code You Can Copy</span> notes, sections 7 and 8 &mdash; including the quit bug, live. This deck is the design; that page is the code.<br><br>Read the left column on its own. It is just the <b>specification</b>, in English. Every construct on the right was chosen by a question about the <i>shape</i> of the work — never by preference, and never by which one you learned most recently.</div>'))},
+
+{cls:"accent", body:()=> e(F,null,
+  e("div",{className:"quote"},"You did not choose these constructs. The problem did.",
+    e("small",null,"Which is why the useful question is never “what can while do?” but “what shape is this repetition?” — and that question is answered in the specification, before you write a line.")))},
+];
+
+/* ---------- deck engine ---------- */
+function Deck(){
+  const [i,setI] = React.useState(()=>{
+    const n=parseInt(location.hash.slice(1)); return Number.isInteger(n)&&n>=0&&n<SLIDES.length? n:0; });
+  const go = React.useCallback(d=>{
+    setI(cur=>{ const n=Math.min(SLIDES.length-1, Math.max(0, cur+d)); location.hash="#"+n; return n; });
+  },[]);
+  React.useEffect(()=>{
+    const k=ev=>{ if(["ArrowRight","PageDown"," "].includes(ev.key)) go(1);
+                  else if(["ArrowLeft","PageUp"].includes(ev.key)) go(-1);
+                  else if(ev.key==="Home"){ setI(0); location.hash="#0"; } };
+    window.addEventListener("keydown",k); return ()=>window.removeEventListener("keydown",k);
+  },[go]);
+  const s=SLIDES[i];
+  return e("div",{className:"deck"},
+    e("div",{className:"clickzone",style:{left:0},onClick:()=>go(-1)}),
+    e("div",{className:"clickzone",style:{right:0},onClick:()=>go(1)}),
+    e("div",{className:"slide "+(s.cls||"")},
+      s.title? e("h2",null,s.title):null,
+      s.body()),
+    e("div",{className:"bar"}, e("div",{style:{width:((i+1)/SLIDES.length*100)+"%"}})),
+    e("div",{className:"foot"},
+      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 10 · One Session at a Bank"),
+      e("span",{className:"navhint"},"← → to navigate"),
+      e("span",null, (i+1)+" / "+SLIDES.length)));
+}
+ReactDOM.createRoot(document.getElementById("root")).render(e(Deck));
+</script>
+</body>
+</html>
