@@ -137,6 +137,20 @@ example fails the next draw.
 ./check.sh
 ```
 
+It now prints **your marks, problem by problem**:
+
+```
+    b3  3/5 vectors    3 of  5 marks
+    e4  2/6 vectors    3 of 10 marks
+    e5  0/6 vectors    0 of 10 marks
+    ---------------------------------------------
+                      56 of 75 marks
+```
+
+Marks are **partial** — every vector you pass earns its share, so fixing one failing case
+is always worth doing, right up to the last minute. Treat the total as an estimate: the
+random vectors are drawn fresh on every run, so it can move a mark or two.
+
 Fix, re-check, repeat. Then — green or time-up:
 
 ```bash
