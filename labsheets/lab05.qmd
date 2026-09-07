@@ -9,9 +9,11 @@
 
 **Syllabus practical module:** 2 — Writing programs related to conditional statements
 
-**Evaluation:** Graded — equal weight within the 20% lab component. Ten drills, five
-fill-in-the-blank programs, and three checked problems, plus observed work and a short
-viva. Teams of 1–2; pairs swap driver/navigator at half-time.
+**Evaluation:** Graded — equal weight within the 20% lab component. **Only the exercises
+carry marks**: five fill-in-the-blank programs (3 each) and five checked problems
+(13 each). The ten drills are **not scored** — they are how you find out what you have
+wrong before it costs you. Plus observed work and a short viva. Teams of 1–2; pairs swap
+driver/navigator at half-time.
 
 **Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
 
@@ -52,7 +54,7 @@ Do not go further until your prompt shows `[lab05 OK ...]`. If it does not, run
 `./where.sh` — it changes nothing, and prints the exact line to copy.
 :::
 
-## Act 1 · Drills — predict, then run (25 min)
+## Act 1 · Drills — predict, then run (20 min, not marked)
 
 ```bash
 ./drill.sh --all
@@ -71,10 +73,11 @@ at five seconds so it cannot hang the machine — but predict *before* you run i
 carefully at where `i++` lives.
 :::
 
-A wrong prediction scores exactly as much as a right one — but only if you write it down
-first.
+These carry **no marks at all**. A wrong prediction costs you nothing — which is exactly
+why you should write it down before pressing Enter. `d05` and `d07` in particular are
+about to reappear in the graded problems.
 
-## Act 2 · Fill the blanks (25 min)
+## Act 2 · Fill the blanks (20 min · 3 marks each)
 
 | File | What it does |
 |---|---|
@@ -90,13 +93,15 @@ first.
 say why.
 :::
 
-## Act 3 · The checked three (40 min, solo)
+## Act 3 · The checked five (60 min, solo · 13 marks each)
 
 | Problem | Task | Final line ends with exactly |
 |---|---|---|
 | `e1.c` | classify a triangle from three sides | `type=equilateral` \| `type=isosceles` \| `type=scalene` \| `type=invalid` |
 | `e2.c` | do a and b share a factor? the **smallest** one | `a=<A> b=<B> common=<D>` or `a=<A> b=<B> coprime` |
 | `e3.c` | the **first** multiple of 7 among five numbers | `found=<X> at=<N>` or `none in 5` |
+| `e4.c` | skip some, stop at others — `continue` **and** `break` in one loop | `sum=<S> added=<N>` |
+| `e5.c` | a bank session — and the `break` that does not work | `balance=<B> ops=<N>` |
 
 `e1` — check **validity first**. Three lengths make a triangle only if every pair adds up
 to more than the third: `5 5 8` is a triangle, `2 3 9` is three sticks that will not meet.
@@ -111,6 +116,16 @@ Predict what your program should print for `13 13` before you run it.
 you ran out of numbers. After the loop your program still has to know *which* — that is
 what the two output lines demand. A search that keeps searching after it has found the
 answer reports the **last** hit, not the first.
+
+`e4` — both of this week's words in one loop, doing different jobs. A number that is not a
+multiple of 3 means *this one* is of no interest but the rest still are — that is
+`continue`. A `0` means there is nothing more to read at all — that is `break`.
+
+`e5` — **this is the problem the whole lab has been pointing at.** A bank session whose
+input carries a command written *after* the `Q`. Write `case 'Q': break;` and your session
+will not end: it will read that command, act on it, and report the wrong balance. The
+trailing command is there on purpose. Ask instead — *what can `Q` change that the loop is
+watching?*
 
 **How checking works** — `./check.sh e1` compiles *your source* and runs it on the public
 examples **and on fresh random inputs drawn from the GIVEN**. A program that memorises an
@@ -132,10 +147,9 @@ Carry `../lab05_<rolls>_<branch>_w<NN>.tar.gz` out with you (Moodle + email your
 
 ## Stretch (fast finishers)
 
-- **The bank menu.** A `while` loop showing a menu — balance, deposit, withdraw, quit —
-  with a `switch` on the choice. Make `quit` actually quit. If your first attempt keeps
-  looping, you have just rediscovered `d05` with your own hands, which is the best way to
-  learn it.
+- **The bank menu, interactively.** `e5` reads its commands from one line. Turn it into a
+  real menu that prompts each time, and add a withdrawal limit of 500 per transaction.
+  Which construct does that limit belong in — the `switch`, or an `if` inside the case?
 - **Prime, from `e2`.** Adapt your `e2` loop into a primality test, then compare an upper
   limit of `n-1` against `i*i <= n`: for 97 that is 95 passes against 9. Add a counter.
 - **Break `e1` on purpose.** Find three sides where your program says `scalene` but the
