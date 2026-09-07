@@ -23,7 +23,7 @@ The schedule below is **tentative** and covers all 11 practical modules of the [
 | [3](labsheets/lab03.qmd) | Aug 25 | Sep 2 | **Solid ground** — consolidation: types, operators, precedence, integer vs. real division | 1 |
 | [4](labsheets/lab04.qmd) | Sep 1 | Sep 9 | Loops: `for`, `while` and `do-while`, and converting between them | 5, 6 |
 | [5](labsheets/lab05.qmd) | Sep 8 | Sep 16 | **Decisions**: `if`/`else`, else-if ladders, `switch`, and `break` / `continue` | 2 |
-| [6](labsheets/lab06.qmd) | Sep 15 | Sep 30 | Arrays and strings as character arrays, with `string.h` and `math.h` | 3, 10 |
+| [6](labsheets/lab06.qmd) | Sep 15 | Sep 30 | **Loops and arrays**: nested loops and patterns, 1-D and 2-D arrays, `break`/`continue` one storey up | 3, 5, 6 |
 | [7](labsheets/lab07.qmd) | Sep 29 | Oct 7 | Functions and recursion | 7 |
 | [8](labsheets/lab08.qmd) | Oct 6 | Oct 14 | Tuples & dictionaries, C-style: structures and key–value lookup tables | 4 |
 | [9](labsheets/lab09.qmd) | Oct 13 | Oct 21 | File handling | 8 |
