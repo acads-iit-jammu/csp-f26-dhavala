@@ -15,6 +15,12 @@ viva. Teams of 1–2; pairs swap driver/navigator at half-time.
 
 **Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
 
+::: {.callout-note}
+The [Week 06 lecture notes](../weeks/w06.qmd) carry eight worked programs on this
+material. They are your **reference**, not your answers — none of the problems below is
+solved there. Read them for the technique, then write these yourself.
+:::
+
 ## The one sentence to leave with
 
 > **`break` leaves exactly one construct — the nearest enclosing loop or `switch`.**
@@ -72,15 +78,16 @@ first.
 
 | File | What it does |
 |---|---|
-| `b1_evenodd.c` | even or odd, with `if`/`else` — and it is tested on negatives |
-| `b2_vowel.c` | vowel or consonant — a `switch` where **fall-through is the point**: five cases, one body |
-| `b3_ticket.c` | ticket price by age bracket — an else-if **ladder** |
+| `b1_sign.c` | positive, negative or **zero** — three outcomes, so `if`/`else` is not enough |
+| `b2_days.c` | days in a month — a `switch` where **fall-through is the point**: four months, one body |
+| `b3_bill.c` | an electricity bill by tariff slab — an else-if **ladder** |
 | `b4_grade.c` | a grade from marks — the same shape, built in the opposite direction |
-| `b5_calc.c` | a mini calculator — `switch` on a character, every case with its own `break` |
+| `b5_convert.c` | a temperature converter — `switch` on a character, each case with its own `break`, and one Week-3 trap hiding in the formulae |
 
 ::: {.callout-tip}
 `b2` and `d03` use the same mechanism and reach opposite verdicts. In `d03` the missing
-`break` is a **bug**; in `b2` the shared body is the **feature**. Be able to say why.
+`break` is a **bug**; in `b2` four months sharing one body is the **feature**. Be able to
+say why.
 :::
 
 ## Act 3 · The checked three (40 min, solo)
@@ -88,21 +95,22 @@ first.
 | Problem | Task | Final line ends with exactly |
 |---|---|---|
 | `e1.c` | classify a triangle from three sides | `type=equilateral` \| `type=isosceles` \| `type=scalene` \| `type=invalid` |
-| `e2.c` | is n prime? if not, its **smallest** divisor | `n=<N> prime` or `n=<N> divisor=<D>` |
-| `e3.c` | a PIN, and three attempts | `access=granted tries=<N>` or `access=denied` |
+| `e2.c` | do a and b share a factor? the **smallest** one | `a=<A> b=<B> common=<D>` or `a=<A> b=<B> coprime` |
+| `e3.c` | the **first** multiple of 7 among five numbers | `found=<X> at=<N>` or `none in 5` |
 
 `e1` — check **validity first**. Three lengths make a triangle only if every pair adds up
 to more than the third: `5 5 8` is a triangle, `2 3 9` is three sticks that will not meet.
 Then ask of your ladder: *do my cases cover every possibility?*
 
-`e2` — search upward from 2 and **`break` the moment you find a divisor**; the spec asks
-for the smallest, and there is no reason to keep looking. Then look at your upper limit:
-going to `n-1` works, and stopping at `i*i <= n` also works — for 97 that is 9 passes
-instead of 95. Add a counter and see.
+`e2` — search upward from 2 and **`break` the moment you find a number that divides
+both**; the spec asks for the smallest, so there is no reason to look further. Two numbers
+sharing no factor above 1 are **coprime** — and you met their `gcd` in Lab 04. What is it?
+Predict what your program should print for `13 13` before you run it.
 
-`e3` — a loop that can end for **two different reasons**: the right PIN (you `break` out)
-or the attempts running out (the condition ends it). After the loop, your program has to
-know *which* happened. That is exactly what the two output lines are asking you to prove.
+`e3` — a loop that can end for **two different reasons**: you found one and broke out, or
+you ran out of numbers. After the loop your program still has to know *which* — that is
+what the two output lines demand. A search that keeps searching after it has found the
+answer reports the **last** hit, not the first.
 
 **How checking works** — `./check.sh e1` compiles *your source* and runs it on the public
 examples **and on fresh random inputs drawn from the GIVEN**. A program that memorises an
@@ -128,7 +136,8 @@ Carry `../lab05_<rolls>_<branch>_w<NN>.tar.gz` out with you (Moodle + email your
   with a `switch` on the choice. Make `quit` actually quit. If your first attempt keeps
   looping, you have just rediscovered `d05` with your own hands, which is the best way to
   learn it.
-- **Count the passes in `e2`.** Compare `i < n` against `i*i <= n` for n = 97 and n = 99.
+- **Prime, from `e2`.** Adapt your `e2` loop into a primality test, then compare an upper
+  limit of `n-1` against `i*i <= n`: for 97 that is 95 passes against 9. Add a counter.
 - **Break `e1` on purpose.** Find three sides where your program says `scalene` but the
   right answer is `invalid`. Then explain why the order of your tests caused it.
 
