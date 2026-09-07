@@ -84,7 +84,7 @@
     "href": "course.html#weekly-plan-lectures",
     "title": "Course",
     "section": "Weekly Plan (Lectures)",
-    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates (Mon, Tue)\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nNumber systems completed on Lec 4 (post CT-1); data types — char/int/float/double as size + reading convention, sizeof\nLec 4 · Deck 07\n\n\n05\nAug 31, Sep 1\nMon: precedence drill, then the compilation pipeline — preprocessor, compiler, assembler, linker, each stopped and inspected (gcc -E/-S/-c, nm). Tue: loops — while, do-while, for as one idea in three costumes (straight into Lab 04)\nDeck 08 · Lec 6 · Lec 9 · Lec 12\n\n\n06\nSep 7, Sep 8\nData & expressions: literals, variables, identifiers, data types; operators, precedence; printf/scanf\nLec 5\n\n\n07\nSep 14, Sep 15\nControl structures: boolean expressions, selection (if, if-else, switch)\nLec 7 · Lec 8\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: Iteration: while, do-while, for. Tue: Problem-solving session — loop workouts: mini calculator, primes, GCD, min\nLec 9 · Lec 12 · Lec 13 · Lec 14 · Lec 16\n\n\n10\nOct 5, Oct 6\nArrays: one-dimensional and character arrays; examples\nLec 15\n\n\n11\nOct 12, Oct 13\nStrings and string processing; multi-dimensional arrays; matrix operations. Class Test-2 window opens Oct 14\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27\nFunctions and modular programming; scope; recursion\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nPointers; dynamic memory allocation (malloc, calloc, realloc, free)\nLec 27 (pointers part) · Lec 28 · OCW L11\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes\n—\n\n\n16\nNov 16, Nov 17\nFunction pointers; structures & unions\nLec 29 · Lec 30 · OCW L6 · OCW L8\n\n\nMU-1\nTBA\nMake-up class: file handling and error handling (fopen/fclose, formatted file I/O, errno, perror); header files and modular builds\nOCW L4 · OCW L10 · OCW L3\n\n\nMU-2\nTBA\nMake-up class: applications; brief of object-oriented programming; course wrap-up\nWrap-up · Notes (TBP)\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They will be scheduled on designated compensatory days and announced in class and here. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
+    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates (Mon, Tue)\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nNumber systems completed on Lec 4 (post CT-1); data types — char/int/float/double as size + reading convention, sizeof\nLec 4 · Deck 07\n\n\n05\nAug 31, Sep 1\nMon: precedence drill, then the compilation pipeline — preprocessor, compiler, assembler, linker, each stopped and inspected (gcc -E/-S/-c, nm). Tue: loops — while, do-while, for as one idea in three costumes (straight into Lab 04)\nDeck 08 · Lec 6 · Lec 9 · Lec 12\n\n\n06\nSep 7, Sep 8\nMon: selection — if/else, else-if ladders, switch and its break, and break/continue inside loops. Eight runnable programs in the notes\nLec 7 · Lec 8\n\n\n07\nSep 14, Sep 15\nControl structures: boolean expressions, selection (if, if-else, switch)\nLec 7 · Lec 8\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: Iteration: while, do-while, for. Tue: Problem-solving session — loop workouts: mini calculator, primes, GCD, min\nLec 9 · Lec 12 · Lec 13 · Lec 14 · Lec 16\n\n\n10\nOct 5, Oct 6\nArrays: one-dimensional and character arrays; examples\nLec 15\n\n\n11\nOct 12, Oct 13\nStrings and string processing; multi-dimensional arrays; matrix operations. Class Test-2 window opens Oct 14\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27\nFunctions and modular programming; scope; recursion\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nPointers; dynamic memory allocation (malloc, calloc, realloc, free)\nLec 27 (pointers part) · Lec 28 · OCW L11\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes\n—\n\n\n16\nNov 16, Nov 17\nFunction pointers; structures & unions\nLec 29 · Lec 30 · OCW L6 · OCW L8\n\n\nMU-1\nTBA\nMake-up class: file handling and error handling (fopen/fclose, formatted file I/O, errno, perror); header files and modular builds\nOCW L4 · OCW L10 · OCW L3\n\n\nMU-2\nTBA\nMake-up class: applications; brief of object-oriented programming; course wrap-up\nWrap-up · Notes (TBP)\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They will be scheduled on designated compensatory days and announced in class and here. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
     "crumbs": [
       "Course"
     ]
@@ -164,7 +164,7 @@
     "href": "labs.html#lab-schedule",
     "title": "Labs",
     "section": "",
-    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 25\nSep 2\nSolid ground — consolidation: types, operators, precedence, integer vs. real division\n1\n\n\n4\nSep 1\nSep 9\nLoops: for, while and do-while, and converting between them\n5, 6\n\n\n5\nSep 8\nSep 16\nLists and strings: arrays, strings as character arrays\n3\n\n\n6\nSep 15\nSep 30\nUsing libraries (string.h, math.h, etc.)\n10\n\n\n7\nSep 29\nOct 7\nFunctions and recursion\n7\n\n\n8\nOct 6\nOct 14\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 13\nOct 21\nFile handling\n8\n\n\n10\nOct 27\nOct 28\nError handling\n9\n\n\n11\nNov 3\nNov 4\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 17\nNov 18\nProblem solving II\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 12 sessions = 24 hours. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (for, while and do-while are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.",
+    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 25\nSep 2\nSolid ground — consolidation: types, operators, precedence, integer vs. real division\n1\n\n\n4\nSep 1\nSep 9\nLoops: for, while and do-while, and converting between them\n5, 6\n\n\n5\nSep 8\nSep 16\nDecisions: if/else, else-if ladders, switch, and break / continue\n2\n\n\n6\nSep 15\nSep 30\nArrays and strings as character arrays, with string.h and math.h\n3, 10\n\n\n7\nSep 29\nOct 7\nFunctions and recursion\n7\n\n\n8\nOct 6\nOct 14\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 13\nOct 21\nFile handling\n8\n\n\n10\nOct 27\nOct 28\nError handling\n9\n\n\n11\nNov 3\nNov 4\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 17\nNov 18\nProblem solving II\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 12 sessions = 24 hours. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (for, while and do-while are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.",
     "crumbs": [
       "Labs"
     ]
@@ -184,7 +184,7 @@
     "href": "labs.html#lab-packs-downloads",
     "title": "Labs",
     "section": "Lab Packs (downloads)",
-    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\n\n\nlab02.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\n\n\nlab03.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz\n\n\nlab04.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab04.tar.gz",
+    "text": "Lab Packs (downloads)\nEvery lab ships as a pack — extract, run ./install.sh, follow the lab sheet. Students and staff use the same file.\n\n\n\n\n\n\n\nPack\nFetch it\n\n\n\n\nlab01.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab01.tar.gz\n\n\nlab02.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab02.tar.gz\n\n\nlab03.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab03.tar.gz\n\n\nlab04.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab04.tar.gz\n\n\nlab05.tar.gz\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab05.tar.gz",
     "crumbs": [
       "Labs"
     ]
@@ -477,45 +477,67 @@
   {
     "objectID": "weeks/w06.html",
     "href": "weeks/w06.html",
-    "title": "W06: Data & Expressions",
+    "title": "W06: Making Decisions",
     "section": "",
-    "text": "Pre-read\nDates: Mon Sep 7 & Tue Sep 8, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 4 — Data and expressions; control structures (5 h)\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Sep 7 & Tue Sep 8, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 4 — Control structures: boolean expressions, selection control (5 h)",
     "crumbs": [
       "Weekly Notes",
-      "W06: Data & Expressions"
+      "W06: Making Decisions"
+    ]
+  },
+  {
+    "objectID": "weeks/w06.html#pre-read",
+    "href": "weeks/w06.html#pre-read",
+    "title": "W06: Making Decisions",
+    "section": "",
+    "text": "The shared lab manual §2.9 for the comparison and logical operators (==, !=, &&, ||, !), and §2.10 for where they sit in the precedence table — below arithmetic, which is why 2 + 3 &gt; 4 means (2+3) &gt; 4.\nSkim Lec 7 and Lec 8 (Prof. Shweta Agrawal, IIT Madras).",
+    "crumbs": [
+      "Weekly Notes",
+      "W06: Making Decisions"
     ]
   },
   {
     "objectID": "weeks/w06.html#in-class",
     "href": "weeks/w06.html#in-class",
-    "title": "W06: Data & Expressions",
+    "title": "W06: Making Decisions",
     "section": "In Class",
-    "text": "In Class\n\nLec 5 — Operators, scanf, printf, sizeof, ranges of data types\nLec 4 — (precedence & associativity sections)",
+    "text": "In Class\nMonday — selection, and the two words that leave a construct:\n\nif, if/else, and the else-if ladder\nswitch, and why it needs break\nbreak and continue inside the loops you already know\nLec 7 · Lec 8 — companion slides\n\n\n\n\n\n\n\nImportantThe sentence to leave with\n\n\n\nbreak leaves exactly one construct — the nearest enclosing loop or switch.\nNearly everything that goes wrong this week is that sentence, not yet believed.",
     "crumbs": [
       "Weekly Notes",
-      "W06: Data & Expressions"
+      "W06: Making Decisions"
+    ]
+  },
+  {
+    "objectID": "weeks/w06.html#code-you-can-copy",
+    "href": "weeks/w06.html#code-you-can-copy",
+    "title": "W06: Making Decisions",
+    "section": "Code You Can Copy",
+    "text": "Code You Can Copy\nEvery program below was compiled and run before it was put here; the outputs are what they actually printed. Predict each one before you run it — that is the exercise; the typing is not.\n\n1 · One decision, then two — if / else\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    int n;\n    printf(\"Enter an integer: \");\n    scanf(\"%d\", &n);\n\n    if (n % 2 == 0) printf(\"%d is even\\n\", n);\n    else            printf(\"%d is odd\\n\", n);\n\n    return 0;\n}\n7   -&gt;  7 is odd\n-4  -&gt;  -4 is even\nNote the test is n % 2 == 0, not n % 2 == 1. For -5, C gives -5 % 2 == -1 — so a program that asks “is the remainder 1?” quietly calls every negative odd number even. Lab 03’s drill 02 warned you.\n\n\n2 · Many decisions in order — the else-if ladder\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    int age, price;\n    printf(\"Enter age: \");\n    scanf(\"%d\", &age);\n\n    if      (age &lt; 5)  price = 0;\n    else if (age &lt; 18) price = 60;\n    else if (age &lt; 60) price = 150;\n    else               price = 80;\n\n    printf(\"price=%d\\n\", price);\n    return 0;\n}\n3   -&gt;  price=0        12  -&gt;  price=60\n30  -&gt;  price=150      70  -&gt;  price=80\nThe order of the rungs is the whole program. Each test is reached only when every test above it has already failed, which is why age &lt; 18 does not need to also say age &gt;= 5. Now swap the first two rungs and run it again: an 8-year-old pays 150.\nTwo questions to ask of any ladder: do my cases cover every possibility? and can two of them ever both be true?\n\n\n3 · switch, where sharing a body is the point\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    char c;\n    printf(\"Enter a lowercase letter: \");\n    scanf(\" %c\", &c);          /* the space skips the leftover Enter */\n\n    switch (c) {\n        case 'a':\n        case 'e':\n        case 'i':\n        case 'o':\n        case 'u':\n            printf(\"%c is a vowel\\n\", c);\n            break;\n        default:\n            printf(\"%c is a consonant\\n\", c);\n    }\n    return 0;\n}\ne  -&gt;  e is a vowel        k  -&gt;  k is a consonant\nA case with no statements simply falls into the next one. Five labels, one body. Here that is exactly what we want — remember this page when you meet the next one.\n\n\n4 · The same mechanism, now a bug\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    int input;\n    printf(\"Enter an integer: \");\n    scanf(\"%d\", &input);\n\n    switch (input % 2) {\n        case 0:  printf(\"Number is even\\n\");\n        case 1:  printf(\"Number is odd\\n\");\n        default: printf(\"Neither even nor odd\\n\");\n    }\n    return 0;\n}\n10  -&gt;  Number is even\n        Number is odd\n        Neither even nor odd\n\n5   -&gt;  Number is odd\n        Neither even nor odd\n\n-5  -&gt;  Neither even nor odd\nThree lessons in one run. Without break, execution keeps falling through — 10 is even, odd, and neither. The entry point moves with the value, so 5 prints two lines. And -5 prints only the last line, because -5 % 2 is -1, which matches no case at all — that is why the default is there.\nAdd break; to the first two cases and run it again.\n\n\n5 · switch on a character — the mini calculator\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    double a, b;\n    char op;\n    printf(\"Enter: a op b   (e.g. 6 * 7): \");\n    scanf(\"%lf %c %lf\", &a, &op, &b);\n\n    switch (op) {\n        case '+': printf(\"%g\\n\", a + b); break;\n        case '-': printf(\"%g\\n\", a - b); break;\n        case '*': printf(\"%g\\n\", a * b); break;\n        case '/':\n            if (b == 0) printf(\"cannot divide by zero\\n\");\n            else        printf(\"%g\\n\", a / b);\n            break;\n        default:  printf(\"unknown operator '%c'\\n\", op);\n    }\n    return 0;\n}\n6 * 7   -&gt;  42\n10 / 4  -&gt;  2.5\n9 / 0   -&gt;  cannot divide by zero\n5 ^ 2   -&gt;  unknown operator '^'\nThe / case carries an if inside it: dividing by zero is a precondition the operator cannot check for itself. And the default is what turns a typo into a message instead of silence.\n\n\n\n\n\n\nTry it with int instead of double and ask for 10 / 4. You get 2. Week 3 is still collecting debts.\n\n\n\n\n\n6 · break and continue in loops — is it prime?\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    int n, i, divisor;\n\n    while (1) {                          /* keep going until told to stop */\n        printf(\"Enter a number 2..99 (anything outside stops): \");\n        scanf(\"%d\", &n);\n        if (n &lt; 2 || n &gt; 99) break;      /* leaves the WHILE */\n\n        divisor = 0;\n        for (i = 2; i * i &lt;= n; i++) {\n            if (n % i != 0) continue;    /* not a divisor - go to the next i */\n            divisor = i;\n            break;                       /* leaves the FOR, not the while */\n        }\n\n        if (divisor) printf(\"  %d is composite, smallest divisor %d\\n\", n, divisor);\n        else         printf(\"  %d is prime\\n\", n);\n    }\n    printf(\"stopped\\n\");\n    return 0;\n}\n97  -&gt;  97 is prime\n91  -&gt;  91 is composite, smallest divisor 7\n2   -&gt;  2 is prime\n-1  -&gt;  stopped\nTwo breaks in one program, leaving two different loops. The first ends the whole session; the second ends only the divisor search. Neither reaches the other.\ncontinue is the other word: it abandons this pass and goes to the next. Here it is only for illustration — if (n % i == 0) { ... } would do the same job — but it makes the shape visible.\nTwo things to try. Replace i * i &lt;= n with i &lt; n: still correct, and for 97 it takes 95 passes instead of 9. Then feed it 1, and decide whether the program’s answer is the one the specification wants.\n\n\n7 · break to leave early — three attempts\n#include &lt;stdio.h&gt;\n#define PIN 4242\n\nint main(void) {\n    int entered, attempt, ok = 0;\n\n    for (attempt = 1; attempt &lt;= 3; attempt++) {\n        printf(\"Enter PIN (attempt %d of 3): \", attempt);\n        scanf(\"%d\", &entered);\n        if (entered == PIN) { ok = attempt; break; }\n        printf(\"  wrong\\n\");\n    }\n\n    if (ok) printf(\"access granted on attempt %d\\n\", ok);\n    else    printf(\"access denied after 3 attempts\\n\");\n    return 0;\n}\n4242              -&gt;  access granted on attempt 1\n1111 2222 4242    -&gt;  access granted on attempt 3\n1 2 3             -&gt;  access denied after 3 attempts\nThis loop can end for two different reasons — the right PIN, or running out of attempts. After the loop, the program still has to know which. That is the whole job of ok: a loop that forgets why it stopped cannot report what happened.\n\n\n8 · The trap — break inside a switch inside a loop\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    double balance = 1000.0;\n    int choice, pass = 0;\n\n    while (pass &lt; 3) {              /* bounded so we can watch the bug and still stop */\n        pass++;\n        printf(\"\\n1 balance  2 deposit  3 withdraw  4 quit\\nChoice: \");\n        scanf(\"%d\", &choice);\n\n        switch (choice) {\n            case 1: printf(\"balance = %.2f\\n\", balance); break;\n            case 4: printf(\"quitting...\\n\"); break;      /* &lt;-- leaves the SWITCH */\n            default: printf(\"not implemented\\n\");\n        }\n    }\n    printf(\"loop ended after %d passes\\n\", pass);\n    return 0;\n}\nChoose 4 — quit — three times:\nquitting...\nquitting...\nquitting...\nloop ended after 3 passes\nIt never quits. The break did exactly what it promised: it left the nearest enclosing construct, and that was the switch. The while never heard about it.\nThe fix is not a cleverer break. It is to give the loop something of its own to look at:\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    double balance = 1000.0, amount;\n    int choice, running = 1;\n\n    while (running) {\n        printf(\"\\n1 balance  2 deposit  3 withdraw  4 quit\\nChoice: \");\n        if (scanf(\"%d\", &choice) != 1) break;      /* input ran out */\n\n        switch (choice) {\n            case 1:\n                printf(\"balance = %.2f\\n\", balance);\n                break;\n            case 2:\n                printf(\"amount: \"); scanf(\"%lf\", &amount);\n                balance += amount;\n                printf(\"balance = %.2f\\n\", balance);\n                break;\n            case 3:\n                printf(\"amount: \"); scanf(\"%lf\", &amount);\n                if (amount &gt; balance) printf(\"insufficient funds\\n\");\n                else { balance -= amount; printf(\"balance = %.2f\\n\", balance); }\n                break;\n            case 4:\n                running = 0;                       /* &lt;-- this is what ends the LOOP */\n                printf(\"goodbye\\n\");\n                break;\n            default:\n                printf(\"no such option\\n\");\n        }\n    }\n    return 0;\n}\n1               -&gt;  balance = 1000.00\n2, 500          -&gt;  balance = 1500.00\n3, 2000         -&gt;  insufficient funds\n4               -&gt;  goodbye",
+    "crumbs": [
+      "Weekly Notes",
+      "W06: Making Decisions"
     ]
   },
   {
     "objectID": "weeks/w06.html#after-class",
     "href": "weeks/w06.html#after-class",
-    "title": "W06: Data & Expressions",
+    "title": "W06: Making Decisions",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\n\nType and run all eight. Where the machine disagrees with your prediction, the disagreement is the lesson — find the rule you misapplied.\nBreak §4 further: add break to case 0 only. Now what does 5 print? And 10?\nBreak §2 on purpose: reorder the ladder so an 8-year-old is charged 150, and explain in one sentence why.\nExtend §5: add % to the calculator. What must you change about the variables, and why does % refuse to work with double?\nExtend §8: add a withdrawal limit of 500 per transaction. Which construct does that belong in — the switch, or an if inside the case?\n\nLab 05 is built on exactly this material. The drills there will catch you on §4 and §8 if you have not run them here first.",
     "crumbs": [
       "Weekly Notes",
-      "W06: Data & Expressions"
+      "W06: Making Decisions"
     ]
   },
   {
     "objectID": "weeks/w06.html#pagal-notes",
     "href": "weeks/w06.html#pagal-notes",
-    "title": "W06: Data & Expressions",
+    "title": "W06: Making Decisions",
     "section": "PAGAL Notes",
     "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W06: Data & Expressions"
+      "W06: Making Decisions"
     ]
   },
   {
@@ -1401,67 +1423,133 @@
   {
     "objectID": "labsheets/lab05.html",
     "href": "labsheets/lab05.html",
-    "title": "Lab 05: Lists & Strings",
+    "title": "Lab 05: Decisions",
     "section": "",
-    "text": "Pre-Lab\nSyllabus practical module: 3 — Writing programs related to lists and strings\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
+    "text": "The one sentence to leave with\nLab pack: lab05.tar.gz — pre-placed on lab machines, downloadable for home practice.\nSyllabus practical module: 2 — Writing programs related to conditional statements\nEvaluation: Graded — equal weight within the 20% lab component. Ten drills, five fill-in-the-blank programs, and three checked problems, plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nAlmost everything that goes wrong today is that sentence, not yet believed. You will meet it again next week, when a break in the inner loop of a matrix search does not stop the outer one.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 05: Lists & Strings"
+      "Lab 05: Decisions"
     ]
   },
   {
-    "objectID": "labsheets/lab05.html#exercises",
-    "href": "labsheets/lab05.html#exercises",
-    "title": "Lab 05: Lists & Strings",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "objectID": "labsheets/lab05.html#the-one-sentence-to-leave-with",
+    "href": "labsheets/lab05.html#the-one-sentence-to-leave-with",
+    "title": "Lab 05: Decisions",
+    "section": "",
+    "text": "break leaves exactly one construct — the nearest enclosing loop or switch.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 05: Lists & Strings"
+      "Lab 05: Decisions"
     ]
   },
   {
-    "objectID": "labsheets/lab05.html#submission",
-    "href": "labsheets/lab05.html#submission",
-    "title": "Lab 05: Lists & Strings",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "objectID": "labsheets/lab05.html#act-0-land-10-min",
+    "href": "labsheets/lab05.html#act-0-land-10-min",
+    "title": "Lab 05: Decisions",
+    "section": "Act 0 · Land (10 min)",
+    "text": "Act 0 · Land (10 min)\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab05.tar.gz\ntar xzf lab05.tar.gz\ncd lab05\n./install.sh\nThen start the recorder:\nscript session.txt\n\n\n\n\n\n\nDo not go further until your prompt shows [lab05 OK ...]. If it does not, run ./where.sh — it changes nothing, and prints the exact line to copy.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 05: Lists & Strings"
+      "Lab 05: Decisions"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab05.html#act-1-drills-predict-then-run-25-min",
+    "href": "labsheets/lab05.html#act-1-drills-predict-then-run-25-min",
+    "title": "Lab 05: Decisions",
+    "section": "Act 1 · Drills — predict, then run (25 min)",
+    "text": "Act 1 · Drills — predict, then run (25 min)\n./drill.sh --all\n\n\n\n\n\n\n\nDrills\nTerritory\n\n\n\n\nd01–d02\nthe two classic if bugs: one equals sign, and an else that belongs to the wrong if\n\n\nd03–d04\nswitch: fall-through with no break, and what %2 does to a negative number\n\n\nd05–d07\nbreak and continue, and where they actually land\n\n\nd08–d10\nshort-circuit &&, a ladder in the wrong order, and a switch that matches nothing\n\n\n\n\n\n\n\n\n\nd07 never stops. That is deliberate, and it is the point. Every drill run is capped at five seconds so it cannot hang the machine — but predict before you run it, and look carefully at where i++ lives.\n\n\n\nA wrong prediction scores exactly as much as a right one — but only if you write it down first.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 05: Decisions"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab05.html#act-2-fill-the-blanks-25-min",
+    "href": "labsheets/lab05.html#act-2-fill-the-blanks-25-min",
+    "title": "Lab 05: Decisions",
+    "section": "Act 2 · Fill the blanks (25 min)",
+    "text": "Act 2 · Fill the blanks (25 min)\n\n\n\n\n\n\n\nFile\nWhat it does\n\n\n\n\nb1_evenodd.c\neven or odd, with if/else — and it is tested on negatives\n\n\nb2_vowel.c\nvowel or consonant — a switch where fall-through is the point: five cases, one body\n\n\nb3_ticket.c\nticket price by age bracket — an else-if ladder\n\n\nb4_grade.c\na grade from marks — the same shape, built in the opposite direction\n\n\nb5_calc.c\na mini calculator — switch on a character, every case with its own break\n\n\n\n\n\n\n\n\n\nb2 and d03 use the same mechanism and reach opposite verdicts. In d03 the missing break is a bug; in b2 the shared body is the feature. Be able to say why.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 05: Decisions"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab05.html#act-3-the-checked-three-40-min-solo",
+    "href": "labsheets/lab05.html#act-3-the-checked-three-40-min-solo",
+    "title": "Lab 05: Decisions",
+    "section": "Act 3 · The checked three (40 min, solo)",
+    "text": "Act 3 · The checked three (40 min, solo)\n\n\n\n\n\n\n\n\nProblem\nTask\nFinal line ends with exactly\n\n\n\n\ne1.c\nclassify a triangle from three sides\ntype=equilateral | type=isosceles | type=scalene | type=invalid\n\n\ne2.c\nis n prime? if not, its smallest divisor\nn=&lt;N&gt; prime or n=&lt;N&gt; divisor=&lt;D&gt;\n\n\ne3.c\na PIN, and three attempts\naccess=granted tries=&lt;N&gt; or access=denied\n\n\n\ne1 — check validity first. Three lengths make a triangle only if every pair adds up to more than the third: 5 5 8 is a triangle, 2 3 9 is three sticks that will not meet. Then ask of your ladder: do my cases cover every possibility?\ne2 — search upward from 2 and break the moment you find a divisor; the spec asks for the smallest, and there is no reason to keep looking. Then look at your upper limit: going to n-1 works, and stopping at i*i &lt;= n also works — for 97 that is 9 passes instead of 95. Add a counter and see.\ne3 — a loop that can end for two different reasons: the right PIN (you break out) or the attempts running out (the condition ends it). After the loop, your program has to know which happened. That is exactly what the two output lines are asking you to prove.\nHow checking works — ./check.sh e1 compiles your source and runs it on the public examples and on fresh random inputs drawn from the GIVEN. A program that memorises an example fails the next draw.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 05: Decisions"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab05.html#act-4-check-fix-bundle-10-min",
+    "href": "labsheets/lab05.html#act-4-check-fix-bundle-10-min",
+    "title": "Lab 05: Decisions",
+    "section": "Act 4 · Check, fix, bundle (10 min)",
+    "text": "Act 4 · Check, fix, bundle (10 min)\n./check.sh\nFix, re-check, repeat. Then — green or time-up:\n./check.sh --bundle\nCarry ../lab05_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz out with you (Moodle + email yourself).",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 05: Decisions"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab05.html#stretch-fast-finishers",
+    "href": "labsheets/lab05.html#stretch-fast-finishers",
+    "title": "Lab 05: Decisions",
+    "section": "Stretch (fast finishers)",
+    "text": "Stretch (fast finishers)\n\nThe bank menu. A while loop showing a menu — balance, deposit, withdraw, quit — with a switch on the choice. Make quit actually quit. If your first attempt keeps looping, you have just rediscovered d05 with your own hands, which is the best way to learn it.\nCount the passes in e2. Compare i &lt; n against i*i &lt;= n for n = 97 and n = 99.\nBreak e1 on purpose. Find three sides where your program says scalene but the right answer is invalid. Then explain why the order of your tests caused it.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 05: Decisions"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab05.html#reflect",
+    "href": "labsheets/lab05.html#reflect",
+    "title": "Lab 05: Decisions",
+    "section": "Reflect",
+    "text": "Reflect\n✍️ Into notes/answers.txt: in d05 the break ran and the loop kept going. In one sentence — what exactly did that break leave?",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 05: Decisions"
     ]
   },
   {
     "objectID": "labsheets/lab06.html",
     "href": "labsheets/lab06.html",
-    "title": "Lab 06: Using Libraries",
+    "title": "Lab 06: Arrays & Strings",
     "section": "",
-    "text": "Pre-Lab\nSyllabus practical module: 10 — Writing programs using libraries (string, math, etc.) in C\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical modules: 3 and 10 — arrays and strings as character arrays, with string.h and math.h\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 06: Using Libraries"
+      "Lab 06: Arrays & Strings"
     ]
   },
   {
     "objectID": "labsheets/lab06.html#exercises",
     "href": "labsheets/lab06.html#exercises",
-    "title": "Lab 06: Using Libraries",
+    "title": "Lab 06: Arrays & Strings",
     "section": "Exercises",
     "text": "Exercises\nTo be posted before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 06: Using Libraries"
+      "Lab 06: Arrays & Strings"
     ]
   },
   {
     "objectID": "labsheets/lab06.html#submission",
     "href": "labsheets/lab06.html#submission",
-    "title": "Lab 06: Using Libraries",
+    "title": "Lab 06: Arrays & Strings",
     "section": "Submission",
     "text": "Submission\nSubmission instructions will be provided in the lab.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 06: Using Libraries"
+      "Lab 06: Arrays & Strings"
     ]
   },
   {

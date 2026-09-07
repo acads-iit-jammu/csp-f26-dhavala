@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 05: Lists &amp; Strings – CS-1-01 (MO)</title>
+<title>Lab 05: Decisions – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab05.html">Lab 05: Lists &amp; Strings</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab05.html">Lab 05: Decisions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -187,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W06: Data &amp; Expressions</span></a>
+ <span class="menu-text">W06: Making Decisions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -300,13 +335,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab05.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab 05: Lists &amp; Strings</span></a>
+ <span class="menu-text">Lab 05: Decisions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 06: Using Libraries</span></a>
+ <span class="menu-text">Lab 06: Arrays &amp; Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -403,18 +438,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#the-one-sentence-to-leave-with" id="toc-the-one-sentence-to-leave-with" class="nav-link active" data-scroll-target="#the-one-sentence-to-leave-with">The one sentence to leave with</a></li>
+  <li><a href="#act-0-land-10-min" id="toc-act-0-land-10-min" class="nav-link" data-scroll-target="#act-0-land-10-min">Act 0 · Land (10 min)</a></li>
+  <li><a href="#act-1-drills-predict-then-run-25-min" id="toc-act-1-drills-predict-then-run-25-min" class="nav-link" data-scroll-target="#act-1-drills-predict-then-run-25-min">Act 1 · Drills — predict, then run (25 min)</a></li>
+  <li><a href="#act-2-fill-the-blanks-25-min" id="toc-act-2-fill-the-blanks-25-min" class="nav-link" data-scroll-target="#act-2-fill-the-blanks-25-min">Act 2 · Fill the blanks (25 min)</a></li>
+  <li><a href="#act-3-the-checked-three-40-min-solo" id="toc-act-3-the-checked-three-40-min-solo" class="nav-link" data-scroll-target="#act-3-the-checked-three-40-min-solo">Act 3 · The checked three (40 min, solo)</a></li>
+  <li><a href="#act-4-check-fix-bundle-10-min" id="toc-act-4-check-fix-bundle-10-min" class="nav-link" data-scroll-target="#act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</a></li>
+  <li><a href="#stretch-fast-finishers" id="toc-stretch-fast-finishers" class="nav-link" data-scroll-target="#stretch-fast-finishers">Stretch (fast finishers)</a></li>
+  <li><a href="#reflect" id="toc-reflect" class="nav-link" data-scroll-target="#reflect">Reflect</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab05.html">Lab 05: Lists &amp; Strings</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab05.html">Lab 05: Decisions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 05: Lists &amp; Strings</h1>
+<h1 class="title">Lab 05: Decisions</h1>
 </div>
 
 
@@ -432,40 +472,213 @@ ul.task-list li input[type="checkbox"] {
 
 
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>Electrical</th>
-<th>Mechanical &amp; Materials</th>
+<th>Mechanical</th>
+<th>Metallurgy &amp; Materials</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Date</strong></td>
-<td>Tue Sep 8, 2026</td>
-<td>Wed Sep 16, 2026</td>
+<td>Tue Sep 8</td>
+<td>Wed Sep 16</td>
+<td>Wed Sep 16</td>
 </tr>
 <tr class="even">
-<td><strong>Time</strong></td>
-<td>2:00–4:00 pm</td>
-<td>2:00–4:00 pm</td>
+<td><strong>Time &amp; Room</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4021</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical module:</strong> 3 — Writing programs related to lists and strings</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
+<p><strong>Lab pack:</strong> <a href="../labs/lab05.tar.gz">lab05.tar.gz</a> — pre-placed on lab machines, downloadable for home practice.</p>
+<p><strong>Syllabus practical module:</strong> 2 — Writing programs related to conditional statements</p>
+<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component. Ten drills, five fill-in-the-blank programs, and three checked problems, plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.</p>
 <p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<section id="the-one-sentence-to-leave-with" class="level2">
+<h2 class="anchored" data-anchor-id="the-one-sentence-to-leave-with">The one sentence to leave with</h2>
+<blockquote class="blockquote">
+<p><strong><code>break</code> leaves exactly one construct — the nearest enclosing loop or <code>switch</code>.</strong></p>
+</blockquote>
+<p>Almost everything that goes wrong today is that sentence, not yet believed. You will meet it again next week, when a <code>break</code> in the inner loop of a matrix search does not stop the outer one.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="act-0-land-10-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-0-land-10-min">Act 0 · Land (10 min)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab05.tar.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf lab05.tar.gz</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab05</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./install.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then start the recorder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Do not go further until your prompt shows <code>[lab05 OK ...]</code>. If it does not, run <code>./where.sh</code> — it changes nothing, and prints the exact line to copy.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="act-1-drills-predict-then-run-25-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-drills-predict-then-run-25-min">Act 1 · Drills — predict, then run (25 min)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Drills</th>
+<th>Territory</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d01</code>–<code>d02</code></td>
+<td>the two classic <code>if</code> bugs: one equals sign, and an <code>else</code> that belongs to the wrong <code>if</code></td>
+</tr>
+<tr class="even">
+<td><code>d03</code>–<code>d04</code></td>
+<td><code>switch</code>: fall-through with no <code>break</code>, and what <code>%2</code> does to a <strong>negative</strong> number</td>
+</tr>
+<tr class="odd">
+<td><code>d05</code>–<code>d07</code></td>
+<td><strong><code>break</code> and <code>continue</code>, and where they actually land</strong></td>
+</tr>
+<tr class="even">
+<td><code>d08</code>–<code>d10</code></td>
+<td>short-circuit <code>&amp;&amp;</code>, a ladder in the wrong order, and a <code>switch</code> that matches nothing</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong><code>d07</code> never stops.</strong> That is deliberate, and it is the point. Every drill run is capped at five seconds so it cannot hang the machine — but predict <em>before</em> you run it, and look carefully at where <code>i++</code> lives.</p>
+</div>
+</div>
+</div>
+<p>A wrong prediction scores exactly as much as a right one — but only if you write it down first.</p>
+</section>
+<section id="act-2-fill-the-blanks-25-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-2-fill-the-blanks-25-min">Act 2 · Fill the blanks (25 min)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>b1_evenodd.c</code></td>
+<td>even or odd, with <code>if</code>/<code>else</code> — and it is tested on negatives</td>
+</tr>
+<tr class="even">
+<td><code>b2_vowel.c</code></td>
+<td>vowel or consonant — a <code>switch</code> where <strong>fall-through is the point</strong>: five cases, one body</td>
+</tr>
+<tr class="odd">
+<td><code>b3_ticket.c</code></td>
+<td>ticket price by age bracket — an else-if <strong>ladder</strong></td>
+</tr>
+<tr class="even">
+<td><code>b4_grade.c</code></td>
+<td>a grade from marks — the same shape, built in the opposite direction</td>
+</tr>
+<tr class="odd">
+<td><code>b5_calc.c</code></td>
+<td>a mini calculator — <code>switch</code> on a character, every case with its own <code>break</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>b2</code> and <code>d03</code> use the same mechanism and reach opposite verdicts. In <code>d03</code> the missing <code>break</code> is a <strong>bug</strong>; in <code>b2</code> the shared body is the <strong>feature</strong>. Be able to say why.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-3-the-checked-three-40-min-solo" class="level2">
+<h2 class="anchored" data-anchor-id="act-3-the-checked-three-40-min-solo">Act 3 · The checked three (40 min, solo)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Task</th>
+<th>Final line ends with exactly</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>e1.c</code></td>
+<td>classify a triangle from three sides</td>
+<td><code>type=equilateral</code> | <code>type=isosceles</code> | <code>type=scalene</code> | <code>type=invalid</code></td>
+</tr>
+<tr class="even">
+<td><code>e2.c</code></td>
+<td>is n prime? if not, its <strong>smallest</strong> divisor</td>
+<td><code>n=&lt;N&gt; prime</code> or <code>n=&lt;N&gt; divisor=&lt;D&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>e3.c</code></td>
+<td>a PIN, and three attempts</td>
+<td><code>access=granted tries=&lt;N&gt;</code> or <code>access=denied</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>e1</code> — check <strong>validity first</strong>. Three lengths make a triangle only if every pair adds up to more than the third: <code>5 5 8</code> is a triangle, <code>2 3 9</code> is three sticks that will not meet. Then ask of your ladder: <em>do my cases cover every possibility?</em></p>
+<p><code>e2</code> — search upward from 2 and <strong><code>break</code> the moment you find a divisor</strong>; the spec asks for the smallest, and there is no reason to keep looking. Then look at your upper limit: going to <code>n-1</code> works, and stopping at <code>i*i &lt;= n</code> also works — for 97 that is 9 passes instead of 95. Add a counter and see.</p>
+<p><code>e3</code> — a loop that can end for <strong>two different reasons</strong>: the right PIN (you <code>break</code> out) or the attempts running out (the condition ends it). After the loop, your program has to know <em>which</em> happened. That is exactly what the two output lines are asking you to prove.</p>
+<p><strong>How checking works</strong> — <code>./check.sh e1</code> compiles <em>your source</em> and runs it on the public examples <strong>and on fresh random inputs drawn from the GIVEN</strong>. A program that memorises an example fails the next draw.</p>
+</section>
+<section id="act-4-check-fix-bundle-10-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Fix, re-check, repeat. Then — green or time-up:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Carry <code>../lab05_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz</code> out with you (Moodle + email yourself).</p>
+</section>
+<section id="stretch-fast-finishers" class="level2">
+<h2 class="anchored" data-anchor-id="stretch-fast-finishers">Stretch (fast finishers)</h2>
+<ul>
+<li><strong>The bank menu.</strong> A <code>while</code> loop showing a menu — balance, deposit, withdraw, quit — with a <code>switch</code> on the choice. Make <code>quit</code> actually quit. If your first attempt keeps looping, you have just rediscovered <code>d05</code> with your own hands, which is the best way to learn it.</li>
+<li><strong>Count the passes in <code>e2</code>.</strong> Compare <code>i &lt; n</code> against <code>i*i &lt;= n</code> for n = 97 and n = 99.</li>
+<li><strong>Break <code>e1</code> on purpose.</strong> Find three sides where your program says <code>scalene</code> but the right answer is <code>invalid</code>. Then explain why the order of your tests caused it.</li>
+</ul>
+</section>
+<section id="reflect" class="level2">
+<h2 class="anchored" data-anchor-id="reflect">Reflect</h2>
+<p>✍️ Into <code>notes/answers.txt</code>: in <code>d05</code> the <code>break</code> ran and the loop kept going. In one sentence — what exactly did that <code>break</code> leave?</p>
 
 
 </section>
@@ -883,8 +1096,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../labsheets/lab06.html" class="pagination-link" aria-label="Lab 06: Using Libraries">
-        <span class="nav-page-text">Lab 06: Using Libraries</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../labsheets/lab06.html" class="pagination-link" aria-label="Lab 06: Arrays &amp; Strings">
+        <span class="nav-page-text">Lab 06: Arrays &amp; Strings</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
