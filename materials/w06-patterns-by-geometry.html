@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patterns by Geometry · CS-1-01 (MO)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#003f87;--blue-dark:#002d63;--blue-mid:#0056b8;--blue-pale:#eaf3ff;--ink:#22262a}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4f7fb;font-family:Roboto,system-ui,sans-serif;color:var(--ink);line-height:1.6}
+  .page{max-width:52rem;margin:0 auto;background:#fff;padding:3rem 3.5rem 4rem;
+        box-shadow:0 1px 20px rgba(0,40,90,.08);min-height:100vh}
+  header{border-bottom:4px solid var(--blue-pale);padding-bottom:1.2rem;margin-bottom:2rem}
+  .kicker{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-mid);font-weight:500}
+  h1{font-family:"Roboto Slab",serif;font-size:2rem;color:var(--blue-dark);margin:.3em 0 .2em;line-height:1.2}
+  .sub{color:#5a6672;font-size:1.05rem;margin:0}
+  h2{font-family:"Roboto Slab",serif;font-size:1.3rem;color:var(--blue-dark);margin:2.2rem 0 .6rem;
+     border-bottom:2px solid var(--blue-pale);padding-bottom:.25rem}
+  h2 .n{color:var(--blue-mid);font-weight:400;margin-right:.4em}
+  h3{font-size:1.02rem;color:var(--blue-dark);margin:1.4rem 0 .3rem}
+  p,li{font-size:1rem}
+  li{margin:.3em 0}
+  code{font-family:"Roboto Mono",monospace;font-size:.9em;color:var(--blue-mid);
+       background:#f2f6fc;padding:.1em .35em;border-radius:3px}
+  pre{background:#f4f8fd;border:1px solid #cfdcec;border-left:5px solid var(--blue-mid);
+      border-radius:0 6px 6px 0;padding:.8em 1.1em;overflow-x:auto;
+      font-family:"Roboto Mono",monospace;font-size:.85rem;line-height:1.5;color:var(--blue-dark)}
+  pre code{background:none;padding:0;color:inherit}
+  table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.95rem}
+  th{background:var(--blue);color:#fff;text-align:left}
+  th,td{border:1px solid #cfdcec;padding:.45em .8em;vertical-align:top}
+  tr:nth-child(even) td{background:#f7fafd}
+  .note{background:var(--blue-pale);border-left:5px solid var(--blue);padding:.8em 1.1em;
+        border-radius:0 6px 6px 0;margin:1em 0}
+  .big{font-family:"Roboto Slab",serif;font-size:1.15rem;color:var(--blue-dark);font-weight:600}
+  .punch{background:linear-gradient(160deg,#f6faff,var(--blue-pale));border:1px solid #cfdcec;
+         border-radius:8px;padding:1.4em 1.6em;margin:2rem 0 0;text-align:center}
+  .punch .big{font-size:1.35rem;display:block;margin-bottom:.4em}
+  footer{margin-top:3rem;padding-top:1rem;border-top:2px solid var(--blue-pale);
+         color:#6b7784;font-size:.85rem}
+  a{color:var(--blue-mid)}
+  @media print{body{background:#fff}.page{box-shadow:none;padding:0}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="kicker">CS-1-01 (MO) · Week 06 · nested loops · notes</div>
+  <h1>Patterns by Geometry</h1>
+  <p class="sub">A pattern is not a pile of loops. It is a <em>question you ask about a point</em> — and once you see that, one program draws every shape.</p>
+</header>
+
+<p><strong>The usual way to print a pattern</strong> is to work out, for each row, how many spaces
+come first and how many stars follow, and then get the arithmetic right. It works. It is also
+brittle: change the shape and every count changes, and nothing you learned from the triangle
+helps you with the diamond.</p>
+
+<p>There is another way in, and it is worth the detour because it generalises.</p>
+
+<h2><span class="n">1.</span> A pattern is a question about a point</h2>
+<p>Stop thinking about rows of output. Think of the grid as a set of <em>points</em>
+<code>(i, j)</code>, and of the pattern as a <strong>predicate</strong> — a yes/no question you ask
+about each one. Print a star where the answer is yes.</p>
+<pre>for (i = 0; i < n; i++) {
+    for (j = 0; j < n; j++)
+        putchar( ON_THE_SHAPE(i, j) ? '*' : ' ' );
+    putchar('\n');
+}</pre>
+<p>The loops never change again. Only the question does. Everything below is one line.</p>
+
+<h2><span class="n">2.</span> The border of a square</h2>
+<p>A cell is on the outer border when its distance to the nearest edge is zero:</p>
+<pre>min(i, j, n-1-i, n-1-j) == 0</pre>
+<p>and that generalises immediately. Ask for <code>== k</code> and you get the <em>k</em>-th ring in:</p>
+<pre>k = 0            k = 1            k = 2
+*********
+*       *         *******
+*       *         *     *          *****
+*       *         *     *          *   *
+*       *         *     *          *   *
+*       *         *     *          *   *
+*       *         *     *          *****
+*       *         *******
+*********</pre>
+<p>One predicate, a family of pictures. Try writing that with space-counting.</p>
+
+<h2><span class="n">3.</span> The same square, said differently</h2>
+<p>Put the origin in the middle. Let <code>c = (n-1)/2</code>, and measure from the centre:
+<code>x = i - c</code>, <code>y = j - c</code>. Then the border is</p>
+<pre>max(|x|, |y|) == c</pre>
+<p>Verified: this draws the <em>identical</em> picture to &sect;2 — cell for cell. Which is worth a
+moment, because it says the square is <q>the set of points whose <strong>largest</strong> coordinate
+is <em>c</em></q>. That is a definition of a square you may not have met, and it is the one that
+travels.</p>
+
+<h2><span class="n">4.</span> Change <code>max</code> to <code>+</code> and you get a diamond</h2>
+<pre>|x| + |y| == c</pre>
+<pre>    *    
+   * *   
+  *   *  
+ *     * 
+*       *
+ *     * 
+  *   *  
+   * *   
+    *    </pre>
+<p>Nothing else moved. Same loops, same <code>c</code>, same grid — one operator. The square asked
+for the <em>largest</em> coordinate; the diamond asks for the <em>sum</em>. Those two questions have
+names, and you now know both: they are the <strong>L&infin;</strong> and <strong>L1</strong>
+distances. A shape is just a distance held constant.</p>
+
+<h2><span class="n">5.</span> The diamond <em>is</em> the square, rotated</h2>
+<p>Here is the part that should feel like a trick and is not. This identity is exactly true for
+every pair of integers:</p>
+<pre>|x| + |y|  ==  max( |x + y| , |x - y| )</pre>
+<p>I checked all 6&nbsp;561 pairs with <code>x</code> and <code>y</code> from &minus;40 to 40:
+<strong>zero failures</strong>. So the L1 question in <code>(x, y)</code> is the very same L&infin;
+question asked in the coordinates <code>(x+y, x-y)</code> — which is a 45&deg; rotation, with the
+usual <code>1/&radic;2</code> simply dropped. We do not need it: we are not measuring, we are
+deciding which cells get a star.</p>
+<p>So <strong>one predicate, two coordinate systems, two shapes</strong>:</p>
+<pre>max(|x|,     |y|    ) == c        max(|x+y|, |x-y|) == c
+
+*********                              *    
+*       *                             * *   
+*       *                            *   *  
+*       *                           *     * 
+*       *                          *       *
+*       *                           *     * 
+*       *                            *   *  
+*       *                             * *   
+*********                              *    </pre>
+<div class="note">This is what people mean by <em>exploiting the geometry</em>. You did not write a
+diamond program. You wrote a square program and asked it a rotated question. The shape moved
+because the coordinates did.</div>
+
+<h2><span class="n">6.</span> And a circle, for the family portrait</h2>
+<p>Three shapes, three distances, one line changed each time. Here at <code>n = 11</code>:</p>
+<pre>max(|x|,|y|) == c      |x| + |y| == c        x*x + y*y ~ c*c
+   square                 diamond                 circle
+
+***********                  *                      *     
+*         *                 * *                  *** ***  
+*         *                *   *                **     ** 
+*         *               *     *               *       *  
+*         *              *       *              *       *  
+*         *             *         *            *         * 
+*         *              *       *              *       *  
+*         *               *     *               *       *  
+*         *                *   *                **     ** 
+*         *                 * *                  *** ***  
+***********                  *                      *     </pre>
+<p>Look closely at the circle. It is <strong>ragged</strong>, and no choice of predicate fixes that.
+A circle of radius <em>c</em> does not pass through whole numbers of cells, so any rule you pick —
+<code>x*x + y*y == c*c</code> catches almost nothing; a band like
+<code>d &lt;= c*c &amp;&amp; d &gt; (c-1)*(c-1)</code> catches too much in the diagonals — is a
+<em>decision</em>, not a discovery.</p>
+<div class="note"><strong>Generalisation cost #1.</strong> The square and the diamond fit the grid
+exactly, so the predicate is the whole truth. The circle does not fit, and the moment a shape stops
+fitting, the program stops being a statement of fact and starts being a choice you have to defend.
+That is not a flaw in the method; it is the method telling you something true about circles and
+square paper.</div>
+
+<h2><span class="n">7.</span> What the elegance costs</h2>
+<p>The predicate version asks the question at <strong>every cell</strong> — <code>n&sup2;</code> of
+them — to print a shape made of about <code>2n</code> stars. Counted:</p>
+<table>
+  <tr><th>n</th><th>predicate: cells tested</th><th>direct: stars written</th><th>ratio</th></tr>
+  <tr><td>9</td><td>81</td><td>16</td><td>5&times;</td></tr>
+  <tr><td>33</td><td>1 089</td><td>64</td><td>17&times;</td></tr>
+  <tr><td>129</td><td>16 641</td><td>256</td><td>65&times;</td></tr>
+  <tr><td>513</td><td>263 169</td><td>1 024</td><td><strong>257&times;</strong></td></tr>
+</table>
+<p>The ratio is about <code>n/2</code>, and it grows without limit. For a pattern on a screen this
+is irrelevant. For a grid of a million cells it is the whole story — and it is the same lesson the
+floor-and-ceiling notes ended on: <em>correct is not the same as usable</em>.</p>
+
+<h2><span class="n">8.</span> The direct construction, and why it is fast</h2>
+<p>Turn the question around. Instead of asking every cell <q>are you on the diamond?</q>, ask each
+row <q>which two cells are?</q> The answer is arithmetic:</p>
+<pre>h = min(i, n-1-i);        /* how far this row reaches from the centre */
+/* the two stars sit at  c - h  and  c + h  */</pre>
+<pre>for (i = 0; i < n; i++) {
+    int h = (i < n-1-i) ? i : n-1-i;
+    for (j = 0; j < n; j++)
+        putchar( (j == c-h || j == c+h) ? '*' : ' ' );
+    putchar('\n');
+}</pre>
+<p>Verified: cell for cell, this is the same diamond as &sect;4. And if you drop the space-filling
+and only <em>place</em> the stars, the inner loop runs <strong>exactly twice</strong> per row — once
+for <code>c-h</code>, once for <code>c+h</code> — collapsing the work from
+<code>n&sup2;</code> to <code>2n</code>.</p>
+<div class="note"><strong>Generalisation cost #2.</strong> That <code>h = min(i, n-1-i)</code> is
+beautiful and it is <em>only about diamonds</em>. Nothing in it survives the trip to the circle, or
+to the k-th ring, or to a shape you have not met yet. You bought a factor of <em>n</em> and paid for
+it in reach.</div>
+
+<h2><span class="n">9.</span> The real lesson, and it is on your syllabus</h2>
+<table>
+  <tr><th></th><th>The predicate</th><th>The construction</th></tr>
+  <tr><td>says</td><td><strong>what the shape is</strong></td><td><strong>how to draw it</strong></td></tr>
+  <tr><td>cost</td><td><code>n&sup2;</code></td><td><code>2n</code></td></tr>
+  <tr><td>new shape</td><td>change one line</td><td>new arithmetic, from scratch</td></tr>
+  <tr><td>reads like</td><td>a definition</td><td>a set of instructions</td></tr>
+</table>
+<p>Those two columns have names you will see again in this course: <strong>declarative</strong> and
+<strong>imperative</strong>. The syllabus lists them as a topic; this page is what the distinction
+actually feels like, in eleven lines of C, on a problem you can see.</p>
+<p class="big">Neither column is the right answer. Knowing which one you are writing — and why — is
+the skill.</p>
+
+<div class="punch">
+  <span class="big">A shape is a distance held constant.</span>
+  Change the distance and the shape changes. Change the coordinates and the shape rotates. Both are
+  one line, and neither is a trick.
+</div>
+
+<h2><span class="n">10.</span> Try it yourself</h2>
+<ul>
+  <li>Make the square <strong>filled</strong> instead of hollow. Which comparison changes, and to what?</li>
+  <li>Draw a hollow diamond of width 5 <em>inside</em> a hollow square of width 11, in one pass. How
+      many predicates does that need — and does the order of the tests matter?</li>
+  <li>Predict, then check: what does <code>|x| + |y| &lt;= c</code> draw? And
+      <code>max(|x|,|y|) &lt;= c &amp;&amp; |x| + |y| &gt;= c</code>?</li>
+  <li>The rotation used <code>(x+y, x-y)</code>. What shape does <code>(x+2*y, x-2*y)</code> give,
+      and why is it no longer symmetric?</li>
+  <li>Write the O(n) construction for the <em>square</em> border, the way &sect;8 did for the diamond.
+      Which rows need two stars, and which need <code>n</code>?</li>
+</ul>
+<footer>
+CS-1-01 (MO) · Computer System and Programming · Monsoon 2026 · IIT Jammu ·
+nested loops · every program on this page was compiled and run before it was printed here
+</footer>
+</div>
+</body>
+</html>

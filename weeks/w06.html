@@ -497,6 +497,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>break</code> and <code>continue</code> inside the loops you already know</li>
 <li><a href="../cs1100-cse-iitm-2021/slides/Lec7.pdf">Lec 7</a> · <a href="../cs1100-cse-iitm-2021/slides/Lec8.pdf">Lec 8</a> — companion slides</li>
 </ul>
+<p><strong>Tuesday — nested loops, and patterns as geometry:</strong></p>
+<ul>
+<li>🖨️ <a href="../materials/w06-patterns-by-geometry.html"><strong>Patterns by Geometry</strong></a> — the handout for today. Printing a pattern is usually a matter of counting spaces per row; it needn’t be. Treat the grid as <em>points</em> and the pattern as a <strong>question you ask about a point</strong>, and the loops never change again — only the question does.
+<ul>
+<li><code>min(i, j, n-1-i, n-1-j) == k</code> is the <strong>k-th ring</strong> of a square. One predicate, a whole family of pictures.</li>
+<li><code>max(|x|,|y|) == c</code> draws that <em>same</em> square, said as a distance. Change <code>max</code> to <code>+</code> — <code>|x|+|y| == c</code> — and it is a <strong>diamond</strong>. One operator.</li>
+<li>And the diamond <strong>is</strong> the square: <code>|x|+|y| == max(|x+y|, |x-y|)</code> is exactly true for integers, so the L1 question in <code>(x,y)</code> is the L∞ question in <code>(x+y, x-y)</code> — a 45° rotation with the <code>1/√2</code> dropped, because we are choosing cells, not measuring.</li>
+<li>Then both prices of generalising: a circle <strong>does not fit</strong> a square grid, so any predicate for it is a decision to defend; and the predicate tests <code>n²</code> cells to draw <code>2n</code> stars — <strong>257× the work at n = 513</strong>. The direct construction <code>h = min(i, n-1-i)</code> buys that factor back, and is only ever about diamonds.</li>
+<li>The closing point is on your syllabus: the predicate says <strong>what the shape is</strong>, the construction says <strong>how to draw it</strong>. That is <em>declarative</em> versus <em>imperative</em>, in eleven lines of C.</li>
+</ul></li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec12.pdf">Lec 12</a> — <code>for</code> loops and nested loops (Prof.&nbsp;Shweta Agrawal, IIT Madras)</li>
+</ul>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
