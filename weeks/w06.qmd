@@ -19,6 +19,16 @@
 - `break` and `continue` inside the loops you already know
 - [Lec 7](../cs1100-cse-iitm-2021/slides/Lec7.pdf) · [Lec 8](../cs1100-cse-iitm-2021/slides/Lec8.pdf) — companion slides
 
+**Tuesday — nested loops, and patterns as geometry:**
+
+- 🖨️ [**Patterns by Geometry**](../materials/w06-patterns-by-geometry.html) — the handout for today. Printing a pattern is usually a matter of counting spaces per row; it needn't be. Treat the grid as *points* and the pattern as a **question you ask about a point**, and the loops never change again — only the question does.
+  - `min(i, j, n-1-i, n-1-j) == k` is the **k-th ring** of a square. One predicate, a whole family of pictures.
+  - `max(|x|,|y|) == c` draws that *same* square, said as a distance. Change `max` to `+` — `|x|+|y| == c` — and it is a **diamond**. One operator.
+  - And the diamond **is** the square: `|x|+|y| == max(|x+y|, |x-y|)` is exactly true for integers, so the L1 question in `(x,y)` is the L∞ question in `(x+y, x-y)` — a 45° rotation with the `1/√2` dropped, because we are choosing cells, not measuring.
+  - Then both prices of generalising: a circle **does not fit** a square grid, so any predicate for it is a decision to defend; and the predicate tests `n²` cells to draw `2n` stars — **257× the work at n = 513**. The direct construction `h = min(i, n-1-i)` buys that factor back, and is only ever about diamonds.
+  - The closing point is on your syllabus: the predicate says **what the shape is**, the construction says **how to draw it**. That is *declarative* versus *imperative*, in eleven lines of C.
+- [Lec 12](../cs1100-cse-iitm-2021/slides/Lec12.pdf) — `for` loops and nested loops (Prof. Shweta Agrawal, IIT Madras)
+
 ::: {.callout-important}
 ## The sentence to leave with
 
