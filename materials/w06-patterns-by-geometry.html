@@ -86,16 +86,25 @@ about each one. Print a star where the answer is yes.</p>
 <p>One predicate, a family of pictures. Try writing that with space-counting.</p>
 
 <h2><span class="n">3.</span> The same square, said differently</h2>
-<p>Put the origin in the middle. Let <code>c = (n-1)/2</code>, and measure from the centre:
-<code>x = i - c</code>, <code>y = j - c</code>. Then the border is</p>
-<pre>max(|x|, |y|) == c</pre>
+<p>Put the origin in the middle. Three names, and it is worth being exact about them:</p>
+<table>
+  <tr><th>symbol</th><th>what it is</th><th>range</th></tr>
+  <tr><td><code>i</code>, <code>j</code></td><td>where the cell <em>is</em> — row and column, counting from 0</td><td><code>0 &hellip; n-1</code></td></tr>
+  <tr><td><code>c</code></td><td>the <strong>midpoint index</strong>, <code>(n-1)/2</code></td><td>&mdash;</td></tr>
+  <tr><td><code>x = i - c</code><br><code>y = j - c</code></td><td>where the cell is <strong>measured from the middle</strong></td><td><code>-c &hellip; +c</code></td></tr>
+  <tr><td><code>r</code></td><td>the <strong>radius</strong> — how far out the shape sits</td><td><code>0 &hellip; c</code></td></tr>
+</table>
+<p>Note that <code>c</code> and <code>r</code> are <em>different things</em> that happen to be equal
+for the outer border: the centre is <code>c</code> steps from the edge, so the outermost ring has
+<code>r = c</code>. Keep them apart and the predicate gains a dial. The border is</p>
+<pre>max(|x|, |y|) == r        /* r == c for the outer border */</pre>
 <p>Verified: this draws the <em>identical</em> picture to &sect;2 — cell for cell. Which is worth a
 moment, because it says the square is <q>the set of points whose <strong>largest</strong> coordinate
-is <em>c</em></q>. That is a definition of a square you may not have met, and it is the one that
+is <em>r</em></q>. That is a definition of a square you may not have met, and it is the one that
 travels.</p>
 
 <h2><span class="n">4.</span> Change <code>max</code> to <code>+</code> and you get a diamond</h2>
-<pre>|x| + |y| == c</pre>
+<pre>|x| + |y| == r</pre>
 <pre>    *    
    * *   
   *   *  
@@ -105,7 +114,7 @@ travels.</p>
   *   *  
    * *   
     *    </pre>
-<p>Nothing else moved. Same loops, same <code>c</code>, same grid — one operator. The square asked
+<p>Nothing else moved. Same loops, same <code>r</code>, same grid — one operator. The square asked
 for the <em>largest</em> coordinate; the diamond asks for the <em>sum</em>. Those two questions have
 names, and you now know both: they are the <strong>L&infin;</strong> and <strong>L1</strong>
 distances. A shape is just a distance held constant.</p>
@@ -120,7 +129,7 @@ question asked in the coordinates <code>(x+y, x-y)</code> — which is a 45&deg;
 usual <code>1/&radic;2</code> simply dropped. We do not need it: we are not measuring, we are
 deciding which cells get a star.</p>
 <p>So <strong>one predicate, two coordinate systems, two shapes</strong>:</p>
-<pre>max(|x|,     |y|    ) == c        max(|x+y|, |x-y|) == c
+<pre>max(|x|,     |y|    ) == r        max(|x+y|, |x-y|) == r
 
 *********                              *    
 *       *                             * *   
@@ -137,7 +146,7 @@ because the coordinates did.</div>
 
 <h2><span class="n">6.</span> And a circle, for the family portrait</h2>
 <p>Three shapes, three distances, one line changed each time. Here at <code>n = 11</code>:</p>
-<pre>max(|x|,|y|) == c      |x| + |y| == c        x*x + y*y ~ c*c
+<pre>max(|x|,|y|) == r      |x| + |y| == r        x*x + y*y ~ r*r
    square                 diamond                 circle
 
 ***********                  *                      *     
@@ -156,11 +165,34 @@ A circle of radius <em>c</em> does not pass through whole numbers of cells, so a
 <code>x*x + y*y == c*c</code> catches almost nothing; a band like
 <code>d &lt;= c*c &amp;&amp; d &gt; (c-1)*(c-1)</code> catches too much in the diagonals — is a
 <em>decision</em>, not a discovery.</p>
-<div class="note"><strong>Generalisation cost #1.</strong> The square and the diamond fit the grid
-exactly, so the predicate is the whole truth. The circle does not fit, and the moment a shape stops
-fitting, the program stops being a statement of fact and starts being a choice you have to defend.
-That is not a flaw in the method; it is the method telling you something true about circles and
-square paper.</div>
+<div class="note"><strong>Generalisation cost #1: not every shape fits the paper.</strong> The
+circle does not, and the moment a shape stops fitting, the program stops being a statement of fact
+and starts being a choice you have to defend. That is not a flaw in the method; it is the method
+telling you something true about circles and square paper.</div>
+
+<h3>And it is a scale, not a yes/no</h3>
+<p>Every picture above used an <strong>odd</strong> <code>n</code>. That was not laziness. Ask for an
+even one and the three shapes behave completely differently:</p>
+<table>
+  <tr><th>shape</th><th>predicate</th><th>fits which grids?</th></tr>
+  <tr><td>square</td><td><code>max(|x|,|y|) == r</code></td><td><strong>every</strong> <code>n</code></td></tr>
+  <tr><td>diamond</td><td><code>|x| + |y| == r</code></td><td><strong>odd</strong> <code>n</code> only</td></tr>
+  <tr><td>circle</td><td><code>x*x + y*y &asymp; r*r</code></td><td><strong>no</strong> <code>n</code> exactly</td></tr>
+</table>
+<p>The diamond's failure is <em>parity</em>, and it is worth seeing. A diamond needs a single cell at
+its apex, which needs an exact centre cell — and an even grid has no centre cell, only a centre
+<em>point</em> between four of them. Push through anyway with <code>c = (n-1)/2</code> and integer
+division quietly rounds down: at <code>n = 8</code> you get a perfectly good <em>7&times;7</em> shape
+parked in the corner, with the last row and column blank. The program does not complain, because
+nothing is wrong with it. The <em>request</em> was impossible.</p>
+<p>If you re-centre exactly using doubled coordinates —
+<code>x = 2*i-(n-1)</code>, <code>y = 2*j-(n-1)</code>, which puts the origin between cells when it
+needs to be — the square works for every <code>n</code>, and the diamond comes out <strong>completely
+empty</strong>: with <code>n</code> even, every <code>|x|+|y|</code> is even while <code>n-1</code> is
+odd, so no cell can ever satisfy it. Not approximately empty. Provably empty.</p>
+<div class="note">This is the most useful thing on the page. A predicate does not just draw a shape —
+it can tell you the shape you asked for <strong>does not exist</strong> on the paper you have. A
+space-counting program would have printed <em>something</em> and let you believe it.</div>
 
 <h2><span class="n">7.</span> What the elegance costs</h2>
 <p>The predicate version asks the question at <strong>every cell</strong> — <code>n&sup2;</code> of
@@ -219,14 +251,16 @@ the skill.</p>
 <h2><span class="n">10.</span> Try it yourself</h2>
 <ul>
   <li>Make the square <strong>filled</strong> instead of hollow. Which comparison changes, and to what?</li>
-  <li>Draw a hollow diamond of width 5 <em>inside</em> a hollow square of width 11, in one pass. How
+  <li>Draw a hollow diamond (<code>r = 2</code>) <em>inside</em> a hollow square (<code>r = 5</code>) on one 11-wide grid, in one pass. How
       many predicates does that need — and does the order of the tests matter?</li>
-  <li>Predict, then check: what does <code>|x| + |y| &lt;= c</code> draw? And
-      <code>max(|x|,|y|) &lt;= c &amp;&amp; |x| + |y| &gt;= c</code>?</li>
+  <li>Predict, then check: what does <code>|x| + |y| &lt;= r</code> draw? And
+      <code>max(|x|,|y|) &lt;= r &amp;&amp; |x| + |y| &gt;= r</code>?</li>
   <li>The rotation used <code>(x+y, x-y)</code>. What shape does <code>(x+2*y, x-2*y)</code> give,
       and why is it no longer symmetric?</li>
   <li>Write the O(n) construction for the <em>square</em> border, the way &sect;8 did for the diamond.
       Which rows need two stars, and which need <code>n</code>?</li>
+  <li>Run the diamond with <code>n = 8</code> and explain, in one sentence, why the last row is blank
+      — then say what the <em>right</em> answer to <q>draw an 8-wide diamond</q> actually is.</li>
 </ul>
 <footer>
 CS-1-01 (MO) · Computer System and Programming · Monsoon 2026 · IIT Jammu ·
