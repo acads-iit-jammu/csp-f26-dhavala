@@ -194,45 +194,85 @@ odd, so no cell can ever satisfy it. Not approximately empty. Provably empty.</p
 it can tell you the shape you asked for <strong>does not exist</strong> on the paper you have. A
 space-counting program would have printed <em>something</em> and let you believe it.</div>
 
-<h2><span class="n">7.</span> What the elegance costs</h2>
-<p>The predicate version asks the question at <strong>every cell</strong> — <code>n&sup2;</code> of
-them — to print a shape made of about <code>2n</code> stars. Counted:</p>
+<h2><span class="n">7.</span> What the elegance costs — and which cost you can actually remove</h2>
+<p>The predicate asks its question at <strong>every cell</strong>. It is natural to say <q>so the
+elegant version is <code>n&sup2;</code> and the direct one is <code>2n</code></q> — and that is too
+loose, because <em>three different things</em> are being counted and they do not behave the same
+way. Separating them is the whole lesson.</p>
 <table>
-  <tr><th>n</th><th>predicate: cells tested</th><th>direct: stars written</th><th>ratio</th></tr>
-  <tr><td>9</td><td>81</td><td>16</td><td>5&times;</td></tr>
-  <tr><td>33</td><td>1 089</td><td>64</td><td>17&times;</td></tr>
-  <tr><td>129</td><td>16 641</td><td>256</td><td>65&times;</td></tr>
-  <tr><td>513</td><td>263 169</td><td>1 024</td><td><strong>257&times;</strong></td></tr>
+  <tr><th>The cost</th><th>predicate</th><th>direct construction</th></tr>
+  <tr><td><strong>deciding</strong> — times you evaluate a test</td><td><code>n&sup2;</code></td><td><strong><code>n</code></strong> — one per row</td></tr>
+  <tr><td><strong>calling</strong> — <code>putchar</code>/<code>printf</code> invocations</td><td><code>n&sup2;</code></td><td><code>4n</code>, printing runs with <code>%*s</code></td></tr>
+  <tr><td><strong>describing</strong> — characters onto the screen</td><td><code>n&sup2;</code></td><td><code>&asymp;&frac34;n&sup2;</code></td></tr>
 </table>
-<p>The ratio is about <code>n/2</code>, and it grows without limit. For a pattern on a screen this
-is irrelevant. For a grid of a million cells it is the whole story — and it is the same lesson the
-floor-and-ceiling notes ended on: <em>correct is not the same as usable</em>.</p>
-
-<h2><span class="n">8.</span> The direct construction, and why it is fast</h2>
-<p>Turn the question around. Instead of asking every cell <q>are you on the diamond?</q>, ask each
-row <q>which two cells are?</q> The answer is arithmetic:</p>
-<pre>h = min(i, n-1-i);        /* how far this row reaches from the centre */
-/* the two stars sit at  c - h  and  c + h  */</pre>
+<p>Measured, for the diamond:</p>
+<table>
+  <tr><th>n</th><th>predicate tests</th><th>direct tests</th><th>stars placed</th><th>bytes, full grid</th><th>bytes, no trailing blanks</th></tr>
+  <tr><td>33</td><td>1 089</td><td><strong>33</strong></td><td>64</td><td>1 122</td><td>850</td></tr>
+  <tr><td>129</td><td>16 641</td><td><strong>129</strong></td><td>256</td><td>16 770</td><td>12 610</td></tr>
+  <tr><td>1025</td><td>1 050 625</td><td><strong>1 025</strong></td><td>2 048</td><td>1 051 650</td><td>788 994</td></tr>
+</table>
+<p>The direct version, for reference. Instead of asking every cell <q>are you on the
+diamond?</q>, it asks each row <q>which two cells are?</q> — and the answer is arithmetic:</p>
 <pre>for (i = 0; i < n; i++) {
-    int h = (i < n-1-i) ? i : n-1-i;
+    int h = (i < n-1-i) ? i : n-1-i;      /* how far this row reaches out */
     for (j = 0; j < n; j++)
         putchar( (j == c-h || j == c+h) ? '*' : ' ' );
     putchar('\n');
 }</pre>
-<p>Verified: cell for cell, this is the same diamond as &sect;4. And if you drop the space-filling
-and only <em>place</em> the stars, the inner loop runs <strong>exactly twice</strong> per row — once
-for <code>c-h</code>, once for <code>c+h</code> — collapsing the work from
-<code>n&sup2;</code> to <code>2n</code>.</p>
-<div class="note"><strong>Generalisation cost #2.</strong> That <code>h = min(i, n-1-i)</code> is
-beautiful and it is <em>only about diamonds</em>. Nothing in it survives the trip to the circle, or
-to the k-th ring, or to a shape you have not met yet. You bought a factor of <em>n</em> and paid for
-it in reach.</div>
+<p>Verified cell for cell against the predicate of &sect;4, for every odd <code>n</code> from 3 to
+101. Two corrections fall out of the table above, and both matter.</p>
+<p><strong>The deciding collapses to <code>n</code>, not <code>2n</code>.</strong> One
+<code>h = min(i, n-1-i)</code> per row settles <em>both</em> stars, so there are <code>n</code>
+decisions and <code>2n</code> stars. Those are different quantities, and the smaller one is the
+achievement: the positions are <strong>computed, not found</strong>. No search, no scan — arithmetic.
+That is exactly what it means to exploit the geometry.</p>
+<p><strong>The describing does not collapse at all.</strong> You cannot print a hole. To put a star in
+column 7 of a text stream you must first emit seven somethings, and blanks are the only somethings
+available. The grid has <code>n&sup2;</code> cells and almost all of them must be written whatever
+your algorithm knows.</p>
+<div class="note"><strong>How much can you shave off it?</strong> Only the <em>trailing</em> blanks,
+after the rightmost star. The leading blanks are how you reach the left star, and the middle ones
+hold the two apart — both are load-bearing. That gets you from <code>n&sup2;+n</code> down to about
+<strong>&frac34;n&sup2;</strong>: 788 994 bytes instead of 1 051 650 at <code>n = 1025</code>. A
+constant factor, not a better exponent. There is no <code>n&sup2;/2</code> available, and no
+<code>2n</code> at all.</div>
+
+<h2><span class="n">8.</span> Unless you stop printing a grid</h2>
+<p>The quadratic is not a fact about diamonds. It is a fact about <em>rendering a grid as a stream of
+characters</em>. Change the output format and it goes away: a terminal will accept an instruction to
+<em>move</em> before it prints, so you can address the <code>2n</code> stars directly and never
+mention a blank.</p>
+<pre>/* "\033[<row>;<col>H" puts the cursor there; then one star.       */
+printf("\033[2J");                                  /* clear once */
+for (i = 0; i < n; i++) {
+    int h = (i < n-1-i) ? i : n-1-i;
+    printf("\033[%d;%dH*", i+1, mid-h+1);
+    if (h) printf("\033[%d;%dH*", i+1, mid+h+1);
+}</pre>
+<table>
+  <tr><th>n</th><th>bytes, full grid</th><th>bytes, cursor moves</th><th>saving</th></tr>
+  <tr><td>33</td><td>1 122</td><td>546</td><td>2.1&times;</td></tr>
+  <tr><td>129</td><td>16 770</td><td>2 392</td><td>7.0&times;</td></tr>
+  <tr><td>1025</td><td>1 051 650</td><td>22 206</td><td><strong>47.4&times;</strong></td></tr>
+</table>
+<p>That is about <code>22n</code> bytes — linear, give or take the digits in the coordinates. And
+notice it <em>loses</em> for small <code>n</code>: 116 bytes against 90 at <code>n = 9</code>, because
+each move instruction costs more than the handful of blanks it replaces. Measured, the crossover is
+at <strong><code>n = 15</code></strong> — 222 bytes against 240. Below that, the blanks are cheaper
+than describing where not to put them.</p>
+<div class="note"><strong>The lesson, and it is a general one.</strong> A better algorithm removes the
+cost of <em>deciding</em>. It cannot touch the cost of <em>describing</em> — that one is set by the
+output format you agreed to. If the description is what is expensive, no cleverness inside the
+program will help you; you have to renegotiate the format. Which is why <q>make it faster</q> is
+never a well-posed request until someone says <em>which</em> of the three costs is the problem.</div>
 
 <h2><span class="n">9.</span> The real lesson, and it is on your syllabus</h2>
 <table>
   <tr><th></th><th>The predicate</th><th>The construction</th></tr>
   <tr><td>says</td><td><strong>what the shape is</strong></td><td><strong>how to draw it</strong></td></tr>
-  <tr><td>cost</td><td><code>n&sup2;</code></td><td><code>2n</code></td></tr>
+  <tr><td>deciding</td><td><code>n&sup2;</code> tests</td><td><code>n</code> tests</td></tr>
+  <tr><td>describing</td><td colspan="2" style="text-align:center"><code>&asymp;n&sup2;</code> either way — the format decides this, not the algorithm</td></tr>
   <tr><td>new shape</td><td>change one line</td><td>new arithmetic, from scratch</td></tr>
   <tr><td>reads like</td><td>a definition</td><td>a set of instructions</td></tr>
 </table>
