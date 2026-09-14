@@ -1,24 +1,218 @@
 # Lab 06: Loops & Arrays {.unnumbered}
 
-| | Electrical | Mechanical & Materials |
-|---|---|---|
-| **Date** | Tue Sep 15, 2026 | Wed Sep 30, 2026 |
-| **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
+| | Electrical | Mechanical | Metallurgy & Materials |
+|---|---|---|---|
+| **Date** | Tue Sep 15 | Wed Sep 30 | Wed Sep 30 |
+| **Time & Room** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4021** |
 
-**Syllabus practical modules:** 3, 5 and 6 — nested loops and patterns, and 1-D / 2-D arrays
+**Lab pack:** [lab06.tar.gz](../labs/lab06.tar.gz) — pre-placed on lab machines, downloadable for home practice.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Syllabus practical modules:** 3, 5 and 6 — lists, and the loops that walk them
+
+**Evaluation:** Graded — equal weight within the 20% lab component. **Only the exercises
+carry marks**: five fill-in-the-blank programs (**5 marks each**) and five checked
+problems (**10 marks each**). The ten drills are **not scored** — they are how you find out
+what you have wrong before it costs you. Plus observed work and a short viva. Teams of 1–2;
+pairs swap driver/navigator at half-time.
 
 **Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
 
-## Pre-Lab
+::: {.callout-note}
+The [Week 07 lecture notes](../weeks/w07.qmd) carry a dozen worked programs on arrays.
+They are your **reference**. They carry the *patterns* — a running total, a search that
+stops at the first hit, best-so-far keeping the index — but **not a single program that
+answers one of the questions below**. `b4` is the closest, and it still needs turning
+round, re-bounding and converting an index into a day. And one of them punishes copying
+outright: the notes' search stops at the first hit and prints nothing otherwise, while
+`e1` is marked on the case where there *is* no hit. Read them for the technique, then
+write these yourself.
+:::
 
-*To be posted — what to read/install before the session.*
+## The one sentence to leave with
 
-## Exercises
+> **`rain[5]` is day 6.**
 
-*To be posted before the session.*
+An index is an offset, not an ordinal. Five of today's ten problems report a *day number*,
+and every one of them is marked on getting that `+1` right — at the first day, at the last
+day, and everywhere between.
 
-## Submission
+## The data is the same all afternoon
 
-Submission instructions will be provided in the lab.
+Every array problem today reads the **same fourteen days of rainfall**, already written
+into your starter file:
+
+| day | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **mm** | 0 | 12 | 0 | 0 | 5 | 30 | 8 | 0 | 0 | 0 | 2 | 0 | 18 | 4 |
+
+```c
+int rain[14] = { 0, 12, 0, 0, 5, 30, 8, 0, 0, 0, 2, 0, 18, 4 };   /* given - do not change */
+```
+
+What changes from problem to problem is the **question**, and it arrives on standard
+input. The checker does not change the month; it changes what it asks about the month —
+so memorising the one worked example in your starter will not get you through, because
+the next input is a different question about the same data.
+
+Three problems — `b1`, `b2` and `e4` — use no rainfall at all. They are last week's
+loops, and they are here on purpose.
+
+## Act 0 · Land (10 min)
+
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab06.tar.gz
+```
+
+```bash
+tar xzf lab06.tar.gz
+cd lab06
+./install.sh
+```
+
+Then start the recorder:
+
+```bash
+script session.txt
+```
+
+::: {.callout-important}
+Do not go further until your prompt shows `[lab06 OK ...]`. If it does not, run
+`./where.sh` — it changes nothing, and prints the exact line to copy.
+:::
+
+## Act 1 · Drills — predict, then run (20 min, not marked)
+
+```bash
+./drill.sh --all
+```
+
+| Drills | Territory |
+|---|---|
+| `d01`–`d03` | where an array starts and stops — and **`rain[6]` against day 6, side by side** |
+| `d04`–`d06` | a search that finds nothing · a best-so-far started badly · **a counter that never resets** |
+| `d07`–`d09` | nested loops: how many stars in total, how many on the last row, and how many places a window fits |
+| `d10` | `>` against `>=`, on a value that sits exactly on the line |
+
+::: {.callout-warning}
+**`d03`, `d05` and `d06` are each a graded problem in miniature.** `d03` is the `+1` that
+`b4`, `e1`, `e3` and `e5` all hang on. `d05` is `b4`'s initialiser. `d06` is `e3` — the
+whole of it, ten marks, five lines long. Predict all three on paper before you run them.
+:::
+
+These carry **no marks at all**. A wrong prediction costs you nothing — which is exactly
+why you should write it down before pressing Enter.
+
+## Act 2 · Fill the blanks (20 min · 5 marks each)
+
+| File | What it does |
+|---|---|
+| `b1_sum.c` | `1 + 2 + … + n` — no array at all; last week's machinery, as a warm-up |
+| `b2_triangle.c` | a right triangle of stars — **nested** loops, the inner limit depending on the outer counter |
+| `b3_total.c` | total rainfall over the first `k` days — the loop, and its **limit** |
+| `b4_wettest.c` | the wettest of the first `k` days — best-so-far, **keeping the day as well as the value** |
+| `b5_dry.c` | how many of the first `k` days were dry — counting |
+
+::: {.callout-tip}
+`b3`, `b4` and `b5` are the **same walk down the same array**, three times. Only the thing
+you accumulate changes: a running sum, a best-so-far with its position, a count. If you
+find yourself writing three unrelated programs, stop and look again — that similarity *is*
+this week's idea, and you will be asked about it in the viva.
+:::
+
+## Act 3 · The checked five (60 min, solo · 10 marks each)
+
+| Problem | Task | Final line ends with exactly |
+|---|---|---|
+| `e1.c` | the **first** day it rained exactly `R` mm — or none did | `day=<D>` or `never` |
+| `e2.c` | how many days were **strictly** wetter than `T` | `count=<N>` |
+| `e3.c` | the longest unbroken **dry spell** | `longest=<L> ending=<D>` |
+| `e4.c` | a hollow square border, `n` by `n` | *(the whole grid is compared)* |
+| `e5.c` | the wettest stretch of `w` consecutive days | `start=<S> total=<T>` |
+
+`e1` — a search with a **not-found** case, which is where most searches go wrong. A loop
+that prints nothing when it finds nothing has not answered the question: `never` **is** the
+answer, and your program has to tell "not found yet" apart from "not there at all". Try
+`R = 6`. Then stop at the *first* match — the spec says first, and a loop that keeps going
+reports the last.
+
+`e2` — read the boundary before you write the loop. `T = 30` is the wettest day there is,
+and nothing is *strictly* greater than it, so the answer is `0`, not `1`. The whole problem
+is the difference between `>` and `>=`, which is drill `d10` with marks attached.
+
+`e3` — **this is the problem the whole lab has been pointing at.** You need two counters:
+how long the run you are *currently* in is, and how long the best run *so far* was. A day
+that is too wet does not merely fail to count — it **ends the run**, and the current
+counter has to go back to zero. Leave that out and your program reports the *total* number
+of dry days: `7` where the true answer is `3`. That is drill `d06`, and it costs ten marks
+here.
+
+`e4` — nested loops, no array. A cell `(i, j)` is on the border when its distance to the
+**nearest** edge is zero. There are four edges, so there are four distances: `i`, `j`,
+`n-1-i` and `n-1-j`. One predicate draws the whole picture.
+
+`e5` — a window that slides. The outer loop chooses where the window starts, the inner one
+adds up the `w` days from there. Settle two questions *before* you write it: how far can
+the window start and still fit inside the month, and — again — which day number does index
+`i` stand for?
+
+`w` can be anything from 2 up to **13**, so a window can be nearly the whole month. That is
+deliberate: a loop that stops one position too early still looks right on a short window
+and is wrong on a long one. And when two stretches tie on total, the spec says report the
+**earliest** — which happens for more than one `w`, so it is not a detail you can skip.
+
+**How checking works** — `./check.sh e1` compiles *your source* and runs it on the public
+examples **and on fresh random inputs drawn from the GIVEN**. A program that memorises an
+example fails the next draw.
+
+::: {.callout-note}
+`b2` and `e4` are compared over the **whole output**, not just the last line, because the
+answer is a shape. Spacing at the end of a line is ignored; a missing row is not. If yours
+looks right but fails, run `./check.sh e4` and read the difference rather than squinting at
+the screen.
+:::
+
+## Act 4 · Check, fix, bundle (10 min)
+
+```bash
+./check.sh
+```
+
+It prints **your marks, problem by problem**:
+
+```
+    b4  3/5 vectors    3 of  5 marks
+    e1  5/7 vectors    7 of 10 marks
+    e3  0/6 vectors    0 of 10 marks
+    ---------------------------------------------
+                      58 of 75 marks
+```
+
+Marks are **partial** — every vector you pass earns its share, so fixing one failing case
+is always worth doing, right up to the last minute. Treat the total as an estimate: the
+random vectors are drawn fresh on every run, so it can move a mark or two.
+
+Fix, re-check, repeat. Then — green or time-up:
+
+```bash
+./check.sh --bundle
+```
+
+Carry `../lab06_<rolls>_<branch>_w<NN>.tar.gz` out with you (Moodle + email yourself).
+
+## Stretch (fast finishers)
+
+- **The same month, a harder question.** Which *pair* of days, not necessarily adjacent,
+  has the largest total? Your `e5` slides a fixed window; this one does not. How many pairs
+  are there, and what does that cost you as the month gets longer?
+- **`e3` in one pass, reporting all ties.** Your `e3` reports the first run to reach the
+  maximum length. Change it to report *every* run of that length. What do you now have to
+  do that a single pass made awkward — and can you still do it in one?
+- **Break `b4` on purpose.** Find a value of `k` for which a `max` initialised to `0`
+  gives an answer that *looks* plausible and is wrong. Then say in one sentence why `-1`
+  is not a real fix either, and what is.
+
+## Reflect
+
+✍️ Into `notes/answers.txt`: drill `d06` counted to 5 when the longest run was 3. In one
+sentence — what event should have put that counter back to zero, and where in your `e3`
+does it happen?
