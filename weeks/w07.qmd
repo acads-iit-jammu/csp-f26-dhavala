@@ -50,9 +50,17 @@ Now ask a different question:
 - *Did the account ever go negative?*
 - *Which single transaction took the most money out?*
 
-Not one of these can be answered by the variable above, and no amount of cleverness
-changes that: **the information has been thrown away.** Each assignment destroyed the
-previous value. If you want to answer questions about the past, you must keep the past.
+Not one of these can be answered by the variable above. Each assignment destroyed the previous
+value, so the information is simply gone.
+
+But be precise about what would fix it, because "use an array" is not the only answer. If you
+knew the question **in advance**, you could carry a little extra as you went: a `lowest` and the
+day it happened, a `wentNegative` flag, a `previous` balance to compare against. Three of the
+four questions above fall to that, in one pass, with no array at all.
+
+The array earns its place the moment you **do not know what you will be asked.** Keep the
+history and every one of those questions — and the ones nobody has thought of yet — is still
+answerable. Throw it away and you are betting that you already know what will matter.
 
 ### 2 · The data: two arrays that move together
 
@@ -84,9 +92,11 @@ The index is what binds them. Nothing in C enforces that — it is a promise you
 and it is your job to keep it.
 
 ::: {.callout-warning}
-For an array of `n` elements the valid indices are `0 … n-1`. There is no `balance[n]`,
-and C will **not** stop you from asking for it. It will hand you whatever happens to be in
-that memory and carry on as though nothing were wrong.
+For an array of `n` elements the valid indices are `0 … n-1`. There is no `balance[n]`, and C
+will **not** stop you from asking for it. What happens then is **undefined** — not "you get
+whatever was in that memory". The program may print rubbish, may crash, may behave differently
+once you compile with optimisation, and may appear to work for a year and then not. There is no
+rule you can rely on, which is exactly why the boundary is yours to keep.
 :::
 
 ### 3 · Did the account *ever* go negative?
@@ -104,9 +114,10 @@ that memory and carry on as though nothing were wrong.
 went negative on day 15
 ```
 
-The `break` is not an optimisation here, it is the **meaning** of the question. *"Did it
-ever?"* needs one witness; searching on after you have found it is answering a question
-nobody asked.
+A loop that sets a flag and keeps scanning would answer just as correctly — so the `break` is
+not what makes this right. What it says is that **the work is finished**: *"did it ever?"* needs
+one witness, and searching on after you have found it buys nothing. Knowing when you may stop is
+a claim about the question, not about the code.
 
 ### 4 · The same data, three questions, three loops
 
@@ -215,9 +226,9 @@ Day 12: withdrawal   4000      Day 29: withdrawal   6500
 Day 15: withdrawal   6000
 ```
 
-**Why does this loop start at `i = 1`?** Because it reads `balance[i-1]`, and at `i = 0`
-that is `balance[-1]` — outside the array. C will read it anyway. Whenever a loop looks at
-a *neighbour*, one end of the range has to give.
+**Why does this loop start at `i = 1`?** Because it reads `balance[i-1]`, and at `i = 0` that
+is `balance[-1]` — outside the array, and undefined. Whenever a loop looks at a *neighbour*, one
+end of the range has to give.
 
 ### 8 · Three questions that sound the same and are not
 
@@ -270,10 +281,17 @@ Every one of the three answers is now wrong, and two of them are wrong in a way 
 entirely plausible if you do not know the data. In §5 we fixed the minimum by putting a
 `continue` in *that* loop — but here are three more loops, each of which would need its own.
 
-**That is the wrong place to fix it.** A record you cannot trust should be dealt with once,
-before any analysis runs, not re-excluded in every loop that ever touches the array. Ask
-yourself where that "once" should live — and note that you do not yet have the tool to
-express it cleanly. You will, in Lab 07.
+And §7's loop is worse than it looks. Skipping the pass where `balance[i]` is corrupt is not
+enough — the *next* pass still reads that same value as `balance[i-1]`. **One bad record poisons
+two differences, not one.**
+
+So what *is* the change across a missing day? Skip both differences? Bridge from the last good
+balance to the next good one? Declare the series unusable? Those are not coding decisions. They
+are decisions about what the data means, and no one can make them from inside the loop.
+
+Which is the real lesson. A record you cannot trust is worth settling **once, before any analysis
+runs**, rather than re-excluding it in every loop that touches the array — but settling it means
+first deciding what it *means*, and that is a conversation, not a `continue`.
 :::
 
 **Tuesday — two arrays that mean different things, and one grid.**
@@ -302,7 +320,9 @@ Until someone asks:
 
 > *At which hour was the rig, as a whole, hottest?*
 
-That is a question about a **column**. You must add `probe0[h] + probe1[h] + probe2[h] + probe3[h]`.
+Take "as a whole" to mean the **total across the four probes** — that reading is a choice, and
+we come back to it below, because it is not the only one. Under it, this is a question about a
+**column**: you must add `probe0[h] + probe1[h] + probe2[h] + probe3[h]`.
 With four probes that is one line. With forty it is forty terms, written out by hand — because
 **you cannot loop over variable names.** You can loop over an index:
 
@@ -336,15 +356,25 @@ position along it.
 
 ### 10 · Which array holds what — and why they are not all 2-D
 
-| | structure | because |
-|---|---|---|
-| `temp[s][h]` | **2-D array** | the same *kind* of thing (°C) indexed two ways |
-| `sensorID[]`, `ratedMax[]` | **parallel 1-D arrays** | different *kinds* — an ID is not a temperature |
+Two different questions decide this, and it helps to keep them apart.
 
-Data that arrives as a table tempts you to make everything 2-D. Resist it: `data[0][s]` holding
-an ID while `data[1][s]` holds degrees is a lie the compiler cannot catch, and it will not warn
-you when you average them together. (That discomfort has a proper fix, and it is called a
-`struct`. Later.)
+**First: how many indices does one value need?**
+
+| | one value is… | so |
+|---|---|---|
+| `sensorID[s]` | one ID **per sensor** | one index |
+| `ratedMax[s]` | one limit **per sensor** | one index |
+| `temp[s][h]` | one reading **per sensor, per hour** | **two** indices |
+
+That — and only that — is what makes `temp` two-dimensional. Count the axes.
+
+**Second: should things sharing an index live in the same array?** All three above are indexed
+by `s`, so you *could* try to merge them. Don't: an array holds one type, and `data[0][s]`
+holding an ID while `data[1][s]` holds degrees is a lie the compiler cannot catch — nothing will
+warn you when you average them together. Different quantities about the same thing stay in
+**separate arrays that move together**.
+
+(That is clumsy, and the clumsiness has a proper fix called a `struct`. Later.)
 
 ### 11 · One line that needs both
 
@@ -502,7 +532,7 @@ one, and say in a sentence why you picked it.
 
 - **Type and run all eight.** Where the machine disagrees with your prediction, find the rule you misapplied.
 - **Answer with an array what you cannot answer without one:** what was the *average* balance over the month? And the average of the *changes* — can you predict that answer before computing it?
-- **Break it on purpose:** change a loop bound to `i <= n` and describe what you get. Then explain why it did not crash.
+- **Break it on purpose:** change a loop bound to `i <= n` and describe what you get. If it did *not* crash — explain why that does not make the access correct.
 - **The corrupted record again:** §5 skipped it when finding the minimum. What does §7 do with it? Is skipping the right answer there too, or is something else needed?
 - **A question we have not asked:** on how many days was the balance above its own monthly average? Note that this one needs **two** passes over the array. Why can it not be done in one?
 
