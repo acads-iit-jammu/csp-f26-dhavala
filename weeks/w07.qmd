@@ -1,26 +1,285 @@
-# W07: Selection Control {.unnumbered}
+# W07: Arrays — Remembering a History {.unnumbered}
 
 **Dates:** Mon Sep 14 & Tue Sep 15, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 4 — Data and expressions; control structures (5 h)
-
-::: {.callout-important}
-**Mid-semester examinations begin Fri Sep 18.** The mid-sem covers W01–W07.
-:::
+**Syllabus module:** 5 — Arrays; one-dimensional and character arrays
 
 ## Pre-read
 
-*To be posted (typically by the weekend before).*
+- Last week's [Making Decisions](w06.qmd) notes, especially `break` and `continue`. Today they stop being about counting and start being about *searching*.
+- Skim [Lec 15](../cs1100-cse-iitm-2021/slides/Lec15.pdf) — *Introduction to arrays* (Prof. Shweta Agrawal, IIT Madras).
 
 ## In Class
 
-- [Lec 7](../cs1100-cse-iitm-2021/slides/Lec7.pdf) — Control flow; operators; single selection (`if`)
-- [Lec 8](../cs1100-cse-iitm-2021/slides/Lec8.pdf) — Multiple selection (`switch`); more `if-then-else`
+**Monday — why an array at all, and eight questions about one bank account.**
+
+::: {.callout-important}
+## The sentence the whole week turns on
+
+**A variable remembers the current value. An array remembers a history.**
+
+Everything below follows from asking a question that a single number cannot answer.
+:::
+
+## Code You Can Copy
+
+Every program here was compiled and run before it was printed; the outputs are what it
+actually produced. **Predict each one before you run it.**
+
+### 1 · When a single variable is enough — and when it stops being enough
+
+A bank account needs one number:
+
+```c
+int balance = 10000;
+balance = balance + 2000;      /* a deposit */
+balance = balance - 5000;      /* a withdrawal */
+```
+
+That answers *"what is the balance now?"* perfectly, and it will answer it forever.
+
+Now ask a different question:
+
+- *What was the balance five transactions ago?*
+- *On which day was it lowest?*
+- *Did the account ever go negative?*
+- *Which single transaction took the most money out?*
+
+Not one of these can be answered by the variable above, and no amount of cleverness
+changes that: **the information has been thrown away.** Each assignment destroyed the
+previous value. If you want to answer questions about the past, you must keep the past.
+
+### 2 · The data: two arrays that move together
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int date[]    = { 1,     3,     5,    8,    12,    15,   18,   22,   25,   29 };
+    int balance[] = { 10000, 12000, 9500, 7000, 3000, -3000, 2000, 1500, 9000, 2500 };
+    int n = 10;
+
+    for (int i = 0; i < n; i++)
+        printf("Day %2d : balance = %6d\n", date[i], balance[i]);
+
+    return 0;
+}
+```
+
+```
+Day  1 : balance =  10000     Day 15 : balance =  -3000
+Day  3 : balance =  12000     Day 18 : balance =   2000
+Day  5 : balance =   9500     Day 22 : balance =   1500
+Day  8 : balance =   7000     Day 25 : balance =   9000
+Day 12 : balance =   3000     Day 29 : balance =   2500
+```
+
+These are **parallel arrays**: `date[i]` and `balance[i]` describe the *same* transaction.
+The index is what binds them. Nothing in C enforces that — it is a promise you are making,
+and it is your job to keep it.
+
+::: {.callout-warning}
+For an array of `n` elements the valid indices are `0 … n-1`. There is no `balance[n]`,
+and C will **not** stop you from asking for it. It will hand you whatever happens to be in
+that memory and carry on as though nothing were wrong.
+:::
+
+### 3 · Did the account *ever* go negative?
+
+```c
+    for (int i = 0; i < n; i++) {
+        if (balance[i] < 0) {
+            printf("went negative on day %d\n", date[i]);
+            break;                       /* one example is enough */
+        }
+    }
+```
+
+```
+went negative on day 15
+```
+
+The `break` is not an optimisation here, it is the **meaning** of the question. *"Did it
+ever?"* needs one witness; searching on after you have found it is answering a question
+nobody asked.
+
+### 4 · The same data, three questions, three loops
+
+This is the idea to take away from today:
+
+```c
+/* (a) find ALL of them  — no break */
+for (int i = 0; i < n; i++)
+    if (balance[i] < 0) printf("negative on day %d\n", date[i]);
+
+/* (b) find the FIRST — break on the first hit */
+for (int i = 0; i < n; i++)
+    if (balance[i] < 0) { printf("first on day %d\n", date[i]); break; }
+
+/* (c) did it EVER? — a yes/no, so remember a flag */
+int ever = 0;
+for (int i = 0; i < n; i++)
+    if (balance[i] < 0) { ever = 1; break; }
+printf(ever ? "yes\n" : "no\n");
+```
+
+Same array, same test, three different loops — because they are three different questions.
+**The control structure follows from the question, never the other way round.**
+
+### 5 · A corrupted record, and why `continue` earns its keep
+
+Suppose the bank's file marks an unreadable record with `-999999`, and day 22 is corrupt:
+
+```c
+    int balance[] = { 10000, 12000, 9500, 7000, 3000, -3000, 2000, -999999, 9000, 2500 };
+```
+
+Now find the lowest balance. Naively:
+
+```c
+    int low = balance[0], at = 0;
+    for (int i = 1; i < n; i++)
+        if (balance[i] < low) { low = balance[i]; at = i; }
+    printf("lowest = %d on day %d\n", low, date[at]);
+```
+
+```
+lowest = -999999 on day 22
+```
+
+That is not a bank balance; it is a **flag pretending to be data**, and it has quietly
+become the answer. The fix is one line — refuse to process a record you do not trust:
+
+```c
+    int low = 0, at = -1;
+    for (int i = 0; i < n; i++) {
+        if (balance[i] == -999999) continue;      /* not data. skip it. */
+        if (at == -1 || balance[i] < low) { low = balance[i]; at = i; }
+    }
+    printf("lowest = %d on day %d\n", low, date[at]);
+```
+
+```
+lowest = -3000 on day 15
+```
+
+::: {.callout-tip}
+`continue` says *"this record is of no interest — the rest still are."* `break` says *"there
+is no point looking at the rest."* Choosing the wrong one here does not crash anything; it
+gives you a confident, wrong answer.
+:::
+
+### 6 · The best-so-far pattern, and why you keep the *index*
+
+```c
+    int low = balance[0], at = 0;
+    for (int i = 1; i < n; i++)
+        if (balance[i] < low) { low = balance[i]; at = i; }
+
+    printf("lowest = %d, on day %d\n", low, date[at]);
+```
+
+```
+lowest = -3000, on day 15
+```
+
+Two details worth arguing about. The loop starts at `i = 1`, because element 0 is already
+the best-so-far — starting at 0 works too, but compares it with itself. And we remember
+`at`, not just `low`: **the index is what lets us get back to `date[]`.** An answer of
+"−3000" is not useful; "−3000, on day 15" is.
+
+### 7 · Neighbours: what each transaction actually did
+
+A balance history does not record the transactions — but it *implies* them:
+
+```c
+    for (int i = 1; i < n; i++) {
+        int change = balance[i] - balance[i-1];
+
+        if      (change > 0) printf("Day %2d: deposit    %6d\n", date[i],  change);
+        else if (change < 0) printf("Day %2d: withdrawal %6d\n", date[i], -change);
+        else                 printf("Day %2d: no change\n",      date[i]);
+    }
+```
+
+```
+Day  3: deposit      2000      Day 18: deposit      5000
+Day  5: withdrawal   2500      Day 22: withdrawal    500
+Day  8: withdrawal   2500      Day 25: deposit      7500
+Day 12: withdrawal   4000      Day 29: withdrawal   6500
+Day 15: withdrawal   6000
+```
+
+**Why does this loop start at `i = 1`?** Because it reads `balance[i-1]`, and at `i = 0`
+that is `balance[-1]` — outside the array. C will read it anyway. Whenever a loop looks at
+a *neighbour*, one end of the range has to give.
+
+### 8 · Three questions that sound the same and are not
+
+```c
+    /* the biggest single drop */
+    int drop = 0, di = -1;
+    for (int i = 1; i < n; i++) {
+        int change = balance[i] - balance[i-1];
+        if (change < drop) { drop = change; di = i; }
+    }
+    if (di != -1) printf("largest drop: %d on day %d\n", -drop, date[di]);
+
+    /* every drop over 5000 — worth a look */
+    for (int i = 1; i < n; i++)
+        if (balance[i] - balance[i-1] < -5000)
+            printf("large debit on day %d\n", date[i]);
+
+    /* over 5000 AND it left the account overdrawn */
+    for (int i = 1; i < n; i++)
+        if (balance[i] - balance[i-1] < -5000 && balance[i] < 0)
+            printf("large debit that overdrew the account: day %d\n", date[i]);
+```
+
+```
+largest drop: 6500 on day 29
+large debit on day 15
+large debit on day 29
+large debit that overdrew the account: day 15
+```
+
+Look at what the three answers actually are. **The largest drop is on day 29 — and it is
+not the one that matters.** Day 15 is the transaction that overdrew the account. "Biggest"
+and "worst" are different questions, and the `&&` is what separates them.
+
+::: {.callout-important}
+## Now run the same three loops on the corrupted array from §5
+
+One record — day 22, holding `-999999` — and the output becomes:
+
+```
+largest drop: 1001999 on day 22
+large debit on day 15
+large debit on day 22
+large debit on day 29
+large debit that overdrew the account: day 15
+large debit that overdrew the account: day 22
+```
+
+Every one of the three answers is now wrong, and two of them are wrong in a way that looks
+entirely plausible if you do not know the data. In §5 we fixed the minimum by putting a
+`continue` in *that* loop — but here are three more loops, each of which would need its own.
+
+**That is the wrong place to fix it.** A record you cannot trust should be dealt with once,
+before any analysis runs, not re-excluded in every loop that ever touches the array. Ask
+yourself where that "once" should live — and note that you do not yet have the tool to
+express it cleanly. You will, in Lab 07.
+:::
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+- **Type and run all eight.** Where the machine disagrees with your prediction, find the rule you misapplied.
+- **Answer with an array what you cannot answer without one:** what was the *average* balance over the month? And the average of the *changes* — can you predict that answer before computing it?
+- **Break it on purpose:** change a loop bound to `i <= n` and describe what you get. Then explain why it did not crash.
+- **The corrupted record again:** §5 skipped it when finding the minimum. What does §7 do with it? Is skipping the right answer there too, or is something else needed?
+- **A question we have not asked:** on how many days was the balance above its own monthly average? Note that this one needs **two** passes over the array. Why can it not be done in one?
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal,
+blog-style column: how this week's material looks in the age of AI. To be posted.*
