@@ -7,7 +7,7 @@
 ::: {.callout-important}
 **Class Test 1** was held in the Aug 19–25 window. Scope: Weeks 1–3 — what a computer is, number systems, complements & overflow.
 
-📕 **[Worked solutions are now posted](../materials/ct1-solutions.pdf)** — every question restated with its answer and the reasoning. Useful revision for the mid-semester examination (Sep 18–23), which covers W01–W07.
+📕 **[Worked solutions are now posted](../materials/ct1-solutions.pdf)** — every question with its answer, the working written out in full, and a **"where this goes wrong"** note naming the specific mistake that question invites. Most of the marks lost went to a handful of recurring slips, and nearly every one is caught by a check that takes seconds — convert your answer back, or add your negative to its positive and confirm you get zero. Useful revision for the mid-semester examination (Sep 18–23), which covers W01–W07.
 :::
 
 ## Pre-read
