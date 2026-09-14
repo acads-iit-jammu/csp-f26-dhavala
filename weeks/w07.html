@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W07: Selection Control – CS-1-01 (MO)</title>
+<title>W07: Arrays — Remembering a History – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w07.html">W07: Selection Control</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w07.html">W07: Arrays — Remembering a History</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -193,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w07.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">W07: Selection Control</span></a>
+ <span class="menu-text">W07: Arrays — Remembering a History</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -405,6 +440,17 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#pre-read" id="toc-pre-read" class="nav-link active" data-scroll-target="#pre-read">Pre-read</a></li>
   <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
+  <li><a href="#code-you-can-copy" id="toc-code-you-can-copy" class="nav-link" data-scroll-target="#code-you-can-copy">Code You Can Copy</a>
+  <ul class="collapse">
+  <li><a href="#when-a-single-variable-is-enough-and-when-it-stops-being-enough" id="toc-when-a-single-variable-is-enough-and-when-it-stops-being-enough" class="nav-link" data-scroll-target="#when-a-single-variable-is-enough-and-when-it-stops-being-enough">1 · When a single variable is enough — and when it stops being enough</a></li>
+  <li><a href="#the-data-two-arrays-that-move-together" id="toc-the-data-two-arrays-that-move-together" class="nav-link" data-scroll-target="#the-data-two-arrays-that-move-together">2 · The data: two arrays that move together</a></li>
+  <li><a href="#did-the-account-ever-go-negative" id="toc-did-the-account-ever-go-negative" class="nav-link" data-scroll-target="#did-the-account-ever-go-negative">3 · Did the account <em>ever</em> go negative?</a></li>
+  <li><a href="#the-same-data-three-questions-three-loops" id="toc-the-same-data-three-questions-three-loops" class="nav-link" data-scroll-target="#the-same-data-three-questions-three-loops">4 · The same data, three questions, three loops</a></li>
+  <li><a href="#a-corrupted-record-and-why-continue-earns-its-keep" id="toc-a-corrupted-record-and-why-continue-earns-its-keep" class="nav-link" data-scroll-target="#a-corrupted-record-and-why-continue-earns-its-keep">5 · A corrupted record, and why <code>continue</code> earns its keep</a></li>
+  <li><a href="#the-best-so-far-pattern-and-why-you-keep-the-index" id="toc-the-best-so-far-pattern-and-why-you-keep-the-index" class="nav-link" data-scroll-target="#the-best-so-far-pattern-and-why-you-keep-the-index">6 · The best-so-far pattern, and why you keep the <em>index</em></a></li>
+  <li><a href="#neighbours-what-each-transaction-actually-did" id="toc-neighbours-what-each-transaction-actually-did" class="nav-link" data-scroll-target="#neighbours-what-each-transaction-actually-did">7 · Neighbours: what each transaction actually did</a></li>
+  <li><a href="#three-questions-that-sound-the-same-and-are-not" id="toc-three-questions-that-sound-the-same-and-are-not" class="nav-link" data-scroll-target="#three-questions-that-sound-the-same-and-are-not">8 · Three questions that sound the same and are not</a></li>
+  </ul></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
   </ul>
@@ -413,9 +459,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w07.html">W07: Selection Control</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w07.html">W07: Arrays — Remembering a History</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W07: Selection Control</h1>
+<h1 class="title">W07: Arrays — Remembering a History</h1>
 </div>
 
 
@@ -433,31 +479,233 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Dates:</strong> Mon Sep 14 &amp; Tue Sep 15, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 4 — Data and expressions; control structures (5 h)</p>
+<p><strong>Syllabus module:</strong> 5 — Arrays; one-dimensional and character arrays</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Mid-semester examinations begin Fri Sep 18.</strong> The mid-sem covers W01–W07.</p>
+<p><strong>Mid-semester examinations begin Fri Sep 18.</strong> The mid-sem covers W01–W07 — which now includes everything on this page.</p>
 </div>
 </div>
 </div>
 <section id="pre-read" class="level2">
 <h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
+<ul>
+<li>Last week’s <a href="../weeks/w06.html">Making Decisions</a> notes, especially <code>break</code> and <code>continue</code>. Today they stop being about counting and start being about <em>searching</em>.</li>
+<li>Skim <a href="../cs1100-cse-iitm-2021/slides/Lec15.pdf">Lec 15</a> — <em>Introduction to arrays</em> (Prof.&nbsp;Shweta Agrawal, IIT Madras).</li>
+</ul>
 </section>
 <section id="in-class" class="level2">
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
+<p><strong>Monday — why an array at all, and eight questions about one bank account.</strong></p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The sentence the whole week turns on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A variable remembers the current value. An array remembers a history.</strong></p>
+<p>Everything below follows from asking a question that a single number cannot answer.</p>
+</div>
+</div>
+</section>
+<section id="code-you-can-copy" class="level2">
+<h2 class="anchored" data-anchor-id="code-you-can-copy">Code You Can Copy</h2>
+<p>Every program here was compiled and run before it was printed; the outputs are what it actually produced. <strong>Predict each one before you run it.</strong></p>
+<section id="when-a-single-variable-is-enough-and-when-it-stops-being-enough" class="level3">
+<h3 class="anchored" data-anchor-id="when-a-single-variable-is-enough-and-when-it-stops-being-enough">1 · When a single variable is enough — and when it stops being enough</h3>
+<p>A bank account needs one number:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> balance <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>balance <span class="op">=</span> balance <span class="op">+</span> <span class="dv">2000</span><span class="op">;</span>      <span class="co">/* a deposit */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>balance <span class="op">=</span> balance <span class="op">-</span> <span class="dv">5000</span><span class="op">;</span>      <span class="co">/* a withdrawal */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That answers <em>“what is the balance now?”</em> perfectly, and it will answer it forever.</p>
+<p>Now ask a different question:</p>
 <ul>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec7.pdf">Lec 7</a> — Control flow; operators; single selection (<code>if</code>)</li>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec8.pdf">Lec 8</a> — Multiple selection (<code>switch</code>); more <code>if-then-else</code></li>
+<li><em>What was the balance five transactions ago?</em></li>
+<li><em>On which day was it lowest?</em></li>
+<li><em>Did the account ever go negative?</em></li>
+<li><em>Which single transaction took the most money out?</em></li>
 </ul>
+<p>Not one of these can be answered by the variable above, and no amount of cleverness changes that: <strong>the information has been thrown away.</strong> Each assignment destroyed the previous value. If you want to answer questions about the past, you must keep the past.</p>
+</section>
+<section id="the-data-two-arrays-that-move-together" class="level3">
+<h3 class="anchored" data-anchor-id="the-data-two-arrays-that-move-together">2 · The data: two arrays that move together</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> date<span class="op">[]</span>    <span class="op">=</span> <span class="op">{</span> <span class="dv">1</span><span class="op">,</span>     <span class="dv">3</span><span class="op">,</span>     <span class="dv">5</span><span class="op">,</span>    <span class="dv">8</span><span class="op">,</span>    <span class="dv">12</span><span class="op">,</span>    <span class="dv">15</span><span class="op">,</span>   <span class="dv">18</span><span class="op">,</span>   <span class="dv">22</span><span class="op">,</span>   <span class="dv">25</span><span class="op">,</span>   <span class="dv">29</span> <span class="op">};</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> balance<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">10000</span><span class="op">,</span> <span class="dv">12000</span><span class="op">,</span> <span class="dv">9500</span><span class="op">,</span> <span class="dv">7000</span><span class="op">,</span> <span class="dv">3000</span><span class="op">,</span> <span class="op">-</span><span class="dv">3000</span><span class="op">,</span> <span class="dv">2000</span><span class="op">,</span> <span class="dv">1500</span><span class="op">,</span> <span class="dv">9000</span><span class="op">,</span> <span class="dv">2500</span> <span class="op">};</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"Day </span><span class="sc">%2d</span><span class="st"> : balance = </span><span class="sc">%6d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">],</span> balance<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Day  1 : balance =  10000     Day 15 : balance =  -3000
+Day  3 : balance =  12000     Day 18 : balance =   2000
+Day  5 : balance =   9500     Day 22 : balance =   1500
+Day  8 : balance =   7000     Day 25 : balance =   9000
+Day 12 : balance =   3000     Day 29 : balance =   2500</code></pre>
+<p>These are <strong>parallel arrays</strong>: <code>date[i]</code> and <code>balance[i]</code> describe the <em>same</em> transaction. The index is what binds them. Nothing in C enforces that — it is a promise you are making, and it is your job to keep it.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>For an array of <code>n</code> elements the valid indices are <code>0 … n-1</code>. There is no <code>balance[n]</code>, and C will <strong>not</strong> stop you from asking for it. It will hand you whatever happens to be in that memory and carry on as though nothing were wrong.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="did-the-account-ever-go-negative" class="level3">
+<h3 class="anchored" data-anchor-id="did-the-account-ever-go-negative">3 · Did the account <em>ever</em> go negative?</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"went negative on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span>                       <span class="co">/* one example is enough */</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>went negative on day 15</code></pre>
+<p>The <code>break</code> is not an optimisation here, it is the <strong>meaning</strong> of the question. <em>“Did it ever?”</em> needs one witness; searching on after you have found it is answering a question nobody asked.</p>
+</section>
+<section id="the-same-data-three-questions-three-loops" class="level3">
+<h3 class="anchored" data-anchor-id="the-same-data-three-questions-three-loops">4 · The same data, three questions, three loops</h3>
+<p>This is the idea to take away from today:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* (a) find ALL of them  — no break */</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> printf<span class="op">(</span><span class="st">"negative on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">/* (b) find the FIRST — break on the first hit */</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span> printf<span class="op">(</span><span class="st">"first on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">]);</span> <span class="cf">break</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">/* (c) did it EVER? — a yes/no, so remember a flag */</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ever <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span> ever <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="cf">break</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span>ever <span class="op">?</span> <span class="st">"yes</span><span class="sc">\n</span><span class="st">"</span> <span class="op">:</span> <span class="st">"no</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Same array, same test, three different loops — because they are three different questions. <strong>The control structure follows from the question, never the other way round.</strong></p>
+</section>
+<section id="a-corrupted-record-and-why-continue-earns-its-keep" class="level3">
+<h3 class="anchored" data-anchor-id="a-corrupted-record-and-why-continue-earns-its-keep">5 · A corrupted record, and why <code>continue</code> earns its keep</h3>
+<p>Suppose the bank’s file marks an unreadable record with <code>-999999</code>, and day 22 is corrupt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> balance<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">10000</span><span class="op">,</span> <span class="dv">12000</span><span class="op">,</span> <span class="dv">9500</span><span class="op">,</span> <span class="dv">7000</span><span class="op">,</span> <span class="dv">3000</span><span class="op">,</span> <span class="op">-</span><span class="dv">3000</span><span class="op">,</span> <span class="dv">2000</span><span class="op">,</span> <span class="op">-</span><span class="dv">999999</span><span class="op">,</span> <span class="dv">9000</span><span class="op">,</span> <span class="dv">2500</span> <span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now find the lowest balance. Naively:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> low <span class="op">=</span> balance<span class="op">[</span><span class="dv">0</span><span class="op">],</span> at <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> low<span class="op">)</span> <span class="op">{</span> low <span class="op">=</span> balance<span class="op">[</span>i<span class="op">];</span> at <span class="op">=</span> i<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"lowest = </span><span class="sc">%d</span><span class="st"> on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> low<span class="op">,</span> date<span class="op">[</span>at<span class="op">]);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>lowest = -999999 on day 22</code></pre>
+<p>That is not a bank balance; it is a <strong>flag pretending to be data</strong>, and it has quietly become the answer. The fix is one line — refuse to process a record you do not trust:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> low <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> at <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">999999</span><span class="op">)</span> <span class="cf">continue</span><span class="op">;</span>      <span class="co">/* not data. skip it. */</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>at <span class="op">==</span> <span class="op">-</span><span class="dv">1</span> <span class="op">||</span> balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> low<span class="op">)</span> <span class="op">{</span> low <span class="op">=</span> balance<span class="op">[</span>i<span class="op">];</span> at <span class="op">=</span> i<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"lowest = </span><span class="sc">%d</span><span class="st"> on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> low<span class="op">,</span> date<span class="op">[</span>at<span class="op">]);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>lowest = -3000 on day 15</code></pre>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>continue</code> says <em>“this record is of no interest — the rest still are.”</em> <code>break</code> says <em>“there is no point looking at the rest.”</em> Choosing the wrong one here does not crash anything; it gives you a confident, wrong answer.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-best-so-far-pattern-and-why-you-keep-the-index" class="level3">
+<h3 class="anchored" data-anchor-id="the-best-so-far-pattern-and-why-you-keep-the-index">6 · The best-so-far pattern, and why you keep the <em>index</em></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> low <span class="op">=</span> balance<span class="op">[</span><span class="dv">0</span><span class="op">],</span> at <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> low<span class="op">)</span> <span class="op">{</span> low <span class="op">=</span> balance<span class="op">[</span>i<span class="op">];</span> at <span class="op">=</span> i<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"lowest = </span><span class="sc">%d</span><span class="st">, on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> low<span class="op">,</span> date<span class="op">[</span>at<span class="op">]);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>lowest = -3000, on day 15</code></pre>
+<p>Two details worth arguing about. The loop starts at <code>i = 1</code>, because element 0 is already the best-so-far — starting at 0 works too, but compares it with itself. And we remember <code>at</code>, not just <code>low</code>: <strong>the index is what lets us get back to <code>date[]</code>.</strong> An answer of “−3000” is not useful; “−3000, on day 15” is.</p>
+</section>
+<section id="neighbours-what-each-transaction-actually-did" class="level3">
+<h3 class="anchored" data-anchor-id="neighbours-what-each-transaction-actually-did">7 · Neighbours: what each transaction actually did</h3>
+<p>A balance history does not record the transactions — but it <em>implies</em> them:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> change <span class="op">=</span> balance<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> balance<span class="op">[</span>i<span class="op">-</span><span class="dv">1</span><span class="op">];</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>      <span class="op">(</span>change <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> printf<span class="op">(</span><span class="st">"Day </span><span class="sc">%2d</span><span class="st">: deposit    </span><span class="sc">%6d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">],</span>  change<span class="op">);</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>change <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> printf<span class="op">(</span><span class="st">"Day </span><span class="sc">%2d</span><span class="st">: withdrawal </span><span class="sc">%6d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">],</span> <span class="op">-</span>change<span class="op">);</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>                 printf<span class="op">(</span><span class="st">"Day </span><span class="sc">%2d</span><span class="st">: no change</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span>      date<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Day  3: deposit      2000      Day 18: deposit      5000
+Day  5: withdrawal   2500      Day 22: withdrawal    500
+Day  8: withdrawal   2500      Day 25: deposit      7500
+Day 12: withdrawal   4000      Day 29: withdrawal   6500
+Day 15: withdrawal   6000</code></pre>
+<p><strong>Why does this loop start at <code>i = 1</code>?</strong> Because it reads <code>balance[i-1]</code>, and at <code>i = 0</code> that is <code>balance[-1]</code> — outside the array. C will read it anyway. Whenever a loop looks at a <em>neighbour</em>, one end of the range has to give.</p>
+</section>
+<section id="three-questions-that-sound-the-same-and-are-not" class="level3">
+<h3 class="anchored" data-anchor-id="three-questions-that-sound-the-same-and-are-not">8 · Three questions that sound the same and are not</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* the biggest single drop */</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> drop <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> di <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> change <span class="op">=</span> balance<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> balance<span class="op">[</span>i<span class="op">-</span><span class="dv">1</span><span class="op">];</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>change <span class="op">&lt;</span> drop<span class="op">)</span> <span class="op">{</span> drop <span class="op">=</span> change<span class="op">;</span> di <span class="op">=</span> i<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>di <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> printf<span class="op">(</span><span class="st">"largest drop: </span><span class="sc">%d</span><span class="st"> on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">-</span>drop<span class="op">,</span> date<span class="op">[</span>di<span class="op">]);</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* every drop over 5000 — worth a look */</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> balance<span class="op">[</span>i<span class="op">-</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;</span> <span class="op">-</span><span class="dv">5000</span><span class="op">)</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"large debit on day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* over 5000 AND it left the account overdrawn */</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>balance<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> balance<span class="op">[</span>i<span class="op">-</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;</span> <span class="op">-</span><span class="dv">5000</span> <span class="op">&amp;&amp;</span> balance<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"large debit that overdrew the account: day </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> date<span class="op">[</span>i<span class="op">]);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>largest drop: 6500 on day 29
+large debit on day 15
+large debit on day 29
+large debit that overdrew the account: day 15</code></pre>
+<p>Look at what the three answers actually are. <strong>The largest drop is on day 29 — and it is not the one that matters.</strong> Day 15 is the transaction that overdrew the account. “Biggest” and “worst” are different questions, and the <code>&amp;&amp;</code> is what separates them.</p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Now run the same three loops on the corrupted array from §5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One record — day 22, holding <code>-999999</code> — and the output becomes:</p>
+<pre><code>largest drop: 1001999 on day 22
+large debit on day 15
+large debit on day 22
+large debit on day 29
+large debit that overdrew the account: day 15
+large debit that overdrew the account: day 22</code></pre>
+<p>Every one of the three answers is now wrong, and two of them are wrong in a way that looks entirely plausible if you do not know the data. In §5 we fixed the minimum by putting a <code>continue</code> in <em>that</em> loop — but here are three more loops, each of which would need its own.</p>
+<p><strong>That is the wrong place to fix it.</strong> A record you cannot trust should be dealt with once, before any analysis runs, not re-excluded in every loop that ever touches the array. Ask yourself where that “once” should live — and note that you do not yet have the tool to express it cleanly. You will, in Lab 07.</p>
+</div>
+</div>
+</section>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<ul>
+<li><strong>Type and run all eight.</strong> Where the machine disagrees with your prediction, find the rule you misapplied.</li>
+<li><strong>Answer with an array what you cannot answer without one:</strong> what was the <em>average</em> balance over the month? And the average of the <em>changes</em> — can you predict that answer before computing it?</li>
+<li><strong>Break it on purpose:</strong> change a loop bound to <code>i &lt;= n</code> and describe what you get. Then explain why it did not crash.</li>
+<li><strong>The corrupted record again:</strong> §5 skipped it when finding the minimum. What does §7 do with it? Is skipping the right answer there too, or is something else needed?</li>
+<li><strong>A question we have not asked:</strong> on how many days was the balance above its own monthly average? Note that this one needs <strong>two</strong> passes over the array. Why can it not be done in one?</li>
+</ul>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
