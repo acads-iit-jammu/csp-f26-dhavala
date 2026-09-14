@@ -60,9 +60,7 @@ From the [IIT Jammu academic calendar for 1^st^ year UG students, Semester 2026-
 : {tbl-colwidths="[70,30]"}
 
 The solutions restate every question, so you can re-attempt the paper before reading the
-answer. One note on wording: question C2(c) calls wrapping *below* the most negative value
-**underflow**, which is this course's usage; most architecture textbooks call the same event
-**negative overflow**. If you wrote that, you were right.
+answer.
 
 ## Weekly Plan (Lectures)
 
