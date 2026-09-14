@@ -164,7 +164,7 @@
     "href": "labs.html#lab-schedule",
     "title": "Labs",
     "section": "",
-    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 25\nSep 2\nSolid ground — consolidation: types, operators, precedence, integer vs. real division\n1\n\n\n4\nSep 1\nSep 9\nLoops: for, while and do-while, and converting between them\n5, 6\n\n\n5\nSep 8\nSep 16\nDecisions: if/else, else-if ladders, switch, and break / continue\n2\n\n\n6\nSep 15\nSep 30\nLoops and arrays: nested loops and patterns, 1-D and 2-D arrays, break/continue one storey up\n3, 5, 6\n\n\n7\nSep 29\nOct 7\nFunctions and recursion\n7\n\n\n8\nOct 6\nOct 14\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 13\nOct 21\nFile handling\n8\n\n\n10\nOct 27\nOct 28\nError handling\n9\n\n\n11\nNov 3\nNov 4\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 17\nNov 18\nProblem solving II\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 12 sessions = 24 hours. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (for, while and do-while are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.",
+    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 25\nSep 2\nSolid ground — consolidation: types, operators, precedence, integer vs. real division\n1\n\n\n4\nSep 1\nSep 9\nLoops: for, while and do-while, and converting between them\n5, 6\n\n\n5\nSep 8\nSep 16\nDecisions: if/else, else-if ladders, switch, and break / continue\n2\n\n\n6\nSep 15\nSep 30\nLoops and arrays: 1-D arrays, traversal and search, nested loops and patterns\n3, 5, 6\n\n\n7\nSep 29\nOct 7\nFunctions and recursion\n7\n\n\n8\nOct 6\nOct 14\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 13\nOct 21\nFile handling\n8\n\n\n10\nOct 27\nOct 28\nError handling\n9\n\n\n11\nNov 3\nNov 4\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 17\nNov 18\nProblem solving II\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 12 sessions = 24 hours. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (for, while and do-while are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.",
     "crumbs": [
       "Labs"
     ]
@@ -1579,29 +1579,106 @@
     "href": "labsheets/lab06.html",
     "title": "Lab 06: Loops & Arrays",
     "section": "",
-    "text": "Pre-Lab\nSyllabus practical modules: 3, 5 and 6 — nested loops and patterns, and 1-D / 2-D arrays\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
+    "text": "The one sentence to leave with\nLab pack: lab06.tar.gz — pre-placed on lab machines, downloadable for home practice.\nSyllabus practical modules: 3, 5 and 6 — lists, and the loops that walk them\nEvaluation: Graded — equal weight within the 20% lab component. Only the exercises carry marks: five fill-in-the-blank programs (5 marks each) and five checked problems (10 marks each). The ten drills are not scored — they are how you find out what you have wrong before it costs you. Plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nAn index is an offset, not an ordinal. Five of today’s ten problems report a day number, and every one of them is marked on getting that +1 right — at the first day, at the last day, and everywhere between.",
     "crumbs": [
       "Lab Sheets",
       "Lab 06: Loops & Arrays"
     ]
   },
   {
-    "objectID": "labsheets/lab06.html#exercises",
-    "href": "labsheets/lab06.html#exercises",
+    "objectID": "labsheets/lab06.html#the-one-sentence-to-leave-with",
+    "href": "labsheets/lab06.html#the-one-sentence-to-leave-with",
     "title": "Lab 06: Loops & Arrays",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "section": "",
+    "text": "rain[5] is day 6.",
     "crumbs": [
       "Lab Sheets",
       "Lab 06: Loops & Arrays"
     ]
   },
   {
-    "objectID": "labsheets/lab06.html#submission",
-    "href": "labsheets/lab06.html#submission",
+    "objectID": "labsheets/lab06.html#the-data-is-the-same-all-afternoon",
+    "href": "labsheets/lab06.html#the-data-is-the-same-all-afternoon",
     "title": "Lab 06: Loops & Arrays",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "section": "The data is the same all afternoon",
+    "text": "The data is the same all afternoon\nEvery array problem today reads the same fourteen days of rainfall, already written into your starter file:\n\n\n\nday\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n\n\n\n\nmm\n0\n12\n0\n0\n5\n30\n8\n0\n0\n0\n2\n0\n18\n4\n\n\n\nint rain[14] = { 0, 12, 0, 0, 5, 30, 8, 0, 0, 0, 2, 0, 18, 4 };   /* given - do not change */\nWhat changes from problem to problem is the question, and it arrives on standard input. The checker does not change the month; it changes what it asks about the month — so memorising the one worked example in your starter will not get you through, because the next input is a different question about the same data.\nThree problems — b1, b2 and e4 — use no rainfall at all. They are last week’s loops, and they are here on purpose.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 06: Loops & Arrays"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab06.html#act-0-land-10-min",
+    "href": "labsheets/lab06.html#act-0-land-10-min",
+    "title": "Lab 06: Loops & Arrays",
+    "section": "Act 0 · Land (10 min)",
+    "text": "Act 0 · Land (10 min)\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab06.tar.gz\ntar xzf lab06.tar.gz\ncd lab06\n./install.sh\nThen start the recorder:\nscript session.txt\n\n\n\n\n\n\nDo not go further until your prompt shows [lab06 OK ...]. If it does not, run ./where.sh — it changes nothing, and prints the exact line to copy.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 06: Loops & Arrays"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab06.html#act-1-drills-predict-then-run-20-min-not-marked",
+    "href": "labsheets/lab06.html#act-1-drills-predict-then-run-20-min-not-marked",
+    "title": "Lab 06: Loops & Arrays",
+    "section": "Act 1 · Drills — predict, then run (20 min, not marked)",
+    "text": "Act 1 · Drills — predict, then run (20 min, not marked)\n./drill.sh --all\n\n\n\n\n\n\n\nDrills\nTerritory\n\n\n\n\nd01–d03\nwhere an array starts and stops — and rain[6] against day 6, side by side\n\n\nd04–d06\na search that finds nothing · a best-so-far started badly · a counter that never resets\n\n\nd07–d09\nnested loops: how many stars in total, how many on the last row, and how many places a window fits\n\n\nd10\n&gt; against &gt;=, on a value that sits exactly on the line\n\n\n\n\n\n\n\n\n\nd03, d05 and d06 are each a graded problem in miniature. d03 is the +1 that b4, e1, e3 and e5 all hang on. d05 is b4’s initialiser. d06 is e3 — the whole of it, ten marks, five lines long. Predict all three on paper before you run them.\n\n\n\nThese carry no marks at all. A wrong prediction costs you nothing — which is exactly why you should write it down before pressing Enter.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 06: Loops & Arrays"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab06.html#act-2-fill-the-blanks-20-min-5-marks-each",
+    "href": "labsheets/lab06.html#act-2-fill-the-blanks-20-min-5-marks-each",
+    "title": "Lab 06: Loops & Arrays",
+    "section": "Act 2 · Fill the blanks (20 min · 5 marks each)",
+    "text": "Act 2 · Fill the blanks (20 min · 5 marks each)\n\n\n\n\n\n\n\nFile\nWhat it does\n\n\n\n\nb1_sum.c\n1 + 2 + … + n — no array at all; last week’s machinery, as a warm-up\n\n\nb2_triangle.c\na right triangle of stars — nested loops, the inner limit depending on the outer counter\n\n\nb3_total.c\ntotal rainfall over the first k days — the loop, and its limit\n\n\nb4_wettest.c\nthe wettest of the first k days — best-so-far, keeping the day as well as the value\n\n\nb5_dry.c\nhow many of the first k days were dry — counting\n\n\n\n\n\n\n\n\n\nb3, b4 and b5 are the same walk down the same array, three times. Only the thing you accumulate changes: a running sum, a best-so-far with its position, a count. If you find yourself writing three unrelated programs, stop and look again — that similarity is this week’s idea, and you will be asked about it in the viva.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 06: Loops & Arrays"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab06.html#act-3-the-checked-five-60-min-solo-10-marks-each",
+    "href": "labsheets/lab06.html#act-3-the-checked-five-60-min-solo-10-marks-each",
+    "title": "Lab 06: Loops & Arrays",
+    "section": "Act 3 · The checked five (60 min, solo · 10 marks each)",
+    "text": "Act 3 · The checked five (60 min, solo · 10 marks each)\n\n\n\n\n\n\n\n\nProblem\nTask\nFinal line ends with exactly\n\n\n\n\ne1.c\nthe first day it rained exactly R mm — or none did\nday=&lt;D&gt; or never\n\n\ne2.c\nhow many days were strictly wetter than T\ncount=&lt;N&gt;\n\n\ne3.c\nthe longest unbroken dry spell\nlongest=&lt;L&gt; ending=&lt;D&gt;\n\n\ne4.c\na hollow square border, n by n\n(the whole grid is compared)\n\n\ne5.c\nthe wettest stretch of w consecutive days\nstart=&lt;S&gt; total=&lt;T&gt;\n\n\n\ne1 — a search with a not-found case, which is where most searches go wrong. A loop that prints nothing when it finds nothing has not answered the question: never is the answer, and your program has to tell “not found yet” apart from “not there at all”. Try R = 6. Then stop at the first match — the spec says first, and a loop that keeps going reports the last.\ne2 — read the boundary before you write the loop. T = 30 is the wettest day there is, and nothing is strictly greater than it, so the answer is 0, not 1. The whole problem is the difference between &gt; and &gt;=, which is drill d10 with marks attached.\ne3 — this is the problem the whole lab has been pointing at. You need two counters: how long the run you are currently in is, and how long the best run so far was. A day that is too wet does not merely fail to count — it ends the run, and the current counter has to go back to zero. Leave that out and your program reports the total number of dry days: 7 where the true answer is 3. That is drill d06, and it costs ten marks here.\ne4 — nested loops, no array. A cell (i, j) is on the border when its distance to the nearest edge is zero. There are four edges, so there are four distances: i, j, n-1-i and n-1-j. One predicate draws the whole picture.\ne5 — a window that slides. The outer loop chooses where the window starts, the inner one adds up the w days from there. Settle two questions before you write it: how far can the window start and still fit inside the month, and — again — which day number does index i stand for?\nw can be anything from 2 up to 13, so a window can be nearly the whole month. That is deliberate: a loop that stops one position too early still looks right on a short window and is wrong on a long one. And when two stretches tie on total, the spec says report the earliest — which happens for more than one w, so it is not a detail you can skip.\nHow checking works — ./check.sh e1 compiles your source and runs it on the public examples and on fresh random inputs drawn from the GIVEN. A program that memorises an example fails the next draw.\n\n\n\n\n\n\nb2 and e4 are compared over the whole output, not just the last line, because the answer is a shape. Spacing at the end of a line is ignored; a missing row is not. If yours looks right but fails, run ./check.sh e4 and read the difference rather than squinting at the screen.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 06: Loops & Arrays"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab06.html#act-4-check-fix-bundle-10-min",
+    "href": "labsheets/lab06.html#act-4-check-fix-bundle-10-min",
+    "title": "Lab 06: Loops & Arrays",
+    "section": "Act 4 · Check, fix, bundle (10 min)",
+    "text": "Act 4 · Check, fix, bundle (10 min)\n./check.sh\nIt prints your marks, problem by problem:\n    b4  3/5 vectors    3 of  5 marks\n    e1  5/7 vectors    7 of 10 marks\n    e3  0/6 vectors    0 of 10 marks\n    ---------------------------------------------\n                      58 of 75 marks\nMarks are partial — every vector you pass earns its share, so fixing one failing case is always worth doing, right up to the last minute. Treat the total as an estimate: the random vectors are drawn fresh on every run, so it can move a mark or two.\nFix, re-check, repeat. Then — green or time-up:\n./check.sh --bundle\nCarry ../lab06_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz out with you (Moodle + email yourself).",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 06: Loops & Arrays"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab06.html#stretch-fast-finishers",
+    "href": "labsheets/lab06.html#stretch-fast-finishers",
+    "title": "Lab 06: Loops & Arrays",
+    "section": "Stretch (fast finishers)",
+    "text": "Stretch (fast finishers)\n\nThe same month, a harder question. Which pair of days, not necessarily adjacent, has the largest total? Your e5 slides a fixed window; this one does not. How many pairs are there, and what does that cost you as the month gets longer?\ne3 in one pass, reporting all ties. Your e3 reports the first run to reach the maximum length. Change it to report every run of that length. What do you now have to do that a single pass made awkward — and can you still do it in one?\nBreak b4 on purpose. Find a value of k for which a max initialised to 0 gives an answer that looks plausible and is wrong. Then say in one sentence why -1 is not a real fix either, and what is.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 06: Loops & Arrays"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab06.html#reflect",
+    "href": "labsheets/lab06.html#reflect",
+    "title": "Lab 06: Loops & Arrays",
+    "section": "Reflect",
+    "text": "Reflect\n✍️ Into notes/answers.txt: drill d06 counted to 5 when the longest run was 3. In one sentence — what event should have put that counter back to zero, and where in your e3 does it happen?",
     "crumbs": [
       "Lab Sheets",
       "Lab 06: Loops & Arrays"

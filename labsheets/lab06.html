@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -403,9 +438,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#the-one-sentence-to-leave-with" id="toc-the-one-sentence-to-leave-with" class="nav-link active" data-scroll-target="#the-one-sentence-to-leave-with">The one sentence to leave with</a></li>
+  <li><a href="#the-data-is-the-same-all-afternoon" id="toc-the-data-is-the-same-all-afternoon" class="nav-link" data-scroll-target="#the-data-is-the-same-all-afternoon">The data is the same all afternoon</a></li>
+  <li><a href="#act-0-land-10-min" id="toc-act-0-land-10-min" class="nav-link" data-scroll-target="#act-0-land-10-min">Act 0 · Land (10 min)</a></li>
+  <li><a href="#act-1-drills-predict-then-run-20-min-not-marked" id="toc-act-1-drills-predict-then-run-20-min-not-marked" class="nav-link" data-scroll-target="#act-1-drills-predict-then-run-20-min-not-marked">Act 1 · Drills — predict, then run (20 min, not marked)</a></li>
+  <li><a href="#act-2-fill-the-blanks-20-min-5-marks-each" id="toc-act-2-fill-the-blanks-20-min-5-marks-each" class="nav-link" data-scroll-target="#act-2-fill-the-blanks-20-min-5-marks-each">Act 2 · Fill the blanks (20 min · 5 marks each)</a></li>
+  <li><a href="#act-3-the-checked-five-60-min-solo-10-marks-each" id="toc-act-3-the-checked-five-60-min-solo-10-marks-each" class="nav-link" data-scroll-target="#act-3-the-checked-five-60-min-solo-10-marks-each">Act 3 · The checked five (60 min, solo · 10 marks each)</a></li>
+  <li><a href="#act-4-check-fix-bundle-10-min" id="toc-act-4-check-fix-bundle-10-min" class="nav-link" data-scroll-target="#act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</a></li>
+  <li><a href="#stretch-fast-finishers" id="toc-stretch-fast-finishers" class="nav-link" data-scroll-target="#stretch-fast-finishers">Stretch (fast finishers)</a></li>
+  <li><a href="#reflect" id="toc-reflect" class="nav-link" data-scroll-target="#reflect">Reflect</a></li>
   </ul>
 </nav>
     </div>
@@ -432,40 +473,300 @@ ul.task-list li input[type="checkbox"] {
 
 
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>Electrical</th>
-<th>Mechanical &amp; Materials</th>
+<th>Mechanical</th>
+<th>Metallurgy &amp; Materials</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Date</strong></td>
-<td>Tue Sep 15, 2026</td>
-<td>Wed Sep 30, 2026</td>
+<td>Tue Sep 15</td>
+<td>Wed Sep 30</td>
+<td>Wed Sep 30</td>
 </tr>
 <tr class="even">
-<td><strong>Time</strong></td>
-<td>2:00–4:00 pm</td>
-<td>2:00–4:00 pm</td>
+<td><strong>Time &amp; Room</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4021</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical modules:</strong> 3, 5 and 6 — nested loops and patterns, and 1-D / 2-D arrays</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
+<p><strong>Lab pack:</strong> <a href="../labs/lab06.tar.gz">lab06.tar.gz</a> — pre-placed on lab machines, downloadable for home practice.</p>
+<p><strong>Syllabus practical modules:</strong> 3, 5 and 6 — lists, and the loops that walk them</p>
+<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component. <strong>Only the exercises carry marks</strong>: five fill-in-the-blank programs (<strong>5 marks each</strong>) and five checked problems (<strong>10 marks each</strong>). The ten drills are <strong>not scored</strong> — they are how you find out what you have wrong before it costs you. Plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.</p>
 <p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The <a href="../weeks/w07.html">Week 07 lecture notes</a> carry a dozen worked programs on arrays. They are your <strong>reference</strong>. They carry the <em>patterns</em> — a running total, a search that stops at the first hit, best-so-far keeping the index — but <strong>not a single program that answers one of the questions below</strong>. <code>b4</code> is the closest, and it still needs turning round, re-bounding and converting an index into a day. And one of them punishes copying outright: the notes’ search stops at the first hit and prints nothing otherwise, while <code>e1</code> is marked on the case where there <em>is</em> no hit. Read them for the technique, then write these yourself.</p>
+</div>
+</div>
+</div>
+<section id="the-one-sentence-to-leave-with" class="level2">
+<h2 class="anchored" data-anchor-id="the-one-sentence-to-leave-with">The one sentence to leave with</h2>
+<blockquote class="blockquote">
+<p><strong><code>rain[5]</code> is day 6.</strong></p>
+</blockquote>
+<p>An index is an offset, not an ordinal. Five of today’s ten problems report a <em>day number</em>, and every one of them is marked on getting that <code>+1</code> right — at the first day, at the last day, and everywhere between.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="the-data-is-the-same-all-afternoon" class="level2">
+<h2 class="anchored" data-anchor-id="the-data-is-the-same-all-afternoon">The data is the same all afternoon</h2>
+<p>Every array problem today reads the <strong>same fourteen days of rainfall</strong>, already written into your starter file:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>day</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>mm</strong></td>
+<td>0</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>30</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>18</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> rain<span class="op">[</span><span class="dv">14</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">18</span><span class="op">,</span> <span class="dv">4</span> <span class="op">};</span>   <span class="co">/* given - do not change */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>What changes from problem to problem is the <strong>question</strong>, and it arrives on standard input. The checker does not change the month; it changes what it asks about the month — so memorising the one worked example in your starter will not get you through, because the next input is a different question about the same data.</p>
+<p>Three problems — <code>b1</code>, <code>b2</code> and <code>e4</code> — use no rainfall at all. They are last week’s loops, and they are here on purpose.</p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="act-0-land-10-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-0-land-10-min">Act 0 · Land (10 min)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab06.tar.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf lab06.tar.gz</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab06</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./install.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then start the recorder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Do not go further until your prompt shows <code>[lab06 OK ...]</code>. If it does not, run <code>./where.sh</code> — it changes nothing, and prints the exact line to copy.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-1-drills-predict-then-run-20-min-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-drills-predict-then-run-20-min-not-marked">Act 1 · Drills — predict, then run (20 min, not marked)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Drills</th>
+<th>Territory</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d01</code>–<code>d03</code></td>
+<td>where an array starts and stops — and <strong><code>rain[6]</code> against day 6, side by side</strong></td>
+</tr>
+<tr class="even">
+<td><code>d04</code>–<code>d06</code></td>
+<td>a search that finds nothing · a best-so-far started badly · <strong>a counter that never resets</strong></td>
+</tr>
+<tr class="odd">
+<td><code>d07</code>–<code>d09</code></td>
+<td>nested loops: how many stars in total, how many on the last row, and how many places a window fits</td>
+</tr>
+<tr class="even">
+<td><code>d10</code></td>
+<td><code>&gt;</code> against <code>&gt;=</code>, on a value that sits exactly on the line</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong><code>d03</code>, <code>d05</code> and <code>d06</code> are each a graded problem in miniature.</strong> <code>d03</code> is the <code>+1</code> that <code>b4</code>, <code>e1</code>, <code>e3</code> and <code>e5</code> all hang on. <code>d05</code> is <code>b4</code>’s initialiser. <code>d06</code> is <code>e3</code> — the whole of it, ten marks, five lines long. Predict all three on paper before you run them.</p>
+</div>
+</div>
+</div>
+<p>These carry <strong>no marks at all</strong>. A wrong prediction costs you nothing — which is exactly why you should write it down before pressing Enter.</p>
+</section>
+<section id="act-2-fill-the-blanks-20-min-5-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-2-fill-the-blanks-20-min-5-marks-each">Act 2 · Fill the blanks (20 min · 5 marks each)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>b1_sum.c</code></td>
+<td><code>1 + 2 + … + n</code> — no array at all; last week’s machinery, as a warm-up</td>
+</tr>
+<tr class="even">
+<td><code>b2_triangle.c</code></td>
+<td>a right triangle of stars — <strong>nested</strong> loops, the inner limit depending on the outer counter</td>
+</tr>
+<tr class="odd">
+<td><code>b3_total.c</code></td>
+<td>total rainfall over the first <code>k</code> days — the loop, and its <strong>limit</strong></td>
+</tr>
+<tr class="even">
+<td><code>b4_wettest.c</code></td>
+<td>the wettest of the first <code>k</code> days — best-so-far, <strong>keeping the day as well as the value</strong></td>
+</tr>
+<tr class="odd">
+<td><code>b5_dry.c</code></td>
+<td>how many of the first <code>k</code> days were dry — counting</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>b3</code>, <code>b4</code> and <code>b5</code> are the <strong>same walk down the same array</strong>, three times. Only the thing you accumulate changes: a running sum, a best-so-far with its position, a count. If you find yourself writing three unrelated programs, stop and look again — that similarity <em>is</em> this week’s idea, and you will be asked about it in the viva.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-3-the-checked-five-60-min-solo-10-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-3-the-checked-five-60-min-solo-10-marks-each">Act 3 · The checked five (60 min, solo · 10 marks each)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Task</th>
+<th>Final line ends with exactly</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>e1.c</code></td>
+<td>the <strong>first</strong> day it rained exactly <code>R</code> mm — or none did</td>
+<td><code>day=&lt;D&gt;</code> or <code>never</code></td>
+</tr>
+<tr class="even">
+<td><code>e2.c</code></td>
+<td>how many days were <strong>strictly</strong> wetter than <code>T</code></td>
+<td><code>count=&lt;N&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>e3.c</code></td>
+<td>the longest unbroken <strong>dry spell</strong></td>
+<td><code>longest=&lt;L&gt; ending=&lt;D&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>e4.c</code></td>
+<td>a hollow square border, <code>n</code> by <code>n</code></td>
+<td><em>(the whole grid is compared)</em></td>
+</tr>
+<tr class="odd">
+<td><code>e5.c</code></td>
+<td>the wettest stretch of <code>w</code> consecutive days</td>
+<td><code>start=&lt;S&gt; total=&lt;T&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>e1</code> — a search with a <strong>not-found</strong> case, which is where most searches go wrong. A loop that prints nothing when it finds nothing has not answered the question: <code>never</code> <strong>is</strong> the answer, and your program has to tell “not found yet” apart from “not there at all”. Try <code>R = 6</code>. Then stop at the <em>first</em> match — the spec says first, and a loop that keeps going reports the last.</p>
+<p><code>e2</code> — read the boundary before you write the loop. <code>T = 30</code> is the wettest day there is, and nothing is <em>strictly</em> greater than it, so the answer is <code>0</code>, not <code>1</code>. The whole problem is the difference between <code>&gt;</code> and <code>&gt;=</code>, which is drill <code>d10</code> with marks attached.</p>
+<p><code>e3</code> — <strong>this is the problem the whole lab has been pointing at.</strong> You need two counters: how long the run you are <em>currently</em> in is, and how long the best run <em>so far</em> was. A day that is too wet does not merely fail to count — it <strong>ends the run</strong>, and the current counter has to go back to zero. Leave that out and your program reports the <em>total</em> number of dry days: <code>7</code> where the true answer is <code>3</code>. That is drill <code>d06</code>, and it costs ten marks here.</p>
+<p><code>e4</code> — nested loops, no array. A cell <code>(i, j)</code> is on the border when its distance to the <strong>nearest</strong> edge is zero. There are four edges, so there are four distances: <code>i</code>, <code>j</code>, <code>n-1-i</code> and <code>n-1-j</code>. One predicate draws the whole picture.</p>
+<p><code>e5</code> — a window that slides. The outer loop chooses where the window starts, the inner one adds up the <code>w</code> days from there. Settle two questions <em>before</em> you write it: how far can the window start and still fit inside the month, and — again — which day number does index <code>i</code> stand for?</p>
+<p><code>w</code> can be anything from 2 up to <strong>13</strong>, so a window can be nearly the whole month. That is deliberate: a loop that stops one position too early still looks right on a short window and is wrong on a long one. And when two stretches tie on total, the spec says report the <strong>earliest</strong> — which happens for more than one <code>w</code>, so it is not a detail you can skip.</p>
+<p><strong>How checking works</strong> — <code>./check.sh e1</code> compiles <em>your source</em> and runs it on the public examples <strong>and on fresh random inputs drawn from the GIVEN</strong>. A program that memorises an example fails the next draw.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>b2</code> and <code>e4</code> are compared over the <strong>whole output</strong>, not just the last line, because the answer is a shape. Spacing at the end of a line is ignored; a missing row is not. If yours looks right but fails, run <code>./check.sh e4</code> and read the difference rather than squinting at the screen.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-4-check-fix-bundle-10-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It prints <strong>your marks, problem by problem</strong>:</p>
+<pre><code>    b4  3/5 vectors    3 of  5 marks
+    e1  5/7 vectors    7 of 10 marks
+    e3  0/6 vectors    0 of 10 marks
+    ---------------------------------------------
+                      58 of 75 marks</code></pre>
+<p>Marks are <strong>partial</strong> — every vector you pass earns its share, so fixing one failing case is always worth doing, right up to the last minute. Treat the total as an estimate: the random vectors are drawn fresh on every run, so it can move a mark or two.</p>
+<p>Fix, re-check, repeat. Then — green or time-up:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Carry <code>../lab06_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz</code> out with you (Moodle + email yourself).</p>
+</section>
+<section id="stretch-fast-finishers" class="level2">
+<h2 class="anchored" data-anchor-id="stretch-fast-finishers">Stretch (fast finishers)</h2>
+<ul>
+<li><strong>The same month, a harder question.</strong> Which <em>pair</em> of days, not necessarily adjacent, has the largest total? Your <code>e5</code> slides a fixed window; this one does not. How many pairs are there, and what does that cost you as the month gets longer?</li>
+<li><strong><code>e3</code> in one pass, reporting all ties.</strong> Your <code>e3</code> reports the first run to reach the maximum length. Change it to report <em>every</em> run of that length. What do you now have to do that a single pass made awkward — and can you still do it in one?</li>
+<li><strong>Break <code>b4</code> on purpose.</strong> Find a value of <code>k</code> for which a <code>max</code> initialised to <code>0</code> gives an answer that <em>looks</em> plausible and is wrong. Then say in one sentence why <code>-1</code> is not a real fix either, and what is.</li>
+</ul>
+</section>
+<section id="reflect" class="level2">
+<h2 class="anchored" data-anchor-id="reflect">Reflect</h2>
+<p>✍️ Into <code>notes/answers.txt</code>: drill <code>d06</code> counted to 5 when the longest run was 3. In one sentence — what event should have put that counter back to zero, and where in your <code>e3</code> does it happen?</p>
 
 
 </section>
