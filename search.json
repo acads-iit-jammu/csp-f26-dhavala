@@ -74,7 +74,7 @@
     "href": "course.html#assessment",
     "title": "Course",
     "section": "Assessment",
-    "text": "Assessment\n\n\n\n\n\n\n\nComponent\nWeight\n\n\n\n\nClass Test-1\n10%\n\n\nClass Test-2\n10%\n\n\nMid-Semester Examination\n20%\n\n\nEnd-Semester Examination\n30%\n\n\nHackathon\n10%\n\n\nRegular lab evaluation\n20%\n\n\nTotal\n100%\n\n\n\n\nLab evaluation: Lab 1 (setup) is not graded. Labs 2 onwards carry equal weight, totalling 20%.\nHackathon: details (format and date) will be announced in class and on this page.\n\n\nPast papers\n\n\n\n\n\n\n\nPaper\nSolutions\n\n\n\n\nClass Test 1 (Aug 2026) — number systems, complements, overflow, the compile model\n📕 Worked solutions\n\n\n\nThe solutions restate every question, so you can re-attempt the paper before reading the answer. One note on wording: question C2(c) calls wrapping below the most negative value underflow, which is this course’s usage; most architecture textbooks call the same event negative overflow. If you wrote that, you were right.",
+    "text": "Assessment\n\n\n\n\n\n\n\nComponent\nWeight\n\n\n\n\nClass Test-1\n10%\n\n\nClass Test-2\n10%\n\n\nMid-Semester Examination\n20%\n\n\nEnd-Semester Examination\n30%\n\n\nHackathon\n10%\n\n\nRegular lab evaluation\n20%\n\n\nTotal\n100%\n\n\n\n\nLab evaluation: Lab 1 (setup) is not graded. Labs 2 onwards carry equal weight, totalling 20%.\nHackathon: details (format and date) will be announced in class and on this page.\n\n\nPast papers\n\n\n\n\n\n\n\nPaper\nSolutions\n\n\n\n\nClass Test 1 (Aug 2026) — number systems, complements, overflow, the compile model\n📕 Worked solutions\n\n\n\nThe solutions restate every question, so you can re-attempt the paper before reading the answer.",
     "crumbs": [
       "Course"
     ]
