@@ -5,7 +5,9 @@
 **Syllabus module:** 2 wrap-up (number systems & arithmetic) · 3 begins (C program structure)
 
 ::: {.callout-important}
-**Class Test 1 window opens Wednesday Aug 19** (through Aug 25). Scope: Weeks 1–3 — what a computer is, number systems, complements & overflow. Exact date/time announced in class and here.
+**Class Test 1** was held in the Aug 19–25 window. Scope: Weeks 1–3 — what a computer is, number systems, complements & overflow.
+
+📕 **[Worked solutions are now posted](../materials/ct1-solutions.pdf)** — every question restated with its answer and the reasoning. Useful revision for the mid-semester examination (Sep 18–23), which covers W01–W07.
 :::
 
 ## Pre-read

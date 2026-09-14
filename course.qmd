@@ -51,6 +51,19 @@ From the [IIT Jammu academic calendar for 1^st^ year UG students, Semester 2026-
 - **Lab evaluation:** Lab 1 (setup) is not graded. Labs 2 onwards carry equal weight, totalling 20%.
 - **Hackathon:** details (format and date) will be announced in class and on this page.
 
+### Past papers
+
+| Paper | Solutions |
+|---|---|
+| Class Test 1 (Aug 2026) — number systems, complements, overflow, the compile model | 📕 [**Worked solutions**](materials/ct1-solutions.pdf) |
+
+: {tbl-colwidths="[70,30]"}
+
+The solutions restate every question, so you can re-attempt the paper before reading the
+answer. One note on wording: question C2(c) calls wrapping *below* the most negative value
+**underflow**, which is this course's usage; most architecture textbooks call the same event
+**negative overflow**. If you wrote that, you were right.
+
 ## Weekly Plan (Lectures)
 
 The plan below is **tentative** and will be adjusted as the semester progresses. Slides marked *Lec n* are from [CS1100, IIT Madras](./cs1100-cse-iitm-2021/index.qmd), reused with permission — see [acknowledgements](./index.qmd#acknowledgements). Additional notes will be posted as we go.
