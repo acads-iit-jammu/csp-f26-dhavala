@@ -4,6 +4,11 @@
 
 **Syllabus module:** 5 — Arrays; one-dimensional and character arrays
 
+::: {.callout-important}
+**Mid-semester examinations begin Fri Sep 18.** The mid-sem covers W01–W07 — which now
+includes everything on this page.
+:::
+
 ## Pre-read
 
 - Last week's [Making Decisions](w06.qmd) notes, especially `break` and `continue`. Today they stop being about counting and start being about *searching*.
