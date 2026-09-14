@@ -450,7 +450,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-best-so-far-pattern-and-why-you-keep-the-index" id="toc-the-best-so-far-pattern-and-why-you-keep-the-index" class="nav-link" data-scroll-target="#the-best-so-far-pattern-and-why-you-keep-the-index">6 · The best-so-far pattern, and why you keep the <em>index</em></a></li>
   <li><a href="#neighbours-what-each-transaction-actually-did" id="toc-neighbours-what-each-transaction-actually-did" class="nav-link" data-scroll-target="#neighbours-what-each-transaction-actually-did">7 · Neighbours: what each transaction actually did</a></li>
   <li><a href="#three-questions-that-sound-the-same-and-are-not" id="toc-three-questions-that-sound-the-same-and-are-not" class="nav-link" data-scroll-target="#three-questions-that-sound-the-same-and-are-not">8 · Three questions that sound the same and are not</a></li>
+  <li><a href="#why-a-second-index-and-not-a-fifth-array" id="toc-why-a-second-index-and-not-a-fifth-array" class="nav-link" data-scroll-target="#why-a-second-index-and-not-a-fifth-array">9 · Why a second index, and not a fifth array</a></li>
+  <li><a href="#which-array-holds-what-and-why-they-are-not-all-2-d" id="toc-which-array-holds-what-and-why-they-are-not-all-2-d" class="nav-link" data-scroll-target="#which-array-holds-what-and-why-they-are-not-all-2-d">10 · Which array holds what — and why they are not all 2-D</a></li>
+  <li><a href="#one-line-that-needs-both" id="toc-one-line-that-needs-both" class="nav-link" data-scroll-target="#one-line-that-needs-both">11 · One line that needs both</a></li>
   </ul></li>
+  <li><a href="#eight-words-that-cost-you-a-day" id="toc-eight-words-that-cost-you-a-day" class="nav-link" data-scroll-target="#eight-words-that-cost-you-a-day">Eight Words That Cost You a Day</a>
+  <ul class="collapse">
+  <li><a href="#which-sensor-is-the-hottest" id="toc-which-sensor-is-the-hottest" class="nav-link" data-scroll-target="#which-sensor-is-the-hottest">“Which sensor is the hottest?”</a></li>
+  <li><a href="#at-which-hour-was-the-rig-hottest" id="toc-at-which-hour-was-the-rig-hottest" class="nav-link" data-scroll-target="#at-which-hour-was-the-rig-hottest">“At which hour was the rig hottest?”</a></li>
+  <li><a href="#how-long-was-the-rig-above-230-c" id="toc-how-long-was-the-rig-above-230-c" class="nav-link" data-scroll-target="#how-long-was-the-rig-above-230-c">“How long was the rig above 230 °C?”</a></li>
+  <li><a href="#how-many-exceeded-the-rating" id="toc-how-many-exceeded-the-rating" class="nav-link" data-scroll-target="#how-many-exceeded-the-rating">“How many exceeded the rating?”</a></li>
+  </ul></li>
+  <li><a href="#what-a-number-means-is-not-in-the-number" id="toc-what-a-number-means-is-not-in-the-number" class="nav-link" data-scroll-target="#what-a-number-means-is-not-in-the-number">What a Number Means Is Not in the Number</a></li>
+  <li><a href="#questions-to-bring-back" id="toc-questions-to-bring-back" class="nav-link" data-scroll-target="#questions-to-bring-back">Questions to Bring Back</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
   </ul>
@@ -532,7 +544,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>Did the account ever go negative?</em></li>
 <li><em>Which single transaction took the most money out?</em></li>
 </ul>
-<p>Not one of these can be answered by the variable above, and no amount of cleverness changes that: <strong>the information has been thrown away.</strong> Each assignment destroyed the previous value. If you want to answer questions about the past, you must keep the past.</p>
+<p>Not one of these can be answered by the variable above. Each assignment destroyed the previous value, so the information is simply gone.</p>
+<p>But be precise about what would fix it, because “use an array” is not the only answer. If you knew the question <strong>in advance</strong>, you could carry a little extra as you went: a <code>lowest</code> and the day it happened, a <code>wentNegative</code> flag, a <code>previous</code> balance to compare against. Three of the four questions above fall to that, in one pass, with no array at all.</p>
+<p>The array earns its place the moment you <strong>do not know what you will be asked.</strong> Keep the history and every one of those questions — and the ones nobody has thought of yet — is still answerable. Throw it away and you are betting that you already know what will matter.</p>
 </section>
 <section id="the-data-two-arrays-that-move-together" class="level3">
 <h3 class="anchored" data-anchor-id="the-data-two-arrays-that-move-together">2 · The data: two arrays that move together</h3>
@@ -560,7 +574,7 @@ Day 12 : balance =   3000     Day 29 : balance =   2500</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>For an array of <code>n</code> elements the valid indices are <code>0 … n-1</code>. There is no <code>balance[n]</code>, and C will <strong>not</strong> stop you from asking for it. It will hand you whatever happens to be in that memory and carry on as though nothing were wrong.</p>
+<p>For an array of <code>n</code> elements the valid indices are <code>0 … n-1</code>. There is no <code>balance[n]</code>, and C will <strong>not</strong> stop you from asking for it. What happens then is <strong>undefined</strong> — not “you get whatever was in that memory”. The program may print rubbish, may crash, may behave differently once you compile with optimisation, and may appear to work for a year and then not. There is no rule you can rely on, which is exactly why the boundary is yours to keep.</p>
 </div>
 </div>
 </div>
@@ -574,7 +588,7 @@ Day 12 : balance =   3000     Day 29 : balance =   2500</code></pre>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>went negative on day 15</code></pre>
-<p>The <code>break</code> is not an optimisation here, it is the <strong>meaning</strong> of the question. <em>“Did it ever?”</em> needs one witness; searching on after you have found it is answering a question nobody asked.</p>
+<p>A loop that sets a flag and keeps scanning would answer just as correctly — so the <code>break</code> is not what makes this right. What it says is that <strong>the work is finished</strong>: <em>“did it ever?”</em> needs one witness, and searching on after you have found it buys nothing. Knowing when you may stop is a claim about the question, not about the code.</p>
 </section>
 <section id="the-same-data-three-questions-three-loops" class="level3">
 <h3 class="anchored" data-anchor-id="the-same-data-three-questions-three-loops">4 · The same data, three questions, three loops</h3>
@@ -648,7 +662,7 @@ Day  5: withdrawal   2500      Day 22: withdrawal    500
 Day  8: withdrawal   2500      Day 25: deposit      7500
 Day 12: withdrawal   4000      Day 29: withdrawal   6500
 Day 15: withdrawal   6000</code></pre>
-<p><strong>Why does this loop start at <code>i = 1</code>?</strong> Because it reads <code>balance[i-1]</code>, and at <code>i = 0</code> that is <code>balance[-1]</code> — outside the array. C will read it anyway. Whenever a loop looks at a <em>neighbour</em>, one end of the range has to give.</p>
+<p><strong>Why does this loop start at <code>i = 1</code>?</strong> Because it reads <code>balance[i-1]</code>, and at <code>i = 0</code> that is <code>balance[-1]</code> — outside the array, and undefined. Whenever a loop looks at a <em>neighbour</em>, one end of the range has to give.</p>
 </section>
 <section id="three-questions-that-sound-the-same-and-are-not" class="level3">
 <h3 class="anchored" data-anchor-id="three-questions-that-sound-the-same-and-are-not">8 · Three questions that sound the same and are not</h3>
@@ -692,17 +706,281 @@ large debit on day 29
 large debit that overdrew the account: day 15
 large debit that overdrew the account: day 22</code></pre>
 <p>Every one of the three answers is now wrong, and two of them are wrong in a way that looks entirely plausible if you do not know the data. In §5 we fixed the minimum by putting a <code>continue</code> in <em>that</em> loop — but here are three more loops, each of which would need its own.</p>
-<p><strong>That is the wrong place to fix it.</strong> A record you cannot trust should be dealt with once, before any analysis runs, not re-excluded in every loop that ever touches the array. Ask yourself where that “once” should live — and note that you do not yet have the tool to express it cleanly. You will, in Lab 07.</p>
+<p>And §7’s loop is worse than it looks. Skipping the pass where <code>balance[i]</code> is corrupt is not enough — the <em>next</em> pass still reads that same value as <code>balance[i-1]</code>. <strong>One bad record poisons two differences, not one.</strong></p>
+<p>So what <em>is</em> the change across a missing day? Skip both differences? Bridge from the last good balance to the next good one? Declare the series unusable? Those are not coding decisions. They are decisions about what the data means, and no one can make them from inside the loop.</p>
+<p>Which is the real lesson. A record you cannot trust is worth settling <strong>once, before any analysis runs</strong>, rather than re-excluding it in every loop that touches the array — but settling it means first deciding what it <em>means</em>, and that is a conversation, not a <code>continue</code>.</p>
+</div>
+</div>
+<p><strong>Tuesday — two arrays that mean different things, and one grid.</strong></p>
+<p>Monday’s history had one account. Today: <strong>a test rig with four thermocouples, logged hourly</strong> — which is the shape of almost every measurement you will ever be handed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define S </span><span class="dv">4</span><span class="pp">                                   </span><span class="co">/* four probes        */</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define H </span><span class="dv">8</span><span class="pp">                                   </span><span class="co">/* eight hourly reads */</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sensorID<span class="op">[</span>S<span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">101</span><span class="op">,</span> <span class="dv">102</span><span class="op">,</span> <span class="dv">103</span><span class="op">,</span> <span class="dv">104</span> <span class="op">};</span>     <span class="co">/* parallel 1-D arrays  */</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ratedMax<span class="op">[</span>S<span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">250</span><span class="op">,</span> <span class="dv">300</span><span class="op">,</span> <span class="dv">220</span><span class="op">,</span> <span class="dv">340</span> <span class="op">};</span>     <span class="co">/* each probe's own limit */</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> temp<span class="op">[</span>S<span class="op">][</span>H<span class="op">]</span> <span class="op">=</span> <span class="op">{</span>                            <span class="co">/* a 2-D array          */</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="dv">240</span><span class="op">,</span> <span class="dv">242</span><span class="op">,</span> <span class="dv">245</span><span class="op">,</span> <span class="dv">248</span><span class="op">,</span> <span class="dv">258</span><span class="op">,</span> <span class="dv">247</span><span class="op">,</span> <span class="dv">244</span><span class="op">,</span> <span class="dv">241</span> <span class="op">},</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="dv">180</span><span class="op">,</span> <span class="dv">265</span><span class="op">,</span> <span class="dv">190</span><span class="op">,</span> <span class="dv">195</span><span class="op">,</span> <span class="dv">215</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">195</span><span class="op">,</span> <span class="dv">190</span> <span class="op">},</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="dv">210</span><span class="op">,</span> <span class="dv">215</span><span class="op">,</span> <span class="dv">220</span><span class="op">,</span> <span class="dv">225</span><span class="op">,</span> <span class="dv">245</span><span class="op">,</span> <span class="dv">228</span><span class="op">,</span> <span class="dv">222</span><span class="op">,</span> <span class="dv">218</span> <span class="op">},</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">205</span><span class="op">,</span> <span class="dv">210</span><span class="op">,</span> <span class="dv">215</span><span class="op">,</span> <span class="dv">235</span><span class="op">,</span> <span class="dv">218</span><span class="op">,</span> <span class="dv">212</span><span class="op">,</span> <span class="dv">208</span> <span class="op">},</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="why-a-second-index-and-not-a-fifth-array" class="level3">
+<h3 class="anchored" data-anchor-id="why-a-second-index-and-not-a-fifth-array">9 · Why a second index, and not a fifth array</h3>
+<p>You could keep four separate arrays — <code>probe0[]</code>, <code>probe1[]</code>, <code>probe2[]</code>, <code>probe3[]</code>. It works. Until someone asks:</p>
+<blockquote class="blockquote">
+<p><em>At which hour was the rig, as a whole, hottest?</em></p>
+</blockquote>
+<p>Take “as a whole” to mean the <strong>total across the four probes</strong> — that reading is a choice, and we come back to it below, because it is not the only one. Under it, this is a question about a <strong>column</strong>: you must add <code>probe0[h] + probe1[h] + probe2[h] + probe3[h]</code>. With four probes that is one line. With forty it is forty terms, written out by hand — because <strong>you cannot loop over variable names.</strong> You can loop over an index:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> hottest <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> best <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s <span class="op">&lt;</span> S<span class="op">;</span> s<span class="op">++)</span>          <span class="co">/* down the column */</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">];</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>total <span class="op">&gt;</span> best<span class="op">)</span> <span class="op">{</span> best <span class="op">=</span> total<span class="op">;</span> hottest <span class="op">=</span> h<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"hour </span><span class="sc">%d</span><span class="st">, total </span><span class="sc">%d</span><span class="st"> across all </span><span class="sc">%d</span><span class="st"> sensors</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> hottest<span class="op">,</span> best<span class="op">,</span> S<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>hour 4, total 953 across all 4 sensors</code></pre>
+<p>That is the entire case for two dimensions, and it is the same move you made on Monday, one storey up:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>from</th>
+<th>to</th>
+<th>what changed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>many variables</td>
+<td>one array</td>
+<td><strong>the index replaced the name</strong></td>
+</tr>
+<tr class="even">
+<td>many arrays</td>
+<td>one table</td>
+<td><strong>a second index replaced the array name</strong></td>
+</tr>
+</tbody>
+</table>
+<p><code>temp[s][h]</code> reads <em>“probe <code>s</code>, hour <code>h</code>”</em>. The first index picks the row, the second the position along it.</p>
+</section>
+<section id="which-array-holds-what-and-why-they-are-not-all-2-d" class="level3">
+<h3 class="anchored" data-anchor-id="which-array-holds-what-and-why-they-are-not-all-2-d">10 · Which array holds what — and why they are not all 2-D</h3>
+<p>Two different questions decide this, and it helps to keep them apart.</p>
+<p><strong>First: how many indices does one value need?</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>one value is…</th>
+<th>so</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sensorID[s]</code></td>
+<td>one ID <strong>per sensor</strong></td>
+<td>one index</td>
+</tr>
+<tr class="even">
+<td><code>ratedMax[s]</code></td>
+<td>one limit <strong>per sensor</strong></td>
+<td>one index</td>
+</tr>
+<tr class="odd">
+<td><code>temp[s][h]</code></td>
+<td>one reading <strong>per sensor, per hour</strong></td>
+<td><strong>two</strong> indices</td>
+</tr>
+</tbody>
+</table>
+<p>That — and only that — is what makes <code>temp</code> two-dimensional. Count the axes.</p>
+<p><strong>Second: should things sharing an index live in the same array?</strong> All three above are indexed by <code>s</code>, so you <em>could</em> try to merge them. Don’t: an array holds one type, and <code>data[0][s]</code> holding an ID while <code>data[1][s]</code> holds degrees is a lie the compiler cannot catch — nothing will warn you when you average them together. Different quantities about the same thing stay in <strong>separate arrays that move together</strong>.</p>
+<p>(That is clumsy, and the clumsiness has a proper fix called a <code>struct</code>. Later.)</p>
+</section>
+<section id="one-line-that-needs-both" class="level3">
+<h3 class="anchored" data-anchor-id="one-line-that-needs-both">11 · One line that needs both</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s <span class="op">&lt;</span> S<span class="op">;</span> s<span class="op">++)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">]</span> <span class="op">&gt;</span> ratedMax<span class="op">[</span>s<span class="op">])</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">"sensor </span><span class="sc">%d</span><span class="st"> (rated </span><span class="sc">%d</span><span class="st">) hit </span><span class="sc">%d</span><span class="st"> at hour </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                       sensorID<span class="op">[</span>s<span class="op">],</span> ratedMax<span class="op">[</span>s<span class="op">],</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">],</span> h<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>sensor 101 (rated 250) hit 258 at hour 4
+sensor 103 (rated 220) hit 225 at hour 3
+sensor 103 (rated 220) hit 245 at hour 4
+sensor 103 (rated 220) hit 228 at hour 5
+sensor 103 (rated 220) hit 222 at hour 6</code></pre>
+<p><code>temp[s][h]</code> is the grid, <code>ratedMax[s]</code> is the parallel array, and <strong><code>s</code> is the same index in both</strong>. That is what the two structures are for, and how they cooperate.</p>
+<p>Note what a simpler question would have missed. <em>“What was the highest reading?”</em> answers <strong>265, on sensor 102</strong> — which was <strong>nowhere near its limit of 300</strong>. The probe in trouble was 103, at 245. <strong>The threshold lives in the other array.</strong> Highest is not the same as worst.</p>
+</section>
+</section>
+<section id="eight-words-that-cost-you-a-day" class="level2">
+<h2 class="anchored" data-anchor-id="eight-words-that-cost-you-a-day">Eight Words That Cost You a Day</h2>
+<p>Everything above was a precise question. Real ones are not. Here are four that a manager, a supervisor or a client might actually say — each one perfectly clear until you try to write it down.</p>
+<section id="which-sensor-is-the-hottest" class="level3">
+<h3 class="anchored" data-anchor-id="which-sensor-is-the-hottest">“Which sensor is the hottest?”</h3>
+<p>Three honest programs, three different answers, from this same data:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>you read it as</th>
+<th>answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>the highest <strong>average</strong></td>
+<td>sensor <strong>101</strong> (245.6 °C)</td>
+</tr>
+<tr class="even">
+<td>the highest <strong>single reading</strong></td>
+<td>sensor <strong>102</strong> (265 °C)</td>
+</tr>
+<tr class="odd">
+<td>the most <strong>time spent</strong> above 230</td>
+<td>sensor <strong>101</strong> (8 hours of 8)</td>
+</tr>
+</tbody>
+</table>
+<p>None of these is a bug. Every one is a correct program. They disagree because <strong>the question does not say</strong>, and the person who asked it has a particular one in mind that they did not think to mention.</p>
+</section>
+<section id="at-which-hour-was-the-rig-hottest" class="level3">
+<h3 class="anchored" data-anchor-id="at-which-hour-was-the-rig-hottest">“At which hour was the rig hottest?”</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>you read it as</th>
+<th>answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>the highest <strong>total</strong> across the four probes</td>
+<td><strong>hour 4</strong></td>
+</tr>
+<tr class="even">
+<td>the hour holding the highest <strong>single</strong> reading</td>
+<td><strong>hour 1</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-long-was-the-rig-above-230-c" class="level3">
+<h3 class="anchored" data-anchor-id="how-long-was-the-rig-above-230-c">“How long was the rig above 230 °C?”</h3>
+<p>This is the one to sit with:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>you read it as</th>
+<th>answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hours where <strong>all</strong> probes were above 230</td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="even">
+<td>hours where <strong>any</strong> probe was above 230</td>
+<td><strong>8</strong></td>
+</tr>
+<tr class="odd">
+<td>hours where the <strong>average</strong> was above 230</td>
+<td><strong>2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Zero, eight, or two. Same data, same eleven words, three correct programs. If you hand in one of these and the answer wanted was another, nothing in your code is wrong — and no amount of testing your code against your own understanding will find it.</p>
+</section>
+<section id="how-many-exceeded-the-rating" class="level3">
+<h3 class="anchored" data-anchor-id="how-many-exceeded-the-rating">“How many exceeded the rating?”</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>you read it as</th>
+<th>answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>how many <strong>sensors</strong> ever exceeded theirs</td>
+<td><strong>2</strong></td>
+</tr>
+<tr class="even">
+<td>how many <strong>readings</strong> were over the limit</td>
+<td><strong>5</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="what-a-number-means-is-not-in-the-number" class="level2">
+<h2 class="anchored" data-anchor-id="what-a-number-means-is-not-in-the-number">What a Number Means Is Not in the Number</h2>
+<p>Suppose probe 104’s hour-2 reading comes back as <code>-1</code>.</p>
+<p>Is that minus one degree, or is the probe disconnected?</p>
+<p>If <code>-1</code> is a <strong>real measurement</strong>, it belongs in the sum like any other:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">];</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"average = </span><span class="sc">%.1f\n</span><span class="st">"</span><span class="op">,</span> sum <span class="op">/</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> H<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If <code>-1</code> means <strong>“no reading”</strong>, it must be skipped — and the divisor changes with it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">continue</span><span class="op">;</span>        <span class="co">/* not a temperature */</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">];</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        k<span class="op">++;</span>                                   <span class="co">/* count only what we counted */</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"average = </span><span class="sc">%.1f</span><span class="st"> over </span><span class="sc">%d</span><span class="st"> readings</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> sum <span class="op">/</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> k<span class="op">,</span> k<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>average, -1 treated as DATA    -&gt; 186.5   over 8 readings
+average, -1 treated as MISSING -&gt; 213.3   over 7 readings
+
+lowest reading, as DATA        -&gt; -1 °C
+lowest reading, as MISSING     -&gt; 180 °C</code></pre>
+<p><strong>Twenty-seven degrees apart, and the array is identical.</strong> The bits in memory do not know which they are. Only the person who built the rig knows — and if they did not tell you, your program is a guess wearing the costume of an answer.</p>
+<p>You have met this before without noticing. On Monday, <code>-999999</code> meant <em>“this record is corrupt”</em>. In a bank, a balance of <code>-1000</code> might be a perfectly ordinary overdraft on one account and a serious bug on another — <strong>the same number, in the same column, meaning opposite things.</strong> There is no rule of C that will tell you which. There is only asking.</p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The point of this course, in one paragraph
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Programming is the <em>means</em>. The <code>for</code> loop, the second index, the <code>continue</code> — all of it is machinery for carrying out a decision that was already made, somewhere, by somebody.</p>
+<p><strong>The decision is the hard part.</strong> “Which sensor is hottest” is not a programming problem; it is a question that has not finished being asked. Your first job on any real task is to turn it into one that <em>can</em> be programmed — and that means going back to whoever asked and finding out what they meant. That is not a delay before the work. <strong>It is the work.</strong></p>
+<p>This matters more now, not less. A machine will write you the loop for any of the six readings above, quickly and correctly, and it will not ask you which one you wanted. It cannot: it has never seen your rig. What it produces is only ever as good as the question you handed it — so <strong>the person who can state the problem precisely is the one in control</strong>, and the person who cannot is merely typing.</p>
+<p>It is also the only way to check the answer. You cannot verify a program against a question that does not have one answer. <strong>Specification and verification are the same skill, seen from either end</strong>, and interpretation is where both of them start.</p>
 </div>
 </div>
 </section>
+<section id="questions-to-bring-back" class="level2">
+<h2 class="anchored" data-anchor-id="questions-to-bring-back">Questions to Bring Back</h2>
+<p>For each of these, do not write code yet. Write down <strong>what the question could mean</strong>, pick one, and say in a sentence why you picked it.</p>
+<ol type="1">
+<li><em>“Is the rig stable?”</em></li>
+<li><em>“Did probe 103 fail?”</em></li>
+<li><em>“What is the rig’s normal operating temperature?”</em></li>
+<li><em>“Which hour should we investigate?”</em></li>
+<li>A reading arrives as <code>999</code>. The probes are rated to 340. Is that a real excursion, a stuck sensor, or a missing value someone encoded badly? <strong>What would you have to know, and who would you ask?</strong></li>
+</ol>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
 <ul>
 <li><strong>Type and run all eight.</strong> Where the machine disagrees with your prediction, find the rule you misapplied.</li>
 <li><strong>Answer with an array what you cannot answer without one:</strong> what was the <em>average</em> balance over the month? And the average of the <em>changes</em> — can you predict that answer before computing it?</li>
-<li><strong>Break it on purpose:</strong> change a loop bound to <code>i &lt;= n</code> and describe what you get. Then explain why it did not crash.</li>
+<li><strong>Break it on purpose:</strong> change a loop bound to <code>i &lt;= n</code> and describe what you get. If it did <em>not</em> crash — explain why that does not make the access correct.</li>
 <li><strong>The corrupted record again:</strong> §5 skipped it when finding the minimum. What does §7 do with it? Is skipping the right answer there too, or is something else needed?</li>
 <li><strong>A question we have not asked:</strong> on how many days was the balance above its own monthly average? Note that this one needs <strong>two</strong> passes over the array. Why can it not be done in one?</li>
 </ul>
