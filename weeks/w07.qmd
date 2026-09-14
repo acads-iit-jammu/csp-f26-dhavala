@@ -276,6 +276,228 @@ yourself where that "once" should live — and note that you do not yet have the
 express it cleanly. You will, in Lab 07.
 :::
 
+**Tuesday — two arrays that mean different things, and one grid.**
+
+Monday's history had one account. Today: **a test rig with four thermocouples, logged hourly** — which is the shape of almost every measurement you will ever be handed.
+
+```c
+#define S 4                                   /* four probes        */
+#define H 8                                   /* eight hourly reads */
+
+int sensorID[S] = { 101, 102, 103, 104 };     /* parallel 1-D arrays  */
+int ratedMax[S] = { 250, 300, 220, 340 };     /* each probe's own limit */
+
+int temp[S][H] = {                            /* a 2-D array          */
+    { 240, 242, 245, 248, 258, 247, 244, 241 },
+    { 180, 265, 190, 195, 215, 200, 195, 190 },
+    { 210, 215, 220, 225, 245, 228, 222, 218 },
+    { 200, 205, 210, 215, 235, 218, 212, 208 },
+};
+```
+
+### 9 · Why a second index, and not a fifth array
+
+You could keep four separate arrays — `probe0[]`, `probe1[]`, `probe2[]`, `probe3[]`. It works.
+Until someone asks:
+
+> *At which hour was the rig, as a whole, hottest?*
+
+That is a question about a **column**. You must add `probe0[h] + probe1[h] + probe2[h] + probe3[h]`.
+With four probes that is one line. With forty it is forty terms, written out by hand — because
+**you cannot loop over variable names.** You can loop over an index:
+
+```c
+    int hottest = 0, best = -1;
+
+    for (int h = 0; h < H; h++) {
+        int total = 0;
+        for (int s = 0; s < S; s++)          /* down the column */
+            total += temp[s][h];
+
+        if (total > best) { best = total; hottest = h; }
+    }
+    printf("hour %d, total %d across all %d sensors\n", hottest, best, S);
+```
+
+```
+hour 4, total 953 across all 4 sensors
+```
+
+That is the entire case for two dimensions, and it is the same move you made on Monday, one
+storey up:
+
+| from | to | what changed |
+|---|---|---|
+| many variables | one array | **the index replaced the name** |
+| many arrays | one table | **a second index replaced the array name** |
+
+`temp[s][h]` reads *"probe `s`, hour `h`"*. The first index picks the row, the second the
+position along it.
+
+### 10 · Which array holds what — and why they are not all 2-D
+
+| | structure | because |
+|---|---|---|
+| `temp[s][h]` | **2-D array** | the same *kind* of thing (°C) indexed two ways |
+| `sensorID[]`, `ratedMax[]` | **parallel 1-D arrays** | different *kinds* — an ID is not a temperature |
+
+Data that arrives as a table tempts you to make everything 2-D. Resist it: `data[0][s]` holding
+an ID while `data[1][s]` holds degrees is a lie the compiler cannot catch, and it will not warn
+you when you average them together. (That discomfort has a proper fix, and it is called a
+`struct`. Later.)
+
+### 11 · One line that needs both
+
+```c
+    for (int s = 0; s < S; s++)
+        for (int h = 0; h < H; h++)
+            if (temp[s][h] > ratedMax[s])
+                printf("sensor %d (rated %d) hit %d at hour %d\n",
+                       sensorID[s], ratedMax[s], temp[s][h], h);
+```
+
+```
+sensor 101 (rated 250) hit 258 at hour 4
+sensor 103 (rated 220) hit 225 at hour 3
+sensor 103 (rated 220) hit 245 at hour 4
+sensor 103 (rated 220) hit 228 at hour 5
+sensor 103 (rated 220) hit 222 at hour 6
+```
+
+`temp[s][h]` is the grid, `ratedMax[s]` is the parallel array, and **`s` is the same index in
+both**. That is what the two structures are for, and how they cooperate.
+
+Note what a simpler question would have missed. *"What was the highest reading?"* answers **265,
+on sensor 102** — which was **nowhere near its limit of 300**. The probe in trouble was 103, at
+245. **The threshold lives in the other array.** Highest is not the same as worst.
+
+## Eight Words That Cost You a Day
+
+Everything above was a precise question. Real ones are not. Here are four that a manager, a
+supervisor or a client might actually say — each one perfectly clear until you try to write it
+down.
+
+### "Which sensor is the hottest?"
+
+Three honest programs, three different answers, from this same data:
+
+| you read it as | answer |
+|---|---|
+| the highest **average** | sensor **101** (245.6 °C) |
+| the highest **single reading** | sensor **102** (265 °C) |
+| the most **time spent** above 230 | sensor **101** (8 hours of 8) |
+
+None of these is a bug. Every one is a correct program. They disagree because **the question
+does not say**, and the person who asked it has a particular one in mind that they did not
+think to mention.
+
+### "At which hour was the rig hottest?"
+
+| you read it as | answer |
+|---|---|
+| the highest **total** across the four probes | **hour 4** |
+| the hour holding the highest **single** reading | **hour 1** |
+
+### "How long was the rig above 230 °C?"
+
+This is the one to sit with:
+
+| you read it as | answer |
+|---|---|
+| hours where **all** probes were above 230 | **0** |
+| hours where **any** probe was above 230 | **8** |
+| hours where the **average** was above 230 | **2** |
+
+Zero, eight, or two. Same data, same eleven words, three correct programs. If you hand in one
+of these and the answer wanted was another, nothing in your code is wrong — and no amount of
+testing your code against your own understanding will find it.
+
+### "How many exceeded the rating?"
+
+| you read it as | answer |
+|---|---|
+| how many **sensors** ever exceeded theirs | **2** |
+| how many **readings** were over the limit | **5** |
+
+## What a Number Means Is Not in the Number
+
+Suppose probe 104's hour-2 reading comes back as `-1`.
+
+Is that minus one degree, or is the probe disconnected?
+
+If `-1` is a **real measurement**, it belongs in the sum like any other:
+
+```c
+    int sum = 0;
+    for (int h = 0; h < H; h++)
+        sum += temp[s][h];
+    printf("average = %.1f\n", sum / (double) H);
+```
+
+If `-1` means **"no reading"**, it must be skipped — and the divisor changes with it:
+
+```c
+    int sum = 0, k = 0;
+    for (int h = 0; h < H; h++) {
+        if (temp[s][h] == -1) continue;        /* not a temperature */
+        sum += temp[s][h];
+        k++;                                   /* count only what we counted */
+    }
+    printf("average = %.1f over %d readings\n", sum / (double) k, k);
+```
+
+```
+average, -1 treated as DATA    -> 186.5   over 8 readings
+average, -1 treated as MISSING -> 213.3   over 7 readings
+
+lowest reading, as DATA        -> -1 °C
+lowest reading, as MISSING     -> 180 °C
+```
+
+**Twenty-seven degrees apart, and the array is identical.** The bits in memory do not know
+which they are. Only the person who built the rig knows — and if they did not tell you, your
+program is a guess wearing the costume of an answer.
+
+You have met this before without noticing. On Monday, `-999999` meant *"this record is
+corrupt"*. In a bank, a balance of `-1000` might be a perfectly ordinary overdraft on one
+account and a serious bug on another — **the same number, in the same column, meaning opposite
+things.** There is no rule of C that will tell you which. There is only asking.
+
+::: {.callout-important}
+## The point of this course, in one paragraph
+
+Programming is the *means*. The `for` loop, the second index, the `continue` — all of it is
+machinery for carrying out a decision that was already made, somewhere, by somebody.
+
+**The decision is the hard part.** "Which sensor is hottest" is not a programming problem; it
+is a question that has not finished being asked. Your first job on any real task is to turn it
+into one that *can* be programmed — and that means going back to whoever asked and finding out
+what they meant. That is not a delay before the work. **It is the work.**
+
+This matters more now, not less. A machine will write you the loop for any of the six readings
+above, quickly and correctly, and it will not ask you which one you wanted. It cannot: it has
+never seen your rig. What it produces is only ever as good as the question you handed it — so
+**the person who can state the problem precisely is the one in control**, and the person who
+cannot is merely typing.
+
+It is also the only way to check the answer. You cannot verify a program against a question
+that does not have one answer. **Specification and verification are the same skill, seen from
+either end**, and interpretation is where both of them start.
+:::
+
+## Questions to Bring Back
+
+For each of these, do not write code yet. Write down **what the question could mean**, pick
+one, and say in a sentence why you picked it.
+
+1. *"Is the rig stable?"*
+2. *"Did probe 103 fail?"*
+3. *"What is the rig's normal operating temperature?"*
+4. *"Which hour should we investigate?"*
+5. A reading arrives as `999`. The probes are rated to 340. Is that a real excursion, a stuck
+   sensor, or a missing value someone encoded badly? **What would you have to know, and who
+   would you ask?**
+
 ## After Class
 
 - **Type and run all eight.** Where the machine disagrees with your prediction, find the rule you misapplied.
