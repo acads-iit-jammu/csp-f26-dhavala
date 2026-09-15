@@ -453,6 +453,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#why-a-second-index-and-not-a-fifth-array" id="toc-why-a-second-index-and-not-a-fifth-array" class="nav-link" data-scroll-target="#why-a-second-index-and-not-a-fifth-array">9 · Why a second index, and not a fifth array</a></li>
   <li><a href="#which-array-holds-what-and-why-they-are-not-all-2-d" id="toc-which-array-holds-what-and-why-they-are-not-all-2-d" class="nav-link" data-scroll-target="#which-array-holds-what-and-why-they-are-not-all-2-d">10 · Which array holds what — and why they are not all 2-D</a></li>
   <li><a href="#one-line-that-needs-both" id="toc-one-line-that-needs-both" class="nav-link" data-scroll-target="#one-line-that-needs-both">11 · One line that needs both</a></li>
+  <li><a href="#the-same-rig-as-a-control-chart-and-what-the-picture-is-for" id="toc-the-same-rig-as-a-control-chart-and-what-the-picture-is-for" class="nav-link" data-scroll-target="#the-same-rig-as-a-control-chart-and-what-the-picture-is-for">12 · The same rig as a control chart — and what the picture is for</a></li>
+  <li><a href="#when-is-a-column-allowed-to-mean-anything" id="toc-when-is-a-column-allowed-to-mean-anything" class="nav-link" data-scroll-target="#when-is-a-column-allowed-to-mean-anything">13 · When is a column allowed to mean anything?</a></li>
+  <li><a href="#questions-a-plant-manager-actually-asks" id="toc-questions-a-plant-manager-actually-asks" class="nav-link" data-scroll-target="#questions-a-plant-manager-actually-asks">14 · Questions a plant manager actually asks</a></li>
   </ul></li>
   <li><a href="#eight-words-that-cost-you-a-day" id="toc-eight-words-that-cost-you-a-day" class="nav-link" data-scroll-target="#eight-words-that-cost-you-a-day">Eight Words That Cost You a Day</a>
   <ul class="collapse">
@@ -822,6 +825,304 @@ sensor 103 (rated 220) hit 222 at hour 6</code></pre>
 <p><code>temp[s][h]</code> is the grid, <code>ratedMax[s]</code> is the parallel array, and <strong><code>s</code> is the same index in both</strong>. That is what the two structures are for, and how they cooperate.</p>
 <p>Note what a simpler question would have missed. <em>“What was the highest reading?”</em> answers <strong>265, on sensor 102</strong> — which was <strong>nowhere near its limit of 300</strong>. The probe in trouble was 103, at 245. <strong>The threshold lives in the other array.</strong> Highest is not the same as worst.</p>
 </section>
+<section id="the-same-rig-as-a-control-chart-and-what-the-picture-is-for" class="level3">
+<h3 class="anchored" data-anchor-id="the-same-rig-as-a-control-chart-and-what-the-picture-is-for">12 · The same rig as a control chart — and what the picture is for</h3>
+<p>Industry does not read sensor logs as columns of numbers. It plots them, and it draws two lines on the plot: an <strong>upper control limit</strong> and a <strong>lower control limit</strong>. A reading between them is normal variation and means nothing. A reading outside them is a signal — something changed.</p>
+<p>Here is a process line with <strong>four different kinds of sensor</strong>, sampled once a minute for sixteen minutes. Each has its own units and its own limits, so the limits live in parallel 1-D arrays while the readings need a grid:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define S </span><span class="dv">4</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define T </span><span class="dv">16</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ROWS </span><span class="dv">9</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>name<span class="op">[</span>S<span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="st">"furnace temp"</span><span class="op">,</span> <span class="st">"line pressure"</span><span class="op">,</span> <span class="st">"vibration"</span><span class="op">,</span> <span class="st">"coolant flow"</span> <span class="op">};</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>unit<span class="op">[</span>S<span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="st">"C"</span><span class="op">,</span>            <span class="st">"kPa"</span><span class="op">,</span>           <span class="st">"um"</span><span class="op">,</span>        <span class="st">"L/min"</span>        <span class="op">};</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> lcl<span class="op">[</span>S<span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">180</span><span class="op">,</span> <span class="dv">400</span><span class="op">,</span>  <span class="dv">5</span><span class="op">,</span>  <span class="dv">90</span> <span class="op">};</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ucl<span class="op">[</span>S<span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">260</span><span class="op">,</span> <span class="dv">700</span><span class="op">,</span> <span class="dv">45</span><span class="op">,</span> <span class="dv">130</span> <span class="op">};</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> r<span class="op">[</span>S<span class="op">][</span>T<span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="dv">205</span><span class="op">,</span><span class="dv">208</span><span class="op">,</span><span class="dv">212</span><span class="op">,</span><span class="dv">210</span><span class="op">,</span><span class="dv">215</span><span class="op">,</span><span class="dv">222</span><span class="op">,</span><span class="dv">231</span><span class="op">,</span><span class="dv">244</span><span class="op">,</span><span class="dv">252</span><span class="op">,</span><span class="dv">263</span><span class="op">,</span><span class="dv">258</span><span class="op">,</span><span class="dv">247</span><span class="op">,</span><span class="dv">236</span><span class="op">,</span><span class="dv">228</span><span class="op">,</span><span class="dv">220</span><span class="op">,</span><span class="dv">214</span> <span class="op">},</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="dv">512</span><span class="op">,</span><span class="dv">508</span><span class="op">,</span><span class="dv">515</span><span class="op">,</span><span class="dv">521</span><span class="op">,</span><span class="dv">509</span><span class="op">,</span><span class="dv">498</span><span class="op">,</span><span class="dv">505</span><span class="op">,</span><span class="dv">517</span><span class="op">,</span><span class="dv">523</span><span class="op">,</span><span class="dv">530</span><span class="op">,</span><span class="dv">527</span><span class="op">,</span><span class="dv">519</span><span class="op">,</span><span class="dv">511</span><span class="op">,</span><span class="dv">505</span><span class="op">,</span><span class="dv">499</span><span class="op">,</span><span class="dv">504</span> <span class="op">},</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="dv">12</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">18</span><span class="op">,</span> <span class="dv">26</span><span class="op">,</span> <span class="dv">34</span><span class="op">,</span> <span class="dv">47</span><span class="op">,</span> <span class="dv">52</span><span class="op">,</span> <span class="dv">44</span><span class="op">,</span> <span class="dv">31</span><span class="op">,</span> <span class="dv">22</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">13</span> <span class="op">},</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="dv">118</span><span class="op">,</span><span class="dv">117</span><span class="op">,</span><span class="dv">119</span><span class="op">,</span><span class="dv">116</span><span class="op">,</span><span class="dv">118</span><span class="op">,</span><span class="dv">115</span><span class="op">,</span><span class="dv">112</span><span class="op">,</span><span class="dv">107</span><span class="op">,</span><span class="dv">101</span><span class="op">,</span> <span class="dv">95</span><span class="op">,</span> <span class="dv">88</span><span class="op">,</span> <span class="dv">92</span><span class="op">,</span> <span class="dv">99</span><span class="op">,</span><span class="dv">105</span><span class="op">,</span><span class="dv">111</span><span class="op">,</span><span class="dv">115</span> <span class="op">},</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Drawing it is nothing but the nested loops of this week — one loop down the rows of the plot, one across time — asking of each cell <em>does a point belong here?</em></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s <span class="op">&lt;</span> S<span class="op">;</span> s<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> pad <span class="op">=</span> <span class="op">(</span>ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">-</span> lcl<span class="op">[</span>s<span class="op">])</span> <span class="op">/</span> <span class="dv">8</span><span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> lo <span class="op">=</span> lcl<span class="op">[</span>s<span class="op">]</span> <span class="op">-</span> pad<span class="op">,</span> hi <span class="op">=</span> ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">+</span> pad<span class="op">;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%s</span><span class="st"> (</span><span class="sc">%s</span><span class="st">)   LCL </span><span class="sc">%d</span><span class="st">   UCL </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> name<span class="op">[</span>s<span class="op">],</span> unit<span class="op">[</span>s<span class="op">],</span> lcl<span class="op">[</span>s<span class="op">],</span> ucl<span class="op">[</span>s<span class="op">]);</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> row <span class="op">=</span> ROWS <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> row <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> row<span class="op">--)</span> <span class="op">{</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> level <span class="op">=</span> lo <span class="op">+</span> row <span class="op">*</span> <span class="op">(</span>hi <span class="op">-</span> lo<span class="op">)</span> <span class="op">/</span> <span class="op">(</span>ROWS <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> isU <span class="op">=</span> <span class="op">(</span>ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">-</span> lo<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>ROWS <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span>hi <span class="op">-</span> lo<span class="op">)</span> <span class="op">==</span> row<span class="op">;</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> isL <span class="op">=</span> <span class="op">(</span>lcl<span class="op">[</span>s<span class="op">]</span> <span class="op">-</span> lo<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>ROWS <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span>hi <span class="op">-</span> lo<span class="op">)</span> <span class="op">==</span> row<span class="op">;</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"</span><span class="sc">%6d</span><span class="st"> </span><span class="sc">%c</span><span class="st">"</span><span class="op">,</span> level<span class="op">,</span> <span class="op">(</span>isU <span class="op">||</span> isL<span class="op">)</span> <span class="op">?</span> <span class="ch">'+'</span> <span class="op">:</span> <span class="ch">'|'</span><span class="op">);</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> t <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> t <span class="op">&lt;</span> T<span class="op">;</span> t<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                <span class="dt">int</span> rr <span class="op">=</span> <span class="op">(</span>r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">-</span> lo<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>ROWS <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span>hi <span class="op">-</span> lo<span class="op">);</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                <span class="dt">int</span> bad <span class="op">=</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&gt;</span> ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">||</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&lt;</span> lcl<span class="op">[</span>s<span class="op">];</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>rr <span class="op">==</span> row<span class="op">)</span>          putchar<span class="op">(</span>bad <span class="op">?</span> <span class="ch">'!'</span> <span class="op">:</span> <span class="ch">'*'</span><span class="op">);</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>isU <span class="op">||</span> isL<span class="op">)</span>    putchar<span class="op">(</span><span class="ch">'-'</span><span class="op">);</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>                    putchar<span class="op">(</span><span class="ch">' '</span><span class="op">);</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> isU <span class="op">?</span> <span class="st">" UCL"</span> <span class="op">:</span> isL <span class="op">?</span> <span class="st">" LCL"</span> <span class="op">:</span> <span class="st">""</span><span class="op">);</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"       +"</span><span class="op">);</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> t <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> t <span class="op">&lt;</span> T<span class="op">;</span> t<span class="op">++)</span> putchar<span class="op">(</span><span class="ch">'-'</span><span class="op">);</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">        minute 1 ......... 16</span><span class="sc">\n\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* the whole point of the limits: which readings were out of control? */</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"out of control:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s <span class="op">&lt;</span> S<span class="op">;</span> s<span class="op">++)</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> t <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> t <span class="op">&lt;</span> T<span class="op">;</span> t<span class="op">++)</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&gt;</span> ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">||</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&lt;</span> lcl<span class="op">[</span>s<span class="op">])</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">"  minute </span><span class="sc">%2d</span><span class="st">  </span><span class="sc">%-14s</span><span class="st"> </span><span class="sc">%4d</span><span class="st"> </span><span class="sc">%-5s</span><span class="st">  (limits </span><span class="sc">%d</span><span class="st">..</span><span class="sc">%d</span><span class="st">)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>                       t <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> name<span class="op">[</span>s<span class="op">],</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">],</span> unit<span class="op">[</span>s<span class="op">],</span> lcl<span class="op">[</span>s<span class="op">],</span> ucl<span class="op">[</span>s<span class="op">]);</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>*</code> is a reading in control, <code>!</code> one outside its limits:</p>
+<pre><code>furnace temp (C)   LCL 180   UCL 260
+   270 |                
+   257 +---------!*----- UCL
+   245 |        *  *    
+   232 |       *    *   
+   220 |     **      ** 
+   207 | ****          *
+   195 |*               
+   182 |                
+   170 +---------------- LCL
+       +----------------
+        minute 1 ......... 16
+
+vibration (um)   LCL 5   UCL 45
+    50 |          !     
+    43 +---------!-*---- UCL
+    37 |                
+    31 |        *       
+    25 |       *    *   
+    18 |             *  
+    12 | * ****       **
+     6 |* *             
+     0 +---------------- LCL
+       +----------------
+        minute 1 ......... 16
+
+coolant flow (L/min)   LCL 90   UCL 130
+   135 |                
+   128 +---------------- UCL
+   122 |                
+   116 |*** *           
+   110 |   * **       **
+   103 |       *     *  
+    97 |        *   *   
+    91 |         * *    
+    85 +----------!----- LCL
+       +----------------
+        minute 1 ......... 16</code></pre>
+<pre><code>out of control:
+  minute 10  furnace temp    263 C      (limits 180..260)
+  minute 10  vibration        47 um     (limits 5..45)
+  minute 11  vibration        52 um     (limits 5..45)
+  minute 11  coolant flow     88 L/min  (limits 90..130)
+</code></pre>
+<p>Line pressure — the one chart not shown — never leaves its band at all, and that absence is itself a finding: whatever went wrong, it was not the pump.</p>
+<p><strong>Now look at the three charts together.</strong> Coolant flow falls, furnace temperature climbs, vibration spikes, all inside two minutes. Not one of those charts shows that on its own. It appears only when you hold the <em>time</em> fixed and look across the sensors — which is a loop with its axes the other way round from every loop so far this week:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Walk TIME on the outside and SENSORS on the inside - the opposite</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">       order to every loop so far this week. That swap is the question. */</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> t <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> t <span class="op">&lt;</span> T<span class="op">;</span> t<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> out <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s <span class="op">&lt;</span> S<span class="op">;</span> s<span class="op">++)</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&gt;</span> ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">||</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&lt;</span> lcl<span class="op">[</span>s<span class="op">])</span> out<span class="op">++;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>out <span class="op">&gt;=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"minute </span><span class="sc">%2d</span><span class="st">: </span><span class="sc">%d</span><span class="st"> sensors out --"</span><span class="op">,</span> t <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> out<span class="op">);</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s <span class="op">&lt;</span> S<span class="op">;</span> s<span class="op">++)</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&gt;</span> ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">||</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&lt;</span> lcl<span class="op">[</span>s<span class="op">])</span> printf<span class="op">(</span><span class="st">" </span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> name<span class="op">[</span>s<span class="op">]);</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>minute 10: 2 sensors out -- furnace temp vibration
+minute 11: 2 sensors out -- vibration coolant flow</code></pre>
+<p>That is the question the grid exists to answer. Four separate arrays could have drawn all four charts perfectly well; <strong>only the grid lets you ask what happened at one moment across all of them.</strong></p>
+</section>
+<section id="when-is-a-column-allowed-to-mean-anything" class="level3">
+<h3 class="anchored" data-anchor-id="when-is-a-column-allowed-to-mean-anything">13 · When is a column allowed to mean anything?</h3>
+<p>Section 10 asked how many indices a value needs. That settles the <em>shape</em>. It does not settle which operations are legal, and the difference matters.</p>
+<p>Ask the plant manager’s question: <em>“which sensor is the worst?”</em> The obvious program hunts for the biggest excursion beyond a limit. But the furnace is over by <code>3</code>, in degrees, and vibration is over by <code>7</code>, in micrometres — and <strong>7 is not bigger than 3 in any physical sense.</strong> The only comparable quantity is each excursion measured against that sensor’s own band:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"sensor           worst reading   over by   as </span><span class="sc">%%</span><span class="st"> of its own band</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s <span class="op">&lt;</span> S<span class="op">;</span> s<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> over <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> val <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>                  <span class="co">/* biggest excursion, any direction */</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> t <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> t <span class="op">&lt;</span> T<span class="op">;</span> t<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> e <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&gt;</span> ucl<span class="op">[</span>s<span class="op">])</span> e <span class="op">=</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">-</span> ucl<span class="op">[</span>s<span class="op">];</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>r<span class="op">[</span>s<span class="op">][</span>t<span class="op">]</span> <span class="op">&lt;</span> lcl<span class="op">[</span>s<span class="op">])</span> e <span class="op">=</span> lcl<span class="op">[</span>s<span class="op">]</span> <span class="op">-</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">];</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>e <span class="op">&gt;</span> over<span class="op">)</span> <span class="op">{</span> over <span class="op">=</span> e<span class="op">;</span> val <span class="op">=</span> r<span class="op">[</span>s<span class="op">][</span>t<span class="op">];</span> <span class="op">}</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> band <span class="op">=</span> ucl<span class="op">[</span>s<span class="op">]</span> <span class="op">-</span> lcl<span class="op">[</span>s<span class="op">];</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%-14s</span><span class="st"> </span><span class="sc">%6d</span><span class="st"> </span><span class="sc">%-5s</span><span class="st"> </span><span class="sc">%7d</span><span class="st"> </span><span class="sc">%14d%%\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>               name<span class="op">[</span>s<span class="op">],</span> over <span class="op">?</span> val <span class="op">:</span> <span class="dv">0</span><span class="op">,</span> unit<span class="op">[</span>s<span class="op">],</span> over<span class="op">,</span> <span class="dv">100</span> <span class="op">*</span> over <span class="op">/</span> band<span class="op">);</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>sensor           worst reading   over by   as % of its own band
+furnace temp      263 C           3              3%
+line pressure       0 kPa         0              0%
+vibration          52 um          7             17%
+coolant flow       88 L/min       2              5%</code></pre>
+<p>The two orderings genuinely disagree. By raw excursion the furnace (<code>3</code>) looks worse than the coolant (<code>2</code>); by share of its own band the coolant (<code>5%</code>) is worse than the furnace (<code>3%</code>). Neither ordering is <em>wrong</em> — but only one of them is a comparison at all.</p>
+<p>Now change one thing. Put <strong>four sensors of the same kind</strong> on one machine — four vibration probes, one per bearing. Same units, same scale, so one pair of limits serves all four and the parallel array disappears:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define B </span><span class="dv">4</span><span class="pp">                 </span><span class="co">/* four bearings on ONE machine        */</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define T </span><span class="dv">16</span><span class="pp">                </span><span class="co">/* same sixteen minutes                */</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">/* Same kind of sensor on every bearing: same units, SAME limits.</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">   So one pair of numbers serves all four - no parallel array needed. */</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LCL </span><span class="dv">5</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UCL </span><span class="dv">45</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> v<span class="op">[</span>B<span class="op">][</span>T<span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">18</span><span class="op">,</span> <span class="dv">26</span><span class="op">,</span> <span class="dv">34</span><span class="op">,</span> <span class="dv">47</span><span class="op">,</span> <span class="dv">52</span><span class="op">,</span> <span class="dv">44</span><span class="op">,</span> <span class="dv">31</span><span class="op">,</span> <span class="dv">22</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">13</span> <span class="op">},</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">17</span><span class="op">,</span> <span class="dv">21</span><span class="op">,</span> <span class="dv">28</span><span class="op">,</span> <span class="dv">33</span><span class="op">,</span> <span class="dv">27</span><span class="op">,</span> <span class="dv">19</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">11</span> <span class="op">},</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span>  <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span>  <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">13</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">18</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">17</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span>  <span class="dv">9</span> <span class="op">},</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">13</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">19</span><span class="op">,</span> <span class="dv">22</span><span class="op">,</span> <span class="dv">18</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">13</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">10</span> <span class="op">},</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Because the units agree, BOTH directions are meaningful. */</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"minute  B1  B2  B3  B4   mean across bearings</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> t <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> t <span class="op">&lt;</span> T<span class="op">;</span> t<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%5d</span><span class="st"> "</span><span class="op">,</span> t <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> b <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> b <span class="op">&lt;</span> B<span class="op">;</span> b<span class="op">++)</span> <span class="op">{</span> printf<span class="op">(</span><span class="st">"</span><span class="sc">%4d</span><span class="st">"</span><span class="op">,</span> v<span class="op">[</span>b<span class="op">][</span>t<span class="op">]);</span> sum <span class="op">+=</span> v<span class="op">[</span>b<span class="op">][</span>t<span class="op">];</span> <span class="op">}</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%12d%s\n</span><span class="st">"</span><span class="op">,</span> sum <span class="op">/</span> B<span class="op">,</span> sum <span class="op">/</span> B <span class="op">&gt;</span> <span class="dv">25</span> <span class="op">?</span> <span class="st">"   &lt;- machine-wide"</span> <span class="op">:</span> <span class="st">""</span><span class="op">);</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">per bearing, across the whole run:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> b <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> b <span class="op">&lt;</span> B<span class="op">;</span> b<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> mx <span class="op">=</span> v<span class="op">[</span>b<span class="op">][</span><span class="dv">0</span><span class="op">],</span> at <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> bad <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> t <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> t <span class="op">&lt;</span> T<span class="op">;</span> t<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>v<span class="op">[</span>b<span class="op">][</span>t<span class="op">]</span> <span class="op">&gt;</span> mx<span class="op">)</span> <span class="op">{</span> mx <span class="op">=</span> v<span class="op">[</span>b<span class="op">][</span>t<span class="op">];</span> at <span class="op">=</span> t<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>v<span class="op">[</span>b<span class="op">][</span>t<span class="op">]</span> <span class="op">&gt;</span> UCL <span class="op">||</span> v<span class="op">[</span>b<span class="op">][</span>t<span class="op">]</span> <span class="op">&lt;</span> LCL<span class="op">)</span> bad<span class="op">++;</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"  B</span><span class="sc">%d</span><span class="st">  peak </span><span class="sc">%2d</span><span class="st"> at minute </span><span class="sc">%2d</span><span class="st">   </span><span class="sc">%d</span><span class="st"> reading(s) out of control</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>               b <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> mx<span class="op">,</span> at <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> bad<span class="op">);</span></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>minute  B1  B2  B3  B4   mean across bearings
+    1   12  10   9  11          10
+    2   14  11  10  12          11
+    3   11  13   9  12          11
+    4   13  12  11  10          11
+    5   15  11  10  13          12
+    6   14  13  12  11          12
+    7   18  14  11  12          13
+    8   26  17  13  14          17
+    9   34  21  15  16          21
+   10   47  28  18  19          28   &lt;- machine-wide
+   11   52  33  20  22          31   &lt;- machine-wide
+   12   44  27  17  18          26   &lt;- machine-wide
+   13   31  19  14  15          19
+   14   22  15  12  13          15
+   15   16  12  10  11          12
+   16   13  11   9  10          10
+
+per bearing, across the whole run:
+  B1  peak 52 at minute 11   2 reading(s) out of control
+  B2  peak 33 at minute 11   0 reading(s) out of control
+  B3  peak 20 at minute 11   0 reading(s) out of control
+  B4  peak 22 at minute 11   0 reading(s) out of control</code></pre>
+<p><code>sum / B</code> is a real number here — the machine’s mean vibration — and on the mixed line the same expression would have been nonsense. That is the whole distinction:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>four different sensors</th>
+<th>four of the same sensor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>limits</td>
+<td>one pair <strong>per sensor</strong> — a parallel array</td>
+<td>one pair for all — two constants</td>
+</tr>
+<tr class="even">
+<td>along a row (time)</td>
+<td>meaningful</td>
+<td>meaningful</td>
+</tr>
+<tr class="odd">
+<td><strong>down a column</strong></td>
+<td><strong>meaningless</strong> — you cannot average °C with µm</td>
+<td>the machine’s mean, a real number</td>
+</tr>
+<tr class="even">
+<td>the grid is</td>
+<td>storage that happens to be rectangular</td>
+<td>genuinely two-dimensional</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>Two arrays can have the same shape and not permit the same operations.</strong> What decides it is whether the rows are measured in the same thing.</p>
+</blockquote>
+<p>A twelve-lead ECG is the same rectangle from medicine: twelve channels, one row each, all in microvolts on one time base — so comparing across leads is meaningful in a way comparing temperature to flow never is.</p>
+<p>And the bearings hide the trap worth the whole session. <strong>B1 is the only bearing out of control — yet all four peak at minute 11.</strong> Replace B1 and you have treated a symptom: the synchronised peak says the cause was machine-wide, and the coolant chart says what it was. <em>The worst reading and the thing that is wrong are not the same question.</em></p>
+</section>
+<section id="questions-a-plant-manager-actually-asks" class="level3">
+<h3 class="anchored" data-anchor-id="questions-a-plant-manager-actually-asks">14 · Questions a plant manager actually asks</h3>
+<p>Each of these is a real question, and each is imprecise in a way you must settle <strong>before</strong> you write a line of code. The ambiguity is not sloppiness on the manager’s part — it is the part of the job that is yours.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>The question as asked</th>
+<th>What has to be decided first</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>“Is the process in control?”</em></td>
+<td>one bad reading, or a sustained excursion? Here that is <strong>4 readings</strong> against <strong>1 episode</strong></td>
+</tr>
+<tr class="even">
+<td><em>“Which sensor is the worst?”</em></td>
+<td>most violations, biggest excursion, or biggest share of its band? §13 — and they disagree</td>
+</tr>
+<tr class="odd">
+<td><em>“When did the trouble start?”</em></td>
+<td>the first reading outside a limit, or the first sign of drift? The furnace is climbing steadily from minute 5; it does not cross until minute 10</td>
+</tr>
+<tr class="even">
+<td><em>“Did they fail together?”</em></td>
+<td>§12 — and note minute 10 and minute 11 are <strong>different pairs</strong> of sensors</td>
+</tr>
+<tr class="odd">
+<td><em>“How long were we out of control?”</em></td>
+<td>every minute with a violation, or the longest unbroken stretch?</td>
+</tr>
+<tr class="even">
+<td><em>“What is the average reading?”</em></td>
+<td>fine for the bearings; a unit error on the mixed line</td>
+</tr>
+<tr class="odd">
+<td><em>“Is it getting worse?”</em></td>
+<td>compare the two halves, or count consecutive increases?</td>
+</tr>
+<tr class="even">
+<td><em>“Which bearing do we service?”</em></td>
+<td>the worst reading, or the actual cause? They are different bearings — and possibly no bearing at all</td>
+</tr>
+</tbody>
+</table>
+<p>Take the third one seriously. A limit tells you when something <strong>has already gone wrong</strong>. The furnace was rising for five minutes before it crossed, and every one of those readings was, by the rule you were given, perfectly normal. Detecting the drift is a different program from detecting the breach, and the chart makes it obvious to the eye long before the <code>!</code> appears.</p>
+</section>
 </section>
 <section id="eight-words-that-cost-you-a-day" class="level2">
 <h2 class="anchored" data-anchor-id="eight-words-that-cost-you-a-day">Eight Words That Cost You a Day</h2>
@@ -928,18 +1229,18 @@ sensor 103 (rated 220) hit 222 at hour 6</code></pre>
 <p>Suppose probe 104’s hour-2 reading comes back as <code>-1</code>.</p>
 <p>Is that minus one degree, or is the probe disconnected?</p>
 <p>If <code>-1</code> is a <strong>real measurement</strong>, it belongs in the sum like any other:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">];</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"average = </span><span class="sc">%.1f\n</span><span class="st">"</span><span class="op">,</span> sum <span class="op">/</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> H<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">];</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"average = </span><span class="sc">%.1f\n</span><span class="st">"</span><span class="op">,</span> sum <span class="op">/</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> H<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If <code>-1</code> means <strong>“no reading”</strong>, it must be skipped — and the divisor changes with it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">continue</span><span class="op">;</span>        <span class="co">/* not a temperature */</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">];</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        k<span class="op">++;</span>                                   <span class="co">/* count only what we counted */</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"average = </span><span class="sc">%.1f</span><span class="st"> over </span><span class="sc">%d</span><span class="st"> readings</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> sum <span class="op">/</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> k<span class="op">,</span> k<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> h <span class="op">&lt;</span> H<span class="op">;</span> h<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">continue</span><span class="op">;</span>        <span class="co">/* not a temperature */</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> temp<span class="op">[</span>s<span class="op">][</span>h<span class="op">];</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        k<span class="op">++;</span>                                   <span class="co">/* count only what we counted */</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"average = </span><span class="sc">%.1f</span><span class="st"> over </span><span class="sc">%d</span><span class="st"> readings</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> sum <span class="op">/</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> k<span class="op">,</span> k<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>average, -1 treated as DATA    -&gt; 186.5   over 8 readings
 average, -1 treated as MISSING -&gt; 213.3   over 7 readings
 
