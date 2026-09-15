@@ -401,6 +401,317 @@ Note what a simpler question would have missed. *"What was the highest reading?"
 on sensor 102** — which was **nowhere near its limit of 300**. The probe in trouble was 103, at
 245. **The threshold lives in the other array.** Highest is not the same as worst.
 
+### 12 · The same rig as a control chart — and what the picture is for
+
+Industry does not read sensor logs as columns of numbers. It plots them, and it draws two
+lines on the plot: an **upper control limit** and a **lower control limit**. A reading between
+them is normal variation and means nothing. A reading outside them is a signal — something
+changed.
+
+Here is a process line with **four different kinds of sensor**, sampled once a minute for
+sixteen minutes. Each has its own units and its own limits, so the limits live in parallel
+1-D arrays while the readings need a grid:
+
+```c
+#include <stdio.h>
+
+#define S 4
+#define T 16
+#define ROWS 9
+
+const char *name[S] = { "furnace temp", "line pressure", "vibration", "coolant flow" };
+const char *unit[S] = { "C",            "kPa",           "um",        "L/min"        };
+int lcl[S] = { 180, 400,  5,  90 };
+int ucl[S] = { 260, 700, 45, 130 };
+int r[S][T] = {
+  { 205,208,212,210,215,222,231,244,252,263,258,247,236,228,220,214 },
+  { 512,508,515,521,509,498,505,517,523,530,527,519,511,505,499,504 },
+  {  12, 14, 11, 13, 15, 14, 18, 26, 34, 47, 52, 44, 31, 22, 16, 13 },
+  { 118,117,119,116,118,115,112,107,101, 95, 88, 92, 99,105,111,115 },
+};
+```
+
+Drawing it is nothing but the nested loops of this week — one loop down the rows of the plot,
+one across time — asking of each cell *does a point belong here?*
+
+```c
+int main(void) {
+    for (int s = 0; s < S; s++) {
+        int pad = (ucl[s] - lcl[s]) / 8;
+        int lo = lcl[s] - pad, hi = ucl[s] + pad;
+
+        printf("%s (%s)   LCL %d   UCL %d\n", name[s], unit[s], lcl[s], ucl[s]);
+        for (int row = ROWS - 1; row >= 0; row--) {
+            int level = lo + row * (hi - lo) / (ROWS - 1);
+            int isU = (ucl[s] - lo) * (ROWS - 1) / (hi - lo) == row;
+            int isL = (lcl[s] - lo) * (ROWS - 1) / (hi - lo) == row;
+            printf("%6d %c", level, (isU || isL) ? '+' : '|');
+            for (int t = 0; t < T; t++) {
+                int rr = (r[s][t] - lo) * (ROWS - 1) / (hi - lo);
+                int bad = r[s][t] > ucl[s] || r[s][t] < lcl[s];
+                if (rr == row)          putchar(bad ? '!' : '*');
+                else if (isU || isL)    putchar('-');
+                else                    putchar(' ');
+            }
+            printf("%s\n", isU ? " UCL" : isL ? " LCL" : "");
+        }
+        printf("       +");
+        for (int t = 0; t < T; t++) putchar('-');
+        printf("\n        minute 1 ......... 16\n\n");
+    }
+
+    /* the whole point of the limits: which readings were out of control? */
+    printf("out of control:\n");
+    for (int s = 0; s < S; s++)
+        for (int t = 0; t < T; t++)
+            if (r[s][t] > ucl[s] || r[s][t] < lcl[s])
+                printf("  minute %2d  %-14s %4d %-5s  (limits %d..%d)\n",
+                       t + 1, name[s], r[s][t], unit[s], lcl[s], ucl[s]);
+    return 0;
+}
+```
+
+`*` is a reading in control, `!` one outside its limits:
+
+```
+furnace temp (C)   LCL 180   UCL 260
+   270 |                
+   257 +---------!*----- UCL
+   245 |        *  *    
+   232 |       *    *   
+   220 |     **      ** 
+   207 | ****          *
+   195 |*               
+   182 |                
+   170 +---------------- LCL
+       +----------------
+        minute 1 ......... 16
+
+vibration (um)   LCL 5   UCL 45
+    50 |          !     
+    43 +---------!-*---- UCL
+    37 |                
+    31 |        *       
+    25 |       *    *   
+    18 |             *  
+    12 | * ****       **
+     6 |* *             
+     0 +---------------- LCL
+       +----------------
+        minute 1 ......... 16
+
+coolant flow (L/min)   LCL 90   UCL 130
+   135 |                
+   128 +---------------- UCL
+   122 |                
+   116 |*** *           
+   110 |   * **       **
+   103 |       *     *  
+    97 |        *   *   
+    91 |         * *    
+    85 +----------!----- LCL
+       +----------------
+        minute 1 ......... 16
+```
+
+```
+out of control:
+  minute 10  furnace temp    263 C      (limits 180..260)
+  minute 10  vibration        47 um     (limits 5..45)
+  minute 11  vibration        52 um     (limits 5..45)
+  minute 11  coolant flow     88 L/min  (limits 90..130)
+
+```
+
+Line pressure — the one chart not shown — never leaves its band at all, and that absence is
+itself a finding: whatever went wrong, it was not the pump.
+
+**Now look at the three charts together.** Coolant flow falls, furnace temperature climbs,
+vibration spikes, all inside two minutes. Not one of those charts shows that on its own. It
+appears only when you hold the *time* fixed and look across the sensors — which is a loop with
+its axes the other way round from every loop so far this week:
+
+```c
+    /* Walk TIME on the outside and SENSORS on the inside - the opposite
+       order to every loop so far this week. That swap is the question. */
+    for (int t = 0; t < T; t++) {
+        int out = 0;
+        for (int s = 0; s < S; s++)
+            if (r[s][t] > ucl[s] || r[s][t] < lcl[s]) out++;
+        if (out >= 2) {
+            printf("minute %2d: %d sensors out --", t + 1, out);
+            for (int s = 0; s < S; s++)
+                if (r[s][t] > ucl[s] || r[s][t] < lcl[s]) printf(" %s", name[s]);
+            printf("\n");
+        }
+    }
+```
+
+```
+minute 10: 2 sensors out -- furnace temp vibration
+minute 11: 2 sensors out -- vibration coolant flow
+```
+
+That is the question the grid exists to answer. Four separate arrays could have drawn all four
+charts perfectly well; **only the grid lets you ask what happened at one moment across all of
+them.**
+
+### 13 · When is a column allowed to mean anything?
+
+Section 10 asked how many indices a value needs. That settles the *shape*. It does not settle
+which operations are legal, and the difference matters.
+
+Ask the plant manager's question: *"which sensor is the worst?"* The obvious program hunts for
+the biggest excursion beyond a limit. But the furnace is over by `3`, in degrees, and vibration
+is over by `7`, in micrometres — and **7 is not bigger than 3 in any physical sense.** The only
+comparable quantity is each excursion measured against that sensor's own band:
+
+```c
+    printf("sensor           worst reading   over by   as %% of its own band\n");
+    for (int s = 0; s < S; s++) {
+        int over = 0, val = 0;                  /* biggest excursion, any direction */
+        for (int t = 0; t < T; t++) {
+            int e = 0;
+            if (r[s][t] > ucl[s]) e = r[s][t] - ucl[s];
+            if (r[s][t] < lcl[s]) e = lcl[s] - r[s][t];
+            if (e > over) { over = e; val = r[s][t]; }
+        }
+        int band = ucl[s] - lcl[s];
+        printf("%-14s %6d %-5s %7d %14d%%\n",
+               name[s], over ? val : 0, unit[s], over, 100 * over / band);
+    }
+```
+
+```
+sensor           worst reading   over by   as % of its own band
+furnace temp      263 C           3              3%
+line pressure       0 kPa         0              0%
+vibration          52 um          7             17%
+coolant flow       88 L/min       2              5%
+```
+
+The two orderings genuinely disagree. By raw excursion the furnace (`3`) looks worse than the
+coolant (`2`); by share of its own band the coolant (`5%`) is worse than the furnace (`3%`).
+Neither ordering is *wrong* — but only one of them is a comparison at all.
+
+Now change one thing. Put **four sensors of the same kind** on one machine — four vibration
+probes, one per bearing. Same units, same scale, so one pair of limits serves all four and the
+parallel array disappears:
+
+```c
+#include <stdio.h>
+
+#define B 4                 /* four bearings on ONE machine        */
+#define T 16                /* same sixteen minutes                */
+
+/* Same kind of sensor on every bearing: same units, SAME limits.
+   So one pair of numbers serves all four - no parallel array needed. */
+#define LCL 5
+#define UCL 45
+```
+
+```c
+int main(void) {
+    int v[B][T] = {
+      { 12, 14, 11, 13, 15, 14, 18, 26, 34, 47, 52, 44, 31, 22, 16, 13 },
+      { 10, 11, 13, 12, 11, 13, 14, 17, 21, 28, 33, 27, 19, 15, 12, 11 },
+      {  9, 10,  9, 11, 10, 12, 11, 13, 15, 18, 20, 17, 14, 12, 10,  9 },
+      { 11, 12, 12, 10, 13, 11, 12, 14, 16, 19, 22, 18, 15, 13, 11, 10 },
+    };
+
+    /* Because the units agree, BOTH directions are meaningful. */
+    printf("minute  B1  B2  B3  B4   mean across bearings\n");
+    for (int t = 0; t < T; t++) {
+        int sum = 0;
+        printf("%5d ", t + 1);
+        for (int b = 0; b < B; b++) { printf("%4d", v[b][t]); sum += v[b][t]; }
+        printf("%12d%s\n", sum / B, sum / B > 25 ? "   <- machine-wide" : "");
+    }
+
+    printf("\nper bearing, across the whole run:\n");
+    for (int b = 0; b < B; b++) {
+        int mx = v[b][0], at = 0, bad = 0;
+        for (int t = 0; t < T; t++) {
+            if (v[b][t] > mx) { mx = v[b][t]; at = t; }
+            if (v[b][t] > UCL || v[b][t] < LCL) bad++;
+        }
+        printf("  B%d  peak %2d at minute %2d   %d reading(s) out of control\n",
+               b + 1, mx, at + 1, bad);
+    }
+    return 0;
+}
+```
+
+```
+minute  B1  B2  B3  B4   mean across bearings
+    1   12  10   9  11          10
+    2   14  11  10  12          11
+    3   11  13   9  12          11
+    4   13  12  11  10          11
+    5   15  11  10  13          12
+    6   14  13  12  11          12
+    7   18  14  11  12          13
+    8   26  17  13  14          17
+    9   34  21  15  16          21
+   10   47  28  18  19          28   <- machine-wide
+   11   52  33  20  22          31   <- machine-wide
+   12   44  27  17  18          26   <- machine-wide
+   13   31  19  14  15          19
+   14   22  15  12  13          15
+   15   16  12  10  11          12
+   16   13  11   9  10          10
+
+per bearing, across the whole run:
+  B1  peak 52 at minute 11   2 reading(s) out of control
+  B2  peak 33 at minute 11   0 reading(s) out of control
+  B3  peak 20 at minute 11   0 reading(s) out of control
+  B4  peak 22 at minute 11   0 reading(s) out of control
+```
+
+`sum / B` is a real number here — the machine's mean vibration — and on the mixed line the same
+expression would have been nonsense. That is the whole distinction:
+
+| | four different sensors | four of the same sensor |
+|---|---|---|
+| limits | one pair **per sensor** — a parallel array | one pair for all — two constants |
+| along a row (time) | meaningful | meaningful |
+| **down a column** | **meaningless** — you cannot average °C with µm | the machine's mean, a real number |
+| the grid is | storage that happens to be rectangular | genuinely two-dimensional |
+
+> **Two arrays can have the same shape and not permit the same operations.** What decides it is
+> whether the rows are measured in the same thing.
+
+A twelve-lead ECG is the same rectangle from medicine: twelve channels, one row each, all in
+microvolts on one time base — so comparing across leads is meaningful in a way comparing
+temperature to flow never is.
+
+And the bearings hide the trap worth the whole session. **B1 is the only bearing out of
+control — yet all four peak at minute 11.** Replace B1 and you have treated a symptom: the
+synchronised peak says the cause was machine-wide, and the coolant chart says what it was.
+*The worst reading and the thing that is wrong are not the same question.*
+
+### 14 · Questions a plant manager actually asks
+
+Each of these is a real question, and each is imprecise in a way you must settle **before** you
+write a line of code. The ambiguity is not sloppiness on the manager's part — it is the part of
+the job that is yours.
+
+| The question as asked | What has to be decided first |
+|---|---|
+| *"Is the process in control?"* | one bad reading, or a sustained excursion? Here that is **4 readings** against **1 episode** |
+| *"Which sensor is the worst?"* | most violations, biggest excursion, or biggest share of its band? §13 — and they disagree |
+| *"When did the trouble start?"* | the first reading outside a limit, or the first sign of drift? The furnace is climbing steadily from minute 5; it does not cross until minute 10 |
+| *"Did they fail together?"* | §12 — and note minute 10 and minute 11 are **different pairs** of sensors |
+| *"How long were we out of control?"* | every minute with a violation, or the longest unbroken stretch? |
+| *"What is the average reading?"* | fine for the bearings; a unit error on the mixed line |
+| *"Is it getting worse?"* | compare the two halves, or count consecutive increases? |
+| *"Which bearing do we service?"* | the worst reading, or the actual cause? They are different bearings — and possibly no bearing at all |
+
+Take the third one seriously. A limit tells you when something **has already gone wrong**. The
+furnace was rising for five minutes before it crossed, and every one of those readings was, by
+the rule you were given, perfectly normal. Detecting the drift is a different program from
+detecting the breach, and the chart makes it obvious to the eye long before the `!` appears.
+
 ## Eight Words That Cost You a Day
 
 Everything above was a precise question. Real ones are not. Here are four that a manager, a
