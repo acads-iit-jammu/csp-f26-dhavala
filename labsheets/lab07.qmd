@@ -1,11 +1,11 @@
-# Lab 07: Functions & Recursion {.unnumbered}
+# Lab 07: Multi-dimensional Arrays & Matrices {.unnumbered}
 
 | | Electrical | Mechanical & Materials |
 |---|---|---|
 | **Date** | Tue Sep 29, 2026 | Wed Oct 7, 2026 |
 | **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
 
-**Syllabus practical module:** 7 — Writing programs using functions and recursion
+**Syllabus practical module:** 3 — Writing programs related to lists and strings (the multi-dimensional case)
 
 **Evaluation:** Graded — equal weight within the 20% lab component.
 
