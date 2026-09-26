@@ -1,25 +1,416 @@
-# W09: Iteration & Problem Solving {.unnumbered}
+# W09: Two Dimensions, and Your First Functions {.unnumbered}
 
 **Dates:** Mon Sep 28 & Tue Sep 29, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 4 — Iterative control (Mon) · 7 — Problem-solving session (Tue)
+**Syllabus modules:** 3 — lists (the multi-dimensional case) · 7 — functions
+
+::: {.callout-note}
+First week back after the mid-semester examination. **Lab 07 is now multi-dimensional
+arrays and matrices** — EE on Tue Sep 29, the same afternoon as Tuesday's lecture;
+Mech & Materials on Wed Oct 7.
+:::
 
 ## Pre-read
 
-*To be posted (typically by the weekend before).*
+- [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) — *from the "Multi-dimensional arrays in C" slide onward*. The first half is character arrays; we come to those next week.
+- [Lec 20](../cs1100-cse-iitm-2021/slides/Lec20.pdf) — *functions in C*
+- [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf) — *from "Matrix Operations: Addition" onward*
+- Last week's [W07 notes](w07.qmd) on 1-D and parallel arrays. Tuesday builds directly on §10–§11.
 
-## In Class
+## The sentence this week turns on
 
-- [Lec 9](../cs1100-cse-iitm-2021/slides/Lec9.pdf) — First loop construct: `while`
-- [Lec 12](../cs1100-cse-iitm-2021/slides/Lec12.pdf) — `for` loop (includes `do-while`, `break`, `continue`)
-- [Lec 13](../cs1100-cse-iitm-2021/slides/Lec13.pdf) — Example problems: mini calculator
-- [Lec 14](../cs1100-cse-iitm-2021/slides/Lec14.pdf) — Loop examples: primes, minimum, GCD
-- [Lec 16](../cs1100-cse-iitm-2021/slides/Lec16.pdf) — Loop revision: patterns, factorization, square roots
+> **A function is a promise: this much goes in, that much comes out.**
+> Everything else this week is what happens when the thing going in is a grid.
+
+## Code You Can Copy
+
+Every program here was compiled and run before it was printed; the outputs are what it
+actually produced. **Predict each one before you run it.**
+
+---
+
+# Monday — the grid, and the first function
+
+## 1 · A grid is not rows. It is one block.
+
+You have been writing `int a[10]` since last week. `int m[3][4]` looks like three arrays of
+four. It is not. It is **twelve integers in a row**, and the two subscripts are a way of
+talking about them.
+
+```c
+#include <stdio.h>
+#define ROWS 3
+#define COLS 4
+int main(void) {
+    int m[ROWS][COLS] = { { 1, 2, 3, 4 },
+                          { 5, 6, 7, 8 },
+                          { 9,10,11,12 } };
+
+    printf("one int          %2zu bytes\n", sizeof(int));
+    printf("one row, m[0]    %2zu bytes   (%d ints)\n", sizeof(m[0]), COLS);
+    printf("the whole grid m %2zu bytes   (%d ints)\n", sizeof(m), ROWS*COLS);
+    printf("\nso the grid is ONE block of %d ints, not %d separate rows.\n\n",
+           ROWS*COLS, ROWS);
+
+    printf("m[i][j]   is the  (i*%d + j)-th int in that block\n", COLS);
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++)
+            printf("  m[%d][%d] -> %2d-th   value %2d\n", i, j, i*COLS + j, m[i][j]);
+    }
+    return 0;
+}
+```
+
+```
+one int           4 bytes
+one row, m[0]    16 bytes   (4 ints)
+the whole grid m 48 bytes   (12 ints)
+
+so the grid is ONE block of 12 ints, not 3 separate rows.
+
+```
+
+and then, for all twelve cells:
+
+```
+m[i][j]   is the  (i*4 + j)-th int in that block
+  m[0][0] ->  0-th   value  1
+  m[0][1] ->  1-th   value  2
+  m[0][2] ->  2-th   value  3
+  m[0][3] ->  3-th   value  4
+  m[1][0] ->  4-th   value  5
+  m[1][1] ->  5-th   value  6
+  m[1][2] ->  6-th   value  7
+  m[1][3] ->  7-th   value  8
+  m[2][0] ->  8-th   value  9
+  m[2][1] ->  9-th   value 10
+  m[2][2] -> 10-th   value 11
+  m[2][3] -> 11-th   value 12
+```
+
+**That formula is the whole idea.** `m[i][j]` is the `(i*COLS + j)`-th integer in one block.
+Moving along a row moves one step; moving down a column jumps a whole row's width. This is
+called **row-major order**, and on Tuesday it will explain a rule that would otherwise look
+arbitrary.
+
+::: {.callout-tip}
+Notice what `sizeof` proved. `sizeof(m)` is `48`, not three separate somethings. If the rows
+were separate objects that number could not exist.
+:::
+
+## 2 · Walking a grid
+
+Two loops, the outer one picking the row:
+
+```c
+for (int i = 0; i < ROWS; i++) {
+    for (int j = 0; j < COLS; j++)
+        printf("%4d", m[i][j]);
+    printf("\n");                 /* end of a ROW -- outer loop's job */
+}
+```
+
+The `printf("\n")` belongs to the **outer** loop. Put it in the inner one and you print one
+number per line; leave it out and you print a single long line. Neither is a syntax error,
+and that is the point: the compiler cannot tell you which grid you meant.
+
+## 3 · The first function
+
+A program that does three things is three walls of loops. A function gives each one a name.
+
+```c
+#include <stdio.h>
+
+int largest(int a, int b);            /* the promise: name, what goes in, what comes out */
+
+int main(void) {
+    int x = 7, y = 12;
+    printf("largest(%d, %d) = %d\n", x, y, largest(x, y));
+    printf("largest(%d, %d) = %d\n", 4, 4, largest(4, 4));
+    return 0;
+}
+
+int largest(int a, int b) {           /* the keeping of it */
+    if (a > b) return a;
+    return b;
+}
+```
+
+```
+largest(7, 12) = 12
+largest(4, 4) = 4
+```
+
+Three parts, and they are worth naming:
+
+| | |
+|---|---|
+| `int largest(int a, int b);` | the **declaration** — a promise made before the promise is kept |
+| `int largest(int a, int b) { ... }` | the **definition** — the keeping of it |
+| `largest(x, y)` | the **call** |
+
+The declaration is what lets `main` use `largest` before it has been written. C reads your
+file top to bottom and will not take your word for a name it has not met.
+
+## 4 · What a function is given
+
+```c
+#include <stdio.h>
+
+void tryToChange(int n, int row[]) {
+    n      = 99;
+    row[0] = 99;
+    printf("  inside   n = %d   row[0] = %d\n", n, row[0]);
+}
+
+int main(void) {
+    int n = 1;
+    int row[3] = { 1, 2, 3 };
+
+    printf("  before   n = %d   row[0] = %d\n", n, row[0]);
+    tryToChange(n, row);
+    printf("  after    n = %d   row[0] = %d\n", n, row[0]);
+    return 0;
+}
+```
+
+```
+  before   n = 1   row[0] = 1
+  inside   n = 99   row[0] = 99
+  after    n = 1   row[0] = 99
+```
+
+**Look at the third line.** `n` went in as 1, was set to 99 inside, and came home as 1. The
+function was handed a *copy*. That is **call by value**, and it is why a function cannot
+reach out and change a plain variable belonging to its caller.
+
+Now look at `row[0]`. Same function, same call — and it came home **changed**.
+
+::: {.callout-important}
+An array handed to a function is **not copied**. The function works on your array, not on a
+copy of it. A function that takes an `int` cannot surprise you; a function that takes an
+array can. Tuesday explains why, and it follows from §1.
+:::
+
+---
+
+# Tuesday — matrices as functions
+
+## 5 · Giving a grid to a function
+
+Here is the rule, and here is the compiler refusing to accept anything else:
+
+```c
+void f(int m[][]) { printf("%d\n", m[1][0]); }
+```
+
+```
+p6.c:2:13: error: array has incomplete element type 'int[]'
+```
+
+The column count is not optional. Ask §1 why: to find `m[1][0]` the machine computes
+`1*COLS + 0`. **Without `COLS` there is no arithmetic to do.** The row count it can live
+without — nothing in that sum uses it — which is why `int m[][4]` is legal and `int m[][]`
+is not.
+
+```c
+void printMatrix(int m[][N]) { ... }      /* fine: COLS is N */
+```
+
+## 6 · Three operations, three functions
+
+```c
+#define N 3
+
+void printMatrix(int m[][N]) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) printf("%5d", m[i][j]);
+        printf("\n");
+    }
+}
+
+void addMatrix(int a[][N], int b[][N], int out[][N]) {
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            out[i][j] = a[i][j] + b[i][j];
+}
+
+void multiplyMatrix(int a[][N], int b[][N], int out[][N]) {
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++) {
+            int sum = 0;
+            for (int k = 0; k < N; k++) sum += a[i][k] * b[k][j];
+            out[i][j] = sum;
+        }
+}
+```
+
+Called from `main`:
+
+```c
+int main(void) {
+    int a[N][N] = { {1,2,3}, {4,5,6}, {7,8,9} };
+    int b[N][N] = { {1,0,0}, {0,1,0}, {0,0,1} };
+    int c[N][N];
+
+    printf("A\n");                printMatrix(a);
+    printf("B (the identity)\n"); printMatrix(b);
+    addMatrix(a, b, c);
+    printf("A + B\n");            printMatrix(c);
+    multiplyMatrix(a, b, c);
+    printf("A x B\n");            printMatrix(c);
+    return 0;
+}
+```
+
+```
+A
+    1    2    3
+    4    5    6
+    7    8    9
+B (the identity)
+    1    0    0
+    0    1    0
+    0    0    1
+A + B
+    2    2    3
+    4    6    6
+    7    8   10
+A x B
+    1    2    3
+    4    5    6
+    7    8    9
+```
+
+**A free check.** Multiplying by the identity must give back what you started with, and it
+did. You did not need to trust the triple loop — you asked it a question whose answer you
+already knew. Do that before you trust any matrix code you write.
+
+Notice too that `addMatrix` and `multiplyMatrix` **write into a grid they were given**. They
+can, because of §4. That is the whole reason they return nothing.
+
+## 7 · The practical problem: Conway's Game of Life
+
+A grid of cells, each alive or dead. One rule, applied everywhere at once:
+
+- a live cell with **2 or 3** live neighbours stays alive; otherwise it dies
+- a dead cell with **exactly 3** live neighbours comes alive
+
+That is all. It is not a game — nobody plays. You set a starting grid and watch.
+
+```c
+int countNeighbours(int g[][N], int r, int c) {
+    int n = 0;
+    for (int di = -1; di <= 1; di++)
+        for (int dj = -1; dj <= 1; dj++) {
+            if (di == 0 && dj == 0) continue;          /* not yourself */
+            int i = r + di, j = c + dj;
+            if (i < 0 || i >= N || j < 0 || j >= N) continue;   /* off the edge */
+            n += g[i][j];
+        }
+    return n;
+}
+```
+
+The `continue` is doing two different jobs: skipping the cell itself, and skipping
+neighbours that fall off the edge. Both would otherwise be wrong answers rather than
+crashes.
+
+```c
+void step(int cur[][N], int next[][N]) {
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++) {
+            int n = countNeighbours(cur, i, j);
+            if (cur[i][j]) next[i][j] = (n == 2 || n == 3);
+            else           next[i][j] = (n == 3);
+        }
+}
+```
+
+Starting from a five-cell shape called a **glider**:
+
+```
+generation 0
+.#......
+..#.....
+###.....
+........
+........
+........
+........
+........
+```
+
+```
+
+generation 1
+........
+#.#.....
+.##.....
+.#......
+........
+........
+........
+```
+
+Four generations on, it is back to its original shape — one cell down and one cell right.
+It walks.
+
+```
+........
+........
+........
+
+generation 4
+........
+..#.....
+...#....
+.###....
+```
+
+## 8 · The bug that makes it a lesson
+
+`step` reads `cur` and writes `next`. Why not save the memory and update one grid in place?
+
+Because a cell's neighbours would then change **while you are still counting them**. Cell
+`(0,1)` is decided using the old values; cell `(0,2)`, one step later, is decided using a
+mixture of old and already-updated ones. Here is the same glider, one generation, computed
+both ways:
+
+```
+correct, two grids          in place, one grid
+generation 1                generation 1
+........                    ........
+#.#.....                    ..#.....
+.##.....                    .##.....
+.#......                    ........
+........                    ........
+........                    ........
+........                    ........
+```
+
+Not a crash. Not a warning. A different, wrong universe.
+
+::: {.callout-warning}
+**Whenever every cell must be updated "at the same time", you need somewhere to put the new
+values while the old ones are still being read.** This is the same shape of bug as W07 §7,
+where one corrupted record poisoned two neighbour differences — one level up.
+:::
+
+## Questions to Bring Back
+
+1. `sizeof(m)` was 48 for `int m[3][4]`. What is `sizeof(m[0])`, and what is `sizeof(m[0][0])`? What does each one *mean*?
+2. Why is `int m[][4]` legal as a parameter but `int m[4][]` is not?
+3. `addMatrix(a, b, c)` returns `void` and yet does something useful. How?
+4. In §4, could you write a function that changes a caller's plain `int`? What would it have to be given instead?
+5. The glider walks. Does anything in the rules mention movement?
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+- Type in the Game of Life and run it. Then change the starting shape — try a 2x2 block, and a row of three — and predict before each run.
+- **Lab 07** is Tuesday afternoon (EE) / Wed Oct 7 (ME & MT): multi-dimensional arrays and matrices.
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal,
+blog-style column: how this week's material looks in the age of AI. To be posted.*

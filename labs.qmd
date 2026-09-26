@@ -24,7 +24,7 @@ The schedule below is **tentative** and covers all 11 practical modules of the [
 | [4](labsheets/lab04.qmd) | Sep 1 | Sep 9 | Loops: `for`, `while` and `do-while`, and converting between them | 5, 6 |
 | [5](labsheets/lab05.qmd) | Sep 8 | Sep 16 | **Decisions**: `if`/`else`, else-if ladders, `switch`, and `break` / `continue` | 2 |
 | [6](labsheets/lab06.qmd) | Sep 15 | Sep 30 | **Loops and arrays**: 1-D arrays, traversal and search, nested loops and patterns | 3, 5, 6 |
-| [7](labsheets/lab07.qmd) | Sep 29 | Oct 7 | **Multi-dimensional arrays and matrices**: declaration and row-major layout, traversal, matrix addition and multiplication | 3 |
+| [7](labsheets/lab07.qmd) | Sep 29 | Oct 7 | **Multi-dimensional arrays and matrices**: row-major layout, traversal, matrix addition and multiplication — written as functions | 3, 7 |
 | [8](labsheets/lab08.qmd) | Oct 6 | Oct 14 | Tuples & dictionaries, C-style: structures and key–value lookup tables | 4 |
 | [9](labsheets/lab09.qmd) | Oct 13 | Oct 21 | File handling | 8 |
 | [10](labsheets/lab10.qmd) | Oct 27 | Oct 28 | Error handling | 9 |
