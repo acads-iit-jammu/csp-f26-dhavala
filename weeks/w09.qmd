@@ -15,7 +15,7 @@ Mech & Materials on Wed Oct 7.
 - [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) — *from the "Multi-dimensional arrays in C" slide onward*. The first half is character arrays; we come to those next week.
 - [Lec 20](../cs1100-cse-iitm-2021/slides/Lec20.pdf) — *functions in C*
 - [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf) — *from "Matrix Operations: Addition" onward*
-- Last week's [W07 notes](w07.qmd) on 1-D and parallel arrays. Tuesday builds directly on §10–§11.
+- The [W07 notes](w07.qmd) on 1-D and parallel arrays — §10 and §11 especially. That was a fortnight ago; W08 was the mid-sems.
 
 ## The sentence this week turns on
 
@@ -24,7 +24,7 @@ Mech & Materials on Wed Oct 7.
 
 ## Code You Can Copy
 
-Every program here was compiled and run before it was printed; the outputs are what it
+Every program here was compiled and run before it was printed, and the outputs are what it
 actually produced. **Predict each one before you run it.**
 
 ---
@@ -33,9 +33,9 @@ actually produced. **Predict each one before you run it.**
 
 ## 1 · A grid is not rows. It is one block.
 
-You have been writing `int a[10]` since last week. `int m[3][4]` looks like three arrays of
-four. It is not. It is **twelve integers in a row**, and the two subscripts are a way of
-talking about them.
+You have met `int a[10]` in lectures. `int m[3][4]` looks like three arrays of four. It is
+not. It is **twelve integers in a row**, and the two subscripts are a way of talking about
+them.
 
 ```c
 #include <stdio.h>
@@ -67,12 +67,12 @@ one row, m[0]    16 bytes   (4 ints)
 the whole grid m 48 bytes   (12 ints)
 
 so the grid is ONE block of 12 ints, not 3 separate rows.
-
 ```
 
 and then, for all twelve cells:
 
 ```
+
 m[i][j]   is the  (i*4 + j)-th int in that block
   m[0][0] ->  0-th   value  1
   m[0][1] ->  1-th   value  2
@@ -88,15 +88,18 @@ m[i][j]   is the  (i*4 + j)-th int in that block
   m[2][3] -> 11-th   value 12
 ```
 
+::: {.callout-tip}
+`%zu` is the conversion for a `sizeof` result — `sizeof` has a type of its own, and `%d` is
+not it.
+:::
+
 **That formula is the whole idea.** `m[i][j]` is the `(i*COLS + j)`-th integer in one block.
 Moving along a row moves one step; moving down a column jumps a whole row's width. This is
 called **row-major order**, and on Tuesday it will explain a rule that would otherwise look
 arbitrary.
 
-::: {.callout-tip}
-Notice what `sizeof` proved. `sizeof(m)` is `48`, not three separate somethings. If the rows
-were separate objects that number could not exist.
-:::
+Notice what `sizeof` proved: one row is 16 bytes, three rows would be 48, and the whole grid
+*is* 48 — no gaps, nothing in between. One block.
 
 ## 2 · Walking a grid
 
@@ -188,8 +191,18 @@ Now look at `row[0]`. Same function, same call — and it came home **changed**.
 
 ::: {.callout-important}
 An array handed to a function is **not copied**. The function works on your array, not on a
-copy of it. A function that takes an `int` cannot surprise you; a function that takes an
-array can. Tuesday explains why, and it follows from §1.
+copy of it. Take that as a rule for today: the machinery that explains it is called a
+*pointer*, and it is a later week's business. What you can rely on now is the behaviour — a
+function given an `int` cannot change your `int`; a function given an array can change your
+array.
+:::
+
+::: {.callout-warning}
+**Do not reach for `sizeof` on an array parameter.** Inside a function, `sizeof` on a
+parameter does *not* give you the size of the caller's array — the rule from §1 stops at the
+function boundary, for the same reason the array was not copied. `sizeof` is trustworthy
+where the array was **declared**, and nowhere else. This is why every function below is also
+told how big the grid is.
 :::
 
 ---
@@ -212,10 +225,6 @@ The column count is not optional. Ask §1 why: to find `m[1][0]` the machine com
 `1*COLS + 0`. **Without `COLS` there is no arithmetic to do.** The row count it can live
 without — nothing in that sum uses it — which is why `int m[][4]` is legal and `int m[][]`
 is not.
-
-```c
-void printMatrix(int m[][N]) { ... }      /* fine: COLS is N */
-```
 
 ## 6 · Three operations, three functions
 
@@ -298,25 +307,36 @@ A grid of cells, each alive or dead. One rule, applied everywhere at once:
 
 That is all. It is not a game — nobody plays. You set a starting grid and watch.
 
+Here is the whole program, so you can type it and run it. Note `#define N 8`: this is a new
+`N`, nothing to do with the 3 of §6.
+
 ```c
+#include <stdio.h>
+#define N 8
+
+void printGrid(int g[][N]) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (g[i][j]) printf("#");
+            else         printf(".");
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 int countNeighbours(int g[][N], int r, int c) {
     int n = 0;
     for (int di = -1; di <= 1; di++)
         for (int dj = -1; dj <= 1; dj++) {
-            if (di == 0 && dj == 0) continue;          /* not yourself */
+            if (di == 0 && dj == 0) continue;                  /* not yourself */
             int i = r + di, j = c + dj;
             if (i < 0 || i >= N || j < 0 || j >= N) continue;   /* off the edge */
             n += g[i][j];
         }
     return n;
 }
-```
 
-The `continue` is doing two different jobs: skipping the cell itself, and skipping
-neighbours that fall off the edge. Both would otherwise be wrong answers rather than
-crashes.
-
-```c
 void step(int cur[][N], int next[][N]) {
     for (int i = 0; i < N; i++)
         for (int j = 0; j < N; j++) {
@@ -325,7 +345,34 @@ void step(int cur[][N], int next[][N]) {
             else           next[i][j] = (n == 3);
         }
 }
+
+void copyGrid(int from[][N], int to[][N]) {
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++) to[i][j] = from[i][j];
+}
+
+int main(void) {
+    int cur[N][N] = {0}, next[N][N];
+    cur[0][1] = 1; cur[1][2] = 1;
+    cur[2][0] = 1; cur[2][1] = 1; cur[2][2] = 1;      /* a glider */
+
+    for (int gen = 0; gen <= 4; gen++) {
+        printf("generation %d\n", gen);
+        printGrid(cur);
+        step(cur, next);
+        copyGrid(next, cur);
+    }
+    return 0;
+}
 ```
+
+Three things in there are worth a second look.
+
+`n += g[i][j]` adds a cell straight into a count, and `next[i][j] = (n == 2 || n == 3)`
+stores a *comparison* into an `int`. Both work because in C a comparison **is** a value —
+1 when true, 0 when false — and a live cell is stored as 1. And the two `continue`s do
+different jobs: the first skips the cell itself, the second skips neighbours that fall off
+the edge. Both would otherwise be wrong answers rather than crashes.
 
 Starting from a five-cell shape called a **glider**:
 
@@ -342,12 +389,12 @@ generation 0
 ```
 
 ```
-
 generation 1
 ........
 #.#.....
 .##.....
 .#......
+........
 ........
 ........
 ........
@@ -357,29 +404,28 @@ Four generations on, it is back to its original shape — one cell down and one 
 It walks.
 
 ```
-........
-........
-........
-
 generation 4
 ........
 ..#.....
 ...#....
 .###....
+........
+........
+........
+........
 ```
 
 ## 8 · The bug that makes it a lesson
 
 `step` reads `cur` and writes `next`. Why not save the memory and update one grid in place?
 
-Because a cell's neighbours would then change **while you are still counting them**. Cell
-`(0,1)` is decided using the old values; cell `(0,2)`, one step later, is decided using a
-mixture of old and already-updated ones. Here is the same glider, one generation, computed
-both ways:
+Because a cell's neighbours would then change **while you are still counting them**. Cells
+decided early in the sweep are read using the old values; cells decided later see a mixture
+of old values and ones already overwritten. Here is the same glider, one generation,
+computed both ways:
 
 ```
 correct, two grids          in place, one grid
-generation 1                generation 1
 ........                    ........
 #.#.....                    ..#.....
 .##.....                    .##.....
@@ -387,19 +433,27 @@ generation 1                generation 1
 ........                    ........
 ........                    ........
 ........                    ........
+........                    ........
 ```
+
+Look at **row 1, column 0** and at **row 3, column 1** — the leftmost `#` of the second
+row, and the one below it. Those are the only two cells where the universes part company,
+and in the in-place version each was decided using at least one neighbour that had already
+been rewritten during this same sweep.
 
 Not a crash. Not a warning. A different, wrong universe.
 
 ::: {.callout-warning}
 **Whenever every cell must be updated "at the same time", you need somewhere to put the new
-values while the old ones are still being read.** This is the same shape of bug as W07 §7,
-where one corrupted record poisoned two neighbour differences — one level up.
+values while the old ones are still being read.** W07 had a cousin of this: in the
+corrupted-record section, skipping a bad record was not enough, because the *next* pass
+still read that same value as its neighbour — one bad record spoiled two differences. The
+same family of mistake; a different fix.
 :::
 
 ## Questions to Bring Back
 
-1. `sizeof(m)` was 48 for `int m[3][4]`. What is `sizeof(m[0])`, and what is `sizeof(m[0][0])`? What does each one *mean*?
+1. `sizeof(m)` was 48 for `int m[3][4]`. What are `sizeof(m[0])` and `sizeof(m[0][0])`, and what does each one *mean*? Ask this where `m` was declared — §4 says why not inside a function.
 2. Why is `int m[][4]` legal as a parameter but `int m[4][]` is not?
 3. `addMatrix(a, b, c)` returns `void` and yet does something useful. How?
 4. In §4, could you write a function that changes a caller's plain `int`? What would it have to be given instead?
@@ -407,8 +461,8 @@ where one corrupted record poisoned two neighbour differences — one level up.
 
 ## After Class
 
-- Type in the Game of Life and run it. Then change the starting shape — try a 2x2 block, and a row of three — and predict before each run.
-- **Lab 07** is Tuesday afternoon (EE) / Wed Oct 7 (ME & MT): multi-dimensional arrays and matrices.
+- Type in the Game of Life exactly as printed and run it. Then change the starting shape — try a 2x2 block, and a row of three — and predict before each run.
+- **Lab 07** is Tuesday afternoon (EE) / Wed Oct 7 (ME & MT): multi-dimensional arrays and matrices, written as functions.
 
 ## PAGAL Notes
 
