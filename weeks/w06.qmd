@@ -13,7 +13,7 @@
 
 **Monday — selection, and the two words that leave a construct:**
 
-- 📽️ [**Deck 10 — One Session at a Bank**](../materials/w06-deck-10-bank-session.html) — the motivation, in one worked design. An ATM session from start to end: authenticate in **at most three attempts** (`for` — a count you know in advance), a gate that ends the program (`if`), then a session **until the customer quits** (`while` — nobody knows how long), one command dispatched to **five discrete options** (`switch`), a refused withdrawal that abandons the command but not the session (`continue`), and the quit that famously does not quit. No new syntax — every construct arrives because the problem asked for it.
+- 📽️ [**Deck 12 — One Session at a Bank**](../materials/w06-deck-12-bank-session.html) — the motivation, in one worked design. An ATM session from start to end: authenticate in **at most three attempts** (`for` — a count you know in advance), a gate that ends the program (`if`), then a session **until the customer quits** (`while` — nobody knows how long), one command dispatched to **five discrete options** (`switch`), a refused withdrawal that abandons the command but not the session (`continue`), and the quit that famously does not quit. No new syntax — every construct arrives because the problem asked for it.
 - `if`, `if`/`else`, and the else-if **ladder**
 - `switch`, and why it needs `break`
 - `break` and `continue` inside the loops you already know
@@ -221,8 +221,8 @@ int main(void) {
 
     while (1) {                          /* keep going until told to stop */
         printf("Enter a number 2..99 (anything outside stops): ");
-        scanf("%d", &n);
-        if (n < 2 || n > 99) break;      /* leaves the WHILE */
+        if (scanf("%d", &n) != 1) break; /* input ran out -- leaves the WHILE */
+        if (n < 2 || n > 99) break;      /* out of range -- also leaves it */
 
         divisor = 0;
         for (i = 2; i * i <= n; i++) {

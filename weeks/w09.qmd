@@ -19,8 +19,8 @@ Mech & Materials on Wed Oct 7.
 
 ## Decks
 
-- **Deck 11 — A Grid Is One Block** *(Monday)*: two dimensions, and your first function
-- **Deck 12 — Matrices, and a Universe with One Rule** *(Tuesday)*: grids as parameters, and Conway's Game of Life
+- **Deck 15 — A Grid Is One Block** *(Monday)*: two dimensions, and your first function
+- **Deck 16 — Matrices, and a Universe with One Rule** *(Tuesday)*: grids as parameters, and Conway's Game of Life
 
 ## The sentence this week turns on
 

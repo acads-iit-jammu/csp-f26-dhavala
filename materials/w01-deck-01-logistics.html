@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deck 01 · Logistics · CS-1-01 (MO)</title>
+<title>Deck 1 · Logistics · CS-1-01 (MO)</title>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -68,7 +68,7 @@ const SLIDES = [
 {cls:"title", body:()=> e(F,null,
   e("div",{className:"kicker"},"CS-1-01 (MO) · EFL001U1M · Monsoon 2026 · IIT Jammu"),
   e("h1",null,"Computer System and Programming"),
-  e("h2",null,"Deck 01 — how this course works"),
+  e("h2",null,"Deck 1 — how this course works"),
   e("p",{style:{marginTop:"2em",color:"#cfe3ff"}},"Soma S Dhavala · Electrical / Mechanical / Materials sections"),
   e("p",{style:{color:"#8fb4e8",fontSize:"1rem"}},"→ arrow keys or click the right edge to advance"))},
 
@@ -199,7 +199,7 @@ function Deck(){
       s.body()),
     e("div",{className:"bar"}, e("div",{style:{width:((i+1)/SLIDES.length*100)+"%"}})),
     e("div",{className:"foot"},
-      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 01 · Logistics"),
+      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 1 · Logistics"),
       e("span",{className:"navhint"},"← → to navigate"),
       e("span",null, (i+1)+" / "+SLIDES.length)));
 }

@@ -14,14 +14,14 @@
 
 **Monday — what happens between `gcc hello.c` and `./hello`:**
 
-- 📽️ [**Deck 08 — From Source to Executable**](../materials/w05-deck-08-source-to-executable.html) — the week's slides:
+- 📽️ [**Deck 09 — From Source to Executable**](../materials/w05-deck-09-source-to-executable.html) — the week's slides:
   - **Lab 03 closed out** — the checked three worked together: `e1` (inches → feet, one division read twice), `e2` (the `100.0` that is the whole problem), `e3` (`'a' - 'A'` — derive the gap, never write 32). Everyone meets these again in Lab 04.
   - **The bridge:** who decided that `marks * 100 / total` was integer division? Not the running program — **the compiler**, before a single instruction executed. Precedence and type rules are settled at compile time, and `gcc -S` shows it.
   - **The four programs, not one:** `gcc` is a driver. Preprocessor (`-E`) → compiler (`-S`) → assembler (`-c`) → linker, each stopped and inspected in turn.
   - **The centrepiece:** `nm hello.o` prints `T main` and `U printf`. That single **U** — *undefined* — is the reason the linker exists.
   - **An audit on your own manual:** §2.9 claims `x++` is faster than `x = x + 1`. It is not, and you can prove it in eight seconds with `diff`.
   - **Two kinds of error:** the compiler catches syntax and never intent. Four tools stand between your source and your executable, and *none of them has read the problem statement*.
-- 📽️ [**Deck 09 — Why Assemblers and Linkers Exist**](../materials/w05-deck-09-why-linkers.html) — the companion deck: not *what* the stages do but **why anyone built it that way**. Separate compilation; object files that are *deliberately* incomplete; relocation, visible with `objdump -r`; what `#include` really gives you (a promise, not an implementation); static vs dynamic linking; and the principle underneath it all — **delay a decision until it reaches the component that has enough information to make it**.
+- 📽️ [**Deck 10 — Why Assemblers and Linkers Exist**](../materials/w05-deck-10-why-linkers.html) — the companion deck: not *what* the stages do but **why anyone built it that way**. Separate compilation; object files that are *deliberately* incomplete; relocation, visible with `objdump -r`; what `#include` really gives you (a promise, not an implementation); static vs dynamic linking; and the principle underneath it all — **delay a decision until it reaches the component that has enough information to make it**.
 - 🖨️ [**Why Assemblers and Linkers Exist — notes**](../materials/w05-linkers-notes.html) — the same material as a printable handout, including the two-minute experiment worth doing with your own hands.
 - [Lec 6](../cs1100-cse-iitm-2021/slides/Lec6.pdf) — companion slides (Prof. Shweta Agrawal, IIT Madras)
 
