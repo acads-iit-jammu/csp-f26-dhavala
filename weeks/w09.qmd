@@ -17,6 +17,11 @@ Mech & Materials on Wed Oct 7.
 - [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf) — *from "Matrix Operations: Addition" onward*
 - The [W07 notes](w07.qmd) on 1-D and parallel arrays — §10 and §11 especially. That was a fortnight ago; W08 was the mid-sems.
 
+## Decks
+
+- **Deck 11 — A Grid Is One Block** *(Monday)*: two dimensions, and your first function
+- **Deck 12 — Matrices, and a Universe with One Rule** *(Tuesday)*: grids as parameters, and Conway's Game of Life
+
 ## The sentence this week turns on
 
 > **A function is a promise: this much goes in, that much comes out.**
