@@ -255,6 +255,52 @@ For `[8]` the valid indices are **0 … 7**. C will not stop you writing `world[
 what happens then is **undefined** — not "whatever happens to be in that memory".
 :::
 
+## 10b · Handing a whole world to a function
+
+Monday left you with two ways to pass something: **by value**, which copies, and **by
+reference**, which needs an `&`. An array is neither, and Tuesday's code depends on it.
+
+```c
+#define ROWS 3
+#define COLS 4
+
+void wipe(int m[ROWS][COLS]) { m[0][0] = 99; }   /* no & anywhere */
+```
+
+```
+before wipe(g)  g[0][0] = 1
+after  wipe(g)  g[0][0] = 99
+```
+
+**No `&` anywhere** — and the caller's grid changed. An array argument is *already* a place;
+there is nothing to take the address of, because passing it hands over the location rather
+than the contents. That is why `nextGeneration(world)` can fill in a world without you
+writing `&world`, and why a function can never accidentally copy a grid for you.
+
+::: {.callout-warning}
+The flip side: a function given a grid **can always change it**. With an `int` you know it
+cannot. With an array you have to read the function to find out.
+:::
+
+**And the parameter must carry the column count.** These are the four ways you might write
+it, and only two of them compile:
+
+| parameter | |
+|---|---|
+| `int m[3][4]` | fine |
+| `int m[][4]` | fine — the row count is not needed |
+| `int m[3][]` | **rejected** |
+| `int m[][]` | **rejected** |
+
+```
+/tmp/t.c:2:13: error: array has incomplete element type 'int[]'
+```
+
+The reason is arithmetic. To reach `m[1][0]` the machine computes `1*COLS + 0` — a grid is
+one block of `ROWS*COLS` integers laid out row after row, and the column count is what turns
+a pair of subscripts into a position in it. Drop `COLS` and there is no sum to do. Drop
+`ROWS` and nothing is lost, because no part of that calculation uses it.
+
 ## 11 · Walking the world
 
 ```c
