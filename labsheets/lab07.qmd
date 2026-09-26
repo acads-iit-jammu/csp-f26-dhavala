@@ -1,24 +1,196 @@
 # Lab 07: Functions & the Game of Life {.unnumbered}
 
-| | Electrical | Mechanical & Materials |
+| | Electrical | Mechanical | Metallurgy & Materials |
+|---|---|---|---|
+| **Date** | Tue Sep 29 | Wed Oct 7 | Wed Oct 7 |
+| **Time & Room** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4021** |
+
+**Lab pack:** [lab07.tar.gz](../labs/lab07.tar.gz) — pre-placed on lab machines, downloadable for home practice.
+
+**Syllabus practical modules:** 7 and 3 — functions, and lists in their multi-dimensional form
+
+**Evaluation:** Graded — equal weight within the 20% lab component. **Only the exercises
+carry marks**: five fill-in-the-blank programs (**5 marks each**) and five checked
+problems (**10 marks each**). The ten drills are **not scored** — they are how you find out
+what you have wrong before it costs you. Plus observed work and a short viva. Teams of 1–2;
+pairs swap driver/navigator at half-time.
+
+**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's
+shared reference. Useful today for vim (§1) and the compilation model (§2.5) if you are
+still finding those awkward. **It does not cover functions, pointers or arrays** — it stops
+before all three — so for this week's material your reference is the
+[Week 09 notes](../weeks/w09.qmd), not the manual. This sheet is self-contained either way.
+
+::: {.callout-note}
+Both of this week's lectures are behind you before you sit this lab: **Monday** on
+functions, scope and call by reference, **Tuesday** on the Game of Life. Nothing below is
+ahead of them. The notes carry `countNeighbours` and `nextGeneration` in full — you are
+meant to have them open. What the notes do *not* carry is any program that reads a world
+from the keyboard, decides one question and stops, which is what every problem below asks
+for.
+:::
+
+## The one sentence to leave with
+
+> **A function is handed a copy — unless it is handed an address, and an array is neither.**
+
+That single distinction decides every problem today. It is why `swap` needs `&a` and
+`countNeighbours(world, i, j)` does not; why `minMax` cannot simply `return` its answer;
+and why a function you hand a grid to can quietly change it underneath you.
+
+## The three drills that carry the week
+
+Do `d02`, `d03` and `d06` **in that order**, and predict each before you press Enter.
+They are one argument in three steps:
+
+| | what it does | what it shows |
 |---|---|---|
-| **Date** | Tue Sep 29, 2026 | Wed Oct 7, 2026 |
-| **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
+| `d02` | `addOne(x)` — and `x` is still 5 | a **copy** went in |
+| `d03` | one character different: `reallyAddOne(&x)` — `x` is 6 | an **address** went in |
+| `d06` | `wipe(a)` — no `&` anywhere, and yet `a[0]` changed | an array is **already** an address |
 
-**Syllabus practical modules:** 7 and 3 — functions, and lists (the multi-dimensional case)
+If `d06` surprises you, good — that is the point of it, and it is the licence for every
+`nextGeneration(world)` call in the second half of the afternoon.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+## Act 0 · Land (10 min)
 
-**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
+```bash
+cd ~ && tar xzf lab07.tar.gz && cd lab07 && ./install.sh
+```
 
-## Pre-Lab
+It will ask your branch and your roll number(s), then **put you inside your workspace** —
+your prompt becomes `[lab07 OK ...]`. If that prompt ever disappears you are in the wrong
+directory; run `./where.sh` and it will print the exact line to type.
 
-*To be posted — what to read/install before the session.*
+Then, before anything else:
 
-## Exercises
+```bash
+script session.txt
+```
 
-*To be posted before the session.*
+::: {.callout-important}
+`session.txt` records your afternoon. It is required in every bundle, and it is **your**
+evidence that the work is yours — the thing that answers a question about who wrote what.
+:::
 
-## Submission
+## Act 1 · Drills — predict, then run (20 min, not marked)
 
-Submission instructions will be provided in the lab.
+```bash
+./drill.sh --all
+```
+
+Ten small programs. Each one is shown to you, you type what you think it will print, and
+only then does it run. **Predicting is the exercise.** A miss is the useful kind of
+result — it tells you something you believed is not true, at no cost.
+
+::: {.callout-warning}
+Do not skim-read them and press Enter. A drill you did not predict taught you nothing, and
+the log records which is which.
+:::
+
+## Act 2 · Fill the blanks (25 min · 5 marks each)
+
+In all five, **the function's first line is already written** and `main` is already calling
+it exactly as written. That line is the *promise* — what goes in, what comes back. Keep it;
+do not change it.
+
+| | given | what you write |
+|---|---|---|
+| `b1_sumto.c` | `int sumTo(int n)` | a loop you already know — now it must `return` |
+| `b2_swap.c` | `void swap(int *a, int *b)` | the version drill `d05` shows failing |
+| `b3_minmax.c` | `void minMax(int a[], int n, int *lo, int *hi)` | **two** answers, so neither can be returned |
+| `b4_rowsum.c` | `int rowSum(int m[][COLS], int r)` | one row of a grid |
+| `b5_cos.c` | `double cosSeries(double x, int n)` | cos *x*, from its series |
+
+::: {.callout-tip}
+`b4` is worth pausing on. The row count may be left out of that parameter; the **column
+count may not**. Reaching `m[r][j]` means computing `r*COLS + j`, and without `COLS` there
+is no sum to do.
+:::
+
+::: {.callout-warning}
+`b5` has a trap with a body count. Do **not** compute each term's factorial with its own
+inner loop — 13! already overflows an `int` and the answer goes quietly, plausibly wrong.
+Build each term from the one before it:
+
+```c
+term = term * (-x*x) / ((2*k+1) * (2*k+2));
+```
+
+starting at `term = 1.0`. No factorial is ever formed, and nothing overflows.
+:::
+
+## Act 3 · The checked five (55 min, solo · 10 marks each)
+
+These give you the specification and nothing else.
+
+| | |
+|---|---|
+| `e1.c` | Find the *x* ≥ 0 with **x³ + x = a**. There is no formula to rearrange — halve the interval instead, as Monday did, and write it as **two** functions: one for the left-hand side, one that does the halving and calls it. |
+| `e2.c` | Flip a 4×4 grid about its diagonal. Build the answer in a **second** grid — writing the flip back into the original overwrites values you have not read yet. |
+| `e3.c` | `countNeighbours` for one cell of an 8×8 world. Two things can go wrong; only one is obvious. |
+| `e4.c` | **One generation** of the Game of Life. This is the lab. |
+| `e5.c` | How many cells are alive after *g* generations. |
+
+::: {.callout-note}
+`e3`, `e4` and `e5` are deliberately **one program grown three times**. Write
+`countNeighbours` once for `e3` and copy it into `e4`; put the generation in a *function*
+in `e4` and `e5` costs you three more lines. If you find yourself copying the whole rule
+into a fresh loop for `e5`, stop — that is the moment a function was supposed to save you.
+:::
+
+::: {.callout-warning}
+**The one that decides `e4`.** Every cell in a generation must see the *same old world*.
+Decide the whole next generation into a second grid, then copy it back. If you write each
+cell's answer straight into `world`, cell (0,1) counts a neighbour that has already
+changed — and the blinker below will visibly fall apart instead of flipping.
+:::
+
+Two sample worlds ship in your workspace so you can watch it run rather than trust it:
+
+```bash
+./e4 < blinker.txt      # three in a row should become three in a column
+./e4 < glider.txt       # a shape that walks
+```
+
+::: {.callout-tip}
+Tuesday's lecture printed a live cell as `##` and a dead one as two blanks, which reads
+well on a projector. Here it is **`#` and `.`** — a checker cannot see blank space.
+:::
+
+## Act 4 · Check, fix, bundle (10 min)
+
+```bash
+./check.sh          # everything, with your marks so far
+./check.sh e4       # just one problem, while you work on it
+./check.sh --bundle # bundle it up — then carry it out
+```
+
+`check.sh` compiles each program, feeds it the examples printed in your starter **and a
+fresh set of random inputs drawn while you watch**. Marks are partial: every vector you
+pass earns its share, so fixing one failing case is always worth doing.
+
+::: {.callout-important}
+The bundle lands one directory **above** your workspace. Carry it out — Moodle, or email it
+to yourself. The machine forgets; you must not.
+:::
+
+## Stretch (fast finishers, not marked)
+
+1. **Watch the glider hit the wall.** Our world has hard edges, so the glider cannot walk
+   forever. Run it well past `e5`'s twelve generations and print the population each time.
+   It does **not** die: at generation 24 it stops changing altogether, leaving four cells
+   in the bottom-right corner. Find out what they are.
+2. **Find a still life.** That corner leftover is one — a 2×2 block, which has exactly the
+   neighbour counts it needs to keep itself alive. Add a check to `e5` that reports the
+   first generation identical to the one before it, and confirm it says 24.
+3. **Make the world wrap**, so column 7's right-hand neighbour is column 0 and the glider
+   never reaches a wall at all. One change, in `countNeighbours` only — and the bounds test
+   you fought with in `e3` becomes an arithmetic one instead.
+
+## Reflect
+
+Two questions to be able to answer out loud before you leave — they are what the viva asks:
+
+1. Why does `swap` need `&a` when `countNeighbours(world, i, j)` does not?
+2. What exactly breaks if you delete the second grid in `e4` — which cell notices first?
