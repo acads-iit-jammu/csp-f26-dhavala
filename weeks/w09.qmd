@@ -5,9 +5,9 @@
 **Syllabus modules:** 7 — functions (Mon) · 3 — lists, the multi-dimensional case (Tue)
 
 ::: {.callout-note}
-First week back after the mid-semester examination. **Lab 07 is now multi-dimensional
-arrays and matrices** — EE on Tue Sep 29, the same afternoon as Tuesday's lecture;
-Mech & Materials on Wed Oct 7.
+First week back after the mid-semester examination. **Lab 07 is Functions and the Game of
+Life** — EE on Tue Sep 29, the afternoon of Tuesday's 8 am lecture; Mech & Materials on
+Wed Oct 7.
 :::
 
 ## Pre-read
@@ -107,7 +107,9 @@ main's n after  : 5
 Uncomment that last line and the compiler stops you:
 
 ```
-/private/tmp/claude-501/-Users-somadhavala-acad-iitjmu-courses-csp-f26-dhavala/79416c08-72cd-4f9f-ae08-9b6a2b9ff644/scratchpad/fn/oops.c:3:28: error: use of undeclared identifier 'result'
+scope.c:13:18: error: use of undeclared identifier 'result'
+   13 |     printf("%d", result);
+      |                  ^~~~~~
 ```
 
 `result` lived inside `twice`. Outside it, the name does not exist. And `main` has its own
@@ -218,7 +220,28 @@ double f(double x) { return cos(x) - x; }     /* where does cos x equal x? */
   check: cos(r)   = 0.7390851332  vs r = 0.7390851332
 ```
 
-The **same** bisection code each time. The only thing that changed is `f`.
+One thing has to change before that works, and it is worth seeing why. §7's test was
+`if (mid*mid > x)` — it assumed the quantity *grows* as the guess grows. That is true of
+`x² − 5` and of `x³ − 5`. It is false of `cos x − x`, which **falls** through zero. Ask that
+version for the third root and it walks the wrong way and returns 5.
+
+So the general form does not ask "is it too big?" but "**which half contains the crossing?**":
+
+```c
+double bisect(double lo, double hi, int *halvings) {
+    int k = 0;
+    while (hi - lo > 1e-12) {
+        double mid = (lo + hi) / 2.0;
+        if (f(lo) * f(mid) <= 0.0) hi = mid;   /* signs differ: the crossing is in [lo, mid] */
+        else                       lo = mid;
+        k++;
+    }
+    *halvings = k;
+    return (lo + hi) / 2.0;
+}
+```
+
+*Now* the same code solves all three, and the only thing that changes is `f`.
 
 ::: {.callout-tip}
 This is what a function buys you. Not shorter code — **a boundary**, with the problem on one
@@ -272,9 +295,8 @@ before wipe(g)  g[0][0] = 1
 after  wipe(g)  g[0][0] = 99
 ```
 
-**No `&` anywhere** — and the caller's grid changed. An array argument is *already* a place;
-there is nothing to take the address of, because passing it hands over the location rather
-than the contents. That is why `nextGeneration(world)` can fill in a world without you
+**No `&` anywhere** — and the caller's grid changed. You do not *need* the `&`, because an
+array's name already hands over the location rather than the contents. That is why `nextGeneration(world)` can fill in a world without you
 writing `&world`, and why a function can never accidentally copy a grid for you.
 
 ::: {.callout-warning}
@@ -365,8 +387,8 @@ int countNeighbours(int world[ROWS][COLS], int i, int j)
 ```
 
 `di` and `dj` run over **relative** coordinates: −1, 0, +1. Nine combinations, minus
-yourself, is eight neighbours. The first `continue` skips **yourself**; the second skips
-anything **off the edge**.
+yourself, is eight neighbours. The `continue` skips **yourself**; the `if` above the sum is
+what keeps you from reading **off the edge**.
 
 That second test is not optional. A corner cell has only *three* neighbours, and without the
 bounds check you read `world[-1][-1]` — outside the array, and undefined. It will very often
@@ -494,7 +516,7 @@ the rule mentions movement.** The glider moves anyway.
 
 ## After Class
 
-- **sin and cos by their series.** `cos x = 1 − x²/2! + x⁴/4! − …`. Write it two ways: computing each factorial, and building each term from the one before with `term *= -x*x/((2i+1)(2i+2))`. At *x* = 4 with 14 terms the first gives −0.662870 and the second −0.653644. Only one of them is right. Find out which, and why.
+- **sin and cos by their series.** `cos x = 1 − x²/2! + x⁴/4! − …`. Write it two ways: computing each factorial, and building each term from the one before with `term *= -x*x/((2i+1)(2i+2))`. Then find where the first way breaks. A hint you can check in one line: `12!` is 479001600 and fits an `int`; `13!` is 6227020800 and does not. `20!` still fits a `long long`; `21!` does not. The incremental form never builds a factorial at all.
 - Then try `ln`. The obvious series is `ln(1+u) = u − u²/2 + u³/3 − …`. Try it at *x* = 8 and watch what happens.
 - **Lab 07**: functions, and the Game of Life.
 
