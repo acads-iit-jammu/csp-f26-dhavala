@@ -1,8 +1,8 @@
-# W09: Two Dimensions, and Your First Functions {.unnumbered}
+# W09: Functions, and a Universe with One Rule {.unnumbered}
 
 **Dates:** Mon Sep 28 & Tue Sep 29, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus modules:** 3 — lists (the multi-dimensional case) · 7 — functions
+**Syllabus modules:** 7 — functions (Mon) · 3 — lists, the multi-dimensional case (Tue)
 
 ::: {.callout-note}
 First week back after the mid-semester examination. **Lab 07 is now multi-dimensional
@@ -12,9 +12,8 @@ Mech & Materials on Wed Oct 7.
 
 ## Pre-read
 
-- [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) — *from the "Multi-dimensional arrays in C" slide onward*. The first half is character arrays; we come to those next week.
-- [Lec 20](../cs1100-cse-iitm-2021/slides/Lec20.pdf) — *functions in C*
-- [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf) — *from "Matrix Operations: Addition" onward*
+- [Lec 20](../cs1100-cse-iitm-2021/slides/Lec20.pdf) — *functions in C* (Monday)
+- [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) — *from the "Multi-dimensional arrays in C" slide onward* (Tuesday). The first half is character arrays; those come next week.
 - The [W07 notes](w07.qmd) on 1-D and parallel arrays — §10 and §11 especially. That was a fortnight ago; W08 was the mid-sems.
 
 ## Decks
@@ -25,7 +24,7 @@ Mech & Materials on Wed Oct 7.
 ## The sentence this week turns on
 
 > **A function is a promise: this much goes in, that much comes out.**
-> Everything else this week is what happens when the thing going in is a grid.
+> Monday builds one. Tuesday hands one a whole world.
 
 ## Code You Can Copy
 
@@ -34,131 +33,18 @@ actually produced. **Predict each one before you run it.**
 
 ---
 
-# Monday — the grid, and the first function
+# Monday — how does the calculator do it?
 
-## 1 · A grid is not rows. It is one block.
+## 1 · A question you have never asked
 
-You have met `int a[10]` in lectures. `int m[3][4]` looks like three arrays of four. It is
-not. It is **twelve integers in a row**, and the two subscripts are a way of talking about
-them.
+You press **√** on a calculator and a number appears. Where does it come from? Nobody stored
+a table; nobody looked it up. Something *computed* it — with a loop, a comparison, and
+nothing you have not already met.
 
-```c
-#include <stdio.h>
-#define ROWS 3
-#define COLS 4
-int main(void) {
-    int m[ROWS][COLS] = { { 1, 2, 3, 4 },
-                          { 5, 6, 7, 8 },
-                          { 9,10,11,12 } };
+By the end of today you will have written `sqrt` yourself. What you will actually have
+written is **a function** — and then you will find you wrote rather more than that.
 
-    printf("one int          %2zu bytes\n", sizeof(int));
-    printf("one row, m[0]    %2zu bytes   (%d ints)\n", sizeof(m[0]), COLS);
-    printf("the whole grid m %2zu bytes   (%d ints)\n", sizeof(m), ROWS*COLS);
-    printf("\nso the grid is ONE block of %d ints, not %d separate rows.\n\n",
-           ROWS*COLS, ROWS);
-
-    printf("m[i][j]   is the  (i*%d + j)-th int in that block\n", COLS);
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++)
-            printf("  m[%d][%d] -> %2d-th   value %2d\n", i, j, i*COLS + j, m[i][j]);
-    }
-    return 0;
-}
-```
-
-```
-one int           4 bytes
-one row, m[0]    16 bytes   (4 ints)
-the whole grid m 48 bytes   (12 ints)
-
-so the grid is ONE block of 12 ints, not 3 separate rows.
-```
-
-and then, for all twelve cells:
-
-```
-
-m[i][j]   is the  (i*4 + j)-th int in that block
-  m[0][0] ->  0-th   value  1
-  m[0][1] ->  1-th   value  2
-  m[0][2] ->  2-th   value  3
-  m[0][3] ->  3-th   value  4
-  m[1][0] ->  4-th   value  5
-  m[1][1] ->  5-th   value  6
-  m[1][2] ->  6-th   value  7
-  m[1][3] ->  7-th   value  8
-  m[2][0] ->  8-th   value  9
-  m[2][1] ->  9-th   value 10
-  m[2][2] -> 10-th   value 11
-  m[2][3] -> 11-th   value 12
-```
-
-::: {.callout-tip}
-`%zu` is the conversion for a `sizeof` result — `sizeof` has a type of its own, and `%d` is
-not it.
-:::
-
-**That formula is the whole idea.** `m[i][j]` is the `(i*COLS + j)`-th integer in one block.
-Moving along a row moves one step; moving down a column jumps a whole row's width. This is
-called **row-major order**, and on Tuesday it will explain a rule that would otherwise look
-arbitrary.
-
-Notice what `sizeof` proved: one row is 16 bytes, three rows would be 48, and the whole grid
-*is* 48 — no gaps, nothing in between. One block.
-
-## 2 · Walking a grid
-
-Two loops, the outer one picking the row:
-
-```c
-for (int i = 0; i < ROWS; i++) {
-    for (int j = 0; j < COLS; j++)
-        printf("%4d", m[i][j]);
-    printf("\n");                 /* end of a ROW -- outer loop's job */
-}
-```
-
-The `printf("\n")` belongs to the **outer** loop. Put it in the inner one and you print one
-number per line; leave it out and you print a single long line. Neither is a syntax error,
-and that is the point: the compiler cannot tell you which grid you meant.
-
-Filling one is the same two loops with `scanf` in the middle, and the `&` you already use
-for a plain variable:
-
-```c
-#include <stdio.h>
-#define ROWS 2
-#define COLS 3
-int main(void) {
-    int m[ROWS][COLS];
-
-    printf("enter %d numbers, row by row: ", ROWS*COLS);
-    for (int i = 0; i < ROWS; i++)
-        for (int j = 0; j < COLS; j++)
-            scanf("%d", &m[i][j]);          /* the & you already know */
-
-    printf("\nthe grid you gave me\n");
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) printf("%4d", m[i][j]);
-        printf("\n");
-    }
-    return 0;
-}
-```
-
-```
-enter 6 numbers, row by row: 
-the grid you gave me
-  10  20  30
-  40  50  60
-```
-
-`&m[i][j]` is *where that one cell lives* — exactly what `&count` means for an ordinary
-`int`. You will need this in Lab 07.
-
-## 3 · The first function
-
-A program that does three things is three walls of loops. A function gives each one a name.
+## 2 · A function is a promise
 
 ```c
 #include <stdio.h>
@@ -183,327 +69,388 @@ largest(7, 12) = 12
 largest(4, 4) = 4
 ```
 
-Three parts, and they are worth naming:
-
 | | |
 |---|---|
-| `int largest(int a, int b);` | the **declaration** — a promise made before the promise is kept |
+| `int largest(int a, int b);` | the **declaration** — a promise made before it is kept |
 | `int largest(int a, int b) { ... }` | the **definition** — the keeping of it |
 | `largest(x, y)` | the **call** |
 
 The declaration is what lets `main` use `largest` before it has been written. C reads your
 file top to bottom and will not take your word for a name it has not met.
 
-## 4 · What a function is given
+## 3 · Scope — a function's variables are its own
 
 ```c
 #include <stdio.h>
 
-void tryToChange(int n, int row[]) {
-    n      = 99;
-    row[0] = 99;
-    printf("  inside   n = %d   row[0] = %d\n", n, row[0]);
+int twice(int n) {
+    int result = n * 2;          /* result belongs to twice, and to nobody else */
+    return result;
 }
 
 int main(void) {
-    int n = 1;
-    int row[3] = { 1, 2, 3 };
-
-    printf("  before   n = %d   row[0] = %d\n", n, row[0]);
-    tryToChange(n, row);
-    printf("  after    n = %d   row[0] = %d\n", n, row[0]);
+    int n = 5;                   /* a DIFFERENT n, living in main */
+    printf("main's n before : %d\n", n);
+    printf("twice(n)        : %d\n", twice(n));
+    printf("main's n after  : %d\n", n);
+    /* printf("%d", result);     <-- would not compile: result is not ours */
     return 0;
 }
 ```
 
 ```
-  before   n = 1   row[0] = 1
-  inside   n = 99   row[0] = 99
-  after    n = 1   row[0] = 99
+main's n before : 5
+twice(n)        : 10
+main's n after  : 5
 ```
 
-**Look at the third line.** `n` went in as 1, was set to 99 inside, and came home as 1. The
-function was handed a *copy*. That is **call by value**, and it is why a function cannot
-reach out and change a plain variable belonging to its caller.
+Uncomment that last line and the compiler stops you:
 
-Now look at `row[0]`. Same function, same call — and it came home **changed**.
+```
+/private/tmp/claude-501/-Users-somadhavala-acad-iitjmu-courses-csp-f26-dhavala/79416c08-72cd-4f9f-ae08-9b6a2b9ff644/scratchpad/fn/oops.c:3:28: error: use of undeclared identifier 'result'
+```
+
+`result` lived inside `twice`. Outside it, the name does not exist. And `main` has its own
+`n` while `twice` has its own `n` — **different variables that happen to share a name**.
 
 ::: {.callout-important}
-An array handed to a function is **not copied**. The function works on your array, not on a
-copy of it. Take that as a rule for today: the machinery that explains it is called a
-*pointer*, and it is a later week's business. What you can rely on now is the behaviour — a
-function given an `int` cannot change your `int`; a function given an array can change your
-array.
+Everything in §4 follows from this section. It is not a separate rule.
 :::
 
-::: {.callout-warning}
-**Do not reach for `sizeof` on an array parameter.** Inside a function, `sizeof` on a
-parameter does *not* give you the size of the caller's array — the rule from §1 stops at the
-function boundary, for the same reason the array was not copied. `sizeof` is trustworthy
-where the array was **declared**, and nowhere else. This is why every function below is also
-told how big the grid is.
+## 4 · Call by value
+
+```c
+void addOne(int n) { n = n + 1; }
+```
+
+The parameter `n` is **a local variable of `addOne`**, started off as a copy of whatever you
+passed. Changing it changes *`addOne`'s* `n`. The caller's variable never hears about it —
+not because of a rule about arguments, but because of §3.
+
+## 5 · Call by reference
+
+```c
+void addOne(int n)   { n = n + 1; }        /* gets a COPY */
+void reallyAddOne(int *n) { *n = *n + 1; } /* gets WHERE the value lives */
+```
+
+```
+after addOne(count)        count = 10
+after reallyAddOne(&count) count = 11
+```
+
+`&count` is **where `count` lives**. `int *n` is a parameter that receives such a place, and
+`*n` reaches through it to the value.
+
+::: {.callout-note}
+You have been doing this since Week 3. `scanf("%d", &count)` needs the `&` for exactly this
+reason: `scanf` cannot hand a value back through a copy, so you tell it *where to put it*.
+:::
+
+**When to use which.** By value to **read** something. By reference when the caller's
+variable must **change** — or when one `return` is not enough, which is §7.
+
+## 6 · Square root, by halving
+
+√5 is somewhere between 0 and 5. Guess the middle: 2.5. But 2.5 × 2.5 = 6.25, too big — so
+the answer lies in [0, 2.5]. Halve again. Each step throws away **half of what is left**.
+
+## 7 · Two answers out of one function
+
+```c
+double mySqrt(double x, int *halvings) {
+    double lo = 0.0, hi = x;
+    if (x < 1.0) hi = 1.0;
+    int k = 0;
+    while (hi - lo > 1e-12) {
+        double mid = (lo + hi) / 2.0;
+        if (mid * mid > x) hi = mid;
+        else               lo = mid;
+        k++;
+    }
+    *halvings = k;              /* the SECOND answer, sent home by reference */
+    return lo;                  /* the first answer, returned normally */
+}
+```
+
+```
+sqrt(5) = 2.2360679775, found in 43 halvings
+```
+
+The root comes back as the **return value**. The number of halvings comes back **by
+reference**. That is when you reach for a pointer — not to be clever, but because one
+`return` is not enough.
+
+## 8 · Look at what you actually wrote
+
+Nothing in that loop knows the words "square root". It knows only one thing: **is my guess
+too big?** And "too big" means `mid*mid - 5 > 0` — the *sign of a function*.
+
+You did not write `sqrt`. You wrote **find where a function crosses zero**, and then used it
+on one particular function.
+
+## 9 · Change `f`, solve something else
+
+```c
+double f(double x) { return x*x - 5.0; }      /* zero at sqrt(5) */
+```
+
+```
+  root = 2.2360679775   in 43 halvings
+  check: sqrt(5)  = 2.2360679775
+```
+
+```c
+double f(double x) { return x*x*x - 5.0; }    /* zero at the CUBE root */
+```
+
+```
+  root = 1.7099759467   in 43 halvings
+  check: cbrt(5)  = 1.7099759467
+```
+
+```c
+double f(double x) { return cos(x) - x; }     /* where does cos x equal x? */
+```
+
+```
+  root = 0.7390851332   in 43 halvings
+  check: cos(r)   = 0.7390851332  vs r = 0.7390851332
+```
+
+The **same** bisection code each time. The only thing that changed is `f`.
+
+::: {.callout-tip}
+This is what a function buys you. Not shorter code — **a boundary**, with the problem on one
+side and the method on the other.
 :::
 
 ---
 
-# Tuesday — matrices as functions
+# Tuesday — a universe with one rule
 
-## 5 · Giving a grid to a function
+## 10 · Start with the world, not the syntax
 
-Here is the rule, and here is the compiler refusing to accept anything else:
+A grid of cells, each **alive** or **dead**. Nothing moves and nothing is drawn. Every cell
+looks at its **eight neighbours** and decides what to be next. That is the whole game —
+nobody plays it.
 
-```c
-void f(int m[][]) { printf("%d\n", m[1][0]); }
-```
-
-```
-p6.c:2:13: error: array has incomplete element type 'int[]'
-```
-
-The column count is not optional. Ask §1 why: to find `m[1][0]` the machine computes
-`1*COLS + 0`. **Without `COLS` there is no arithmetic to do.** The row count it can live
-without — nothing in that sum uses it — which is why `int m[][4]` is legal and `int m[][]`
-is not.
-
-## 6 · Three operations, three functions
+The array comes *after* the world. Decide what you are modelling; the declaration follows.
 
 ```c
-#define N 3
+#define ROWS 8
+#define COLS 8
 
-void printMatrix(int m[][N]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) printf("%5d", m[i][j]);
-        printf("\n");
-    }
-}
-
-void addMatrix(int a[][N], int b[][N], int out[][N]) {
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++)
-            out[i][j] = a[i][j] + b[i][j];
-}
-
-void multiplyMatrix(int a[][N], int b[][N], int out[][N]) {
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++) {
-            int sum = 0;
-            for (int k = 0; k < N; k++) sum += a[i][k] * b[k][j];
-            out[i][j] = sum;
-        }
-}
+int world[ROWS][COLS] = {0};      /* every cell dead, to begin */
 ```
 
-Called from `main`:
-
-```c
-int main(void) {
-    int a[N][N] = { {1,2,3}, {4,5,6}, {7,8,9} };
-    int b[N][N] = { {1,0,0}, {0,1,0}, {0,0,1} };
-    int c[N][N];
-
-    printf("A\n");                printMatrix(a);
-    printf("B (the identity)\n"); printMatrix(b);
-    addMatrix(a, b, c);
-    printf("A + B\n");            printMatrix(c);
-    multiplyMatrix(a, b, c);
-    printf("A x B\n");            printMatrix(c);
-    return 0;
-}
-```
-
-```
-A
-    1    2    3
-    4    5    6
-    7    8    9
-B (the identity)
-    1    0    0
-    0    1    0
-    0    0    1
-A + B
-    2    2    3
-    4    6    6
-    7    8   10
-A x B
-    1    2    3
-    4    5    6
-    7    8    9
-```
-
-**A free check.** Multiplying by the identity must give back what you started with, and it
-did. You did not need to trust the triple loop — you asked it a question whose answer you
-already knew. Do that before you trust any matrix code you write.
-
-Notice too that `addMatrix` and `multiplyMatrix` **write into a grid they were given**. They
-can, because of §4. That is the whole reason they return nothing.
-
-## 7 · The practical problem: Conway's Game of Life
-
-A grid of cells, each alive or dead. One rule, applied everywhere at once:
-
-- a live cell with **2 or 3** live neighbours stays alive; otherwise it dies
-- a dead cell with **exactly 3** live neighbours comes alive
-
-That is all. It is not a game — nobody plays. You set a starting grid and watch.
-
-Here is the whole program, so you can type it and run it. Note `#define N 8`: this is a new
-`N`, nothing to do with the 3 of §6.
-
-```c
-#include <stdio.h>
-#define N 8
-
-void printGrid(int g[][N]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if (g[i][j]) printf("#");
-            else         printf(".");
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
-
-int countNeighbours(int g[][N], int r, int c) {
-    int n = 0;
-    for (int di = -1; di <= 1; di++)
-        for (int dj = -1; dj <= 1; dj++) {
-            if (di == 0 && dj == 0) continue;                  /* not yourself */
-            int i = r + di, j = c + dj;
-            if (i < 0 || i >= N || j < 0 || j >= N) continue;   /* off the edge */
-            n += g[i][j];
-        }
-    return n;
-}
-
-void step(int cur[][N], int next[][N]) {
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++) {
-            int n = countNeighbours(cur, i, j);
-            if (cur[i][j]) next[i][j] = (n == 2 || n == 3);
-            else           next[i][j] = (n == 3);
-        }
-}
-
-void copyGrid(int from[][N], int to[][N]) {
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++) to[i][j] = from[i][j];
-}
-
-int main(void) {
-    int cur[N][N] = {0}, next[N][N];
-    cur[0][1] = 1; cur[1][2] = 1;
-    cur[2][0] = 1; cur[2][1] = 1; cur[2][2] = 1;      /* a glider */
-
-    for (int gen = 0; gen <= 4; gen++) {
-        printf("generation %d\n", gen);
-        printGrid(cur);
-        step(cur, next);
-        copyGrid(next, cur);
-    }
-    return 0;
-}
-```
-
-Three things in there are worth a second look.
-
-`n += g[i][j]` adds a cell straight into a count, and `next[i][j] = (n == 2 || n == 3)`
-stores a *comparison* into an `int`. Both work because in C a comparison **is** a value —
-1 when true, 0 when false — and a live cell is stored as 1. For the same reason
-`if (cur[i][j])` needs no `== 1`: **any non-zero value is true**, so it reads simply as
-*"if this cell is alive"*. And the two `continue`s do
-different jobs: the first skips the cell itself, the second skips neighbours that fall off
-the edge. Both would otherwise be wrong answers rather than crashes.
-
-Starting from a five-cell shape called a **glider**:
-
-```
-generation 0
-.#......
-..#.....
-###.....
-........
-........
-........
-........
-........
-```
-
-```
-generation 1
-........
-#.#.....
-.##.....
-.#......
-........
-........
-........
-........
-```
-
-Four generations on, it is back to its original shape — one cell down and one cell right.
-It walks.
-
-```
-generation 4
-........
-..#.....
-...#....
-.###....
-........
-........
-........
-........
-```
-
-## 8 · The bug that makes it a lesson
-
-`step` reads `cur` and writes `next`. Why not save the memory and update one grid in place?
-
-Because a cell's neighbours would then change **while you are still counting them**. Cells
-decided early in the sweep are read using the old values; cells decided later see a mixture
-of old values and ones already overwritten. Here is the same glider, one generation,
-computed both ways:
-
-```
-correct, two grids          in place, one grid
-........                    ........
-#.#.....                    ..#.....
-.##.....                    .##.....
-.#......                    ........
-........                    ........
-........                    ........
-........                    ........
-........                    ........
-```
-
-Look at **row 1, column 0** and at **row 3, column 1** — the leftmost `#` of the second
-row, and the one below it. Those are the only two cells where the universes part company,
-and in the in-place version each was decided using at least one neighbour that had already
-been rewritten during this same sweep.
-
-Not a crash. Not a warning. A different, wrong universe.
+| written | valid? |
+|---|---|
+| `world[0][0]` | yes — the first cell |
+| `world[7][7]` | yes — the last |
+| `world[8][8]` | **no** — there is no row 8 |
 
 ::: {.callout-warning}
-**Whenever every cell must be updated "at the same time", you need somewhere to put the new
-values while the old ones are still being read.** W07 had a cousin of this: in the
-corrupted-record section, skipping a bad record was not enough, because the *next* pass
-still read that same value as its neighbour — one bad record spoiled two differences. The
-same family of mistake; a different fix.
+For `[8]` the valid indices are **0 … 7**. C will not stop you writing `world[8][8]`, and
+what happens then is **undefined** — not "whatever happens to be in that memory".
 :::
+
+## 11 · Walking the world
+
+```c
+void printWorld(int world[ROWS][COLS])
+{
+    for (int i = 0; i < ROWS; i++) {
+
+        for (int j = 0; j < COLS; j++) {
+
+            if (world[i][j])
+                printf("##");
+            else
+                printf("  ");
+        }
+
+        printf("\n");
+    }
+}
+```
+
+Outer loop picks the row; inner loop walks its columns. The newline belongs to the **outer**
+loop, because it ends a row.
+
+## 12 · The rule, in full
+
+| the cell is | live neighbours | it becomes |
+|---|---|---|
+| **alive** | 2 or 3 | alive |
+| **alive** | anything else | dead |
+| **dead** | exactly 3 | alive |
+| **dead** | anything else | dead |
+
+Local rules only. No cell can see further than one step away.
+
+## 13 · Counting one cell's neighbours
+
+```c
+int countNeighbours(int world[ROWS][COLS], int i, int j)
+{
+    int count = 0;
+
+    for (int di = -1; di <= 1; di++) {
+
+        for (int dj = -1; dj <= 1; dj++) {
+
+            if (di == 0 && dj == 0)
+                continue;
+
+            int ni = i + di;
+            int nj = j + dj;
+
+            if (ni >= 0 && ni < ROWS &&
+                nj >= 0 && nj < COLS) {
+
+                count += world[ni][nj];
+            }
+        }
+    }
+
+    return count;
+}
+```
+
+`di` and `dj` run over **relative** coordinates: −1, 0, +1. Nine combinations, minus
+yourself, is eight neighbours. The first `continue` skips **yourself**; the second skips
+anything **off the edge**.
+
+That second test is not optional. A corner cell has only *three* neighbours, and without the
+bounds check you read `world[-1][-1]` — outside the array, and undefined. It will very often
+appear to work, which is exactly the danger.
+
+## 14 · The bug that matters most
+
+```c
+for (int i = 0; i < ROWS; i++)
+    for (int j = 0; j < COLS; j++) {
+        int neighbours = countNeighbours(world, i, j);
+        if (neighbours < 2) world[i][j] = 0;    /* writing into the world */
+        /* ... */
+    }
+```
+
+Cell (0,0) is decided and written back. Cell (0,1) then counts *its* neighbours — and one of
+them has **already changed**. Every cell in a generation must see the same old world.
+
+> next = f(current). You cannot let `current` change while `f` is still reading it.
+
+So you need two grids:
+
+```c
+void nextGeneration(int world[ROWS][COLS])
+{
+    int next[ROWS][COLS];
+
+    for (int i = 0; i < ROWS; i++) {
+
+        for (int j = 0; j < COLS; j++) {
+
+            int neighbors =
+                countNeighbours(world, i, j);
+
+            if (world[i][j] == 1) {
+
+                if (neighbors == 2 ||
+                    neighbors == 3)
+
+                    next[i][j] = 1;
+
+                else
+                    next[i][j] = 0;
+
+            } else {
+
+                if (neighbors == 3)
+                    next[i][j] = 1;
+
+                else
+                    next[i][j] = 0;
+            }
+        }
+    }
+
+
+    /* Copy next generation back */
+
+    for (int i = 0; i < ROWS; i++) {
+
+        for (int j = 0; j < COLS; j++) {
+
+            world[i][j] = next[i][j];
+        }
+    }
+}
+```
+
+## 15 · First test: something that should blink
+
+```
+Generation 0
+
+                
+                
+                
+    ######
+```
+
+```
+Generation 1
+
+                
+                
+      ##        
+      ##        
+      ##
+```
+
+Three in a row becomes three in a column, and back again. If your program does not do this,
+stop and fix it before going any further.
+
+## 16 · Second test: something that should walk
+
+```
+Generation 0
+
+                
+    ##          
+      ##        
+  ######
+```
+
+```
+Generation 4
+
+                
+                
+      ##        
+        ##      
+    ######
+```
+
+Four generations later: the same five cells, one row down and one column right. **Nothing in
+the rule mentions movement.** The glider moves anyway.
 
 ## Questions to Bring Back
 
-1. `sizeof(m)` was 48 for `int m[3][4]`. What are `sizeof(m[0])` and `sizeof(m[0][0])`, and what does each one *mean*? Ask this where `m` was declared — §4 says why not inside a function.
-2. Why is `int m[][4]` legal as a parameter but `int m[4][]` is not?
-3. `addMatrix(a, b, c)` returns `void` and yet does something useful. How?
-4. In §4, could you write a function that changes a caller's plain `int`? What would it have to be given instead?
-5. The glider walks. Does anything in the rules mention movement?
+1. In §3, `main` and `twice` each had an `n`. How many variables called `n` existed while `twice` was running?
+2. Why does `scanf` need `&` but `printf` does not?
+3. §7 returned one answer and sent another back by reference. Could it have returned both? What would have to change?
+4. In §9 only `f` changed. What does that tell you about where the *problem* lives and where the *method* lives?
+5. A corner cell has three neighbours, an edge cell five. Where in §13 is that handled — and what would happen if it were not?
 
 ## After Class
 
-- Type in the Game of Life exactly as printed and run it. Then change the starting shape — try a 2x2 block, and a row of three — and predict before each run.
-- **Lab 07** is Tuesday afternoon (EE) / Wed Oct 7 (ME & MT): multi-dimensional arrays and matrices, written as functions.
+- **sin and cos by their series.** `cos x = 1 − x²/2! + x⁴/4! − …`. Write it two ways: computing each factorial, and building each term from the one before with `term *= -x*x/((2i+1)(2i+2))`. At *x* = 4 with 14 terms the first gives −0.662870 and the second −0.653644. Only one of them is right. Find out which, and why.
+- Then try `ln`. The obvious series is `ln(1+u) = u − u²/2 + u³/3 − …`. Try it at *x* = 8 and watch what happens.
+- **Lab 07**: functions, and the Game of Life.
 
 ## PAGAL Notes
 
