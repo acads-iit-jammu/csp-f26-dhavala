@@ -240,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W09: Iteration &amp; Problem Solving</span></a>
+ <span class="menu-text">W09: Functions, and a Universe with One Rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -347,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 07: Functions &amp; Recursion</span></a>
+ <span class="menu-text">Lab 07: Functions &amp; the Game of Life</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -488,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
 <p><strong>Monday — what happens between <code>gcc hello.c</code> and <code>./hello</code>:</strong></p>
 <ul>
-<li>📽️ <a href="../materials/w05-deck-08-source-to-executable.html"><strong>Deck 08 — From Source to Executable</strong></a> — the week’s slides:
+<li>📽️ <a href="../materials/w05-deck-09-source-to-executable.html"><strong>Deck 09 — From Source to Executable</strong></a> — the week’s slides:
 <ul>
 <li><strong>Lab 03 closed out</strong> — the checked three worked together: <code>e1</code> (inches → feet, one division read twice), <code>e2</code> (the <code>100.0</code> that is the whole problem), <code>e3</code> (<code>'a' - 'A'</code> — derive the gap, never write 32). Everyone meets these again in Lab 04.</li>
 <li><strong>The bridge:</strong> who decided that <code>marks * 100 / total</code> was integer division? Not the running program — <strong>the compiler</strong>, before a single instruction executed. Precedence and type rules are settled at compile time, and <code>gcc -S</code> shows it.</li>
@@ -497,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>An audit on your own manual:</strong> §2.9 claims <code>x++</code> is faster than <code>x = x + 1</code>. It is not, and you can prove it in eight seconds with <code>diff</code>.</li>
 <li><strong>Two kinds of error:</strong> the compiler catches syntax and never intent. Four tools stand between your source and your executable, and <em>none of them has read the problem statement</em>.</li>
 </ul></li>
-<li>📽️ <a href="../materials/w05-deck-09-why-linkers.html"><strong>Deck 09 — Why Assemblers and Linkers Exist</strong></a> — the companion deck: not <em>what</em> the stages do but <strong>why anyone built it that way</strong>. Separate compilation; object files that are <em>deliberately</em> incomplete; relocation, visible with <code>objdump -r</code>; what <code>#include</code> really gives you (a promise, not an implementation); static vs dynamic linking; and the principle underneath it all — <strong>delay a decision until it reaches the component that has enough information to make it</strong>.</li>
+<li>📽️ <a href="../materials/w05-deck-10-why-linkers.html"><strong>Deck 10 — Why Assemblers and Linkers Exist</strong></a> — the companion deck: not <em>what</em> the stages do but <strong>why anyone built it that way</strong>. Separate compilation; object files that are <em>deliberately</em> incomplete; relocation, visible with <code>objdump -r</code>; what <code>#include</code> really gives you (a promise, not an implementation); static vs dynamic linking; and the principle underneath it all — <strong>delay a decision until it reaches the component that has enough information to make it</strong>.</li>
 <li>🖨️ <a href="../materials/w05-linkers-notes.html"><strong>Why Assemblers and Linkers Exist — notes</strong></a> — the same material as a printable handout, including the two-minute experiment worth doing with your own hands.</li>
 <li><a href="../cs1100-cse-iitm-2021/slides/Lec6.pdf">Lec 6</a> — companion slides (Prof.&nbsp;Shweta Agrawal, IIT Madras)</li>
 </ul>

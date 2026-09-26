@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deck 09 — Why Assemblers and Linkers Exist · CS-1-01 (MO)</title>
+<title>Deck 10 — Why Assemblers and Linkers Exist · CS-1-01 (MO)</title>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -70,9 +70,9 @@ const table = (head,rows)=> e("table",null,
 
 const SLIDES = [
 {cls:"title", body:()=> e(F,null,
-  e("div",{className:"kicker"},"CS-1-01 (MO) · Monsoon 2026 · W05 · companion to Deck 08"),
+  e("div",{className:"kicker"},"CS-1-01 (MO) · Monsoon 2026 · W05 · companion to Deck 09"),
   e("h1",null,"Why Assemblers and Linkers Exist"),
-  e("h2",null,"Deck 09 — a .o file is not broken. It is deliberately incomplete."),
+  e("h2",null,"Deck 10 — a .o file is not broken. It is deliberately incomplete."),
   e("p",{style:{marginTop:"2em",color:"#cfe3ff"}},"Soma S Dhavala · Electrical / Mechanical / Materials"),
   e("p",{style:{color:"#8fb4e8",fontSize:"1rem"}},"→ arrow keys or click the right edge to advance"))},
 
@@ -173,7 +173,7 @@ function Deck(){
       s.body()),
     e("div",{className:"bar"}, e("div",{style:{width:((i+1)/SLIDES.length*100)+"%"}})),
     e("div",{className:"foot"},
-      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 09 · Why Assemblers and Linkers Exist"),
+      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 10 · Why Assemblers and Linkers Exist"),
       e("span",{className:"navhint"},"← → to navigate"),
       e("span",null, (i+1)+" / "+SLIDES.length)));
 }

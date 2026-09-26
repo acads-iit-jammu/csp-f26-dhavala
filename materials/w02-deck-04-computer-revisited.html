@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deck 04 · The Computer, Revisited · CS-1-01 (MO)</title>
+<title>Deck 4 · The Computer, Revisited · CS-1-01 (MO)</title>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -68,7 +68,7 @@ const SLIDES = [
 {cls:"title", body:()=> e(F,null,
   e("div",{className:"kicker"},"CS-1-01 (MO) · Monsoon 2026 · W02 · Lecture 1"),
   e("h1",null,"The Computer, Revisited"),
-  e("h2",null,"Deck 04 — from turtle steps to von Neumann, and a machine you can program"),
+  e("h2",null,"Deck 4 — from turtle steps to von Neumann, and a machine you can program"),
   e("p",{style:{marginTop:"2em",color:"#cfe3ff"}},"Soma S Dhavala · Electrical / Mechanical / Materials"),
   e("p",{style:{color:"#8fb4e8",fontSize:"1rem"}},"→ arrow keys or click the right edge to advance"))},
 
@@ -140,7 +140,7 @@ function Deck(){
       s.body()),
     e("div",{className:"bar"}, e("div",{style:{width:((i+1)/SLIDES.length*100)+"%"}})),
     e("div",{className:"foot"},
-      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 04 · The Computer, Revisited"),
+      e("span",null, e("b",null,"CS-1-01 (MO)")," · Deck 4 · The Computer, Revisited"),
       e("span",{className:"navhint"},"← → to navigate"),
       e("span",null, (i+1)+" / "+SLIDES.length)));
 }

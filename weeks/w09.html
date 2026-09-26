@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W09: Iteration &amp; Problem Solving – CS-1-01 (MO)</title>
+<title>W09: Functions, and a Universe with One Rule – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w09.html">W09: Iteration &amp; Problem Solving</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w09.html">W09: Functions, and a Universe with One Rule</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -205,7 +240,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w09.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">W09: Iteration &amp; Problem Solving</span></a>
+ <span class="menu-text">W09: Functions, and a Universe with One Rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -312,7 +347,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 07: Functions &amp; Recursion</span></a>
+ <span class="menu-text">Lab 07: Functions &amp; the Game of Life</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -404,18 +439,44 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#pre-read" id="toc-pre-read" class="nav-link active" data-scroll-target="#pre-read">Pre-read</a></li>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
+  <li><a href="#decks" id="toc-decks" class="nav-link" data-scroll-target="#decks">Decks</a></li>
+  <li><a href="#the-sentence-this-week-turns-on" id="toc-the-sentence-this-week-turns-on" class="nav-link" data-scroll-target="#the-sentence-this-week-turns-on">The sentence this week turns on</a></li>
+  <li><a href="#code-you-can-copy" id="toc-code-you-can-copy" class="nav-link" data-scroll-target="#code-you-can-copy">Code You Can Copy</a></li>
+  <li><a href="#monday-how-does-the-calculator-do-it" id="toc-monday-how-does-the-calculator-do-it" class="nav-link" data-scroll-target="#monday-how-does-the-calculator-do-it">Monday — how does the calculator do it?</a>
+  <ul class="collapse">
+  <li><a href="#a-question-you-have-never-asked" id="toc-a-question-you-have-never-asked" class="nav-link" data-scroll-target="#a-question-you-have-never-asked">1 · A question you have never asked</a></li>
+  <li><a href="#a-function-is-a-promise" id="toc-a-function-is-a-promise" class="nav-link" data-scroll-target="#a-function-is-a-promise">2 · A function is a promise</a></li>
+  <li><a href="#scope-a-functions-variables-are-its-own" id="toc-scope-a-functions-variables-are-its-own" class="nav-link" data-scroll-target="#scope-a-functions-variables-are-its-own">3 · Scope — a function’s variables are its own</a></li>
+  <li><a href="#call-by-value" id="toc-call-by-value" class="nav-link" data-scroll-target="#call-by-value">4 · Call by value</a></li>
+  <li><a href="#call-by-reference" id="toc-call-by-reference" class="nav-link" data-scroll-target="#call-by-reference">5 · Call by reference</a></li>
+  <li><a href="#square-root-by-halving" id="toc-square-root-by-halving" class="nav-link" data-scroll-target="#square-root-by-halving">6 · Square root, by halving</a></li>
+  <li><a href="#two-answers-out-of-one-function" id="toc-two-answers-out-of-one-function" class="nav-link" data-scroll-target="#two-answers-out-of-one-function">7 · Two answers out of one function</a></li>
+  <li><a href="#look-at-what-you-actually-wrote" id="toc-look-at-what-you-actually-wrote" class="nav-link" data-scroll-target="#look-at-what-you-actually-wrote">8 · Look at what you actually wrote</a></li>
+  <li><a href="#change-f-solve-something-else" id="toc-change-f-solve-something-else" class="nav-link" data-scroll-target="#change-f-solve-something-else">9 · Change <code>f</code>, solve something else</a></li>
+  </ul></li>
+  <li><a href="#tuesday-a-universe-with-one-rule" id="toc-tuesday-a-universe-with-one-rule" class="nav-link" data-scroll-target="#tuesday-a-universe-with-one-rule">Tuesday — a universe with one rule</a>
+  <ul class="collapse">
+  <li><a href="#start-with-the-world-not-the-syntax" id="toc-start-with-the-world-not-the-syntax" class="nav-link" data-scroll-target="#start-with-the-world-not-the-syntax">10 · Start with the world, not the syntax</a></li>
+  <li><a href="#b-handing-a-whole-world-to-a-function" id="toc-b-handing-a-whole-world-to-a-function" class="nav-link" data-scroll-target="#b-handing-a-whole-world-to-a-function">10b · Handing a whole world to a function</a></li>
+  <li><a href="#walking-the-world" id="toc-walking-the-world" class="nav-link" data-scroll-target="#walking-the-world">11 · Walking the world</a></li>
+  <li><a href="#the-rule-in-full" id="toc-the-rule-in-full" class="nav-link" data-scroll-target="#the-rule-in-full">12 · The rule, in full</a></li>
+  <li><a href="#counting-one-cells-neighbours" id="toc-counting-one-cells-neighbours" class="nav-link" data-scroll-target="#counting-one-cells-neighbours">13 · Counting one cell’s neighbours</a></li>
+  <li><a href="#the-bug-that-matters-most" id="toc-the-bug-that-matters-most" class="nav-link" data-scroll-target="#the-bug-that-matters-most">14 · The bug that matters most</a></li>
+  <li><a href="#first-test-something-that-should-blink" id="toc-first-test-something-that-should-blink" class="nav-link" data-scroll-target="#first-test-something-that-should-blink">15 · First test: something that should blink</a></li>
+  <li><a href="#second-test-something-that-should-walk" id="toc-second-test-something-that-should-walk" class="nav-link" data-scroll-target="#second-test-something-that-should-walk">16 · Second test: something that should walk</a></li>
+  <li><a href="#questions-to-bring-back" id="toc-questions-to-bring-back" class="nav-link" data-scroll-target="#questions-to-bring-back">Questions to Bring Back</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w09.html">W09: Iteration &amp; Problem Solving</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w09.html">W09: Functions, and a Universe with One Rule</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W09: Iteration &amp; Problem Solving</h1>
+<h1 class="title">W09: Functions, and a Universe with One Rule</h1>
 </div>
 
 
@@ -433,30 +494,492 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Dates:</strong> Mon Sep 28 &amp; Tue Sep 29, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 4 — Iterative control (Mon) · 7 — Problem-solving session (Tue)</p>
+<p><strong>Syllabus modules:</strong> 7 — functions (Mon) · 3 — lists, the multi-dimensional case (Tue)</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>First week back after the mid-semester examination. <strong>Lab 07 is now multi-dimensional arrays and matrices</strong> — EE on Tue Sep 29, the same afternoon as Tuesday’s lecture; Mech &amp; Materials on Wed Oct 7.</p>
+</div>
+</div>
+</div>
 <section id="pre-read" class="level2">
 <h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
-</section>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
 <ul>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec9.pdf">Lec 9</a> — First loop construct: <code>while</code></li>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec12.pdf">Lec 12</a> — <code>for</code> loop (includes <code>do-while</code>, <code>break</code>, <code>continue</code>)</li>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec13.pdf">Lec 13</a> — Example problems: mini calculator</li>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec14.pdf">Lec 14</a> — Loop examples: primes, minimum, GCD</li>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec16.pdf">Lec 16</a> — Loop revision: patterns, factorization, square roots</li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec20.pdf">Lec 20</a> — <em>functions in C</em> (Monday)</li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec17.pdf">Lec 17</a> — <em>from the “Multi-dimensional arrays in C” slide onward</em> (Tuesday). The first half is character arrays; those come next week.</li>
+<li>The <a href="../weeks/w07.html">W07 notes</a> on 1-D and parallel arrays — §10 and §11 especially. That was a fortnight ago; W08 was the mid-sems.</li>
 </ul>
+</section>
+<section id="decks" class="level2">
+<h2 class="anchored" data-anchor-id="decks">Decks</h2>
+<ul>
+<li><strong>Deck 15 — How Does the Calculator Do It?</strong> <em>(Monday)</em>: functions, scope, call by value and by reference, and square root by halving</li>
+<li><strong>Deck 16 — A Universe with One Rule</strong> <em>(Tuesday)</em>: two-dimensional arrays, through Conway’s Game of Life</li>
+</ul>
+</section>
+<section id="the-sentence-this-week-turns-on" class="level2">
+<h2 class="anchored" data-anchor-id="the-sentence-this-week-turns-on">The sentence this week turns on</h2>
+<blockquote class="blockquote">
+<p><strong>A function is a promise: this much goes in, that much comes out.</strong> Monday builds one. Tuesday hands one a whole world.</p>
+</blockquote>
+</section>
+<section id="code-you-can-copy" class="level2">
+<h2 class="anchored" data-anchor-id="code-you-can-copy">Code You Can Copy</h2>
+<p>Every program here was compiled and run before it was printed, and the outputs are what it actually produced. <strong>Predict each one before you run it.</strong></p>
+<hr>
+</section>
+<section id="monday-how-does-the-calculator-do-it" class="level1">
+<h1>Monday — how does the calculator do it?</h1>
+<section id="a-question-you-have-never-asked" class="level2">
+<h2 class="anchored" data-anchor-id="a-question-you-have-never-asked">1 · A question you have never asked</h2>
+<p>You press <strong>√</strong> on a calculator and a number appears. Where does it come from? Nobody stored a table; nobody looked it up. Something <em>computed</em> it — with a loop, a comparison, and nothing you have not already met.</p>
+<p>By the end of today you will have written <code>sqrt</code> yourself. What you will actually have written is <strong>a function</strong> — and then you will find you wrote rather more than that.</p>
+</section>
+<section id="a-function-is-a-promise" class="level2">
+<h2 class="anchored" data-anchor-id="a-function-is-a-promise">2 · A function is a promise</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> largest<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span>            <span class="co">/* the promise: name, what goes in, what comes out */</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">7</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">12</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"largest(</span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">) = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">,</span> largest<span class="op">(</span>x<span class="op">,</span> y<span class="op">));</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"largest(</span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">) = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> largest<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">4</span><span class="op">));</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> largest<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span>           <span class="co">/* the keeping of it */</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a <span class="op">&gt;</span> b<span class="op">)</span> <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>largest(7, 12) = 12
+largest(4, 4) = 4</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>int largest(int a, int b);</code></td>
+<td>the <strong>declaration</strong> — a promise made before it is kept</td>
+</tr>
+<tr class="even">
+<td><code>int largest(int a, int b) { ... }</code></td>
+<td>the <strong>definition</strong> — the keeping of it</td>
+</tr>
+<tr class="odd">
+<td><code>largest(x, y)</code></td>
+<td>the <strong>call</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The declaration is what lets <code>main</code> use <code>largest</code> before it has been written. C reads your file top to bottom and will not take your word for a name it has not met.</p>
+</section>
+<section id="scope-a-functions-variables-are-its-own" class="level2">
+<h2 class="anchored" data-anchor-id="scope-a-functions-variables-are-its-own">3 · Scope — a function’s variables are its own</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> twice<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> result <span class="op">=</span> n <span class="op">*</span> <span class="dv">2</span><span class="op">;</span>          <span class="co">/* result belongs to twice, and to nobody else */</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>                   <span class="co">/* a DIFFERENT n, living in main */</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"main's n before : </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> n<span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"twice(n)        : </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> twice<span class="op">(</span>n<span class="op">));</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"main's n after  : </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> n<span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* printf("%d", result);     &lt;-- would not compile: result is not ours */</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>main's n before : 5
+twice(n)        : 10
+main's n after  : 5</code></pre>
+<p>Uncomment that last line and the compiler stops you:</p>
+<pre><code>/private/tmp/claude-501/-Users-somadhavala-acad-iitjmu-courses-csp-f26-dhavala/79416c08-72cd-4f9f-ae08-9b6a2b9ff644/scratchpad/fn/oops.c:3:28: error: use of undeclared identifier 'result'</code></pre>
+<p><code>result</code> lived inside <code>twice</code>. Outside it, the name does not exist. And <code>main</code> has its own <code>n</code> while <code>twice</code> has its own <code>n</code> — <strong>different variables that happen to share a name</strong>.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Everything in §4 follows from this section. It is not a separate rule.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="call-by-value" class="level2">
+<h2 class="anchored" data-anchor-id="call-by-value">4 · Call by value</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> addOne<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span> n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The parameter <code>n</code> is <strong>a local variable of <code>addOne</code></strong>, started off as a copy of whatever you passed. Changing it changes <em><code>addOne</code>’s</em> <code>n</code>. The caller’s variable never hears about it — not because of a rule about arguments, but because of §3.</p>
+</section>
+<section id="call-by-reference" class="level2">
+<h2 class="anchored" data-anchor-id="call-by-reference">5 · Call by reference</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> addOne<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span>   <span class="op">{</span> n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span>        <span class="co">/* gets a COPY */</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> reallyAddOne<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>n<span class="op">)</span> <span class="op">{</span> <span class="op">*</span>n <span class="op">=</span> <span class="op">*</span>n <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span> <span class="co">/* gets WHERE the value lives */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>after addOne(count)        count = 10
+after reallyAddOne(&amp;count) count = 11</code></pre>
+<p><code>&amp;count</code> is <strong>where <code>count</code> lives</strong>. <code>int *n</code> is a parameter that receives such a place, and <code>*n</code> reaches through it to the value.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>You have been doing this since Week 3. <code>scanf("%d", &amp;count)</code> needs the <code>&amp;</code> for exactly this reason: <code>scanf</code> cannot hand a value back through a copy, so you tell it <em>where to put it</em>.</p>
+</div>
+</div>
+</div>
+<p><strong>When to use which.</strong> By value to <strong>read</strong> something. By reference when the caller’s variable must <strong>change</strong> — or when one <code>return</code> is not enough, which is §7.</p>
+</section>
+<section id="square-root-by-halving" class="level2">
+<h2 class="anchored" data-anchor-id="square-root-by-halving">6 · Square root, by halving</h2>
+<p>√5 is somewhere between 0 and 5. Guess the middle: 2.5. But 2.5 × 2.5 = 6.25, too big — so the answer lies in [0, 2.5]. Halve again. Each step throws away <strong>half of what is left</strong>.</p>
+</section>
+<section id="two-answers-out-of-one-function" class="level2">
+<h2 class="anchored" data-anchor-id="two-answers-out-of-one-function">7 · Two answers out of one function</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mySqrt<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>halvings<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> lo <span class="op">=</span> <span class="fl">0.0</span><span class="op">,</span> hi <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="fl">1.0</span><span class="op">)</span> hi <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>hi <span class="op">-</span> lo <span class="op">&gt;</span> <span class="fl">1e-12</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span> mid <span class="op">=</span> <span class="op">(</span>lo <span class="op">+</span> hi<span class="op">)</span> <span class="op">/</span> <span class="fl">2.0</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>mid <span class="op">*</span> mid <span class="op">&gt;</span> x<span class="op">)</span> hi <span class="op">=</span> mid<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>               lo <span class="op">=</span> mid<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        k<span class="op">++;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>halvings <span class="op">=</span> k<span class="op">;</span>              <span class="co">/* the SECOND answer, sent home by reference */</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lo<span class="op">;</span>                  <span class="co">/* the first answer, returned normally */</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>sqrt(5) = 2.2360679775, found in 43 halvings</code></pre>
+<p>The root comes back as the <strong>return value</strong>. The number of halvings comes back <strong>by reference</strong>. That is when you reach for a pointer — not to be clever, but because one <code>return</code> is not enough.</p>
+</section>
+<section id="look-at-what-you-actually-wrote" class="level2">
+<h2 class="anchored" data-anchor-id="look-at-what-you-actually-wrote">8 · Look at what you actually wrote</h2>
+<p>Nothing in that loop knows the words “square root”. It knows only one thing: <strong>is my guess too big?</strong> And “too big” means <code>mid*mid - 5 &gt; 0</code> — the <em>sign of a function</em>.</p>
+<p>You did not write <code>sqrt</code>. You wrote <strong>find where a function crosses zero</strong>, and then used it on one particular function.</p>
+</section>
+<section id="change-f-solve-something-else" class="level2">
+<h2 class="anchored" data-anchor-id="change-f-solve-something-else">9 · Change <code>f</code>, solve something else</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> x<span class="op">*</span>x <span class="op">-</span> <span class="fl">5.0</span><span class="op">;</span> <span class="op">}</span>      <span class="co">/* zero at sqrt(5) */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>  root = 2.2360679775   in 43 halvings
+  check: sqrt(5)  = 2.2360679775</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> x<span class="op">*</span>x<span class="op">*</span>x <span class="op">-</span> <span class="fl">5.0</span><span class="op">;</span> <span class="op">}</span>    <span class="co">/* zero at the CUBE root */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>  root = 1.7099759467   in 43 halvings
+  check: cbrt(5)  = 1.7099759467</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> cos<span class="op">(</span>x<span class="op">)</span> <span class="op">-</span> x<span class="op">;</span> <span class="op">}</span>     <span class="co">/* where does cos x equal x? */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>  root = 0.7390851332   in 43 halvings
+  check: cos(r)   = 0.7390851332  vs r = 0.7390851332</code></pre>
+<p>The <strong>same</strong> bisection code each time. The only thing that changed is <code>f</code>.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is what a function buys you. Not shorter code — <strong>a boundary</strong>, with the problem on one side and the method on the other.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="tuesday-a-universe-with-one-rule" class="level1">
+<h1>Tuesday — a universe with one rule</h1>
+<section id="start-with-the-world-not-the-syntax" class="level2">
+<h2 class="anchored" data-anchor-id="start-with-the-world-not-the-syntax">10 · Start with the world, not the syntax</h2>
+<p>A grid of cells, each <strong>alive</strong> or <strong>dead</strong>. Nothing moves and nothing is drawn. Every cell looks at its <strong>eight neighbours</strong> and decides what to be next. That is the whole game — nobody plays it.</p>
+<p>The array comes <em>after</em> the world. Decide what you are modelling; the declaration follows.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ROWS </span><span class="dv">8</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define COLS </span><span class="dv">8</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> world<span class="op">[</span>ROWS<span class="op">][</span>COLS<span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>      <span class="co">/* every cell dead, to begin */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>written</th>
+<th>valid?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>world[0][0]</code></td>
+<td>yes — the first cell</td>
+</tr>
+<tr class="even">
+<td><code>world[7][7]</code></td>
+<td>yes — the last</td>
+</tr>
+<tr class="odd">
+<td><code>world[8][8]</code></td>
+<td><strong>no</strong> — there is no row 8</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>For <code>[8]</code> the valid indices are <strong>0 … 7</strong>. C will not stop you writing <code>world[8][8]</code>, and what happens then is <strong>undefined</strong> — not “whatever happens to be in that memory”.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="b-handing-a-whole-world-to-a-function" class="level2">
+<h2 class="anchored" data-anchor-id="b-handing-a-whole-world-to-a-function">10b · Handing a whole world to a function</h2>
+<p>Monday left you with two ways to pass something: <strong>by value</strong>, which copies, and <strong>by reference</strong>, which needs an <code>&amp;</code>. An array is neither, and Tuesday’s code depends on it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ROWS </span><span class="dv">3</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define COLS </span><span class="dv">4</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> wipe<span class="op">(</span><span class="dt">int</span> m<span class="op">[</span>ROWS<span class="op">][</span>COLS<span class="op">])</span> <span class="op">{</span> m<span class="op">[</span><span class="dv">0</span><span class="op">][</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">99</span><span class="op">;</span> <span class="op">}</span>   <span class="co">/* no &amp; anywhere */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>before wipe(g)  g[0][0] = 1
+after  wipe(g)  g[0][0] = 99</code></pre>
+<p><strong>No <code>&amp;</code> anywhere</strong> — and the caller’s grid changed. An array argument is <em>already</em> a place; there is nothing to take the address of, because passing it hands over the location rather than the contents. That is why <code>nextGeneration(world)</code> can fill in a world without you writing <code>&amp;world</code>, and why a function can never accidentally copy a grid for you.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The flip side: a function given a grid <strong>can always change it</strong>. With an <code>int</code> you know it cannot. With an array you have to read the function to find out.</p>
+</div>
+</div>
+</div>
+<p><strong>And the parameter must carry the column count.</strong> These are the four ways you might write it, and only two of them compile:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>parameter</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>int m[3][4]</code></td>
+<td>fine</td>
+</tr>
+<tr class="even">
+<td><code>int m[][4]</code></td>
+<td>fine — the row count is not needed</td>
+</tr>
+<tr class="odd">
+<td><code>int m[3][]</code></td>
+<td><strong>rejected</strong></td>
+</tr>
+<tr class="even">
+<td><code>int m[][]</code></td>
+<td><strong>rejected</strong></td>
+</tr>
+</tbody>
+</table>
+<pre><code>/tmp/t.c:2:13: error: array has incomplete element type 'int[]'</code></pre>
+<p>The reason is arithmetic. To reach <code>m[1][0]</code> the machine computes <code>1*COLS + 0</code> — a grid is one block of <code>ROWS*COLS</code> integers laid out row after row, and the column count is what turns a pair of subscripts into a position in it. Drop <code>COLS</code> and there is no sum to do. Drop <code>ROWS</code> and nothing is lost, because no part of that calculation uses it.</p>
+</section>
+<section id="walking-the-world" class="level2">
+<h2 class="anchored" data-anchor-id="walking-the-world">11 · Walking the world</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> printWorld<span class="op">(</span><span class="dt">int</span> world<span class="op">[</span>ROWS<span class="op">][</span>COLS<span class="op">])</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> ROWS<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> COLS<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>world<span class="op">[</span>i<span class="op">][</span>j<span class="op">])</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">"##"</span><span class="op">);</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">"  "</span><span class="op">);</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Outer loop picks the row; inner loop walks its columns. The newline belongs to the <strong>outer</strong> loop, because it ends a row.</p>
+</section>
+<section id="the-rule-in-full" class="level2">
+<h2 class="anchored" data-anchor-id="the-rule-in-full">12 · The rule, in full</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>the cell is</th>
+<th>live neighbours</th>
+<th>it becomes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>alive</strong></td>
+<td>2 or 3</td>
+<td>alive</td>
+</tr>
+<tr class="even">
+<td><strong>alive</strong></td>
+<td>anything else</td>
+<td>dead</td>
+</tr>
+<tr class="odd">
+<td><strong>dead</strong></td>
+<td>exactly 3</td>
+<td>alive</td>
+</tr>
+<tr class="even">
+<td><strong>dead</strong></td>
+<td>anything else</td>
+<td>dead</td>
+</tr>
+</tbody>
+</table>
+<p>Local rules only. No cell can see further than one step away.</p>
+</section>
+<section id="counting-one-cells-neighbours" class="level2">
+<h2 class="anchored" data-anchor-id="counting-one-cells-neighbours">13 · Counting one cell’s neighbours</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> countNeighbours<span class="op">(</span><span class="dt">int</span> world<span class="op">[</span>ROWS<span class="op">][</span>COLS<span class="op">],</span> <span class="dt">int</span> i<span class="op">,</span> <span class="dt">int</span> j<span class="op">)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> di <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> di <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">;</span> di<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> dj <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> dj <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">;</span> dj<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>di <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> dj <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> ni <span class="op">=</span> i <span class="op">+</span> di<span class="op">;</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> nj <span class="op">=</span> j <span class="op">+</span> dj<span class="op">;</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>ni <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> ni <span class="op">&lt;</span> ROWS <span class="op">&amp;&amp;</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>                nj <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> nj <span class="op">&lt;</span> COLS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>                count <span class="op">+=</span> world<span class="op">[</span>ni<span class="op">][</span>nj<span class="op">];</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count<span class="op">;</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>di</code> and <code>dj</code> run over <strong>relative</strong> coordinates: −1, 0, +1. Nine combinations, minus yourself, is eight neighbours. The first <code>continue</code> skips <strong>yourself</strong>; the second skips anything <strong>off the edge</strong>.</p>
+<p>That second test is not optional. A corner cell has only <em>three</em> neighbours, and without the bounds check you read <code>world[-1][-1]</code> — outside the array, and undefined. It will very often appear to work, which is exactly the danger.</p>
+</section>
+<section id="the-bug-that-matters-most" class="level2">
+<h2 class="anchored" data-anchor-id="the-bug-that-matters-most">14 · The bug that matters most</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> ROWS<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> COLS<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> neighbours <span class="op">=</span> countNeighbours<span class="op">(</span>world<span class="op">,</span> i<span class="op">,</span> j<span class="op">);</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>neighbours <span class="op">&lt;</span> <span class="dv">2</span><span class="op">)</span> world<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>    <span class="co">/* writing into the world */</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">/* ... */</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cell (0,0) is decided and written back. Cell (0,1) then counts <em>its</em> neighbours — and one of them has <strong>already changed</strong>. Every cell in a generation must see the same old world.</p>
+<blockquote class="blockquote">
+<p>next = f(current). You cannot let <code>current</code> change while <code>f</code> is still reading it.</p>
+</blockquote>
+<p>So you need two grids:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> nextGeneration<span class="op">(</span><span class="dt">int</span> world<span class="op">[</span>ROWS<span class="op">][</span>COLS<span class="op">])</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> next<span class="op">[</span>ROWS<span class="op">][</span>COLS<span class="op">];</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> ROWS<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> COLS<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> neighbors <span class="op">=</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                countNeighbours<span class="op">(</span>world<span class="op">,</span> i<span class="op">,</span> j<span class="op">);</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>world<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>neighbors <span class="op">==</span> <span class="dv">2</span> <span class="op">||</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>                    neighbors <span class="op">==</span> <span class="dv">3</span><span class="op">)</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>                    next<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>                    next<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>neighbors <span class="op">==</span> <span class="dv">3</span><span class="op">)</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>                    next<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>                    next<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Copy next generation back */</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> ROWS<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> COLS<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>            world<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> next<span class="op">[</span>i<span class="op">][</span>j<span class="op">];</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="first-test-something-that-should-blink" class="level2">
+<h2 class="anchored" data-anchor-id="first-test-something-that-should-blink">15 · First test: something that should blink</h2>
+<pre><code>Generation 0
+
+                
+                
+                
+    ######</code></pre>
+<pre><code>Generation 1
+
+                
+                
+      ##        
+      ##        
+      ##</code></pre>
+<p>Three in a row becomes three in a column, and back again. If your program does not do this, stop and fix it before going any further.</p>
+</section>
+<section id="second-test-something-that-should-walk" class="level2">
+<h2 class="anchored" data-anchor-id="second-test-something-that-should-walk">16 · Second test: something that should walk</h2>
+<pre><code>Generation 0
+
+                
+    ##          
+      ##        
+  ######</code></pre>
+<pre><code>Generation 4
+
+                
+                
+      ##        
+        ##      
+    ######</code></pre>
+<p>Four generations later: the same five cells, one row down and one column right. <strong>Nothing in the rule mentions movement.</strong> The glider moves anyway.</p>
+</section>
+<section id="questions-to-bring-back" class="level2">
+<h2 class="anchored" data-anchor-id="questions-to-bring-back">Questions to Bring Back</h2>
+<ol type="1">
+<li>In §3, <code>main</code> and <code>twice</code> each had an <code>n</code>. How many variables called <code>n</code> existed while <code>twice</code> was running?</li>
+<li>Why does <code>scanf</code> need <code>&amp;</code> but <code>printf</code> does not?</li>
+<li>§7 returned one answer and sent another back by reference. Could it have returned both? What would have to change?</li>
+<li>In §9 only <code>f</code> changed. What does that tell you about where the <em>problem</em> lives and where the <em>method</em> lives?</li>
+<li>A corner cell has three neighbours, an edge cell five. Where in §13 is that handled — and what would happen if it were not?</li>
+</ol>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<ul>
+<li><strong>sin and cos by their series.</strong> <code>cos x = 1 − x²/2! + x⁴/4! − …</code>. Write it two ways: computing each factorial, and building each term from the one before with <code>term *= -x*x/((2i+1)(2i+2))</code>. At <em>x</em> = 4 with 14 terms the first gives −0.662870 and the second −0.653644. Only one of them is right. Find out which, and why.</li>
+<li>Then try <code>ln</code>. The obvious series is <code>ln(1+u) = u − u²/2 + u³/3 − …</code>. Try it at <em>x</em> = 8 and watch what happens.</li>
+<li><strong>Lab 07</strong>: functions, and the Game of Life.</li>
+</ul>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
 <p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
