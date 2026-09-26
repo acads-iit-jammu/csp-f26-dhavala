@@ -117,6 +117,40 @@ The `printf("\n")` belongs to the **outer** loop. Put it in the inner one and yo
 number per line; leave it out and you print a single long line. Neither is a syntax error,
 and that is the point: the compiler cannot tell you which grid you meant.
 
+Filling one is the same two loops with `scanf` in the middle, and the `&` you already use
+for a plain variable:
+
+```c
+#include <stdio.h>
+#define ROWS 2
+#define COLS 3
+int main(void) {
+    int m[ROWS][COLS];
+
+    printf("enter %d numbers, row by row: ", ROWS*COLS);
+    for (int i = 0; i < ROWS; i++)
+        for (int j = 0; j < COLS; j++)
+            scanf("%d", &m[i][j]);          /* the & you already know */
+
+    printf("\nthe grid you gave me\n");
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) printf("%4d", m[i][j]);
+        printf("\n");
+    }
+    return 0;
+}
+```
+
+```
+enter 6 numbers, row by row: 
+the grid you gave me
+  10  20  30
+  40  50  60
+```
+
+`&m[i][j]` is *where that one cell lives* — exactly what `&count` means for an ordinary
+`int`. You will need this in Lab 07.
+
 ## 3 · The first function
 
 A program that does three things is three walls of loops. A function gives each one a name.
@@ -370,7 +404,9 @@ Three things in there are worth a second look.
 
 `n += g[i][j]` adds a cell straight into a count, and `next[i][j] = (n == 2 || n == 3)`
 stores a *comparison* into an `int`. Both work because in C a comparison **is** a value —
-1 when true, 0 when false — and a live cell is stored as 1. And the two `continue`s do
+1 when true, 0 when false — and a live cell is stored as 1. For the same reason
+`if (cur[i][j])` needs no `== 1`: **any non-zero value is true**, so it reads simply as
+*"if this cell is alive"*. And the two `continue`s do
 different jobs: the first skips the cell itself, the second skips neighbours that fall off
 the edge. Both would otherwise be wrong answers rather than crashes.
 
