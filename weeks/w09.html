@@ -560,7 +560,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a-question-you-have-never-asked" class="level2">
 <h2 class="anchored" data-anchor-id="a-question-you-have-never-asked">1 · A question you have never asked</h2>
 <p>You press <strong>√</strong> on a calculator and a number appears. Where does it come from? Nobody stored a table; nobody looked it up. Something <em>computed</em> it — with a loop, a comparison, and nothing you have not already met.</p>
-<p>By the end of today you will have written <code>sqrt</code> yourself. What you will actually have written is <strong>a function</strong> — and then you will find you wrote rather more than that.</p>
+<p>Monday’s lecture answered that <strong>conceptually</strong> — what a function is, what <code>sin</code> and <code>sqrt</code> are really doing behind the name, and why both come down to the same move: ask a question you <em>can</em> answer, over and over, until the answer is good enough.</p>
+<p>These notes are where that becomes code. Nothing below was typed in the lecture, so work through it here: §2–§5 build a function, §6 and §9 build <code>sqrt</code> out of halving, and the two <strong>Going Further</strong> sections at the end take <code>sin</code> and <code>sqrt</code> all the way down to what the library actually does.</p>
 </section>
 <section id="a-function-is-a-promise" class="level2">
 <h2 class="anchored" data-anchor-id="a-function-is-a-promise">2 · A function is a promise</h2>
@@ -666,6 +667,7 @@ after reallyAddOne(&amp;count) count = 11</code></pre>
 <section id="square-root-by-halving" class="level2">
 <h2 class="anchored" data-anchor-id="square-root-by-halving">6 · Square root, by halving</h2>
 <p>√5 is somewhere between 0 and 5. Guess the middle: 2.5. But 2.5 × 2.5 = 6.25, too big — so the answer lies in [0, 2.5]. Halve again. Each step throws away <strong>half of what is left</strong>.</p>
+<p>This is <strong>bisection</strong>, and it is the method we talked through in class. It is not the fastest way to a square root — <a href="#going-further-and-what-sqrtx-does">And What <code>sqrt(x)</code> Does</a> shows the one that is, and measures the difference: 41 halvings against 6 steps for the same answer.</p>
 </section>
 <section id="two-answers-out-of-one-function" class="level2">
 <h2 class="anchored" data-anchor-id="two-answers-out-of-one-function">7 · Two answers out of one function</h2>
@@ -692,6 +694,7 @@ after reallyAddOne(&amp;count) count = 11</code></pre>
 </section>
 <section id="change-f-solve-something-else" class="level2">
 <h2 class="anchored" data-anchor-id="change-f-solve-something-else">9 · Change <code>f</code>, solve something else</h2>
+<p>This is the step that matters, and it is the one the lecture spent longest on: once the <em>method</em> is separate from the <em>problem</em>, changing the problem costs one line.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> x<span class="op">*</span>x <span class="op">-</span> <span class="fl">5.0</span><span class="op">;</span> <span class="op">}</span>      <span class="co">/* zero at sqrt(5) */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>  root = 2.2360679775   in 43 halvings
   check: sqrt(5)  = 2.2360679775</code></pre>
