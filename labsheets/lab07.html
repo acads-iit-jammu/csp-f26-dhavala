@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -403,9 +438,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#the-one-sentence-to-leave-with" id="toc-the-one-sentence-to-leave-with" class="nav-link active" data-scroll-target="#the-one-sentence-to-leave-with">The one sentence to leave with</a></li>
+  <li><a href="#the-three-drills-that-carry-the-week" id="toc-the-three-drills-that-carry-the-week" class="nav-link" data-scroll-target="#the-three-drills-that-carry-the-week">The three drills that carry the week</a></li>
+  <li><a href="#act-0-land-10-min" id="toc-act-0-land-10-min" class="nav-link" data-scroll-target="#act-0-land-10-min">Act 0 · Land (10 min)</a></li>
+  <li><a href="#act-1-drills-predict-then-run-20-min-not-marked" id="toc-act-1-drills-predict-then-run-20-min-not-marked" class="nav-link" data-scroll-target="#act-1-drills-predict-then-run-20-min-not-marked">Act 1 · Drills — predict, then run (20 min, not marked)</a></li>
+  <li><a href="#act-2-fill-the-blanks-25-min-5-marks-each" id="toc-act-2-fill-the-blanks-25-min-5-marks-each" class="nav-link" data-scroll-target="#act-2-fill-the-blanks-25-min-5-marks-each">Act 2 · Fill the blanks (25 min · 5 marks each)</a></li>
+  <li><a href="#act-3-the-checked-five-55-min-solo-10-marks-each" id="toc-act-3-the-checked-five-55-min-solo-10-marks-each" class="nav-link" data-scroll-target="#act-3-the-checked-five-55-min-solo-10-marks-each">Act 3 · The checked five (55 min, solo · 10 marks each)</a></li>
+  <li><a href="#act-4-check-fix-bundle-10-min" id="toc-act-4-check-fix-bundle-10-min" class="nav-link" data-scroll-target="#act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</a></li>
+  <li><a href="#stretch-fast-finishers-not-marked" id="toc-stretch-fast-finishers-not-marked" class="nav-link" data-scroll-target="#stretch-fast-finishers-not-marked">Stretch (fast finishers, not marked)</a></li>
+  <li><a href="#reflect" id="toc-reflect" class="nav-link" data-scroll-target="#reflect">Reflect</a></li>
   </ul>
 </nav>
     </div>
@@ -432,40 +473,288 @@ ul.task-list li input[type="checkbox"] {
 
 
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>Electrical</th>
-<th>Mechanical &amp; Materials</th>
+<th>Mechanical</th>
+<th>Metallurgy &amp; Materials</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Date</strong></td>
-<td>Tue Sep 29, 2026</td>
-<td>Wed Oct 7, 2026</td>
+<td>Tue Sep 29</td>
+<td>Wed Oct 7</td>
+<td>Wed Oct 7</td>
 </tr>
 <tr class="even">
-<td><strong>Time</strong></td>
-<td>2:00–4:00 pm</td>
-<td>2:00–4:00 pm</td>
+<td><strong>Time &amp; Room</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4022</strong></td>
+<td>2:00–4:00 pm · <strong>Lab 4021</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical modules:</strong> 7 and 3 — functions, and lists (the multi-dimensional case)</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
-<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<p><strong>Lab pack:</strong> <a href="../labs/lab07.tar.gz">lab07.tar.gz</a> — pre-placed on lab machines, downloadable for home practice.</p>
+<p><strong>Syllabus practical modules:</strong> 7 and 3 — functions, and lists in their multi-dimensional form</p>
+<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component. <strong>Only the exercises carry marks</strong>: five fill-in-the-blank programs (<strong>5 marks each</strong>) and five checked problems (<strong>10 marks each</strong>). The ten drills are <strong>not scored</strong> — they are how you find out what you have wrong before it costs you. Plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.</p>
+<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference. Useful today for vim (§1) and the compilation model (§2.5) if you are still finding those awkward. <strong>It does not cover functions, pointers or arrays</strong> — it stops before all three — so for this week’s material your reference is the <a href="../weeks/w09.html">Week 09 notes</a>, not the manual. This sheet is self-contained either way.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Both of this week’s lectures are behind you before you sit this lab: <strong>Monday</strong> on functions, scope and call by reference, <strong>Tuesday</strong> on the Game of Life. Nothing below is ahead of them. The notes carry <code>countNeighbours</code> and <code>nextGeneration</code> in full — you are meant to have them open. What the notes do <em>not</em> carry is any program that reads a world from the keyboard, decides one question and stops, which is what every problem below asks for.</p>
+</div>
+</div>
+</div>
+<section id="the-one-sentence-to-leave-with" class="level2">
+<h2 class="anchored" data-anchor-id="the-one-sentence-to-leave-with">The one sentence to leave with</h2>
+<blockquote class="blockquote">
+<p><strong>A function is handed a copy — unless it is handed an address, and an array is neither.</strong></p>
+</blockquote>
+<p>That single distinction decides every problem today. It is why <code>swap</code> needs <code>&amp;a</code> and <code>countNeighbours(world, i, j)</code> does not; why <code>minMax</code> cannot simply <code>return</code> its answer; and why a function you hand a grid to can quietly change it underneath you.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="the-three-drills-that-carry-the-week" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-drills-that-carry-the-week">The three drills that carry the week</h2>
+<p>Do <code>d02</code>, <code>d03</code> and <code>d06</code> <strong>in that order</strong>, and predict each before you press Enter. They are one argument in three steps:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>what it does</th>
+<th>what it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d02</code></td>
+<td><code>addOne(x)</code> — and <code>x</code> is still 5</td>
+<td>a <strong>copy</strong> went in</td>
+</tr>
+<tr class="even">
+<td><code>d03</code></td>
+<td>one character different: <code>reallyAddOne(&amp;x)</code> — <code>x</code> is 6</td>
+<td>an <strong>address</strong> went in</td>
+</tr>
+<tr class="odd">
+<td><code>d06</code></td>
+<td><code>wipe(a)</code> — no <code>&amp;</code> anywhere, and yet <code>a[0]</code> changed</td>
+<td>an array is <strong>already</strong> an address</td>
+</tr>
+</tbody>
+</table>
+<p>If <code>d06</code> surprises you, good — that is the point of it, and it is the licence for every <code>nextGeneration(world)</code> call in the second half of the afternoon.</p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="act-0-land-10-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-0-land-10-min">Act 0 · Land (10 min)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~ <span class="kw">&amp;&amp;</span> <span class="fu">tar</span> xzf lab07.tar.gz <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> lab07 <span class="kw">&amp;&amp;</span> <span class="ex">./install.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It will ask your branch and your roll number(s), then <strong>put you inside your workspace</strong> — your prompt becomes <code>[lab07 OK ...]</code>. If that prompt ever disappears you are in the wrong directory; run <code>./where.sh</code> and it will print the exact line to type.</p>
+<p>Then, before anything else:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>session.txt</code> records your afternoon. It is required in every bundle, and it is <strong>your</strong> evidence that the work is yours — the thing that answers a question about who wrote what.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-1-drills-predict-then-run-20-min-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-drills-predict-then-run-20-min-not-marked">Act 1 · Drills — predict, then run (20 min, not marked)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ten small programs. Each one is shown to you, you type what you think it will print, and only then does it run. <strong>Predicting is the exercise.</strong> A miss is the useful kind of result — it tells you something you believed is not true, at no cost.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Do not skim-read them and press Enter. A drill you did not predict taught you nothing, and the log records which is which.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-2-fill-the-blanks-25-min-5-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-2-fill-the-blanks-25-min-5-marks-each">Act 2 · Fill the blanks (25 min · 5 marks each)</h2>
+<p>In all five, <strong>the function’s first line is already written</strong> and <code>main</code> is already calling it exactly as written. That line is the <em>promise</em> — what goes in, what comes back. Keep it; do not change it.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>given</th>
+<th>what you write</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>b1_sumto.c</code></td>
+<td><code>int sumTo(int n)</code></td>
+<td>a loop you already know — now it must <code>return</code></td>
+</tr>
+<tr class="even">
+<td><code>b2_swap.c</code></td>
+<td><code>void swap(int *a, int *b)</code></td>
+<td>the version drill <code>d05</code> shows failing</td>
+</tr>
+<tr class="odd">
+<td><code>b3_minmax.c</code></td>
+<td><code>void minMax(int a[], int n, int *lo, int *hi)</code></td>
+<td><strong>two</strong> answers, so neither can be returned</td>
+</tr>
+<tr class="even">
+<td><code>b4_rowsum.c</code></td>
+<td><code>int rowSum(int m[][COLS], int r)</code></td>
+<td>one row of a grid</td>
+</tr>
+<tr class="odd">
+<td><code>b5_cos.c</code></td>
+<td><code>double cosSeries(double x, int n)</code></td>
+<td>cos <em>x</em>, from its series</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>b4</code> is worth pausing on. The row count may be left out of that parameter; the <strong>column count may not</strong>. Reaching <code>m[r][j]</code> means computing <code>r*COLS + j</code>, and without <code>COLS</code> there is no sum to do.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>b5</code> has a trap with a body count. Do <strong>not</strong> compute each term’s factorial with its own inner loop — 13! already overflows an <code>int</code> and the answer goes quietly, plausibly wrong. Build each term from the one before it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>term <span class="op">=</span> term <span class="op">*</span> <span class="op">(-</span>x<span class="op">*</span>x<span class="op">)</span> <span class="op">/</span> <span class="op">((</span><span class="dv">2</span><span class="op">*</span>k<span class="op">+</span><span class="dv">1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="dv">2</span><span class="op">*</span>k<span class="op">+</span><span class="dv">2</span><span class="op">));</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>starting at <code>term = 1.0</code>. No factorial is ever formed, and nothing overflows.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-3-the-checked-five-55-min-solo-10-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-3-the-checked-five-55-min-solo-10-marks-each">Act 3 · The checked five (55 min, solo · 10 marks each)</h2>
+<p>These give you the specification and nothing else.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>e1.c</code></td>
+<td>Find the <em>x</em> ≥ 0 with <strong>x³ + x = a</strong>. There is no formula to rearrange — halve the interval instead, as Monday did, and write it as <strong>two</strong> functions: one for the left-hand side, one that does the halving and calls it.</td>
+</tr>
+<tr class="even">
+<td><code>e2.c</code></td>
+<td>Flip a 4×4 grid about its diagonal. Build the answer in a <strong>second</strong> grid — writing the flip back into the original overwrites values you have not read yet.</td>
+</tr>
+<tr class="odd">
+<td><code>e3.c</code></td>
+<td><code>countNeighbours</code> for one cell of an 8×8 world. Two things can go wrong; only one is obvious.</td>
+</tr>
+<tr class="even">
+<td><code>e4.c</code></td>
+<td><strong>One generation</strong> of the Game of Life. This is the lab.</td>
+</tr>
+<tr class="odd">
+<td><code>e5.c</code></td>
+<td>How many cells are alive after <em>g</em> generations.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>e3</code>, <code>e4</code> and <code>e5</code> are deliberately <strong>one program grown three times</strong>. Write <code>countNeighbours</code> once for <code>e3</code> and copy it into <code>e4</code>; put the generation in a <em>function</em> in <code>e4</code> and <code>e5</code> costs you three more lines. If you find yourself copying the whole rule into a fresh loop for <code>e5</code>, stop — that is the moment a function was supposed to save you.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>The one that decides <code>e4</code>.</strong> Every cell in a generation must see the <em>same old world</em>. Decide the whole next generation into a second grid, then copy it back. If you write each cell’s answer straight into <code>world</code>, cell (0,1) counts a neighbour that has already changed — and the blinker below will visibly fall apart instead of flipping.</p>
+</div>
+</div>
+</div>
+<p>Two sample worlds ship in your workspace so you can watch it run rather than trust it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> blinker.txt      <span class="co"># three in a row should become three in a column</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> glider.txt       <span class="co"># a shape that walks</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Tuesday’s lecture printed a live cell as <code>##</code> and a dead one as two blanks, which reads well on a projector. Here it is <strong><code>#</code> and <code>.</code></strong> — a checker cannot see blank space.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-4-check-fix-bundle-10-min" class="level2">
+<h2 class="anchored" data-anchor-id="act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything, with your marks so far</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e4       <span class="co"># just one problem, while you work on it</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span> <span class="co"># bundle it up — then carry it out</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>check.sh</code> compiles each program, feeds it the examples printed in your starter <strong>and a fresh set of random inputs drawn while you watch</strong>. Marks are partial: every vector you pass earns its share, so fixing one failing case is always worth doing.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The bundle lands one directory <strong>above</strong> your workspace. Carry it out — Moodle, or email it to yourself. The machine forgets; you must not.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stretch-fast-finishers-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="stretch-fast-finishers-not-marked">Stretch (fast finishers, not marked)</h2>
+<ol type="1">
+<li><strong>Watch the glider hit the wall.</strong> Our world has hard edges, so the glider cannot walk forever. Run it well past <code>e5</code>’s twelve generations and print the population each time. It does <strong>not</strong> die: at generation 24 it stops changing altogether, leaving four cells in the bottom-right corner. Find out what they are.</li>
+<li><strong>Find a still life.</strong> That corner leftover is one — a 2×2 block, which has exactly the neighbour counts it needs to keep itself alive. Add a check to <code>e5</code> that reports the first generation identical to the one before it, and confirm it says 24.</li>
+<li><strong>Make the world wrap</strong>, so column 7’s right-hand neighbour is column 0 and the glider never reaches a wall at all. One change, in <code>countNeighbours</code> only — and the bounds test you fought with in <code>e3</code> becomes an arithmetic one instead.</li>
+</ol>
+</section>
+<section id="reflect" class="level2">
+<h2 class="anchored" data-anchor-id="reflect">Reflect</h2>
+<p>Two questions to be able to answer out loud before you leave — they are what the viva asks:</p>
+<ol type="1">
+<li>Why does <code>swap</code> need <code>&amp;a</code> when <code>countNeighbours(world, i, j)</code> does not?</li>
+<li>What exactly breaks if you delete the second grid in <code>e4</code> — which cell notices first?</li>
+</ol>
 
 
 </section>
