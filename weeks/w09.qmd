@@ -293,8 +293,10 @@ what happens then is **undefined** — not "whatever happens to be in that memor
 
 ## 10b · Handing a whole world to a function
 
-Monday left you with two ways to pass something: **by value**, which copies, and **by
-reference**, which needs an `&`. An array is neither, and Tuesday's code depends on it.
+Monday gave you two cases: an ordinary argument is **passed by value**, so the function gets
+a copy, and to let a function change a caller's variable you pass **the address** of it. An
+array argument is a third case, and Tuesday's code depends on it: the array name is converted
+to a pointer to its first element, so the function receives no copy.
 
 ```c
 #define ROWS 3

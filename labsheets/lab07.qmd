@@ -30,27 +30,33 @@ from the keyboard, decides one question and stops, which is what every problem b
 for.
 :::
 
-## The one sentence to leave with
+## What this lab is about
 
-> **A function is handed a copy — unless it is handed an address, and an array is neither.**
+**C passes arguments by value.** A function receives copies of its arguments, so assigning
+to a parameter does not change the caller's variable.
 
-That single distinction decides every problem today. It is why `swap` needs `&a` and
-`countNeighbours(world, i, j)` does not; why `minMax` cannot simply `return` its answer;
-and why a function you hand a grid to can quietly change it underneath you.
+To let a function change a caller's variable, pass **the address** of that variable and
+declare the parameter as a pointer. That is `swap(&a, &b)` with `void swap(int *a, int *b)`,
+and it is also why `minMax` can return two answers without using `return` at all.
 
-## The three drills that carry the week
+**An array argument behaves differently.** When you pass an array, the array name is
+converted to a pointer to its first element, so the function does not get a copy of the
+array and *can* change the caller's elements. That is why `countNeighbours(world, i, j)`
+needs no `&`.
 
-Do `d02`, `d03` and `d06` **in that order**, and predict each before you press Enter.
-They are one argument in three steps:
+## Three drills worth doing first
 
-| | what it does | what it shows |
+Do `d02`, `d03` and `d06` in that order, and predict each before you press Enter. They
+demonstrate the three cases above.
+
+| Drill | What it does | What it shows |
 |---|---|---|
-| `d02` | `addOne(x)` — and `x` is still 5 | a **copy** went in |
-| `d03` | one character different: `reallyAddOne(&x)` — `x` is 6 | an **address** went in |
-| `d06` | `wipe(a)` — no `&` anywhere, and yet `a[0]` changed | an array is **already** an address |
+| `d02` | `addOne(x)` — `x` is still 5 afterwards | passed by value: the function got a copy |
+| `d03` | one character different: `reallyAddOne(&x)` — `x` is 6 | the address was passed, through a pointer parameter |
+| `d06` | `wipe(a)` — no `&` anywhere, and `a[0]` changed | the array name was converted to a pointer |
 
-If `d06` surprises you, good — that is the point of it, and it is the licence for every
-`nextGeneration(world)` call in the second half of the afternoon.
+`d06` is the one to be sure of, because every `nextGeneration(world)` call later in the lab
+relies on it.
 
 ## Act 0 · Land (10 min)
 
@@ -95,15 +101,16 @@ only then does it run. **Predicting is the exercise.**
 | Drills | Territory |
 |---|---|
 | `d01`–`d04` | what a function hands back, and what it cannot change — `d02` and `d03` differ by **one character** and give different answers |
-| `d05`–`d06` | the swap that does nothing, and the array that changes anyway **without any `&`** |
+| `d05`–`d06` | a swap that has no effect, and an array a function modifies without any `&` |
 | `d07`–`d08` | a grid subscript, and a counter that lives in the caller |
 | `d09`–`d10` | a corner cell's neighbours, and `return` from inside a loop |
 
 ::: {.callout-warning}
 **`d05`, `d06` and `d09` are each a graded problem in miniature.** `d05` is `b2` before you
-fix it. `d06` is the licence for every `nextGeneration(world)` you will write — an array
-needs no `&`, and changes anyway. `d09` is `e3`, ten marks, already written for you at one
-corner. Predict all three on paper before you run them.
+fix it. `d06` is what every `nextGeneration(world)` call later in the lab relies on: an
+array argument is converted to a pointer, so the function modifies the caller's array. `d09`
+is `e3`, ten marks, already written for you at one corner. Predict all three on paper before
+you run them.
 :::
 
 These carry **no marks at all**. A wrong prediction costs you nothing — which is exactly
