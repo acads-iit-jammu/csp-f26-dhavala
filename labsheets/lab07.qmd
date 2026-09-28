@@ -124,8 +124,19 @@ Running it yourself looks like this — you type the `5`:
 
 ```
 $ ./b1
-Enter n: 5
+Enter one integer n (1..50): 5
 total=15
+```
+
+Each program tells you **what to type and how many**. `b3` asks twice — once for the count,
+then for that many values. `b4` wants sixteen numbers before it wants the row number:
+
+```
+$ ./b4
+Enter 16 integers (each 0..99), row by row into a 4 x 4 grid:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+Now the row number r (0..3): 2
+sum=42
 ```
 
 **No `-lm`, no extra flags.** Every problem this week compiles with plain `gcc`, and none of
