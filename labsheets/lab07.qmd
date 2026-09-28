@@ -226,6 +226,49 @@ term = term * (-x*x) / ((2*k+1) * (2*k+2));
 starting with `term = 1.0`. Written this way, no factorial is ever calculated, and nothing overflows.
 :::
 
+## A short introduction to the Game of Life
+
+The last three problems are all about the same thing, so here is what it is. Tuesday's
+lecture covered this, and §10 to §16 of the [Week 09 notes](../weeks/w09.qmd) have it in
+full, with the code.
+
+The Game of Life was invented by the mathematician John Conway in 1970. It is not a game
+anyone plays. There are no players and no moves. You set up a starting position, and from
+then on it runs by itself.
+
+**The world** is a grid of cells. In this lab it is 8 rows by 8 columns. Each cell is either
+**alive** or **dead**, which we store as `1` or `0`.
+
+**Neighbours.** Every cell has up to eight neighbours: the cells immediately above, below,
+left, right, and the four diagonals. Cells at the edge of the grid have fewer, because some
+of those positions are outside the world. A corner cell has only three.
+
+**The rule.** To work out the next generation, look at every cell and count how many of its
+neighbours are currently alive. Then:
+
+| If the cell is | and its live neighbours number | it becomes |
+|---|---|---|
+| alive | 2 or 3 | alive |
+| alive | anything else | dead |
+| dead | exactly 3 | alive |
+| dead | anything else | dead |
+
+A cell can be described loosely as dying of loneliness with fewer than two neighbours, and of
+overcrowding with more than three. Three live neighbours around an empty cell produce a new
+live cell.
+
+**A generation** is one application of that rule to *every* cell in the grid. All the cells
+change at the same instant, which is the point `e4` is marked on: every cell must be decided
+from the world as it was *before* this generation began.
+
+**Two starting positions you will meet today.** A *blinker* is three live cells in a row. It
+turns into three live cells in a column, then back again, forever. A *glider* is a
+five-celled shape that repeats itself every four generations, one square diagonally from
+where it started, so it appears to travel across the grid. Both are in your workspace, as
+`e4_sample.txt` and `glider.txt`.
+
+That is the whole game. Nothing else happens, and no cell can see further than one step away.
+
 ## Act 3 · The five checked problems (55 minutes, on your own, 10 marks each)
 
 For these five you are given the specification and nothing else. You write the whole program.
