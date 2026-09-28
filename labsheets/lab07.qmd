@@ -149,12 +149,22 @@ answer is right; running it tells you what your program actually does. You need 
 second one is faster.
 :::
 
-**The world problems take 64 numbers**, which nobody wants to type. Two sample worlds are
-already in your workspace, so feed them in from a file with `<`:
+### Nobody should type 64 numbers
+
+`e3`, `e4` and `e5` each read an 8 × 8 world — sixty-four integers — and `e2` reads sixteen.
+You are not expected to type them. **Ready-made input files are already in your workspace**,
+and each one reproduces the `EXAMPLE` printed at the top of that starter, so one command
+tells you whether your program agrees with the spec:
 
 ```bash
-./e4 < blinker.txt
+./e2 < e2_sample.txt      # the 4 x 4 grid from e2's EXAMPLE
+./e3 < e3_sample.txt      # -> neighbours=3
+./e4 < blinker.txt        # three in a row become three in a column
+./e4 < glider.txt         # a shape that walks
+./e5 < e5_sample.txt      # the glider after 4 generations -> alive=5
 ```
+
+`./e4 < blinker.txt` prints:
 
 ```
 ........
@@ -167,15 +177,20 @@ already in your workspace, so feed them in from a file with `<`:
 ........
 ```
 
-`e3` and `e5` want an extra number *after* the 64 — the cell for `e3`, the generation count
-for `e5`. Add it on the end:
+::: {.callout-note}
+`e3` and `e5` need one number **after** the sixty-four — the cell for `e3`, the generation
+count for `e5` — which is why they have their own files. `./e3 < blinker.txt` would read the
+world and then sit there waiting for a cell that never arrives. `e4` needs only the world, so
+`blinker.txt` and `glider.txt` work for it directly.
+:::
+
+**Make your own.** Copy any of these, edit the 0s and 1s, and run it again:
 
 ```bash
-(cat blinker.txt; echo "3 3") | ./e3     # -> neighbours=2
-(cat glider.txt;  echo 4)     | ./e5     # -> alive=5
+cp blinker.txt mine.txt
+vim mine.txt
+./e4 < mine.txt
 ```
-
-Make your own worlds too: copy `blinker.txt`, edit the 0s and 1s, and watch what happens.
 
 ::: {.callout-warning}
 The starters **do not compile as shipped**. Each blank is a name the compiler has never heard
