@@ -442,9 +442,9 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
 <ul>
 <li>📽️ <a href="../materials/w01-deck-01-logistics.html"><strong>Deck 01 — Logistics</strong></a> — the opening slides: who/where/when, assessment, tools, and this week’s plan.</li>
-<li>📽️ <a href="../materials/w01-deck-02-what-is-a-computer.html"><strong>Deck 02 — What is a Computer?</strong></a> — Tuesday’s slides: computing is a process, a computer is a thing, programming is an act, computational thinking is a habit; the stored program as the dividing line.</li>
-<li>🖨️ <a href="../materials/w01-hello-under-the-hood.html"><strong>Hello, World — all the way down</strong></a> — the closing demo, in two acts: printf(“abba”) in a two-letter world (a=0, b=1 — the text in memory is just 0 1 1 0), then the same five-instruction program with the book grown to ASCII printing Hello, world! Why does 72 mean H?</li>
-<li>🐢 <a href="../materials/w01-turtle-computer.html"><strong>The Turtle Computer</strong></a> — your first programming language: ten words, one turtle, no typing. We start here, before any C: a program is a precise plan, the machine does exactly what you <em>said</em> (never what you meant), and language features are <em>invented</em> when problems demand them.</li>
+<li>📽️ <a href="../materials/w01-deck-02-what-is-a-computer.html"><strong>Deck 02 — What is a Computer?</strong></a> — Tuesday’s slides. They separate four things that are often confused: computing, which is a process; a computer, which is a machine; programming, which is what you do; and computational thinking, which is a way of approaching problems. The deck then covers the stored-program idea, which is what distinguishes a computer from earlier calculating machines.</li>
+<li>🖨️ <a href="../materials/w01-hello-under-the-hood.html"><strong>Hello, World — all the way down</strong></a> — the closing demonstration, in two parts. First, <code>printf("abba")</code> in a world with only two letters, where a is 0 and b is 1, so the text stored in memory is just 0 1 1 0. Then the same five-instruction program, with the character set extended to ASCII, printing <code>Hello, world!</code>. The question it answers is why the number 72 means the letter H.</li>
+<li>🐢 <a href="../materials/w01-turtle-computer.html"><strong>The Turtle Computer</strong></a> — your first programming language. It has ten words and one turtle, and requires no typing. We start here rather than with C, because it makes three points clearly: a program is a precise plan; the machine does exactly what you wrote, not what you intended; and features of a language get invented because some problem needed them.</li>
 <li><a href="../cs1100-cse-iitm-2021/slides/Lec1.pdf">Lec 1</a> — Introduction to Programming</li>
 <li><a href="../cs1100-cse-iitm-2021/slides/Lec3.pdf">Lec 3</a> — The Computing Machine</li>
 </ul>
@@ -452,7 +452,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
 <ul>
-<li>Finish all six Turtle missions — can you match the turtle master’s <em>par</em> on each for two stars? Bring your hardest-earned star to Tuesday’s class.</li>
+<li>Finish all six Turtle missions. Each mission has a target number of moves, called its par. Matching the par earns two stars rather than one. Bring the mission you found hardest to Tuesday’s class.</li>
 </ul>
 <p><em>More practice problems and handouts will be posted here.</em></p>
 </section>
@@ -460,25 +460,93 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
 <p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning: the week’s informal column.</em></p>
 <ul>
-<li>📽️ <strong>In slides:</strong> <a href="../materials/w01-pagal-age-of-ai.html">PAGAL — Programming in the Age of AI</a> — this week’s column as a presentation: the paradigm shift, the Specify–Verify loop, architects over bricklayers, and Computational X. The long-reads follow below.</li>
+<li>📽️ <strong>In slides:</strong> <a href="../materials/w01-pagal-age-of-ai.html">PAGAL — Programming in the Age of AI</a> — this week’s column as a presentation. It covers what has changed in how software is written, the Specify–Verify loop, why the work is shifting from writing code to designing and checking systems, and what computing looks like inside other disciplines. The written version follows below.</li>
 </ul>
-<p><strong>On telescopes — and on checking your quotes.</strong></p>
-<p>This week’s deck leans on a famous line: <em>“Computer science is not about machines, in the same way that astronomy is not about telescopes.”</em> The internet will tell you, with great confidence, that Edsger Dijkstra said it (so will framed posters, and so will several AI assistants). We checked. The trail — documented at <a href="https://quoteinvestigator.com/2021/04/02/computer-science/">Quote Investigator</a> — leads elsewhere: Alan Perlis was making the telescope comparison as early as 1968; the closest early match in print is science writer George Johnson in 1986; and the polished modern form belongs to mathematician <strong>Michael Fellows</strong>, writing with Ian Parberry in the early 1990s. Dijkstra would very likely have <em>agreed</em> — but there is no verified record of him saying it.</p>
-<p>Why open a programming course’s first column with quote forensics? Because this is the whole course in miniature: a claim can be <strong>plausible, widely repeated, and wrong</strong> — and the only defense is to check it against a source. You will spend the semester doing precisely that with programs. Not <em>“does this code look right?”</em> but <em>“does it meet what was asked?”</em> Not <em>“the AI said so”</em> but <em>“show me the witness.”</em> The habit transfers both ways.</p>
-<p>And the line itself? It survives the correction. Whoever said it, you proved it this week without noticing: you programmed a turtle — no silicon in sight — and everything that mattered was the <em>plan</em>. The machine is the telescope. Computing is the astronomy.</p>
+<p><strong>On telescopes, and on checking your quotes.</strong></p>
+<p>This week’s deck uses a well-known line: <em>“Computer science is not about machines, in the same way that astronomy is not about telescopes.”</em></p>
+<p>Search for it and you will be told confidently that Edsger Dijkstra said it. So will framed posters, and so will several AI assistants. We checked, and that attribution does not hold up. The trail is documented at <a href="https://quoteinvestigator.com/2021/04/02/computer-science/">Quote Investigator</a>. Alan Perlis was making the telescope comparison as early as 1968. The closest early match in print is by the science writer George Johnson in 1986. The polished modern wording belongs to the mathematician <strong>Michael Fellows</strong>, writing with Ian Parberry in the early 1990s. Dijkstra would probably have agreed with it, but there is no verified record of him saying it.</p>
+<p>Why begin a programming course with this? Because it is the same problem you will face all semester in a different form. A claim can be plausible, widely repeated, and still wrong, and the only way to find out is to check it against a source.</p>
+<p>You will do exactly this with programs. The question is not “does this code look right?” but “does it do what was asked?” It is not “the AI said so” but “show me the evidence.” The habit is the same in both cases.</p>
+<p>As for the line itself, it survives the correction. You demonstrated it this week without noticing: you programmed a turtle, with no computer involved at all, and everything that mattered was the plan.</p>
 <hr>
-<p><strong>Programming in the age of AI — or, what exactly is our job now?</strong></p>
-<p>Here is the dilemma, stated without cushioning. For seventy years, the deal was: humans think, computers execute. That deal has been renegotiated while nobody asked us. Today the computer can <em>write</em> the program. It can <em>run</em> the program — that part was always true. And it can even make a show of <em>verifying</em> the program. Writer, runner, checker — all in the machine. So what, precisely, are you here to learn for four months?</p>
-<p>Start with the economics, because they are brutal and clarifying. The software industry paid programmers well for one reason: <strong>creating software was scarce</strong>. Few people could do it, and the world wanted more of it than they could make. That scarcity is ending in front of us. A shopkeeper with no training can now describe an app and <em>ship it</em>. Non-tech people write working code every day. When a machine does something faster than you and often better, that something is a <strong>commodity</strong> — and nobody builds a career on a commodity. Typing programs is going the way of typing letters: everyone can, so it distinguishes no one.</p>
-<p>But look carefully at what the machine actually took over. It took the <em>middle</em> of the loop — the <strong>Express</strong> step, plan-to-code. It did not take the two ends. Someone must still decide <strong>what should exist</strong> and state it so precisely that no ambiguity survives: that is <strong>Specify</strong>. And someone must still judge <strong>whether what came back is right</strong> — right for the stated problem, right at the edges, right when it fails: that is <strong>Verify</strong>. Be suspicious of the claim that the machine verifies itself; a checker that checks against a specification <em>you never stated precisely</em> is a dog grading its own homework. The verification is only ever as good as the specification, and both ends of the loop belong to whoever is willing to think. <strong>The Specify–Verify loop is the job now.</strong> The middle became free; the ends became everything.</p>
-<p>This changes what kind of person you must become. Less a bricklayer, more an <strong>architect</strong>: someone who thinks in <em>systems</em> — how parts connect, where they can fail, what each piece promises the others. And it makes one unglamorous skill suddenly precious: <strong>reading</strong>. Comprehending code you did not write — in large quantities, quickly, skeptically — because from now on, most of the code in your life will arrive written by something else. You cannot audit what you cannot read, and you cannot read deeply what you do not understand down to the machine (which is why we will not skip the pointers, the memory, the compiler — the “obsolete” parts are the audit toolkit).</p>
-<p>The one rule that compresses all of this: <strong>do not outsource the thinking.</strong> Outsource the typing — gladly. But the moment the problem statement, the plan, and the judgment of correctness come from the machine too, you are not using the tool; you are decoration around it. Everything in this course — the spec cards, the <em>given/ensures</em> habit, predict-before-run, “show me a witness” — is training for the two ends of the loop that remain, stubbornly, human.</p>
-<p>And that points at the deepest change of all, which is not a skill but a <em>temperament</em>. When answers are cheap, the scarce thing is the person who still asks — <strong>curiosity</strong>, and the <strong>willingness to challenge yourself</strong> when the machine has made comfort so easy. It has never been simpler to appear competent without understanding anything: accept the generated code, ship it, move on. Which is exactly why the one who peeks under the hood, who asks <em>“but why does this work?”</em>, who deliberately attempts the problem the hard way once before accepting the easy way, pulls ahead — and keeps pulling ahead, because curiosity compounds and comfort doesn’t. The machine will happily do your thinking; it will never do your <em>wondering</em>.</p>
-<p>That is how you prepare: not by racing the machine at the thing it commoditized, but by staying curious enough to keep asking what should exist, rigorous enough to judge what comes back — so good at specifying and verifying that the machine becomes <em>your</em> commodity.</p>
-<p><strong>A coda: whose problem is it, anyway?</strong></p>
-<p>One more turn of the screw before we close the week. We drew the chain as <em>problem → plan → notation → executor</em> — but problems don’t float free. They belong to someone, somewhere: a farmer pricing crops, a lab measuring an alloy, a clerk closing accounts. So the chain really starts one box earlier: <strong>world → problem → plan → notation → executor</strong>. A program is a claim about a world — <em>“this is what mattered, and this is what should happen.”</em> Get the world wrong, and everything downstream is flawlessly, efficiently wrong.</p>
-<p>That gives Verify a twin, and the pair is worth memorizing now: <em>“Did we build the thing <strong>right</strong>?”</em> — does the program meet the spec; tests can answer this, and increasingly, so can machines. And <em>“Did we build the <strong>right thing</strong>?”</em> — does the spec serve the world it came from; only someone who knows that world, and cares about the person in it, can answer. The machine is getting very good at the first question. The second is not even in its vocabulary — it has never met your user.</p>
-<p>This is why we keep insisting you know your own discipline deeply, and why a specification is never mere paperwork: it is a compressed model of <em>someone else’s world</em>, and writing one well takes the most unexpectedly technical of skills — asking, listening, and caring whose problem it is. Even the turtle taught this, quietly: the reward never came from running the program. It came from the drawing matching an <em>intention</em> — and intentions are things worlds have, not machines.</p>
+<p><strong>Programming in the age of AI: what is our job now?</strong></p>
+<p>For about seventy years the arrangement was that humans thought and computers executed. That arrangement has changed. A computer can now write a program, run it, and make a reasonable attempt at checking it. So it is worth asking directly what you are here to learn for four months.</p>
+<p>Start with the economics. Programmers were paid well because writing software was scarce: few people could do it, and the world wanted more of it than they could produce. That scarcity is disappearing. Someone with no training can describe an application and get working code. When a machine can do something quickly and often well, that thing becomes a commodity, and careers are not built on commodities.</p>
+<p>But look at which part the machine took over. Think of the work as three steps:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What it means</th>
+<th>Who does it now</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Specify</strong></td>
+<td>decide what should exist, and state it precisely enough that nothing is ambiguous</td>
+<td>you</td>
+</tr>
+<tr class="even">
+<td><strong>Express</strong></td>
+<td>turn that statement into code</td>
+<td>increasingly the machine</td>
+</tr>
+<tr class="odd">
+<td><strong>Verify</strong></td>
+<td>judge whether what came back is correct, including at the edges and when it fails</td>
+<td>you</td>
+</tr>
+</tbody>
+</table>
+<p>The machine took the middle step. It did not take the other two.</p>
+<p>Be careful with the claim that the machine can verify its own work. A check is only ever a check against a specification. If you never stated the specification precisely, then the machine is checking against its own guess at what you wanted. The verification is worth exactly as much as the specification behind it.</p>
+<p>This changes what you need to become good at. Two things in particular.</p>
+<p>The first is thinking in systems: how parts connect, where they can fail, and what each part promises the others.</p>
+<p>The second is reading. You will need to understand code you did not write, quickly and sceptically, because most of the code you deal with will arrive written by something else. You cannot check what you cannot read, and you cannot read it properly without understanding what is underneath it. That is why this course does not skip pointers, memory or the compiler.</p>
+<p>The rule that follows from all of this is: <strong>do not outsource the thinking.</strong> Outsource the typing as much as you like. But if the problem statement, the plan and the judgement of correctness all come from the machine as well, then you are not using a tool. Everything in this course — the spec cards, the <em>given</em> and <em>ensures</em> habit, predicting output before running it, asking for evidence — is practice at the two steps that remain yours.</p>
+<p>There is also a change that is not a skill. When answers are cheap, the scarce thing is the person who still asks questions. It has never been easier to look competent without understanding anything: accept the generated code, ship it, move on. Which is why the person who asks “but why does this work?”, and who attempts a problem the hard way once before accepting the easy way, ends up further ahead. The machine will do your thinking. It will not do your wondering.</p>
+<hr>
+<p><strong>A note on where problems come from.</strong></p>
+<p>We drew the chain in class as <em>problem → plan → notation → executor</em>. But problems do not appear from nowhere. They belong to someone: a farmer pricing crops, a lab measuring an alloy, a clerk closing accounts. So the chain really begins one step earlier:</p>
+<blockquote class="blockquote">
+<p>world → problem → plan → notation → executor</p>
+</blockquote>
+<p>A program is a claim about some part of the world: this is what mattered, and this is what should happen. If you get the world wrong, everything after it is efficiently and correctly wrong.</p>
+<p>That gives two different questions, and they are worth keeping separate:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>What it asks</th>
+<th>Who can answer it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Did we build the thing <strong>right</strong>?</td>
+<td>does the program meet the specification</td>
+<td>tests can, and increasingly so can machines</td>
+</tr>
+<tr class="even">
+<td>Did we build the <strong>right thing</strong>?</td>
+<td>does the specification serve the world it came from</td>
+<td>only someone who knows that world</td>
+</tr>
+</tbody>
+</table>
+<p>The machine is becoming very good at the first question. The second one it cannot attempt, because it has never met the person whose problem this is.</p>
+<p>This is why we keep insisting that you know your own discipline properly, and why writing a specification is not paperwork. A specification is a compressed description of someone else’s situation, and writing a good one requires asking, listening, and caring whose problem it is. The turtle made this point too: the satisfaction never came from the program running. It came from the drawing matching what you intended.</p>
 
 
 </section>
