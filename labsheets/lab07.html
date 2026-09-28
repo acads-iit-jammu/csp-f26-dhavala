@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 07: Functions &amp; the Game of Life – CS-1-01 (MO)</title>
+<title>Lab 07: Functions and the Game of Life – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab07.html">Lab 07: Functions &amp; the Game of Life</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab07.html">Lab 07: Functions and the Game of Life</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -347,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab07.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab 07: Functions &amp; the Game of Life</span></a>
+ <span class="menu-text">Lab 07: Functions and the Game of Life</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -438,28 +438,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-one-sentence-to-leave-with" id="toc-the-one-sentence-to-leave-with" class="nav-link active" data-scroll-target="#the-one-sentence-to-leave-with">The one sentence to leave with</a></li>
-  <li><a href="#the-three-drills-that-carry-the-week" id="toc-the-three-drills-that-carry-the-week" class="nav-link" data-scroll-target="#the-three-drills-that-carry-the-week">The three drills that carry the week</a></li>
-  <li><a href="#act-0-land-10-min" id="toc-act-0-land-10-min" class="nav-link" data-scroll-target="#act-0-land-10-min">Act 0 · Land (10 min)</a></li>
-  <li><a href="#act-1-drills-predict-then-run-20-min-not-marked" id="toc-act-1-drills-predict-then-run-20-min-not-marked" class="nav-link" data-scroll-target="#act-1-drills-predict-then-run-20-min-not-marked">Act 1 · Drills — predict, then run (20 min, not marked)</a></li>
-  <li><a href="#working-on-one-problem-read-this-once" id="toc-working-on-one-problem-read-this-once" class="nav-link" data-scroll-target="#working-on-one-problem-read-this-once">Working on one problem — read this once</a>
+  <li><a href="#what-this-lab-is-about" id="toc-what-this-lab-is-about" class="nav-link active" data-scroll-target="#what-this-lab-is-about">What this lab is about</a></li>
+  <li><a href="#three-drills-worth-doing-first" id="toc-three-drills-worth-doing-first" class="nav-link" data-scroll-target="#three-drills-worth-doing-first">Three drills worth doing first</a></li>
+  <li><a href="#act-0-getting-started-10-minutes" id="toc-act-0-getting-started-10-minutes" class="nav-link" data-scroll-target="#act-0-getting-started-10-minutes">Act 0 · Getting started (10 minutes)</a></li>
+  <li><a href="#act-1-drills-20-minutes-not-marked" id="toc-act-1-drills-20-minutes-not-marked" class="nav-link" data-scroll-target="#act-1-drills-20-minutes-not-marked">Act 1 · Drills (20 minutes, not marked)</a></li>
+  <li><a href="#how-to-work-on-one-problem" id="toc-how-to-work-on-one-problem" class="nav-link" data-scroll-target="#how-to-work-on-one-problem">How to work on one problem</a>
   <ul class="collapse">
   <li><a href="#every-problem-has-a-ready-made-input-file" id="toc-every-problem-has-a-ready-made-input-file" class="nav-link" data-scroll-target="#every-problem-has-a-ready-made-input-file">Every problem has a ready-made input file</a></li>
   </ul></li>
-  <li><a href="#act-2-fill-the-blanks-25-min-5-marks-each" id="toc-act-2-fill-the-blanks-25-min-5-marks-each" class="nav-link" data-scroll-target="#act-2-fill-the-blanks-25-min-5-marks-each">Act 2 · Fill the blanks (25 min · 5 marks each)</a></li>
-  <li><a href="#act-3-the-checked-five-55-min-solo-10-marks-each" id="toc-act-3-the-checked-five-55-min-solo-10-marks-each" class="nav-link" data-scroll-target="#act-3-the-checked-five-55-min-solo-10-marks-each">Act 3 · The checked five (55 min, solo · 10 marks each)</a></li>
-  <li><a href="#act-4-check-fix-bundle-10-min" id="toc-act-4-check-fix-bundle-10-min" class="nav-link" data-scroll-target="#act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</a></li>
-  <li><a href="#stretch-fast-finishers-not-marked" id="toc-stretch-fast-finishers-not-marked" class="nav-link" data-scroll-target="#stretch-fast-finishers-not-marked">Stretch (fast finishers, not marked)</a></li>
-  <li><a href="#reflect" id="toc-reflect" class="nav-link" data-scroll-target="#reflect">Reflect</a></li>
+  <li><a href="#act-2-fill-in-the-blanks-25-minutes-5-marks-each" id="toc-act-2-fill-in-the-blanks-25-minutes-5-marks-each" class="nav-link" data-scroll-target="#act-2-fill-in-the-blanks-25-minutes-5-marks-each">Act 2 · Fill in the blanks (25 minutes, 5 marks each)</a></li>
+  <li><a href="#a-short-introduction-to-the-game-of-life" id="toc-a-short-introduction-to-the-game-of-life" class="nav-link" data-scroll-target="#a-short-introduction-to-the-game-of-life">A short introduction to the Game of Life</a></li>
+  <li><a href="#act-3-the-five-checked-problems-55-minutes-on-your-own-10-marks-each" id="toc-act-3-the-five-checked-problems-55-minutes-on-your-own-10-marks-each" class="nav-link" data-scroll-target="#act-3-the-five-checked-problems-55-minutes-on-your-own-10-marks-each">Act 3 · The five checked problems (55 minutes, on your own, 10 marks each)</a>
+  <ul class="collapse">
+  <li><a href="#notes-on-each-problem" id="toc-notes-on-each-problem" class="nav-link" data-scroll-target="#notes-on-each-problem">Notes on each problem</a></li>
+  <li><a href="#how-the-checking-works" id="toc-how-the-checking-works" class="nav-link" data-scroll-target="#how-the-checking-works">How the checking works</a></li>
+  </ul></li>
+  <li><a href="#act-4-check-your-marks-fix-and-submit-10-minutes" id="toc-act-4-check-your-marks-fix-and-submit-10-minutes" class="nav-link" data-scroll-target="#act-4-check-your-marks-fix-and-submit-10-minutes">Act 4 · Check your marks, fix, and submit (10 minutes)</a></li>
+  <li><a href="#if-you-finish-early-not-marked" id="toc-if-you-finish-early-not-marked" class="nav-link" data-scroll-target="#if-you-finish-early-not-marked">If you finish early (not marked)</a></li>
+  <li><a href="#before-you-leave" id="toc-before-you-leave" class="nav-link" data-scroll-target="#before-you-leave">Before you leave</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab07.html">Lab 07: Functions &amp; the Game of Life</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab07.html">Lab 07: Functions and the Game of Life</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 07: Functions &amp; the Game of Life</h1>
+<h1 class="title">Lab 07: Functions and the Game of Life</h1>
 </div>
 
 
@@ -506,30 +511,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><strong>Lab pack:</strong> <a href="../labs/lab07.tar.gz">lab07.tar.gz</a> — pre-placed on lab machines, downloadable for home practice.</p>
-<p><strong>Syllabus practical modules:</strong> 7 and 3 — functions, and lists in their multi-dimensional form</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component. <strong>Only the exercises carry marks</strong>: five fill-in-the-blank programs (<strong>5 marks each</strong>) and five checked problems (<strong>10 marks each</strong>). The ten drills are <strong>not scored</strong> — they are how you find out what you have wrong before it costs you. Plus observed work and a short viva. Teams of 1–2; pairs swap driver/navigator at half-time.</p>
-<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference. Useful today for vim (§1) and the compilation model (§2.5) if you are still finding those awkward. <strong>It does not cover functions, pointers or arrays</strong> — it stops before all three — so for this week’s material your reference is the <a href="../weeks/w09.html">Week 09 notes</a>, not the manual. This sheet is self-contained either way.</p>
+<p><strong>Lab pack:</strong> <a href="../labs/lab07.tar.gz">lab07.tar.gz</a>. It is already on the lab machines. You can also download it to practise at home.</p>
+<p><strong>Syllabus practical modules:</strong> 7 and 3 — functions, and arrays in their multi-dimensional form.</p>
+<p><strong>Evaluation:</strong> This lab is graded. It carries the same weight as the other labs inside the 20% lab component.</p>
+<p>Only the exercises carry marks:</p>
+<ul>
+<li>five fill-in-the-blank programs, <code>b1</code> to <code>b5</code>, worth <strong>5 marks each</strong></li>
+<li>five checked problems, <code>e1</code> to <code>e5</code>, worth <strong>10 marks each</strong></li>
+</ul>
+<p>That is 75 marks from the programs. The remaining 25 marks come from observed work and a short viva, in which you will be asked to explain your own code. The ten drills are <strong>not</strong> marked at all.</p>
+<p>You may work in teams of one or two. If you are a pair, swap who types at the halfway point.</p>
+<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> is the department’s shared reference. It is useful today for vim (§1) and for the compilation model (§2.5) if you still find those awkward. It does <strong>not</strong> cover functions, pointers or arrays, so it cannot help you with this week’s material. Use the <a href="../weeks/w09.html">Week 09 notes</a> instead. This sheet is written to be complete on its own.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Both of this week’s lectures are behind you before you sit this lab: <strong>Monday</strong> on functions, scope and call by reference, <strong>Tuesday</strong> on the Game of Life. Nothing below is ahead of them. The notes carry <code>countNeighbours</code> and <code>nextGeneration</code> in full — you are meant to have them open. What the notes do <em>not</em> carry is any program that reads a world from the keyboard, decides one question and stops, which is what every problem below asks for.</p>
+<p>You will have attended both of this week’s lectures before this lab: Monday on functions, scope and pointers, and Tuesday on the Game of Life. Nothing in this lab is ahead of those lectures.</p>
+<p>The Week 09 notes contain <code>countNeighbours</code> and <code>nextGeneration</code> written out in full, and you are meant to have them open while you work. What the notes do not contain is a complete program that reads a world from the input, answers one question and stops. Writing that program is your job today.</p>
 </div>
 </div>
 </div>
-<section id="the-one-sentence-to-leave-with" class="level2">
-<h2 class="anchored" data-anchor-id="the-one-sentence-to-leave-with">The one sentence to leave with</h2>
-<blockquote class="blockquote">
-<p><strong>A function is handed a copy — unless it is handed an address, and an array is neither.</strong></p>
-</blockquote>
-<p>That single distinction decides every problem today. It is why <code>swap</code> needs <code>&amp;a</code> and <code>countNeighbours(world, i, j)</code> does not; why <code>minMax</code> cannot simply <code>return</code> its answer; and why a function you hand a grid to can quietly change it underneath you.</p>
+<section id="what-this-lab-is-about" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-lab-is-about">What this lab is about</h2>
+<p>There are three facts about how C passes arguments to a function. Every problem today uses one of them.</p>
+<p><strong>1. C passes arguments by value.</strong> When you call a function, it receives a <em>copy</em> of each argument. If the function assigns a new value to a parameter, the caller’s variable does not change.</p>
+<p><strong>2. To let a function change a caller’s variable, pass the address of that variable.</strong> You write <code>&amp;x</code> at the call, and you declare the parameter as a pointer, for example <code>int *p</code>. Inside the function, <code>*p</code> refers to the caller’s variable, so assigning to <code>*p</code> changes it.</p>
+<p>This is what <code>b2_swap.c</code> needs. It is also how <code>b3_minmax.c</code> gives back two answers, because a function can only <code>return</code> one value.</p>
+<p><strong>3. An array argument is converted to a pointer.</strong> When you pass an array to a function, C converts the array name to a pointer to its first element. The function therefore does not receive a copy of the array, and it <em>can</em> change the caller’s elements. You do not write <code>&amp;</code> when passing an array.</p>
+<p>This is why <code>countNeighbours(world, i, j)</code> has no <code>&amp;</code> in it, even though <code>swap(&amp;a, &amp;b)</code> does.</p>
 </section>
-<section id="the-three-drills-that-carry-the-week" class="level2">
-<h2 class="anchored" data-anchor-id="the-three-drills-that-carry-the-week">The three drills that carry the week</h2>
-<p>Do <code>d02</code>, <code>d03</code> and <code>d06</code> <strong>in that order</strong>, and predict each before you press Enter. They are one argument in three steps:</p>
+<section id="three-drills-worth-doing-first" class="level2">
+<h2 class="anchored" data-anchor-id="three-drills-worth-doing-first">Three drills worth doing first</h2>
+<p>Three of the ten drills demonstrate exactly those three facts. Do them in this order, and write down what you think each will print before you run it.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -538,40 +553,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th>what it does</th>
-<th>what it shows</th>
+<th>Drill</th>
+<th>What it does</th>
+<th>What it shows</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>d02</code></td>
-<td><code>addOne(x)</code> — and <code>x</code> is still 5</td>
-<td>a <strong>copy</strong> went in</td>
+<td>calls <code>addOne(x)</code>, and <code>x</code> is still 5 afterwards</td>
+<td>the function received a copy</td>
 </tr>
 <tr class="even">
 <td><code>d03</code></td>
-<td>one character different: <code>reallyAddOne(&amp;x)</code> — <code>x</code> is 6</td>
-<td>an <strong>address</strong> went in</td>
+<td>the same program with one character changed: <code>reallyAddOne(&amp;x)</code>, and <code>x</code> becomes 6</td>
+<td>the address was passed, through a pointer parameter</td>
 </tr>
 <tr class="odd">
 <td><code>d06</code></td>
-<td><code>wipe(a)</code> — no <code>&amp;</code> anywhere, and yet <code>a[0]</code> changed</td>
-<td>an array is <strong>already</strong> an address</td>
+<td>calls <code>wipe(a)</code> with no <code>&amp;</code> anywhere, and <code>a[0]</code> changes</td>
+<td>the array name was converted to a pointer</td>
 </tr>
 </tbody>
 </table>
-<p>If <code>d06</code> surprises you, good — that is the point of it, and it is the licence for every <code>nextGeneration(world)</code> call in the second half of the afternoon.</p>
+<p><code>d06</code> is the one to be sure you understand, because every <code>nextGeneration(world)</code> call later in this lab depends on it.</p>
 </section>
-<section id="act-0-land-10-min" class="level2">
-<h2 class="anchored" data-anchor-id="act-0-land-10-min">Act 0 · Land (10 min)</h2>
-<p>The pack is already on the lab machines. If it is not on yours, fetch it:</p>
+<section id="act-0-getting-started-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="act-0-getting-started-10-minutes">Act 0 · Getting started (10 minutes)</h2>
+<p>The pack is already on the lab machines. If it is not on yours, download it first:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab07.tar.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then unpack and install — one line at a time, so you can see which step failed if one does:</p>
+<p>Now unpack it and run the installer. Type these one line at a time, so that you can see which step failed if one of them does:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf lab07.tar.gz</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab07</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./install.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>install.sh</code> asks your branch and roll number(s), then <strong>puts you inside your workspace</strong>. Then start the recorder:</p>
+<p>The installer asks which branch you are in and for your roll number or numbers. It then creates your workspace and puts you inside it.</p>
+<p>Next, start the session recorder:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
@@ -579,16 +595,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Do not go further until your prompt shows <code>[lab07 OK ...]</code>. If it does not, run <code>./where.sh</code> — it changes nothing, and prints the exact line to copy.</p>
-<p><code>session.txt</code> records your afternoon. It is required in every bundle, and it is <strong>your</strong> evidence that the work is yours — the thing that answers a question about who wrote what.</p>
+<p>Do not start the exercises until your prompt reads <code>[lab07 OK ...]</code>. That prompt is how you know you are inside your workspace. If it does not appear, run <code>./where.sh</code>. That script changes nothing; it only tells you where you are and prints the exact command to type.</p>
+<p><code>session.txt</code> records everything you do this afternoon. It must be in the bundle you submit. It is the evidence that the work is your own.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="act-1-drills-predict-then-run-20-min-not-marked" class="level2">
-<h2 class="anchored" data-anchor-id="act-1-drills-predict-then-run-20-min-not-marked">Act 1 · Drills — predict, then run (20 min, not marked)</h2>
+<section id="act-1-drills-20-minutes-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-drills-20-minutes-not-marked">Act 1 · Drills (20 minutes, not marked)</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Ten small programs. Each one is shown to you, you type what you think it will print, and only then does it run. <strong>Predicting is the exercise.</strong></p>
+<p>This shows you ten short programs, one at a time. For each one, you type what you think it will print, and only then does the drill run it and show you the answer.</p>
+<p>The ten drills cover:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -597,25 +614,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th>Drills</th>
-<th>Territory</th>
+<th>What they are about</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>d01</code>–<code>d04</code></td>
-<td>what a function hands back, and what it cannot change — <code>d02</code> and <code>d03</code> differ by <strong>one character</strong> and give different answers</td>
+<td>what a function returns, and what it cannot change</td>
 </tr>
 <tr class="even">
 <td><code>d05</code>–<code>d06</code></td>
-<td>the swap that does nothing, and the array that changes anyway <strong>without any <code>&amp;</code></strong></td>
+<td>a swap that has no effect, and an array that a function modifies without any <code>&amp;</code></td>
 </tr>
 <tr class="odd">
 <td><code>d07</code>–<code>d08</code></td>
-<td>a grid subscript, and a counter that lives in the caller</td>
+<td>reading a value from a grid, and a counter that the caller owns</td>
 </tr>
 <tr class="even">
 <td><code>d09</code>–<code>d10</code></td>
-<td>a corner cell’s neighbours, and <code>return</code> from inside a loop</td>
+<td>counting the neighbours of a corner cell, and using <code>return</code> inside a loop</td>
 </tr>
 </tbody>
 </table>
@@ -625,88 +642,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong><code>d05</code>, <code>d06</code> and <code>d09</code> are each a graded problem in miniature.</strong> <code>d05</code> is <code>b2</code> before you fix it. <code>d06</code> is the licence for every <code>nextGeneration(world)</code> you will write — an array needs no <code>&amp;</code>, and changes anyway. <code>d09</code> is <code>e3</code>, ten marks, already written for you at one corner. Predict all three on paper before you run them.</p>
+<p>Three of the drills are small versions of problems you are about to be marked on.</p>
+<ul>
+<li><code>d05</code> is <code>b2</code> before you fix it.</li>
+<li><code>d06</code> is the fact that every <code>nextGeneration(world)</code> call depends on: an array argument is converted to a pointer, so the function changes the caller’s array.</li>
+<li><code>d09</code> is <code>e3</code>, worth 10 marks, already written for you for one corner cell.</li>
+</ul>
+<p>Write your prediction for these three on paper before you run them.</p>
 </div>
 </div>
 </div>
-<p>These carry <strong>no marks at all</strong>. A wrong prediction costs you nothing — which is exactly why you should write it down before pressing Enter.</p>
+<p>The drills carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.</p>
 </section>
-<section id="working-on-one-problem-read-this-once" class="level2">
-<h2 class="anchored" data-anchor-id="working-on-one-problem-read-this-once">Working on one problem — read this once</h2>
-<p>The same four steps for all ten. Take <code>b1_sumto.c</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> b1_sumto.c          <span class="co"># or nano, or gedit — whatever you use</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> b1_sumto.c <span class="at">-o</span> b1    <span class="co"># compile it, naming the program b1</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./b1</span>                    <span class="co"># run it, and type the input it asks for</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> b1           <span class="co"># only when it runs: mark it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Running it yourself looks like this — you type the <code>5</code>:</p>
-<pre><code>$ ./b1
-Enter one integer n (1..50): 5
-total=15</code></pre>
-<p>Each program tells you <strong>what to type and how many</strong>. <code>b3</code> asks twice — once for the count, then for that many values. <code>b4</code> wants sixteen numbers before it wants the row number:</p>
-<pre><code>$ ./b4
-Enter 16 integers (each 0..99), row by row into a 4 x 4 grid:
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-Now the row number r (0..3): 2
-sum=42</code></pre>
-<p><strong>No <code>-lm</code>, no extra flags.</strong> Every problem this week compiles with plain <code>gcc</code>, and none of them may use <code>math.h</code>. If you reach for <code>sqrt</code> or <code>cos</code> from the library, you have skipped the exercise.</p>
+<section id="how-to-work-on-one-problem" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-work-on-one-problem">How to work on one problem</h2>
+<p>The steps are the same for all ten problems. Using <code>b1_sumto.c</code> as the example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> b1_sumto.c          <span class="co"># open the file and fill in the blank</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> b1_sumto.c <span class="at">-o</span> b1    <span class="co"># compile it; -o b1 names the program b1</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./b1</span> <span class="op">&lt;</span> b1_sample.txt    <span class="co"># run it on the sample input</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> b1           <span class="co"># once it runs, have it marked</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compile with plain <code>gcc</code>. You do not need <code>-lm</code> or any other flag. You may <strong>not</strong> use <code>math.h</code> in any problem this week; if you find yourself calling <code>sqrt</code> or <code>cos</code> from the library, you have skipped the exercise.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Compile and run it <em>yourself</em> before you run <code>./check.sh</code>. The checker tells you whether the answer is right; running it tells you what your program actually does. You need both, and the second one is faster.</p>
+<p>Compile and run the program yourself before you run <code>./check.sh</code>. Running it shows you what your program actually does. The checker only tells you whether the final answer is right. You need both, and running it yourself is faster.</p>
 </div>
 </div>
 </div>
 <section id="every-problem-has-a-ready-made-input-file" class="level3">
 <h3 class="anchored" data-anchor-id="every-problem-has-a-ready-made-input-file">Every problem has a ready-made input file</h3>
-<p>You are never expected to type the input by hand — <code>e3</code>, <code>e4</code> and <code>e5</code> each read an 8 × 8 world, which is <strong>sixty-four integers</strong>, and <code>e2</code> reads sixteen.</p>
-<p>Every problem has a file next to it, named the same way:</p>
+<p>Some problems need a lot of input. <code>e3</code>, <code>e4</code> and <code>e5</code> each read an 8 × 8 world, which is <strong>sixty-four integers</strong>, and <code>e2</code> reads sixteen. You are not expected to type these.</p>
+<p>Every problem has an input file next to it in your workspace. The files are all named the same way:</p>
 <blockquote class="blockquote">
 <p><strong><code>&lt;problem&gt;_sample.txt</code></strong></p>
 </blockquote>
-<p>So the command is always the same shape — redirect the file in with <code>&lt;</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./b1</span> <span class="op">&lt;</span> b1_sample.txt          ./e1 <span class="op">&lt;</span> e1_sample.txt</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./b2</span> <span class="op">&lt;</span> b2_sample.txt          ./e2 <span class="op">&lt;</span> e2_sample.txt</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./b3</span> <span class="op">&lt;</span> b3_sample.txt          ./e3 <span class="op">&lt;</span> e3_sample.txt</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./b4</span> <span class="op">&lt;</span> b4_sample.txt          ./e4 <span class="op">&lt;</span> e4_sample.txt</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./b5</span> <span class="op">&lt;</span> b5_sample.txt          ./e5 <span class="op">&lt;</span> e5_sample.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Each file reproduces the <code>EXAMPLE</code> printed at the top of that starter.</strong> So if your program is right, you see exactly the answer the spec promised you — which makes this the fastest check you have:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./e3 <span class="op">&lt;</span> e3_sample.txt</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">neighbours</span><span class="op">=</span>3</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./e5 <span class="op">&lt;</span> e5_sample.txt</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="va">alive</span><span class="op">=</span>5</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./e4 <span class="op">&lt;</span> e4_sample.txt</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">...#....</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ex">...#....</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ex">...#....</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>So the command always has the same shape. The <code>&lt;</code> sign tells the shell to feed the file to the program in place of the keyboard:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./b1</span> <span class="op">&lt;</span> b1_sample.txt          ./e1 <span class="op">&lt;</span> e1_sample.txt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./b2</span> <span class="op">&lt;</span> b2_sample.txt          ./e2 <span class="op">&lt;</span> e2_sample.txt</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./b3</span> <span class="op">&lt;</span> b3_sample.txt          ./e3 <span class="op">&lt;</span> e3_sample.txt</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./b4</span> <span class="op">&lt;</span> b4_sample.txt          ./e4 <span class="op">&lt;</span> e4_sample.txt</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./b5</span> <span class="op">&lt;</span> b5_sample.txt          ./e5 <span class="op">&lt;</span> e5_sample.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each file contains the <code>EXAMPLE</code> that is printed at the top of that starter file. So if your program is correct, running it on its sample file prints exactly the answer the specification promised you. For instance:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./e3 <span class="op">&lt;</span> e3_sample.txt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">neighbours</span><span class="op">=</span>3</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./e5 <span class="op">&lt;</span> e5_sample.txt</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="va">alive</span><span class="op">=</span>5</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./e4 <span class="op">&lt;</span> e4_sample.txt</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">...#....</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">...#....</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">...#....</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">........</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>e3</code> and <code>e5</code> need one number <strong>after</strong> the sixty-four — the cell for <code>e3</code>, the generation count for <code>e5</code> — and their sample files already contain it. That is why you use <code>e3_sample.txt</code> and not a bare world: feeding <code>e3</code> a world alone leaves it waiting for a cell that never arrives.</p>
+<p><code>e3</code> and <code>e5</code> each read one more number <em>after</em> the sixty-four: <code>e3</code> reads the row and column of the cell you are asking about, and <code>e5</code> reads how many generations to run. Their sample files already contain that extra number.</p>
+<p>This is why you should use <code>e3_sample.txt</code> rather than a file containing only a world. If you give <code>e3</code> a world and nothing else, it reads the world and then waits for a cell that never arrives. The program looks as though it has frozen, but it is simply waiting for input.</p>
 </div>
 </div>
 </div>
-<p>One extra world is provided, <code>glider.txt</code> — a shape that walks rather than blinks:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> glider.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Make your own.</strong> Copy any sample file, edit the numbers, run it again:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> e4_sample.txt mine.txt</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mine.txt</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> mine.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>There is one extra world file, <code>glider.txt</code>. It contains a shape that moves across the grid instead of staying in place. Try it with <code>e4</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> glider.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can also make your own worlds. Copy any sample file, change the 0s and 1s in it, and run it again:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> e4_sample.txt mine.txt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mine.txt</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> mine.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="act-2-fill-the-blanks-25-min-5-marks-each" class="level2">
-<h2 class="anchored" data-anchor-id="act-2-fill-the-blanks-25-min-5-marks-each">Act 2 · Fill the blanks (25 min · 5 marks each)</h2>
-<p>In all five, <strong>the function’s first line is already written</strong> and <code>main</code> is already calling it exactly as written. That line is the <em>promise</em> — what goes in, what comes back. Keep it; do not change it.</p>
+<section id="act-2-fill-in-the-blanks-25-minutes-5-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-2-fill-in-the-blanks-25-minutes-5-marks-each">Act 2 · Fill in the blanks (25 minutes, 5 marks each)</h2>
+<p>In all five of these programs, the first line of the function is already written for you, and <code>main</code> already calls it correctly. Do not change either of them. Your job is to write the body of the function.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -716,46 +730,52 @@ sum=42</code></pre>
 <thead>
 <tr class="header">
 <th>File</th>
-<th>What it does</th>
-<th>Final line ends with exactly</th>
+<th>What the program must do</th>
+<th>Its last line must end with</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>b1_sumto.c</code></td>
-<td><code>1 + 2 + … + n</code>, now inside a function that must <code>return</code></td>
+<td>add up <code>1 + 2 + … + n</code> inside a function that returns the total</td>
 <td><code>total=&lt;S&gt;</code></td>
 </tr>
 <tr class="even">
 <td><code>b2_swap.c</code></td>
-<td>exchange the caller’s two integers — drill <code>d05</code>, made to work</td>
+<td>exchange the caller’s two integers</td>
 <td><code>a=&lt;B&gt; b=&lt;A&gt;</code></td>
 </tr>
 <tr class="odd">
 <td><code>b3_minmax.c</code></td>
-<td>smallest <strong>and</strong> largest of <code>n</code> values — two answers, neither returned</td>
+<td>find both the smallest and the largest of <code>n</code> values</td>
 <td><code>lo=&lt;L&gt; hi=&lt;H&gt;</code></td>
 </tr>
 <tr class="even">
 <td><code>b4_rowsum.c</code></td>
-<td>the total of row <code>r</code> of a 4 × 4 grid</td>
+<td>add up row <code>r</code> of a 4 × 4 grid</td>
 <td><code>sum=&lt;S&gt;</code></td>
 </tr>
 <tr class="odd">
 <td><code>b5_cos.c</code></td>
-<td>cos <em>x</em> from the <strong>first <code>n</code> terms</strong> of its series</td>
-<td><code>cos=&lt;V&gt;</code>, <code>%.6f</code></td>
+<td>compute cos <em>x</em> from the first <code>n</code> terms of its series</td>
+<td><code>cos=&lt;V&gt;</code>, printed with <code>%.6f</code></td>
 </tr>
 </tbody>
 </table>
-<p>The signature is given in each file — <code>int sumTo(int n)</code>, <code>void swap(int *a, int *b)</code>, <code>void minMax(int a[], int n, int *lo, int *hi)</code>, <code>int rowSum(int m[][COLS], int r)</code>, <code>double cosSeries(double x, int n)</code>. Read the <code>GIVEN</code> comment at the top of each starter for the exact input range.</p>
+<p>The function headers you are given are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sumTo<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> swap<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>b<span class="op">)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> minMax<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>lo<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>hi<span class="op">)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> rowSum<span class="op">(</span><span class="dt">int</span> m<span class="op">[][</span>COLS<span class="op">],</span> <span class="dt">int</span> r<span class="op">)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> cosSeries<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">int</span> n<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each starter file begins with a comment block. Read it. The <code>GIVEN</code> line tells you exactly what input the program will receive and the range of each value. The <code>ENSURES</code> line tells you what the output must look like.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>b4</code> is worth pausing on. The row count may be left out of that parameter; the <strong>column count may not</strong>. Reaching <code>m[r][j]</code> means computing <code>r*COLS + j</code>, and without <code>COLS</code> there is no sum to do.</p>
+<p><code>b4</code> is worth stopping to think about. In the parameter <code>int m[][COLS]</code>, you may leave out the number of rows, but you may <strong>not</strong> leave out the number of columns. To find <code>m[r][j]</code>, the machine computes <code>r * COLS + j</code>. Without <code>COLS</code>, there is no calculation it can do.</p>
 </div>
 </div>
 </div>
@@ -765,16 +785,60 @@ sum=42</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>b5</code> has a trap with a body count. Do <strong>not</strong> compute each term’s factorial with its own inner loop — 13! already overflows an <code>int</code> and the answer goes quietly, plausibly wrong. Build each term from the one before it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>term <span class="op">=</span> term <span class="op">*</span> <span class="op">(-</span>x<span class="op">*</span>x<span class="op">)</span> <span class="op">/</span> <span class="op">((</span><span class="dv">2</span><span class="op">*</span>k<span class="op">+</span><span class="dv">1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="dv">2</span><span class="op">*</span>k<span class="op">+</span><span class="dv">2</span><span class="op">));</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>starting at <code>term = 1.0</code>. No factorial is ever formed, and nothing overflows.</p>
+<p><code>b5</code> contains a trap that is easy to fall into. Do <strong>not</strong> compute each term’s factorial with its own inner loop. <code>13!</code> is larger than an <code>int</code> can hold, so the result silently becomes wrong while still looking reasonable.</p>
+<p>Instead, build each term from the one before it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>term <span class="op">=</span> term <span class="op">*</span> <span class="op">(-</span>x<span class="op">*</span>x<span class="op">)</span> <span class="op">/</span> <span class="op">((</span><span class="dv">2</span><span class="op">*</span>k<span class="op">+</span><span class="dv">1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="dv">2</span><span class="op">*</span>k<span class="op">+</span><span class="dv">2</span><span class="op">));</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>starting with <code>term = 1.0</code>. Written this way, no factorial is ever calculated, and nothing overflows.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="act-3-the-checked-five-55-min-solo-10-marks-each" class="level2">
-<h2 class="anchored" data-anchor-id="act-3-the-checked-five-55-min-solo-10-marks-each">Act 3 · The checked five (55 min, solo · 10 marks each)</h2>
-<p>These give you the specification and nothing else.</p>
+<section id="a-short-introduction-to-the-game-of-life" class="level2">
+<h2 class="anchored" data-anchor-id="a-short-introduction-to-the-game-of-life">A short introduction to the Game of Life</h2>
+<p>The last three problems are all about the same thing, so here is what it is. Tuesday’s lecture covered this, and §10 to §16 of the <a href="../weeks/w09.html">Week 09 notes</a> have it in full, with the code.</p>
+<p>The Game of Life was invented by the mathematician John Conway in 1970. It is not a game anyone plays. There are no players and no moves. You set up a starting position, and from then on it runs by itself.</p>
+<p><strong>The world</strong> is a grid of cells. In this lab it is 8 rows by 8 columns. Each cell is either <strong>alive</strong> or <strong>dead</strong>, which we store as <code>1</code> or <code>0</code>.</p>
+<p><strong>Neighbours.</strong> Every cell has up to eight neighbours: the cells immediately above, below, left, right, and the four diagonals. Cells at the edge of the grid have fewer, because some of those positions are outside the world. A corner cell has only three.</p>
+<p><strong>The rule.</strong> To work out the next generation, look at every cell and count how many of its neighbours are currently alive. Then:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>If the cell is</th>
+<th>and its live neighbours number</th>
+<th>it becomes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>alive</td>
+<td>2 or 3</td>
+<td>alive</td>
+</tr>
+<tr class="even">
+<td>alive</td>
+<td>anything else</td>
+<td>dead</td>
+</tr>
+<tr class="odd">
+<td>dead</td>
+<td>exactly 3</td>
+<td>alive</td>
+</tr>
+<tr class="even">
+<td>dead</td>
+<td>anything else</td>
+<td>dead</td>
+</tr>
+</tbody>
+</table>
+<p>A cell can be described loosely as dying of loneliness with fewer than two neighbours, and of overcrowding with more than three. Three live neighbours around an empty cell produce a new live cell.</p>
+<p><strong>A generation</strong> is one application of that rule to <em>every</em> cell in the grid. All the cells change at the same instant, which is the point <code>e4</code> is marked on: every cell must be decided from the world as it was <em>before</em> this generation began.</p>
+<p><strong>Two starting positions you will meet today.</strong> A <em>blinker</em> is three live cells in a row. It turns into three live cells in a column, then back again, forever. A <em>glider</em> is a five-celled shape that repeats itself every four generations, one square diagonally from where it started, so it appears to travel across the grid. Both are in your workspace, as <code>e4_sample.txt</code> and <code>glider.txt</code>.</p>
+<p>That is the whole game. Nothing else happens, and no cell can see further than one step away.</p>
+</section>
+<section id="act-3-the-five-checked-problems-55-minutes-on-your-own-10-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-3-the-five-checked-problems-55-minutes-on-your-own-10-marks-each">Act 3 · The five checked problems (55 minutes, on your own, 10 marks each)</h2>
+<p>For these five you are given the specification and nothing else. You write the whole program.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -784,50 +848,56 @@ sum=42</code></pre>
 <thead>
 <tr class="header">
 <th>Problem</th>
-<th>Task</th>
-<th>Final line ends with exactly</th>
+<th>What the program must do</th>
+<th>Its last line must end with</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>e1.c</code></td>
-<td>the <em>x</em> ≥ 0 with <strong>x³ + x = a</strong>, by halving</td>
-<td><code>root=&lt;R&gt;</code>, <code>%.4f</code></td>
+<td>find the value <em>x</em> ≥ 0 for which x³ + x = a</td>
+<td><code>root=&lt;R&gt;</code>, printed with <code>%.4f</code></td>
 </tr>
 <tr class="even">
 <td><code>e2.c</code></td>
-<td>a 4 × 4 grid flipped about its diagonal</td>
-<td><em>(the whole output is compared)</em></td>
+<td>print a 4 × 4 grid flipped about its diagonal</td>
+<td><em>(the whole output is checked)</em></td>
 </tr>
 <tr class="odd">
 <td><code>e3.c</code></td>
-<td>how many of the <strong>eight</strong> cells touching (r, c) are alive</td>
+<td>count how many of the eight cells touching (r, c) are alive</td>
 <td><code>neighbours=&lt;N&gt;</code></td>
 </tr>
 <tr class="even">
 <td><code>e4.c</code></td>
-<td><strong>one generation</strong> of the Game of Life</td>
-<td><em>(the whole grid is compared)</em></td>
+<td>print one generation of the Game of Life</td>
+<td><em>(the whole grid is checked)</em></td>
 </tr>
 <tr class="odd">
 <td><code>e5.c</code></td>
-<td>how many cells are alive after <code>g</code> generations</td>
+<td>count how many cells are alive after <code>g</code> generations</td>
 <td><code>alive=&lt;N&gt;</code></td>
 </tr>
 </tbody>
 </table>
-<p><code>e1</code> — there is no formula to rearrange. Halve the interval, as Monday did, and write it as <strong>two</strong> functions: one for the left-hand side, one that does the halving and calls it. The answer is somewhere in [0, a].</p>
-<p><code>e2</code> — build the answer in a <strong>second</strong> grid. Writing the flip back into the original overwrites values you have not read yet, which is <code>e4</code>’s trap met early on something small.</p>
-<p><code>e3</code> — two things can go wrong and only one is obvious. Skipping the cell itself is the obvious one. The other is the edge: a corner cell <strong>has</strong> only three neighbours, and reaching for the other five reads outside the array. C will not stop you, and it will often appear to work.</p>
-<p><code>e4</code> — <strong>this is the problem the whole lab has been pointing at.</strong> See the warning below.</p>
-<p><code>e5</code> — watch <code>g = 0</code>. A loop written “do it, then check” runs once even when it was asked for none. And if you find yourself re-writing the rule, stop: <code>e4</code> already contains it.</p>
+<section id="notes-on-each-problem" class="level3">
+<h3 class="anchored" data-anchor-id="notes-on-each-problem">Notes on each problem</h3>
+<p><strong><code>e1</code>.</strong> There is no formula you can rearrange to get the answer. Use the halving method from Monday’s lecture instead. The answer lies somewhere between 0 and <code>a</code>. Write the program as two functions: one that computes the left-hand side x³ + x, and one that does the halving and calls it.</p>
+<p><strong><code>e2</code>.</strong> Build the flipped grid in a <em>second</em> array and print that. If you write the flipped values back into the original array as you go, you will overwrite values you have not read yet and the answer will be wrong. This is a small version of the problem <code>e4</code> has.</p>
+<p><strong><code>e3</code>.</strong> Two things can go wrong here, and only one of them is obvious.</p>
+<p>The obvious one is that a cell must not count itself.</p>
+<p>The other one is the edge of the grid. A corner cell has only three neighbours, not eight. If you try to look at all eight without checking, you will read outside the array. C does not stop you from doing this, and the program will often appear to work, which is what makes it dangerous.</p>
+<p><strong><code>e4</code>.</strong> See the warning below. This is the central problem of the lab.</p>
+<p><strong><code>e5</code>.</strong> Be careful when <code>g</code> is 0: the answer is the world exactly as it was given to you. A loop written to run once and then test will run once even when it was asked for no generations at all.</p>
+<p>If you find yourself writing out the rules of the game a second time for this problem, stop. <code>e4</code> already contains them.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>e3</code>, <code>e4</code> and <code>e5</code> are deliberately <strong>one program grown three times</strong>. Write <code>countNeighbours</code> once for <code>e3</code> and copy it into <code>e4</code>; put the generation in a <em>function</em> in <code>e4</code> and <code>e5</code> costs you three more lines. If you find yourself copying the whole rule into a fresh loop for <code>e5</code>, stop — that is the moment a function was supposed to save you.</p>
+<p><code>e3</code>, <code>e4</code> and <code>e5</code> are deliberately the same program, extended twice.</p>
+<p>Write <code>countNeighbours</code> for <code>e3</code>. Copy it into <code>e4</code> and use it there. If you then put the code that produces one generation into a function of its own, <code>e5</code> needs only a few more lines: call that function <code>g</code> times, then count the live cells.</p>
 </div>
 </div>
 </div>
@@ -837,40 +907,45 @@ sum=42</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>The one that decides <code>e4</code>.</strong> Every cell in a generation must see the <em>same old world</em>. Decide the whole next generation into a second grid, then copy it back. If you write each cell’s answer straight into <code>world</code>, cell (0,1) counts a neighbour that has already changed — and the blinker below will visibly fall apart instead of flipping.</p>
+<p><strong>This is what <code>e4</code> is marked on.</strong> Every cell in a generation must be decided from the <em>same</em> old world.</p>
+<p>So you need two grids. Work out the entire next generation into a second grid, and only then copy it back into the first.</p>
+<p>If instead you write each cell’s new value straight into <code>world</code>, then when you reach cell (0,1) one of its neighbours has already been changed, and it counts the wrong number. The blinker will visibly fall apart instead of flipping.</p>
 </div>
 </div>
 </div>
-<p>Two sample worlds ship in your workspace so you can watch it run rather than trust it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> blinker.txt      <span class="co"># three in a row should become three in a column</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./e4</span> <span class="op">&lt;</span> glider.txt       <span class="co"># a shape that walks</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Tuesday’s lecture printed a live cell as <code>##</code> and a dead one as two blanks, which reads well on a projector. Here it is <strong><code>#</code> and <code>.</code></strong> — a checker cannot see blank space.</p>
+<p>Tuesday’s lecture printed a live cell as <code>##</code> and a dead cell as two spaces, which is easy to read on a projector. In this lab, print <code>#</code> for a live cell and <code>.</code> for a dead one. The checker compares text, and it cannot tell blank space apart from missing output.</p>
 </div>
 </div>
 </div>
-<p><strong>How checking works</strong> — <code>./check.sh e3</code> compiles <em>your source</em> and runs it on the public examples printed in your starter <strong>and on fresh random inputs drawn from the GIVEN</strong>. A program that memorises an example fails the next draw.</p>
+</section>
+<section id="how-the-checking-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-the-checking-works">How the checking works</h3>
+<p>When you run <code>./check.sh e3</code>, it compiles <em>your</em> source file and runs it twice over: once on the examples printed in your starter file, and once on fresh random inputs generated at that moment from the range in the <code>GIVEN</code> line.</p>
+<p>This means a program that only reproduces the printed example will fail as soon as a new input is drawn.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>e2</code> and <code>e4</code> are compared over the <strong>whole output</strong>, not just the last line, because the answer is a shape. Spacing is ignored; a missing or wrong row is not. If yours looks right but fails, run <code>./check.sh e4</code> and read the difference it prints rather than squinting at the screen.</p>
+<p><code>e2</code> and <code>e4</code> are checked over their whole output, not just the last line, because the answer is a grid rather than a single value. Extra or missing spaces are ignored. A wrong or missing row is not.</p>
+<p>If your output looks right but the check fails, run <code>./check.sh e4</code> and read the difference it prints. It shows you the line that differs, what you printed, and what was expected.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="act-4-check-fix-bundle-10-min" class="level2">
-<h2 class="anchored" data-anchor-id="act-4-check-fix-bundle-10-min">Act 4 · Check, fix, bundle (10 min)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e4       <span class="co"># just one problem, while you are working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>It prints <strong>your marks, problem by problem</strong>:</p>
+</section>
+<section id="act-4-check-your-marks-fix-and-submit-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="act-4-check-your-marks-fix-and-submit-10-minutes">Act 4 · Check your marks, fix, and submit (10 minutes)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># check everything</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e4       <span class="co"># check one problem, while you are still working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>check.sh</code> prints your marks, problem by problem:</p>
 <pre><code>  YOUR MARKS SO FAR   (blanks 5 each, checked 10 each)
 
     b1  6/6 vectors    5 of  5 marks
@@ -885,34 +960,37 @@ sum=42</code></pre>
     e5  0/9 vectors    0 of 10 marks
     ---------------------------------------------
                       58 of 75 marks</code></pre>
-<p>That <code>e4</code> line is the in-place bug: two vectors pass, five do not. Marks are <strong>partial</strong> — every vector you pass earns its share, so fixing one failing case is always worth doing, right up to the last minute. Treat the total as an estimate: the random vectors are drawn fresh on every run, so it can move a mark or two.</p>
-<p>Fix, re-check, repeat. Then — green or time-up:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In that example, <code>e4</code> has the two-grid bug described above: two of its seven test cases pass and five do not.</p>
+<p>Marks are given <strong>per test case</strong>, not all-or-nothing. Every case you pass earns its share, so fixing one failing case is always worth doing, even in the last few minutes.</p>
+<p>Treat the total as an estimate. Some of the test cases are generated fresh each time you run the checker, so the number can move by a mark or two between runs.</p>
+<p>Keep fixing and re-checking. When you are finished, or when time is called, make your bundle:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>The bundle lands one directory <strong>above</strong> your workspace, named <code>lab07_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz</code>. Carry it out — Moodle, and email it to yourself. The machine forgets; you must not.</p>
+<p>The bundle is written to the directory <strong>above</strong> your workspace, with a name of the form <code>lab07_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz</code>.</p>
+<p>Take it with you. Upload it to Moodle and also email it to yourself. The lab machines are wiped between sessions, so a bundle left behind is lost.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="stretch-fast-finishers-not-marked" class="level2">
-<h2 class="anchored" data-anchor-id="stretch-fast-finishers-not-marked">Stretch (fast finishers, not marked)</h2>
+<section id="if-you-finish-early-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="if-you-finish-early-not-marked">If you finish early (not marked)</h2>
 <ol type="1">
-<li><strong>Watch the glider hit the wall.</strong> Our world has hard edges, so the glider cannot walk forever. Run it well past <code>e5</code>’s twelve generations and print the population each time. It does <strong>not</strong> die: at generation 24 it stops changing altogether, leaving four cells in the bottom-right corner. Find out what they are.</li>
-<li><strong>Find a still life.</strong> That corner leftover is one — a 2×2 block, which has exactly the neighbour counts it needs to keep itself alive. Add a check to <code>e5</code> that reports the first generation identical to the one before it, and confirm it says 24.</li>
-<li><strong>Make the world wrap</strong>, so column 7’s right-hand neighbour is column 0 and the glider never reaches a wall at all. One change, in <code>countNeighbours</code> only — and the bounds test you fought with in <code>e3</code> becomes an arithmetic one instead.</li>
+<li><strong>Watch the glider reach the wall.</strong> This world has fixed edges, so the glider cannot keep moving forever. Run it for more than the twelve generations <code>e5</code> allows and print how many cells are alive after each one. It does not die out. At generation 24 it stops changing completely, leaving four live cells in the bottom-right corner. Work out what shape they form.</li>
+<li><strong>Find a still life.</strong> Those four cells are one: a 2 × 2 block, in which every live cell has exactly the number of neighbours it needs to survive. Add a test to <code>e5</code> that reports the first generation identical to the one before it, and check that it reports 24.</li>
+<li><strong>Make the edges wrap around</strong>, so that the cell to the right of column 7 is column 0, and the glider never reaches a wall. This needs one change, inside <code>countNeighbours</code> only. The bounds check you wrote for <code>e3</code> becomes a calculation instead.</li>
 </ol>
 </section>
-<section id="reflect" class="level2">
-<h2 class="anchored" data-anchor-id="reflect">Reflect</h2>
-<p>Two questions to be able to answer out loud before you leave — they are what the viva asks:</p>
+<section id="before-you-leave" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-leave">Before you leave</h2>
+<p>Be ready to answer these two questions out loud. They are the kind of question the viva will ask.</p>
 <ol type="1">
-<li>Why does <code>swap</code> need <code>&amp;a</code> when <code>countNeighbours(world, i, j)</code> does not?</li>
-<li>What exactly breaks if you delete the second grid in <code>e4</code> — which cell notices first?</li>
+<li><code>swap(&amp;a, &amp;b)</code> is written with <code>&amp;</code>, but <code>countNeighbours(world, i, j)</code> is not. Why is the array different?</li>
+<li>What goes wrong in <code>e4</code> if you use only one grid instead of two? Which cell is the first to be given a wrong answer, and why?</li>
 </ol>
 
 

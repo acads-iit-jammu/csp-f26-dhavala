@@ -347,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 07: Functions &amp; the Game of Life</span></a>
+ <span class="menu-text">Lab 07: Functions and the Game of Life</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -776,7 +776,7 @@ after reallyAddOne(&amp;count) count = 11</code></pre>
 </section>
 <section id="b-handing-a-whole-world-to-a-function" class="level2">
 <h2 class="anchored" data-anchor-id="b-handing-a-whole-world-to-a-function">10b · Handing a whole world to a function</h2>
-<p>Monday left you with two ways to pass something: <strong>by value</strong>, which copies, and <strong>by reference</strong>, which needs an <code>&amp;</code>. An array is neither, and Tuesday’s code depends on it.</p>
+<p>Monday gave you two cases: an ordinary argument is <strong>passed by value</strong>, so the function gets a copy, and to let a function change a caller’s variable you pass <strong>the address</strong> of it. An array argument is a third case, and Tuesday’s code depends on it: the array name is converted to a pointer to its first element, so the function receives no copy.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ROWS </span><span class="dv">3</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define COLS </span><span class="dv">4</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
