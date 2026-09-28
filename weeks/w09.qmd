@@ -520,6 +520,245 @@ the rule mentions movement.** The glider moves anyway.
 - Then try `ln`. The obvious series is `ln(1+u) = u − u²/2 + u³/3 − …`. Try it at *x* = 8 and watch what happens.
 - **Lab 07**: functions, and the Game of Life.
 
+## Going Further · What `sin(x)` Actually Does
+
+The After-Class exercise above asks you to build `cos` from its series. This section follows
+that one step further, with `sin`, and shows why the series is the *starting* point and not
+the answer. Every output below is real.
+
+### The series
+
+    sin x = x − x³/3! + x⁵/5! − x⁷/7! + x⁹/9! − …
+
+which is the same pattern as `cos`, starting at `x` instead of `1`. As with `cos`, never
+build the factorials — grow each term from the one before it:
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+/* The series, with each term built from the one before.
+   No factorial is ever formed, so nothing overflows. */
+double mySin(double x, int terms)
+{
+    double term = x, sum = 0.0;
+
+    for (int k = 0; k < terms; k++) {
+        sum += term;
+        term = term * (-x * x) / ((2*k + 2) * (2*k + 3));
+    }
+    return sum;
+}
+
+int main(void)
+{
+    double xs[5] = { 0.1, 1.0, 10.0, 100.0, 1000000.0 };
+
+    for (int i = 0; i < 5; i++)
+        printf("x = %-9g mine = %-14.6g  sin(x) = %-12.6g  error = %.3g\n",
+               xs[i], mySin(xs[i], 12), sin(xs[i]),
+               fabs(mySin(xs[i], 12) - sin(xs[i])));
+    return 0;
+}
+```
+
+Compile it with `-lm`. Predict the five lines before you look.
+
+```
+x = 0.1       mine = 0.0998334       sin(x) = 0.0998334     error = 1.39e-17
+x = 1         mine = 0.841471        sin(x) = 0.841471      error = 0
+x = 10        mine = -1.10708        sin(x) = -0.544021     error = 0.563
+x = 100       mine = -3.68039e+23    sin(x) = -0.506366     error = 3.68e+23
+x = 1e+06     mine = -3.86817e+115   sin(x) = -0.349994     error = 3.87e+115
+```
+
+Perfect at 0.1 and 1. Wrong in the first decimal at 10. At 100 the answer is off by 23
+orders of magnitude, and `sin` is a function that never leaves −1 … 1.
+
+### "Use more terms" is not the fix
+
+The obvious reaction is that twelve terms is too few. That reaction is right at *x* = 10 and
+wrong everywhere past it. Run the same series with more terms:
+
+| terms | x = 10 | x = 100 | x = 1000000 |
+|---:|---|---|---|
+| 12 | −1.1071 | −3.68e+23 | −3.87e+115 |
+| 30 | **−0.5440211109** | −5.35e+37 | −7.21e+273 |
+| 60 | −0.5440211109 | −7.37e+40 | `nan` |
+| 200 | −0.5440211109 | −8.26e+25 | `nan` |
+| 600 | −0.5440211109 | −8.26e+25 | `nan` |
+| | *true* −0.5440211109 | *true* −0.5063656411 | *true* −0.3499935022 |
+
+At *x* = 10, thirty terms lands it. At *x* = 100, **no number of terms ever will** — the
+value settles on 8.26e+25 and stays there.
+
+The reason is not the mathematics. The series converges for every *x*; a mathematician is
+not wrong. The reason is the arithmetic. At *x* = 100 the largest single term the sum ever
+forms is about **1.07e+42**, and those giant terms have to cancel each other down to an
+answer of about 0.5. A `double` carries roughly **16 significant digits**. Cancelling 42
+digits down to one, with 16 digits to work in, leaves nothing but the rounding error.
+
+> A convergent series and a usable algorithm are two different things.
+
+### So what does `math.h` give you?
+
+When you write `#include <math.h>` and call `sin(x)`, the header supplies little more than
+the promise — the same kind of promise §2 was about:
+
+```c
+double sin(double x);
+```
+
+The body lives in the platform's maths library, `libm`, which the linker pulls in when you
+pass `-lm`. The C standard says what `sin` must *do*; it does not say how. Different
+machines may compute it differently, and a good implementation is doing something like this:
+
+    x  →  range reduction  →  small argument  →  polynomial  →  result
+
+### Step 1 · Range reduction
+
+The series is only in trouble because *x* got large. So make it small first, using the one
+thing `sin` is famous for:
+
+    sin(x + 2πk) = sin x
+
+Better still, reduce modulo π/2 rather than 2π. Write *x* = n·(π/2) + r, choosing the
+nearest n so that |r| is at most about π/4. Then n mod 4 says which function to call:
+
+| n mod 4 | the answer is |
+|---:|---|
+| 0 | sin r |
+| 1 | cos r |
+| 2 | −sin r |
+| 3 | −cos r |
+
+The library now needs to be accurate on one small interval only, and never anywhere else.
+
+### Step 2 · A polynomial on the small interval
+
+On −π/4 … π/4 a handful of terms is plenty. Four of them, written out:
+
+```c
+double sinSmall(double x) {
+    double z = x * x;
+    return x - x*z/6.0 + x*z*z/120.0 - x*z*z*z/5040.0;
+}
+```
+
+Measured against `sin` at 200001 points across −π/4 … π/4, its worst error is **3.12e-07**.
+Adding one more term and rearranging into Horner's form — factor out `r`, then keep peeling
+off a `z`:
+
+```c
+double sinSmallHorner(double r) {
+    double z = r * r, p;
+    p =  1.0/362880.0;
+    p = -1.0/5040.0  + z*p;
+    p =  1.0/120.0   + z*p;
+    p = -1.0/6.0     + z*p;
+    return r + r*z*p;
+}
+```
+
+Worst error over the same interval: **1.75e-09**. Note what Horner's form bought — `z = r*r`
+is computed once, and there is no `r*r*r*r*r*r*r` anywhere. Same polynomial, fewer
+multiplications, less rounding.
+
+### Putting the two together
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+double sinSmall(double x) {
+    double z = x * x;
+    return x - x*z/6.0 + x*z*z/120.0 - x*z*z*z/5040.0;
+}
+double cosSmall(double x) {
+    double z = x * x;
+    return 1.0 - z/2.0 + z*z/24.0 - z*z*z/720.0 + z*z*z*z/40320.0;
+}
+
+double mySin(double x)
+{
+    double n = floor(x / (M_PI/2) + 0.5);   /* nearest multiple of pi/2 */
+    double r = x - n * (M_PI/2);            /* what is left over        */
+    int q = (int) fmod(n, 4.0);
+    q = ((q % 4) + 4) % 4;                  /* fmod can come back negative */
+
+    if (q == 0) return  sinSmall(r);
+    if (q == 1) return  cosSmall(r);
+    if (q == 2) return -sinSmall(r);
+    return              -cosSmall(r);
+}
+
+int main(void)
+{
+    double xs[7] = { 0.1, 1.0, 3.0, 10.0, 100.0, 1000000.0, 1e20 };
+
+    for (int i = 0; i < 7; i++)
+        printf("x = %-9g mine = %-14.6g  sin(x) = %-12.6g  error = %.3g\n",
+               xs[i], mySin(xs[i]), sin(xs[i]), fabs(mySin(xs[i]) - sin(xs[i])));
+    return 0;
+}
+```
+
+```
+x = 0.1       mine = 0.0998334       sin(x) = 0.0998334     error = 2.75e-15
+x = 1         mine = 0.841471        sin(x) = 0.841471      error = 1.01e-09
+x = 3         mine = 0.14112         sin(x) = 0.14112       error = 6.31e-14
+x = 10        mine = -0.544021       sin(x) = -0.544021     error = 1.89e-08
+x = 100       mine = -0.506366       sin(x) = -0.506366     error = 9.22e-09
+x = 1e+06     mine = -0.349994       sin(x) = -0.349994     error = 2.99e-10
+x = 1e+20     mine = -6.10268e+20    sin(x) = -0.645251     error = 6.1e+20
+```
+
+Compare the *x* = 1e+06 line with the one at the top of this section: error 3.87e+115 has
+become 2.99e-10, and the only new idea was to make the argument small before doing anything
+with it.
+
+### Where this one still breaks
+
+The last line. At *x* = 1e20 the reduction itself falls apart, and it is the same disease in
+a new place. Reducing means computing `x - n*(M_PI/2)`, and at that size `n` is about
+6.4e+19. Every rounding error in `n * (M_PI/2)` is multiplied by how big `n` is:
+
+| x | n | error in `n * (M_PI/2)` |
+|---|---|---|
+| 100 | 64 | 2.23e-14 |
+| 1e+06 | 636620 | 2.22e-10 |
+| 1e+12 | 636619772368 | 0.000222 |
+| 1e+20 | 63661977236758134784 | **2.22e+04** |
+
+`r` is supposed to come out no bigger than π/4 ≈ 0.785. At *x* = 1e20 this code produces
+`r` = 3150. There is no accuracy left to lose, because the subtraction has taken two huge
+nearly-equal numbers and kept only their noise. Real libraries carry π to hundreds of bits
+for exactly this case.
+
+### One last honesty
+
+Everything above used the Taylor coefficients, because you can derive them. A production
+library usually does not. Taylor coefficients are chosen to be as accurate as possible *at
+one point*, x = 0. A library wants the **worst** error across the whole interval −π/4 … π/4
+to be as small as possible, which is a different request and gives slightly different
+numbers. That family of approximations is called *minimax*, and it is a topic for another
+year — but it is why the constants inside a real `sin` are not the ones you recognise.
+
+So `sin(x)` — three characters, one `return` value — is standing on calculus, polynomial
+approximation, how a `double` is stored, range reduction, and a choice of algorithm. That is
+what a function being *a promise* really buys you: all of that, kept behind a name.
+
+### Try it
+
+1. Run the first program. Find the largest *x* at which twelve terms still gives you three
+   correct decimals.
+2. Add a `printf` inside `mySin` to print the largest term the sum ever forms. Compare that
+   number with the answer, at *x* = 10 and *x* = 100.
+3. Build `myCos` the same way, using the identity cos x = sin(x + π/2), and check it against
+   `cos` over the same seven values.
+4. In `mySin`, replace `sinSmall` with `sinSmallHorner`. Does the error at *x* = 100 improve?
+   Should it?
+
 ## PAGAL Notes
 
 *PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal,
