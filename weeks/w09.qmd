@@ -759,6 +759,257 @@ what a function being *a promise* really buys you: all of that, kept behind a na
 4. In `mySin`, replace `sinSmall` with `sinSmallHorner`. Does the error at *x* = 100 improve?
    Should it?
 
+## Going Further · And What `sqrt(x)` Does
+
+§6 found √5 by halving an interval. That works, and §9 showed it works for any `f` once you
+ask the right question. But it is not how anyone computes a square root when they are in a
+hurry, and `sqrt` is worth its own look because it ends somewhere `sin` does not.
+
+As with `sin`, `math.h` only declares the promise:
+
+```c
+double sqrt(double x);
+```
+
+The standard says what `sqrt` must produce, not how. Every output below is real.
+
+### Turn the square root into a root
+
+We want *x* = √a, which is the same as saying *x*² = a, which is the same as saying
+
+    f(x) = x² − a  is zero.
+
+That is §9's question again, so §9's answer is available — halve the bracket. Newton's method
+asks a different one: *stand at your guess, follow the tangent line down to zero, and go
+there.* That gives
+
+    x ← x − f(x)/f′(x)
+
+and with f(x) = x² − a, so f′(x) = 2x, the whole thing collapses to
+
+    x ← ½ · (x + a/x)
+
+Read it as an average. If your guess `x` is too small, then `a/x` is too big, and the true
+root is somewhere between them — so take the midpoint and go round again. The Babylonians
+knew this; it is about four thousand years old.
+
+### Watch it run
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main(void)
+{
+    double x = 1.0, truth = sqrt(2.0);
+
+    for (int i = 0; i < 6; i++) {
+        printf("x%d = %.16f   error = %.3g\n", i, x, fabs(x - truth));
+        x = 0.5 * (x + 2.0 / x);
+    }
+    printf("     %.16f   <- sqrt(2.0)\n", truth);
+    return 0;
+}
+```
+
+```
+x0 = 1.0000000000000000   error = 0.414
+x1 = 1.5000000000000000   error = 0.0858
+x2 = 1.4166666666666665   error = 0.00245
+x3 = 1.4142156862745097   error = 2.12e-06
+x4 = 1.4142135623746899   error = 1.59e-12
+x5 = 1.4142135623730949   error = 2.22e-16
+     1.4142135623730951   <- sqrt(2.0)
+```
+
+Look at the error column, not the digits: 0.4, then 0.09, then 0.002, then 2e-06, then
+1.6e-12. **Each step roughly doubles the number of correct digits** — 0.4, 1.1, 2.6, 5.7,
+11.8, 15.7 of them. Five steps from a guess of 1 exhausts what a `double` can hold.
+
+### Against §6's halving
+
+Both methods find the same number. They do not find it at the same speed.
+
+| a | halving, to a bracket of 1e-12 | Newton, from x = a |
+|---|---:|---:|
+| 2 | 41 steps | 6 steps |
+| 5 | 43 steps | 7 steps |
+| 100 | 47 steps | 9 steps |
+
+Halving buys exactly **one bit** per step — it is the same one bit whether you are close or
+far. Newton **squares the error** each step, so once it is near, it arrives almost at once.
+That is the whole difference, and it is why §6 is the method you can always trust and this is
+the method you actually use.
+
+### The ten-line version, and where it lets you down
+
+The obvious way to package it:
+
+```c
+double my_sqrt(double a)
+{
+    double x = a;
+    for (int i = 0; i < 10; i++)
+        x = 0.5 * (x + a / x);
+    return x;
+}
+```
+
+Ten iterations, no thinking required. Try it across a range of inputs before you trust it:
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+/* the obvious version: start at a, iterate a fixed ten times */
+double my_sqrt(double a)
+{
+    double x = a;
+    for (int i = 0; i < 10; i++)
+        x = 0.5 * (x + a / x);
+    return x;
+}
+
+/* split off the exponent first, then five steps on the significand */
+double my_sqrt2(double a)
+{
+    if (a <  0.0) return NAN;
+    if (a == 0.0) return 0.0;
+
+    int e;
+    double m = frexp(a, &e);         /* a = m * 2^e, with 0.5 <= m < 1 */
+    if (e % 2) { m *= 2.0; e -= 1; } /* force e even, so 0.5 <= m < 2  */
+
+    double x = 1.0;                  /* now always a good first guess  */
+    for (int i = 0; i < 5; i++)
+        x = 0.5 * (x + m / x);
+
+    return ldexp(x, e / 2);          /* put the exponent back          */
+}
+
+int main(void)
+{
+    double as[6] = { 1e-8, 2.0, 100.0, 1e6, 1e12, 1e100 };
+
+    printf("%-8s %-16s %-16s %-16s\n", "a", "my_sqrt", "my_sqrt2", "sqrt");
+    for (int i = 0; i < 6; i++)
+        printf("%-8.0e %-16.8g %-16.8g %-16.8g\n",
+               as[i], my_sqrt(as[i]), my_sqrt2(as[i]), sqrt(as[i]));
+    return 0;
+}
+```
+
+```
+a        my_sqrt          my_sqrt2         sqrt
+1e-08    0.00097997345    0.0001           0.0001
+2e+00    1.4142136        1.4142136        1.4142136
+1e+02    10               10               10
+1e+06    1296.1916        1000             1000
+1e+12    9.7656284e+08    1000000          1000000
+1e+100   9.765625e+96     1e+50            1e+50
+```
+
+`my_sqrt(1000000.0)` returns **1296.19**. Not nearly a thousand — a different number
+altogether, from code that is correct at *a* = 2 and *a* = 100.
+
+Nothing is wrong with the iteration. Ten of them is simply not enough, because the starting
+guess `x = a` is a *million* when the answer is a thousand. Newton spends its early steps
+just halving the guess down to the right size, and only then starts doubling digits. Count
+the steps to converge:
+
+| a | 2 | 100 | 1e6 | 1e12 | 1e100 |
+|---|---:|---:|---:|---:|---:|
+| steps from x = a | 6 | 9 | 16 | 26 | **172** |
+
+The number of iterations grows with the *size* of `a`. Any fixed count is wrong for a large
+enough input.
+
+### Which is exactly why the exponent matters
+
+A `double` is already stored as a significand times a power of two,
+
+    a = m · 2^e
+
+and the square root of that is
+
+    √a = √m · 2^(e/2)
+
+so if you make `e` even, half the problem is solved by **dividing an integer by two**. What
+is left, √m, is a square root of a number between 0.5 and 2 — where a guess of 1.0 is never
+far off. `frexp` hands you `m` and `e`; `ldexp` puts them back together.
+
+That is `my_sqrt2` above, and the column speaks for itself: correct from 1e-8 to 1e100, on
+**five** iterations rather than 172. The exponent trick is not an elegance. It is what makes a
+fixed, small iteration count possible at all.
+
+If 8 = 2 × 2² makes this concrete: √8 = √2 × 2 = 2.828427124746190, and `sqrt(8.0)` returns
+2.828427124746190. The hard part was only ever √2.
+
+This is the shape `sin` had, arrived at from a different direction:
+
+> Reduce to a small, controlled range · approximate well there · reassemble.
+
+### How close is close?
+
+Tested against `sqrt` on 200000 values spread from 1e-200 to 1e200, `my_sqrt2` disagrees on
+**25.1%** of them — and the worst disagreement is **1.00 ULP**, one unit in the last place.
+
+So it is right to the last bit, and still not *correctly rounded*. A real library must return
+the nearest representable double every single time, which is a stronger promise than "very
+close", and getting that last bit right is the final step in a production implementation.
+That is the difference between a good classroom answer and a library.
+
+### Where `sqrt` parts company with `sin`
+
+There is no machine instruction for sine. There is one for square root. Compile
+
+```c
+#include <math.h>
+double f(double x){ return sqrt(x); }
+```
+
+with `gcc -O2 -S` and read the assembly. On the machine these notes were written on, the
+entire function body is one instruction:
+
+```
+fsqrt   d0, d0
+```
+
+On the x86 lab machines you should find `sqrtsd` instead — run it yourself and look. Either
+way, all the Newton machinery above has been replaced by a single operation in silicon, which
+is why `sqrt` is fast and why the library rarely computes it the way you just did.
+
+That does not make the exercise pointless — it makes it the point. Square root feels like a
+primitive, something the machine simply *knows*. It is not. It is `+`, `×` and `/`, arranged
+so that each step doubles what you already have, and someone eventually put that arrangement
+into hardware.
+
+### One warning before you use it anywhere
+
+`my_sqrt` is ten lines and it is not a `sqrt`. Besides the size problem above:
+
+| a | `my_sqrt(a)` | `sqrt(a)` |
+|---|---|---|
+| 0.0 | `nan` — the first step divides by zero | 0 |
+| −4.0 | −4.80176, a number that looks like an answer | `nan` |
+
+The negative case is the dangerous one: it does not crash and it does not warn. It returns a
+plausible-looking value that is not a square root of anything. A library function has to
+handle zero, negatives, infinities, NaNs and subnormals before it may be called `sqrt`.
+
+### Try it
+
+1. Change the `10` in `my_sqrt` to `20`. Which of the six test values become correct, and
+   which still do not? Explain the ones that do not.
+2. Print `x` inside `my_sqrt(1e6)` on every iteration. Find the exact step at which it stops
+   halving and starts doubling digits.
+3. In `my_sqrt2`, cut the five iterations to three. How many decimals do you lose? Now cut it
+   to two.
+4. Compare with §6. Write the halving version so it stops at a bracket of 1e-12, count its
+   steps, and confirm the numbers in the table above for *a* = 2, 5 and 100.
+5. Why does `my_sqrt2` start its guess at `1.0` rather than at `m`? Try both and count
+   iterations.
+
 ## PAGAL Notes
 
 *PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal,
