@@ -149,24 +149,35 @@ answer is right; running it tells you what your program actually does. You need 
 second one is faster.
 :::
 
-### Nobody should type 64 numbers
+### Every problem has a ready-made input file
 
-`e3`, `e4` and `e5` each read an 8 × 8 world — sixty-four integers — and `e2` reads sixteen.
-You are not expected to type them. **Ready-made input files are already in your workspace**,
-and each one reproduces the `EXAMPLE` printed at the top of that starter, so one command
-tells you whether your program agrees with the spec:
+You are never expected to type the input by hand — `e3`, `e4` and `e5` each read an 8 × 8
+world, which is **sixty-four integers**, and `e2` reads sixteen.
+
+Every problem has a file next to it, named the same way:
+
+> **`<problem>_sample.txt`**
+
+So the command is always the same shape — redirect the file in with `<`:
 
 ```bash
-./e2 < e2_sample.txt      # the 4 x 4 grid from e2's EXAMPLE
-./e3 < e3_sample.txt      # -> neighbours=3
-./e4 < blinker.txt        # three in a row become three in a column
-./e4 < glider.txt         # a shape that walks
-./e5 < e5_sample.txt      # the glider after 4 generations -> alive=5
+./b1 < b1_sample.txt          ./e1 < e1_sample.txt
+./b2 < b2_sample.txt          ./e2 < e2_sample.txt
+./b3 < b3_sample.txt          ./e3 < e3_sample.txt
+./b4 < b4_sample.txt          ./e4 < e4_sample.txt
+./b5 < b5_sample.txt          ./e5 < e5_sample.txt
 ```
 
-`./e4 < blinker.txt` prints:
+**Each file reproduces the `EXAMPLE` printed at the top of that starter.** So if your program
+is right, you see exactly the answer the spec promised you — which makes this the fastest
+check you have:
 
-```
+```bash
+$ ./e3 < e3_sample.txt
+neighbours=3
+$ ./e5 < e5_sample.txt
+alive=5
+$ ./e4 < e4_sample.txt
 ........
 ........
 ...#....
@@ -179,31 +190,24 @@ tells you whether your program agrees with the spec:
 
 ::: {.callout-note}
 `e3` and `e5` need one number **after** the sixty-four — the cell for `e3`, the generation
-count for `e5` — which is why they have their own files. `./e3 < blinker.txt` would read the
-world and then sit there waiting for a cell that never arrives. `e4` needs only the world, so
-`blinker.txt` and `glider.txt` work for it directly.
+count for `e5` — and their sample files already contain it. That is why you use
+`e3_sample.txt` and not a bare world: feeding `e3` a world alone leaves it waiting for a cell
+that never arrives.
 :::
 
-**Make your own.** Copy any of these, edit the 0s and 1s, and run it again:
+One extra world is provided, `glider.txt` — a shape that walks rather than blinks:
 
 ```bash
-cp blinker.txt mine.txt
+./e4 < glider.txt
+```
+
+**Make your own.** Copy any sample file, edit the numbers, run it again:
+
+```bash
+cp e4_sample.txt mine.txt
 vim mine.txt
 ./e4 < mine.txt
 ```
-
-::: {.callout-warning}
-The starters **do not compile as shipped**. Each blank is a name the compiler has never heard
-of, so `gcc` points at the exact line still waiting for you — something like
-
-```
-b1_sumto.c:13:5: error: 'TODO_body' undeclared
-```
-
-The wording differs between compilers; the part that matters is the **file and line number**,
-which is the blank you have not filled yet. That is the intended first error, not a broken
-file.
-:::
 
 ## Act 2 · Fill the blanks (25 min · 5 marks each)
 
