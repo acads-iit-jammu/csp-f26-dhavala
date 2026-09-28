@@ -41,8 +41,14 @@ You press **√** on a calculator and a number appears. Where does it come from?
 a table; nobody looked it up. Something *computed* it — with a loop, a comparison, and
 nothing you have not already met.
 
-By the end of today you will have written `sqrt` yourself. What you will actually have
-written is **a function** — and then you will find you wrote rather more than that.
+Monday's lecture answered that **conceptually** — what a function is, what `sin` and `sqrt`
+are really doing behind the name, and why both come down to the same move: ask a question you
+*can* answer, over and over, until the answer is good enough.
+
+These notes are where that becomes code. Nothing below was typed in the lecture, so work
+through it here: §2–§5 build a function, §6 and §9 build `sqrt` out of halving, and the two
+**Going Further** sections at the end take `sin` and `sqrt` all the way down to what the
+library actually does.
 
 ## 2 · A function is a promise
 
@@ -157,6 +163,10 @@ variable must **change** — or when one `return` is not enough, which is §7.
 √5 is somewhere between 0 and 5. Guess the middle: 2.5. But 2.5 × 2.5 = 6.25, too big — so
 the answer lies in [0, 2.5]. Halve again. Each step throws away **half of what is left**.
 
+This is **bisection**, and it is the method we talked through in class. It is not the fastest
+way to a square root — [And What `sqrt(x)` Does](#going-further-and-what-sqrtx-does) shows the
+one that is, and measures the difference: 41 halvings against 6 steps for the same answer.
+
 ## 7 · Two answers out of one function
 
 ```c
@@ -192,6 +202,9 @@ You did not write `sqrt`. You wrote **find where a function crosses zero**, and 
 on one particular function.
 
 ## 9 · Change `f`, solve something else
+
+This is the step that matters, and it is the one the lecture spent longest on: once the
+*method* is separate from the *problem*, changing the problem costs one line.
 
 ```c
 double f(double x) { return x*x - 5.0; }      /* zero at sqrt(5) */
