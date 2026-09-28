@@ -27,38 +27,67 @@
 
 *PAGAL — Perspectives on Algorithms, Generative AI & Learning: the week's informal column.*
 
-- 📽️ **In slides:** [PAGAL — Programming in the Age of AI](../materials/w01-pagal-age-of-ai.html) — this week's column as a presentation: the paradigm shift, the Specify–Verify loop, architects over bricklayers, and Computational X. The long-reads follow below.
+- 📽️ **In slides:** [PAGAL — Programming in the Age of AI](../materials/w01-pagal-age-of-ai.html) — this week's column as a presentation. It covers what has changed in how software is written, the Specify–Verify loop, why the work is shifting from writing code to designing and checking systems, and what computing looks like inside other disciplines. The written version follows below.
 
-**On telescopes — and on checking your quotes.**
+**On telescopes, and on checking your quotes.**
 
-This week's deck leans on a famous line: *"Computer science is not about machines, in the same way that astronomy is not about telescopes."* The internet will tell you, with great confidence, that Edsger Dijkstra said it (so will framed posters, and so will several AI assistants). We checked. The trail — documented at [Quote Investigator](https://quoteinvestigator.com/2021/04/02/computer-science/) — leads elsewhere: Alan Perlis was making the telescope comparison as early as 1968; the closest early match in print is science writer George Johnson in 1986; and the polished modern form belongs to mathematician **Michael Fellows**, writing with Ian Parberry in the early 1990s. Dijkstra would very likely have *agreed* — but there is no verified record of him saying it.
+This week's deck uses a well-known line: *"Computer science is not about machines, in the same way that astronomy is not about telescopes."*
 
-Why open a programming course's first column with quote forensics? Because this is the whole course in miniature: a claim can be **plausible, widely repeated, and wrong** — and the only defense is to check it against a source. You will spend the semester doing precisely that with programs. Not *"does this code look right?"* but *"does it meet what was asked?"* Not *"the AI said so"* but *"show me the witness."* The habit transfers both ways.
+Search for it and you will be told confidently that Edsger Dijkstra said it. So will framed posters, and so will several AI assistants. We checked, and that attribution does not hold up. The trail is documented at [Quote Investigator](https://quoteinvestigator.com/2021/04/02/computer-science/). Alan Perlis was making the telescope comparison as early as 1968. The closest early match in print is by the science writer George Johnson in 1986. The polished modern wording belongs to the mathematician **Michael Fellows**, writing with Ian Parberry in the early 1990s. Dijkstra would probably have agreed with it, but there is no verified record of him saying it.
 
-And the line itself? It survives the correction. Whoever said it, you proved it this week without noticing: you programmed a turtle — no silicon in sight — and everything that mattered was the *plan*. The machine is the telescope. Computing is the astronomy.
+Why begin a programming course with this? Because it is the same problem you will face all semester in a different form. A claim can be plausible, widely repeated, and still wrong, and the only way to find out is to check it against a source.
+
+You will do exactly this with programs. The question is not "does this code look right?" but "does it do what was asked?" It is not "the AI said so" but "show me the evidence." The habit is the same in both cases.
+
+As for the line itself, it survives the correction. You demonstrated it this week without noticing: you programmed a turtle, with no computer involved at all, and everything that mattered was the plan.
 
 ---
 
-**Programming in the age of AI — or, what exactly is our job now?**
+**Programming in the age of AI: what is our job now?**
 
-Here is the dilemma, stated without cushioning. For seventy years, the deal was: humans think, computers execute. That deal has been renegotiated while nobody asked us. Today the computer can *write* the program. It can *run* the program — that part was always true. And it can even make a show of *verifying* the program. Writer, runner, checker — all in the machine. So what, precisely, are you here to learn for four months?
+For about seventy years the arrangement was that humans thought and computers executed. That arrangement has changed. A computer can now write a program, run it, and make a reasonable attempt at checking it. So it is worth asking directly what you are here to learn for four months.
 
-Start with the economics, because they are brutal and clarifying. The software industry paid programmers well for one reason: **creating software was scarce**. Few people could do it, and the world wanted more of it than they could make. That scarcity is ending in front of us. A shopkeeper with no training can now describe an app and *ship it*. Non-tech people write working code every day. When a machine does something faster than you and often better, that something is a **commodity** — and nobody builds a career on a commodity. Typing programs is going the way of typing letters: everyone can, so it distinguishes no one.
+Start with the economics. Programmers were paid well because writing software was scarce: few people could do it, and the world wanted more of it than they could produce. That scarcity is disappearing. Someone with no training can describe an application and get working code. When a machine can do something quickly and often well, that thing becomes a commodity, and careers are not built on commodities.
 
-But look carefully at what the machine actually took over. It took the *middle* of the loop — the **Express** step, plan-to-code. It did not take the two ends. Someone must still decide **what should exist** and state it so precisely that no ambiguity survives: that is **Specify**. And someone must still judge **whether what came back is right** — right for the stated problem, right at the edges, right when it fails: that is **Verify**. Be suspicious of the claim that the machine verifies itself; a checker that checks against a specification *you never stated precisely* is a dog grading its own homework. The verification is only ever as good as the specification, and both ends of the loop belong to whoever is willing to think. **The Specify–Verify loop is the job now.** The middle became free; the ends became everything.
+But look at which part the machine took over. Think of the work as three steps:
 
-This changes what kind of person you must become. Less a bricklayer, more an **architect**: someone who thinks in *systems* — how parts connect, where they can fail, what each piece promises the others. And it makes one unglamorous skill suddenly precious: **reading**. Comprehending code you did not write — in large quantities, quickly, skeptically — because from now on, most of the code in your life will arrive written by something else. You cannot audit what you cannot read, and you cannot read deeply what you do not understand down to the machine (which is why we will not skip the pointers, the memory, the compiler — the "obsolete" parts are the audit toolkit).
+| Step | What it means | Who does it now |
+|---|---|---|
+| **Specify** | decide what should exist, and state it precisely enough that nothing is ambiguous | you |
+| **Express** | turn that statement into code | increasingly the machine |
+| **Verify** | judge whether what came back is correct, including at the edges and when it fails | you |
 
-The one rule that compresses all of this: **do not outsource the thinking.** Outsource the typing — gladly. But the moment the problem statement, the plan, and the judgment of correctness come from the machine too, you are not using the tool; you are decoration around it. Everything in this course — the spec cards, the *given/ensures* habit, predict-before-run, "show me a witness" — is training for the two ends of the loop that remain, stubbornly, human.
+The machine took the middle step. It did not take the other two.
 
-And that points at the deepest change of all, which is not a skill but a *temperament*. When answers are cheap, the scarce thing is the person who still asks — **curiosity**, and the **willingness to challenge yourself** when the machine has made comfort so easy. It has never been simpler to appear competent without understanding anything: accept the generated code, ship it, move on. Which is exactly why the one who peeks under the hood, who asks *"but why does this work?"*, who deliberately attempts the problem the hard way once before accepting the easy way, pulls ahead — and keeps pulling ahead, because curiosity compounds and comfort doesn't. The machine will happily do your thinking; it will never do your *wondering*.
+Be careful with the claim that the machine can verify its own work. A check is only ever a check against a specification. If you never stated the specification precisely, then the machine is checking against its own guess at what you wanted. The verification is worth exactly as much as the specification behind it.
 
-That is how you prepare: not by racing the machine at the thing it commoditized, but by staying curious enough to keep asking what should exist, rigorous enough to judge what comes back — so good at specifying and verifying that the machine becomes *your* commodity.
+This changes what you need to become good at. Two things in particular.
 
-**A coda: whose problem is it, anyway?**
+The first is thinking in systems: how parts connect, where they can fail, and what each part promises the others.
 
-One more turn of the screw before we close the week. We drew the chain as *problem → plan → notation → executor* — but problems don't float free. They belong to someone, somewhere: a farmer pricing crops, a lab measuring an alloy, a clerk closing accounts. So the chain really starts one box earlier: **world → problem → plan → notation → executor**. A program is a claim about a world — *"this is what mattered, and this is what should happen."* Get the world wrong, and everything downstream is flawlessly, efficiently wrong.
+The second is reading. You will need to understand code you did not write, quickly and sceptically, because most of the code you deal with will arrive written by something else. You cannot check what you cannot read, and you cannot read it properly without understanding what is underneath it. That is why this course does not skip pointers, memory or the compiler.
 
-That gives Verify a twin, and the pair is worth memorizing now: *"Did we build the thing **right**?"* — does the program meet the spec; tests can answer this, and increasingly, so can machines. And *"Did we build the **right thing**?"* — does the spec serve the world it came from; only someone who knows that world, and cares about the person in it, can answer. The machine is getting very good at the first question. The second is not even in its vocabulary — it has never met your user.
+The rule that follows from all of this is: **do not outsource the thinking.** Outsource the typing as much as you like. But if the problem statement, the plan and the judgement of correctness all come from the machine as well, then you are not using a tool. Everything in this course — the spec cards, the *given* and *ensures* habit, predicting output before running it, asking for evidence — is practice at the two steps that remain yours.
 
-This is why we keep insisting you know your own discipline deeply, and why a specification is never mere paperwork: it is a compressed model of *someone else's world*, and writing one well takes the most unexpectedly technical of skills — asking, listening, and caring whose problem it is. Even the turtle taught this, quietly: the reward never came from running the program. It came from the drawing matching an *intention* — and intentions are things worlds have, not machines.
+There is also a change that is not a skill. When answers are cheap, the scarce thing is the person who still asks questions. It has never been easier to look competent without understanding anything: accept the generated code, ship it, move on. Which is why the person who asks "but why does this work?", and who attempts a problem the hard way once before accepting the easy way, ends up further ahead. The machine will do your thinking. It will not do your wondering.
+
+---
+
+**A note on where problems come from.**
+
+We drew the chain in class as *problem → plan → notation → executor*. But problems do not appear from nowhere. They belong to someone: a farmer pricing crops, a lab measuring an alloy, a clerk closing accounts. So the chain really begins one step earlier:
+
+> world → problem → plan → notation → executor
+
+A program is a claim about some part of the world: this is what mattered, and this is what should happen. If you get the world wrong, everything after it is efficiently and correctly wrong.
+
+That gives two different questions, and they are worth keeping separate:
+
+| Question | What it asks | Who can answer it |
+|---|---|---|
+| Did we build the thing **right**? | does the program meet the specification | tests can, and increasingly so can machines |
+| Did we build the **right thing**? | does the specification serve the world it came from | only someone who knows that world |
+
+The machine is becoming very good at the first question. The second one it cannot attempt, because it has never met the person whose problem this is.
+
+This is why we keep insisting that you know your own discipline properly, and why writing a specification is not paperwork. A specification is a compressed description of someone else's situation, and writing a good one requires asking, listening, and caring whose problem it is. The turtle made this point too: the satisfaction never came from the program running. It came from the drawing matching what you intended.
