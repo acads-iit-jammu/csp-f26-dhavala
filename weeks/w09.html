@@ -466,6 +466,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#second-test-something-that-should-walk" id="toc-second-test-something-that-should-walk" class="nav-link" data-scroll-target="#second-test-something-that-should-walk">16 · Second test: something that should walk</a></li>
   <li><a href="#questions-to-bring-back" id="toc-questions-to-bring-back" class="nav-link" data-scroll-target="#questions-to-bring-back">Questions to Bring Back</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
+  <li><a href="#going-further-what-sinx-actually-does" id="toc-going-further-what-sinx-actually-does" class="nav-link" data-scroll-target="#going-further-what-sinx-actually-does">Going Further · What <code>sin(x)</code> Actually Does</a>
+  <ul class="collapse">
+  <li><a href="#the-series" id="toc-the-series" class="nav-link" data-scroll-target="#the-series">The series</a></li>
+  <li><a href="#use-more-terms-is-not-the-fix" id="toc-use-more-terms-is-not-the-fix" class="nav-link" data-scroll-target="#use-more-terms-is-not-the-fix">“Use more terms” is not the fix</a></li>
+  <li><a href="#so-what-does-math.h-give-you" id="toc-so-what-does-math.h-give-you" class="nav-link" data-scroll-target="#so-what-does-math.h-give-you">So what does <code>math.h</code> give you?</a></li>
+  <li><a href="#step-1-range-reduction" id="toc-step-1-range-reduction" class="nav-link" data-scroll-target="#step-1-range-reduction">Step 1 · Range reduction</a></li>
+  <li><a href="#step-2-a-polynomial-on-the-small-interval" id="toc-step-2-a-polynomial-on-the-small-interval" class="nav-link" data-scroll-target="#step-2-a-polynomial-on-the-small-interval">Step 2 · A polynomial on the small interval</a></li>
+  <li><a href="#putting-the-two-together" id="toc-putting-the-two-together" class="nav-link" data-scroll-target="#putting-the-two-together">Putting the two together</a></li>
+  <li><a href="#where-this-one-still-breaks" id="toc-where-this-one-still-breaks" class="nav-link" data-scroll-target="#where-this-one-still-breaks">Where this one still breaks</a></li>
+  <li><a href="#one-last-honesty" id="toc-one-last-honesty" class="nav-link" data-scroll-target="#one-last-honesty">One last honesty</a></li>
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it">Try it</a></li>
+  </ul></li>
+  <li><a href="#going-further-and-what-sqrtx-does" id="toc-going-further-and-what-sqrtx-does" class="nav-link" data-scroll-target="#going-further-and-what-sqrtx-does">Going Further · And What <code>sqrt(x)</code> Does</a>
+  <ul class="collapse">
+  <li><a href="#turn-the-square-root-into-a-root" id="toc-turn-the-square-root-into-a-root" class="nav-link" data-scroll-target="#turn-the-square-root-into-a-root">Turn the square root into a root</a></li>
+  <li><a href="#watch-it-run" id="toc-watch-it-run" class="nav-link" data-scroll-target="#watch-it-run">Watch it run</a></li>
+  <li><a href="#against-6s-halving" id="toc-against-6s-halving" class="nav-link" data-scroll-target="#against-6s-halving">Against §6’s halving</a></li>
+  <li><a href="#the-ten-line-version-and-where-it-lets-you-down" id="toc-the-ten-line-version-and-where-it-lets-you-down" class="nav-link" data-scroll-target="#the-ten-line-version-and-where-it-lets-you-down">The ten-line version, and where it lets you down</a></li>
+  <li><a href="#which-is-exactly-why-the-exponent-matters" id="toc-which-is-exactly-why-the-exponent-matters" class="nav-link" data-scroll-target="#which-is-exactly-why-the-exponent-matters">Which is exactly why the exponent matters</a></li>
+  <li><a href="#how-close-is-close" id="toc-how-close-is-close" class="nav-link" data-scroll-target="#how-close-is-close">How close is close?</a></li>
+  <li><a href="#where-sqrt-parts-company-with-sin" id="toc-where-sqrt-parts-company-with-sin" class="nav-link" data-scroll-target="#where-sqrt-parts-company-with-sin">Where <code>sqrt</code> parts company with <code>sin</code></a></li>
+  <li><a href="#one-warning-before-you-use-it-anywhere" id="toc-one-warning-before-you-use-it-anywhere" class="nav-link" data-scroll-target="#one-warning-before-you-use-it-anywhere">One warning before you use it anywhere</a></li>
+  <li><a href="#try-it-1" id="toc-try-it-1" class="nav-link" data-scroll-target="#try-it-1">Try it</a></li>
+  </ul></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
   </ul></li>
   </ul>
@@ -988,6 +1012,479 @@ after  wipe(g)  g[0][0] = 99</code></pre>
 <li>Then try <code>ln</code>. The obvious series is <code>ln(1+u) = u − u²/2 + u³/3 − …</code>. Try it at <em>x</em> = 8 and watch what happens.</li>
 <li><strong>Lab 07</strong>: functions, and the Game of Life.</li>
 </ul>
+</section>
+<section id="going-further-what-sinx-actually-does" class="level2">
+<h2 class="anchored" data-anchor-id="going-further-what-sinx-actually-does">Going Further · What <code>sin(x)</code> Actually Does</h2>
+<p>The After-Class exercise above asks you to build <code>cos</code> from its series. This section follows that one step further, with <code>sin</code>, and shows why the series is the <em>starting</em> point and not the answer. Every output below is real.</p>
+<section id="the-series" class="level3">
+<h3 class="anchored" data-anchor-id="the-series">The series</h3>
+<pre><code>sin x = x − x³/3! + x⁵/5! − x⁷/7! + x⁹/9! − …</code></pre>
+<p>which is the same pattern as <code>cos</code>, starting at <code>x</code> instead of <code>1</code>. As with <code>cos</code>, never build the factorials — grow each term from the one before it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">/* The series, with each term built from the one before.</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">   No factorial is ever formed, so nothing overflows. */</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mySin<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">int</span> terms<span class="op">)</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> term <span class="op">=</span> x<span class="op">,</span> sum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> terms<span class="op">;</span> k<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> term<span class="op">;</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        term <span class="op">=</span> term <span class="op">*</span> <span class="op">(-</span>x <span class="op">*</span> x<span class="op">)</span> <span class="op">/</span> <span class="op">((</span><span class="dv">2</span><span class="op">*</span>k <span class="op">+</span> <span class="dv">2</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="dv">2</span><span class="op">*</span>k <span class="op">+</span> <span class="dv">3</span><span class="op">));</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sum<span class="op">;</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> xs<span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="fl">0.1</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">10.0</span><span class="op">,</span> <span class="fl">100.0</span><span class="op">,</span> <span class="fl">1000000.0</span> <span class="op">};</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%-9g</span><span class="st"> mine = </span><span class="sc">%-14.6g</span><span class="st">  sin(x) = </span><span class="sc">%-12.6g</span><span class="st">  error = </span><span class="sc">%.3g\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>               xs<span class="op">[</span>i<span class="op">],</span> mySin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">],</span> <span class="dv">12</span><span class="op">),</span> sin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">]),</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>               fabs<span class="op">(</span>mySin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">],</span> <span class="dv">12</span><span class="op">)</span> <span class="op">-</span> sin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">])));</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compile it with <code>-lm</code>. Predict the five lines before you look.</p>
+<pre><code>x = 0.1       mine = 0.0998334       sin(x) = 0.0998334     error = 1.39e-17
+x = 1         mine = 0.841471        sin(x) = 0.841471      error = 0
+x = 10        mine = -1.10708        sin(x) = -0.544021     error = 0.563
+x = 100       mine = -3.68039e+23    sin(x) = -0.506366     error = 3.68e+23
+x = 1e+06     mine = -3.86817e+115   sin(x) = -0.349994     error = 3.87e+115</code></pre>
+<p>Perfect at 0.1 and 1. Wrong in the first decimal at 10. At 100 the answer is off by 23 orders of magnitude, and <code>sin</code> is a function that never leaves −1 … 1.</p>
+</section>
+<section id="use-more-terms-is-not-the-fix" class="level3">
+<h3 class="anchored" data-anchor-id="use-more-terms-is-not-the-fix">“Use more terms” is not the fix</h3>
+<p>The obvious reaction is that twelve terms is too few. That reaction is right at <em>x</em> = 10 and wrong everywhere past it. Run the same series with more terms:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">terms</th>
+<th>x = 10</th>
+<th>x = 100</th>
+<th>x = 1000000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td>−1.1071</td>
+<td>−3.68e+23</td>
+<td>−3.87e+115</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">30</td>
+<td><strong>−0.5440211109</strong></td>
+<td>−5.35e+37</td>
+<td>−7.21e+273</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">60</td>
+<td>−0.5440211109</td>
+<td>−7.37e+40</td>
+<td><code>nan</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">200</td>
+<td>−0.5440211109</td>
+<td>−8.26e+25</td>
+<td><code>nan</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">600</td>
+<td>−0.5440211109</td>
+<td>−8.26e+25</td>
+<td><code>nan</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"></td>
+<td><em>true</em> −0.5440211109</td>
+<td><em>true</em> −0.5063656411</td>
+<td><em>true</em> −0.3499935022</td>
+</tr>
+</tbody>
+</table>
+<p>At <em>x</em> = 10, thirty terms lands it. At <em>x</em> = 100, <strong>no number of terms ever will</strong> — the value settles on 8.26e+25 and stays there.</p>
+<p>The reason is not the mathematics. The series converges for every <em>x</em>; a mathematician is not wrong. The reason is the arithmetic. At <em>x</em> = 100 the largest single term the sum ever forms is about <strong>1.07e+42</strong>, and those giant terms have to cancel each other down to an answer of about 0.5. A <code>double</code> carries roughly <strong>16 significant digits</strong>. Cancelling 42 digits down to one, with 16 digits to work in, leaves nothing but the rounding error.</p>
+<blockquote class="blockquote">
+<p>A convergent series and a usable algorithm are two different things.</p>
+</blockquote>
+</section>
+<section id="so-what-does-math.h-give-you" class="level3">
+<h3 class="anchored" data-anchor-id="so-what-does-math.h-give-you">So what does <code>math.h</code> give you?</h3>
+<p>When you write <code>#include &lt;math.h&gt;</code> and call <code>sin(x)</code>, the header supplies little more than the promise — the same kind of promise §2 was about:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sin<span class="op">(</span><span class="dt">double</span> x<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The body lives in the platform’s maths library, <code>libm</code>, which the linker pulls in when you pass <code>-lm</code>. The C standard says what <code>sin</code> must <em>do</em>; it does not say how. Different machines may compute it differently, and a good implementation is doing something like this:</p>
+<pre><code>x  →  range reduction  →  small argument  →  polynomial  →  result</code></pre>
+</section>
+<section id="step-1-range-reduction" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-range-reduction">Step 1 · Range reduction</h3>
+<p>The series is only in trouble because <em>x</em> got large. So make it small first, using the one thing <code>sin</code> is famous for:</p>
+<pre><code>sin(x + 2πk) = sin x</code></pre>
+<p>Better still, reduce modulo π/2 rather than 2π. Write <em>x</em> = n·(π/2) + r, choosing the nearest n so that |r| is at most about π/4. Then n mod 4 says which function to call:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">n mod 4</th>
+<th>the answer is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td>sin r</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td>cos r</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td>−sin r</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td>−cos r</td>
+</tr>
+</tbody>
+</table>
+<p>The library now needs to be accurate on one small interval only, and never anywhere else.</p>
+</section>
+<section id="step-2-a-polynomial-on-the-small-interval" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-a-polynomial-on-the-small-interval">Step 2 · A polynomial on the small interval</h3>
+<p>On −π/4 … π/4 a handful of terms is plenty. Four of them, written out:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sinSmall<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> z <span class="op">=</span> x <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">-</span> x<span class="op">*</span>z<span class="op">/</span><span class="fl">6.0</span> <span class="op">+</span> x<span class="op">*</span>z<span class="op">*</span>z<span class="op">/</span><span class="fl">120.0</span> <span class="op">-</span> x<span class="op">*</span>z<span class="op">*</span>z<span class="op">*</span>z<span class="op">/</span><span class="fl">5040.0</span><span class="op">;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Measured against <code>sin</code> at 200001 points across −π/4 … π/4, its worst error is <strong>3.12e-07</strong>. Adding one more term and rearranging into Horner’s form — factor out <code>r</code>, then keep peeling off a <code>z</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sinSmallHorner<span class="op">(</span><span class="dt">double</span> r<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> z <span class="op">=</span> r <span class="op">*</span> r<span class="op">,</span> p<span class="op">;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span>  <span class="fl">1.0</span><span class="op">/</span><span class="fl">362880.0</span><span class="op">;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">/</span><span class="fl">5040.0</span>  <span class="op">+</span> z<span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span>  <span class="fl">1.0</span><span class="op">/</span><span class="fl">120.0</span>   <span class="op">+</span> z<span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">/</span><span class="fl">6.0</span>     <span class="op">+</span> z<span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r <span class="op">+</span> r<span class="op">*</span>z<span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Worst error over the same interval: <strong>1.75e-09</strong>. Note what Horner’s form bought — <code>z = r*r</code> is computed once, and there is no <code>r*r*r*r*r*r*r</code> anywhere. Same polynomial, fewer multiplications, less rounding.</p>
+</section>
+<section id="putting-the-two-together" class="level3">
+<h3 class="anchored" data-anchor-id="putting-the-two-together">Putting the two together</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sinSmall<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> z <span class="op">=</span> x <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">-</span> x<span class="op">*</span>z<span class="op">/</span><span class="fl">6.0</span> <span class="op">+</span> x<span class="op">*</span>z<span class="op">*</span>z<span class="op">/</span><span class="fl">120.0</span> <span class="op">-</span> x<span class="op">*</span>z<span class="op">*</span>z<span class="op">*</span>z<span class="op">/</span><span class="fl">5040.0</span><span class="op">;</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> cosSmall<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> z <span class="op">=</span> x <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">1.0</span> <span class="op">-</span> z<span class="op">/</span><span class="fl">2.0</span> <span class="op">+</span> z<span class="op">*</span>z<span class="op">/</span><span class="fl">24.0</span> <span class="op">-</span> z<span class="op">*</span>z<span class="op">*</span>z<span class="op">/</span><span class="fl">720.0</span> <span class="op">+</span> z<span class="op">*</span>z<span class="op">*</span>z<span class="op">*</span>z<span class="op">/</span><span class="fl">40320.0</span><span class="op">;</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mySin<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> n <span class="op">=</span> floor<span class="op">(</span>x <span class="op">/</span> <span class="op">(</span>M_PI<span class="op">/</span><span class="dv">2</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">);</span>   <span class="co">/* nearest multiple of pi/2 */</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> r <span class="op">=</span> x <span class="op">-</span> n <span class="op">*</span> <span class="op">(</span>M_PI<span class="op">/</span><span class="dv">2</span><span class="op">);</span>            <span class="co">/* what is left over        */</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> q <span class="op">=</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> fmod<span class="op">(</span>n<span class="op">,</span> <span class="fl">4.0</span><span class="op">);</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> <span class="op">((</span>q <span class="op">%</span> <span class="dv">4</span><span class="op">)</span> <span class="op">+</span> <span class="dv">4</span><span class="op">)</span> <span class="op">%</span> <span class="dv">4</span><span class="op">;</span>                  <span class="co">/* fmod can come back negative */</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>q <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span>  sinSmall<span class="op">(</span>r<span class="op">);</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>q <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="cf">return</span>  cosSmall<span class="op">(</span>r<span class="op">);</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>q <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="cf">return</span> <span class="op">-</span>sinSmall<span class="op">(</span>r<span class="op">);</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>              <span class="op">-</span>cosSmall<span class="op">(</span>r<span class="op">);</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> xs<span class="op">[</span><span class="dv">7</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="fl">0.1</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">10.0</span><span class="op">,</span> <span class="fl">100.0</span><span class="op">,</span> <span class="fl">1000000.0</span><span class="op">,</span> <span class="fl">1e20</span> <span class="op">};</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">7</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%-9g</span><span class="st"> mine = </span><span class="sc">%-14.6g</span><span class="st">  sin(x) = </span><span class="sc">%-12.6g</span><span class="st">  error = </span><span class="sc">%.3g\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>               xs<span class="op">[</span>i<span class="op">],</span> mySin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">]),</span> sin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">]),</span> fabs<span class="op">(</span>mySin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">])</span> <span class="op">-</span> sin<span class="op">(</span>xs<span class="op">[</span>i<span class="op">])));</span></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>x = 0.1       mine = 0.0998334       sin(x) = 0.0998334     error = 2.75e-15
+x = 1         mine = 0.841471        sin(x) = 0.841471      error = 1.01e-09
+x = 3         mine = 0.14112         sin(x) = 0.14112       error = 6.31e-14
+x = 10        mine = -0.544021       sin(x) = -0.544021     error = 1.89e-08
+x = 100       mine = -0.506366       sin(x) = -0.506366     error = 9.22e-09
+x = 1e+06     mine = -0.349994       sin(x) = -0.349994     error = 2.99e-10
+x = 1e+20     mine = -6.10268e+20    sin(x) = -0.645251     error = 6.1e+20</code></pre>
+<p>Compare the <em>x</em> = 1e+06 line with the one at the top of this section: error 3.87e+115 has become 2.99e-10, and the only new idea was to make the argument small before doing anything with it.</p>
+</section>
+<section id="where-this-one-still-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="where-this-one-still-breaks">Where this one still breaks</h3>
+<p>The last line. At <em>x</em> = 1e20 the reduction itself falls apart, and it is the same disease in a new place. Reducing means computing <code>x - n*(M_PI/2)</code>, and at that size <code>n</code> is about 6.4e+19. Every rounding error in <code>n * (M_PI/2)</code> is multiplied by how big <code>n</code> is:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>x</th>
+<th>n</th>
+<th>error in <code>n * (M_PI/2)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100</td>
+<td>64</td>
+<td>2.23e-14</td>
+</tr>
+<tr class="even">
+<td>1e+06</td>
+<td>636620</td>
+<td>2.22e-10</td>
+</tr>
+<tr class="odd">
+<td>1e+12</td>
+<td>636619772368</td>
+<td>0.000222</td>
+</tr>
+<tr class="even">
+<td>1e+20</td>
+<td>63661977236758134784</td>
+<td><strong>2.22e+04</strong></td>
+</tr>
+</tbody>
+</table>
+<p><code>r</code> is supposed to come out no bigger than π/4 ≈ 0.785. At <em>x</em> = 1e20 this code produces <code>r</code> = 3150. There is no accuracy left to lose, because the subtraction has taken two huge nearly-equal numbers and kept only their noise. Real libraries carry π to hundreds of bits for exactly this case.</p>
+</section>
+<section id="one-last-honesty" class="level3">
+<h3 class="anchored" data-anchor-id="one-last-honesty">One last honesty</h3>
+<p>Everything above used the Taylor coefficients, because you can derive them. A production library usually does not. Taylor coefficients are chosen to be as accurate as possible <em>at one point</em>, x = 0. A library wants the <strong>worst</strong> error across the whole interval −π/4 … π/4 to be as small as possible, which is a different request and gives slightly different numbers. That family of approximations is called <em>minimax</em>, and it is a topic for another year — but it is why the constants inside a real <code>sin</code> are not the ones you recognise.</p>
+<p>So <code>sin(x)</code> — three characters, one <code>return</code> value — is standing on calculus, polynomial approximation, how a <code>double</code> is stored, range reduction, and a choice of algorithm. That is what a function being <em>a promise</em> really buys you: all of that, kept behind a name.</p>
+</section>
+<section id="try-it" class="level3">
+<h3 class="anchored" data-anchor-id="try-it">Try it</h3>
+<ol type="1">
+<li>Run the first program. Find the largest <em>x</em> at which twelve terms still gives you three correct decimals.</li>
+<li>Add a <code>printf</code> inside <code>mySin</code> to print the largest term the sum ever forms. Compare that number with the answer, at <em>x</em> = 10 and <em>x</em> = 100.</li>
+<li>Build <code>myCos</code> the same way, using the identity cos x = sin(x + π/2), and check it against <code>cos</code> over the same seven values.</li>
+<li>In <code>mySin</code>, replace <code>sinSmall</code> with <code>sinSmallHorner</code>. Does the error at <em>x</em> = 100 improve? Should it?</li>
+</ol>
+</section>
+</section>
+<section id="going-further-and-what-sqrtx-does" class="level2">
+<h2 class="anchored" data-anchor-id="going-further-and-what-sqrtx-does">Going Further · And What <code>sqrt(x)</code> Does</h2>
+<p>§6 found √5 by halving an interval. That works, and §9 showed it works for any <code>f</code> once you ask the right question. But it is not how anyone computes a square root when they are in a hurry, and <code>sqrt</code> is worth its own look because it ends somewhere <code>sin</code> does not.</p>
+<p>As with <code>sin</code>, <code>math.h</code> only declares the promise:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sqrt<span class="op">(</span><span class="dt">double</span> x<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The standard says what <code>sqrt</code> must produce, not how. Every output below is real.</p>
+<section id="turn-the-square-root-into-a-root" class="level3">
+<h3 class="anchored" data-anchor-id="turn-the-square-root-into-a-root">Turn the square root into a root</h3>
+<p>We want <em>x</em> = √a, which is the same as saying <em>x</em>² = a, which is the same as saying</p>
+<pre><code>f(x) = x² − a  is zero.</code></pre>
+<p>That is §9’s question again, so §9’s answer is available — halve the bracket. Newton’s method asks a different one: <em>stand at your guess, follow the tangent line down to zero, and go there.</em> That gives</p>
+<pre><code>x ← x − f(x)/f′(x)</code></pre>
+<p>and with f(x) = x² − a, so f′(x) = 2x, the whole thing collapses to</p>
+<pre><code>x ← ½ · (x + a/x)</code></pre>
+<p>Read it as an average. If your guess <code>x</code> is too small, then <code>a/x</code> is too big, and the true root is somewhere between them — so take the midpoint and go round again. The Babylonians knew this; it is about four thousand years old.</p>
+</section>
+<section id="watch-it-run" class="level3">
+<h3 class="anchored" data-anchor-id="watch-it-run">Watch it run</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> x <span class="op">=</span> <span class="fl">1.0</span><span class="op">,</span> truth <span class="op">=</span> sqrt<span class="op">(</span><span class="fl">2.0</span><span class="op">);</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">6</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"x</span><span class="sc">%d</span><span class="st"> = </span><span class="sc">%.16f</span><span class="st">   error = </span><span class="sc">%.3g\n</span><span class="st">"</span><span class="op">,</span> i<span class="op">,</span> x<span class="op">,</span> fabs<span class="op">(</span>x <span class="op">-</span> truth<span class="op">));</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span>x <span class="op">+</span> <span class="fl">2.0</span> <span class="op">/</span> x<span class="op">);</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"     </span><span class="sc">%.16f</span><span class="st">   &lt;- sqrt(2.0)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> truth<span class="op">);</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>x0 = 1.0000000000000000   error = 0.414
+x1 = 1.5000000000000000   error = 0.0858
+x2 = 1.4166666666666665   error = 0.00245
+x3 = 1.4142156862745097   error = 2.12e-06
+x4 = 1.4142135623746899   error = 1.59e-12
+x5 = 1.4142135623730949   error = 2.22e-16
+     1.4142135623730951   &lt;- sqrt(2.0)</code></pre>
+<p>Look at the error column, not the digits: 0.4, then 0.09, then 0.002, then 2e-06, then 1.6e-12. <strong>Each step roughly doubles the number of correct digits</strong> — 0.4, 1.1, 2.6, 5.7, 11.8, 15.7 of them. Five steps from a guess of 1 exhausts what a <code>double</code> can hold.</p>
+</section>
+<section id="against-6s-halving" class="level3">
+<h3 class="anchored" data-anchor-id="against-6s-halving">Against §6’s halving</h3>
+<p>Both methods find the same number. They do not find it at the same speed.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>a</th>
+<th style="text-align: right;">halving, to a bracket of 1e-12</th>
+<th style="text-align: right;">Newton, from x = a</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td style="text-align: right;">41 steps</td>
+<td style="text-align: right;">6 steps</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td style="text-align: right;">43 steps</td>
+<td style="text-align: right;">7 steps</td>
+</tr>
+<tr class="odd">
+<td>100</td>
+<td style="text-align: right;">47 steps</td>
+<td style="text-align: right;">9 steps</td>
+</tr>
+</tbody>
+</table>
+<p>Halving buys exactly <strong>one bit</strong> per step — it is the same one bit whether you are close or far. Newton <strong>squares the error</strong> each step, so once it is near, it arrives almost at once. That is the whole difference, and it is why §6 is the method you can always trust and this is the method you actually use.</p>
+</section>
+<section id="the-ten-line-version-and-where-it-lets-you-down" class="level3">
+<h3 class="anchored" data-anchor-id="the-ten-line-version-and-where-it-lets-you-down">The ten-line version, and where it lets you down</h3>
+<p>The obvious way to package it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> my_sqrt<span class="op">(</span><span class="dt">double</span> a<span class="op">)</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> x <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span>x <span class="op">+</span> a <span class="op">/</span> x<span class="op">);</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">;</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ten iterations, no thinking required. Try it across a range of inputs before you trust it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">/* the obvious version: start at a, iterate a fixed ten times */</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> my_sqrt<span class="op">(</span><span class="dt">double</span> a<span class="op">)</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> x <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span>x <span class="op">+</span> a <span class="op">/</span> x<span class="op">);</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">;</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co">/* split off the exponent first, then five steps on the significand */</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> my_sqrt2<span class="op">(</span><span class="dt">double</span> a<span class="op">)</span></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a <span class="op">&lt;</span>  <span class="fl">0.0</span><span class="op">)</span> <span class="cf">return</span> NAN<span class="op">;</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a <span class="op">==</span> <span class="fl">0.0</span><span class="op">)</span> <span class="cf">return</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> e<span class="op">;</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> m <span class="op">=</span> frexp<span class="op">(</span>a<span class="op">,</span> <span class="op">&amp;</span>e<span class="op">);</span>         <span class="co">/* a = m * 2^e, with 0.5 &lt;= m &lt; 1 */</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>e <span class="op">%</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span> m <span class="op">*=</span> <span class="fl">2.0</span><span class="op">;</span> e <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span> <span class="co">/* force e even, so 0.5 &lt;= m &lt; 2  */</span></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> x <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>                  <span class="co">/* now always a good first guess  */</span></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="op">(</span>x <span class="op">+</span> m <span class="op">/</span> x<span class="op">);</span></span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ldexp<span class="op">(</span>x<span class="op">,</span> e <span class="op">/</span> <span class="dv">2</span><span class="op">);</span>          <span class="co">/* put the exponent back          */</span></span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> as<span class="op">[</span><span class="dv">6</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="fl">1e-8</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">100.0</span><span class="op">,</span> <span class="fl">1e6</span><span class="op">,</span> <span class="fl">1e12</span><span class="op">,</span> <span class="fl">1e100</span> <span class="op">};</span></span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%-8s</span><span class="st"> </span><span class="sc">%-16s</span><span class="st"> </span><span class="sc">%-16s</span><span class="st"> </span><span class="sc">%-16s\n</span><span class="st">"</span><span class="op">,</span> <span class="st">"a"</span><span class="op">,</span> <span class="st">"my_sqrt"</span><span class="op">,</span> <span class="st">"my_sqrt2"</span><span class="op">,</span> <span class="st">"sqrt"</span><span class="op">);</span></span>
+<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">6</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%-8.0e</span><span class="st"> </span><span class="sc">%-16.8g</span><span class="st"> </span><span class="sc">%-16.8g</span><span class="st"> </span><span class="sc">%-16.8g\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a>               as<span class="op">[</span>i<span class="op">],</span> my_sqrt<span class="op">(</span>as<span class="op">[</span>i<span class="op">]),</span> my_sqrt2<span class="op">(</span>as<span class="op">[</span>i<span class="op">]),</span> sqrt<span class="op">(</span>as<span class="op">[</span>i<span class="op">]));</span></span>
+<span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>a        my_sqrt          my_sqrt2         sqrt
+1e-08    0.00097997345    0.0001           0.0001
+2e+00    1.4142136        1.4142136        1.4142136
+1e+02    10               10               10
+1e+06    1296.1916        1000             1000
+1e+12    9.7656284e+08    1000000          1000000
+1e+100   9.765625e+96     1e+50            1e+50</code></pre>
+<p><code>my_sqrt(1000000.0)</code> returns <strong>1296.19</strong>. Not nearly a thousand — a different number altogether, from code that is correct at <em>a</em> = 2 and <em>a</em> = 100.</p>
+<p>Nothing is wrong with the iteration. Ten of them is simply not enough, because the starting guess <code>x = a</code> is a <em>million</em> when the answer is a thousand. Newton spends its early steps just halving the guess down to the right size, and only then starts doubling digits. Count the steps to converge:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>a</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">100</th>
+<th style="text-align: right;">1e6</th>
+<th style="text-align: right;">1e12</th>
+<th style="text-align: right;">1e100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>steps from x = a</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;"><strong>172</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The number of iterations grows with the <em>size</em> of <code>a</code>. Any fixed count is wrong for a large enough input.</p>
+</section>
+<section id="which-is-exactly-why-the-exponent-matters" class="level3">
+<h3 class="anchored" data-anchor-id="which-is-exactly-why-the-exponent-matters">Which is exactly why the exponent matters</h3>
+<p>A <code>double</code> is already stored as a significand times a power of two,</p>
+<pre><code>a = m · 2^e</code></pre>
+<p>and the square root of that is</p>
+<pre><code>√a = √m · 2^(e/2)</code></pre>
+<p>so if you make <code>e</code> even, half the problem is solved by <strong>dividing an integer by two</strong>. What is left, √m, is a square root of a number between 0.5 and 2 — where a guess of 1.0 is never far off. <code>frexp</code> hands you <code>m</code> and <code>e</code>; <code>ldexp</code> puts them back together.</p>
+<p>That is <code>my_sqrt2</code> above, and the column speaks for itself: correct from 1e-8 to 1e100, on <strong>five</strong> iterations rather than 172. The exponent trick is not an elegance. It is what makes a fixed, small iteration count possible at all.</p>
+<p>If 8 = 2 × 2² makes this concrete: √8 = √2 × 2 = 2.828427124746190, and <code>sqrt(8.0)</code> returns 2.828427124746190. The hard part was only ever √2.</p>
+<p>This is the shape <code>sin</code> had, arrived at from a different direction:</p>
+<blockquote class="blockquote">
+<p>Reduce to a small, controlled range · approximate well there · reassemble.</p>
+</blockquote>
+</section>
+<section id="how-close-is-close" class="level3">
+<h3 class="anchored" data-anchor-id="how-close-is-close">How close is close?</h3>
+<p>Tested against <code>sqrt</code> on 200000 values spread from 1e-200 to 1e200, <code>my_sqrt2</code> disagrees on <strong>25.1%</strong> of them — and the worst disagreement is <strong>1.00 ULP</strong>, one unit in the last place.</p>
+<p>So it is right to the last bit, and still not <em>correctly rounded</em>. A real library must return the nearest representable double every single time, which is a stronger promise than “very close”, and getting that last bit right is the final step in a production implementation. That is the difference between a good classroom answer and a library.</p>
+</section>
+<section id="where-sqrt-parts-company-with-sin" class="level3">
+<h3 class="anchored" data-anchor-id="where-sqrt-parts-company-with-sin">Where <code>sqrt</code> parts company with <code>sin</code></h3>
+<p>There is no machine instruction for sine. There is one for square root. Compile</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span> <span class="cf">return</span> sqrt<span class="op">(</span>x<span class="op">);</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>with <code>gcc -O2 -S</code> and read the assembly. On the machine these notes were written on, the entire function body is one instruction:</p>
+<pre><code>fsqrt   d0, d0</code></pre>
+<p>On the x86 lab machines you should find <code>sqrtsd</code> instead — run it yourself and look. Either way, all the Newton machinery above has been replaced by a single operation in silicon, which is why <code>sqrt</code> is fast and why the library rarely computes it the way you just did.</p>
+<p>That does not make the exercise pointless — it makes it the point. Square root feels like a primitive, something the machine simply <em>knows</em>. It is not. It is <code>+</code>, <code>×</code> and <code>/</code>, arranged so that each step doubles what you already have, and someone eventually put that arrangement into hardware.</p>
+</section>
+<section id="one-warning-before-you-use-it-anywhere" class="level3">
+<h3 class="anchored" data-anchor-id="one-warning-before-you-use-it-anywhere">One warning before you use it anywhere</h3>
+<p><code>my_sqrt</code> is ten lines and it is not a <code>sqrt</code>. Besides the size problem above:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>a</th>
+<th><code>my_sqrt(a)</code></th>
+<th><code>sqrt(a)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.0</td>
+<td><code>nan</code> — the first step divides by zero</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>−4.0</td>
+<td>−4.80176, a number that looks like an answer</td>
+<td><code>nan</code></td>
+</tr>
+</tbody>
+</table>
+<p>The negative case is the dangerous one: it does not crash and it does not warn. It returns a plausible-looking value that is not a square root of anything. A library function has to handle zero, negatives, infinities, NaNs and subnormals before it may be called <code>sqrt</code>.</p>
+</section>
+<section id="try-it-1" class="level3">
+<h3 class="anchored" data-anchor-id="try-it-1">Try it</h3>
+<ol type="1">
+<li>Change the <code>10</code> in <code>my_sqrt</code> to <code>20</code>. Which of the six test values become correct, and which still do not? Explain the ones that do not.</li>
+<li>Print <code>x</code> inside <code>my_sqrt(1e6)</code> on every iteration. Find the exact step at which it stops halving and starts doubling digits.</li>
+<li>In <code>my_sqrt2</code>, cut the five iterations to three. How many decimals do you lose? Now cut it to two.</li>
+<li>Compare with §6. Write the halving version so it stops at a bracket of 1e-12, count its steps, and confirm the numbers in the table above for <em>a</em> = 2, 5 and 100.</li>
+<li>Why does <code>my_sqrt2</code> start its guess at <code>1.0</code> rather than at <code>m</code>? Try both and count iterations.</li>
+</ol>
+</section>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
