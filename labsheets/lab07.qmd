@@ -109,6 +109,76 @@ corner. Predict all three on paper before you run them.
 These carry **no marks at all**. A wrong prediction costs you nothing — which is exactly
 why you should write it down before pressing Enter.
 
+## Working on one problem — read this once
+
+The same four steps for all ten. Take `b1_sumto.c`:
+
+```bash
+vim b1_sumto.c          # or nano, or gedit — whatever you use
+gcc b1_sumto.c -o b1    # compile it, naming the program b1
+./b1                    # run it, and type the input it asks for
+./check.sh b1           # only when it runs: mark it
+```
+
+Running it yourself looks like this — you type the `5`:
+
+```
+$ ./b1
+Enter n: 5
+total=15
+```
+
+**No `-lm`, no extra flags.** Every problem this week compiles with plain `gcc`, and none of
+them may use `math.h`. If you reach for `sqrt` or `cos` from the library, you have skipped
+the exercise.
+
+::: {.callout-tip}
+Compile and run it *yourself* before you run `./check.sh`. The checker tells you whether the
+answer is right; running it tells you what your program actually does. You need both, and the
+second one is faster.
+:::
+
+**The world problems take 64 numbers**, which nobody wants to type. Two sample worlds are
+already in your workspace, so feed them in from a file with `<`:
+
+```bash
+./e4 < blinker.txt
+```
+
+```
+........
+........
+...#....
+...#....
+...#....
+........
+........
+........
+```
+
+`e3` and `e5` want an extra number *after* the 64 — the cell for `e3`, the generation count
+for `e5`. Add it on the end:
+
+```bash
+(cat blinker.txt; echo "3 3") | ./e3     # -> neighbours=2
+(cat glider.txt;  echo 4)     | ./e5     # -> alive=5
+```
+
+Make your own worlds too: copy `blinker.txt`, edit the 0s and 1s, and watch what happens.
+
+::: {.callout-warning}
+The starters **do not compile as shipped**. Each blank is a name the compiler has never heard
+of, so `gcc` points at the exact line still waiting for you — something like
+
+```
+b1_sumto.c:13:5: error: 'TODO_body' undeclared
+```
+
+The wording differs between compilers; the part that matters is the **file and line number**,
+which is the blank you have not filled yet. That is the intended first error, not a broken
+file.
+:::
+
 ## Act 2 · Fill the blanks (25 min · 5 marks each)
 
 In all five, **the function's first line is already written** and `main` is already calling
