@@ -54,21 +54,31 @@ If `d06` surprises you, good — that is the point of it, and it is the licence 
 
 ## Act 0 · Land (10 min)
 
+The pack is already on the lab machines. If it is not on yours, fetch it:
+
 ```bash
-cd ~ && tar xzf lab07.tar.gz && cd lab07 && ./install.sh
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab07.tar.gz
 ```
 
-It will ask your branch and your roll number(s), then **put you inside your workspace** —
-your prompt becomes `[lab07 OK ...]`. If that prompt ever disappears you are in the wrong
-directory; run `./where.sh` and it will print the exact line to type.
+Then unpack and install — one line at a time, so you can see which step failed if one does:
 
-Then, before anything else:
+```bash
+tar xzf lab07.tar.gz
+cd lab07
+./install.sh
+```
+
+`install.sh` asks your branch and roll number(s), then **puts you inside your workspace**.
+Then start the recorder:
 
 ```bash
 script session.txt
 ```
 
 ::: {.callout-important}
+Do not go further until your prompt shows `[lab07 OK ...]`. If it does not, run
+`./where.sh` — it changes nothing, and prints the exact line to copy.
+
 `session.txt` records your afternoon. It is required in every bundle, and it is **your**
 evidence that the work is yours — the thing that answers a question about who wrote what.
 :::
@@ -80,13 +90,24 @@ evidence that the work is yours — the thing that answers a question about who 
 ```
 
 Ten small programs. Each one is shown to you, you type what you think it will print, and
-only then does it run. **Predicting is the exercise.** A miss is the useful kind of
-result — it tells you something you believed is not true, at no cost.
+only then does it run. **Predicting is the exercise.**
+
+| Drills | Territory |
+|---|---|
+| `d01`–`d04` | what a function hands back, and what it cannot change — `d02` and `d03` differ by **one character** and give different answers |
+| `d05`–`d06` | the swap that does nothing, and the array that changes anyway **without any `&`** |
+| `d07`–`d08` | a grid subscript, and a counter that lives in the caller |
+| `d09`–`d10` | a corner cell's neighbours, and `return` from inside a loop |
 
 ::: {.callout-warning}
-Do not skim-read them and press Enter. A drill you did not predict taught you nothing, and
-the log records which is which.
+**`d05`, `d06` and `d09` are each a graded problem in miniature.** `d05` is `b2` before you
+fix it. `d06` is the licence for every `nextGeneration(world)` you will write — an array
+needs no `&`, and changes anyway. `d09` is `e3`, ten marks, already written for you at one
+corner. Predict all three on paper before you run them.
 :::
+
+These carry **no marks at all**. A wrong prediction costs you nothing — which is exactly
+why you should write it down before pressing Enter.
 
 ## Act 2 · Fill the blanks (25 min · 5 marks each)
 
@@ -94,13 +115,18 @@ In all five, **the function's first line is already written** and `main` is alre
 it exactly as written. That line is the *promise* — what goes in, what comes back. Keep it;
 do not change it.
 
-| | given | what you write |
+| File | What it does | Final line ends with exactly |
 |---|---|---|
-| `b1_sumto.c` | `int sumTo(int n)` | a loop you already know — now it must `return` |
-| `b2_swap.c` | `void swap(int *a, int *b)` | the version drill `d05` shows failing |
-| `b3_minmax.c` | `void minMax(int a[], int n, int *lo, int *hi)` | **two** answers, so neither can be returned |
-| `b4_rowsum.c` | `int rowSum(int m[][COLS], int r)` | one row of a grid |
-| `b5_cos.c` | `double cosSeries(double x, int n)` | cos *x*, from its series |
+| `b1_sumto.c` | `1 + 2 + … + n`, now inside a function that must `return` | `total=<S>` |
+| `b2_swap.c` | exchange the caller's two integers — drill `d05`, made to work | `a=<B> b=<A>` |
+| `b3_minmax.c` | smallest **and** largest of `n` values — two answers, neither returned | `lo=<L> hi=<H>` |
+| `b4_rowsum.c` | the total of row `r` of a 4 × 4 grid | `sum=<S>` |
+| `b5_cos.c` | cos *x* from the **first `n` terms** of its series | `cos=<V>`, `%.6f` |
+
+The signature is given in each file — `int sumTo(int n)`, `void swap(int *a, int *b)`,
+`void minMax(int a[], int n, int *lo, int *hi)`, `int rowSum(int m[][COLS], int r)`,
+`double cosSeries(double x, int n)`. Read the `GIVEN` comment at the top of each starter for
+the exact input range.
 
 ::: {.callout-tip}
 `b4` is worth pausing on. The row count may be left out of that parameter; the **column
@@ -124,13 +150,30 @@ starting at `term = 1.0`. No factorial is ever formed, and nothing overflows.
 
 These give you the specification and nothing else.
 
-| | |
-|---|---|
-| `e1.c` | Find the *x* ≥ 0 with **x³ + x = a**. There is no formula to rearrange — halve the interval instead, as Monday did, and write it as **two** functions: one for the left-hand side, one that does the halving and calls it. |
-| `e2.c` | Flip a 4×4 grid about its diagonal. Build the answer in a **second** grid — writing the flip back into the original overwrites values you have not read yet. |
-| `e3.c` | `countNeighbours` for one cell of an 8×8 world. Two things can go wrong; only one is obvious. |
-| `e4.c` | **One generation** of the Game of Life. This is the lab. |
-| `e5.c` | How many cells are alive after *g* generations. |
+| Problem | Task | Final line ends with exactly |
+|---|---|---|
+| `e1.c` | the *x* ≥ 0 with **x³ + x = a**, by halving | `root=<R>`, `%.4f` |
+| `e2.c` | a 4 × 4 grid flipped about its diagonal | *(the whole output is compared)* |
+| `e3.c` | how many of the **eight** cells touching (r, c) are alive | `neighbours=<N>` |
+| `e4.c` | **one generation** of the Game of Life | *(the whole grid is compared)* |
+| `e5.c` | how many cells are alive after `g` generations | `alive=<N>` |
+
+`e1` — there is no formula to rearrange. Halve the interval, as Monday did, and write it as
+**two** functions: one for the left-hand side, one that does the halving and calls it. The
+answer is somewhere in [0, a].
+
+`e2` — build the answer in a **second** grid. Writing the flip back into the original
+overwrites values you have not read yet, which is `e4`'s trap met early on something small.
+
+`e3` — two things can go wrong and only one is obvious. Skipping the cell itself is the
+obvious one. The other is the edge: a corner cell **has** only three neighbours, and reaching
+for the other five reads outside the array. C will not stop you, and it will often appear to
+work.
+
+`e4` — **this is the problem the whole lab has been pointing at.** See the warning below.
+
+`e5` — watch `g = 0`. A loop written "do it, then check" runs once even when it was asked for
+none. And if you find yourself re-writing the rule, stop: `e4` already contains it.
 
 ::: {.callout-note}
 `e3`, `e4` and `e5` are deliberately **one program grown three times**. Write
@@ -158,21 +201,58 @@ Tuesday's lecture printed a live cell as `##` and a dead one as two blanks, whic
 well on a projector. Here it is **`#` and `.`** — a checker cannot see blank space.
 :::
 
+**How checking works** — `./check.sh e3` compiles *your source* and runs it on the public
+examples printed in your starter **and on fresh random inputs drawn from the GIVEN**. A
+program that memorises an example fails the next draw.
+
+::: {.callout-note}
+`e2` and `e4` are compared over the **whole output**, not just the last line, because the
+answer is a shape. Spacing is ignored; a missing or wrong row is not. If yours looks right
+but fails, run `./check.sh e4` and read the difference it prints rather than squinting at
+the screen.
+:::
+
 ## Act 4 · Check, fix, bundle (10 min)
 
 ```bash
-./check.sh          # everything, with your marks so far
-./check.sh e4       # just one problem, while you work on it
-./check.sh --bundle # bundle it up — then carry it out
+./check.sh          # everything
+./check.sh e4       # just one problem, while you are working on it
 ```
 
-`check.sh` compiles each program, feeds it the examples printed in your starter **and a
-fresh set of random inputs drawn while you watch**. Marks are partial: every vector you
-pass earns its share, so fixing one failing case is always worth doing.
+It prints **your marks, problem by problem**:
+
+```
+  YOUR MARKS SO FAR   (blanks 5 each, checked 10 each)
+
+    b1  6/6 vectors    5 of  5 marks
+    b2  6/6 vectors    5 of  5 marks
+    b3  7/7 vectors    5 of  5 marks
+    b4  6/6 vectors    5 of  5 marks
+    b5  10/10 vectors    5 of  5 marks
+    e1  9/9 vectors   10 of 10 marks
+    e2  5/5 vectors   10 of 10 marks
+    e3  9/9 vectors   10 of 10 marks
+    e4  2/7 vectors    3 of 10 marks
+    e5  0/9 vectors    0 of 10 marks
+    ---------------------------------------------
+                      58 of 75 marks
+```
+
+That `e4` line is the in-place bug: two vectors pass, five do not. Marks are **partial** —
+every vector you pass earns its share, so fixing one failing case is always worth doing,
+right up to the last minute. Treat the total as an estimate: the random vectors are drawn
+fresh on every run, so it can move a mark or two.
+
+Fix, re-check, repeat. Then — green or time-up:
+
+```bash
+./check.sh --bundle
+```
 
 ::: {.callout-important}
-The bundle lands one directory **above** your workspace. Carry it out — Moodle, or email it
-to yourself. The machine forgets; you must not.
+The bundle lands one directory **above** your workspace, named
+`lab07_<rolls>_<branch>_w<NN>.tar.gz`. Carry it out — Moodle, and email it to yourself. The
+machine forgets; you must not.
 :::
 
 ## Stretch (fast finishers, not marked)
