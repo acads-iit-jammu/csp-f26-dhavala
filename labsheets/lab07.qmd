@@ -1,72 +1,68 @@
-# Lab 07: Functions & the Game of Life {.unnumbered}
+# Lab 07: Functions and the Game of Life {.unnumbered}
 
 | | Electrical | Mechanical | Metallurgy & Materials |
 |---|---|---|---|
 | **Date** | Tue Sep 29 | Wed Oct 7 | Wed Oct 7 |
 | **Time & Room** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4022** | 2:00–4:00 pm · **Lab 4021** |
 
-**Lab pack:** [lab07.tar.gz](../labs/lab07.tar.gz) — pre-placed on lab machines, downloadable for home practice.
+**Lab pack:** [lab07.tar.gz](../labs/lab07.tar.gz). It is already on the lab machines. You can also download it to practise at home.
 
-**Syllabus practical modules:** 7 and 3 — functions, and lists in their multi-dimensional form
+**Syllabus practical modules:** 7 and 3 — functions, and arrays in their multi-dimensional form.
 
-**Evaluation:** Graded — equal weight within the 20% lab component. **Only the exercises
-carry marks**: five fill-in-the-blank programs (**5 marks each**) and five checked
-problems (**10 marks each**). The ten drills are **not scored** — they are how you find out
-what you have wrong before it costs you. Plus observed work and a short viva. Teams of 1–2;
-pairs swap driver/navigator at half-time.
+**Evaluation:** This lab is graded. It carries the same weight as the other labs inside the 20% lab component.
 
-**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's
-shared reference. Useful today for vim (§1) and the compilation model (§2.5) if you are
-still finding those awkward. **It does not cover functions, pointers or arrays** — it stops
-before all three — so for this week's material your reference is the
-[Week 09 notes](../weeks/w09.qmd), not the manual. This sheet is self-contained either way.
+Only the exercises carry marks:
+
+- five fill-in-the-blank programs, `b1` to `b5`, worth **5 marks each**
+- five checked problems, `e1` to `e5`, worth **10 marks each**
+
+That is 75 marks from the programs. The remaining 25 marks come from observed work and a short viva, in which you will be asked to explain your own code. The ten drills are **not** marked at all.
+
+You may work in teams of one or two. If you are a pair, swap who types at the halfway point.
+
+**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) is the department's shared reference. It is useful today for vim (§1) and for the compilation model (§2.5) if you still find those awkward. It does **not** cover functions, pointers or arrays, so it cannot help you with this week's material. Use the [Week 09 notes](../weeks/w09.qmd) instead. This sheet is written to be complete on its own.
 
 ::: {.callout-note}
-Both of this week's lectures are behind you before you sit this lab: **Monday** on
-functions, scope and call by reference, **Tuesday** on the Game of Life. Nothing below is
-ahead of them. The notes carry `countNeighbours` and `nextGeneration` in full — you are
-meant to have them open. What the notes do *not* carry is any program that reads a world
-from the keyboard, decides one question and stops, which is what every problem below asks
-for.
+You will have attended both of this week's lectures before this lab: Monday on functions, scope and pointers, and Tuesday on the Game of Life. Nothing in this lab is ahead of those lectures.
+
+The Week 09 notes contain `countNeighbours` and `nextGeneration` written out in full, and you are meant to have them open while you work. What the notes do not contain is a complete program that reads a world from the input, answers one question and stops. Writing that program is your job today.
 :::
 
 ## What this lab is about
 
-**C passes arguments by value.** A function receives copies of its arguments, so assigning
-to a parameter does not change the caller's variable.
+There are three facts about how C passes arguments to a function. Every problem today uses one of them.
 
-To let a function change a caller's variable, pass **the address** of that variable and
-declare the parameter as a pointer. That is `swap(&a, &b)` with `void swap(int *a, int *b)`,
-and it is also why `minMax` can return two answers without using `return` at all.
+**1. C passes arguments by value.** When you call a function, it receives a *copy* of each argument. If the function assigns a new value to a parameter, the caller's variable does not change.
 
-**An array argument behaves differently.** When you pass an array, the array name is
-converted to a pointer to its first element, so the function does not get a copy of the
-array and *can* change the caller's elements. That is why `countNeighbours(world, i, j)`
-needs no `&`.
+**2. To let a function change a caller's variable, pass the address of that variable.** You write `&x` at the call, and you declare the parameter as a pointer, for example `int *p`. Inside the function, `*p` refers to the caller's variable, so assigning to `*p` changes it.
+
+This is what `b2_swap.c` needs. It is also how `b3_minmax.c` gives back two answers, because a function can only `return` one value.
+
+**3. An array argument is converted to a pointer.** When you pass an array to a function, C converts the array name to a pointer to its first element. The function therefore does not receive a copy of the array, and it *can* change the caller's elements. You do not write `&` when passing an array.
+
+This is why `countNeighbours(world, i, j)` has no `&` in it, even though `swap(&a, &b)` does.
 
 ## Three drills worth doing first
 
-Do `d02`, `d03` and `d06` in that order, and predict each before you press Enter. They
-demonstrate the three cases above.
+Three of the ten drills demonstrate exactly those three facts. Do them in this order, and write down what you think each will print before you run it.
 
 | Drill | What it does | What it shows |
 |---|---|---|
-| `d02` | `addOne(x)` — `x` is still 5 afterwards | passed by value: the function got a copy |
-| `d03` | one character different: `reallyAddOne(&x)` — `x` is 6 | the address was passed, through a pointer parameter |
-| `d06` | `wipe(a)` — no `&` anywhere, and `a[0]` changed | the array name was converted to a pointer |
+| `d02` | calls `addOne(x)`, and `x` is still 5 afterwards | the function received a copy |
+| `d03` | the same program with one character changed: `reallyAddOne(&x)`, and `x` becomes 6 | the address was passed, through a pointer parameter |
+| `d06` | calls `wipe(a)` with no `&` anywhere, and `a[0]` changes | the array name was converted to a pointer |
 
-`d06` is the one to be sure of, because every `nextGeneration(world)` call later in the lab
-relies on it.
+`d06` is the one to be sure you understand, because every `nextGeneration(world)` call later in this lab depends on it.
 
-## Act 0 · Land (10 min)
+## Act 0 · Getting started (10 minutes)
 
-The pack is already on the lab machines. If it is not on yours, fetch it:
+The pack is already on the lab machines. If it is not on yours, download it first:
 
 ```bash
 wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab07.tar.gz
 ```
 
-Then unpack and install — one line at a time, so you can see which step failed if one does:
+Now unpack it and run the installer. Type these one line at a time, so that you can see which step failed if one of them does:
 
 ```bash
 tar xzf lab07.tar.gz
@@ -74,98 +70,75 @@ cd lab07
 ./install.sh
 ```
 
-`install.sh` asks your branch and roll number(s), then **puts you inside your workspace**.
-Then start the recorder:
+The installer asks which branch you are in and for your roll number or numbers. It then creates your workspace and puts you inside it.
+
+Next, start the session recorder:
 
 ```bash
 script session.txt
 ```
 
 ::: {.callout-important}
-Do not go further until your prompt shows `[lab07 OK ...]`. If it does not, run
-`./where.sh` — it changes nothing, and prints the exact line to copy.
+Do not start the exercises until your prompt reads `[lab07 OK ...]`. That prompt is how you know you are inside your workspace. If it does not appear, run `./where.sh`. That script changes nothing; it only tells you where you are and prints the exact command to type.
 
-`session.txt` records your afternoon. It is required in every bundle, and it is **your**
-evidence that the work is yours — the thing that answers a question about who wrote what.
+`session.txt` records everything you do this afternoon. It must be in the bundle you submit. It is the evidence that the work is your own.
 :::
 
-## Act 1 · Drills — predict, then run (20 min, not marked)
+## Act 1 · Drills (20 minutes, not marked)
 
 ```bash
 ./drill.sh --all
 ```
 
-Ten small programs. Each one is shown to you, you type what you think it will print, and
-only then does it run. **Predicting is the exercise.**
+This shows you ten short programs, one at a time. For each one, you type what you think it will print, and only then does the drill run it and show you the answer.
 
-| Drills | Territory |
+The ten drills cover:
+
+| Drills | What they are about |
 |---|---|
-| `d01`–`d04` | what a function hands back, and what it cannot change — `d02` and `d03` differ by **one character** and give different answers |
-| `d05`–`d06` | a swap that has no effect, and an array a function modifies without any `&` |
-| `d07`–`d08` | a grid subscript, and a counter that lives in the caller |
-| `d09`–`d10` | a corner cell's neighbours, and `return` from inside a loop |
+| `d01`–`d04` | what a function returns, and what it cannot change |
+| `d05`–`d06` | a swap that has no effect, and an array that a function modifies without any `&` |
+| `d07`–`d08` | reading a value from a grid, and a counter that the caller owns |
+| `d09`–`d10` | counting the neighbours of a corner cell, and using `return` inside a loop |
 
 ::: {.callout-warning}
-**`d05`, `d06` and `d09` are each a graded problem in miniature.** `d05` is `b2` before you
-fix it. `d06` is what every `nextGeneration(world)` call later in the lab relies on: an
-array argument is converted to a pointer, so the function modifies the caller's array. `d09`
-is `e3`, ten marks, already written for you at one corner. Predict all three on paper before
-you run them.
+Three of the drills are small versions of problems you are about to be marked on.
+
+- `d05` is `b2` before you fix it.
+- `d06` is the fact that every `nextGeneration(world)` call depends on: an array argument is converted to a pointer, so the function changes the caller's array.
+- `d09` is `e3`, worth 10 marks, already written for you for one corner cell.
+
+Write your prediction for these three on paper before you run them.
 :::
 
-These carry **no marks at all**. A wrong prediction costs you nothing — which is exactly
-why you should write it down before pressing Enter.
+The drills carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.
 
-## Working on one problem — read this once
+## How to work on one problem
 
-The same four steps for all ten. Take `b1_sumto.c`:
+The steps are the same for all ten problems. Using `b1_sumto.c` as the example:
 
 ```bash
-vim b1_sumto.c          # or nano, or gedit — whatever you use
-gcc b1_sumto.c -o b1    # compile it, naming the program b1
-./b1                    # run it, and type the input it asks for
-./check.sh b1           # only when it runs: mark it
+vim b1_sumto.c          # open the file and fill in the blank
+gcc b1_sumto.c -o b1    # compile it; -o b1 names the program b1
+./b1 < b1_sample.txt    # run it on the sample input
+./check.sh b1           # once it runs, have it marked
 ```
 
-Running it yourself looks like this — you type the `5`:
-
-```
-$ ./b1
-Enter one integer n (1..50): 5
-total=15
-```
-
-Each program tells you **what to type and how many**. `b3` asks twice — once for the count,
-then for that many values. `b4` wants sixteen numbers before it wants the row number:
-
-```
-$ ./b4
-Enter 16 integers (each 0..99), row by row into a 4 x 4 grid:
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-Now the row number r (0..3): 2
-sum=42
-```
-
-**No `-lm`, no extra flags.** Every problem this week compiles with plain `gcc`, and none of
-them may use `math.h`. If you reach for `sqrt` or `cos` from the library, you have skipped
-the exercise.
+Compile with plain `gcc`. You do not need `-lm` or any other flag. You may **not** use `math.h` in any problem this week; if you find yourself calling `sqrt` or `cos` from the library, you have skipped the exercise.
 
 ::: {.callout-tip}
-Compile and run it *yourself* before you run `./check.sh`. The checker tells you whether the
-answer is right; running it tells you what your program actually does. You need both, and the
-second one is faster.
+Compile and run the program yourself before you run `./check.sh`. Running it shows you what your program actually does. The checker only tells you whether the final answer is right. You need both, and running it yourself is faster.
 :::
 
 ### Every problem has a ready-made input file
 
-You are never expected to type the input by hand — `e3`, `e4` and `e5` each read an 8 × 8
-world, which is **sixty-four integers**, and `e2` reads sixteen.
+Some problems need a lot of input. `e3`, `e4` and `e5` each read an 8 × 8 world, which is **sixty-four integers**, and `e2` reads sixteen. You are not expected to type these.
 
-Every problem has a file next to it, named the same way:
+Every problem has an input file next to it in your workspace. The files are all named the same way:
 
 > **`<problem>_sample.txt`**
 
-So the command is always the same shape — redirect the file in with `<`:
+So the command always has the same shape. The `<` sign tells the shell to feed the file to the program in place of the keyboard:
 
 ```bash
 ./b1 < b1_sample.txt          ./e1 < e1_sample.txt
@@ -175,9 +148,7 @@ So the command is always the same shape — redirect the file in with `<`:
 ./b5 < b5_sample.txt          ./e5 < e5_sample.txt
 ```
 
-**Each file reproduces the `EXAMPLE` printed at the top of that starter.** So if your program
-is right, you see exactly the answer the spec promised you — which makes this the fastest
-check you have:
+Each file contains the `EXAMPLE` that is printed at the top of that starter file. So if your program is correct, running it on its sample file prints exactly the answer the specification promised you. For instance:
 
 ```bash
 $ ./e3 < e3_sample.txt
@@ -196,19 +167,18 @@ $ ./e4 < e4_sample.txt
 ```
 
 ::: {.callout-note}
-`e3` and `e5` need one number **after** the sixty-four — the cell for `e3`, the generation
-count for `e5` — and their sample files already contain it. That is why you use
-`e3_sample.txt` and not a bare world: feeding `e3` a world alone leaves it waiting for a cell
-that never arrives.
+`e3` and `e5` each read one more number *after* the sixty-four: `e3` reads the row and column of the cell you are asking about, and `e5` reads how many generations to run. Their sample files already contain that extra number.
+
+This is why you should use `e3_sample.txt` rather than a file containing only a world. If you give `e3` a world and nothing else, it reads the world and then waits for a cell that never arrives. The program looks as though it has frozen, but it is simply waiting for input.
 :::
 
-One extra world is provided, `glider.txt` — a shape that walks rather than blinks:
+There is one extra world file, `glider.txt`. It contains a shape that moves across the grid instead of staying in place. Try it with `e4`:
 
 ```bash
 ./e4 < glider.txt
 ```
 
-**Make your own.** Copy any sample file, edit the numbers, run it again:
+You can also make your own worlds. Copy any sample file, change the 0s and 1s in it, and run it again:
 
 ```bash
 cp e4_sample.txt mine.txt
@@ -216,117 +186,114 @@ vim mine.txt
 ./e4 < mine.txt
 ```
 
-## Act 2 · Fill the blanks (25 min · 5 marks each)
+## Act 2 · Fill in the blanks (25 minutes, 5 marks each)
 
-In all five, **the function's first line is already written** and `main` is already calling
-it exactly as written. That line is the *promise* — what goes in, what comes back. Keep it;
-do not change it.
+In all five of these programs, the first line of the function is already written for you, and `main` already calls it correctly. Do not change either of them. Your job is to write the body of the function.
 
-| File | What it does | Final line ends with exactly |
+| File | What the program must do | Its last line must end with |
 |---|---|---|
-| `b1_sumto.c` | `1 + 2 + … + n`, now inside a function that must `return` | `total=<S>` |
-| `b2_swap.c` | exchange the caller's two integers — drill `d05`, made to work | `a=<B> b=<A>` |
-| `b3_minmax.c` | smallest **and** largest of `n` values — two answers, neither returned | `lo=<L> hi=<H>` |
-| `b4_rowsum.c` | the total of row `r` of a 4 × 4 grid | `sum=<S>` |
-| `b5_cos.c` | cos *x* from the **first `n` terms** of its series | `cos=<V>`, `%.6f` |
+| `b1_sumto.c` | add up `1 + 2 + … + n` inside a function that returns the total | `total=<S>` |
+| `b2_swap.c` | exchange the caller's two integers | `a=<B> b=<A>` |
+| `b3_minmax.c` | find both the smallest and the largest of `n` values | `lo=<L> hi=<H>` |
+| `b4_rowsum.c` | add up row `r` of a 4 × 4 grid | `sum=<S>` |
+| `b5_cos.c` | compute cos *x* from the first `n` terms of its series | `cos=<V>`, printed with `%.6f` |
 
-The signature is given in each file — `int sumTo(int n)`, `void swap(int *a, int *b)`,
-`void minMax(int a[], int n, int *lo, int *hi)`, `int rowSum(int m[][COLS], int r)`,
-`double cosSeries(double x, int n)`. Read the `GIVEN` comment at the top of each starter for
-the exact input range.
+The function headers you are given are:
+
+```c
+int sumTo(int n)
+void swap(int *a, int *b)
+void minMax(int a[], int n, int *lo, int *hi)
+int rowSum(int m[][COLS], int r)
+double cosSeries(double x, int n)
+```
+
+Each starter file begins with a comment block. Read it. The `GIVEN` line tells you exactly what input the program will receive and the range of each value. The `ENSURES` line tells you what the output must look like.
 
 ::: {.callout-tip}
-`b4` is worth pausing on. The row count may be left out of that parameter; the **column
-count may not**. Reaching `m[r][j]` means computing `r*COLS + j`, and without `COLS` there
-is no sum to do.
+`b4` is worth stopping to think about. In the parameter `int m[][COLS]`, you may leave out the number of rows, but you may **not** leave out the number of columns. To find `m[r][j]`, the machine computes `r * COLS + j`. Without `COLS`, there is no calculation it can do.
 :::
 
 ::: {.callout-warning}
-`b5` has a trap with a body count. Do **not** compute each term's factorial with its own
-inner loop — 13! already overflows an `int` and the answer goes quietly, plausibly wrong.
-Build each term from the one before it:
+`b5` contains a trap that is easy to fall into. Do **not** compute each term's factorial with its own inner loop. `13!` is larger than an `int` can hold, so the result silently becomes wrong while still looking reasonable.
+
+Instead, build each term from the one before it:
 
 ```c
 term = term * (-x*x) / ((2*k+1) * (2*k+2));
 ```
 
-starting at `term = 1.0`. No factorial is ever formed, and nothing overflows.
+starting with `term = 1.0`. Written this way, no factorial is ever calculated, and nothing overflows.
 :::
 
-## Act 3 · The checked five (55 min, solo · 10 marks each)
+## Act 3 · The five checked problems (55 minutes, on your own, 10 marks each)
 
-These give you the specification and nothing else.
+For these five you are given the specification and nothing else. You write the whole program.
 
-| Problem | Task | Final line ends with exactly |
+| Problem | What the program must do | Its last line must end with |
 |---|---|---|
-| `e1.c` | the *x* ≥ 0 with **x³ + x = a**, by halving | `root=<R>`, `%.4f` |
-| `e2.c` | a 4 × 4 grid flipped about its diagonal | *(the whole output is compared)* |
-| `e3.c` | how many of the **eight** cells touching (r, c) are alive | `neighbours=<N>` |
-| `e4.c` | **one generation** of the Game of Life | *(the whole grid is compared)* |
-| `e5.c` | how many cells are alive after `g` generations | `alive=<N>` |
+| `e1.c` | find the value *x* ≥ 0 for which x³ + x = a | `root=<R>`, printed with `%.4f` |
+| `e2.c` | print a 4 × 4 grid flipped about its diagonal | *(the whole output is checked)* |
+| `e3.c` | count how many of the eight cells touching (r, c) are alive | `neighbours=<N>` |
+| `e4.c` | print one generation of the Game of Life | *(the whole grid is checked)* |
+| `e5.c` | count how many cells are alive after `g` generations | `alive=<N>` |
 
-`e1` — there is no formula to rearrange. Halve the interval, as Monday did, and write it as
-**two** functions: one for the left-hand side, one that does the halving and calls it. The
-answer is somewhere in [0, a].
+### Notes on each problem
 
-`e2` — build the answer in a **second** grid. Writing the flip back into the original
-overwrites values you have not read yet, which is `e4`'s trap met early on something small.
+**`e1`.** There is no formula you can rearrange to get the answer. Use the halving method from Monday's lecture instead. The answer lies somewhere between 0 and `a`. Write the program as two functions: one that computes the left-hand side x³ + x, and one that does the halving and calls it.
 
-`e3` — two things can go wrong and only one is obvious. Skipping the cell itself is the
-obvious one. The other is the edge: a corner cell **has** only three neighbours, and reaching
-for the other five reads outside the array. C will not stop you, and it will often appear to
-work.
+**`e2`.** Build the flipped grid in a *second* array and print that. If you write the flipped values back into the original array as you go, you will overwrite values you have not read yet and the answer will be wrong. This is a small version of the problem `e4` has.
 
-`e4` — **this is the problem the whole lab has been pointing at.** See the warning below.
+**`e3`.** Two things can go wrong here, and only one of them is obvious.
 
-`e5` — watch `g = 0`. A loop written "do it, then check" runs once even when it was asked for
-none. And if you find yourself re-writing the rule, stop: `e4` already contains it.
+The obvious one is that a cell must not count itself.
+
+The other one is the edge of the grid. A corner cell has only three neighbours, not eight. If you try to look at all eight without checking, you will read outside the array. C does not stop you from doing this, and the program will often appear to work, which is what makes it dangerous.
+
+**`e4`.** See the warning below. This is the central problem of the lab.
+
+**`e5`.** Be careful when `g` is 0: the answer is the world exactly as it was given to you. A loop written to run once and then test will run once even when it was asked for no generations at all.
+
+If you find yourself writing out the rules of the game a second time for this problem, stop. `e4` already contains them.
 
 ::: {.callout-note}
-`e3`, `e4` and `e5` are deliberately **one program grown three times**. Write
-`countNeighbours` once for `e3` and copy it into `e4`; put the generation in a *function*
-in `e4` and `e5` costs you three more lines. If you find yourself copying the whole rule
-into a fresh loop for `e5`, stop — that is the moment a function was supposed to save you.
+`e3`, `e4` and `e5` are deliberately the same program, extended twice.
+
+Write `countNeighbours` for `e3`. Copy it into `e4` and use it there. If you then put the code that produces one generation into a function of its own, `e5` needs only a few more lines: call that function `g` times, then count the live cells.
 :::
 
 ::: {.callout-warning}
-**The one that decides `e4`.** Every cell in a generation must see the *same old world*.
-Decide the whole next generation into a second grid, then copy it back. If you write each
-cell's answer straight into `world`, cell (0,1) counts a neighbour that has already
-changed — and the blinker below will visibly fall apart instead of flipping.
+**This is what `e4` is marked on.** Every cell in a generation must be decided from the *same* old world.
+
+So you need two grids. Work out the entire next generation into a second grid, and only then copy it back into the first.
+
+If instead you write each cell's new value straight into `world`, then when you reach cell (0,1) one of its neighbours has already been changed, and it counts the wrong number. The blinker will visibly fall apart instead of flipping.
 :::
-
-Two sample worlds ship in your workspace so you can watch it run rather than trust it:
-
-```bash
-./e4 < blinker.txt      # three in a row should become three in a column
-./e4 < glider.txt       # a shape that walks
-```
 
 ::: {.callout-tip}
-Tuesday's lecture printed a live cell as `##` and a dead one as two blanks, which reads
-well on a projector. Here it is **`#` and `.`** — a checker cannot see blank space.
+Tuesday's lecture printed a live cell as `##` and a dead cell as two spaces, which is easy to read on a projector. In this lab, print `#` for a live cell and `.` for a dead one. The checker compares text, and it cannot tell blank space apart from missing output.
 :::
 
-**How checking works** — `./check.sh e3` compiles *your source* and runs it on the public
-examples printed in your starter **and on fresh random inputs drawn from the GIVEN**. A
-program that memorises an example fails the next draw.
+### How the checking works
+
+When you run `./check.sh e3`, it compiles *your* source file and runs it twice over: once on the examples printed in your starter file, and once on fresh random inputs generated at that moment from the range in the `GIVEN` line.
+
+This means a program that only reproduces the printed example will fail as soon as a new input is drawn.
 
 ::: {.callout-note}
-`e2` and `e4` are compared over the **whole output**, not just the last line, because the
-answer is a shape. Spacing is ignored; a missing or wrong row is not. If yours looks right
-but fails, run `./check.sh e4` and read the difference it prints rather than squinting at
-the screen.
+`e2` and `e4` are checked over their whole output, not just the last line, because the answer is a grid rather than a single value. Extra or missing spaces are ignored. A wrong or missing row is not.
+
+If your output looks right but the check fails, run `./check.sh e4` and read the difference it prints. It shows you the line that differs, what you printed, and what was expected.
 :::
 
-## Act 4 · Check, fix, bundle (10 min)
+## Act 4 · Check your marks, fix, and submit (10 minutes)
 
 ```bash
-./check.sh          # everything
-./check.sh e4       # just one problem, while you are working on it
+./check.sh          # check everything
+./check.sh e4       # check one problem, while you are still working on it
 ```
 
-It prints **your marks, problem by problem**:
+`check.sh` prints your marks, problem by problem:
 
 ```
   YOUR MARKS SO FAR   (blanks 5 each, checked 10 each)
@@ -345,39 +312,33 @@ It prints **your marks, problem by problem**:
                       58 of 75 marks
 ```
 
-That `e4` line is the in-place bug: two vectors pass, five do not. Marks are **partial** —
-every vector you pass earns its share, so fixing one failing case is always worth doing,
-right up to the last minute. Treat the total as an estimate: the random vectors are drawn
-fresh on every run, so it can move a mark or two.
+In that example, `e4` has the two-grid bug described above: two of its seven test cases pass and five do not.
 
-Fix, re-check, repeat. Then — green or time-up:
+Marks are given **per test case**, not all-or-nothing. Every case you pass earns its share, so fixing one failing case is always worth doing, even in the last few minutes.
+
+Treat the total as an estimate. Some of the test cases are generated fresh each time you run the checker, so the number can move by a mark or two between runs.
+
+Keep fixing and re-checking. When you are finished, or when time is called, make your bundle:
 
 ```bash
 ./check.sh --bundle
 ```
 
 ::: {.callout-important}
-The bundle lands one directory **above** your workspace, named
-`lab07_<rolls>_<branch>_w<NN>.tar.gz`. Carry it out — Moodle, and email it to yourself. The
-machine forgets; you must not.
+The bundle is written to the directory **above** your workspace, with a name of the form `lab07_<rolls>_<branch>_w<NN>.tar.gz`.
+
+Take it with you. Upload it to Moodle and also email it to yourself. The lab machines are wiped between sessions, so a bundle left behind is lost.
 :::
 
-## Stretch (fast finishers, not marked)
+## If you finish early (not marked)
 
-1. **Watch the glider hit the wall.** Our world has hard edges, so the glider cannot walk
-   forever. Run it well past `e5`'s twelve generations and print the population each time.
-   It does **not** die: at generation 24 it stops changing altogether, leaving four cells
-   in the bottom-right corner. Find out what they are.
-2. **Find a still life.** That corner leftover is one — a 2×2 block, which has exactly the
-   neighbour counts it needs to keep itself alive. Add a check to `e5` that reports the
-   first generation identical to the one before it, and confirm it says 24.
-3. **Make the world wrap**, so column 7's right-hand neighbour is column 0 and the glider
-   never reaches a wall at all. One change, in `countNeighbours` only — and the bounds test
-   you fought with in `e3` becomes an arithmetic one instead.
+1. **Watch the glider reach the wall.** This world has fixed edges, so the glider cannot keep moving forever. Run it for more than the twelve generations `e5` allows and print how many cells are alive after each one. It does not die out. At generation 24 it stops changing completely, leaving four live cells in the bottom-right corner. Work out what shape they form.
+2. **Find a still life.** Those four cells are one: a 2 × 2 block, in which every live cell has exactly the number of neighbours it needs to survive. Add a test to `e5` that reports the first generation identical to the one before it, and check that it reports 24.
+3. **Make the edges wrap around**, so that the cell to the right of column 7 is column 0, and the glider never reaches a wall. This needs one change, inside `countNeighbours` only. The bounds check you wrote for `e3` becomes a calculation instead.
 
-## Reflect
+## Before you leave
 
-Two questions to be able to answer out loud before you leave — they are what the viva asks:
+Be ready to answer these two questions out loud. They are the kind of question the viva will ask.
 
-1. Why does `swap` need `&a` when `countNeighbours(world, i, j)` does not?
-2. What exactly breaks if you delete the second grid in `e4` — which cell notices first?
+1. `swap(&a, &b)` is written with `&`, but `countNeighbours(world, i, j)` is not. Why is the array different?
+2. What goes wrong in `e4` if you use only one grid instead of two? Which cell is the first to be given a wrong answer, and why?
