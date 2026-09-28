@@ -11,15 +11,15 @@
 ## In Class
 
 - 📽️ [**Deck 01 — Logistics**](../materials/w01-deck-01-logistics.html) — the opening slides: who/where/when, assessment, tools, and this week's plan.
-- 📽️ [**Deck 02 — What is a Computer?**](../materials/w01-deck-02-what-is-a-computer.html) — Tuesday's slides: computing is a process, a computer is a thing, programming is an act, computational thinking is a habit; the stored program as the dividing line.
-- 🖨️ [**Hello, World — all the way down**](../materials/w01-hello-under-the-hood.html) — the closing demo, in two acts: printf("abba") in a two-letter world (a=0, b=1 — the text in memory is just 0 1 1 0), then the same five-instruction program with the book grown to ASCII printing Hello, world! Why does 72 mean H?
-- 🐢 [**The Turtle Computer**](../materials/w01-turtle-computer.html) — your first programming language: ten words, one turtle, no typing. We start here, before any C: a program is a precise plan, the machine does exactly what you *said* (never what you meant), and language features are *invented* when problems demand them.
+- 📽️ [**Deck 02 — What is a Computer?**](../materials/w01-deck-02-what-is-a-computer.html) — Tuesday's slides. They separate four things that are often confused: computing, which is a process; a computer, which is a machine; programming, which is what you do; and computational thinking, which is a way of approaching problems. The deck then covers the stored-program idea, which is what distinguishes a computer from earlier calculating machines.
+- 🖨️ [**Hello, World — all the way down**](../materials/w01-hello-under-the-hood.html) — the closing demonstration, in two parts. First, `printf("abba")` in a world with only two letters, where a is 0 and b is 1, so the text stored in memory is just 0 1 1 0. Then the same five-instruction program, with the character set extended to ASCII, printing `Hello, world!`. The question it answers is why the number 72 means the letter H.
+- 🐢 [**The Turtle Computer**](../materials/w01-turtle-computer.html) — your first programming language. It has ten words and one turtle, and requires no typing. We start here rather than with C, because it makes three points clearly: a program is a precise plan; the machine does exactly what you wrote, not what you intended; and features of a language get invented because some problem needed them.
 - [Lec 1](../cs1100-cse-iitm-2021/slides/Lec1.pdf) — Introduction to Programming
 - [Lec 3](../cs1100-cse-iitm-2021/slides/Lec3.pdf) — The Computing Machine
 
 ## After Class
 
-- Finish all six Turtle missions — can you match the turtle master's *par* on each for two stars? Bring your hardest-earned star to Tuesday's class.
+- Finish all six Turtle missions. Each mission has a target number of moves, called its par. Matching the par earns two stars rather than one. Bring the mission you found hardest to Tuesday's class.
 
 *More practice problems and handouts will be posted here.*
 
