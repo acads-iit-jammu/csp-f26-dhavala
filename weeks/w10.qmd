@@ -2,7 +2,7 @@
 
 **Dates:** Mon Oct 5 & Tue Oct 6, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 5 — Pointers; arrays; dynamic memory allocation; functions and recursion
+**Syllabus modules:** 5 — pointers and arrays (Monday) · 3 and 10 — strings, and the `string` library (Tuesday)
 
 ::: {.callout-note}
 **Lab 08 is on pointers and strings**, and follows these two lectures: EE on Tue Oct 6, Mechanical and Materials on Wed Oct 14.
@@ -23,7 +23,7 @@ Every program below was compiled with `gcc -Wall -Wextra` and run, and the outpu
 
 ## 1 · A question you have already answered without knowing it
 
-In W09 you wrote two functions that differ by one character, and they behave differently:
+In W09 you wrote these two functions. They do the same arithmetic, but only one of them changes the caller's variable:
 
 ```c
 #include <stdio.h>
@@ -49,13 +49,13 @@ after addOne(x),        x = 5
 after reallyAddOne(&x), x = 6
 ```
 
-You have been using this for two weeks. The explanation was "pass the address". Today we say what an address is, what `&` and `*` actually do, and why this is the only way C can do it.
+You have been using this since last week. The explanation then was "pass the address". Today we say what an address is, what `&` and `*` actually do, and why this is the only way C can do it.
 
 ## 2 · Memory is numbered
 
 A program's memory is one long row of bytes, and **every byte has a number**. That number is called its **address**. The first byte is at some address, the next at that address plus one, and so on.
 
-When you declare `int x = 5;`, the program sets aside four adjacent bytes somewhere in that row and writes 5 into them. The variable name `x` is how *you* refer to those bytes. The address is how the *machine* refers to them.
+When you declare `int x = 5;`, the program sets aside enough adjacent bytes somewhere in that row to hold an `int` — four of them on the machines we use — and writes 5 into them. The variable name `x` is how *you* refer to those bytes. The address is how the *machine* refers to them.
 
 Two things follow, and both matter:
 
@@ -128,7 +128,7 @@ int *p, *q;
 This catches everyone once. Write one declaration per line and it cannot catch you at all.
 :::
 
-## 5 · A pointer knows the size of what it points at
+## 5 · Adding 1 to a pointer moves it by one whole item
 
 Adding 1 to a pointer does **not** move it one byte along. It moves it to the **next item of that type**.
 
@@ -139,24 +139,31 @@ int main(void)
     int a[5] = { 10, 20, 30, 40, 50 };
     int *p = a;
 
-    printf("sizeof(int)        = %zu\n", sizeof(int));
-    printf("(p+1) - p in bytes = %td\n", (char *)(p + 1) - (char *)p);
-    printf("a[2]               = %d\n", a[2]);
-    printf("*(a + 2)           = %d\n", *(a + 2));
-    printf("*(p + 2)           = %d\n", *(p + 2));
+    printf("sizeof(int) = %zu\n", sizeof(int));
+    printf("(p + 1) - p = %td        (counted in ints, not bytes)\n", (p + 1) - p);
+
+    printf("a[2]        = %d\n", a[2]);
+    printf("*(a + 2)    = %d\n", *(a + 2));
+    printf("*(p + 2)    = %d\n", *(p + 2));
     return 0;
 }
 ```
 
 ```
-sizeof(int)        = 4
-(p+1) - p in bytes = 4
-a[2]               = 30
-*(a + 2)           = 30
-*(p + 2)           = 30
+sizeof(int) = 4
+(p + 1) - p = 1        (counted in ints, not bytes)
+a[2]        = 30
+*(a + 2)    = 30
+*(p + 2)    = 30
 ```
 
-`p + 1` is four bytes further on, because an `int` is four bytes. For a `char *`, `p + 1` would be one byte further on. The compiler scales the arithmetic by the size of the type, which is why the type in the declaration is not decoration.
+Two facts here, and they are two halves of the same rule.
+
+**Going forwards**, `p + 1` is the address of the *next int*, which on this machine is four bytes further along, because `sizeof(int)` is 4. For a `char *`, `p + 1` would be one byte further along. The compiler scales the step by the size of the type, which is why the type in the declaration is not decoration.
+
+**Going backwards**, subtracting two pointers gives the number of *items* between them, not the number of bytes. That is why `(p + 1) - p` is 1 and not 4.
+
+So pointer arithmetic is always counted in whole items of the pointed-to type. Nothing is stored in the pointer to make this happen; the compiler works it out from the type at compile time.
 
 ::: {.callout-note}
 `sizeof` produces a value of type `size_t`, and `%zu` is the `printf` format for it. `%td` is the format for the result of subtracting two pointers. You can use them without studying either type further; just do not use `%d` for them.
@@ -170,9 +177,9 @@ The last three lines of that output are equal, and that is not a coincidence. In
 
 The subscript notation is a shorthand for pointer arithmetic. This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why `int a[]` and `int *a` mean the same thing in a parameter list, and why the function can change the caller's array.
 
-## 7 · Why every array function you have written takes a length
+## 7 · Why a function is usually told how long an array is
 
-Here is the consequence, and it explains a rule you have been following since Lab 06 without being told the reason:
+Here is the consequence, and it explains something you have been doing since you started writing functions over arrays:
 
 ```c
 #include <stdio.h>
@@ -200,36 +207,85 @@ inside the function, n         = 10
 
 In `main`, `sizeof a` is 40: ten integers of four bytes each. Inside the function it is 8, the size of a pointer on this machine.
 
-**The function was never given the array. It was given an address.** The length did not travel with it, and there is no way to recover it. That is why `minMax(int a[], int n, int *lo, int *hi)` in Lab 07 had to take `n` as a separate parameter, and why every array function you will ever write does the same.
+**The function was never given the array. It was given an address.** The length did not travel with it, and there is no way to recover it from inside the function. That is why a function like
 
-The compiler knows this is a common mistake and warns about it:
+```c
+void minMax(int a[], int n, int *lo, int *hi)
+```
+
+has to take `n` as a separate parameter. You will meet this one in Lab 07.
+
+The compiler knows this is a common mistake and warns about it. The exact wording differs between compilers; what matters is the file and line it points at:
 
 ```
 warning: sizeof on array function parameter will return size of 'int *'
          instead of 'int[]' [-Wsizeof-array-argument]
 ```
 
+::: {.callout-note}
+**This is about the first dimension only.** A parameter written `int world[ROWS][COLS]`, as in last week's Game of Life, still carries its **column** count, because that number is part of the parameter's type — it is what makes `world[i][j]` computable. That is why `printWorld`, `countNeighbours` and `nextGeneration` needed no length parameter: `COLS` was in the type and `ROWS` was a `#define` both sides could see.
+
+What never survives is the number of rows, which is the dimension that decays to a pointer. So the rule is: a function is told the size of the dimension that decayed, and reads the rest from the type.
+:::
+
 ## 8 · What goes wrong
 
-Four mistakes account for most pointer bugs. The first two you can check yourself; the last two you must simply not do.
+Four mistakes account for most pointer bugs. **Three of the four are undefined behaviour**, marked below. Read them; do not run them.
 
-**Declaring a pointer is not the same as giving it something to point at.**
+**Declaring a pointer is not the same as giving it something to point at.** *(undefined behaviour)*
 
 ```c
-int *p;      /* p exists, but holds no useful address */
-*p = 5;      /* wrong: writes to an address nobody chose */
+int *p;      /* p exists, but has not been given an address */
+*p = 5;      /* undefined: writes to an address nobody chose */
 ```
 
-A pointer must be given an address before it is dereferenced, either from `&something` or from a function that returns one. Until then the value in it is whatever happened to be in that memory.
+A pointer must be given an address before it is dereferenced, either from `&something` or from a function that returns one. Until then, as W09 §10 put it for arrays, what happens is **undefined** — not "whatever happened to be in that memory". There is no value you can reason about, and reading it is itself undefined.
 
-**Confusing the pointer with the thing it points at.** `p = 7` sets the pointer to the address 7, which is meaningless. `*p = 7` sets the variable it points at to 7. Mixing these up is the most common beginner error, and the compiler will usually, but not always, warn you.
+C gives you a way to say "not pointing at anything yet". The name is `NULL`, and you can test for it:
 
-**Returning the address of a local variable.** A local variable stops existing when its function returns, so its address refers to storage that has been given back. The pointer still holds a number, and the program may appear to work, which is exactly what makes it dangerous. You will see the proper way to return new storage when we reach `malloc` in W13.
+```c
+#include <stdio.h>
+int main(void)
+{
+    int x = 5;
+    int *p = NULL;          /* NULL means: not pointing at anything yet */
 
-**Writing past the end of an array.** `a[10]` in an array of ten, or walking a pointer one step too far. C does not check this. We will come back to it on Tuesday, because the most common version in practice involves strings.
+    if (p == NULL)
+        printf("p is NULL, so it must not be dereferenced\n");
+
+    p = &x;                 /* now it points at something real */
+
+    if (p != NULL)
+        printf("p now points at x, and *p = %d\n", *p);
+
+    printf("an address prints with %%p, like this: ");
+    printf("%p\n", (void *)p);
+    return 0;
+}
+```
+
+```
+p is NULL, so it must not be dereferenced
+p now points at x, and *p = 5
+an address prints with %p, like this: 0x16d4b32c8
+```
+
+The last line is the one from section 2 that changes on every run, so yours will show a different number. Note the two details: `%p` is the format for an address, and the pointer is cast to `(void *)` to use it. `NULL` returns in W13, where it is how `malloc` reports failure.
+
+**Confusing the pointer with the thing it points at.** `*p = 7` sets the variable `p` points at to 7. Writing `p = 7` instead tries to set the pointer itself to the address 7, which is meaningless — and the compiler rejects it outright:
+
+```
+error: incompatible integer to pointer conversion assigning to 'int *' from 'int'
+```
+
+So that particular slip cannot get past the compiler. The dangerous version is the one where both sides are pointers: writing `p = q` when you meant `*p = *q` is perfectly legal, silent, and changes which variable `p` refers to instead of copying a value.
+
+**Returning the address of a local variable.** *(undefined behaviour)* A local variable stops existing when its function returns, so its address refers to storage that has been given back. The pointer still holds a number, and the program may appear to work, which is exactly what makes it dangerous. You will see the proper way to return new storage when we reach `malloc` in W13.
+
+**Writing past the end of an array.** *(undefined behaviour)* `a[10]` in an array of ten, or walking a pointer one step too far. C does not check this. We will come back to it on Tuesday, because the most common version in practice involves strings.
 
 ::: {.callout-important}
-Three of those four are **undefined behaviour**: the C standard does not say what happens. The program may crash, may print nonsense, or may appear to work perfectly on your machine and fail on the examiner's. Do not learn what your compiler happens to do with them. Learn not to write them.
+The three marked above are **undefined behaviour**: the C standard does not say what happens. The program may crash, may print nonsense, or may appear to work perfectly on your machine and fail on the examiner's. Do not learn what your compiler happens to do with them. Learn not to write them.
 :::
 
 ---
@@ -250,7 +306,7 @@ That declaration creates an array of **six** characters, not five:
 |---|---|---|---|---|---|---|
 | character | `l` | `e` | `v` | `e` | `l` | `\0` |
 
-Every function that works on strings relies on that terminator being there, because nothing else tells it where the text stops. The array knows its own length only in `main`, and section 7 showed you that the length does not survive being passed to a function.
+Every function that works on strings relies on that terminator being there, because nothing else tells it where the text stops. `sizeof` can tell you the size of an array wherever its declaration is visible, but section 7 showed that this does not survive being passed to a function — and a string function is almost always on the receiving end of that.
 
 ```c
 #include <stdio.h>
@@ -334,6 +390,40 @@ myStrlen("level") = 5
 
 `isPalindrome` uses two indices that move towards each other and stop when they meet. Note the loop condition is `lo < hi`, not `lo <= hi`: when they are equal they are on the same character, and a character always matches itself. A string of odd length has a middle character that is never compared, and does not need to be.
 
+## 11b · Reading a string from the keyboard
+
+Every string so far has been written into the program. To read one you type, use `scanf` with `%s` — and note that **there is no `&`**, because an array argument is already an address, which is section 6.
+
+```c
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+    char word[50];
+
+    printf("Enter a word: ");
+    if (scanf("%49s", word) != 1) {
+        printf("no word was read\n");
+        return 1;
+    }
+
+    printf("you typed \"%s\", which has %zu characters\n", word, strlen(word));
+    return 0;
+}
+```
+
+Typing `level` gives:
+
+```
+Enter a word: you typed "level", which has 5 characters
+```
+
+Two details that are not optional.
+
+**The `49` in `%49s` is a limit.** The array holds 50 characters, one of which must be the `'\0'`, so at most 49 may be read. Plain `%s` has no limit: type a longer word and `scanf` writes past the end of the array, which is the fourth mistake in section 8. Always give the number, and always make it one less than the array size.
+
+**`%s` stops at the first space.** It reads one word, not a line. For `"never odd or even"` it would read only `never`. Reading a whole line needs a different tool, which we will not need before Lab 08.
+
 ## 12 · The library: `string.h`
 
 Four functions cover most of what you need. All of them depend on the terminator being present.
@@ -343,7 +433,7 @@ Four functions cover most of what you need. All of them depend on the terminator
 | `strlen(s)` | number of characters before the `'\0'` |
 | `strcpy(dst, src)` | copies `src` into `dst`, terminator included |
 | `strcat(dst, src)` | appends `src` to the end of `dst` |
-| `strcmp(a, b)` | negative, zero, or positive according to alphabetical order |
+| `strcmp(a, b)` | negative, zero, or positive, comparing character codes (see the warning below) |
 
 ```c
 #include <stdio.h>
@@ -391,6 +481,17 @@ strcmp("abc", "abc") is zero: they are equal
 Only the sign of the result is defined. Do not depend on the particular number.
 :::
 
+::: {.callout-warning}
+**`strcmp` is not alphabetical order.** It compares the characters by their numeric codes, and every capital letter has a smaller code than every lowercase letter — `'Z'` is 90 and `'a'` is 97. So:
+
+```
+strcmp("Zebra", "apple")  is negative:  "Zebra" comes first
+strcmp("abc",   "ABD")    is positive:  "ABD"   comes first
+```
+
+For a dictionary ordering you would have to convert both strings to one case first. This is also why the After Class exercise has to say "ignore letter case" explicitly: comparing `'N'` with `'n'` finds them different.
+:::
+
 ::: {.callout-important}
 **`strcpy` and `strcat` do not check that the destination is big enough.** If it is not, they write past the end of the array, which is undefined behaviour and one of the most exploited bugs in the history of software. Make sure the destination array has room, including one byte for the terminator.
 :::
@@ -414,14 +515,16 @@ If you want a string you can modify, declare an array.
 
 Short programs to predict before running. Write your answer down first; that is the exercise.
 
+Two of these print numbers that depend on the machine — the size of an `int` and the size of a pointer. Predict them for the machine in front of you, and say which they are.
+
 | | Program | Predict |
 |---|---|---|
 | `d01` | `int x=5, *p=&x; printf("%d", *p);` | the number printed |
 | `d02` | `*p = 7;` then `printf("%d", x);` | the number printed |
 | `d03` | `int *p, q;` — then `q = 4;` | does it compile? what is `q`? |
-| `d04` | `int a[5], *p=a;` print `(char*)(p+1)-(char*)p` | the number of bytes |
+| `d04` | `int a[5], *p=a;` print `(p+1)-p`, then `sizeof(int)` | both numbers, and why they differ |
 | `d05` | print `a[3]` and `*(a+3)` | are they the same? |
-| `d06` | `sizeof a` in `main` against `sizeof a` inside a function | both numbers |
+| `d06` | `sizeof a` in `main` against `sizeof a` inside a function | both numbers (the second is the size of a pointer on your machine) |
 | `d07` | `char s[]="level";` print `sizeof s` and `strlen(s)` | both numbers |
 | `d08` | count the steps the `strlen` loop takes on `"hello"` | the number of steps |
 | `d09` | count the comparisons `isPalindrome` makes on `"level"` | the number |
