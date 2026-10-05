@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pointers, Step by Step · CS-1-01 (MO)</title>
+<style>
+  :root{
+    --blue:#003f87; --blue-dark:#002d63; --blue-mid:#0056b8;
+    --blue-sky:#4da3ff; --blue-pale:#eaf3ff;
+    --ink:#22262a; --paper:#fff; --grey:#f4f6f8; --line:#d7e3f2;
+    --flash:#ffd34d; --warn:#b35c00; --bad:#a40e26; --good:#1a7f4b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Roboto,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       font-size:15px;color:var(--ink);background:var(--grey);line-height:1.5}
+  header{background:var(--blue);color:#fff;padding:.7rem 1.2rem}
+  header h1{font-family:"Roboto Slab",Georgia,serif;font-size:1.3rem;margin:0;font-weight:600}
+  header .sub{opacity:.85;font-size:.85rem}
+  nav{display:flex;gap:4px;flex-wrap:wrap;background:var(--blue-dark);padding:6px 12px;position:sticky;top:0;z-index:5}
+  nav button{font-size:.78rem;border:1px solid transparent;background:transparent;color:#cfe3ff;
+             border-radius:14px;padding:3px 11px;cursor:pointer}
+  nav button.cur{background:#fff;color:var(--blue);font-weight:600}
+  main{max-width:980px;margin:0 auto;padding:1rem 1.2rem 3rem}
+  h2{font-family:"Roboto Slab",Georgia,serif;color:var(--blue);font-size:1.15rem;margin:.2rem 0 .5rem}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1rem 1.1rem;margin:.8rem 0}
+  code,.mono{font-family:"SF Mono",Menlo,Consolas,monospace}
+  pre{background:#0f1b2b;color:#e8f0fa;padding:.7rem .9rem;border-radius:6px;overflow-x:auto;font-size:.85rem;margin:.5rem 0}
+  .mem{display:flex;gap:0;flex-wrap:nowrap;overflow-x:auto;padding:28px 0 46px;position:relative}
+  .cell{min-width:86px;border:2px solid var(--line);border-right-width:0;background:#fff;
+        text-align:center;padding:.45rem .2rem;position:relative}
+  .cell:last-child{border-right-width:2px}
+  .cell .val{font-family:"SF Mono",Menlo,monospace;font-size:1.05rem;font-weight:600}
+  .cell .addr{font-family:"SF Mono",Menlo,monospace;font-size:.68rem;color:#7b8794;margin-top:2px}
+  .cell .nm{position:absolute;top:-24px;left:0;right:0;font-size:.78rem;color:var(--blue-mid);font-weight:600}
+  .cell.lit{border-color:var(--blue-mid);background:var(--blue-pale)}
+  .cell.ptr{border-color:var(--good);background:#eefaf3}
+  .cell.flash{animation:fl .9s ease-out}
+  @keyframes fl{0%{background:var(--flash)}100%{background:var(--blue-pale)}}
+  .arrow{position:absolute;height:2px;background:var(--good);bottom:26px}
+  .arrow:after{content:"";position:absolute;right:-1px;top:-4px;border-left:9px solid var(--good);
+               border-top:5px solid transparent;border-bottom:5px solid transparent}
+  .arrow .lab{position:absolute;left:50%;transform:translateX(-50%);bottom:4px;font-size:.7rem;color:var(--good);white-space:nowrap}
+  .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin:.6rem 0}
+  .ctrls button{font-size:.82rem;border:1px solid var(--blue-mid);background:#fff;color:var(--blue-mid);
+                border-radius:5px;padding:5px 12px;cursor:pointer;font-family:"SF Mono",Menlo,monospace}
+  .ctrls button:hover{background:var(--blue-pale)}
+  .ctrls button.danger{border-color:var(--bad);color:var(--bad)}
+  .ctrls button:disabled{opacity:.4;cursor:not-allowed}
+  .say{border-left:4px solid var(--blue-mid);background:var(--blue-pale);padding:.5rem .8rem;margin:.6rem 0;font-size:.92rem}
+  .warn{border-left:4px solid var(--warn);background:#fff6ea}
+  .foot{color:#6b7684;font-size:.82rem;margin-top:1.2rem}
+  table{border-collapse:collapse;font-size:.88rem;margin:.5rem 0}
+  th,td{border:1px solid var(--line);padding:.3rem .6rem;text-align:left}
+  th{background:var(--blue-pale);color:var(--blue-dark)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Pointers, step by step</h1>
+  <div class="sub">CS-1-01 (MO) · Week 10 · companion to the lecture notes</div>
+</header>
+<nav id="nav"></nav>
+<main id="main"></main>
+
+<script>
+/* ---------- a tiny memory model -------------------------------------
+   Addresses are made up but consistent: one int every 4 bytes, starting
+   at BASE. Nothing here depends on the real machine; the point is the
+   RELATIONSHIP between a pointer and what it points at.               */
+var BASE = 0x7ffd1000, WORD = 4;
+function hex(a){ return "0x" + a.toString(16); }
+
+function cellsHTML(cells){
+  var h = '<div class="mem" id="memrow">';
+  cells.forEach(function(c, i){
+    var cls = "cell" + (c.lit ? " lit" : "") + (c.ptr ? " ptr" : "") + (c.flash ? " flash" : "");
+    h += '<div class="' + cls + '" data-i="' + i + '">'
+       +   (c.name ? '<div class="nm">' + c.name + '</div>' : '')
+       +   '<div class="val">' + c.val + '</div>'
+       +   '<div class="addr">' + hex(BASE + i*WORD) + '</div>'
+       + '</div>';
+  });
+  return h + '</div>';
+}
+
+/* draw an arrow from the middle of cell `from` to the middle of cell `to` */
+function drawArrow(from, to, label){
+  var row = document.getElementById("memrow");
+  if(!row) return;
+  var cells = row.querySelectorAll(".cell");
+  if(!cells[from] || !cells[to]) return;
+  var a = cells[from], b = cells[to];
+  var x1 = a.offsetLeft + a.offsetWidth/2;
+  var x2 = b.offsetLeft + b.offsetWidth/2;
+  var el = document.createElement("div");
+  el.className = "arrow";
+  el.style.left  = Math.min(x1,x2) + "px";
+  el.style.width = Math.abs(x2-x1) + "px";
+  if(x2 < x1){ el.style.transform = "scaleX(-1)"; }
+  if(label){
+    var l = document.createElement("div");
+    l.className = "lab";
+    l.textContent = label;
+    if(x2 < x1) l.style.transform = "translateX(-50%) scaleX(-1)";
+    el.appendChild(l);
+  }
+  row.appendChild(el);
+}
+
+/* ---------- scenes --------------------------------------------------- */
+var scenes = [];
+
+/* 1 — a variable occupies bytes, and those bytes have a number */
+scenes.push({ title:"1 · A variable lives somewhere", build:function(host){
+  var step = 0;
+  var code = ['int x = 5;'];
+  function render(){
+    var cells = [
+      {val:"?",  name:""},
+      {val: step>=1 ? "5" : "?", name: step>=1 ? "x" : "", lit: step>=1},
+      {val:"?",  name:""},
+      {val:"?",  name:""}
+    ];
+    host.innerHTML =
+      '<pre>' + code.join("\n") + '</pre>'
+      + cellsHTML(cells)
+      + '<div class="ctrls">'
+      +   '<button id="go">' + (step===0 ? "run int x = 5;" : "reset") + '</button>'
+      + '</div>'
+      + '<div class="say">' + (step===0
+          ? "Memory is one long row of bytes. Every position has a number, called its <b>address</b> &mdash; shown in small type under each box."
+          : "<code>int x = 5</code> set aside room for an int and wrote 5 into it. The name <code>x</code> is how <i>you</i> refer to that box. The address " + hex(BASE+WORD) + " is how the <i>machine</i> refers to it.") + '</div>'
+      + (step>=1 ? '<div class="say warn">On a real machine the address is different every time the program runs. The relationship is what matters, never the particular number.</div>' : '');
+    host.querySelector("#go").onclick = function(){ step = step===0 ? 1 : 0; render(); };
+  }
+  render();
+}});
+
+/* 2 — & takes the address, * follows it */
+scenes.push({ title:"2 · &amp; takes the address, * follows it", build:function(host){
+  var step = 0;   /* 0 none, 1 p declared, 2 written through */
+  function render(){
+    var xval = step>=2 ? "7" : "5";
+    var cells = [
+      {val:"?", name:""},
+      {val:xval, name:"x", lit:true, flash: step===2},
+      {val: step>=1 ? hex(BASE+WORD) : "?", name: step>=1 ? "p" : "", ptr: step>=1},
+      {val:"?", name:""}
+    ];
+    var lines = ['int x = 5;'];
+    if(step>=1) lines.push('int *p = &x;');
+    if(step>=2) lines.push('*p = 7;');
+    host.innerHTML =
+      '<pre>' + lines.join("\n") + '</pre>'
+      + cellsHTML(cells)
+      + '<div class="ctrls">'
+      +   '<button id="b1"' + (step>=1?' disabled':'') + '>int *p = &amp;x;</button>'
+      +   '<button id="b2"' + (step<1||step>=2?' disabled':'') + '>*p = 7;</button>'
+      +   '<button id="rs">reset</button>'
+      + '</div>'
+      + '<div class="say">' + (
+          step===0 ? "Press the first button. <code>&amp;x</code> is not a copy of <code>x</code> &mdash; it is the number of the box <code>x</code> lives in."
+        : step===1 ? "<code>p</code> now holds " + hex(BASE+WORD) + ", which is the address of <code>x</code>. The arrow is the picture of that; the number is what is actually stored."
+        : "<code>*p = 7</code> never mentions <code>x</code>, and <code>x</code> changed. That is the whole point of a pointer: a second route to the same storage.") + '</div>';
+    if(step>=1) setTimeout(function(){ drawArrow(2,1,"p points at x"); }, 0);
+    var b1=host.querySelector("#b1"), b2=host.querySelector("#b2");
+    if(b1) b1.onclick=function(){ step=1; render(); };
+    if(b2) b2.onclick=function(){ step=2; render(); };
+    host.querySelector("#rs").onclick=function(){ step=0; render(); };
+  }
+  render();
+}});
+
+/* 3 — the one that kills "a pointer is just a number" */
+scenes.push({ title:"3 · Adding 1 moves a whole item", build:function(host){
+  var at = 0;                       /* index into the array */
+  var arr = [10,20,30,40,50];
+  function render(){
+    var cells = arr.map(function(v,i){
+      return {val:String(v), name:"a["+i+"]", lit:true};
+    });
+    cells.push({val: hex(BASE + at*WORD), name:"p", ptr:true});
+    host.innerHTML =
+      '<pre>int a[5] = { 10, 20, 30, 40, 50 };\n'
+      + 'int *p = a;' + (at>0 ? '\np = p + ' + at + ';' : '') + '</pre>'
+      + cellsHTML(cells)
+      + '<div class="ctrls">'
+      +   '<button id="inc"' + (at>=4?' disabled':'') + '>p = p + 1</button>'
+      +   '<button id="dec"' + (at<=0?' disabled':'') + '>p = p - 1</button>'
+      +   '<button id="rs">reset</button>'
+      + '</div>'
+      + '<table><tr><th>expression</th><th>value</th></tr>'
+      +   '<tr><td class="mono">p</td><td class="mono">' + hex(BASE + at*WORD) + '</td></tr>'
+      +   '<tr><td class="mono">*p</td><td class="mono">' + arr[at] + '</td></tr>'
+      +   '<tr><td class="mono">p - a</td><td class="mono">' + at + '  (items, not bytes)</td></tr>'
+      + '</table>'
+      + '<div class="say">Each press changes the stored address by <b>' + WORD + '</b>, because an <code>int</code> is '
+      + WORD + ' bytes &mdash; and the arrow lands on the <b>next whole box</b>, never part of one. '
+      + 'That is why the type in <code>int *p</code> is not decoration.</div>'
+      + '<div class="say warn">Notice the last row: <code>p - a</code> counts <b>items</b>. Stepping forward scales by the size of the type; '
+      + 'subtracting two pointers undoes that scaling. The two halves agree.</div>';
+    setTimeout(function(){ drawArrow(5, at, "*p is " + arr[at]); }, 0);
+    var i=host.querySelector("#inc"), d=host.querySelector("#dec");
+    if(i) i.onclick=function(){ if(at<4){at++;render();} };
+    if(d) d.onclick=function(){ if(at>0){at--;render();} };
+    host.querySelector("#rs").onclick=function(){ at=0; render(); };
+  }
+  render();
+}});
+
+/* 4 — strings: the terminator, strlen vs sizeof */
+scenes.push({ title:"4 · A string, and where it stops", build:function(host){
+  var word = "level";
+  var at = -1, done = false;
+  function render(){
+    var chars = word.split("").concat(["\\0"]);
+    var cells = chars.map(function(c,i){
+      return { val: c==="\\0" ? "\\0" : "'"+c+"'",
+               name: "s["+i+"]",
+               lit: at>=0 && i<=at && i<word.length,
+               ptr: c==="\\0" && done,
+               flash: i===at };
+    });
+    host.innerHTML =
+      '<pre>char s[] = "' + word + '";\n\n'
+      + 'int n = 0;\nwhile (s[n] != \'\\0\')\n    n++;</pre>'
+      + cellsHTML(cells)
+      + '<div class="ctrls">'
+      +   '<button id="st"' + (done?' disabled':'') + '>' + (at<0 ? "start walking" : "n++") + '</button>'
+      +   '<button id="rs">reset</button>'
+      + '</div>'
+      + '<table><tr><th>expression</th><th>value</th></tr>'
+      +   '<tr><td class="mono">n</td><td class="mono">' + (at<0?0:Math.min(at+1, word.length)) + '</td></tr>'
+      +   '<tr><td class="mono">sizeof s</td><td class="mono">' + (word.length+1) + '  (all the boxes)</td></tr>'
+      +   '<tr><td class="mono">strlen(s)</td><td class="mono">' + word.length + '  (stops at the \\0)</td></tr>'
+      + '</table>'
+      + '<div class="say">' + (done
+          ? "The loop stopped because it found <code>'\\0'</code>. Nothing else marks the end &mdash; which is why a string function needs no length parameter, and why a missing terminator makes it run off the end."
+          : "The array has <b>" + (word.length+1) + "</b> boxes for <b>" + word.length + "</b> letters. Press the button to walk the loop one step at a time.") + '</div>';
+    var b=host.querySelector("#st");
+    if(b) b.onclick=function(){
+      at++;
+      if(at >= word.length){ at = word.length; done = true; }
+      render();
+    };
+    host.querySelector("#rs").onclick=function(){ at=-1; done=false; render(); };
+  }
+  render();
+}});
+
+/* ---------- stepper -------------------------------------------------- */
+var cur = 0;
+function show(i){
+  cur = i;
+  var nav = document.getElementById("nav");
+  nav.innerHTML = "";
+  scenes.forEach(function(s, k){
+    var b = document.createElement("button");
+    b.innerHTML = s.title;
+    if(k===cur) b.className = "cur";
+    b.onclick = function(){ show(k); };
+    nav.appendChild(b);
+  });
+  var main = document.getElementById("main");
+  main.innerHTML = '<h2>' + scenes[cur].title + '</h2><div class="card" id="host"></div>'
+    + '<div class="foot">Addresses shown here are invented but consistent: one <code>int</code> every '
+    + WORD + ' bytes. On a real machine the numbers differ on every run &mdash; the relationships do not. '
+    + 'Companion to the Week 10 lecture notes, sections 2 to 6 and 9 to 11.</div>';
+  scenes[cur].build(document.getElementById("host"));
+}
+show(0);
+window.addEventListener("resize", function(){ show(cur); });
+</script>
+</body>
+</html>

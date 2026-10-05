@@ -10,8 +10,18 @@
 
 ## Pre-read
 
+- [Lec 27](../cs1100-cse-iitm-2021/slides/Lec27.pdf) — *introduction to pointers*, in the second half (the first half is sorting, which we come to later)
+- [Lec 28](../cs1100-cse-iitm-2021/slides/Lec28.pdf) — *more on pointers*: pass by reference, what a segmentation fault is, and pointers to pointers
 - [Lec 15](../cs1100-cse-iitm-2021/slides/Lec15.pdf) — arrays, including character arrays
+
+::: {.callout-note}
+Lec 28 goes one step further than we do and covers **pointers to pointers**, written `int **p`. That is a pointer whose stored address is the address of another pointer. You do not need it this week, and nothing in Lab 08 requires it, but it is worth seeing once: the rule in section 4 — read `int **p` as "`*p` is an `int *`, so `p` points at an `int *`" — is all it takes to decode.
+:::
 - The [W09 notes](w09.qmd), sections 4 and 5, on call by value and call by reference. You wrote `int *n` and `*n` there without being told what they were. This week says what they are.
+
+## Interactive
+
+- 🧭 [**Pointers, step by step**](../materials/w10-pointers-visualiser.html) — memory drawn as numbered boxes. Watch `int *p = &x` store an address, `*p = 7` change `x` through the arrow, `p + 1` jump a whole box at a time, and the `strlen` loop walk a string until it finds the `'\0'`. Four scenes, matching sections 2 to 6 and 9 to 11 below. It runs offline, so it works on a lab machine with no network.
 
 ## Code You Can Copy
 
@@ -288,6 +298,80 @@ So that particular slip cannot get past the compiler. The dangerous version is t
 The three marked above are **undefined behaviour**: the C standard does not say what happens. The program may crash, may print nonsense, or may appear to work perfectly on your machine and fail on the examiner's. Do not learn what your compiler happens to do with them. Learn not to write them.
 :::
 
+## 8b · A worked problem: reversing a list in place
+
+Everything from Monday, used once on a real task. The problem: **reverse a list of readings in place, and report how many exchanges that took.**
+
+Three things make this need pointers, and each is one of the ideas above.
+
+1. `swap` has to change two variables belonging to its caller, so it takes their addresses.
+2. `reverse` has to modify the caller's array, which it can, because an array argument is converted to a pointer.
+3. `reverse` has to hand back a count *as well as* doing its job, and a function can only `return` one value, so the count goes back through a pointer.
+
+```c
+#include <stdio.h>
+
+/* exchanges the two ints whose addresses it is given */
+void swap(int *x, int *y)
+{
+    int t = *x;
+    *x = *y;
+    *y = t;
+}
+
+/* reverses a[0..n-1] in place, and reports how many swaps that took */
+void reverse(int a[], int n, int *swaps)
+{
+    int lo = 0, hi = n - 1, count = 0;
+
+    while (lo < hi) {
+        swap(&a[lo], &a[hi]);
+        count++;
+        lo++;
+        hi--;
+    }
+    *swaps = count;
+}
+
+void show(char label[], int a[], int n)
+{
+    printf("%s", label);
+    for (int i = 0; i < n; i++)
+        printf(" %d", a[i]);
+    printf("\n");
+}
+
+int main(void)
+{
+    int a[7] = { 3, 1, 4, 1, 5, 9, 2 };
+    int swaps;
+
+    show("before:", a, 7);
+    reverse(a, 7, &swaps);
+    show("after: ", a, 7);
+    printf("swaps made: %d\n", swaps);
+    return 0;
+}
+```
+
+```
+before: 3 1 4 1 5 9 2
+after:  2 9 5 1 4 1 3
+swaps made: 3
+```
+
+Three points worth pausing on.
+
+**`&a[lo]` is the address of one element.** `a[lo]` is a variable like any other, so `&` works on it. `swap` neither knows nor cares that its two addresses happen to be inside an array.
+
+**Seven elements, three swaps.** The loop stops when `lo` and `hi` meet. With an odd count the middle element is never touched, because exchanging it with itself would achieve nothing.
+
+**`reverse` returns `void` and still produces two results** — a changed array and a count. Both travel out through addresses. This is the shape you will use whenever one answer is not enough.
+
+::: {.callout-tip}
+Check the loop condition. Writing `lo <= hi` instead of `lo < hi` would, for an odd-length list, swap the middle element with itself: harmless to the data, but the reported count would be wrong. A test that only looked at the array would never catch it.
+:::
+
 ---
 
 # Tuesday — Strings
@@ -510,6 +594,191 @@ The second stores the address of a string literal. String literals may be placed
 If you want a string you can modify, declare an array.
 
 ---
+
+## 13b · A worked problem: palindromes in real sentences
+
+Section 11 checked `"level"`. Real text is not that tidy: `"Never odd or even"` is a palindrome, but only if you ignore the spaces and treat `N` and `n` as the same letter. This is the Tuesday problem, and it is the Monday problem with one change — **compare instead of swap**.
+
+The two indices still start at the ends and move towards each other. What is new is that each one must first skip anything that is not a letter.
+
+```c
+#include <stdio.h>
+
+int myStrlen(char s[])
+{
+    int n = 0;
+    while (s[n] != '\0')
+        n++;
+    return n;
+}
+
+int isLetter(char c)
+{
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
+char lower(char c)
+{
+    if (c >= 'A' && c <= 'Z')
+        return c - 'A' + 'a';
+    return c;
+}
+
+int isPalindrome(char s[])
+{
+    int lo = 0, hi = myStrlen(s) - 1;
+
+    while (lo < hi) {
+        while (lo < hi && !isLetter(s[lo])) lo++;
+        while (lo < hi && !isLetter(s[hi])) hi--;
+
+        if (lower(s[lo]) != lower(s[hi]))
+            return 0;
+
+        lo++;
+        hi--;
+    }
+    return 1;
+}
+
+int main(void)
+{
+    char a[] = "level";
+    char b[] = "lever";
+    char c[] = "Never odd or even";
+    char d[] = "A man, a plan, a canal: Panama";
+
+    printf("\"%s\" -> %d\n", a, isPalindrome(a));
+    printf("\"%s\" -> %d\n", b, isPalindrome(b));
+    printf("\"%s\" -> %d\n", c, isPalindrome(c));
+    printf("\"%s\" -> %d\n", d, isPalindrome(d));
+    return 0;
+}
+```
+
+```
+"level" -> 1
+"lever" -> 0
+"Never odd or even" -> 1
+"A man, a plan, a canal: Panama" -> 1
+```
+
+Four things to look at, because each one is a decision that could have gone wrong.
+
+**`lower` subtracts `'A'` and adds `'a'`** rather than subtracting 32. Both work here, but the first says what it means: *move this letter from the capital range into the small range*. It also does not depend on you remembering that the gap is 32, which is the kind of thing the `strcmp` warning in section 12 was about.
+
+**The skipping loops carry `lo < hi` as well.** Without it, a string with no letters at all would run `lo` off the end of the array — mistake four from section 8. Every loop that advances an index needs a reason to stop.
+
+**`isLetter` and `lower` are separate functions.** Each does one thing and is three lines long. You could write the whole test as one enormous condition, and you would not be able to read it next week.
+
+**The structure is Monday's.** Two indices from the ends, moving towards each other, stopping when they meet. Monday exchanged the two elements; today it compares them. Recognising that one piece of machinery solves both problems is most of what this week is for.
+
+::: {.callout-note}
+This is the After Class exercise from section 11, worked. It is also close to what Lab 08 asks for, so understand it rather than copy it — the lab will not hand you the same sentence.
+:::
+
+## 13c · Where this is going: linking things together
+
+Pointers are not only a way to let a function change a variable. They are how C builds data structures that an array cannot give you, and the first of those is the **linked list**.
+
+Here is the problem with an array. To insert a value in the middle, every element after it has to shift up one place to make room. For a thousand elements that is hundreds of moves for one insertion.
+
+A linked list solves this by not storing the items next to each other. Each item keeps, alongside its value, **where the next item is**. To insert, you change two links and move nothing:
+
+```
+head → [10|•] → [20|•] → [30|✗]
+
+insert 15 after 10:
+
+head → [10|•] → [15|•] → [20|•] → [30|✗]
+             ╰─ this link changed, and the new node points where it used to
+```
+
+You have not met the two tools C normally uses for this — `struct`, which arrives in W11, and `malloc`, in W13. But the *idea* needs neither, and you can run it today with what you already have. Keep the values in one array, and keep the links in a second array, where each entry is the **index** of the next item. `-1` means "nothing follows".
+
+```c
+#include <stdio.h>
+
+#define NONE -1
+
+/* Insert v just after the node held in slot `at`, and return its slot.
+   Nothing already in the arrays is moved. */
+int insertAfter(int value[], int next[], int at, int v, int *used)
+{
+    int n = *used;
+
+    value[n] = v;
+    next[n]  = next[at];    /* the new node points where `at` used to point */
+    next[at] = n;           /* and `at` now points at the new node          */
+
+    *used = n + 1;
+    return n;
+}
+
+void printList(int value[], int next[], int head)
+{
+    int i = head;
+
+    while (i != NONE) {
+        printf(" %d", value[i]);
+        i = next[i];        /* follow the link */
+    }
+    printf("\n");
+}
+
+int main(void)
+{
+    int value[10], next[10];
+    int used, head;
+
+    value[0] = 10;  next[0] = 1;
+    value[1] = 20;  next[1] = 2;
+    value[2] = 30;  next[2] = NONE;
+    head = 0;  used = 3;
+
+    printf("list:          "); printList(value, next, head);
+
+    insertAfter(value, next, 0, 15, &used);
+    printf("15 after 10:   "); printList(value, next, head);
+
+    insertAfter(value, next, 1, 25, &used);
+    printf("25 after 20:   "); printList(value, next, head);
+
+    printf("\nslot 1 still holds %d, slot 2 still holds %d — nothing was shifted\n",
+           value[1], value[2]);
+    return 0;
+}
+```
+
+```
+list:           10 20 30
+15 after 10:    10 15 20 30
+25 after 20:    10 15 20 25 30
+
+slot 1 still holds 20, slot 2 still holds 30 — nothing was shifted
+```
+
+Two insertions into the middle, and not one existing value moved. That is the whole trade: an array gives you instant access to element *i* but expensive insertion; a linked list gives you cheap insertion but makes you walk from the front to find anything.
+
+Notice what the program is made of. `printList` **follows links until it reaches the end marker** — the same shape as the `strlen` loop in section 11, which follows characters until it reaches `'\0'`. And `insertAfter` reports the new slot through `int *used`, because it has work to do *and* a value to hand back, which is section 8b.
+
+::: {.callout-note}
+**What changes when you have the real tools.** In W11 a `struct` will let one variable hold both the value and the link, so there are no parallel arrays. In W13, `malloc` will create nodes while the program runs, so there is no fixed-size pool and no `used` counter. The link stops being an index and becomes an actual pointer, and `NONE` becomes `NULL`:
+
+```c
+struct node {
+    int value;
+    struct node *next;
+};
+
+for (struct node *p = head; p != NULL; p = p->next)
+    printf(" %d", p->value);
+```
+
+That loop is `printList` above, written with the real tools. Compare them: `i = next[i]` has become `p = p->next`, and `i != NONE` has become `p != NULL`. Nothing else about the idea changed.
+
+You are not expected to write that version yet. We build it properly in W14.
+:::
 
 ## Drills
 
