@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 08: Structures (Tuples &amp; Dictionaries, C-style) – CS-1-01 (MO)</title>
+<title>Lab 08: Pointers and Strings – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab08.html">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab08.html">Lab 08: Pointers and Strings</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -211,13 +246,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W10: Arrays</span></a>
+ <span class="menu-text">W10: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W11: Strings &amp; Multi-dimensional Arrays</span></a>
+ <span class="menu-text">W11: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -229,13 +264,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W13: Functions &amp; Recursion</span></a>
+ <span class="menu-text">W13: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W14: Pointers &amp; Dynamic Memory</span></a>
+ <span class="menu-text">W14: Full Problems I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -247,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w16.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W16: Function Pointers, Structures &amp; Unions</span></a>
+ <span class="menu-text">W16: Full Problems II</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -318,19 +353,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab08.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</span></a>
+ <span class="menu-text">Lab 08: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: File Handling</span></a>
+ <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 10: Error Handling</span></a>
+ <span class="menu-text">Lab 10: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -403,18 +438,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#the-shape-of-this-lab-and-why-it-changed" id="toc-the-shape-of-this-lab-and-why-it-changed" class="nav-link active" data-scroll-target="#the-shape-of-this-lab-and-why-it-changed">The shape of this lab, and why it changed</a></li>
+  <li><a href="#the-minimum-c-you-need-today" id="toc-the-minimum-c-you-need-today" class="nav-link" data-scroll-target="#the-minimum-c-you-need-today">The minimum C you need today</a></li>
+  <li><a href="#act-0-getting-started-10-minutes" id="toc-act-0-getting-started-10-minutes" class="nav-link" data-scroll-target="#act-0-getting-started-10-minutes">Act 0 · Getting started (10 minutes)</a></li>
+  <li><a href="#act-1-read-drills-15-minutes-not-marked" id="toc-act-1-read-drills-15-minutes-not-marked" class="nav-link" data-scroll-target="#act-1-read-drills-15-minutes-not-marked">Act 1 · Read drills (15 minutes, not marked)</a></li>
+  <li><a href="#act-2-write-drills-20-minutes-1-mark-each" id="toc-act-2-write-drills-20-minutes-1-mark-each" class="nav-link" data-scroll-target="#act-2-write-drills-20-minutes-1-mark-each">Act 2 · Write drills (20 minutes, 1 mark each)</a></li>
+  <li><a href="#how-to-work-on-one-problem" id="toc-how-to-work-on-one-problem" class="nav-link" data-scroll-target="#how-to-work-on-one-problem">How to work on one problem</a></li>
+  <li><a href="#act-3-blanks-25-minutes-5-marks-each" id="toc-act-3-blanks-25-minutes-5-marks-each" class="nav-link" data-scroll-target="#act-3-blanks-25-minutes-5-marks-each">Act 3 · Blanks (25 minutes, 5 marks each)</a></li>
+  <li><a href="#act-4-problems-40-minutes-10-marks-each" id="toc-act-4-problems-40-minutes-10-marks-each" class="nav-link" data-scroll-target="#act-4-problems-40-minutes-10-marks-each">Act 4 · Problems (40 minutes, 10 marks each)</a>
+  <ul class="collapse">
+  <li><a href="#how-the-checking-works" id="toc-how-the-checking-works" class="nav-link" data-scroll-target="#how-the-checking-works">How the checking works</a></li>
+  </ul></li>
+  <li><a href="#act-5-check-your-marks-fix-and-submit-10-minutes" id="toc-act-5-check-your-marks-fix-and-submit-10-minutes" class="nav-link" data-scroll-target="#act-5-check-your-marks-fix-and-submit-10-minutes">Act 5 · Check your marks, fix, and submit (10 minutes)</a></li>
+  <li><a href="#if-you-finish-early-not-marked" id="toc-if-you-finish-early-not-marked" class="nav-link" data-scroll-target="#if-you-finish-early-not-marked">If you finish early (not marked)</a></li>
+  <li><a href="#before-you-leave" id="toc-before-you-leave" class="nav-link" data-scroll-target="#before-you-leave">Before you leave</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab08.html">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab08.html">Lab 08: Pointers and Strings</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</h1>
+<h1 class="title">Lab 08: Pointers and Strings</h1>
 </div>
 
 
@@ -452,20 +498,359 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical module:</strong> 4 — Writing programs related to tuples and dictionaries</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
-<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<p><strong>Lab pack:</strong> <a href="../labs/lab08.tar.gz">lab08.tar.gz</a>. It is already on the lab machines. You can also download it to practise at home.</p>
+<p><strong>Syllabus practical modules:</strong> 3 and 10 — lists and strings, and using the <code>string</code> library.</p>
+<p><strong>Evaluation:</strong> This lab is graded, with the same weight as the others inside the 20% lab component. It is marked in three tiers:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th style="text-align: right;">Each</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Write drills</strong> <code>w01</code>–<code>w10</code></td>
+<td>one line of C each</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;"><strong>10</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Blanks</strong> <code>b1</code>–<code>b5</code></td>
+<td>one function body each</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;"><strong>25</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Problems</strong> <code>e1</code>–<code>e4</code></td>
+<td>specification only</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;"><strong>40</strong></td>
+</tr>
+</tbody>
+</table>
+<p>That is 75 marks from the programs. The remaining 25 come from observed work and a short viva, in which you will be asked to explain your own code.</p>
+<p>The <strong>read drills</strong> (<code>./drill.sh</code>) are <strong>not</strong> marked.</p>
+<p>You may work in teams of one or two. If you are a pair, swap who types at the halfway point.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This lab follows the Week 10 lectures: Monday on pointers, Tuesday on strings. The <a href="../weeks/w10.html">Week 10 notes</a> contain everything you need, and the <a href="../materials/w10-pointers-visualiser.html">pointer visualiser</a> shows what <code>&amp;</code>, <code>*</code> and <code>p + 1</code> actually do to memory.</p>
+</div>
+</div>
+</div>
+<section id="the-shape-of-this-lab-and-why-it-changed" class="level2">
+<h2 class="anchored" data-anchor-id="the-shape-of-this-lab-and-why-it-changed">The shape of this lab, and why it changed</h2>
+<p>Several of you said in the mid-semester feedback that you follow the ideas in class but cannot produce the C when you sit down to a lab problem. That is a fair criticism of how these labs were built, and this one is organised to answer it.</p>
+<p>There is a new tier between the lecture and the problems: <strong>write drills</strong>. Each one is a single line of C, with everything around it already written for you. They are worth marks, so they are not something to skip and come back to.</p>
+<p>The chain is meant to be walked in order:</p>
+<blockquote class="blockquote">
+<p>read a drill and predict it → <strong>write one line</strong> → fill in one function body → solve a problem</p>
+</blockquote>
+<p>Every starter file has a <strong><code>BEFORE</code></strong> line naming the drills it rests on. If you are stuck on a blank or a problem, that line tells you what to go and do first.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="the-minimum-c-you-need-today" class="level2">
+<h2 class="anchored" data-anchor-id="the-minimum-c-you-need-today">The minimum C you need today</h2>
+<p>Everything in this lab is built from these nine lines. If you can read and write all of them, you have what you need.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span>                 <span class="co">/* p holds the address of x                  */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span>            <span class="co">/* the value at that address                 */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="dv">7</span><span class="op">;</span>                      <span class="co">/* change x, without naming x                */</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>n<span class="op">)</span> <span class="op">{</span> <span class="op">*</span>n <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> <span class="op">}</span>   <span class="co">/* a function that changes the caller's copy  */</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>f<span class="op">(&amp;</span>x<span class="op">);</span>                       <span class="co">/* note the &amp; at the call                    */</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[</span><span class="dv">50</span><span class="op">];</span>                  <span class="co">/* room for 49 characters and a '\0'         */</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">"</span><span class="sc">%49s</span><span class="st">"</span><span class="op">,</span> s<span class="op">);</span>            <span class="co">/* read one word. NO &amp; before an array       */</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>s<span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">)</span> i<span class="op">++;</span>    <span class="co">/* walk to the end of the text               */</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>strlen<span class="op">(</span>s<span class="op">);</span>  strcmp<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span>    <span class="co">/* length; and ZERO means the strings match  */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Two of these are where almost all the mistakes happen:</p>
+<p><strong><code>scanf("%49s", s)</code> has no <code>&amp;</code>.</strong> An array name is already an address, so adding <code>&amp;</code> is wrong. But <code>scanf("%d", &amp;x)</code> on an ordinary <code>int</code> <em>does</em> need it. Drill <code>d06</code> is about this difference.</p>
+<p><strong><code>strcmp</code> returns zero when the strings are the same.</strong> So <code>if (strcmp(a, b))</code> runs its body when they <em>differ</em>, which is the opposite of what it reads like. Write <code>if (strcmp(a, b) == 0)</code>.</p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="act-0-getting-started-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="act-0-getting-started-10-minutes">Act 0 · Getting started (10 minutes)</h2>
+<p>The pack is already on the lab machines. If it is not on yours, download it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab08.tar.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Unpack it and run the installer, one line at a time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf lab08.tar.gz</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab08</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./install.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then start the recorder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Do not start the exercises until your prompt reads <code>[lab08 OK ...]</code>. If it does not, run <code>./where.sh</code>; it changes nothing and prints the exact command to type.</p>
+<p><code>session.txt</code> records your afternoon and must be in the bundle you submit.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-1-read-drills-15-minutes-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-read-drills-15-minutes-not-marked">Act 1 · Read drills (15 minutes, not marked)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ten short programs. For each one you type what you think it will print, and only then does it run.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Drills</th>
+<th>What they are about</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d01</code>–<code>d03</code></td>
+<td>what <code>*</code> and <code>&amp;</code> actually do, and that the <code>*</code> binds to the variable</td>
+</tr>
+<tr class="even">
+<td><code>d04</code>–<code>d06</code></td>
+<td>pointers and arrays, and the <code>sizeof</code> trap</td>
+</tr>
+<tr class="odd">
+<td><code>d07</code>–<code>d09</code></td>
+<td>strings, the terminator, and what <code>strcmp</code> returns</td>
+</tr>
+<tr class="even">
+<td><code>d10</code></td>
+<td>passing by value</td>
+</tr>
+</tbody>
+</table>
+<p>These carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.</p>
+</section>
+<section id="act-2-write-drills-20-minutes-1-mark-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-2-write-drills-20-minutes-1-mark-each">Act 2 · Write drills (20 minutes, 1 mark each)</h2>
+<p>Ten files, <code>w01.c</code> to <code>w10.c</code>. In each one, everything is written except a single line, and the comment tells you what that line must do.</p>
+<p>This is where you practise producing the notation rather than recognising it. They are quick — if one of them takes more than two minutes, that is the signal to go back to the drill named on its <code>BEFORE</code> line.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>What you write</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>w01</code></td>
+<td>declare a pointer and point it at a variable</td>
+</tr>
+<tr class="even">
+<td><code>w02</code></td>
+<td>change a variable through a pointer</td>
+</tr>
+<tr class="odd">
+<td><code>w03</code></td>
+<td>reach an array element through a pointer</td>
+</tr>
+<tr class="even">
+<td><code>w04</code></td>
+<td>a function body that changes the caller’s variable, and the call</td>
+</tr>
+<tr class="odd">
+<td><code>w05</code></td>
+<td>the length of a string, using <code>strlen</code></td>
+</tr>
+<tr class="even">
+<td><code>w06</code></td>
+<td>the length of a string, by walking to the <code>'\0'</code></td>
+</tr>
+<tr class="odd">
+<td><code>w07</code></td>
+<td>the condition that tests whether two strings match</td>
+</tr>
+<tr class="even">
+<td><code>w08</code></td>
+<td>the body of <code>swap</code>, and the call</td>
+</tr>
+<tr class="odd">
+<td><code>w09</code></td>
+<td>the <code>scanf</code> that reads one word</td>
+</tr>
+<tr class="even">
+<td><code>w10</code></td>
+<td>the first and the last character of a word</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-to-work-on-one-problem" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-work-on-one-problem">How to work on one problem</h2>
+<p>The steps are the same for all nineteen. Using <code>w01.c</code> as the example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> w01.c                <span class="co"># open it and write the missing line</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> w01.c <span class="at">-o</span> w01         <span class="co"># compile it</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./w01</span> <span class="op">&lt;</span> w01_sample.txt   <span class="co"># run it on the sample input</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> w01           <span class="co"># once it runs, have it marked</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Plain <code>gcc</code>. No <code>-lm</code>, no other flags.</p>
+<p><strong>Every problem has a ready-made input file</strong>, named <code>&lt;problem&gt;_sample.txt</code>, and each one reproduces the <code>EXAMPLE</code> printed at the top of that starter. So if your program is right, running it on its sample prints exactly what the specification promised:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./w05 <span class="op">&lt;</span> w05_sample.txt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">len</span><span class="op">=</span>5</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./e2 <span class="op">&lt;</span> e2_sample.txt</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="va">reversed</span><span class="op">=</span>dcba <span class="va">swaps</span><span class="op">=</span>2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Compile and run it yourself before running <code>./check.sh</code>. Running it shows you what your program does; the checker only tells you whether the answer is right.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-3-blanks-25-minutes-5-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-3-blanks-25-minutes-5-marks-each">Act 3 · Blanks (25 minutes, 5 marks each)</h2>
+<p>The function’s first line is written for you, and <code>main</code> already calls it. Write the body.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What the function must do</th>
+<th>Its last line must end with</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>b1_deref.c</code></td>
+<td>put a value into the caller’s variable through a pointer</td>
+<td><code>x=&lt;v&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>b2_swap.c</code></td>
+<td>exchange the caller’s two integers</td>
+<td><code>a=&lt;B&gt; b=&lt;A&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>b3_length.c</code></td>
+<td>the length of a string, without <code>strlen</code></td>
+<td><code>len=&lt;N&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>b4_count.c</code></td>
+<td>how many times a character appears in a word</td>
+<td><code>count=&lt;N&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>b5_upper.c</code></td>
+<td>change a word to capitals, in place</td>
+<td><code>upper=&lt;WORD&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>b5</code> changes the caller’s array without returning anything and without any <code>&amp;</code>. That is the array-to-pointer conversion from Monday, and it is worth being able to say out loud why it works — the viva asks.</p>
+<p>To move a letter from the small range to the capital range, subtract <code>'a'</code> and add <code>'A'</code>. That says what it means, and does not depend on remembering that the gap is 32.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-4-problems-40-minutes-10-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-4-problems-40-minutes-10-marks-each">Act 4 · Problems (40 minutes, 10 marks each)</h2>
+<p>Specification only. You write the whole program.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>What it must do</th>
+<th>Its last line must end with</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>e1.c</code></td>
+<td>count letters, digits and other characters in one word</td>
+<td><code>letters=&lt;L&gt; digits=&lt;D&gt; others=&lt;O&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>e2.c</code></td>
+<td>reverse a word in place, and report how many exchanges</td>
+<td><code>reversed=&lt;S&gt; swaps=&lt;N&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>e3.c</code></td>
+<td>the longest unbroken run of one repeated character</td>
+<td><code>longest=&lt;N&gt; char=&lt;C&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>e4.c</code></td>
+<td>shift every letter <code>k</code> places along the alphabet</td>
+<td><code>shifted=&lt;S&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>e1</code> is the one to do first.</strong> It is the only problem here that cannot be written without pointers: you owe the caller three answers and a function can return one, so all three come back through pointer parameters. Write it as</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> classify<span class="op">(</span><span class="dt">char</span> s<span class="op">[],</span> <span class="dt">int</span> <span class="op">*</span>letters<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>digits<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>others<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>e2</code></strong> uses two indices that start at the ends and move towards each other. A word of odd length has a middle character that is never exchanged — <code>"level"</code> is five characters but only two swaps.</p>
+<p><strong><code>e3</code></strong> needs two counters: how long the run you are currently in is, and how long the best one so far was. A character that differs from the one before does not merely fail to extend the run; it <strong>ends</strong> it, and the current counter goes back to 1.</p>
+<p><strong><code>e4</code></strong> is about the wrap past <code>z</code>. Do not write <code>s[i] = s[i] + k</code>. Work with the letter’s position in the alphabet instead: subtract <code>'a'</code> to get 0–25, add <code>k</code>, take <code>% 26</code>, then add <code>'a'</code> back.</p>
+<section id="how-the-checking-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-the-checking-works">How the checking works</h3>
+<p><code>./check.sh e1</code> compiles <em>your</em> source and runs it on two kinds of input: a fixed set chosen in advance, labelled <code>public</code>, and a set generated fresh at that moment from the range in the <code>GIVEN</code> line, labelled <code>random</code>. A program that only reproduces the printed example will fail as soon as a new input is drawn.</p>
+</section>
+</section>
+<section id="act-5-check-your-marks-fix-and-submit-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="act-5-check-your-marks-fix-and-submit-10-minutes">Act 5 · Check your marks, fix, and submit (10 minutes)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e3       <span class="co"># one problem, while you are working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Marks are given <strong>per test case</strong>, not all-or-nothing, so fixing one failing case is always worth doing, even in the last few minutes. Treat the total as an estimate: some vectors are drawn fresh each run, so the number can move by a mark or two.</p>
+<p>When you are finished, or when time is called:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The bundle is written to the directory <strong>above</strong> your workspace, named <code>lab08_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz</code>. Take it with you: upload it to Moodle and email a copy to yourself. The lab machines are wiped between sessions.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="if-you-finish-early-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="if-you-finish-early-not-marked">If you finish early (not marked)</h2>
+<ol type="1">
+<li>Make <code>e3</code> report the run that starts <strong>latest</strong> instead of earliest when two are equally long. Which single comparison changes?</li>
+<li>Make <code>e4</code> accept capital letters as well, leaving them capital. Then make it accept punctuation and leave it alone.</li>
+<li>Write <code>myStrcmp</code> yourself, returning negative, zero or positive, and check it agrees with the library on a dozen pairs. Try <code>"Zebra"</code> against <code>"apple"</code> and explain the sign.</li>
+</ol>
+</section>
+<section id="before-you-leave" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-leave">Before you leave</h2>
+<p>Be ready to answer these out loud.</p>
+<ol type="1">
+<li>In <code>b2</code>, <code>swap(&amp;a, &amp;b)</code> has <code>&amp;</code> but <code>toUpper(s)</code> in <code>b5</code> does not. Why is the array different?</li>
+<li><code>e1</code> returns <code>void</code>. Where do its three answers go, and why could <code>return</code> not have been used?</li>
+<li>Which write drill did you need before you could do <code>e2</code>?</li>
+</ol>
 
 
 </section>
@@ -883,8 +1268,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../labsheets/lab09.html" class="pagination-link" aria-label="Lab 09: File Handling">
-        <span class="nav-page-text">Lab 09: File Handling</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../labsheets/lab09.html" class="pagination-link" aria-label="Lab 09: Structures and File Input/Output">
+        <span class="nav-page-text">Lab 09: Structures and File Input/Output</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

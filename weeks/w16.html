@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W16: Function Pointers, Structures &amp; Unions – CS-1-01 (MO)</title>
+<title>W16: Full Problems II – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Function Pointers, Structures &amp; Unions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Full Problems II</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -211,13 +211,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W10: Arrays</span></a>
+ <span class="menu-text">W10: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W11: Strings &amp; Multi-dimensional Arrays</span></a>
+ <span class="menu-text">W11: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -229,13 +229,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W13: Functions &amp; Recursion</span></a>
+ <span class="menu-text">W13: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W14: Pointers &amp; Dynamic Memory</span></a>
+ <span class="menu-text">W14: Full Problems I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -247,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w16.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">W16: Function Pointers, Structures &amp; Unions</span></a>
+ <span class="menu-text">W16: Full Problems II</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -318,19 +318,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</span></a>
+ <span class="menu-text">Lab 08: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: File Handling</span></a>
+ <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 10: Error Handling</span></a>
+ <span class="menu-text">Lab 10: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -403,7 +403,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-read" id="toc-pre-read" class="nav-link active" data-scroll-target="#pre-read">Pre-read</a></li>
+  <li><a href="#plan" id="toc-plan" class="nav-link active" data-scroll-target="#plan">Plan</a></li>
   <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
@@ -413,9 +413,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Function Pointers, Structures &amp; Unions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Full Problems II</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W16: Function Pointers, Structures &amp; Unions</h1>
+<h1 class="title">W16: Full Problems II</h1>
 </div>
 
 
@@ -433,37 +433,33 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Dates:</strong> Mon Nov 16 &amp; Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 6 — Function pointers; structure, union; file handling; error handling (3 h)</p>
-<div class="callout callout-style-simple callout-important">
+<p><strong>Syllabus modules:</strong> 5 and 6 — applied together</p>
+<div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Last day of classes is Fri Nov 20. End-semester examinations: Nov 23–30.</p>
+<p>Last teaching week of the semester. The end-semester examination is Nov 23–30.</p>
 </div>
 </div>
 </div>
-<section id="pre-read" class="level2">
-<h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
+<section id="plan" class="level2">
+<h2 class="anchored" data-anchor-id="plan">Plan</h2>
+<p>A second week of complete problems, continuing W14. Larger problems, assembled from parts you have already written, with more of the design left to you.</p>
+<p>This is also the week to revisit whatever the class found hardest during the semester, so bring questions.</p>
 </section>
 <section id="in-class" class="level2">
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<ul>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec29.pdf">Lec 29</a> — Introduction to structures</li>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec30.pdf">Lec 30</a> — More on structures; <code>typedef</code>; pointers to structures</li>
-<li><a href="https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec06/">OCW L6</a> — Structs, unions, bitfields; memory allocation</li>
-<li><a href="https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec08/">OCW L8</a> — Void and function pointers</li>
-</ul>
+<p><em>To be posted.</em></p>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<p><em>To be posted.</em> <strong>Lab 12</strong> is problem solving: EE on Tue Nov 17, Mechanical and Materials on Wed Nov 18.</p>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal column. To be posted.</em></p>
 
 
 </section>

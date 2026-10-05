@@ -84,7 +84,7 @@
     "href": "course.html#weekly-plan-lectures",
     "title": "Course",
     "section": "Weekly Plan (Lectures)",
-    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates (Mon, Tue)\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nNumber systems completed on Lec 4 (post CT-1); data types — char/int/float/double as size + reading convention, sizeof\nLec 4 · Deck 07\n\n\n05\nAug 31, Sep 1\nMon: precedence drill, then the compilation pipeline — preprocessor, compiler, assembler, linker, each stopped and inspected (gcc -E/-S/-c, nm). Tue: loops — while, do-while, for as one idea in three costumes (straight into Lab 04)\nDeck 09 · Lec 6 · Lec 9 · Lec 12\n\n\n06\nSep 7, Sep 8\nMon: selection — if/else, ladders, switch and its break, break/continue in loops (eight runnable programs in the notes). Tue: nested loops, and patterns as geometry — a shape is a distance held constant\nLec 7 · Lec 8\n\n\n07\nSep 14, Sep 15\nMon: 1-D arrays — why a single variable cannot answer a question about the past; traversal, search with break, skipping bad records with continue, best-so-far with its index, neighbour differences. Tue: parallel arrays and 2-D on a sensor rig — why a second index beats a fifth array, and four business questions whose answers differ by interpretation, not by bugs\nLec 15\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: functions — declaration, definition, call; scope; call by value and by reference; bisection — square root by halving, and why that is really root-finding; how sin and sqrt are actually computed (conceptual). Tue: two-dimensional arrays through Conway’s Game of Life\nLec 20 · Lec 17\n\n\n10\nOct 5, Oct 6\nArrays: one-dimensional and character arrays; examples\nLec 15\n\n\n11\nOct 12, Oct 13\nStrings and string processing; multi-dimensional arrays; matrix operations. Class Test-2 window opens Oct 14\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27\nFunctions and modular programming; scope; recursion\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nPointers; dynamic memory allocation (malloc, calloc, realloc, free)\nLec 27 (pointers part) · Lec 28 · OCW L11\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes\n—\n\n\n16\nNov 16, Nov 17\nFunction pointers; structures & unions\nLec 29 · Lec 30 · OCW L6 · OCW L8\n\n\nMU-1\nTBA\nMake-up class: file handling and error handling (fopen/fclose, formatted file I/O, errno, perror); header files and modular builds\nOCW L4 · OCW L10 · OCW L3\n\n\nMU-2\nTBA\nMake-up class: applications; brief of object-oriented programming; course wrap-up\nWrap-up · Notes (TBP)\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They will be scheduled on designated compensatory days and announced in class and here. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
+    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates (Mon, Tue)\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nNumber systems completed on Lec 4 (post CT-1); data types — char/int/float/double as size + reading convention, sizeof\nLec 4 · Deck 07\n\n\n05\nAug 31, Sep 1\nMon: precedence drill, then the compilation pipeline — preprocessor, compiler, assembler, linker, each stopped and inspected (gcc -E/-S/-c, nm). Tue: loops — while, do-while, for as one idea in three costumes (straight into Lab 04)\nDeck 09 · Lec 6 · Lec 9 · Lec 12\n\n\n06\nSep 7, Sep 8\nMon: selection — if/else, ladders, switch and its break, break/continue in loops (eight runnable programs in the notes). Tue: nested loops, and patterns as geometry — a shape is a distance held constant\nLec 7 · Lec 8\n\n\n07\nSep 14, Sep 15\nMon: 1-D arrays — why a single variable cannot answer a question about the past; traversal, search with break, skipping bad records with continue, best-so-far with its index, neighbour differences. Tue: parallel arrays and 2-D on a sensor rig — why a second index beats a fifth array, and four business questions whose answers differ by interpretation, not by bugs\nLec 15\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: functions — declaration, definition, call; scope; call by value and by reference; bisection — square root by halving, and why that is really root-finding; how sin and sqrt are actually computed (conceptual). Tue: two-dimensional arrays through Conway’s Game of Life\nLec 20 · Lec 17\n\n\n10\nOct 5, Oct 6\nPointers — addresses, & and *, pointer arithmetic, arrays as pointers, and why an array function needs a length. Strings — character arrays and the '\\0' terminator, strlen, palindromes, string.h\nLec 15\n\n\n11\nOct 12, Oct 13\nStructures and pointers to structures; -&gt;. File input and output — FILE *, fopen/fclose, reading to end of file. Class Test-2 window opens Oct 14\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27\nDynamic memory allocation — malloc, calloc, realloc, free; stack and heap; leaks and dangling pointers. Recursion — base case, recursive case, the call stack\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nFull problems I — no new features; complete problems solved end to end, using arrays, functions, pointers, strings, structures, files and dynamic memory together\n—\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes\n—\n\n\n16\nNov 16, Nov 17\nFull problems II — larger problems, more of the design left to the class; revision of whatever proved hardest\n—\n\n\nMU-1\nTBA\nMake-up class: file handling and error handling (fopen/fclose, formatted file I/O, errno, perror); header files and modular builds\nOCW L4 · OCW L10 · OCW L3\n\n\nMU-2\nTBA\nMake-up class: applications; brief of object-oriented programming; course wrap-up\nWrap-up · Notes (TBP)\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They will be scheduled on designated compensatory days and announced in class and here. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
     "crumbs": [
       "Course"
     ]
@@ -164,7 +164,7 @@
     "href": "labs.html#lab-schedule",
     "title": "Labs",
     "section": "",
-    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 25\nSep 2\nSolid ground — consolidation: types, operators, precedence, integer vs. real division\n1\n\n\n4\nSep 1\nSep 9\nLoops: for, while and do-while, and converting between them\n5, 6\n\n\n5\nSep 8\nSep 16\nDecisions: if/else, else-if ladders, switch, and break / continue\n2\n\n\n6\nSep 15\nSep 30\nLoops and arrays: 1-D arrays, traversal and search, nested loops and patterns\n3, 5, 6\n\n\n7\nSep 29\nOct 7\nFunctions and the Game of Life: writing and calling functions, scope, call by value vs by reference; 2-D arrays, neighbours and boundaries\n7, 3\n\n\n8\nOct 6\nOct 14\nTuples & dictionaries, C-style: structures and key–value lookup tables\n4\n\n\n9\nOct 13\nOct 21\nFile handling\n8\n\n\n10\nOct 27\nOct 28\nError handling\n9\n\n\n11\nNov 3\nNov 4\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 17\nNov 18\nProblem solving II\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 12 sessions = 24 hours. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (for, while and do-while are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.",
+    "text": "#\nEE (Tue)\nMech & Materials (Wed)\nTopic\nModule\n\n\n\n\n1\nAug 4\nAug 5\nBasic input/output programs (incl. toolchain & editor setup)\n1\n\n\n2\nAug 18\nAug 19\nFirst C programs: printf/scanf, variables, operators — graded set e1–e5\n1\n\n\n3\nAug 25\nSep 2\nSolid ground — consolidation: types, operators, precedence, integer vs. real division\n1\n\n\n4\nSep 1\nSep 9\nLoops: for, while and do-while, and converting between them\n5, 6\n\n\n5\nSep 8\nSep 16\nDecisions: if/else, else-if ladders, switch, and break / continue\n2\n\n\n6\nSep 15\nSep 30\nLoops and arrays: 1-D arrays, traversal and search, nested loops and patterns\n3, 5, 6\n\n\n7\nSep 29\nOct 7\nFunctions and the Game of Life: writing and calling functions, scope, call by value vs by reference; 2-D arrays, neighbours and boundaries\n7, 3\n\n\n8\nOct 6\nOct 14\nPointers and strings: addresses, & and *, pointer arithmetic, character arrays, strlen and palindromes\n3\n\n\n9\nOct 13\nOct 21\nStructures and file input/output: records, -&gt;, reading and writing files\n4, 8\n\n\n10\nOct 27\nOct 28\nDynamic memory and recursion: malloc and free, growing data, recursive functions\n5\n\n\n11\nNov 3\nNov 4\nProblem solving I (GATE / ACM ICPC style)\n11\n\n\n12\nNov 17\nNov 18\nProblem solving II\n11\n\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 practical hours (8 of them for problem solving); holidays leave 12 sessions = 24 hours. Two adjustments close the gap: modules 5 and 6 are taught together in Lab 4 (for, while and do-while are one idea in three costumes, and converting between them is a better exercise than meeting them a week apart), and the remaining problem-solving hours are covered through a make-up lab session (date TBA) plus problems embedded in earlier sheets — Lab 3 alone carries 24 practice problems.",
     "crumbs": [
       "Labs"
     ]
@@ -950,89 +950,331 @@
   {
     "objectID": "weeks/w10.html",
     "href": "weeks/w10.html",
-    "title": "W10: Arrays",
+    "title": "W10: Pointers and Strings",
     "section": "",
-    "text": "Pre-read\nDates: Mon Oct 5 & Tue Oct 6, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
+    "text": "Pre-read\nDates: Mon Oct 5 & Tue Oct 6, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus modules: 5 — pointers and arrays (Monday) · 3 and 10 — strings, and the string library (Tuesday)",
     "crumbs": [
       "Weekly Notes",
-      "W10: Arrays"
+      "W10: Pointers and Strings"
     ]
   },
   {
-    "objectID": "weeks/w10.html#in-class",
-    "href": "weeks/w10.html#in-class",
-    "title": "W10: Arrays",
-    "section": "In Class",
-    "text": "In Class\n\nLec 15 — Introduction to arrays; integer & character arrays; histogram; polynomial evaluation",
+    "objectID": "weeks/w10.html#pre-read",
+    "href": "weeks/w10.html#pre-read",
+    "title": "W10: Pointers and Strings",
+    "section": "",
+    "text": "Lec 27 — introduction to pointers, in the second half (the first half is sorting, which we come to later)\nLec 28 — more on pointers: pass by reference, what a segmentation fault is, and pointers to pointers\nLec 15 — arrays, including character arrays\n\n\n\n\n\n\n\nLec 28 goes one step further than we do and covers pointers to pointers, written int **p. That is a pointer whose stored address is the address of another pointer. You do not need it this week, and nothing in Lab 08 requires it, but it is worth seeing once: the rule in section 4 — read int **p as “*p is an int *, so p points at an int *” — is all it takes to decode.\n\n\n\n\nThe W09 notes, sections 4 and 5, on call by value and call by reference. You wrote int *n and *n there without being told what they were. This week says what they are.",
     "crumbs": [
       "Weekly Notes",
-      "W10: Arrays"
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#interactive",
+    "href": "weeks/w10.html#interactive",
+    "title": "W10: Pointers and Strings",
+    "section": "Interactive",
+    "text": "Interactive\n\n🧭 Pointers, step by step — memory drawn as numbered boxes. Watch int *p = &x store an address, *p = 7 change x through the arrow, p + 1 jump a whole box at a time, and the strlen loop walk a string until it finds the '\\0'. Four scenes, matching sections 2 to 6 and 9 to 11 below. It runs offline, so it works on a lab machine with no network.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#code-you-can-copy",
+    "href": "weeks/w10.html#code-you-can-copy",
+    "title": "W10: Pointers and Strings",
+    "section": "Code You Can Copy",
+    "text": "Code You Can Copy\nEvery program below was compiled with gcc -Wall -Wextra and run, and the output shown is what it actually printed. Predict each one before you run it.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#a-question-you-have-already-answered-without-knowing-it",
+    "href": "weeks/w10.html#a-question-you-have-already-answered-without-knowing-it",
+    "title": "W10: Pointers and Strings",
+    "section": "1 · A question you have already answered without knowing it",
+    "text": "1 · A question you have already answered without knowing it\nIn W09 you wrote these two functions. They do the same arithmetic, but only one of them changes the caller’s variable:\n#include &lt;stdio.h&gt;\n\nvoid addOne(int n)        { n = n + 1; }\nvoid reallyAddOne(int *n) { *n = *n + 1; }\n\nint main(void)\n{\n    int x = 5;\n\n    addOne(x);\n    printf(\"after addOne(x),        x = %d\\n\", x);\n\n    reallyAddOne(&x);\n    printf(\"after reallyAddOne(&x), x = %d\\n\", x);\n    return 0;\n}\nafter addOne(x),        x = 5\nafter reallyAddOne(&x), x = 6\nYou have been using this since last week. The explanation then was “pass the address”. Today we say what an address is, what & and * actually do, and why this is the only way C can do it.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#memory-is-numbered",
+    "href": "weeks/w10.html#memory-is-numbered",
+    "title": "W10: Pointers and Strings",
+    "section": "2 · Memory is numbered",
+    "text": "2 · Memory is numbered\nA program’s memory is one long row of bytes, and every byte has a number. That number is called its address. The first byte is at some address, the next at that address plus one, and so on.\nWhen you declare int x = 5;, the program sets aside enough adjacent bytes somewhere in that row to hold an int — four of them on the machines we use — and writes 5 into them. The variable name x is how you refer to those bytes. The address is how the machine refers to them.\nTwo things follow, and both matter:\n\nEvery variable has an address, because every variable occupies bytes.\nAn address is itself just a number, so it can be stored in a variable. A variable that stores an address is called a pointer.\n\n\n\n\n\n\n\nIf you print an address, you will get a different number every time you run the program. Modern operating systems deliberately place programs at different addresses on each run. So addresses are real, but no particular address is worth memorising, and no exercise in this course will ask you for one.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#two-operators",
+    "href": "weeks/w10.html#two-operators",
+    "title": "W10: Pointers and Strings",
+    "section": "3 · Two operators",
+    "text": "3 · Two operators\n\n\n\nOperator\nWritten\nWhat it gives you\n\n\n\n\naddress-of\n&x\nthe address of the variable x\n\n\ndereference\n*p\nthe value stored at the address held in p\n\n\n\nThey undo each other. & turns a variable into an address; * turns an address back into the variable it refers to.\n#include &lt;stdio.h&gt;\nint main(void)\n{\n    int x = 5;\n    int *p = &x;        /* p holds the address of x */\n\n    printf(\"x  = %d\\n\", x);\n    printf(\"*p = %d\\n\", *p);\n\n    *p = 7;             /* write through the pointer */\n\n    printf(\"after *p = 7, x = %d\\n\", x);\n    return 0;\n}\nx  = 5\n*p = 5\nafter *p = 7, x = 7\nRead the last part carefully. *p = 7 never mentions x, and yet x changed. That is the whole point of a pointer: it gives a second route to the same storage.\n*p can appear on either side of an assignment, and it means something different in each position. On the right, y = *p reads the value at that address. On the left, *p = 7 writes a value to that address.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#declaring-a-pointer",
+    "href": "weeks/w10.html#declaring-a-pointer",
+    "title": "W10: Pointers and Strings",
+    "section": "4 · Declaring a pointer",
+    "text": "4 · Declaring a pointer\nint *p;\nRead it as: *p is an int, therefore p is a pointer to an int.\nThe type matters. int *p may only hold the address of an int; char *s may only hold the address of a char. A pointer is not a general-purpose number — it carries the type of the thing it points at, and section 5 shows why that is more than bookkeeping.\n\n\n\n\n\n\nThe * belongs to the variable, not to the type. This line does not declare two pointers:\nint *p, q;\np is a pointer to int. q is a plain int. If you want two pointers you must write the * twice:\nint *p, *q;\nThis catches everyone once. Write one declaration per line and it cannot catch you at all.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#adding-1-to-a-pointer-moves-it-by-one-whole-item",
+    "href": "weeks/w10.html#adding-1-to-a-pointer-moves-it-by-one-whole-item",
+    "title": "W10: Pointers and Strings",
+    "section": "5 · Adding 1 to a pointer moves it by one whole item",
+    "text": "5 · Adding 1 to a pointer moves it by one whole item\nAdding 1 to a pointer does not move it one byte along. It moves it to the next item of that type.\n#include &lt;stdio.h&gt;\nint main(void)\n{\n    int a[5] = { 10, 20, 30, 40, 50 };\n    int *p = a;\n\n    printf(\"sizeof(int) = %zu\\n\", sizeof(int));\n    printf(\"(p + 1) - p = %td        (counted in ints, not bytes)\\n\", (p + 1) - p);\n\n    printf(\"a[2]        = %d\\n\", a[2]);\n    printf(\"*(a + 2)    = %d\\n\", *(a + 2));\n    printf(\"*(p + 2)    = %d\\n\", *(p + 2));\n    return 0;\n}\nsizeof(int) = 4\n(p + 1) - p = 1        (counted in ints, not bytes)\na[2]        = 30\n*(a + 2)    = 30\n*(p + 2)    = 30\nTwo facts here, and they are two halves of the same rule.\nGoing forwards, p + 1 is the address of the next int, which on this machine is four bytes further along, because sizeof(int) is 4. For a char *, p + 1 would be one byte further along. The compiler scales the step by the size of the type, which is why the type in the declaration is not decoration.\nGoing backwards, subtracting two pointers gives the number of items between them, not the number of bytes. That is why (p + 1) - p is 1 and not 4.\nSo pointer arithmetic is always counted in whole items of the pointed-to type. Nothing is stored in the pointer to make this happen; the compiler works it out from the type at compile time.\n\n\n\n\n\n\nsizeof produces a value of type size_t, and %zu is the printf format for it. %td is the format for the result of subtracting two pointers. You can use them without studying either type further; just do not use %d for them.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#arrays-and-pointers",
+    "href": "weeks/w10.html#arrays-and-pointers",
+    "title": "W10: Pointers and Strings",
+    "section": "6 · Arrays and pointers",
+    "text": "6 · Arrays and pointers\nThe last three lines of that output are equal, and that is not a coincidence. In C, for any array a and index i:\n\na[i] means exactly *(a + i)\n\nThe subscript notation is a shorthand for pointer arithmetic. This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why int a[] and int *a mean the same thing in a parameter list, and why the function can change the caller’s array.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#why-a-function-is-usually-told-how-long-an-array-is",
+    "href": "weeks/w10.html#why-a-function-is-usually-told-how-long-an-array-is",
+    "title": "W10: Pointers and Strings",
+    "section": "7 · Why a function is usually told how long an array is",
+    "text": "7 · Why a function is usually told how long an array is\nHere is the consequence, and it explains something you have been doing since you started writing functions over arrays:\n#include &lt;stdio.h&gt;\n\nvoid show(int a[], int n)\n{\n    printf(\"inside the function, sizeof(a) = %zu\\n\", sizeof a);\n    printf(\"inside the function, n         = %d\\n\", n);\n}\n\nint main(void)\n{\n    int a[10];\n    printf(\"in main, sizeof(a)             = %zu\\n\", sizeof a);\n    show(a, 10);\n    return 0;\n}\nin main, sizeof(a)             = 40\ninside the function, sizeof(a) = 8\ninside the function, n         = 10\nIn main, sizeof a is 40: ten integers of four bytes each. Inside the function it is 8, the size of a pointer on this machine.\nThe function was never given the array. It was given an address. The length did not travel with it, and there is no way to recover it from inside the function. That is why a function like\nvoid minMax(int a[], int n, int *lo, int *hi)\nhas to take n as a separate parameter. You will meet this one in Lab 07.\nThe compiler knows this is a common mistake and warns about it. The exact wording differs between compilers; what matters is the file and line it points at:\nwarning: sizeof on array function parameter will return size of 'int *'\n         instead of 'int[]' [-Wsizeof-array-argument]\n\n\n\n\n\n\nThis is about the first dimension only. A parameter written int world[ROWS][COLS], as in last week’s Game of Life, still carries its column count, because that number is part of the parameter’s type — it is what makes world[i][j] computable. That is why printWorld, countNeighbours and nextGeneration needed no length parameter: COLS was in the type and ROWS was a #define both sides could see.\nWhat never survives is the number of rows, which is the dimension that decays to a pointer. So the rule is: a function is told the size of the dimension that decayed, and reads the rest from the type.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#what-goes-wrong",
+    "href": "weeks/w10.html#what-goes-wrong",
+    "title": "W10: Pointers and Strings",
+    "section": "8 · What goes wrong",
+    "text": "8 · What goes wrong\nFour mistakes account for most pointer bugs. Three of the four are undefined behaviour, marked below. Read them; do not run them.\nDeclaring a pointer is not the same as giving it something to point at. (undefined behaviour)\nint *p;      /* p exists, but has not been given an address */\n*p = 5;      /* undefined: writes to an address nobody chose */\nA pointer must be given an address before it is dereferenced, either from &something or from a function that returns one. Until then, as W09 §10 put it for arrays, what happens is undefined — not “whatever happened to be in that memory”. There is no value you can reason about, and reading it is itself undefined.\nC gives you a way to say “not pointing at anything yet”. The name is NULL, and you can test for it:\n#include &lt;stdio.h&gt;\nint main(void)\n{\n    int x = 5;\n    int *p = NULL;          /* NULL means: not pointing at anything yet */\n\n    if (p == NULL)\n        printf(\"p is NULL, so it must not be dereferenced\\n\");\n\n    p = &x;                 /* now it points at something real */\n\n    if (p != NULL)\n        printf(\"p now points at x, and *p = %d\\n\", *p);\n\n    printf(\"an address prints with %%p, like this: \");\n    printf(\"%p\\n\", (void *)p);\n    return 0;\n}\np is NULL, so it must not be dereferenced\np now points at x, and *p = 5\nan address prints with %p, like this: 0x16d4b32c8\nThe last line is the one from section 2 that changes on every run, so yours will show a different number. Note the two details: %p is the format for an address, and the pointer is cast to (void *) to use it. NULL returns in W13, where it is how malloc reports failure.\nConfusing the pointer with the thing it points at. *p = 7 sets the variable p points at to 7. Writing p = 7 instead tries to set the pointer itself to the address 7, which is meaningless — and the compiler rejects it outright:\nerror: incompatible integer to pointer conversion assigning to 'int *' from 'int'\nSo that particular slip cannot get past the compiler. The dangerous version is the one where both sides are pointers: writing p = q when you meant *p = *q is perfectly legal, silent, and changes which variable p refers to instead of copying a value.\nReturning the address of a local variable. (undefined behaviour) A local variable stops existing when its function returns, so its address refers to storage that has been given back. The pointer still holds a number, and the program may appear to work, which is exactly what makes it dangerous. You will see the proper way to return new storage when we reach malloc in W13.\nWriting past the end of an array. (undefined behaviour) a[10] in an array of ten, or walking a pointer one step too far. C does not check this. We will come back to it on Tuesday, because the most common version in practice involves strings.\n\n\n\n\n\n\nThe three marked above are undefined behaviour: the C standard does not say what happens. The program may crash, may print nonsense, or may appear to work perfectly on your machine and fail on the examiner’s. Do not learn what your compiler happens to do with them. Learn not to write them.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#b-a-worked-problem-reversing-a-list-in-place",
+    "href": "weeks/w10.html#b-a-worked-problem-reversing-a-list-in-place",
+    "title": "W10: Pointers and Strings",
+    "section": "8b · A worked problem: reversing a list in place",
+    "text": "8b · A worked problem: reversing a list in place\nEverything from Monday, used once on a real task. The problem: reverse a list of readings in place, and report how many exchanges that took.\nThree things make this need pointers, and each is one of the ideas above.\n\nswap has to change two variables belonging to its caller, so it takes their addresses.\nreverse has to modify the caller’s array, which it can, because an array argument is converted to a pointer.\nreverse has to hand back a count as well as doing its job, and a function can only return one value, so the count goes back through a pointer.\n\n#include &lt;stdio.h&gt;\n\n/* exchanges the two ints whose addresses it is given */\nvoid swap(int *x, int *y)\n{\n    int t = *x;\n    *x = *y;\n    *y = t;\n}\n\n/* reverses a[0..n-1] in place, and reports how many swaps that took */\nvoid reverse(int a[], int n, int *swaps)\n{\n    int lo = 0, hi = n - 1, count = 0;\n\n    while (lo &lt; hi) {\n        swap(&a[lo], &a[hi]);\n        count++;\n        lo++;\n        hi--;\n    }\n    *swaps = count;\n}\n\nvoid show(char label[], int a[], int n)\n{\n    printf(\"%s\", label);\n    for (int i = 0; i &lt; n; i++)\n        printf(\" %d\", a[i]);\n    printf(\"\\n\");\n}\n\nint main(void)\n{\n    int a[7] = { 3, 1, 4, 1, 5, 9, 2 };\n    int swaps;\n\n    show(\"before:\", a, 7);\n    reverse(a, 7, &swaps);\n    show(\"after: \", a, 7);\n    printf(\"swaps made: %d\\n\", swaps);\n    return 0;\n}\nbefore: 3 1 4 1 5 9 2\nafter:  2 9 5 1 4 1 3\nswaps made: 3\nThree points worth pausing on.\n&a[lo] is the address of one element. a[lo] is a variable like any other, so & works on it. swap neither knows nor cares that its two addresses happen to be inside an array.\nSeven elements, three swaps. The loop stops when lo and hi meet. With an odd count the middle element is never touched, because exchanging it with itself would achieve nothing.\nreverse returns void and still produces two results — a changed array and a count. Both travel out through addresses. This is the shape you will use whenever one answer is not enough.\n\n\n\n\n\n\nCheck the loop condition. Writing lo &lt;= hi instead of lo &lt; hi would, for an odd-length list, swap the middle element with itself: harmless to the data, but the reported count would be wrong. A test that only looked at the array would never catch it.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#a-string-is-an-array-of-characters-with-a-marker-at-the-end",
+    "href": "weeks/w10.html#a-string-is-an-array-of-characters-with-a-marker-at-the-end",
+    "title": "W10: Pointers and Strings",
+    "section": "9 · A string is an array of characters with a marker at the end",
+    "text": "9 · A string is an array of characters with a marker at the end\nC has no separate string type. A string is an array of char in which the end of the text is marked by a character whose value is zero, written '\\0' and called the null terminator.\nchar s[] = \"level\";\nThat declaration creates an array of six characters, not five:\n\n\n\nindex\n0\n1\n2\n3\n4\n5\n\n\n\n\ncharacter\nl\ne\nv\ne\nl\n\\0\n\n\n\nEvery function that works on strings relies on that terminator being there, because nothing else tells it where the text stops. sizeof can tell you the size of an array wherever its declaration is visible, but section 7 showed that this does not survive being passed to a function — and a string function is almost always on the receiving end of that.\n#include &lt;stdio.h&gt;\n#include &lt;string.h&gt;\nint main(void)\n{\n    char s[] = \"level\";\n\n    printf(\"the characters are:\");\n    for (int i = 0; s[i] != '\\0'; i++)\n        printf(\" %c\", s[i]);\n    printf(\"\\n\");\n\n    printf(\"sizeof s  = %zu\\n\", sizeof s);\n    printf(\"strlen(s) = %zu\\n\", strlen(s));\n    return 0;\n}\nthe characters are: l e v e l\nsizeof s  = 6\nstrlen(s) = 5",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#sizeof-and-strlen-answer-different-questions",
+    "href": "weeks/w10.html#sizeof-and-strlen-answer-different-questions",
+    "title": "W10: Pointers and Strings",
+    "section": "10 · sizeof and strlen answer different questions",
+    "text": "10 · sizeof and strlen answer different questions\nThey differ here by exactly one, and it is worth being precise about why.\n\n\n\n\nWhat it asks\nAnswer for char s[] = \"level\"\n\n\n\n\nsizeof s\nhow many bytes were set aside\n6, including the '\\0'\n\n\nstrlen(s)\nhow many characters before the '\\0'\n5\n\n\n\nsizeof is answered by the compiler, which can see the declaration. strlen is answered at run time, by walking the array until it finds the terminator. And as section 7 established, sizeof gives the wrong answer entirely once the array has been passed to a function, whereas strlen keeps working, because it needs only the terminator.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#writing-strlen-yourself-and-a-palindrome",
+    "href": "weeks/w10.html#writing-strlen-yourself-and-a-palindrome",
+    "title": "W10: Pointers and Strings",
+    "section": "11 · Writing strlen yourself, and a palindrome",
+    "text": "11 · Writing strlen yourself, and a palindrome\nBoth of these are just the walk from section 9, with the loop doing different work.\n#include &lt;stdio.h&gt;\n\nint myStrlen(char s[])\n{\n    int n = 0;\n    while (s[n] != '\\0')\n        n++;\n    return n;\n}\n\nint isPalindrome(char s[], int n)\n{\n    int lo = 0, hi = n - 1;\n    while (lo &lt; hi) {\n        if (s[lo] != s[hi])\n            return 0;\n        lo++;\n        hi--;\n    }\n    return 1;\n}\n\nint main(void)\n{\n    char a[] = \"level\";\n    char b[] = \"lever\";\n\n    printf(\"myStrlen(\\\"level\\\") = %d\\n\", myStrlen(a));\n    printf(\"\\\"level\\\" palindrome? %d\\n\", isPalindrome(a, myStrlen(a)));\n    printf(\"\\\"lever\\\" palindrome? %d\\n\", isPalindrome(b, myStrlen(b)));\n    return 0;\n}\nmyStrlen(\"level\") = 5\n\"level\" palindrome? 1\n\"lever\" palindrome? 0\nisPalindrome uses two indices that move towards each other and stop when they meet. Note the loop condition is lo &lt; hi, not lo &lt;= hi: when they are equal they are on the same character, and a character always matches itself. A string of odd length has a middle character that is never compared, and does not need to be.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#b-reading-a-string-from-the-keyboard",
+    "href": "weeks/w10.html#b-reading-a-string-from-the-keyboard",
+    "title": "W10: Pointers and Strings",
+    "section": "11b · Reading a string from the keyboard",
+    "text": "11b · Reading a string from the keyboard\nEvery string so far has been written into the program. To read one you type, use scanf with %s — and note that there is no &, because an array argument is already an address, which is section 6.\n#include &lt;stdio.h&gt;\n#include &lt;string.h&gt;\nint main(void)\n{\n    char word[50];\n\n    printf(\"Enter a word: \");\n    if (scanf(\"%49s\", word) != 1) {\n        printf(\"no word was read\\n\");\n        return 1;\n    }\n\n    printf(\"you typed \\\"%s\\\", which has %zu characters\\n\", word, strlen(word));\n    return 0;\n}\nTyping level gives:\nEnter a word: you typed \"level\", which has 5 characters\nTwo details that are not optional.\nThe 49 in %49s is a limit. The array holds 50 characters, one of which must be the '\\0', so at most 49 may be read. Plain %s has no limit: type a longer word and scanf writes past the end of the array, which is the fourth mistake in section 8. Always give the number, and always make it one less than the array size.\n%s stops at the first space. It reads one word, not a line. For \"never odd or even\" it would read only never. Reading a whole line needs a different tool, which we will not need before Lab 08.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#the-library-string.h",
+    "href": "weeks/w10.html#the-library-string.h",
+    "title": "W10: Pointers and Strings",
+    "section": "12 · The library: string.h",
+    "text": "12 · The library: string.h\nFour functions cover most of what you need. All of them depend on the terminator being present.\n\n\n\n\n\n\n\n\nWhat it does\n\n\n\n\nstrlen(s)\nnumber of characters before the '\\0'\n\n\nstrcpy(dst, src)\ncopies src into dst, terminator included\n\n\nstrcat(dst, src)\nappends src to the end of dst\n\n\nstrcmp(a, b)\nnegative, zero, or positive, comparing character codes (see the warning below)\n\n\n\n#include &lt;stdio.h&gt;\n#include &lt;string.h&gt;\n\nvoid compare(char a[], char b[])\n{\n    int r = strcmp(a, b);\n\n    printf(\"strcmp(\\\"%s\\\", \\\"%s\\\") is \", a, b);\n    if (r &lt; 0)       printf(\"negative: \\\"%s\\\" comes first\\n\", a);\n    else if (r &gt; 0)  printf(\"positive: \\\"%s\\\" comes first\\n\", b);\n    else             printf(\"zero: they are equal\\n\");\n}\n\nint main(void)\n{\n    char a[20] = \"hello\";\n    char b[20];\n\n    strcpy(b, a);\n    printf(\"b after strcpy(b, a)      = %s\\n\", b);\n\n    strcat(b, \" there\");\n    printf(\"b after strcat(b, \\\" there\\\") = %s\\n\", b);\n\n    compare(\"abc\", \"abd\");\n    compare(\"abd\", \"abc\");\n    compare(\"abc\", \"abc\");\n    return 0;\n}\nb after strcpy(b, a)      = hello\nb after strcat(b, \" there\") = hello there\nstrcmp(\"abc\", \"abd\") is negative: \"abc\" comes first\nstrcmp(\"abd\", \"abc\") is positive: \"abc\" comes first\nstrcmp(\"abc\", \"abc\") is zero: they are equal\n\n\n\n\n\n\nstrcmp does not return true or false. It returns zero when the strings are equal, which is the opposite of what reading if (strcmp(a, b)) suggests. Write if (strcmp(a, b) == 0) when you mean “are these the same string”.\nOnly the sign of the result is defined. Do not depend on the particular number.\n\n\n\n\n\n\n\n\n\nstrcmp is not alphabetical order. It compares the characters by their numeric codes, and every capital letter has a smaller code than every lowercase letter — 'Z' is 90 and 'a' is 97. So:\nstrcmp(\"Zebra\", \"apple\")  is negative:  \"Zebra\" comes first\nstrcmp(\"abc\",   \"ABD\")    is positive:  \"ABD\"   comes first\nFor a dictionary ordering you would have to convert both strings to one case first. This is also why the After Class exercise has to say “ignore letter case” explicitly: comparing 'N' with 'n' finds them different.\n\n\n\n\n\n\n\n\n\nstrcpy and strcat do not check that the destination is big enough. If it is not, they write past the end of the array, which is undefined behaviour and one of the most exploited bugs in the history of software. Make sure the destination array has room, including one byte for the terminator.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#two-ways-of-writing-a-string-and-they-are-not-the-same",
+    "href": "weeks/w10.html#two-ways-of-writing-a-string-and-they-are-not-the-same",
+    "title": "W10: Pointers and Strings",
+    "section": "13 · Two ways of writing a string, and they are not the same",
+    "text": "13 · Two ways of writing a string, and they are not the same\nchar a[] = \"hello\";     /* an array of 6 chars, holding a copy of the text  */\nchar *p  = \"hello\";     /* a pointer to the text, which you must not modify */\nThe first makes an array and copies the characters into it. You may change them: a[0] = 'H' is fine.\nThe second stores the address of a string literal. String literals may be placed in read-only memory, and modifying one is undefined behaviour. p[0] = 'H' may crash, or may silently do nothing, or may appear to work. It is not a thing to try and find out; it is a thing not to write.\nIf you want a string you can modify, declare an array.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#b-a-worked-problem-palindromes-in-real-sentences",
+    "href": "weeks/w10.html#b-a-worked-problem-palindromes-in-real-sentences",
+    "title": "W10: Pointers and Strings",
+    "section": "13b · A worked problem: palindromes in real sentences",
+    "text": "13b · A worked problem: palindromes in real sentences\nSection 11 checked \"level\". Real text is not that tidy: \"Never odd or even\" is a palindrome, but only if you ignore the spaces and treat N and n as the same letter. This is the Tuesday problem, and it is the Monday problem with one change — compare instead of swap.\nThe two indices still start at the ends and move towards each other. What is new is that each one must first skip anything that is not a letter.\n#include &lt;stdio.h&gt;\n\nint myStrlen(char s[])\n{\n    int n = 0;\n    while (s[n] != '\\0')\n        n++;\n    return n;\n}\n\nint isLetter(char c)\n{\n    return (c &gt;= 'a' && c &lt;= 'z') || (c &gt;= 'A' && c &lt;= 'Z');\n}\n\nchar lower(char c)\n{\n    if (c &gt;= 'A' && c &lt;= 'Z')\n        return c - 'A' + 'a';\n    return c;\n}\n\nint isPalindrome(char s[])\n{\n    int lo = 0, hi = myStrlen(s) - 1;\n\n    while (lo &lt; hi) {\n        while (lo &lt; hi && !isLetter(s[lo])) lo++;\n        while (lo &lt; hi && !isLetter(s[hi])) hi--;\n\n        if (lower(s[lo]) != lower(s[hi]))\n            return 0;\n\n        lo++;\n        hi--;\n    }\n    return 1;\n}\n\nint main(void)\n{\n    char a[] = \"level\";\n    char b[] = \"lever\";\n    char c[] = \"Never odd or even\";\n    char d[] = \"A man, a plan, a canal: Panama\";\n\n    printf(\"\\\"%s\\\" -&gt; %d\\n\", a, isPalindrome(a));\n    printf(\"\\\"%s\\\" -&gt; %d\\n\", b, isPalindrome(b));\n    printf(\"\\\"%s\\\" -&gt; %d\\n\", c, isPalindrome(c));\n    printf(\"\\\"%s\\\" -&gt; %d\\n\", d, isPalindrome(d));\n    return 0;\n}\n\"level\" -&gt; 1\n\"lever\" -&gt; 0\n\"Never odd or even\" -&gt; 1\n\"A man, a plan, a canal: Panama\" -&gt; 1\nFour things to look at, because each one is a decision that could have gone wrong.\nlower subtracts 'A' and adds 'a' rather than subtracting 32. Both work here, but the first says what it means: move this letter from the capital range into the small range. It also does not depend on you remembering that the gap is 32, which is the kind of thing the strcmp warning in section 12 was about.\nThe skipping loops carry lo &lt; hi as well. Without it, a string with no letters at all would run lo off the end of the array — mistake four from section 8. Every loop that advances an index needs a reason to stop.\nisLetter and lower are separate functions. Each does one thing and is three lines long. You could write the whole test as one enormous condition, and you would not be able to read it next week.\nThe structure is Monday’s. Two indices from the ends, moving towards each other, stopping when they meet. Monday exchanged the two elements; today it compares them. Recognising that one piece of machinery solves both problems is most of what this week is for.\n\n\n\n\n\n\nThis is the After Class exercise from section 11, worked. It is also close to what Lab 08 asks for, so understand it rather than copy it — the lab will not hand you the same sentence.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#c-where-this-is-going-linking-things-together",
+    "href": "weeks/w10.html#c-where-this-is-going-linking-things-together",
+    "title": "W10: Pointers and Strings",
+    "section": "13c · Where this is going: linking things together",
+    "text": "13c · Where this is going: linking things together\nPointers are not only a way to let a function change a variable. They are how C builds data structures that an array cannot give you, and the first of those is the linked list.\nHere is the problem with an array. To insert a value in the middle, every element after it has to shift up one place to make room. For a thousand elements that is hundreds of moves for one insertion.\nA linked list solves this by not storing the items next to each other. Each item keeps, alongside its value, where the next item is. To insert, you change two links and move nothing:\nhead → [10|•] → [20|•] → [30|✗]\n\ninsert 15 after 10:\n\nhead → [10|•] → [15|•] → [20|•] → [30|✗]\n             ╰─ this link changed, and the new node points where it used to\nYou have not met the two tools C normally uses for this — struct, which arrives in W11, and malloc, in W13. But the idea needs neither, and you can run it today with what you already have. Keep the values in one array, and keep the links in a second array, where each entry is the index of the next item. -1 means “nothing follows”.\n#include &lt;stdio.h&gt;\n\n#define NONE -1\n\n/* Insert v just after the node held in slot `at`, and return its slot.\n   Nothing already in the arrays is moved. */\nint insertAfter(int value[], int next[], int at, int v, int *used)\n{\n    int n = *used;\n\n    value[n] = v;\n    next[n]  = next[at];    /* the new node points where `at` used to point */\n    next[at] = n;           /* and `at` now points at the new node          */\n\n    *used = n + 1;\n    return n;\n}\n\nvoid printList(int value[], int next[], int head)\n{\n    int i = head;\n\n    while (i != NONE) {\n        printf(\" %d\", value[i]);\n        i = next[i];        /* follow the link */\n    }\n    printf(\"\\n\");\n}\n\nint main(void)\n{\n    int value[10], next[10];\n    int used, head;\n\n    value[0] = 10;  next[0] = 1;\n    value[1] = 20;  next[1] = 2;\n    value[2] = 30;  next[2] = NONE;\n    head = 0;  used = 3;\n\n    printf(\"list:          \"); printList(value, next, head);\n\n    insertAfter(value, next, 0, 15, &used);\n    printf(\"15 after 10:   \"); printList(value, next, head);\n\n    insertAfter(value, next, 1, 25, &used);\n    printf(\"25 after 20:   \"); printList(value, next, head);\n\n    printf(\"\\nslot 1 still holds %d, slot 2 still holds %d — nothing was shifted\\n\",\n           value[1], value[2]);\n    return 0;\n}\nlist:           10 20 30\n15 after 10:    10 15 20 30\n25 after 20:    10 15 20 25 30\n\nslot 1 still holds 20, slot 2 still holds 30 — nothing was shifted\nTwo insertions into the middle, and not one existing value moved. That is the whole trade: an array gives you instant access to element i but expensive insertion; a linked list gives you cheap insertion but makes you walk from the front to find anything.\nNotice what the program is made of. printList follows links until it reaches the end marker — the same shape as the strlen loop in section 11, which follows characters until it reaches '\\0'. And insertAfter reports the new slot through int *used, because it has work to do and a value to hand back, which is section 8b.\n\n\n\n\n\n\nWhat changes when you have the real tools. In W11 a struct will let one variable hold both the value and the link, so there are no parallel arrays. In W13, malloc will create nodes while the program runs, so there is no fixed-size pool and no used counter. The link stops being an index and becomes an actual pointer, and NONE becomes NULL:\nstruct node {\n    int value;\n    struct node *next;\n};\n\nfor (struct node *p = head; p != NULL; p = p-&gt;next)\n    printf(\" %d\", p-&gt;value);\nThat loop is printList above, written with the real tools. Compare them: i = next[i] has become p = p-&gt;next, and i != NONE has become p != NULL. Nothing else about the idea changed.\nYou are not expected to write that version yet. We build it properly in W14.",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#drills",
+    "href": "weeks/w10.html#drills",
+    "title": "W10: Pointers and Strings",
+    "section": "Drills",
+    "text": "Drills\nShort programs to predict before running. Write your answer down first; that is the exercise.\nTwo of these print numbers that depend on the machine — the size of an int and the size of a pointer. Predict them for the machine in front of you, and say which they are.\n\n\n\n\n\n\n\n\n\nProgram\nPredict\n\n\n\n\nd01\nint x=5, *p=&x; printf(\"%d\", *p);\nthe number printed\n\n\nd02\n*p = 7; then printf(\"%d\", x);\nthe number printed\n\n\nd03\nint *p, q; — then q = 4;\ndoes it compile? what is q?\n\n\nd04\nint a[5], *p=a; print (p+1)-p, then sizeof(int)\nboth numbers, and why they differ\n\n\nd05\nprint a[3] and *(a+3)\nare they the same?\n\n\nd06\nsizeof a in main against sizeof a inside a function\nboth numbers (the second is the size of a pointer on your machine)\n\n\nd07\nchar s[]=\"level\"; print sizeof s and strlen(s)\nboth numbers\n\n\nd08\ncount the steps the strlen loop takes on \"hello\"\nthe number of steps\n\n\nd09\ncount the comparisons isPalindrome makes on \"level\"\nthe number\n\n\nd10\nstrcmp(\"abc\",\"abc\") used directly in an if\nwhich branch runs, and why",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "weeks/w10.html#questions-to-bring-back",
+    "href": "weeks/w10.html#questions-to-bring-back",
+    "title": "W10: Pointers and Strings",
+    "section": "Questions to Bring Back",
+    "text": "Questions to Bring Back\n\nWhy can a function not find out, by itself, how long an array it was given is?\n&x and x differ by one character at a call site. Describe what each one hands to the function.\nchar s[] = \"level\" sets aside six bytes for five letters. What is the sixth for, and what breaks without it?\nWhy does p + 1 move four bytes for an int * but one byte for a char *?\nif (strcmp(a, b)) is almost always a bug. What does it actually test, and what did the author probably mean?",
+    "crumbs": [
+      "Weekly Notes",
+      "W10: Pointers and Strings"
     ]
   },
   {
     "objectID": "weeks/w10.html#after-class",
     "href": "weeks/w10.html#after-class",
-    "title": "W10: Arrays",
+    "title": "W10: Pointers and Strings",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\n\nWrite myStrcpy and myStrcat yourself, using only the walk from section 11. Then compare your versions against the library ones.\nModify isPalindrome to ignore spaces and letter case, so that \"Never odd or even\" is reported as a palindrome.\nLab 08 is on this material, for EE on Tue Oct 6 and for Mechanical and Materials on Wed Oct 14.",
     "crumbs": [
       "Weekly Notes",
-      "W10: Arrays"
+      "W10: Pointers and Strings"
     ]
   },
   {
     "objectID": "weeks/w10.html#pagal-notes",
     "href": "weeks/w10.html#pagal-notes",
-    "title": "W10: Arrays",
+    "title": "W10: Pointers and Strings",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal column. To be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W10: Arrays"
+      "W10: Pointers and Strings"
     ]
   },
   {
     "objectID": "weeks/w11.html",
     "href": "weeks/w11.html",
-    "title": "W11: Strings & Multi-dimensional Arrays",
+    "title": "W11: Structures and File Input/Output",
     "section": "",
-    "text": "Pre-read\nDates: Mon Oct 12 & Tue Oct 13, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
+    "text": "Plan\nDates: Mon Oct 12 & Tue Oct 13, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 6 — structures; file handling\nMonday — structures, and pointers to them. A structure groups several values of different types under one name, which is what you need as soon as a record has more than one field. Declaring a structure, reading and writing its members, passing one to a function by value and by address, arrays of structures, and the -&gt; notation for reaching a member through a pointer.\nTuesday — file input and output. Programs so far have read from the keyboard and written to the screen. A file is the same idea with a name attached: fopen gives you a FILE *, fclose gives it back, and fscanf and fprintf work like the versions you already know. Reading until the end of the file, and checking whether fopen actually succeeded.",
     "crumbs": [
       "Weekly Notes",
-      "W11: Strings & Multi-dimensional Arrays"
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#pre-read",
+    "href": "weeks/w11.html#pre-read",
+    "title": "W11: Structures and File Input/Output",
+    "section": "Pre-read",
+    "text": "Pre-read\n\nLec 17 · Lec 18\nThe W10 notes. Both of this week’s topics are built on pointers: a structure is usually passed by address, and a FILE * is a pointer.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
     ]
   },
   {
     "objectID": "weeks/w11.html#in-class",
     "href": "weeks/w11.html#in-class",
-    "title": "W11: Strings & Multi-dimensional Arrays",
+    "title": "W11: Structures and File Input/Output",
     "section": "In Class",
-    "text": "In Class\n\nLec 17 — Character arrays: string length, comparison, palindromes; multi-dimensional arrays\nLec 18 — Standard library string support; matrix operations",
+    "text": "In Class\nTo be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W11: Strings & Multi-dimensional Arrays"
+      "W11: Structures and File Input/Output"
     ]
   },
   {
     "objectID": "weeks/w11.html#after-class",
     "href": "weeks/w11.html#after-class",
-    "title": "W11: Strings & Multi-dimensional Arrays",
+    "title": "W11: Structures and File Input/Output",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\nTo be posted. Lab 09 covers this material: EE on Tue Oct 13, Mechanical and Materials on Wed Oct 21.",
     "crumbs": [
       "Weekly Notes",
-      "W11: Strings & Multi-dimensional Arrays"
+      "W11: Structures and File Input/Output"
     ]
   },
   {
     "objectID": "weeks/w11.html#pagal-notes",
     "href": "weeks/w11.html#pagal-notes",
-    "title": "W11: Strings & Multi-dimensional Arrays",
+    "title": "W11: Structures and File Input/Output",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal column. To be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W11: Strings & Multi-dimensional Arrays"
+      "W11: Structures and File Input/Output"
     ]
   },
   {
@@ -1049,89 +1291,100 @@
   {
     "objectID": "weeks/w13.html",
     "href": "weeks/w13.html",
-    "title": "W13: Functions & Recursion",
+    "title": "W13: Dynamic Memory and Recursion",
     "section": "",
-    "text": "Pre-read\nDates: Mon Oct 26 & Tue Oct 27, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
+    "text": "Plan\nDates: Mon Oct 26 & Tue Oct 27, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — dynamic memory allocation; functions and recursion\nMonday — dynamic memory allocation. Every array you have declared so far had its size fixed when the program was compiled. That is a real limit: you cannot read a list whose length you only discover while running. malloc asks for memory while the program runs and returns its address; free gives it back. The stack and the heap as two different places, why malloc can fail and what it returns when it does, and the three mistakes that follow: leaking memory, using it after freeing it, and freeing it twice.\nTuesday — recursion. A function that calls itself. The base case that stops it, the recursive case that makes progress towards the base case, and what the call stack looks like while it runs — which is easier to picture now that Monday has separated the stack from the heap.",
     "crumbs": [
       "Weekly Notes",
-      "W13: Functions & Recursion"
+      "W13: Dynamic Memory and Recursion"
+    ]
+  },
+  {
+    "objectID": "weeks/w13.html#pre-read",
+    "href": "weeks/w13.html#pre-read",
+    "title": "W13: Dynamic Memory and Recursion",
+    "section": "Pre-read",
+    "text": "Pre-read\n\nLec 19 · Lec 20 · Lec 24\nThe W10 notes on pointers. malloc returns an address, so everything this week rests on that.",
+    "crumbs": [
+      "Weekly Notes",
+      "W13: Dynamic Memory and Recursion"
     ]
   },
   {
     "objectID": "weeks/w13.html#in-class",
     "href": "weeks/w13.html#in-class",
-    "title": "W13: Functions & Recursion",
+    "title": "W13: Dynamic Memory and Recursion",
     "section": "In Class",
-    "text": "In Class\n\nLec 19 — Introduction to functions; blocks and scope\nLec 20 — More functions: factorial, matrix multiplication, Tic-Tac-Toe\nLec 24 — Recursive functions: factorial, binomial coefficients, Fibonacci",
+    "text": "In Class\nTo be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W13: Functions & Recursion"
+      "W13: Dynamic Memory and Recursion"
     ]
   },
   {
     "objectID": "weeks/w13.html#after-class",
     "href": "weeks/w13.html#after-class",
-    "title": "W13: Functions & Recursion",
+    "title": "W13: Dynamic Memory and Recursion",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\nTo be posted. Lab 10 covers this material: EE on Tue Oct 27, Mechanical and Materials on Wed Oct 28.",
     "crumbs": [
       "Weekly Notes",
-      "W13: Functions & Recursion"
+      "W13: Dynamic Memory and Recursion"
     ]
   },
   {
     "objectID": "weeks/w13.html#pagal-notes",
     "href": "weeks/w13.html#pagal-notes",
-    "title": "W13: Functions & Recursion",
+    "title": "W13: Dynamic Memory and Recursion",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal column. To be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W13: Functions & Recursion"
+      "W13: Dynamic Memory and Recursion"
     ]
   },
   {
     "objectID": "weeks/w14.html",
     "href": "weeks/w14.html",
-    "title": "W14: Pointers & Dynamic Memory",
+    "title": "W14: Full Problems I",
     "section": "",
-    "text": "Pre-read\nDates: Mon Nov 2 & Tue Nov 3, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)\nTo be posted (typically by the weekend before).",
+    "text": "Plan\nDates: Mon Nov 2 & Tue Nov 3, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus modules: 5 and 6 — applied together\nNo new language features this week. Both lectures are spent solving complete problems, of the size and shape you will meet in the end-semester examination, using everything from the semester at once: arrays, functions, pointers, strings, structures, files and dynamic memory.\nThe emphasis is on the part that is usually skipped. Reading a problem statement and deciding what the data actually is. Choosing between an array and allocated memory. Deciding which parts become functions and what each one promises. Then writing it, and checking it against the statement rather than against a hope.\nA worked problem will be developed on the board across both lectures rather than presented finished.",
     "crumbs": [
       "Weekly Notes",
-      "W14: Pointers & Dynamic Memory"
+      "W14: Full Problems I"
     ]
   },
   {
     "objectID": "weeks/w14.html#in-class",
     "href": "weeks/w14.html#in-class",
-    "title": "W14: Pointers & Dynamic Memory",
+    "title": "W14: Full Problems I",
     "section": "In Class",
-    "text": "In Class\n\nLec 27 — (pointers introduction — final section)\nLec 28 — More on pointers; malloc\nOCW L11 — Dynamic memory allocation: malloc, calloc, realloc, free, valgrind",
+    "text": "In Class\nTo be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W14: Pointers & Dynamic Memory"
+      "W14: Full Problems I"
     ]
   },
   {
     "objectID": "weeks/w14.html#after-class",
     "href": "weeks/w14.html#after-class",
-    "title": "W14: Pointers & Dynamic Memory",
+    "title": "W14: Full Problems I",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\nTo be posted. Lab 11 is problem solving: EE on Tue Nov 3, Mechanical and Materials on Wed Nov 4.",
     "crumbs": [
       "Weekly Notes",
-      "W14: Pointers & Dynamic Memory"
+      "W14: Full Problems I"
     ]
   },
   {
     "objectID": "weeks/w14.html#pagal-notes",
     "href": "weeks/w14.html#pagal-notes",
-    "title": "W14: Pointers & Dynamic Memory",
+    "title": "W14: Full Problems I",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal column. To be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W14: Pointers & Dynamic Memory"
+      "W14: Full Problems I"
     ]
   },
   {
@@ -1148,45 +1401,45 @@
   {
     "objectID": "weeks/w16.html",
     "href": "weeks/w16.html",
-    "title": "W16: Function Pointers, Structures & Unions",
+    "title": "W16: Full Problems II",
     "section": "",
-    "text": "Pre-read\nDates: Mon Nov 16 & Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 6 — Function pointers; structure, union; file handling; error handling (3 h)\nTo be posted (typically by the weekend before).",
+    "text": "Plan\nDates: Mon Nov 16 & Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus modules: 5 and 6 — applied together\nA second week of complete problems, continuing W14. Larger problems, assembled from parts you have already written, with more of the design left to you.\nThis is also the week to revisit whatever the class found hardest during the semester, so bring questions.",
     "crumbs": [
       "Weekly Notes",
-      "W16: Function Pointers, Structures & Unions"
+      "W16: Full Problems II"
     ]
   },
   {
     "objectID": "weeks/w16.html#in-class",
     "href": "weeks/w16.html#in-class",
-    "title": "W16: Function Pointers, Structures & Unions",
+    "title": "W16: Full Problems II",
     "section": "In Class",
-    "text": "In Class\n\nLec 29 — Introduction to structures\nLec 30 — More on structures; typedef; pointers to structures\nOCW L6 — Structs, unions, bitfields; memory allocation\nOCW L8 — Void and function pointers",
+    "text": "In Class\nTo be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W16: Function Pointers, Structures & Unions"
+      "W16: Full Problems II"
     ]
   },
   {
     "objectID": "weeks/w16.html#after-class",
     "href": "weeks/w16.html#after-class",
-    "title": "W16: Function Pointers, Structures & Unions",
+    "title": "W16: Full Problems II",
     "section": "After Class",
-    "text": "After Class\nPractice problems and any handouts will be posted here.",
+    "text": "After Class\nTo be posted. Lab 12 is problem solving: EE on Tue Nov 17, Mechanical and Materials on Wed Nov 18.",
     "crumbs": [
       "Weekly Notes",
-      "W16: Function Pointers, Structures & Unions"
+      "W16: Full Problems II"
     ]
   },
   {
     "objectID": "weeks/w16.html#pagal-notes",
     "href": "weeks/w16.html#pagal-notes",
-    "title": "W16: Function Pointers, Structures & Unions",
+    "title": "W16: Full Problems II",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal column. To be posted.",
     "crumbs": [
       "Weekly Notes",
-      "W16: Function Pointers, Structures & Unions"
+      "W16: Full Problems II"
     ]
   },
   {
@@ -2019,7 +2272,7 @@
     "href": "labsheets/lab07.html#act-3-the-five-checked-problems-55-minutes-on-your-own-10-marks-each",
     "title": "Lab 07: Functions and the Game of Life",
     "section": "Act 3 · The five checked problems (55 minutes, on your own, 10 marks each)",
-    "text": "Act 3 · The five checked problems (55 minutes, on your own, 10 marks each)\nFor these five you are given the specification and nothing else. You write the whole program.\n\n\n\n\n\n\n\n\nProblem\nWhat the program must do\nIts last line must end with\n\n\n\n\ne1.c\nfind the value x ≥ 0 for which x³ + x = a\nroot=&lt;R&gt;, printed with %.4f\n\n\ne2.c\nprint a 4 × 4 grid flipped about its diagonal\n(the whole output is checked)\n\n\ne3.c\ncount how many of the eight cells touching (r, c) are alive\nneighbours=&lt;N&gt;\n\n\ne4.c\nprint one generation of the Game of Life\n(the whole grid is checked)\n\n\ne5.c\ncount how many cells are alive after g generations\nalive=&lt;N&gt;\n\n\n\n\nNotes on each problem\ne1. There is no formula you can rearrange to get the answer. Use the halving method from Monday’s lecture instead. The answer lies somewhere between 0 and a. Write the program as two functions: one that computes the left-hand side x³ + x, and one that does the halving and calls it.\ne2. Build the flipped grid in a second array and print that. If you write the flipped values back into the original array as you go, you will overwrite values you have not read yet and the answer will be wrong. This is a small version of the problem e4 has.\ne3. Two things can go wrong here, and only one of them is obvious.\nThe obvious one is that a cell must not count itself.\nThe other one is the edge of the grid. A corner cell has only three neighbours, not eight. If you try to look at all eight without checking, you will read outside the array. C does not stop you from doing this, and the program will often appear to work, which is what makes it dangerous.\ne4. See the warning below. This is the central problem of the lab.\ne5. Be careful when g is 0: the answer is the world exactly as it was given to you. A loop written to run once and then test will run once even when it was asked for no generations at all.\nIf you find yourself writing out the rules of the game a second time for this problem, stop. e4 already contains them.\n\n\n\n\n\n\ne3, e4 and e5 are deliberately the same program, extended twice.\nWrite countNeighbours for e3. Copy it into e4 and use it there. If you then put the code that produces one generation into a function of its own, e5 needs only a few more lines: call that function g times, then count the live cells.\n\n\n\n\n\n\n\n\n\nThis is what e4 is marked on. Every cell in a generation must be decided from the same old world.\nSo you need two grids. Work out the entire next generation into a second grid, and only then copy it back into the first.\nIf instead you write each cell’s new value straight into world, then when you reach cell (0,1) one of its neighbours has already been changed, and it counts the wrong number. The blinker will visibly fall apart instead of flipping.\n\n\n\n\n\n\n\n\n\nTuesday’s lecture printed a live cell as ## and a dead cell as two spaces, which is easy to read on a projector. In this lab, print # for a live cell and . for a dead one. The checker compares text, and it cannot tell blank space apart from missing output.\n\n\n\n\n\nHow the checking works\nWhen you run ./check.sh e3, it compiles your source file and runs it twice over: once on the examples printed in your starter file, and once on fresh random inputs generated at that moment from the range in the GIVEN line.\nThis means a program that only reproduces the printed example will fail as soon as a new input is drawn.\n\n\n\n\n\n\ne2 and e4 are checked over their whole output, not just the last line, because the answer is a grid rather than a single value. Extra or missing spaces are ignored. A wrong or missing row is not.\nIf your output looks right but the check fails, run ./check.sh e4 and read the difference it prints. It shows you the line that differs, what you printed, and what was expected.",
+    "text": "Act 3 · The five checked problems (55 minutes, on your own, 10 marks each)\nFor these five you are given the specification and nothing else. You write the whole program.\n\n\n\n\n\n\n\n\nProblem\nWhat the program must do\nIts last line must end with\n\n\n\n\ne1.c\nfind the value x ≥ 0 for which x³ + x = a\nroot=&lt;R&gt;, printed with %.4f\n\n\ne2.c\nprint a 4 × 4 grid flipped about its diagonal\n(the whole output is checked)\n\n\ne3.c\ncount how many of the eight cells touching (r, c) are alive\nneighbours=&lt;N&gt;\n\n\ne4.c\nprint one generation of the Game of Life\n(the whole grid is checked)\n\n\ne5.c\ncount how many cells are alive after g generations\nalive=&lt;N&gt;\n\n\n\n\nNotes on each problem\ne1. There is no formula you can rearrange to get the answer. Use the halving method from Monday’s lecture instead. The answer lies somewhere between 0 and a.\nWrite the program as two functions. The first must be zero at the answer, so it is x*x*x + x - a, not x*x*x + x. The second does the halving and calls the first. If you leave out the - a, your function is zero at x = 0, the halving test is satisfied immediately, and the answer collapses to 0.0000 for every input.\ne2. Build the flipped grid in a second array and print that. If you write the flipped values back into the original array as you go, you will overwrite values you have not read yet and the answer will be wrong. This is a small version of the problem e4 has.\ne3. Two things can go wrong here, and only one of them is obvious.\nThe obvious one is that a cell must not count itself.\nThe other one is the edge of the grid. A corner cell has only three neighbours, not eight. If you try to look at all eight without checking, you will read outside the array. C does not stop you from doing this, and the program will often appear to work, which is what makes it dangerous.\ne4. See the warning below. This is the central problem of the lab.\ne5. Be careful when g is 0: the answer is the world exactly as it was given to you. A loop written to run once and then test will run once even when it was asked for no generations at all.\nIf you find yourself writing out the rules of the game a second time for this problem, stop. e4 already contains them.\n\n\n\n\n\n\ne3, e4 and e5 are deliberately the same program, extended twice.\nWrite countNeighbours for e3. Copy it into e4 and use it there. If you then put the code that produces one generation into a function of its own, e5 needs only a few more lines: call that function g times, then count the live cells.\n\n\n\n\n\n\n\n\n\nThis is what e4 is marked on. Every cell in a generation must be decided from the same old world.\nSo you need two grids. Work out the entire next generation into a second grid, and only then copy it back into the first.\nIf instead you write each cell’s new value straight into world, then when you reach cell (0,1) one of its neighbours has already been changed, and it counts the wrong number. The blinker will visibly fall apart instead of flipping.\n\n\n\n\n\n\n\n\n\nTuesday’s lecture printed a live cell as ## and a dead cell as two spaces, which is easy to read on a projector. In this lab, print # for a live cell and . for a dead one. The checker compares text, and it cannot tell blank space apart from missing output.\n\n\n\n\n\nHow the checking works\nWhen you run ./check.sh e3, it compiles your source file and runs it on two kinds of input: a fixed set chosen in advance, and a set generated fresh at that moment from the range in the GIVEN line. The fixed ones are labelled public and the generated ones random.\nThe examples printed in your starter are among the fixed ones, but there are more fixed vectors than printed examples — e3 has six, for instance. So passing the printed example does not mean passing every public vector.\nThis means a program that only reproduces the printed example will fail as soon as a new input is drawn.\n\n\n\n\n\n\ne2 and e4 are checked over their whole output, not just the last line, because the answer is a grid rather than a single value.\nSeveral spaces in a row count as one, so the column alignment in e2 is up to you. But a space is not the same as no space: for e4, printing # . # . instead of #.#. is a different line and fails. Print the eight characters of each row with nothing between them.\nPrint nothing but the grid. Do not print a prompt. The whole output is compared, so a prompt on a line of its own becomes a wrong first row and costs all ten marks — even if every cell below it is right.\nIf your output looks right but the check fails, run ./check.sh e4 and read the difference it prints. It shows you the line that differs, what you printed, and what was expected.",
     "crumbs": [
       "Lab Sheets",
       "Lab 07: Functions and the Game of Life"
@@ -2061,100 +2314,199 @@
   {
     "objectID": "labsheets/lab08.html",
     "href": "labsheets/lab08.html",
-    "title": "Lab 08: Structures (Tuples & Dictionaries, C-style)",
+    "title": "Lab 08: Pointers and Strings",
     "section": "",
-    "text": "Pre-Lab\nSyllabus practical module: 4 — Writing programs related to tuples and dictionaries\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
+    "text": "The shape of this lab, and why it changed\nLab pack: lab08.tar.gz. It is already on the lab machines. You can also download it to practise at home.\nSyllabus practical modules: 3 and 10 — lists and strings, and using the string library.\nEvaluation: This lab is graded, with the same weight as the others inside the 20% lab component. It is marked in three tiers:\nThat is 75 marks from the programs. The remaining 25 come from observed work and a short viva, in which you will be asked to explain your own code.\nThe read drills (./drill.sh) are not marked.\nYou may work in teams of one or two. If you are a pair, swap who types at the halfway point.\nSeveral of you said in the mid-semester feedback that you follow the ideas in class but cannot produce the C when you sit down to a lab problem. That is a fair criticism of how these labs were built, and this one is organised to answer it.\nThere is a new tier between the lecture and the problems: write drills. Each one is a single line of C, with everything around it already written for you. They are worth marks, so they are not something to skip and come back to.\nThe chain is meant to be walked in order:\nEvery starter file has a BEFORE line naming the drills it rests on. If you are stuck on a blank or a problem, that line tells you what to go and do first.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 08: Structures (Tuples & Dictionaries, C-style)"
+      "Lab 08: Pointers and Strings"
     ]
   },
   {
-    "objectID": "labsheets/lab08.html#exercises",
-    "href": "labsheets/lab08.html#exercises",
-    "title": "Lab 08: Structures (Tuples & Dictionaries, C-style)",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "objectID": "labsheets/lab08.html#the-shape-of-this-lab-and-why-it-changed",
+    "href": "labsheets/lab08.html#the-shape-of-this-lab-and-why-it-changed",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "",
+    "text": "read a drill and predict it → write one line → fill in one function body → solve a problem",
     "crumbs": [
       "Lab Sheets",
-      "Lab 08: Structures (Tuples & Dictionaries, C-style)"
+      "Lab 08: Pointers and Strings"
     ]
   },
   {
-    "objectID": "labsheets/lab08.html#submission",
-    "href": "labsheets/lab08.html#submission",
-    "title": "Lab 08: Structures (Tuples & Dictionaries, C-style)",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "objectID": "labsheets/lab08.html#the-minimum-c-you-need-today",
+    "href": "labsheets/lab08.html#the-minimum-c-you-need-today",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "The minimum C you need today",
+    "text": "The minimum C you need today\nEverything in this lab is built from these nine lines. If you can read and write all of them, you have what you need.\nint *p = &x;                 /* p holds the address of x                  */\nprintf(\"%d\", *p);            /* the value at that address                 */\n*p = 7;                      /* change x, without naming x                */\nvoid f(int *n) { *n = 5; }   /* a function that changes the caller's copy  */\nf(&x);                       /* note the & at the call                    */\n\nchar s[50];                  /* room for 49 characters and a '\\0'         */\nscanf(\"%49s\", s);            /* read one word. NO & before an array       */\nwhile (s[i] != '\\0') i++;    /* walk to the end of the text               */\nstrlen(s);  strcmp(a, b);    /* length; and ZERO means the strings match  */\nTwo of these are where almost all the mistakes happen:\nscanf(\"%49s\", s) has no &. An array name is already an address, so adding & is wrong. But scanf(\"%d\", &x) on an ordinary int does need it. Drill d06 is about this difference.\nstrcmp returns zero when the strings are the same. So if (strcmp(a, b)) runs its body when they differ, which is the opposite of what it reads like. Write if (strcmp(a, b) == 0).",
     "crumbs": [
       "Lab Sheets",
-      "Lab 08: Structures (Tuples & Dictionaries, C-style)"
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#act-0-getting-started-10-minutes",
+    "href": "labsheets/lab08.html#act-0-getting-started-10-minutes",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "Act 0 · Getting started (10 minutes)",
+    "text": "Act 0 · Getting started (10 minutes)\nThe pack is already on the lab machines. If it is not on yours, download it:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab08.tar.gz\nUnpack it and run the installer, one line at a time:\ntar xzf lab08.tar.gz\ncd lab08\n./install.sh\nThen start the recorder:\nscript session.txt\n\n\n\n\n\n\nDo not start the exercises until your prompt reads [lab08 OK ...]. If it does not, run ./where.sh; it changes nothing and prints the exact command to type.\nsession.txt records your afternoon and must be in the bundle you submit.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#act-1-read-drills-15-minutes-not-marked",
+    "href": "labsheets/lab08.html#act-1-read-drills-15-minutes-not-marked",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "Act 1 · Read drills (15 minutes, not marked)",
+    "text": "Act 1 · Read drills (15 minutes, not marked)\n./drill.sh --all\nTen short programs. For each one you type what you think it will print, and only then does it run.\n\n\n\n\n\n\n\nDrills\nWhat they are about\n\n\n\n\nd01–d03\nwhat * and & actually do, and that the * binds to the variable\n\n\nd04–d06\npointers and arrays, and the sizeof trap\n\n\nd07–d09\nstrings, the terminator, and what strcmp returns\n\n\nd10\npassing by value\n\n\n\nThese carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#act-2-write-drills-20-minutes-1-mark-each",
+    "href": "labsheets/lab08.html#act-2-write-drills-20-minutes-1-mark-each",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "Act 2 · Write drills (20 minutes, 1 mark each)",
+    "text": "Act 2 · Write drills (20 minutes, 1 mark each)\nTen files, w01.c to w10.c. In each one, everything is written except a single line, and the comment tells you what that line must do.\nThis is where you practise producing the notation rather than recognising it. They are quick — if one of them takes more than two minutes, that is the signal to go back to the drill named on its BEFORE line.\n\n\n\n\n\n\n\n\nWhat you write\n\n\n\n\nw01\ndeclare a pointer and point it at a variable\n\n\nw02\nchange a variable through a pointer\n\n\nw03\nreach an array element through a pointer\n\n\nw04\na function body that changes the caller’s variable, and the call\n\n\nw05\nthe length of a string, using strlen\n\n\nw06\nthe length of a string, by walking to the '\\0'\n\n\nw07\nthe condition that tests whether two strings match\n\n\nw08\nthe body of swap, and the call\n\n\nw09\nthe scanf that reads one word\n\n\nw10\nthe first and the last character of a word",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#how-to-work-on-one-problem",
+    "href": "labsheets/lab08.html#how-to-work-on-one-problem",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "How to work on one problem",
+    "text": "How to work on one problem\nThe steps are the same for all nineteen. Using w01.c as the example:\nvim w01.c                # open it and write the missing line\ngcc w01.c -o w01         # compile it\n./w01 &lt; w01_sample.txt   # run it on the sample input\n./check.sh w01           # once it runs, have it marked\nPlain gcc. No -lm, no other flags.\nEvery problem has a ready-made input file, named &lt;problem&gt;_sample.txt, and each one reproduces the EXAMPLE printed at the top of that starter. So if your program is right, running it on its sample prints exactly what the specification promised:\n$ ./w05 &lt; w05_sample.txt\nlen=5\n$ ./e2 &lt; e2_sample.txt\nreversed=dcba swaps=2\n\n\n\n\n\n\nCompile and run it yourself before running ./check.sh. Running it shows you what your program does; the checker only tells you whether the answer is right.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#act-3-blanks-25-minutes-5-marks-each",
+    "href": "labsheets/lab08.html#act-3-blanks-25-minutes-5-marks-each",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "Act 3 · Blanks (25 minutes, 5 marks each)",
+    "text": "Act 3 · Blanks (25 minutes, 5 marks each)\nThe function’s first line is written for you, and main already calls it. Write the body.\n\n\n\n\n\n\n\n\nFile\nWhat the function must do\nIts last line must end with\n\n\n\n\nb1_deref.c\nput a value into the caller’s variable through a pointer\nx=&lt;v&gt;\n\n\nb2_swap.c\nexchange the caller’s two integers\na=&lt;B&gt; b=&lt;A&gt;\n\n\nb3_length.c\nthe length of a string, without strlen\nlen=&lt;N&gt;\n\n\nb4_count.c\nhow many times a character appears in a word\ncount=&lt;N&gt;\n\n\nb5_upper.c\nchange a word to capitals, in place\nupper=&lt;WORD&gt;\n\n\n\n\n\n\n\n\n\nb5 changes the caller’s array without returning anything and without any &. That is the array-to-pointer conversion from Monday, and it is worth being able to say out loud why it works — the viva asks.\nTo move a letter from the small range to the capital range, subtract 'a' and add 'A'. That says what it means, and does not depend on remembering that the gap is 32.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#act-4-problems-40-minutes-10-marks-each",
+    "href": "labsheets/lab08.html#act-4-problems-40-minutes-10-marks-each",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "Act 4 · Problems (40 minutes, 10 marks each)",
+    "text": "Act 4 · Problems (40 minutes, 10 marks each)\nSpecification only. You write the whole program.\n\n\n\n\n\n\n\n\nProblem\nWhat it must do\nIts last line must end with\n\n\n\n\ne1.c\ncount letters, digits and other characters in one word\nletters=&lt;L&gt; digits=&lt;D&gt; others=&lt;O&gt;\n\n\ne2.c\nreverse a word in place, and report how many exchanges\nreversed=&lt;S&gt; swaps=&lt;N&gt;\n\n\ne3.c\nthe longest unbroken run of one repeated character\nlongest=&lt;N&gt; char=&lt;C&gt;\n\n\ne4.c\nshift every letter k places along the alphabet\nshifted=&lt;S&gt;\n\n\n\ne1 is the one to do first. It is the only problem here that cannot be written without pointers: you owe the caller three answers and a function can return one, so all three come back through pointer parameters. Write it as\nvoid classify(char s[], int *letters, int *digits, int *others)\ne2 uses two indices that start at the ends and move towards each other. A word of odd length has a middle character that is never exchanged — \"level\" is five characters but only two swaps.\ne3 needs two counters: how long the run you are currently in is, and how long the best one so far was. A character that differs from the one before does not merely fail to extend the run; it ends it, and the current counter goes back to 1.\ne4 is about the wrap past z. Do not write s[i] = s[i] + k. Work with the letter’s position in the alphabet instead: subtract 'a' to get 0–25, add k, take % 26, then add 'a' back.\n\nHow the checking works\n./check.sh e1 compiles your source and runs it on two kinds of input: a fixed set chosen in advance, labelled public, and a set generated fresh at that moment from the range in the GIVEN line, labelled random. A program that only reproduces the printed example will fail as soon as a new input is drawn.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#act-5-check-your-marks-fix-and-submit-10-minutes",
+    "href": "labsheets/lab08.html#act-5-check-your-marks-fix-and-submit-10-minutes",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "Act 5 · Check your marks, fix, and submit (10 minutes)",
+    "text": "Act 5 · Check your marks, fix, and submit (10 minutes)\n./check.sh          # everything\n./check.sh e3       # one problem, while you are working on it\nMarks are given per test case, not all-or-nothing, so fixing one failing case is always worth doing, even in the last few minutes. Treat the total as an estimate: some vectors are drawn fresh each run, so the number can move by a mark or two.\nWhen you are finished, or when time is called:\n./check.sh --bundle\n\n\n\n\n\n\nThe bundle is written to the directory above your workspace, named lab08_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz. Take it with you: upload it to Moodle and email a copy to yourself. The lab machines are wiped between sessions.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#if-you-finish-early-not-marked",
+    "href": "labsheets/lab08.html#if-you-finish-early-not-marked",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "If you finish early (not marked)",
+    "text": "If you finish early (not marked)\n\nMake e3 report the run that starts latest instead of earliest when two are equally long. Which single comparison changes?\nMake e4 accept capital letters as well, leaving them capital. Then make it accept punctuation and leave it alone.\nWrite myStrcmp yourself, returning negative, zero or positive, and check it agrees with the library on a dozen pairs. Try \"Zebra\" against \"apple\" and explain the sign.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab08.html#before-you-leave",
+    "href": "labsheets/lab08.html#before-you-leave",
+    "title": "Lab 08: Pointers and Strings",
+    "section": "Before you leave",
+    "text": "Before you leave\nBe ready to answer these out loud.\n\nIn b2, swap(&a, &b) has & but toUpper(s) in b5 does not. Why is the array different?\ne1 returns void. Where do its three answers go, and why could return not have been used?\nWhich write drill did you need before you could do e2?",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 08: Pointers and Strings"
     ]
   },
   {
     "objectID": "labsheets/lab09.html",
     "href": "labsheets/lab09.html",
-    "title": "Lab 09: File Handling",
+    "title": "Lab 09: Structures and File Input/Output",
     "section": "",
-    "text": "Pre-Lab\nSyllabus practical module: 8 — Writing programs related to file handling\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical modules: 4 and 8 — tuples and dictionaries; file handling\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 09: File Handling"
+      "Lab 09: Structures and File Input/Output"
     ]
   },
   {
     "objectID": "labsheets/lab09.html#exercises",
     "href": "labsheets/lab09.html#exercises",
-    "title": "Lab 09: File Handling",
+    "title": "Lab 09: Structures and File Input/Output",
     "section": "Exercises",
     "text": "Exercises\nTo be posted before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 09: File Handling"
+      "Lab 09: Structures and File Input/Output"
     ]
   },
   {
     "objectID": "labsheets/lab09.html#submission",
     "href": "labsheets/lab09.html#submission",
-    "title": "Lab 09: File Handling",
+    "title": "Lab 09: Structures and File Input/Output",
     "section": "Submission",
     "text": "Submission\nSubmission instructions will be provided in the lab.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 09: File Handling"
+      "Lab 09: Structures and File Input/Output"
     ]
   },
   {
     "objectID": "labsheets/lab10.html",
     "href": "labsheets/lab10.html",
-    "title": "Lab 10: Error Handling",
+    "title": "Lab 10: Dynamic Memory and Recursion",
     "section": "",
-    "text": "Pre-Lab\nSyllabus practical module: 9 — Writing programs related to error handling\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
+    "text": "Pre-Lab\nSyllabus practical module: 5 — pointers, dynamic memory and recursion\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 10: Error Handling"
+      "Lab 10: Dynamic Memory and Recursion"
     ]
   },
   {
     "objectID": "labsheets/lab10.html#exercises",
     "href": "labsheets/lab10.html#exercises",
-    "title": "Lab 10: Error Handling",
+    "title": "Lab 10: Dynamic Memory and Recursion",
     "section": "Exercises",
     "text": "Exercises\nTo be posted before the session.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 10: Error Handling"
+      "Lab 10: Dynamic Memory and Recursion"
     ]
   },
   {
     "objectID": "labsheets/lab10.html#submission",
     "href": "labsheets/lab10.html#submission",
-    "title": "Lab 10: Error Handling",
+    "title": "Lab 10: Dynamic Memory and Recursion",
     "section": "Submission",
     "text": "Submission\nSubmission instructions will be provided in the lab.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 10: Error Handling"
+      "Lab 10: Dynamic Memory and Recursion"
     ]
   },
   {

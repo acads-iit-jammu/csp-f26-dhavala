@@ -246,13 +246,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W10: Arrays</span></a>
+ <span class="menu-text">W10: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W11: Strings &amp; Multi-dimensional Arrays</span></a>
+ <span class="menu-text">W11: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -264,13 +264,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W13: Functions &amp; Recursion</span></a>
+ <span class="menu-text">W13: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W14: Pointers &amp; Dynamic Memory</span></a>
+ <span class="menu-text">W14: Full Problems I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -282,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w16.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W16: Function Pointers, Structures &amp; Unions</span></a>
+ <span class="menu-text">W16: Full Problems II</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -353,19 +353,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</span></a>
+ <span class="menu-text">Lab 08: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: File Handling</span></a>
+ <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 10: Error Handling</span></a>
+ <span class="menu-text">Lab 10: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -882,7 +882,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <section id="notes-on-each-problem" class="level3">
 <h3 class="anchored" data-anchor-id="notes-on-each-problem">Notes on each problem</h3>
-<p><strong><code>e1</code>.</strong> There is no formula you can rearrange to get the answer. Use the halving method from Monday’s lecture instead. The answer lies somewhere between 0 and <code>a</code>. Write the program as two functions: one that computes the left-hand side x³ + x, and one that does the halving and calls it.</p>
+<p><strong><code>e1</code>.</strong> There is no formula you can rearrange to get the answer. Use the halving method from Monday’s lecture instead. The answer lies somewhere between 0 and <code>a</code>.</p>
+<p>Write the program as two functions. The first must be <strong>zero at the answer</strong>, so it is <code>x*x*x + x - a</code>, not <code>x*x*x + x</code>. The second does the halving and calls the first. If you leave out the <code>- a</code>, your function is zero at x = 0, the halving test is satisfied immediately, and the answer collapses to 0.0000 for every input.</p>
 <p><strong><code>e2</code>.</strong> Build the flipped grid in a <em>second</em> array and print that. If you write the flipped values back into the original array as you go, you will overwrite values you have not read yet and the answer will be wrong. This is a small version of the problem <code>e4</code> has.</p>
 <p><strong><code>e3</code>.</strong> Two things can go wrong here, and only one of them is obvious.</p>
 <p>The obvious one is that a cell must not count itself.</p>
@@ -926,7 +927,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="how-the-checking-works" class="level3">
 <h3 class="anchored" data-anchor-id="how-the-checking-works">How the checking works</h3>
-<p>When you run <code>./check.sh e3</code>, it compiles <em>your</em> source file and runs it twice over: once on the examples printed in your starter file, and once on fresh random inputs generated at that moment from the range in the <code>GIVEN</code> line.</p>
+<p>When you run <code>./check.sh e3</code>, it compiles <em>your</em> source file and runs it on two kinds of input: a fixed set chosen in advance, and a set generated fresh at that moment from the range in the <code>GIVEN</code> line. The fixed ones are labelled <code>public</code> and the generated ones <code>random</code>.</p>
+<p>The examples printed in your starter are among the fixed ones, but there are more fixed vectors than printed examples — <code>e3</code> has six, for instance. So passing the printed example does not mean passing every <code>public</code> vector.</p>
 <p>This means a program that only reproduces the printed example will fail as soon as a new input is drawn.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -934,7 +936,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><code>e2</code> and <code>e4</code> are checked over their whole output, not just the last line, because the answer is a grid rather than a single value. Extra or missing spaces are ignored. A wrong or missing row is not.</p>
+<p><code>e2</code> and <code>e4</code> are checked over their whole output, not just the last line, because the answer is a grid rather than a single value.</p>
+<p>Several spaces in a row count as one, so the column alignment in <code>e2</code> is up to you. But a space is <strong>not</strong> the same as no space: for <code>e4</code>, printing <code># . # .</code> instead of <code>#.#.</code> is a different line and fails. Print the eight characters of each row with nothing between them.</p>
+<p><strong>Print nothing but the grid.</strong> Do not print a prompt. The whole output is compared, so a prompt on a line of its own becomes a wrong first row and costs all ten marks — even if every cell below it is right.</p>
 <p>If your output looks right but the check fails, run <code>./check.sh e4</code> and read the difference it prints. It shows you the line that differs, what you printed, and what was expected.</p>
 </div>
 </div>
@@ -1409,8 +1413,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../labsheets/lab08.html" class="pagination-link" aria-label="Lab 08: Structures (Tuples &amp; Dictionaries, C-style)">
-        <span class="nav-page-text">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../labsheets/lab08.html" class="pagination-link" aria-label="Lab 08: Pointers and Strings">
+        <span class="nav-page-text">Lab 08: Pointers and Strings</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

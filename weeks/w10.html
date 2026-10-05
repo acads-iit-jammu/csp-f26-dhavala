@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W10: Arrays – CS-1-01 (MO)</title>
+<title>W10: Pointers and Strings – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w10.html">W10: Arrays</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w10.html">W10: Pointers and Strings</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -211,13 +246,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w10.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">W10: Arrays</span></a>
+ <span class="menu-text">W10: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W11: Strings &amp; Multi-dimensional Arrays</span></a>
+ <span class="menu-text">W11: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -229,13 +264,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W13: Functions &amp; Recursion</span></a>
+ <span class="menu-text">W13: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W14: Pointers &amp; Dynamic Memory</span></a>
+ <span class="menu-text">W14: Full Problems I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -247,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w16.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W16: Function Pointers, Structures &amp; Unions</span></a>
+ <span class="menu-text">W16: Full Problems II</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -318,19 +353,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 08: Structures (Tuples &amp; Dictionaries, C-style)</span></a>
+ <span class="menu-text">Lab 08: Pointers and Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: File Handling</span></a>
+ <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 10: Error Handling</span></a>
+ <span class="menu-text">Lab 10: Dynamic Memory and Recursion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -404,18 +439,44 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#pre-read" id="toc-pre-read" class="nav-link active" data-scroll-target="#pre-read">Pre-read</a></li>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
+  <li><a href="#interactive" id="toc-interactive" class="nav-link" data-scroll-target="#interactive">Interactive</a></li>
+  <li><a href="#code-you-can-copy" id="toc-code-you-can-copy" class="nav-link" data-scroll-target="#code-you-can-copy">Code You Can Copy</a></li>
+  <li><a href="#monday-pointers" id="toc-monday-pointers" class="nav-link" data-scroll-target="#monday-pointers">Monday — Pointers</a>
+  <ul class="collapse">
+  <li><a href="#a-question-you-have-already-answered-without-knowing-it" id="toc-a-question-you-have-already-answered-without-knowing-it" class="nav-link" data-scroll-target="#a-question-you-have-already-answered-without-knowing-it">1 · A question you have already answered without knowing it</a></li>
+  <li><a href="#memory-is-numbered" id="toc-memory-is-numbered" class="nav-link" data-scroll-target="#memory-is-numbered">2 · Memory is numbered</a></li>
+  <li><a href="#two-operators" id="toc-two-operators" class="nav-link" data-scroll-target="#two-operators">3 · Two operators</a></li>
+  <li><a href="#declaring-a-pointer" id="toc-declaring-a-pointer" class="nav-link" data-scroll-target="#declaring-a-pointer">4 · Declaring a pointer</a></li>
+  <li><a href="#adding-1-to-a-pointer-moves-it-by-one-whole-item" id="toc-adding-1-to-a-pointer-moves-it-by-one-whole-item" class="nav-link" data-scroll-target="#adding-1-to-a-pointer-moves-it-by-one-whole-item">5 · Adding 1 to a pointer moves it by one whole item</a></li>
+  <li><a href="#arrays-and-pointers" id="toc-arrays-and-pointers" class="nav-link" data-scroll-target="#arrays-and-pointers">6 · Arrays and pointers</a></li>
+  <li><a href="#why-a-function-is-usually-told-how-long-an-array-is" id="toc-why-a-function-is-usually-told-how-long-an-array-is" class="nav-link" data-scroll-target="#why-a-function-is-usually-told-how-long-an-array-is">7 · Why a function is usually told how long an array is</a></li>
+  <li><a href="#what-goes-wrong" id="toc-what-goes-wrong" class="nav-link" data-scroll-target="#what-goes-wrong">8 · What goes wrong</a></li>
+  <li><a href="#b-a-worked-problem-reversing-a-list-in-place" id="toc-b-a-worked-problem-reversing-a-list-in-place" class="nav-link" data-scroll-target="#b-a-worked-problem-reversing-a-list-in-place">8b · A worked problem: reversing a list in place</a></li>
+  </ul></li>
+  <li><a href="#tuesday-strings" id="toc-tuesday-strings" class="nav-link" data-scroll-target="#tuesday-strings">Tuesday — Strings</a>
+  <ul class="collapse">
+  <li><a href="#a-string-is-an-array-of-characters-with-a-marker-at-the-end" id="toc-a-string-is-an-array-of-characters-with-a-marker-at-the-end" class="nav-link" data-scroll-target="#a-string-is-an-array-of-characters-with-a-marker-at-the-end">9 · A string is an array of characters with a marker at the end</a></li>
+  <li><a href="#sizeof-and-strlen-answer-different-questions" id="toc-sizeof-and-strlen-answer-different-questions" class="nav-link" data-scroll-target="#sizeof-and-strlen-answer-different-questions">10 · <code>sizeof</code> and <code>strlen</code> answer different questions</a></li>
+  <li><a href="#writing-strlen-yourself-and-a-palindrome" id="toc-writing-strlen-yourself-and-a-palindrome" class="nav-link" data-scroll-target="#writing-strlen-yourself-and-a-palindrome">11 · Writing <code>strlen</code> yourself, and a palindrome</a></li>
+  <li><a href="#b-reading-a-string-from-the-keyboard" id="toc-b-reading-a-string-from-the-keyboard" class="nav-link" data-scroll-target="#b-reading-a-string-from-the-keyboard">11b · Reading a string from the keyboard</a></li>
+  <li><a href="#the-library-string.h" id="toc-the-library-string.h" class="nav-link" data-scroll-target="#the-library-string.h">12 · The library: <code>string.h</code></a></li>
+  <li><a href="#two-ways-of-writing-a-string-and-they-are-not-the-same" id="toc-two-ways-of-writing-a-string-and-they-are-not-the-same" class="nav-link" data-scroll-target="#two-ways-of-writing-a-string-and-they-are-not-the-same">13 · Two ways of writing a string, and they are not the same</a></li>
+  <li><a href="#b-a-worked-problem-palindromes-in-real-sentences" id="toc-b-a-worked-problem-palindromes-in-real-sentences" class="nav-link" data-scroll-target="#b-a-worked-problem-palindromes-in-real-sentences">13b · A worked problem: palindromes in real sentences</a></li>
+  <li><a href="#c-where-this-is-going-linking-things-together" id="toc-c-where-this-is-going-linking-things-together" class="nav-link" data-scroll-target="#c-where-this-is-going-linking-things-together">13c · Where this is going: linking things together</a></li>
+  <li><a href="#drills" id="toc-drills" class="nav-link" data-scroll-target="#drills">Drills</a></li>
+  <li><a href="#questions-to-bring-back" id="toc-questions-to-bring-back" class="nav-link" data-scroll-target="#questions-to-bring-back">Questions to Bring Back</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w10.html">W10: Arrays</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w10.html">W10: Pointers and Strings</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W10: Arrays</h1>
+<h1 class="title">W10: Pointers and Strings</h1>
 </div>
 
 
@@ -433,26 +494,874 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Dates:</strong> Mon Oct 5 &amp; Tue Oct 6, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)</p>
+<p><strong>Syllabus modules:</strong> 5 — pointers and arrays (Monday) · 3 and 10 — strings, and the <code>string</code> library (Tuesday)</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Lab 08 is on pointers and strings</strong>, and follows these two lectures: EE on Tue Oct 6, Mechanical and Materials on Wed Oct 14.</p>
+</div>
+</div>
+</div>
 <section id="pre-read" class="level2">
 <h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
-</section>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
 <ul>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec15.pdf">Lec 15</a> — Introduction to arrays; integer &amp; character arrays; histogram; polynomial evaluation</li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec27.pdf">Lec 27</a> — <em>introduction to pointers</em>, in the second half (the first half is sorting, which we come to later)</li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec28.pdf">Lec 28</a> — <em>more on pointers</em>: pass by reference, what a segmentation fault is, and pointers to pointers</li>
+<li><a href="../cs1100-cse-iitm-2021/slides/Lec15.pdf">Lec 15</a> — arrays, including character arrays</li>
 </ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Lec 28 goes one step further than we do and covers <strong>pointers to pointers</strong>, written <code>int **p</code>. That is a pointer whose stored address is the address of another pointer. You do not need it this week, and nothing in Lab 08 requires it, but it is worth seeing once: the rule in section 4 — read <code>int **p</code> as “<code>*p</code> is an <code>int *</code>, so <code>p</code> points at an <code>int *</code>” — is all it takes to decode.</p>
+</div>
+</div>
+</div>
+<ul>
+<li>The <a href="../weeks/w09.html">W09 notes</a>, sections 4 and 5, on call by value and call by reference. You wrote <code>int *n</code> and <code>*n</code> there without being told what they were. This week says what they are.</li>
+</ul>
+</section>
+<section id="interactive" class="level2">
+<h2 class="anchored" data-anchor-id="interactive">Interactive</h2>
+<ul>
+<li>🧭 <a href="../materials/w10-pointers-visualiser.html"><strong>Pointers, step by step</strong></a> — memory drawn as numbered boxes. Watch <code>int *p = &amp;x</code> store an address, <code>*p = 7</code> change <code>x</code> through the arrow, <code>p + 1</code> jump a whole box at a time, and the <code>strlen</code> loop walk a string until it finds the <code>'\0'</code>. Four scenes, matching sections 2 to 6 and 9 to 11 below. It runs offline, so it works on a lab machine with no network.</li>
+</ul>
+</section>
+<section id="code-you-can-copy" class="level2">
+<h2 class="anchored" data-anchor-id="code-you-can-copy">Code You Can Copy</h2>
+<p>Every program below was compiled with <code>gcc -Wall -Wextra</code> and run, and the output shown is what it actually printed. Predict each one before you run it.</p>
+<hr>
+</section>
+<section id="monday-pointers" class="level1">
+<h1>Monday — Pointers</h1>
+<section id="a-question-you-have-already-answered-without-knowing-it" class="level2">
+<h2 class="anchored" data-anchor-id="a-question-you-have-already-answered-without-knowing-it">1 · A question you have already answered without knowing it</h2>
+<p>In W09 you wrote these two functions. They do the same arithmetic, but only one of them changes the caller’s variable:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> addOne<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span>        <span class="op">{</span> n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> reallyAddOne<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>n<span class="op">)</span> <span class="op">{</span> <span class="op">*</span>n <span class="op">=</span> <span class="op">*</span>n <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    addOne<span class="op">(</span>x<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"after addOne(x),        x = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    reallyAddOne<span class="op">(&amp;</span>x<span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"after reallyAddOne(&amp;x), x = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>after addOne(x),        x = 5
+after reallyAddOne(&amp;x), x = 6</code></pre>
+<p>You have been using this since last week. The explanation then was “pass the address”. Today we say what an address is, what <code>&amp;</code> and <code>*</code> actually do, and why this is the only way C can do it.</p>
+</section>
+<section id="memory-is-numbered" class="level2">
+<h2 class="anchored" data-anchor-id="memory-is-numbered">2 · Memory is numbered</h2>
+<p>A program’s memory is one long row of bytes, and <strong>every byte has a number</strong>. That number is called its <strong>address</strong>. The first byte is at some address, the next at that address plus one, and so on.</p>
+<p>When you declare <code>int x = 5;</code>, the program sets aside enough adjacent bytes somewhere in that row to hold an <code>int</code> — four of them on the machines we use — and writes 5 into them. The variable name <code>x</code> is how <em>you</em> refer to those bytes. The address is how the <em>machine</em> refers to them.</p>
+<p>Two things follow, and both matter:</p>
+<ul>
+<li>Every variable has an address, because every variable occupies bytes.</li>
+<li>An address is itself just a number, so it can be stored in a variable. A variable that stores an address is called a <strong>pointer</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>If you print an address, you will get a different number every time you run the program. Modern operating systems deliberately place programs at different addresses on each run. So addresses are real, but no particular address is worth memorising, and no exercise in this course will ask you for one.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="two-operators" class="level2">
+<h2 class="anchored" data-anchor-id="two-operators">3 · Two operators</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Written</th>
+<th>What it gives you</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>address-of</td>
+<td><code>&amp;x</code></td>
+<td>the address of the variable <code>x</code></td>
+</tr>
+<tr class="even">
+<td>dereference</td>
+<td><code>*p</code></td>
+<td>the value stored at the address held in <code>p</code></td>
+</tr>
+</tbody>
+</table>
+<p>They undo each other. <code>&amp;</code> turns a variable into an address; <code>*</code> turns an address back into the variable it refers to.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span>        <span class="co">/* p holds the address of x */</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"x  = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"*p = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="dv">7</span><span class="op">;</span>             <span class="co">/* write through the pointer */</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"after *p = 7, x = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>x  = 5
+*p = 5
+after *p = 7, x = 7</code></pre>
+<p>Read the last part carefully. <code>*p = 7</code> never mentions <code>x</code>, and yet <code>x</code> changed. That is the whole point of a pointer: it gives a second route to the same storage.</p>
+<p><code>*p</code> can appear on either side of an assignment, and it means something different in each position. On the <strong>right</strong>, <code>y = *p</code> reads the value at that address. On the <strong>left</strong>, <code>*p = 7</code> writes a value to that address.</p>
+</section>
+<section id="declaring-a-pointer" class="level2">
+<h2 class="anchored" data-anchor-id="declaring-a-pointer">4 · Declaring a pointer</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Read it as: <code>*p</code> is an <code>int</code>, therefore <code>p</code> is a pointer to an <code>int</code>.</p>
+<p>The type matters. <code>int *p</code> may only hold the address of an <code>int</code>; <code>char *s</code> may only hold the address of a <code>char</code>. A pointer is not a general-purpose number — it carries the type of the thing it points at, and section 5 shows why that is more than bookkeeping.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>The <code>*</code> belongs to the variable, not to the type.</strong> This line does not declare two pointers:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p<span class="op">,</span> q<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>p</code> is a pointer to <code>int</code>. <code>q</code> is a plain <code>int</code>. If you want two pointers you must write the <code>*</code> twice:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p<span class="op">,</span> <span class="op">*</span>q<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This catches everyone once. Write one declaration per line and it cannot catch you at all.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-1-to-a-pointer-moves-it-by-one-whole-item" class="level2">
+<h2 class="anchored" data-anchor-id="adding-1-to-a-pointer-moves-it-by-one-whole-item">5 · Adding 1 to a pointer moves it by one whole item</h2>
+<p>Adding 1 to a pointer does <strong>not</strong> move it one byte along. It moves it to the <strong>next item of that type</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">,</span> <span class="dv">50</span> <span class="op">};</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"sizeof(int) = </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"(p + 1) - p = </span><span class="sc">%td</span><span class="st">        (counted in ints, not bytes)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="op">(</span>p <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">-</span> p<span class="op">);</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"a[2]        = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"*(a + 2)    = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span>a <span class="op">+</span> <span class="dv">2</span><span class="op">));</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"*(p + 2)    = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span>p <span class="op">+</span> <span class="dv">2</span><span class="op">));</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>sizeof(int) = 4
+(p + 1) - p = 1        (counted in ints, not bytes)
+a[2]        = 30
+*(a + 2)    = 30
+*(p + 2)    = 30</code></pre>
+<p>Two facts here, and they are two halves of the same rule.</p>
+<p><strong>Going forwards</strong>, <code>p + 1</code> is the address of the <em>next int</em>, which on this machine is four bytes further along, because <code>sizeof(int)</code> is 4. For a <code>char *</code>, <code>p + 1</code> would be one byte further along. The compiler scales the step by the size of the type, which is why the type in the declaration is not decoration.</p>
+<p><strong>Going backwards</strong>, subtracting two pointers gives the number of <em>items</em> between them, not the number of bytes. That is why <code>(p + 1) - p</code> is 1 and not 4.</p>
+<p>So pointer arithmetic is always counted in whole items of the pointed-to type. Nothing is stored in the pointer to make this happen; the compiler works it out from the type at compile time.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>sizeof</code> produces a value of type <code>size_t</code>, and <code>%zu</code> is the <code>printf</code> format for it. <code>%td</code> is the format for the result of subtracting two pointers. You can use them without studying either type further; just do not use <code>%d</code> for them.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="arrays-and-pointers" class="level2">
+<h2 class="anchored" data-anchor-id="arrays-and-pointers">6 · Arrays and pointers</h2>
+<p>The last three lines of that output are equal, and that is not a coincidence. In C, for any array <code>a</code> and index <code>i</code>:</p>
+<blockquote class="blockquote">
+<p><code>a[i]</code> means exactly <code>*(a + i)</code></p>
+</blockquote>
+<p>The subscript notation is a shorthand for pointer arithmetic. This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why <code>int a[]</code> and <code>int *a</code> mean the same thing in a parameter list, and why the function can change the caller’s array.</p>
+</section>
+<section id="why-a-function-is-usually-told-how-long-an-array-is" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-function-is-usually-told-how-long-an-array-is">7 · Why a function is usually told how long an array is</h2>
+<p>Here is the consequence, and it explains something you have been doing since you started writing functions over arrays:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> show<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"inside the function, sizeof(a) = </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span> a<span class="op">);</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"inside the function, n         = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> n<span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"in main, sizeof(a)             = </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span> a<span class="op">);</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    show<span class="op">(</span>a<span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>in main, sizeof(a)             = 40
+inside the function, sizeof(a) = 8
+inside the function, n         = 10</code></pre>
+<p>In <code>main</code>, <code>sizeof a</code> is 40: ten integers of four bytes each. Inside the function it is 8, the size of a pointer on this machine.</p>
+<p><strong>The function was never given the array. It was given an address.</strong> The length did not travel with it, and there is no way to recover it from inside the function. That is why a function like</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> minMax<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>lo<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>hi<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>has to take <code>n</code> as a separate parameter. You will meet this one in Lab 07.</p>
+<p>The compiler knows this is a common mistake and warns about it. The exact wording differs between compilers; what matters is the file and line it points at:</p>
+<pre><code>warning: sizeof on array function parameter will return size of 'int *'
+         instead of 'int[]' [-Wsizeof-array-argument]</code></pre>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>This is about the first dimension only.</strong> A parameter written <code>int world[ROWS][COLS]</code>, as in last week’s Game of Life, still carries its <strong>column</strong> count, because that number is part of the parameter’s type — it is what makes <code>world[i][j]</code> computable. That is why <code>printWorld</code>, <code>countNeighbours</code> and <code>nextGeneration</code> needed no length parameter: <code>COLS</code> was in the type and <code>ROWS</code> was a <code>#define</code> both sides could see.</p>
+<p>What never survives is the number of rows, which is the dimension that decays to a pointer. So the rule is: a function is told the size of the dimension that decayed, and reads the rest from the type.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="what-goes-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="what-goes-wrong">8 · What goes wrong</h2>
+<p>Four mistakes account for most pointer bugs. <strong>Three of the four are undefined behaviour</strong>, marked below. Read them; do not run them.</p>
+<p><strong>Declaring a pointer is not the same as giving it something to point at.</strong> <em>(undefined behaviour)</em></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p<span class="op">;</span>      <span class="co">/* p exists, but has not been given an address */</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>      <span class="co">/* undefined: writes to an address nobody chose */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A pointer must be given an address before it is dereferenced, either from <code>&amp;something</code> or from a function that returns one. Until then, as W09 §10 put it for arrays, what happens is <strong>undefined</strong> — not “whatever happened to be in that memory”. There is no value you can reason about, and reading it is itself undefined.</p>
+<p>C gives you a way to say “not pointing at anything yet”. The name is <code>NULL</code>, and you can test for it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> NULL<span class="op">;</span>          <span class="co">/* NULL means: not pointing at anything yet */</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"p is NULL, so it must not be dereferenced</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span>                 <span class="co">/* now it points at something real */</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">!=</span> NULL<span class="op">)</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"p now points at x, and *p = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"an address prints with </span><span class="sc">%%</span><span class="st">p, like this: "</span><span class="op">);</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%p\n</span><span class="st">"</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>p<span class="op">);</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>p is NULL, so it must not be dereferenced
+p now points at x, and *p = 5
+an address prints with %p, like this: 0x16d4b32c8</code></pre>
+<p>The last line is the one from section 2 that changes on every run, so yours will show a different number. Note the two details: <code>%p</code> is the format for an address, and the pointer is cast to <code>(void *)</code> to use it. <code>NULL</code> returns in W13, where it is how <code>malloc</code> reports failure.</p>
+<p><strong>Confusing the pointer with the thing it points at.</strong> <code>*p = 7</code> sets the variable <code>p</code> points at to 7. Writing <code>p = 7</code> instead tries to set the pointer itself to the address 7, which is meaningless — and the compiler rejects it outright:</p>
+<pre><code>error: incompatible integer to pointer conversion assigning to 'int *' from 'int'</code></pre>
+<p>So that particular slip cannot get past the compiler. The dangerous version is the one where both sides are pointers: writing <code>p = q</code> when you meant <code>*p = *q</code> is perfectly legal, silent, and changes which variable <code>p</code> refers to instead of copying a value.</p>
+<p><strong>Returning the address of a local variable.</strong> <em>(undefined behaviour)</em> A local variable stops existing when its function returns, so its address refers to storage that has been given back. The pointer still holds a number, and the program may appear to work, which is exactly what makes it dangerous. You will see the proper way to return new storage when we reach <code>malloc</code> in W13.</p>
+<p><strong>Writing past the end of an array.</strong> <em>(undefined behaviour)</em> <code>a[10]</code> in an array of ten, or walking a pointer one step too far. C does not check this. We will come back to it on Tuesday, because the most common version in practice involves strings.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The three marked above are <strong>undefined behaviour</strong>: the C standard does not say what happens. The program may crash, may print nonsense, or may appear to work perfectly on your machine and fail on the examiner’s. Do not learn what your compiler happens to do with them. Learn not to write them.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="b-a-worked-problem-reversing-a-list-in-place" class="level2">
+<h2 class="anchored" data-anchor-id="b-a-worked-problem-reversing-a-list-in-place">8b · A worked problem: reversing a list in place</h2>
+<p>Everything from Monday, used once on a real task. The problem: <strong>reverse a list of readings in place, and report how many exchanges that took.</strong></p>
+<p>Three things make this need pointers, and each is one of the ideas above.</p>
+<ol type="1">
+<li><code>swap</code> has to change two variables belonging to its caller, so it takes their addresses.</li>
+<li><code>reverse</code> has to modify the caller’s array, which it can, because an array argument is converted to a pointer.</li>
+<li><code>reverse</code> has to hand back a count <em>as well as</em> doing its job, and a function can only <code>return</code> one value, so the count goes back through a pointer.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* exchanges the two ints whose addresses it is given */</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> swap<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>y<span class="op">)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> t <span class="op">=</span> <span class="op">*</span>x<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>x <span class="op">=</span> <span class="op">*</span>y<span class="op">;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>y <span class="op">=</span> t<span class="op">;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">/* reverses a[0..n-1] in place, and reports how many swaps that took */</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> reverse<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>swaps<span class="op">)</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lo <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> hi <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>lo <span class="op">&lt;</span> hi<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        swap<span class="op">(&amp;</span>a<span class="op">[</span>lo<span class="op">],</span> <span class="op">&amp;</span>a<span class="op">[</span>hi<span class="op">]);</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        count<span class="op">++;</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        lo<span class="op">++;</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        hi<span class="op">--;</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>swaps <span class="op">=</span> count<span class="op">;</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> show<span class="op">(</span><span class="dt">char</span> label<span class="op">[],</span> <span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> label<span class="op">);</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">" </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> a<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">[</span><span class="dv">7</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">2</span> <span class="op">};</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> swaps<span class="op">;</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    show<span class="op">(</span><span class="st">"before:"</span><span class="op">,</span> a<span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    reverse<span class="op">(</span>a<span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="op">&amp;</span>swaps<span class="op">);</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    show<span class="op">(</span><span class="st">"after: "</span><span class="op">,</span> a<span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"swaps made: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> swaps<span class="op">);</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>before: 3 1 4 1 5 9 2
+after:  2 9 5 1 4 1 3
+swaps made: 3</code></pre>
+<p>Three points worth pausing on.</p>
+<p><strong><code>&amp;a[lo]</code> is the address of one element.</strong> <code>a[lo]</code> is a variable like any other, so <code>&amp;</code> works on it. <code>swap</code> neither knows nor cares that its two addresses happen to be inside an array.</p>
+<p><strong>Seven elements, three swaps.</strong> The loop stops when <code>lo</code> and <code>hi</code> meet. With an odd count the middle element is never touched, because exchanging it with itself would achieve nothing.</p>
+<p><strong><code>reverse</code> returns <code>void</code> and still produces two results</strong> — a changed array and a count. Both travel out through addresses. This is the shape you will use whenever one answer is not enough.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Check the loop condition. Writing <code>lo &lt;= hi</code> instead of <code>lo &lt; hi</code> would, for an odd-length list, swap the middle element with itself: harmless to the data, but the reported count would be wrong. A test that only looked at the array would never catch it.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="tuesday-strings" class="level1">
+<h1>Tuesday — Strings</h1>
+<section id="a-string-is-an-array-of-characters-with-a-marker-at-the-end" class="level2">
+<h2 class="anchored" data-anchor-id="a-string-is-an-array-of-characters-with-a-marker-at-the-end">9 · A string is an array of characters with a marker at the end</h2>
+<p>C has no separate string type. A string is an array of <code>char</code> in which the end of the text is marked by a character whose value is zero, written <code>'\0'</code> and called the <strong>null terminator</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">"level"</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That declaration creates an array of <strong>six</strong> characters, not five:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>character</td>
+<td><code>l</code></td>
+<td><code>e</code></td>
+<td><code>v</code></td>
+<td><code>e</code></td>
+<td><code>l</code></td>
+<td><code>\0</code></td>
+</tr>
+</tbody>
+</table>
+<p>Every function that works on strings relies on that terminator being there, because nothing else tells it where the text stops. <code>sizeof</code> can tell you the size of an array wherever its declaration is visible, but section 7 showed that this does not survive being passed to a function — and a string function is almost always on the receiving end of that.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">"level"</span><span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"the characters are:"</span><span class="op">);</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s<span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">" </span><span class="sc">%c</span><span class="st">"</span><span class="op">,</span> s<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"sizeof s  = </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">);</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"strlen(s) = </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span> strlen<span class="op">(</span>s<span class="op">));</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>the characters are: l e v e l
+sizeof s  = 6
+strlen(s) = 5</code></pre>
+</section>
+<section id="sizeof-and-strlen-answer-different-questions" class="level2">
+<h2 class="anchored" data-anchor-id="sizeof-and-strlen-answer-different-questions">10 · <code>sizeof</code> and <code>strlen</code> answer different questions</h2>
+<p>They differ here by exactly one, and it is worth being precise about why.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>What it asks</th>
+<th>Answer for <code>char s[] = "level"</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sizeof s</code></td>
+<td>how many bytes were set aside</td>
+<td>6, including the <code>'\0'</code></td>
+</tr>
+<tr class="even">
+<td><code>strlen(s)</code></td>
+<td>how many characters before the <code>'\0'</code></td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p><code>sizeof</code> is answered by the compiler, which can see the declaration. <code>strlen</code> is answered at run time, by walking the array until it finds the terminator. And as section 7 established, <code>sizeof</code> gives the wrong answer entirely once the array has been passed to a function, whereas <code>strlen</code> keeps working, because it needs only the terminator.</p>
+</section>
+<section id="writing-strlen-yourself-and-a-palindrome" class="level2">
+<h2 class="anchored" data-anchor-id="writing-strlen-yourself-and-a-palindrome">11 · Writing <code>strlen</code> yourself, and a palindrome</h2>
+<p>Both of these are just the walk from section 9, with the loop doing different work.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> myStrlen<span class="op">(</span><span class="dt">char</span> s<span class="op">[])</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>s<span class="op">[</span>n<span class="op">]</span> <span class="op">!=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">)</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        n<span class="op">++;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n<span class="op">;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> isPalindrome<span class="op">(</span><span class="dt">char</span> s<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lo <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> hi <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>lo <span class="op">&lt;</span> hi<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>s<span class="op">[</span>lo<span class="op">]</span> <span class="op">!=</span> s<span class="op">[</span>hi<span class="op">])</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        lo<span class="op">++;</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        hi<span class="op">--;</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> a<span class="op">[]</span> <span class="op">=</span> <span class="st">"level"</span><span class="op">;</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> b<span class="op">[]</span> <span class="op">=</span> <span class="st">"lever"</span><span class="op">;</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"myStrlen(</span><span class="sc">\"</span><span class="st">level</span><span class="sc">\"</span><span class="st">) = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> myStrlen<span class="op">(</span>a<span class="op">));</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\"</span><span class="st">level</span><span class="sc">\"</span><span class="st"> palindrome? </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> isPalindrome<span class="op">(</span>a<span class="op">,</span> myStrlen<span class="op">(</span>a<span class="op">)));</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\"</span><span class="st">lever</span><span class="sc">\"</span><span class="st"> palindrome? </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> isPalindrome<span class="op">(</span>b<span class="op">,</span> myStrlen<span class="op">(</span>b<span class="op">)));</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>myStrlen("level") = 5
+"level" palindrome? 1
+"lever" palindrome? 0</code></pre>
+<p><code>isPalindrome</code> uses two indices that move towards each other and stop when they meet. Note the loop condition is <code>lo &lt; hi</code>, not <code>lo &lt;= hi</code>: when they are equal they are on the same character, and a character always matches itself. A string of odd length has a middle character that is never compared, and does not need to be.</p>
+</section>
+<section id="b-reading-a-string-from-the-keyboard" class="level2">
+<h2 class="anchored" data-anchor-id="b-reading-a-string-from-the-keyboard">11b · Reading a string from the keyboard</h2>
+<p>Every string so far has been written into the program. To read one you type, use <code>scanf</code> with <code>%s</code> — and note that <strong>there is no <code>&amp;</code></strong>, because an array argument is already an address, which is section 6.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> word<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Enter a word: "</span><span class="op">);</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>scanf<span class="op">(</span><span class="st">"</span><span class="sc">%49s</span><span class="st">"</span><span class="op">,</span> word<span class="op">)</span> <span class="op">!=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"no word was read</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"you typed </span><span class="sc">\"%s\"</span><span class="st">, which has </span><span class="sc">%zu</span><span class="st"> characters</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> word<span class="op">,</span> strlen<span class="op">(</span>word<span class="op">));</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Typing <code>level</code> gives:</p>
+<pre><code>Enter a word: you typed "level", which has 5 characters</code></pre>
+<p>Two details that are not optional.</p>
+<p><strong>The <code>49</code> in <code>%49s</code> is a limit.</strong> The array holds 50 characters, one of which must be the <code>'\0'</code>, so at most 49 may be read. Plain <code>%s</code> has no limit: type a longer word and <code>scanf</code> writes past the end of the array, which is the fourth mistake in section 8. Always give the number, and always make it one less than the array size.</p>
+<p><strong><code>%s</code> stops at the first space.</strong> It reads one word, not a line. For <code>"never odd or even"</code> it would read only <code>never</code>. Reading a whole line needs a different tool, which we will not need before Lab 08.</p>
+</section>
+<section id="the-library-string.h" class="level2">
+<h2 class="anchored" data-anchor-id="the-library-string.h">12 · The library: <code>string.h</code></h2>
+<p>Four functions cover most of what you need. All of them depend on the terminator being present.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>strlen(s)</code></td>
+<td>number of characters before the <code>'\0'</code></td>
+</tr>
+<tr class="even">
+<td><code>strcpy(dst, src)</code></td>
+<td>copies <code>src</code> into <code>dst</code>, terminator included</td>
+</tr>
+<tr class="odd">
+<td><code>strcat(dst, src)</code></td>
+<td>appends <code>src</code> to the end of <code>dst</code></td>
+</tr>
+<tr class="even">
+<td><code>strcmp(a, b)</code></td>
+<td>negative, zero, or positive, comparing character codes (see the warning below)</td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> compare<span class="op">(</span><span class="dt">char</span> a<span class="op">[],</span> <span class="dt">char</span> b<span class="op">[])</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> r <span class="op">=</span> strcmp<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"strcmp(</span><span class="sc">\"%s\"</span><span class="st">, </span><span class="sc">\"%s\"</span><span class="st">) is "</span><span class="op">,</span> a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>r <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span>       printf<span class="op">(</span><span class="st">"negative: </span><span class="sc">\"%s\"</span><span class="st"> comes first</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">);</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>r <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span>  printf<span class="op">(</span><span class="st">"positive: </span><span class="sc">\"%s\"</span><span class="st"> comes first</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>             printf<span class="op">(</span><span class="st">"zero: they are equal</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> a<span class="op">[</span><span class="dv">20</span><span class="op">]</span> <span class="op">=</span> <span class="st">"hello"</span><span class="op">;</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> b<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>b<span class="op">,</span> a<span class="op">);</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"b after strcpy(b, a)      = </span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    strcat<span class="op">(</span>b<span class="op">,</span> <span class="st">" there"</span><span class="op">);</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"b after strcat(b, </span><span class="sc">\"</span><span class="st"> there</span><span class="sc">\"</span><span class="st">) = </span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    compare<span class="op">(</span><span class="st">"abc"</span><span class="op">,</span> <span class="st">"abd"</span><span class="op">);</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    compare<span class="op">(</span><span class="st">"abd"</span><span class="op">,</span> <span class="st">"abc"</span><span class="op">);</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    compare<span class="op">(</span><span class="st">"abc"</span><span class="op">,</span> <span class="st">"abc"</span><span class="op">);</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>b after strcpy(b, a)      = hello
+b after strcat(b, " there") = hello there
+strcmp("abc", "abd") is negative: "abc" comes first
+strcmp("abd", "abc") is positive: "abc" comes first
+strcmp("abc", "abc") is zero: they are equal</code></pre>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong><code>strcmp</code> does not return <code>true</code> or <code>false</code>.</strong> It returns zero when the strings are <strong>equal</strong>, which is the opposite of what reading <code>if (strcmp(a, b))</code> suggests. Write <code>if (strcmp(a, b) == 0)</code> when you mean “are these the same string”.</p>
+<p>Only the sign of the result is defined. Do not depend on the particular number.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong><code>strcmp</code> is not alphabetical order.</strong> It compares the characters by their numeric codes, and every capital letter has a smaller code than every lowercase letter — <code>'Z'</code> is 90 and <code>'a'</code> is 97. So:</p>
+<pre><code>strcmp("Zebra", "apple")  is negative:  "Zebra" comes first
+strcmp("abc",   "ABD")    is positive:  "ABD"   comes first</code></pre>
+<p>For a dictionary ordering you would have to convert both strings to one case first. This is also why the After Class exercise has to say “ignore letter case” explicitly: comparing <code>'N'</code> with <code>'n'</code> finds them different.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong><code>strcpy</code> and <code>strcat</code> do not check that the destination is big enough.</strong> If it is not, they write past the end of the array, which is undefined behaviour and one of the most exploited bugs in the history of software. Make sure the destination array has room, including one byte for the terminator.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="two-ways-of-writing-a-string-and-they-are-not-the-same" class="level2">
+<h2 class="anchored" data-anchor-id="two-ways-of-writing-a-string-and-they-are-not-the-same">13 · Two ways of writing a string, and they are not the same</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> a<span class="op">[]</span> <span class="op">=</span> <span class="st">"hello"</span><span class="op">;</span>     <span class="co">/* an array of 6 chars, holding a copy of the text  */</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>p  <span class="op">=</span> <span class="st">"hello"</span><span class="op">;</span>     <span class="co">/* a pointer to the text, which you must not modify */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first makes an array and copies the characters into it. You may change them: <code>a[0] = 'H'</code> is fine.</p>
+<p>The second stores the address of a string literal. String literals may be placed in read-only memory, and <strong>modifying one is undefined behaviour</strong>. <code>p[0] = 'H'</code> may crash, or may silently do nothing, or may appear to work. It is not a thing to try and find out; it is a thing not to write.</p>
+<p>If you want a string you can modify, declare an array.</p>
+<hr>
+</section>
+<section id="b-a-worked-problem-palindromes-in-real-sentences" class="level2">
+<h2 class="anchored" data-anchor-id="b-a-worked-problem-palindromes-in-real-sentences">13b · A worked problem: palindromes in real sentences</h2>
+<p>Section 11 checked <code>"level"</code>. Real text is not that tidy: <code>"Never odd or even"</code> is a palindrome, but only if you ignore the spaces and treat <code>N</code> and <code>n</code> as the same letter. This is the Tuesday problem, and it is the Monday problem with one change — <strong>compare instead of swap</strong>.</p>
+<p>The two indices still start at the ends and move towards each other. What is new is that each one must first skip anything that is not a letter.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> myStrlen<span class="op">(</span><span class="dt">char</span> s<span class="op">[])</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>s<span class="op">[</span>n<span class="op">]</span> <span class="op">!=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">)</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        n<span class="op">++;</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n<span class="op">;</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> isLetter<span class="op">(</span><span class="dt">char</span> c<span class="op">)</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">'a'</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">'z'</span><span class="op">)</span> <span class="op">||</span> <span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">'A'</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">'Z'</span><span class="op">);</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> lower<span class="op">(</span><span class="dt">char</span> c<span class="op">)</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">'A'</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">'Z'</span><span class="op">)</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> c <span class="op">-</span> <span class="ch">'A'</span> <span class="op">+</span> <span class="ch">'a'</span><span class="op">;</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c<span class="op">;</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> isPalindrome<span class="op">(</span><span class="dt">char</span> s<span class="op">[])</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lo <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> hi <span class="op">=</span> myStrlen<span class="op">(</span>s<span class="op">)</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>lo <span class="op">&lt;</span> hi<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>lo <span class="op">&lt;</span> hi <span class="op">&amp;&amp;</span> <span class="op">!</span>isLetter<span class="op">(</span>s<span class="op">[</span>lo<span class="op">]))</span> lo<span class="op">++;</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>lo <span class="op">&lt;</span> hi <span class="op">&amp;&amp;</span> <span class="op">!</span>isLetter<span class="op">(</span>s<span class="op">[</span>hi<span class="op">]))</span> hi<span class="op">--;</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>lower<span class="op">(</span>s<span class="op">[</span>lo<span class="op">])</span> <span class="op">!=</span> lower<span class="op">(</span>s<span class="op">[</span>hi<span class="op">]))</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>        lo<span class="op">++;</span></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>        hi<span class="op">--;</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> a<span class="op">[]</span> <span class="op">=</span> <span class="st">"level"</span><span class="op">;</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> b<span class="op">[]</span> <span class="op">=</span> <span class="st">"lever"</span><span class="op">;</span></span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> c<span class="op">[]</span> <span class="op">=</span> <span class="st">"Never odd or even"</span><span class="op">;</span></span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> d<span class="op">[]</span> <span class="op">=</span> <span class="st">"A man, a plan, a canal: Panama"</span><span class="op">;</span></span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\"%s\"</span><span class="st"> -&gt; </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">,</span> isPalindrome<span class="op">(</span>a<span class="op">));</span></span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\"%s\"</span><span class="st"> -&gt; </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> b<span class="op">,</span> isPalindrome<span class="op">(</span>b<span class="op">));</span></span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\"%s\"</span><span class="st"> -&gt; </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> c<span class="op">,</span> isPalindrome<span class="op">(</span>c<span class="op">));</span></span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\"%s\"</span><span class="st"> -&gt; </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> d<span class="op">,</span> isPalindrome<span class="op">(</span>d<span class="op">));</span></span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>"level" -&gt; 1
+"lever" -&gt; 0
+"Never odd or even" -&gt; 1
+"A man, a plan, a canal: Panama" -&gt; 1</code></pre>
+<p>Four things to look at, because each one is a decision that could have gone wrong.</p>
+<p><strong><code>lower</code> subtracts <code>'A'</code> and adds <code>'a'</code></strong> rather than subtracting 32. Both work here, but the first says what it means: <em>move this letter from the capital range into the small range</em>. It also does not depend on you remembering that the gap is 32, which is the kind of thing the <code>strcmp</code> warning in section 12 was about.</p>
+<p><strong>The skipping loops carry <code>lo &lt; hi</code> as well.</strong> Without it, a string with no letters at all would run <code>lo</code> off the end of the array — mistake four from section 8. Every loop that advances an index needs a reason to stop.</p>
+<p><strong><code>isLetter</code> and <code>lower</code> are separate functions.</strong> Each does one thing and is three lines long. You could write the whole test as one enormous condition, and you would not be able to read it next week.</p>
+<p><strong>The structure is Monday’s.</strong> Two indices from the ends, moving towards each other, stopping when they meet. Monday exchanged the two elements; today it compares them. Recognising that one piece of machinery solves both problems is most of what this week is for.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is the After Class exercise from section 11, worked. It is also close to what Lab 08 asks for, so understand it rather than copy it — the lab will not hand you the same sentence.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="c-where-this-is-going-linking-things-together" class="level2">
+<h2 class="anchored" data-anchor-id="c-where-this-is-going-linking-things-together">13c · Where this is going: linking things together</h2>
+<p>Pointers are not only a way to let a function change a variable. They are how C builds data structures that an array cannot give you, and the first of those is the <strong>linked list</strong>.</p>
+<p>Here is the problem with an array. To insert a value in the middle, every element after it has to shift up one place to make room. For a thousand elements that is hundreds of moves for one insertion.</p>
+<p>A linked list solves this by not storing the items next to each other. Each item keeps, alongside its value, <strong>where the next item is</strong>. To insert, you change two links and move nothing:</p>
+<pre><code>head → [10|•] → [20|•] → [30|✗]
+
+insert 15 after 10:
+
+head → [10|•] → [15|•] → [20|•] → [30|✗]
+             ╰─ this link changed, and the new node points where it used to</code></pre>
+<p>You have not met the two tools C normally uses for this — <code>struct</code>, which arrives in W11, and <code>malloc</code>, in W13. But the <em>idea</em> needs neither, and you can run it today with what you already have. Keep the values in one array, and keep the links in a second array, where each entry is the <strong>index</strong> of the next item. <code>-1</code> means “nothing follows”.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NONE </span><span class="op">-</span><span class="dv">1</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">/* Insert v just after the node held in slot `at`, and return its slot.</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">   Nothing already in the arrays is moved. */</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> insertAfter<span class="op">(</span><span class="dt">int</span> value<span class="op">[],</span> <span class="dt">int</span> next<span class="op">[],</span> <span class="dt">int</span> at<span class="op">,</span> <span class="dt">int</span> v<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>used<span class="op">)</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="op">*</span>used<span class="op">;</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    value<span class="op">[</span>n<span class="op">]</span> <span class="op">=</span> v<span class="op">;</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    next<span class="op">[</span>n<span class="op">]</span>  <span class="op">=</span> next<span class="op">[</span>at<span class="op">];</span>    <span class="co">/* the new node points where `at` used to point */</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    next<span class="op">[</span>at<span class="op">]</span> <span class="op">=</span> n<span class="op">;</span>           <span class="co">/* and `at` now points at the new node          */</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>used <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n<span class="op">;</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> printList<span class="op">(</span><span class="dt">int</span> value<span class="op">[],</span> <span class="dt">int</span> next<span class="op">[],</span> <span class="dt">int</span> head<span class="op">)</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>i <span class="op">!=</span> NONE<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">" </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> value<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> next<span class="op">[</span>i<span class="op">];</span>        <span class="co">/* follow the link */</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> value<span class="op">[</span><span class="dv">10</span><span class="op">],</span> next<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> used<span class="op">,</span> head<span class="op">;</span></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    value<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  next<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>    value<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>  next<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>    value<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="dv">30</span><span class="op">;</span>  next<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> NONE<span class="op">;</span></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>  used <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"list:          "</span><span class="op">);</span> printList<span class="op">(</span>value<span class="op">,</span> next<span class="op">,</span> head<span class="op">);</span></span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>    insertAfter<span class="op">(</span>value<span class="op">,</span> next<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="op">&amp;</span>used<span class="op">);</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"15 after 10:   "</span><span class="op">);</span> printList<span class="op">(</span>value<span class="op">,</span> next<span class="op">,</span> head<span class="op">);</span></span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>    insertAfter<span class="op">(</span>value<span class="op">,</span> next<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">25</span><span class="op">,</span> <span class="op">&amp;</span>used<span class="op">);</span></span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"25 after 20:   "</span><span class="op">);</span> printList<span class="op">(</span>value<span class="op">,</span> next<span class="op">,</span> head<span class="op">);</span></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">slot 1 still holds </span><span class="sc">%d</span><span class="st">, slot 2 still holds </span><span class="sc">%d</span><span class="st"> — nothing was shifted</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>           value<span class="op">[</span><span class="dv">1</span><span class="op">],</span> value<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>list:           10 20 30
+15 after 10:    10 15 20 30
+25 after 20:    10 15 20 25 30
+
+slot 1 still holds 20, slot 2 still holds 30 — nothing was shifted</code></pre>
+<p>Two insertions into the middle, and not one existing value moved. That is the whole trade: an array gives you instant access to element <em>i</em> but expensive insertion; a linked list gives you cheap insertion but makes you walk from the front to find anything.</p>
+<p>Notice what the program is made of. <code>printList</code> <strong>follows links until it reaches the end marker</strong> — the same shape as the <code>strlen</code> loop in section 11, which follows characters until it reaches <code>'\0'</code>. And <code>insertAfter</code> reports the new slot through <code>int *used</code>, because it has work to do <em>and</em> a value to hand back, which is section 8b.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>What changes when you have the real tools.</strong> In W11 a <code>struct</code> will let one variable hold both the value and the link, so there are no parallel arrays. In W13, <code>malloc</code> will create nodes while the program runs, so there is no fixed-size pool and no <code>used</code> counter. The link stops being an index and becomes an actual pointer, and <code>NONE</code> becomes <code>NULL</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> node <span class="op">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> value<span class="op">;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> node <span class="op">*</span>next<span class="op">;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="kw">struct</span> node <span class="op">*</span>p <span class="op">=</span> head<span class="op">;</span> p <span class="op">!=</span> NULL<span class="op">;</span> p <span class="op">=</span> p<span class="op">-&gt;</span>next<span class="op">)</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">" </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> p<span class="op">-&gt;</span>value<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That loop is <code>printList</code> above, written with the real tools. Compare them: <code>i = next[i]</code> has become <code>p = p-&gt;next</code>, and <code>i != NONE</code> has become <code>p != NULL</code>. Nothing else about the idea changed.</p>
+<p>You are not expected to write that version yet. We build it properly in W14.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="drills" class="level2">
+<h2 class="anchored" data-anchor-id="drills">Drills</h2>
+<p>Short programs to predict before running. Write your answer down first; that is the exercise.</p>
+<p>Two of these print numbers that depend on the machine — the size of an <code>int</code> and the size of a pointer. Predict them for the machine in front of you, and say which they are.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Program</th>
+<th>Predict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d01</code></td>
+<td><code>int x=5, *p=&amp;x; printf("%d", *p);</code></td>
+<td>the number printed</td>
+</tr>
+<tr class="even">
+<td><code>d02</code></td>
+<td><code>*p = 7;</code> then <code>printf("%d", x);</code></td>
+<td>the number printed</td>
+</tr>
+<tr class="odd">
+<td><code>d03</code></td>
+<td><code>int *p, q;</code> — then <code>q = 4;</code></td>
+<td>does it compile? what is <code>q</code>?</td>
+</tr>
+<tr class="even">
+<td><code>d04</code></td>
+<td><code>int a[5], *p=a;</code> print <code>(p+1)-p</code>, then <code>sizeof(int)</code></td>
+<td>both numbers, and why they differ</td>
+</tr>
+<tr class="odd">
+<td><code>d05</code></td>
+<td>print <code>a[3]</code> and <code>*(a+3)</code></td>
+<td>are they the same?</td>
+</tr>
+<tr class="even">
+<td><code>d06</code></td>
+<td><code>sizeof a</code> in <code>main</code> against <code>sizeof a</code> inside a function</td>
+<td>both numbers (the second is the size of a pointer on your machine)</td>
+</tr>
+<tr class="odd">
+<td><code>d07</code></td>
+<td><code>char s[]="level";</code> print <code>sizeof s</code> and <code>strlen(s)</code></td>
+<td>both numbers</td>
+</tr>
+<tr class="even">
+<td><code>d08</code></td>
+<td>count the steps the <code>strlen</code> loop takes on <code>"hello"</code></td>
+<td>the number of steps</td>
+</tr>
+<tr class="odd">
+<td><code>d09</code></td>
+<td>count the comparisons <code>isPalindrome</code> makes on <code>"level"</code></td>
+<td>the number</td>
+</tr>
+<tr class="even">
+<td><code>d10</code></td>
+<td><code>strcmp("abc","abc")</code> used directly in an <code>if</code></td>
+<td>which branch runs, and why</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="questions-to-bring-back" class="level2">
+<h2 class="anchored" data-anchor-id="questions-to-bring-back">Questions to Bring Back</h2>
+<ol type="1">
+<li>Why can a function not find out, by itself, how long an array it was given is?</li>
+<li><code>&amp;x</code> and <code>x</code> differ by one character at a call site. Describe what each one hands to the function.</li>
+<li><code>char s[] = "level"</code> sets aside six bytes for five letters. What is the sixth for, and what breaks without it?</li>
+<li>Why does <code>p + 1</code> move four bytes for an <code>int *</code> but one byte for a <code>char *</code>?</li>
+<li><code>if (strcmp(a, b))</code> is almost always a bug. What does it actually test, and what did the author probably mean?</li>
+</ol>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<ul>
+<li>Write <code>myStrcpy</code> and <code>myStrcat</code> yourself, using only the walk from section 11. Then compare your versions against the library ones.</li>
+<li>Modify <code>isPalindrome</code> to ignore spaces and letter case, so that <code>"Never odd or even"</code> is reported as a palindrome.</li>
+<li><strong>Lab 08</strong> is on this material, for EE on Tue Oct 6 and for Mechanical and Materials on Wed Oct 14.</li>
+</ul>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal column. To be posted.</em></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -868,8 +1777,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/w11.html" class="pagination-link" aria-label="W11: Strings &amp; Multi-dimensional Arrays">
-        <span class="nav-page-text">W11: Strings &amp; Multi-dimensional Arrays</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/w11.html" class="pagination-link" aria-label="W11: Structures and File Input/Output">
+        <span class="nav-page-text">W11: Structures and File Input/Output</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
