@@ -283,7 +283,9 @@ For these five you are given the specification and nothing else. You write the w
 
 ### Notes on each problem
 
-**`e1`.** There is no formula you can rearrange to get the answer. Use the halving method from Monday's lecture instead. The answer lies somewhere between 0 and `a`. Write the program as two functions: one that computes the left-hand side x³ + x, and one that does the halving and calls it.
+**`e1`.** There is no formula you can rearrange to get the answer. Use the halving method from Monday's lecture instead. The answer lies somewhere between 0 and `a`.
+
+Write the program as two functions. The first must be **zero at the answer**, so it is `x*x*x + x - a`, not `x*x*x + x`. The second does the halving and calls the first. If you leave out the `- a`, your function is zero at x = 0, the halving test is satisfied immediately, and the answer collapses to 0.0000 for every input.
 
 **`e2`.** Build the flipped grid in a *second* array and print that. If you write the flipped values back into the original array as you go, you will overwrite values you have not read yet and the answer will be wrong. This is a small version of the problem `e4` has.
 
@@ -319,12 +321,18 @@ Tuesday's lecture printed a live cell as `##` and a dead cell as two spaces, whi
 
 ### How the checking works
 
-When you run `./check.sh e3`, it compiles *your* source file and runs it twice over: once on the examples printed in your starter file, and once on fresh random inputs generated at that moment from the range in the `GIVEN` line.
+When you run `./check.sh e3`, it compiles *your* source file and runs it on two kinds of input: a fixed set chosen in advance, and a set generated fresh at that moment from the range in the `GIVEN` line. The fixed ones are labelled `public` and the generated ones `random`.
+
+The examples printed in your starter are among the fixed ones, but there are more fixed vectors than printed examples — `e3` has six, for instance. So passing the printed example does not mean passing every `public` vector.
 
 This means a program that only reproduces the printed example will fail as soon as a new input is drawn.
 
 ::: {.callout-note}
-`e2` and `e4` are checked over their whole output, not just the last line, because the answer is a grid rather than a single value. Extra or missing spaces are ignored. A wrong or missing row is not.
+`e2` and `e4` are checked over their whole output, not just the last line, because the answer is a grid rather than a single value.
+
+Several spaces in a row count as one, so the column alignment in `e2` is up to you. But a space is **not** the same as no space: for `e4`, printing `# . # .` instead of `#.#.` is a different line and fails. Print the eight characters of each row with nothing between them.
+
+**Print nothing but the grid.** Do not print a prompt. The whole output is compared, so a prompt on a line of its own becomes a wrong first row and costs all ten marks — even if every cell below it is right.
 
 If your output looks right but the check fails, run `./check.sh e4` and read the difference it prints. It shows you the line that differs, what you printed, and what was expected.
 :::
