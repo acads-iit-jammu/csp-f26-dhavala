@@ -5,20 +5,227 @@
 | **Date** | Tue Oct 6, 2026 | Wed Oct 14, 2026 |
 | **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
 
-**Syllabus practical module:** 3 — writing programs related to lists and strings
+**Lab pack:** [lab08.tar.gz](../labs/lab08.tar.gz). It is already on the lab machines. You can also download it to practise at home.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Syllabus practical modules:** 3 and 10 — lists and strings, and using the `string` library.
 
-**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
+**Evaluation:** This lab is graded, with the same weight as the others inside the 20% lab component. It is marked in three tiers:
 
-## Pre-Lab
+| | | Each | Total |
+|---|---|---:|---:|
+| **Write drills** `w01`–`w10` | one line of C each | 1 | **10** |
+| **Blanks** `b1`–`b5` | one function body each | 5 | **25** |
+| **Problems** `e1`–`e4` | specification only | 10 | **40** |
 
-*To be posted — what to read/install before the session.*
+That is 75 marks from the programs. The remaining 25 come from observed work and a short viva, in which you will be asked to explain your own code.
 
-## Exercises
+The **read drills** (`./drill.sh`) are **not** marked.
 
-*To be posted before the session.*
+You may work in teams of one or two. If you are a pair, swap who types at the halfway point.
 
-## Submission
+::: {.callout-note}
+This lab follows the Week 10 lectures: Monday on pointers, Tuesday on strings. The [Week 10 notes](../weeks/w10.qmd) contain everything you need, and the [pointer visualiser](../materials/w10-pointers-visualiser.html) shows what `&`, `*` and `p + 1` actually do to memory.
+:::
 
-Submission instructions will be provided in the lab.
+## The shape of this lab, and why it changed
+
+Several of you said in the mid-semester feedback that you follow the ideas in class but cannot produce the C when you sit down to a lab problem. That is a fair criticism of how these labs were built, and this one is organised to answer it.
+
+There is a new tier between the lecture and the problems: **write drills**. Each one is a single line of C, with everything around it already written for you. They are worth marks, so they are not something to skip and come back to.
+
+The chain is meant to be walked in order:
+
+> read a drill and predict it → **write one line** → fill in one function body → solve a problem
+
+Every starter file has a **`BEFORE`** line naming the drills it rests on. If you are stuck on a blank or a problem, that line tells you what to go and do first.
+
+## The minimum C you need today
+
+Everything in this lab is built from these nine lines. If you can read and write all of them, you have what you need.
+
+```c
+int *p = &x;                 /* p holds the address of x                  */
+printf("%d", *p);            /* the value at that address                 */
+*p = 7;                      /* change x, without naming x                */
+void f(int *n) { *n = 5; }   /* a function that changes the caller's copy  */
+f(&x);                       /* note the & at the call                    */
+
+char s[50];                  /* room for 49 characters and a '\0'         */
+scanf("%49s", s);            /* read one word. NO & before an array       */
+while (s[i] != '\0') i++;    /* walk to the end of the text               */
+strlen(s);  strcmp(a, b);    /* length; and ZERO means the strings match  */
+```
+
+Two of these are where almost all the mistakes happen:
+
+**`scanf("%49s", s)` has no `&`.** An array name is already an address, so adding `&` is wrong. But `scanf("%d", &x)` on an ordinary `int` *does* need it. Drill `d06` is about this difference.
+
+**`strcmp` returns zero when the strings are the same.** So `if (strcmp(a, b))` runs its body when they *differ*, which is the opposite of what it reads like. Write `if (strcmp(a, b) == 0)`.
+
+## Act 0 · Getting started (10 minutes)
+
+The pack is already on the lab machines. If it is not on yours, download it:
+
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab08.tar.gz
+```
+
+Unpack it and run the installer, one line at a time:
+
+```bash
+tar xzf lab08.tar.gz
+cd lab08
+./install.sh
+```
+
+Then start the recorder:
+
+```bash
+script session.txt
+```
+
+::: {.callout-important}
+Do not start the exercises until your prompt reads `[lab08 OK ...]`. If it does not, run `./where.sh`; it changes nothing and prints the exact command to type.
+
+`session.txt` records your afternoon and must be in the bundle you submit.
+:::
+
+## Act 1 · Read drills (15 minutes, not marked)
+
+```bash
+./drill.sh --all
+```
+
+Ten short programs. For each one you type what you think it will print, and only then does it run.
+
+| Drills | What they are about |
+|---|---|
+| `d01`–`d03` | what `*` and `&` actually do, and that the `*` binds to the variable |
+| `d04`–`d06` | pointers and arrays, and the `sizeof` trap |
+| `d07`–`d09` | strings, the terminator, and what `strcmp` returns |
+| `d10` | passing by value |
+
+These carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.
+
+## Act 2 · Write drills (20 minutes, 1 mark each)
+
+Ten files, `w01.c` to `w10.c`. In each one, everything is written except a single line, and the comment tells you what that line must do.
+
+This is where you practise producing the notation rather than recognising it. They are quick — if one of them takes more than two minutes, that is the signal to go back to the drill named on its `BEFORE` line.
+
+| | What you write |
+|---|---|
+| `w01` | declare a pointer and point it at a variable |
+| `w02` | change a variable through a pointer |
+| `w03` | reach an array element through a pointer |
+| `w04` | a function body that changes the caller's variable, and the call |
+| `w05` | the length of a string, using `strlen` |
+| `w06` | the length of a string, by walking to the `'\0'` |
+| `w07` | the condition that tests whether two strings match |
+| `w08` | the body of `swap`, and the call |
+| `w09` | the `scanf` that reads one word |
+| `w10` | the first and the last character of a word |
+
+## How to work on one problem
+
+The steps are the same for all nineteen. Using `w01.c` as the example:
+
+```bash
+vim w01.c                # open it and write the missing line
+gcc w01.c -o w01         # compile it
+./w01 < w01_sample.txt   # run it on the sample input
+./check.sh w01           # once it runs, have it marked
+```
+
+Plain `gcc`. No `-lm`, no other flags.
+
+**Every problem has a ready-made input file**, named `<problem>_sample.txt`, and each one reproduces the `EXAMPLE` printed at the top of that starter. So if your program is right, running it on its sample prints exactly what the specification promised:
+
+```bash
+$ ./w05 < w05_sample.txt
+len=5
+$ ./e2 < e2_sample.txt
+reversed=dcba swaps=2
+```
+
+::: {.callout-tip}
+Compile and run it yourself before running `./check.sh`. Running it shows you what your program does; the checker only tells you whether the answer is right.
+:::
+
+## Act 3 · Blanks (25 minutes, 5 marks each)
+
+The function's first line is written for you, and `main` already calls it. Write the body.
+
+| File | What the function must do | Its last line must end with |
+|---|---|---|
+| `b1_deref.c` | put a value into the caller's variable through a pointer | `x=<v>` |
+| `b2_swap.c` | exchange the caller's two integers | `a=<B> b=<A>` |
+| `b3_length.c` | the length of a string, without `strlen` | `len=<N>` |
+| `b4_count.c` | how many times a character appears in a word | `count=<N>` |
+| `b5_upper.c` | change a word to capitals, in place | `upper=<WORD>` |
+
+::: {.callout-tip}
+`b5` changes the caller's array without returning anything and without any `&`. That is the array-to-pointer conversion from Monday, and it is worth being able to say out loud why it works — the viva asks.
+
+To move a letter from the small range to the capital range, subtract `'a'` and add `'A'`. That says what it means, and does not depend on remembering that the gap is 32.
+:::
+
+## Act 4 · Problems (40 minutes, 10 marks each)
+
+Specification only. You write the whole program.
+
+| Problem | What it must do | Its last line must end with |
+|---|---|---|
+| `e1.c` | count letters, digits and other characters in one word | `letters=<L> digits=<D> others=<O>` |
+| `e2.c` | reverse a word in place, and report how many exchanges | `reversed=<S> swaps=<N>` |
+| `e3.c` | the longest unbroken run of one repeated character | `longest=<N> char=<C>` |
+| `e4.c` | shift every letter `k` places along the alphabet | `shifted=<S>` |
+
+**`e1` is the one to do first.** It is the only problem here that cannot be written without pointers: you owe the caller three answers and a function can return one, so all three come back through pointer parameters. Write it as
+
+```c
+void classify(char s[], int *letters, int *digits, int *others)
+```
+
+**`e2`** uses two indices that start at the ends and move towards each other. A word of odd length has a middle character that is never exchanged — `"level"` is five characters but only two swaps.
+
+**`e3`** needs two counters: how long the run you are currently in is, and how long the best one so far was. A character that differs from the one before does not merely fail to extend the run; it **ends** it, and the current counter goes back to 1.
+
+**`e4`** is about the wrap past `z`. Do not write `s[i] = s[i] + k`. Work with the letter's position in the alphabet instead: subtract `'a'` to get 0–25, add `k`, take `% 26`, then add `'a'` back.
+
+### How the checking works
+
+`./check.sh e1` compiles *your* source and runs it on two kinds of input: a fixed set chosen in advance, labelled `public`, and a set generated fresh at that moment from the range in the `GIVEN` line, labelled `random`. A program that only reproduces the printed example will fail as soon as a new input is drawn.
+
+## Act 5 · Check your marks, fix, and submit (10 minutes)
+
+```bash
+./check.sh          # everything
+./check.sh e3       # one problem, while you are working on it
+```
+
+Marks are given **per test case**, not all-or-nothing, so fixing one failing case is always worth doing, even in the last few minutes. Treat the total as an estimate: some vectors are drawn fresh each run, so the number can move by a mark or two.
+
+When you are finished, or when time is called:
+
+```bash
+./check.sh --bundle
+```
+
+::: {.callout-important}
+The bundle is written to the directory **above** your workspace, named `lab08_<rolls>_<branch>_w<NN>.tar.gz`. Take it with you: upload it to Moodle and email a copy to yourself. The lab machines are wiped between sessions.
+:::
+
+## If you finish early (not marked)
+
+1. Make `e3` report the run that starts **latest** instead of earliest when two are equally long. Which single comparison changes?
+2. Make `e4` accept capital letters as well, leaving them capital. Then make it accept punctuation and leave it alone.
+3. Write `myStrcmp` yourself, returning negative, zero or positive, and check it agrees with the library on a dozen pairs. Try `"Zebra"` against `"apple"` and explain the sign.
+
+## Before you leave
+
+Be ready to answer these out loud.
+
+1. In `b2`, `swap(&a, &b)` has `&` but `toUpper(s)` in `b5` does not. Why is the array different?
+2. `e1` returns `void`. Where do its three answers go, and why could `return` not have been used?
+3. Which write drill did you need before you could do `e2`?
