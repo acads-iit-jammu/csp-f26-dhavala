@@ -1,26 +1,32 @@
-# W11: Strings & Multi-dimensional Arrays {.unnumbered}
+# W11: Structures and File Input/Output {.unnumbered}
 
 **Dates:** Mon Oct 12 & Tue Oct 13, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)
+**Syllabus module:** 6 — structures; file handling
 
 ::: {.callout-important}
-**Class Test-2 window opens Wed Oct 14** (through Oct 22); exact date/time announced in class.
+**Class Test-2 opens on Oct 14**, the day after Tuesday's lecture. It covers W10 and W11: pointers, strings, structures and file input/output.
 :::
+
+## Plan
+
+**Monday — structures, and pointers to them.** A structure groups several values of different types under one name, which is what you need as soon as a record has more than one field. Declaring a structure, reading and writing its members, passing one to a function by value and by address, arrays of structures, and the `->` notation for reaching a member through a pointer.
+
+**Tuesday — file input and output.** Programs so far have read from the keyboard and written to the screen. A file is the same idea with a name attached: `fopen` gives you a `FILE *`, `fclose` gives it back, and `fscanf` and `fprintf` work like the versions you already know. Reading until the end of the file, and checking whether `fopen` actually succeeded.
 
 ## Pre-read
 
-*To be posted (typically by the weekend before).*
+- [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) · [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf)
+- The [W10 notes](w10.qmd). Both of this week's topics are built on pointers: a structure is usually passed by address, and a `FILE *` is a pointer.
 
 ## In Class
 
-- [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) — Character arrays: string length, comparison, palindromes; multi-dimensional arrays
-- [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf) — Standard library string support; matrix operations
+*To be posted.*
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+*To be posted.* **Lab 09** covers this material: EE on Tue Oct 13, Mechanical and Materials on Wed Oct 21.
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal column. To be posted.*

@@ -25,9 +25,9 @@ The schedule below is **tentative** and covers all 11 practical modules of the [
 | [5](labsheets/lab05.qmd) | Sep 8 | Sep 16 | **Decisions**: `if`/`else`, else-if ladders, `switch`, and `break` / `continue` | 2 |
 | [6](labsheets/lab06.qmd) | Sep 15 | Sep 30 | **Loops and arrays**: 1-D arrays, traversal and search, nested loops and patterns | 3, 5, 6 |
 | [7](labsheets/lab07.qmd) | Sep 29 | Oct 7 | **Functions and the Game of Life**: writing and calling functions, scope, call by value vs by reference; 2-D arrays, neighbours and boundaries | 7, 3 |
-| [8](labsheets/lab08.qmd) | Oct 6 | Oct 14 | Tuples & dictionaries, C-style: structures and key–value lookup tables | 4 |
-| [9](labsheets/lab09.qmd) | Oct 13 | Oct 21 | File handling | 8 |
-| [10](labsheets/lab10.qmd) | Oct 27 | Oct 28 | Error handling | 9 |
+| [8](labsheets/lab08.qmd) | Oct 6 | Oct 14 | **Pointers and strings**: addresses, `&` and `*`, pointer arithmetic, character arrays, `strlen` and palindromes | 3 |
+| [9](labsheets/lab09.qmd) | Oct 13 | Oct 21 | **Structures and file input/output**: records, `->`, reading and writing files | 4, 8 |
+| [10](labsheets/lab10.qmd) | Oct 27 | Oct 28 | **Dynamic memory and recursion**: `malloc` and `free`, growing data, recursive functions | 5 |
 | [11](labsheets/lab11.qmd) | Nov 3 | Nov 4 | Problem solving I (GATE / ACM ICPC style) | 11 |
 | [12](labsheets/lab12.qmd) | Nov 17 | Nov 18 | Problem solving II | 11 |
 

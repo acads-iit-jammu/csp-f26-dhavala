@@ -1,23 +1,28 @@
-# W13: Functions & Recursion {.unnumbered}
+# W13: Dynamic Memory and Recursion {.unnumbered}
 
 **Dates:** Mon Oct 26 & Tue Oct 27, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)
+**Syllabus module:** 5 — dynamic memory allocation; functions and recursion
+
+## Plan
+
+**Monday — dynamic memory allocation.** Every array you have declared so far had its size fixed when the program was compiled. That is a real limit: you cannot read a list whose length you only discover while running. `malloc` asks for memory while the program runs and returns its address; `free` gives it back. The stack and the heap as two different places, why `malloc` can fail and what it returns when it does, and the three mistakes that follow: leaking memory, using it after freeing it, and freeing it twice.
+
+**Tuesday — recursion.** A function that calls itself. The base case that stops it, the recursive case that makes progress towards the base case, and what the call stack looks like while it runs — which is easier to picture now that Monday has separated the stack from the heap.
 
 ## Pre-read
 
-*To be posted (typically by the weekend before).*
+- [Lec 19](../cs1100-cse-iitm-2021/slides/Lec19.pdf) · [Lec 20](../cs1100-cse-iitm-2021/slides/Lec20.pdf) · [Lec 24](../cs1100-cse-iitm-2021/slides/Lec24.pdf)
+- The [W10 notes](w10.qmd) on pointers. `malloc` returns an address, so everything this week rests on that.
 
 ## In Class
 
-- [Lec 19](../cs1100-cse-iitm-2021/slides/Lec19.pdf) — Introduction to functions; blocks and scope
-- [Lec 20](../cs1100-cse-iitm-2021/slides/Lec20.pdf) — More functions: factorial, matrix multiplication, Tic-Tac-Toe
-- [Lec 24](../cs1100-cse-iitm-2021/slides/Lec24.pdf) — Recursive functions: factorial, binomial coefficients, Fibonacci
+*To be posted.*
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+*To be posted.* **Lab 10** covers this material: EE on Tue Oct 27, Mechanical and Materials on Wed Oct 28.
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal column. To be posted.*

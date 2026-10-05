@@ -1,23 +1,25 @@
-# W14: Pointers & Dynamic Memory {.unnumbered}
+# W14: Full Problems I {.unnumbered}
 
 **Dates:** Mon Nov 2 & Tue Nov 3, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 5 — Pointers; arrays; dynamic memory allocation; functions and recursion (8 h)
+**Syllabus modules:** 5 and 6 — applied together
 
-## Pre-read
+## Plan
 
-*To be posted (typically by the weekend before).*
+No new language features this week. Both lectures are spent solving complete problems, of the size and shape you will meet in the end-semester examination, using everything from the semester at once: arrays, functions, pointers, strings, structures, files and dynamic memory.
+
+The emphasis is on the part that is usually skipped. Reading a problem statement and deciding what the data actually is. Choosing between an array and allocated memory. Deciding which parts become functions and what each one promises. Then writing it, and checking it against the statement rather than against a hope.
+
+A worked problem will be developed on the board across both lectures rather than presented finished.
 
 ## In Class
 
-- [Lec 27](../cs1100-cse-iitm-2021/slides/Lec27.pdf) — (pointers introduction — final section)
-- [Lec 28](../cs1100-cse-iitm-2021/slides/Lec28.pdf) — More on pointers; `malloc`
-- [OCW L11](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec11/) — Dynamic memory allocation: `malloc`, `calloc`, `realloc`, `free`, valgrind
+*To be posted.*
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+*To be posted.* **Lab 11** is problem solving: EE on Tue Nov 3, Mechanical and Materials on Wed Nov 4.
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal column. To be posted.*

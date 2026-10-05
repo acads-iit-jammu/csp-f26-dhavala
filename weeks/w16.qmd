@@ -1,28 +1,27 @@
-# W16: Function Pointers, Structures & Unions {.unnumbered}
+# W16: Full Problems II {.unnumbered}
 
 **Dates:** Mon Nov 16 & Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 6 — Function pointers; structure, union; file handling; error handling (3 h)
+**Syllabus modules:** 5 and 6 — applied together
 
-::: {.callout-important}
-Last day of classes is Fri Nov 20. End-semester examinations: Nov 23–30.
+::: {.callout-note}
+Last teaching week of the semester. The end-semester examination is Nov 23–30.
 :::
 
-## Pre-read
+## Plan
 
-*To be posted (typically by the weekend before).*
+A second week of complete problems, continuing W14. Larger problems, assembled from parts you have already written, with more of the design left to you.
+
+This is also the week to revisit whatever the class found hardest during the semester, so bring questions.
 
 ## In Class
 
-- [Lec 29](../cs1100-cse-iitm-2021/slides/Lec29.pdf) — Introduction to structures
-- [Lec 30](../cs1100-cse-iitm-2021/slides/Lec30.pdf) — More on structures; `typedef`; pointers to structures
-- [OCW L6](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec06/) — Structs, unions, bitfields; memory allocation
-- [OCW L8](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec08/) — Void and function pointers
+*To be posted.*
 
 ## After Class
 
-*Practice problems and any handouts will be posted here.*
+*To be posted.* **Lab 12** is problem solving: EE on Tue Nov 17, Mechanical and Materials on Wed Nov 18.
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal column. To be posted.*
