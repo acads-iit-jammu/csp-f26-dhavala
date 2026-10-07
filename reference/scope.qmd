@@ -81,7 +81,80 @@ void reallyAddOne(int *n) { *n = *n + 1; }   /* changes the caller's  */
 
 ## Rules of thumb
 
-1. Declare in the smallest block that needs it.
-2. Same name in nested scopes → rename one.
-3. `static` local only when a value must survive between calls.
-4. Globals: almost never in this course.
+**1. Declare a variable in the smallest block that needs it.**
+
+If a variable is only used inside a loop, declare it inside the loop. The compiler then
+refuses to let you use it anywhere else, which turns a whole class of mistake into an error
+you see immediately instead of a wrong answer you have to hunt for.
+
+```c
+int total = 0;
+for (int i = 0; i < n; i++) {    /* i belongs to the loop        */
+    int doubled = a[i] * 2;      /* doubled belongs to one pass  */
+    total += doubled;
+}
+/* using i or doubled here is an error — which is the point */
+```
+
+It also keeps the reader's job small: a name declared three lines above is one you can still
+see, and one declared at the top of a 60-line function is not.
+
+**2. If the same name appears in nested scopes, rename one of them.**
+
+The inner declaration *shadows* the outer one: both exist, and the name refers to whichever
+is nearer. This is legal, so the compiler says nothing, and the symptom is a value that
+"refuses to change".
+
+```c
+int count = 0;
+for (int i = 0; i < n; i++) {
+    int count = 0;        /* a SECOND count — the outer one never moves */
+    count++;
+}
+printf("%d\n", count);    /* prints 0, not n */
+```
+
+Rename the inner one (`seen`, `local`, anything) and the bug cannot occur. Note this applies
+to function parameters too: a parameter named `count` shadows a global `count` for the whole
+function body.
+
+`-Wall -Wextra` does **not** warn about this. The flag that does is `-Wshadow`, and it is not
+switched on by default:
+
+```
+warning: declaration shadows a local variable [-Wshadow]
+```
+
+**3. Use a `static` local only when a value genuinely must survive between calls.**
+
+The legitimate cases are narrow — counting how many times a function has run, remembering a
+result that is expensive to recompute, holding a one-time setup flag.
+
+```c
+void logLine(char s[]) {
+    static int lineNo = 0;       /* survives; numbers the output */
+    lineNo++;
+    printf("%d: %s\n", lineNo, s);
+}
+```
+
+The cost is that the function is no longer predictable from its arguments alone: calling it
+twice with the same input gives different output. That makes it harder to test and harder to
+reason about, so it should be a decision, not a convenience. If the caller could just as
+easily pass the value in and get it back, do that instead.
+
+**4. Avoid globals in this course — pass values in and return them out.**
+
+A global is in scope for every function below it, so any of them can change it and nothing
+records which one did. When the value is wrong you have no shortlist of suspects, and the
+function's signature no longer tells you what it depends on.
+
+```c
+int total;                    /* global */
+void addTo(int x) { total += x; }     /* what else touches total? you must read everything */
+
+int addTo(int total, int x) { return total + x; }   /* better: it is all in the signature */
+```
+
+The exception is a genuine program-wide constant, and for that prefer `#define MAX 100` or
+`const`, which cannot be modified by accident.
