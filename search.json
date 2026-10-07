@@ -2602,7 +2602,7 @@
     "href": "reference/index.html",
     "title": "Quick Reference",
     "section": "",
-    "text": "Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. Every example was compiled and run before it was printed.\n\n\n\nSheet\nFor\n\n\n\n\nprintf / scanf\n%d %u %zu %.2f, and why scanf read nothing\n\n\nData types\nsizes, ranges, integer division, overflow\n\n\nOperator precedence\nthe table, and the five that actually bite\n\n\nControl flow\nbreak vs continue, switch fall-through, loop traps\n\n\nArrays\n1-D and 2-D, sizeof, why the length must travel\n\n\nPointers\n& and *, arithmetic, NULL, the four mistakes\n\n\nStrings\n'\\0', sizeof vs strlen, string.h, character tests\n\n\nFunctions\ndeclaration vs definition, by value vs by address\n\n\nScope and lifetime\nwhich x a name means; why a value did not survive\n\n\nCompiler errors\nwhat the message means, and where to look",
+    "text": "Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. Every example was compiled and run before it was printed.\n\n\n\nSheet\nFor\n\n\n\n\nprintf / scanf\n%d %u %zu %.2f, and why scanf read nothing\n\n\nData types\nsizes, ranges, integer division, overflow\n\n\nOperator precedence\nthe table, and the five that actually bite\n\n\nControl flow\nbreak vs continue, switch fall-through, loop traps\n\n\nArrays\n1-D and 2-D, sizeof, why the length must travel\n\n\nPointers\n& and *, arithmetic, NULL, the four mistakes\n\n\nStrings\n'\\0', sizeof vs strlen, string.h, character tests\n\n\nFunctions\ndeclaration vs definition, by value vs by address\n\n\nScope and lifetime\nwhich x a name means; why a value did not survive\n\n\nStorage classes\nstatic, extern, register, auto; globals and linkage\n\n\nCompiler errors\nwhat the message means, and where to look",
     "crumbs": [
       "Quick Reference",
       "Quick Reference"
@@ -3207,7 +3207,7 @@
     "href": "reference/functions.html#scope",
     "title": "Functions",
     "section": "Scope",
-    "text": "Scope\nint g;                       /* global: everywhere below it  */\nvoid f(void){\n    static int calls = 0;    /* survives between calls       */\n    int fresh = 0;           /* new every call               */\n}\nSee Scope and lifetime.",
+    "text": "Scope\nint g;                       /* global: everywhere below it  */\nvoid f(void){\n    static int calls = 0;    /* survives between calls       */\n    int fresh = 0;           /* new every call               */\n}\nSee Scope and lifetime and Storage classes.",
     "crumbs": [
       "Quick Reference",
       "Functions"
@@ -3229,7 +3229,7 @@
     "href": "reference/scope.html",
     "title": "Scope and Lifetime",
     "section": "",
-    "text": "The table\nScope = where the name can be used. Lifetime = how long the storage exists. Different questions.\nstatic inside a function changes the lifetime, not the scope.",
+    "text": "The table\nScope = where the name can be used. Lifetime = how long the storage exists. Different questions.",
     "crumbs": [
       "Quick Reference",
       "Scope and Lifetime"
@@ -3240,7 +3240,7 @@
     "href": "reference/scope.html#the-table",
     "title": "Scope and Lifetime",
     "section": "",
-    "text": "Declared\nScope\nLifetime\n\n\n\n\nin a block { }\nthat block, from the declaration down\nuntil the block ends\n\n\nfunction parameter\nthe function body\nuntil it returns\n\n\noutside all functions\nevery function below it in the file\nwhole program\n\n\noutside all functions, static\nthe same, but no other file can reach it\nwhole program\n\n\nin a block, static\nthat block only\nwhole program",
+    "text": "Declared\nScope — where the name works\nLifetime — how long the storage lasts\n\n\n\n\nin a block { }\nthat block, from the declaration down to the closing brace\nuntil the block ends\n\n\nfunction parameter\nthe whole function body\nuntil the function returns\n\n\noutside all functions\nevery function below it in that file — and, with extern, other files too\nwhole program\n\n\noutside all functions, with static\nevery function below it in that file, and nowhere else\nwhole program\n\n\nin a block, with static\nthat block only\nwhole program\n\n\n\n\nWhat each row means\nIn a block. The ordinary case. The name exists from its declaration to the closing brace, and the storage disappears with it. Declaring the same name in two different blocks creates two unrelated variables.\nA parameter. Behaves exactly like a local declared at the top of the function — it just starts with a copy of the argument.\nOutside all functions — a “global”. This is the row worth reading twice, because its scope is larger than the file it is written in.\nWithin the file, every function below the declaration can use it. A function written above it cannot, which is why globals are conventionally put at the top.\nAnd another file can use it too. The variable has external linkage: its name is visible to the linker, so a second file can declare it with extern and then read and write the same variable — not a copy.\n/* totals.c  — the definition. This is where the storage lives. */\nint total = 0;\n\n/* report.c  — a different file, same variable */\nextern int total;                    /* \"it exists somewhere; trust me\" */\nvoid show(void) { printf(\"%d\\n\", total); }\ntotal seen from the other file = 42\nChange it in one file and the other file sees the change, because there is only one total in the whole program. That reach is what makes globals risky: the list of code that can modify one is not bounded by the file you are reading.\nOutside all functions, with static. Same scope inside the file, but the name is not given to the linker, so no other file can reach it even by writing extern. Those two files simply fail to link. This is how you keep a variable or helper function private to one file.\nIn a block, with static. The odd one. Scope is unchanged — still only that block — but the storage now lasts for the whole program, so the value survives between calls.\n\n\n\n\n\n\nstatic means two different things depending on where you write it: survives between calls on a local, private to this file at file level. Same word, unrelated jobs.\nstatic inside a function changes the lifetime, not the scope. For static, extern, register and auto in full — including the one-definition rule — see Storage classes.",
     "crumbs": [
       "Quick Reference",
       "Scope and Lifetime"
@@ -3273,7 +3273,7 @@
     "href": "reference/scope.html#traps",
     "title": "Scope and Lifetime",
     "section": "Traps",
-    "text": "Traps\n\n\n\n\n\n\n\naccidental shadowing\nlegal, silent; a value “not changing” is often a shadow\n\n\nblock variable used after the block\nundeclared identifier — the declaration is inside braces it should be outside\n\n\nreturning &local\nundefined behaviour; storage is gone, may appear to work\n\n\nglobals as a shortcut\nanything can change them, nothing records what did",
+    "text": "Traps\n\nAccidental shadowing\nShadowing is declaring a name inside a block when that name already exists outside it. Both variables exist; the inner one hides the outer one for as long as the block lasts.\nIt is perfectly legal, so nothing complains — and the symptom is a variable that stubbornly refuses to change:\nint count = 0;\nfor (int i = 0; i &lt; n; i++) {\n    int count = 0;        /* you meant to use the one above */\n    count++;\n}\nprintf(\"%d\\n\", count);    /* 0 */\nYou wrote count++ and the number is still 0, because you incremented a different variable that was destroyed at the closing brace. Nothing was wrong with your loop.\nIt is called “accidental” because deliberate shadowing is rare; almost every real case is someone re-declaring a name they had forgotten was already in use. See rule 2 below for the fix, and note that -Wall does not catch it.\n\n\nUsing a block variable after its block\nA variable declared inside braces stops existing at the closing brace — including the braces of an if, a loop, or a bare block.\n{\n    int t = 5;\n}\nprintf(\"%d\", t);     /* error: use of undeclared identifier 't' */\nThe compiler is clear about it, so this one costs you a minute rather than an afternoon. The usual cause is a declaration that ended up one level deeper than intended: you declared t inside the loop and want to read it after the loop. The fix is to declare it before the block and assign inside.\n\n\nReturning the address of a local\nA local variable’s storage is released when the function returns. Its address then refers to memory that no longer belongs to you.\nint *f(void) {\n    int local = 5;\n    return &local;      /* the storage dies here */\n}\nThis is undefined behaviour — the standard does not say what happens. It may appear to work, because the memory has not been reused yet, and then fail when some other call reuses it. That is what makes it dangerous: it does not fail where the mistake is.\n-Wall does catch this particular shape:\nwarning: address of stack memory associated with local variable 'local' returned\nTo return something that outlives the function you need storage that is not a local: a static, something the caller passed in, or memory from malloc (W13).\n\n\nGlobals used as a shortcut\nReaching for a global to avoid passing a parameter works, and costs you the ability to find the bug later: any function in the program can change it, and nothing records which one did. See rule 4 below.",
     "crumbs": [
       "Quick Reference",
       "Scope and Lifetime"
@@ -3284,10 +3284,120 @@
     "href": "reference/scope.html#rules-of-thumb",
     "title": "Scope and Lifetime",
     "section": "Rules of thumb",
-    "text": "Rules of thumb\n\nDeclare in the smallest block that needs it.\nSame name in nested scopes → rename one.\nstatic local only when a value must survive between calls.\nGlobals: almost never in this course.",
+    "text": "Rules of thumb\n1. Declare a variable in the smallest block that needs it.\nIf a variable is only used inside a loop, declare it inside the loop. The compiler then refuses to let you use it anywhere else, which turns a whole class of mistake into an error you see immediately instead of a wrong answer you have to hunt for.\nint total = 0;\nfor (int i = 0; i &lt; n; i++) {    /* i belongs to the loop        */\n    int doubled = a[i] * 2;      /* doubled belongs to one pass  */\n    total += doubled;\n}\n/* using i or doubled here is an error — which is the point */\nIt also keeps the reader’s job small: a name declared three lines above is one you can still see, and one declared at the top of a 60-line function is not.\n2. If the same name appears in nested scopes, rename one of them.\nThe inner declaration shadows the outer one: both exist, and the name refers to whichever is nearer. This is legal, so the compiler says nothing, and the symptom is a value that “refuses to change”.\nint count = 0;\nfor (int i = 0; i &lt; n; i++) {\n    int count = 0;        /* a SECOND count — the outer one never moves */\n    count++;\n}\nprintf(\"%d\\n\", count);    /* prints 0, not n */\nRename the inner one (seen, local, anything) and the bug cannot occur. Note this applies to function parameters too: a parameter named count shadows a global count for the whole function body.\n-Wall -Wextra does not warn about this. The flag that does is -Wshadow, and it is not switched on by default:\nwarning: declaration shadows a local variable [-Wshadow]\n3. Use a static local only when a value genuinely must survive between calls.\nThe legitimate cases are narrow — counting how many times a function has run, remembering a result that is expensive to recompute, holding a one-time setup flag.\nvoid logLine(char s[]) {\n    static int lineNo = 0;       /* survives; numbers the output */\n    lineNo++;\n    printf(\"%d: %s\\n\", lineNo, s);\n}\nThe cost is that the function is no longer predictable from its arguments alone: calling it twice with the same input gives different output. That makes it harder to test and harder to reason about, so it should be a decision, not a convenience. If the caller could just as easily pass the value in and get it back, do that instead.\n4. Avoid globals in this course — pass values in and return them out.\nA global is in scope for every function below it, so any of them can change it and nothing records which one did. When the value is wrong you have no shortlist of suspects, and the function’s signature no longer tells you what it depends on.\nint total;                    /* global */\nvoid addTo(int x) { total += x; }     /* what else touches total? you must read everything */\n\nint addTo(int total, int x) { return total + x; }   /* better: it is all in the signature */\nThe exception is a genuine program-wide constant, and for that prefer #define MAX 100 or const, which cannot be modified by accident.",
     "crumbs": [
       "Quick Reference",
       "Scope and Lifetime"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html",
+    "href": "reference/storage-classes.html",
+    "title": "Storage Classes",
+    "section": "",
+    "text": "The table\nThe words you may put in front of a declaration: auto, register, static, extern.\nThey control lifetime (how long the storage exists) and linkage (whether another file can reach the name) — except register, which controls neither and does only one thing, below. For scope itself see Scope and lifetime.\nstatic is the one to watch: the same word does two different jobs depending on where it is written.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#the-table",
+    "href": "reference/storage-classes.html#the-table",
+    "title": "Storage Classes",
+    "section": "",
+    "text": "Written\nWhere it is legal\nLifetime\nAnother file can reach it\n\n\n\n\n(nothing), in a block\nin a block\nuntil the block ends\nno\n\n\n(nothing), at file level\nat file level\nwhole program\nyes\n\n\nauto\nin a block\nuntil the block ends\nno\n\n\nregister\nin a block, or on a parameter\nuntil the block ends\nno\n\n\nstatic\nin a block\nwhole program\nno\n\n\nstatic\nat file level\nwhole program\nno\n\n\nextern\nat file level, or in a block\nwhole program\nnames something defined elsewhere",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#what-you-get-for-free-zero",
+    "href": "reference/storage-classes.html#what-you-get-for-free-zero",
+    "title": "Storage Classes",
+    "section": "What you get for free: zero",
+    "text": "What you get for free: zero\n\n\n\nDeclared\nWith no initialiser, starts as\n\n\n\n\nat file level\n0\n\n\nstatic, anywhere\n0\n\n\nordinary local in a block\nindeterminate — anything at all\n\n\n\n#include &lt;stdio.h&gt;\nint g;                       /* file level  */\nstatic int s;                /* file static */\nvoid f(void){ static int k; printf(\"  static local k=%d\\n\", k); }\nint main(void){\n    printf(\"  global g=%d   file-static s=%d\\n\", g, s);\n    f();\n    return 0;\n}\n  global g=0   file-static s=0\n  static local k=0\nA plain local gets no such promise. int sum; for (…) sum += a[i]; is a bug: sum did not start at zero.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#static-on-a-local",
+    "href": "reference/storage-classes.html#static-on-a-local",
+    "title": "Storage Classes",
+    "section": "static on a local",
+    "text": "static on a local\n#include &lt;stdio.h&gt;\n\nvoid counter(void){\n    static int calls = 0;    /* created once, survives every return */\n    int fresh = 0;           /* new each call                       */\n    calls++; fresh++;\n    printf(\"calls=%d fresh=%d\\n\", calls, fresh);\n}\n\nint main(void){ counter(); counter(); counter(); return 0; }\ncalls=1 fresh=1\ncalls=2 fresh=1\ncalls=3 fresh=1\n\n\n\n\n\n\n\nstatic on …\ndoes\n\n\n\n\na local variable\nkeeps the value between calls\n\n\na file-level variable or function\nhides the name from other files\n\n\n\n\n\n\n\n\n\nA static initialiser must be a constant. It is set up before main begins, not on first entry, so it cannot call anything:\nstatic int x = f();        /* error: initializer element is not a compile-time constant */\nstatic int n = size;       /* same, even if size is a variable in scope */\nThis surprises people coming from C++, where function-local statics are initialised on first use.\n\n\n\nThere is one such variable, even in a recursive function — every call shares it.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#static-on-a-function",
+    "href": "reference/storage-classes.html#static-on-a-function",
+    "title": "Storage Classes",
+    "section": "static on a function",
+    "text": "static on a function\nThe more common use. helper below cannot be called from any other file:\n/* one.c */\nstatic void helper(void){ … }      /* private to one.c */\nvoid publicThing(void){ helper(); }\nWithout static, functions have external linkage by default, so void f(void); and extern void f(void); mean the same thing — the extern is redundant on a prototype.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#extern",
+    "href": "reference/storage-classes.html#extern",
+    "title": "Storage Classes",
+    "section": "extern",
+    "text": "extern\n/* a.c */  int shared = 42;          /* the definition — reserves storage */\n/* b.c */  extern int shared;        /* a declaration — \"it exists elsewhere\" */\nshared from the other file = 42\nMake it static int shared = 42; in a.c and the same two files no longer link:\nUndefined symbols … referenced from …\n\n\n\n\n\n\n\ndefinition\nreserves the storage — exactly one, in one file\n\n\ndeclaration (extern)\npromises it exists — may appear in many files\n\n\n\nIn practice the extern declaration lives in a header that both files include, so there is one copy of it to keep correct.\n\n\n\n\n\n\nextern with an initialiser is a definition, not a declaration. extern int w = 5; at file level allocates storage and merely warns; inside a block it is an error. If you write extern you almost always mean no initialiser.\nDefine a file-level variable in exactly one file. Two definitions of int x = 1; is a duplicate-symbol link error. Two uninitialised int x; may link silently on some toolchains and fail on others — including the lab machines, where gcc rejects it. Put the definition in one .c file and an extern in the header.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#register",
+    "href": "reference/storage-classes.html#register",
+    "title": "Storage Classes",
+    "section": "register",
+    "text": "register\nA hint that a variable will be used heavily. Modern compilers allocate registers themselves and ignore it, so you will rarely write it.\nOne rule is still enforced: you cannot take the address of a register variable.\nregister int x = 5;\nx++;                /* fine — x is 6 */\nint *p = &x;        /* error: address of register variable requested */\nThat rules it out for arrays altogether, not just arrays you pass to a function: a[0] means *(a + 0), which needs the array’s address.\nregister int a[3] = {1,2,3};\na[0] = 9;           /* error: address of register variable requested */\nThe only thing you may do with a register array is sizeof.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#auto",
+    "href": "reference/storage-classes.html#auto",
+    "title": "Storage Classes",
+    "section": "auto",
+    "text": "auto\nThe default for a variable in a block. As a storage class it changes nothing:\nauto int x = 3;     /* identical to: int x = 3; */\n\n\n\n\n\n\nC23 gave auto a second, unrelated meaning: written without a type, it infers one, as in C++.\nauto x = 7;         /* C23: x is an int */\nGCC 15 defaults to this standard, so on an up-to-date compiler that line builds with no flags, while older ones reject it. Avoid auto in this course — in either sense.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#globals-the-cost",
+    "href": "reference/storage-classes.html#globals-the-cost",
+    "title": "Storage Classes",
+    "section": "Globals: the cost",
+    "text": "Globals: the cost\nA file-level variable is in scope for every function below it.\n\n\n\n\n\n\n\nany function can change it\nnothing records which one did\n\n\ntwo functions can disagree about its state\nthe bug is in neither of them\n\n\nbehaviour depends on invisible input\nthe signature no longer says what it needs\n\n\n\nFile-level static hides the name, not the data: a function in that file can still hand its address to anyone.\nPrefer parameters in and return values out. Use a global when the alternative is genuinely worse — in this course, almost never.",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
+    ]
+  },
+  {
+    "objectID": "reference/storage-classes.html#choosing",
+    "href": "reference/storage-classes.html#choosing",
+    "title": "Storage Classes",
+    "section": "Choosing",
+    "text": "Choosing\n\n\n\n\n\n\n\nYou want\nUse\n\n\n\n\nan ordinary variable\nnothing — just declare it\n\n\na value to survive between calls to one function\nstatic on the local\n\n\na helper function or variable private to one file\nstatic at file level\n\n\none variable shared by several files\ndefine it in one .c, extern it in a header both include\n\n\nspeed\nnothing — write clear code and let the compiler optimise",
+    "crumbs": [
+      "Quick Reference",
+      "Storage Classes"
     ]
   },
   {

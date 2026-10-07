@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 12: Problem Solving II – CS-1-01 (MO)</title>
+<title>Storage Classes – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../materials/index.html" rel="next">
-<link href="../labsheets/lab11.html" rel="prev">
+<link href="../reference/errors.html" rel="next">
+<link href="../reference/scope.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab12.html">Lab 12: Problem Solving II</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/storage-classes.html">Storage Classes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -266,13 +301,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Lab Sheets</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab01.html" class="sidebar-item-text sidebar-link">
@@ -341,7 +376,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labsheets/lab12.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labsheets/lab12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 12: Problem Solving II</span></a>
   </div>
 </li>
@@ -372,13 +407,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Quick Reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
@@ -441,7 +476,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/storage-classes.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/storage-classes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Storage Classes</span></a>
   </div>
 </li>
@@ -486,18 +521,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#the-table" id="toc-the-table" class="nav-link active" data-scroll-target="#the-table">The table</a></li>
+  <li><a href="#what-you-get-for-free-zero" id="toc-what-you-get-for-free-zero" class="nav-link" data-scroll-target="#what-you-get-for-free-zero">What you get for free: zero</a></li>
+  <li><a href="#static-on-a-local" id="toc-static-on-a-local" class="nav-link" data-scroll-target="#static-on-a-local">static on a local</a></li>
+  <li><a href="#static-on-a-function" id="toc-static-on-a-function" class="nav-link" data-scroll-target="#static-on-a-function">static on a function</a></li>
+  <li><a href="#extern" id="toc-extern" class="nav-link" data-scroll-target="#extern">extern</a></li>
+  <li><a href="#register" id="toc-register" class="nav-link" data-scroll-target="#register">register</a></li>
+  <li><a href="#auto" id="toc-auto" class="nav-link" data-scroll-target="#auto">auto</a></li>
+  <li><a href="#globals-the-cost" id="toc-globals-the-cost" class="nav-link" data-scroll-target="#globals-the-cost">Globals: the cost</a></li>
+  <li><a href="#choosing" id="toc-choosing" class="nav-link" data-scroll-target="#choosing">Choosing</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab12.html">Lab 12: Problem Solving II</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/storage-classes.html">Storage Classes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 12: Problem Solving II</h1>
+<h1 class="title">Storage Classes</h1>
 </div>
 
 
@@ -514,41 +555,296 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>The words you may put in front of a declaration: <code>auto</code>, <code>register</code>, <code>static</code>, <code>extern</code>.</p>
+<p>They control <strong>lifetime</strong> (how long the storage exists) and <strong>linkage</strong> (whether another file can reach the name) — except <code>register</code>, which controls neither and does only one thing, below. For scope itself see <a href="../reference/scope.html">Scope and lifetime</a>.</p>
+<section id="the-table" class="level2">
+<h2 class="anchored" data-anchor-id="the-table">The table</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th>Electrical</th>
-<th>Mechanical &amp; Materials</th>
+<th>Written</th>
+<th>Where it is legal</th>
+<th>Lifetime</th>
+<th>Another file can reach it</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Date</strong></td>
-<td>Tue Nov 17, 2026</td>
-<td>Wed Nov 18, 2026</td>
+<td><em>(nothing)</em>, in a block</td>
+<td>in a block</td>
+<td>until the block ends</td>
+<td>no</td>
 </tr>
 <tr class="even">
-<td><strong>Time</strong></td>
-<td>2:00–4:00 pm</td>
-<td>2:00–4:00 pm</td>
+<td><em>(nothing)</em>, at file level</td>
+<td>at file level</td>
+<td>whole program</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr class="odd">
+<td><code>auto</code></td>
+<td>in a block</td>
+<td>until the block ends</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td><code>register</code></td>
+<td>in a block, or on a parameter</td>
+<td>until the block ends</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td><code>static</code></td>
+<td>in a block</td>
+<td><strong>whole program</strong></td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td><code>static</code></td>
+<td>at file level</td>
+<td>whole program</td>
+<td><strong>no</strong></td>
+</tr>
+<tr class="odd">
+<td><code>extern</code></td>
+<td>at file level, or in a block</td>
+<td>whole program</td>
+<td>names something defined elsewhere</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical module:</strong> 11 — Problem solving (GATE, ACM ICPC)</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
-<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<p><code>static</code> is the one to watch: the same word does two different jobs depending on where it is written.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="what-you-get-for-free-zero" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-get-for-free-zero">What you get for free: zero</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Declared</th>
+<th>With no initialiser, starts as</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>at file level</td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="even">
+<td><code>static</code>, anywhere</td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="odd">
+<td>ordinary local in a block</td>
+<td><strong>indeterminate — anything at all</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> g<span class="op">;</span>                       <span class="co">/* file level  */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> s<span class="op">;</span>                <span class="co">/* file static */</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">void</span><span class="op">){</span> <span class="dt">static</span> <span class="dt">int</span> k<span class="op">;</span> printf<span class="op">(</span><span class="st">"  static local k=</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> k<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"  global g=</span><span class="sc">%d</span><span class="st">   file-static s=</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> g<span class="op">,</span> s<span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    f<span class="op">();</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>  global g=0   file-static s=0
+  static local k=0</code></pre>
+<p>A plain local gets no such promise. <code>int sum; for (…) sum += a[i];</code> is a bug: <code>sum</code> did not start at zero.</p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="static-on-a-local" class="level2">
+<h2 class="anchored" data-anchor-id="static-on-a-local">static on a local</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> counter<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> calls <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>    <span class="co">/* created once, survives every return */</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> fresh <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>           <span class="co">/* new each call                       */</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    calls<span class="op">++;</span> fresh<span class="op">++;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"calls=</span><span class="sc">%d</span><span class="st"> fresh=</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> calls<span class="op">,</span> fresh<span class="op">);</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">){</span> counter<span class="op">();</span> counter<span class="op">();</span> counter<span class="op">();</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>calls=1 fresh=1
+calls=2 fresh=1
+calls=3 fresh=1</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>static</code> on …</th>
+<th>does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a <strong>local</strong> variable</td>
+<td>keeps the value between calls</td>
+</tr>
+<tr class="even">
+<td>a <strong>file-level</strong> variable or function</td>
+<td>hides the name from other files</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>A <code>static</code> initialiser must be a constant.</strong> It is set up before <code>main</code> begins, not on first entry, so it cannot call anything:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> x <span class="op">=</span> f<span class="op">();</span>        <span class="co">/* error: initializer element is not a compile-time constant */</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> n <span class="op">=</span> size<span class="op">;</span>       <span class="co">/* same, even if size is a variable in scope */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This surprises people coming from C++, where function-local statics <em>are</em> initialised on first use.</p>
+</div>
+</div>
+</div>
+<p>There is <strong>one</strong> such variable, even in a recursive function — every call shares it.</p>
+</section>
+<section id="static-on-a-function" class="level2">
+<h2 class="anchored" data-anchor-id="static-on-a-function">static on a function</h2>
+<p>The more common use. <code>helper</code> below cannot be called from any other file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* one.c */</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> helper<span class="op">(</span><span class="dt">void</span><span class="op">){</span> … <span class="op">}</span>      <span class="co">/* private to one.c */</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> publicThing<span class="op">(</span><span class="dt">void</span><span class="op">){</span> helper<span class="op">();</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Without <code>static</code>, functions have external linkage by default, so <code>void f(void);</code> and <code>extern void f(void);</code> mean the same thing — the <code>extern</code> is redundant on a prototype.</p>
+</section>
+<section id="extern" class="level2">
+<h2 class="anchored" data-anchor-id="extern">extern</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* a.c */</span>  <span class="dt">int</span> shared <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>          <span class="co">/* the definition — reserves storage */</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">/* b.c */</span>  <span class="kw">extern</span> <span class="dt">int</span> shared<span class="op">;</span>        <span class="co">/* a declaration — "it exists elsewhere" */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>shared from the other file = 42</code></pre>
+<p>Make it <code>static int shared = 42;</code> in <code>a.c</code> and the same two files no longer link:</p>
+<pre><code>Undefined symbols … referenced from …</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>definition</strong></td>
+<td>reserves the storage — <strong>exactly one</strong>, in one file</td>
+</tr>
+<tr class="even">
+<td><strong>declaration</strong> (<code>extern</code>)</td>
+<td>promises it exists — may appear in many files</td>
+</tr>
+</tbody>
+</table>
+<p>In practice the <code>extern</code> declaration lives in a <strong>header</strong> that both files include, so there is one copy of it to keep correct.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong><code>extern</code> with an initialiser is a definition, not a declaration.</strong> <code>extern int w = 5;</code> at file level allocates storage and merely warns; inside a block it is an error. If you write <code>extern</code> you almost always mean no initialiser.</p>
+<p><strong>Define a file-level variable in exactly one file.</strong> Two definitions of <code>int x = 1;</code> is a duplicate-symbol link error. Two <em>uninitialised</em> <code>int x;</code> may link silently on some toolchains and fail on others — including the lab machines, where gcc rejects it. Put the definition in one <code>.c</code> file and an <code>extern</code> in the header.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="register" class="level2">
+<h2 class="anchored" data-anchor-id="register">register</h2>
+<p>A <strong>hint</strong> that a variable will be used heavily. Modern compilers allocate registers themselves and ignore it, so you will rarely write it.</p>
+<p>One rule is still enforced: <strong>you cannot take the address of a <code>register</code> variable.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">register</span> <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">++;</span>                <span class="co">/* fine — x is 6 */</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span>        <span class="co">/* error: address of register variable requested */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That rules it out for <strong>arrays altogether</strong>, not just arrays you pass to a function: <code>a[0]</code> means <code>*(a + 0)</code>, which needs the array’s address.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">register</span> <span class="dt">int</span> a<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">};</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">9</span><span class="op">;</span>           <span class="co">/* error: address of register variable requested */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The only thing you may do with a <code>register</code> array is <code>sizeof</code>.</p>
+</section>
+<section id="auto" class="level2">
+<h2 class="anchored" data-anchor-id="auto">auto</h2>
+<p>The default for a variable in a block. As a storage class it changes nothing:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> <span class="dt">int</span> x <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>     <span class="co">/* identical to: int x = 3; */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>C23 gave <code>auto</code> a second, unrelated meaning</strong>: written without a type, it infers one, as in C++.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> x <span class="op">=</span> <span class="dv">7</span><span class="op">;</span>         <span class="co">/* C23: x is an int */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>GCC 15 defaults to this standard, so on an up-to-date compiler that line builds with no flags, while older ones reject it. Avoid <code>auto</code> in this course — in either sense.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="globals-the-cost" class="level2">
+<h2 class="anchored" data-anchor-id="globals-the-cost">Globals: the cost</h2>
+<p>A file-level variable is in scope for every function below it.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>any function can change it</td>
+<td>nothing records which one did</td>
+</tr>
+<tr class="even">
+<td>two functions can disagree about its state</td>
+<td>the bug is in neither of them</td>
+</tr>
+<tr class="odd">
+<td>behaviour depends on invisible input</td>
+<td>the signature no longer says what it needs</td>
+</tr>
+</tbody>
+</table>
+<p>File-level <code>static</code> hides the <strong>name</strong>, not the data: a function in that file can still hand its address to anyone.</p>
+<p>Prefer parameters in and return values out. Use a global when the alternative is genuinely worse — in this course, almost never.</p>
+</section>
+<section id="choosing" class="level2">
+<h2 class="anchored" data-anchor-id="choosing">Choosing</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>You want</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>an ordinary variable</td>
+<td>nothing — just declare it</td>
+</tr>
+<tr class="even">
+<td>a value to survive between calls to one function</td>
+<td><code>static</code> on the local</td>
+</tr>
+<tr class="odd">
+<td>a helper function or variable private to one file</td>
+<td><code>static</code> at file level</td>
+</tr>
+<tr class="even">
+<td>one variable shared by several files</td>
+<td>define it in one <code>.c</code>, <code>extern</code> it in a header both include</td>
+</tr>
+<tr class="odd">
+<td>speed</td>
+<td>nothing — write clear code and let the compiler optimise</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
@@ -961,13 +1257,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../labsheets/lab11.html" class="pagination-link" aria-label="Lab 11: Problem Solving I">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 11: Problem Solving I</span>
+      <a href="../reference/scope.html" class="pagination-link" aria-label="Scope and Lifetime">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Scope and Lifetime</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../materials/index.html" class="pagination-link" aria-label="Materials">
-        <span class="nav-page-text">Materials</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/errors.html" class="pagination-link" aria-label="Compiler Errors, Decoded">
+        <span class="nav-page-text">Compiler Errors, Decoded</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
