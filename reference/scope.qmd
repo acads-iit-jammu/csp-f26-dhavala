@@ -122,12 +122,77 @@ void reallyAddOne(int *n) { *n = *n + 1; }   /* changes the caller's  */
 
 ## Traps
 
-| | |
-|---|---|
-| accidental shadowing | legal, silent; a value "not changing" is often a shadow |
-| block variable used after the block | `undeclared identifier` — the declaration is inside braces it should be outside |
-| returning `&local` | undefined behaviour; storage is gone, may appear to work |
-| globals as a shortcut | anything can change them, nothing records what did |
+### Accidental shadowing
+
+**Shadowing** is declaring a name inside a block when that name already exists outside it.
+Both variables exist; the inner one *hides* the outer one for as long as the block lasts.
+
+It is perfectly legal, so nothing complains — and the symptom is a variable that stubbornly
+refuses to change:
+
+```c
+int count = 0;
+for (int i = 0; i < n; i++) {
+    int count = 0;        /* you meant to use the one above */
+    count++;
+}
+printf("%d\n", count);    /* 0 */
+```
+
+You wrote `count++` and the number is still 0, because you incremented a different variable
+that was destroyed at the closing brace. Nothing was wrong with your loop.
+
+It is called "accidental" because deliberate shadowing is rare; almost every real case is
+someone re-declaring a name they had forgotten was already in use. See rule 2 below for the
+fix, and note that `-Wall` does not catch it.
+
+### Using a block variable after its block
+
+A variable declared inside braces stops existing at the closing brace — including the braces
+of an `if`, a loop, or a bare block.
+
+```c
+{
+    int t = 5;
+}
+printf("%d", t);     /* error: use of undeclared identifier 't' */
+```
+
+The compiler is clear about it, so this one costs you a minute rather than an afternoon. The
+usual cause is a declaration that ended up one level deeper than intended: you declared `t`
+inside the loop and want to read it after the loop. The fix is to declare it before the block
+and assign inside.
+
+### Returning the address of a local
+
+A local variable's storage is released when the function returns. Its address then refers to
+memory that no longer belongs to you.
+
+```c
+int *f(void) {
+    int local = 5;
+    return &local;      /* the storage dies here */
+}
+```
+
+This is **undefined behaviour** — the standard does not say what happens. It may appear to
+work, because the memory has not been reused yet, and then fail when some other call reuses
+it. That is what makes it dangerous: it does not fail where the mistake is.
+
+`-Wall` does catch this particular shape:
+
+```
+warning: address of stack memory associated with local variable 'local' returned
+```
+
+To return something that outlives the function you need storage that is not a local: a
+`static`, something the caller passed in, or memory from `malloc` (W13).
+
+### Globals used as a shortcut
+
+Reaching for a global to avoid passing a parameter works, and costs you the ability to find
+the bug later: any function in the program can change it, and nothing records which one did.
+See rule 4 below.
 
 ## Rules of thumb
 
