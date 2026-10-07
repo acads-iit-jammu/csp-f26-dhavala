@@ -4,15 +4,65 @@
 
 ## The table
 
-| Declared | Scope | Lifetime |
+| Declared | Scope — where the name works | Lifetime — how long the storage lasts |
 |---|---|---|
-| in a block `{ }` | that block, from the declaration down | until the block ends |
-| function parameter | the function body | until it returns |
-| outside all functions | every function below it in the file | whole program |
-| outside all functions, `static` | the same, **but no other file can reach it** | whole program |
-| in a block, `static` | that block only | **whole program** |
+| in a block `{ }` | that block, from the declaration down to the closing brace | until the block ends |
+| function parameter | the whole function body | until the function returns |
+| outside all functions | every function below it **in that file** — and, with `extern`, other files too | whole program |
+| outside all functions, with `static` | every function below it in that file, **and nowhere else** | whole program |
+| in a block, with `static` | that block only | **whole program** |
 
-`static` inside a function changes the **lifetime**, not the scope. For `static`, `extern`, `register` and `auto` in full, see [Storage classes](storage-classes.qmd).
+### What each row means
+
+**In a block.** The ordinary case. The name exists from its declaration to the closing brace,
+and the storage disappears with it. Declaring the same name in two different blocks creates
+two unrelated variables.
+
+**A parameter.** Behaves exactly like a local declared at the top of the function — it just
+starts with a copy of the argument.
+
+**Outside all functions — a "global".** This is the row worth reading twice, because its
+scope is larger than the file it is written in.
+
+Within the file, every function *below* the declaration can use it. A function written
+*above* it cannot, which is why globals are conventionally put at the top.
+
+**And another file can use it too.** The variable has *external linkage*: its name is visible
+to the linker, so a second file can declare it with `extern` and then read and write **the
+same variable** — not a copy.
+
+```c
+/* totals.c  — the definition. This is where the storage lives. */
+int total = 0;
+
+/* report.c  — a different file, same variable */
+extern int total;                    /* "it exists somewhere; trust me" */
+void show(void) { printf("%d\n", total); }
+```
+
+```
+total seen from the other file = 42
+```
+
+Change it in one file and the other file sees the change, because there is only one `total`
+in the whole program. That reach is what makes globals risky: the list of code that can
+modify one is not bounded by the file you are reading.
+
+**Outside all functions, with `static`.** Same scope inside the file, but the name is **not**
+given to the linker, so no other file can reach it even by writing `extern`. Those two files
+simply fail to link. This is how you keep a variable or helper function private to one file.
+
+**In a block, with `static`.** The odd one. Scope is unchanged — still only that block — but
+the storage now lasts for the whole program, so the value survives between calls.
+
+::: {.callout-note}
+`static` means two different things depending on where you write it: *survives between calls*
+on a local, *private to this file* at file level. Same word, unrelated jobs.
+
+`static` inside a function changes the **lifetime**, not the scope. For `static`, `extern`,
+`register` and `auto` in full — including the one-definition rule — see
+[Storage classes](storage-classes.qmd).
+:::
 
 ## One program, all of it
 
