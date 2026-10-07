@@ -2598,6 +2598,743 @@
     ]
   },
   {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Quick Reference",
+    "section": "",
+    "text": "Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. Every example was compiled and run before it was printed.\n\n\n\nSheet\nFor\n\n\n\n\nprintf / scanf\n%d %u %zu %.2f, and why scanf read nothing\n\n\nData types\nsizes, ranges, integer division, overflow\n\n\nOperator precedence\nthe table, and the five that actually bite\n\n\nControl flow\nbreak vs continue, switch fall-through, loop traps\n\n\nArrays\n1-D and 2-D, sizeof, why the length must travel\n\n\nPointers\n& and *, arithmetic, NULL, the four mistakes\n\n\nStrings\n'\\0', sizeof vs strlen, string.h, character tests\n\n\nFunctions\ndeclaration vs definition, by value vs by address\n\n\nScope and lifetime\nwhich x a name means; why a value did not survive\n\n\nCompiler errors\nwhat the message means, and where to look",
+    "crumbs": [
+      "Quick Reference",
+      "Quick Reference"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html",
+    "href": "reference/printf-scanf.html",
+    "title": "printf / scanf",
+    "section": "",
+    "text": "Conversions\nEvery output below is what the program actually printed.",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html#conversions",
+    "href": "reference/printf-scanf.html#conversions",
+    "title": "printf / scanf",
+    "section": "",
+    "text": "type\nprints\n\n\n\n\n%d\nint\n-42\n\n\n%i\nint — same as %d here; differs in scanf\n-42\n\n\n%u\nunsigned\n42\n\n\n%ld\nlong\n3000000000\n\n\n%lld\nlong long\n9000000000\n\n\n%zu\nsize_t (sizeof, strlen)\n4\n\n\n%f\ndouble and float\n2.718282\n\n\n%e\ndouble, exponent\n2.718282e+00\n\n\n%g\ndouble, shorter form\n2.71828\n\n\n%c\nchar\nA\n\n\n%s\nstring\nhi\n\n\n%x\nunsigned, hex\nff\n\n\n%o\nunsigned, octal\n10\n\n\n%p\npointer — cast (void *)p\ndiffers on every run\n\n\n%%\nliteral %\n%",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html#width-and-precision",
+    "href": "reference/printf-scanf.html#width-and-precision",
+    "title": "printf / scanf",
+    "section": "Width and precision",
+    "text": "Width and precision\n\n\n\n%5d\n[   42]\n\n\n%-5d\n[42   ]\n\n\n%05d\n[00042]\n\n\n%.2f\n[3.14]\n\n\n%8.3f\n[   3.142]\n\n\n%.3s\n[abc]",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html#printf-vs-scanf-the-two-that-catch-everyone",
+    "href": "reference/printf-scanf.html#printf-vs-scanf-the-two-that-catch-everyone",
+    "title": "printf / scanf",
+    "section": "printf vs scanf — the two that catch everyone",
+    "text": "printf vs scanf — the two that catch everyone\n\n\n\n\nprintf\nscanf\n\n\n\n\nfloat\n%f\n%f\n\n\ndouble\n%f\n%lf\n\n\n%i\nsame as %d\nreads the base from the text\n\n\n\nscanf(\"%i\", &n) on 010 gives 8, not 10 — a leading zero means octal. Use %d.",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html#scanf-rules",
+    "href": "reference/printf-scanf.html#scanf-rules",
+    "title": "printf / scanf",
+    "section": "scanf rules",
+    "text": "scanf rules\n\n\n\n\n\n\n\nRule\n\n\n\n\n\nneeds the address\nscanf(\"%d\", &i)\n\n\nexcept arrays\nscanf(\"%19s\", s) — no &\n\n\nalways limit %s\nchar s[50] → %49s\n\n\n%s stops at whitespace\nspace, tab or newline — one word, not a line\n\n\ncheck the return\nsee below\n\n\n%c reads the next character\nincluding a leftover newline — see below\n\n\n\nint i; double d; float f; char c; char s[20];\nif (scanf(\"%d %lf %f %c %19s\", &i, &d, &f, &c, s) != 5) return 1;\ninput 7 2.5 1.5 Z hello →\ni=7 d=2.500 f=1.500 c=Z s=hello",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html#the-c-trap",
+    "href": "reference/printf-scanf.html#the-c-trap",
+    "title": "printf / scanf",
+    "section": "The %c trap",
+    "text": "The %c trap\n%c is the one conversion that does not skip whitespace, so it picks up the newline the previous scanf left behind:\nscanf(\"%d\", &n);  scanf(\"%c\", &c);     -&gt;  c is '\\n'\nscanf(\"%d\", &n);  scanf(\" %c\", &c);    -&gt;  c is 'Z'\nThe space before %c is doing real work. Note the worked example above has one.",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html#what-scanf-returns",
+    "href": "reference/printf-scanf.html#what-scanf-returns",
+    "title": "printf / scanf",
+    "section": "What scanf returns",
+    "text": "What scanf returns\n\n\n\nreturns\nmeans\n\n\n\n\na count\nhow many items it filled\n\n\n0\ninput present but it did not match\n\n\nEOF (−1)\nnothing left to read\n\n\n\nA retry loop that does not consume the offending characters spins forever — after a mismatch they are still waiting.",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/printf-scanf.html#three-mistakes--wall-catches",
+    "href": "reference/printf-scanf.html#three-mistakes--wall-catches",
+    "title": "printf / scanf",
+    "section": "Three mistakes -Wall catches",
+    "text": "Three mistakes -Wall catches\nscanf(\"%f\", &d);   /* d is double */\nscanf(\"%d\", i);    /* missing &   */\nscanf(\"%s\", &s);   /* & on array  */\nformat specifies type 'float *' but the argument has type 'double *' [-Wformat]\nformat specifies type 'int *' but the argument has type 'int' [-Wformat]\nformat specifies type 'char *' but the argument has type 'char (*)[20]' [-Wformat]\nWording differs between compilers — GNU gcc says “expects argument of type …”. None of them is silent if you ask, which is why -Wall is worth typing every time.",
+    "crumbs": [
+      "Quick Reference",
+      "printf / scanf"
+    ]
+  },
+  {
+    "objectID": "reference/data-types.html",
+    "href": "reference/data-types.html",
+    "title": "Data Types",
+    "section": "",
+    "text": "Integers\nSizes and ranges below were printed by a program on a 64-bit machine; the lab machines agree.\nWhether plain char is signed is not fixed by the standard. Use signed char or unsigned char when it matters.\nOnly the minimums are guaranteed: int ≥ 16 bits, long ≥ 32, long long ≥ 64. The sizes above hold on the lab machines and on macOS; on Windows long is 4 bytes. The portable names are in &lt;limits.h&gt; — INT_MAX, LONG_MIN, and so on — and in &lt;float.h&gt; for FLT_MAX, DBL_DIG.",
+    "crumbs": [
+      "Quick Reference",
+      "Data Types"
+    ]
+  },
+  {
+    "objectID": "reference/data-types.html#integers",
+    "href": "reference/data-types.html#integers",
+    "title": "Data Types",
+    "section": "",
+    "text": "type\nbytes\nrange\n\n\n\n\nchar\n1\n−128 … 127 (signed on the lab machines)\n\n\nunsigned char\n1\n0 … 255\n\n\nshort\n2\n−32 768 … 32 767\n\n\nunsigned short\n2\n0 … 65 535\n\n\nint\n4\n−2 147 483 648 … 2 147 483 647\n\n\nunsigned int\n4\n0 … 4 294 967 295\n\n\nlong\n8\n±9.22 × 10¹⁸ — 4 bytes on Windows\n\n\nlong long\n8\n±9.22 × 10¹⁸",
+    "crumbs": [
+      "Quick Reference",
+      "Data Types"
+    ]
+  },
+  {
+    "objectID": "reference/data-types.html#floating-point",
+    "href": "reference/data-types.html#floating-point",
+    "title": "Data Types",
+    "section": "Floating point",
+    "text": "Floating point\n\n\n\ntype\nbytes\nlargest\nreliable digits\n\n\n\n\nfloat\n4\n~3.4 × 10³⁸\n6\n\n\ndouble\n8\n~1.8 × 10³⁰⁸\n15\n\n\n\nUse double unless you have a reason not to.",
+    "crumbs": [
+      "Quick Reference",
+      "Data Types"
+    ]
+  },
+  {
+    "objectID": "reference/data-types.html#division-and",
+    "href": "reference/data-types.html#division-and",
+    "title": "Data Types",
+    "section": "Division and %",
+    "text": "Division and %\n  7 / 2   = 3       7 % 2   = 1\n -7 / 2   = -3     -7 % 2   = -1\n  7 / -2  = -3      7 % -2  = 1\n\n\n\n\n\n\n\nboth operands int\ninteger division: the quotient is truncated toward zero\n\n\n% sign\nfollows the left operand\n\n\none operand double\nthe whole division is double\n\n\n\n7 / 2        /* 3   */\n7.0 / 2      /* 3.5 */\n7 / 2.0      /* 3.5 */\n(double)7/2  /* 3.5 */\n% does not work on double at all.\n\n\n\n\n\n\nx / 0 and x % 0 are undefined behaviour, not an error value — the program typically crashes. Test the divisor first.",
+    "crumbs": [
+      "Quick Reference",
+      "Data Types"
+    ]
+  },
+  {
+    "objectID": "reference/data-types.html#overflow",
+    "href": "reference/data-types.html#overflow",
+    "title": "Data Types",
+    "section": "Overflow",
+    "text": "Overflow\n\n\n\nsigned overflow\nundefined behaviour — not “wraps round”\n\n\nunsigned overflow\nwraps modulo 2ⁿ, defined\n\n\n12!\nfits an int\n\n\n13!\ndoes not\n\n\n20!\nfits a long long\n\n\n21!\ndoes not",
+    "crumbs": [
+      "Quick Reference",
+      "Data Types"
+    ]
+  },
+  {
+    "objectID": "reference/data-types.html#mixing-signed-and-unsigned",
+    "href": "reference/data-types.html#mixing-signed-and-unsigned",
+    "title": "Data Types",
+    "section": "Mixing signed and unsigned",
+    "text": "Mixing signed and unsigned\nIn an expression with both, the signed value is converted to unsigned. So this is false:\nif (-1 &lt; strlen(s))     /* strlen returns size_t: -1 becomes huge */\nCompare lengths as int, or keep both sides unsigned.",
+    "crumbs": [
+      "Quick Reference",
+      "Data Types"
+    ]
+  },
+  {
+    "objectID": "reference/data-types.html#sizes-at-a-glance",
+    "href": "reference/data-types.html#sizes-at-a-glance",
+    "title": "Data Types",
+    "section": "Sizes at a glance",
+    "text": "Sizes at a glance\nsizeof(int)        /* 4  */\nsizeof(char)       /* 1, always */\nsizeof arr         /* whole array, only where it was declared */\nsizeof ptr         /* 8, the pointer — not what it points at  */\nsizeof yields size_t → print with %zu.",
+    "crumbs": [
+      "Quick Reference",
+      "Data Types"
+    ]
+  },
+  {
+    "objectID": "reference/precedence.html",
+    "href": "reference/precedence.html",
+    "title": "Operator Precedence",
+    "section": "",
+    "text": "The ones that actually bite\nHighest first. Within a row, apply in the associativity direction.\nAll verified by running them.\nRecent compilers refuse the last two outright:\n(with x = 4)",
+    "crumbs": [
+      "Quick Reference",
+      "Operator Precedence"
+    ]
+  },
+  {
+    "objectID": "reference/precedence.html#the-ones-that-actually-bite",
+    "href": "reference/precedence.html#the-ones-that-actually-bite",
+    "title": "Operator Precedence",
+    "section": "",
+    "text": "Written\nGives\nBecause\nYou meant\n\n\n\n\nx & 1 == 0\n0\n== is tighter than &\n(x & 1) == 0 → 1\n\n\nx &lt;&lt; 1 + 2\n32\n+ is tighter than &lt;&lt;\n(x &lt;&lt; 1) + 2 → 10\n\n\n!x & 1\n0\n! is tighter than &\n!(x & 1) → 1\n\n\n1 &lt; 2 &lt; 3\n1\n(1&lt;2) is 1, then 1&lt;3\nchained compares do not work\n\n\n3 &gt; 2 &gt; 1\n0\n(3&gt;2) is 1, then 1&gt;1\n—\n\n\n\n\nerror: chained comparison 'X &lt; Y &lt; Z' does not behave the same\n       as a mathematical expression",
+    "crumbs": [
+      "Quick Reference",
+      "Operator Precedence"
+    ]
+  },
+  {
+    "objectID": "reference/precedence.html#pointers-and",
+    "href": "reference/precedence.html#pointers-and",
+    "title": "Operator Precedence",
+    "section": "Pointers and ++",
+    "text": "Pointers and ++\n\n\n\n*p++\nthe value at p, then advance p\n\n\n(*p)++\nthe value at p, then increase that value\n\n\n*++p\nadvance p first, then the value",
+    "crumbs": [
+      "Quick Reference",
+      "Operator Precedence"
+    ]
+  },
+  {
+    "objectID": "reference/precedence.html#wall-warns-you",
+    "href": "reference/precedence.html#wall-warns-you",
+    "title": "Operator Precedence",
+    "section": "-Wall warns you",
+    "text": "-Wall warns you\nwarning: & has lower precedence than ==; == will be evaluated first\nwarning: operator '&lt;&lt;' has lower precedence than '+'; '+' will be evaluated first\nWording differs between compilers; GNU gcc says “suggest parentheses around …”. Either way, -Wall finds them.",
+    "crumbs": [
+      "Quick Reference",
+      "Operator Precedence"
+    ]
+  },
+  {
+    "objectID": "reference/precedence.html#rule-of-thumb",
+    "href": "reference/precedence.html#rule-of-thumb",
+    "title": "Operator Precedence",
+    "section": "Rule of thumb",
+    "text": "Rule of thumb\n\nIf you have to think about precedence, add parentheses. The compiler does not care; the next reader does.",
+    "crumbs": [
+      "Quick Reference",
+      "Operator Precedence"
+    ]
+  },
+  {
+    "objectID": "reference/control-flow.html",
+    "href": "reference/control-flow.html",
+    "title": "Control Flow",
+    "section": "",
+    "text": "Forms",
+    "crumbs": [
+      "Quick Reference",
+      "Control Flow"
+    ]
+  },
+  {
+    "objectID": "reference/control-flow.html#forms",
+    "href": "reference/control-flow.html#forms",
+    "title": "Control Flow",
+    "section": "",
+    "text": "if (cond) { … }\nelse if (cond) { … }\nelse { … }\n\nwhile (cond) { … }                 /* may run zero times */\ndo { … } while (cond);             /* runs at least once */\nfor (init; cond; step) { … }\n\nswitch (expr) {\n    case 1:  … break;\n    case 2:  … break;\n    default: …\n}",
+    "crumbs": [
+      "Quick Reference",
+      "Control Flow"
+    ]
+  },
+  {
+    "objectID": "reference/control-flow.html#break-and-continue",
+    "href": "reference/control-flow.html#break-and-continue",
+    "title": "Control Flow",
+    "section": "break and continue",
+    "text": "break and continue\nfor (i=0; i&lt;5; i++) { if (i==3) break;    printf(\"%d \", i); }   -&gt;  0 1 2\nfor (i=0; i&lt;5; i++) { if (i==3) continue; printf(\"%d \", i); }   -&gt;  0 1 2 4\n\n\n\n\n\n\n\nbreak\nleaves the nearest enclosing loop or switch\n\n\ncontinue\nskips to the next iteration of the nearest loop — in a for, the step still runs; in a do…while, it jumps to the condition test\n\n\nbreak in a switch inside a loop\nleaves the switch, not the loop",
+    "crumbs": [
+      "Quick Reference",
+      "Control Flow"
+    ]
+  },
+  {
+    "objectID": "reference/control-flow.html#switch-fall-through",
+    "href": "reference/control-flow.html#switch-fall-through",
+    "title": "Control Flow",
+    "section": "switch fall-through",
+    "text": "switch fall-through\nswitch (2) { case 1: \"one \" case 2: \"two \" case 3: \"three \" default: \"def\" }\n   without break  -&gt;  two three def\n   with    break  -&gt;  two\nA case without break falls into the next one. Occasionally useful; usually a bug.\nswitch works on integers and char only — not double, not strings.",
+    "crumbs": [
+      "Quick Reference",
+      "Control Flow"
+    ]
+  },
+  {
+    "objectID": "reference/control-flow.html#do-while-runs-first-tests-after",
+    "href": "reference/control-flow.html#do-while-runs-first-tests-after",
+    "title": "Control Flow",
+    "section": "do-while runs first, tests after",
+    "text": "do-while runs first, tests after\ndo    { … } while (0);    -&gt;  body ran once\nwhile (0) { … }           -&gt;  body never ran\nThe classic bug: “do it, then check” runs once even when asked for zero.",
+    "crumbs": [
+      "Quick Reference",
+      "Control Flow"
+    ]
+  },
+  {
+    "objectID": "reference/control-flow.html#traps",
+    "href": "reference/control-flow.html#traps",
+    "title": "Control Flow",
+    "section": "Traps",
+    "text": "Traps\n\n\n\n\n\n\n\nif (x = 5)\nassigns, then tests 5 → always true. You meant ==\n\n\nfor (i=0; i&lt;n; i++);\nthe ; is the body — the loop does nothing n times, and whatever follows runs once\n\n\ndangling else\nbinds to the nearest unmatched if — brace it\n\n\nwhile (i &lt; n) with no change to i\ninfinite; stop it with Ctrl-C\n\n\ncomparing double with ==\nrounding makes it unreliable; compare a difference against a tolerance",
+    "crumbs": [
+      "Quick Reference",
+      "Control Flow"
+    ]
+  },
+  {
+    "objectID": "reference/arrays.html",
+    "href": "reference/arrays.html",
+    "title": "Arrays",
+    "section": "",
+    "text": "Declaring\nIndices run 0 … n-1. a[10] in an array of 10 is out of bounds — undefined behaviour, and C will not stop you.",
+    "crumbs": [
+      "Quick Reference",
+      "Arrays"
+    ]
+  },
+  {
+    "objectID": "reference/arrays.html#declaring",
+    "href": "reference/arrays.html#declaring",
+    "title": "Arrays",
+    "section": "",
+    "text": "int  a[10];                     /* 10 ints, values undefined   */\nint  b[5] = {1,2,3,4,5};\nint  c[5] = {0};                /* first 0, rest also 0        */\nint  d[]  = {1,2,3};            /* size taken from the list: 3 */\nint  m[3][4];                   /* 3 rows, 4 columns           */",
+    "crumbs": [
+      "Quick Reference",
+      "Arrays"
+    ]
+  },
+  {
+    "objectID": "reference/arrays.html#sizeof-and-where-it-stops-working",
+    "href": "reference/arrays.html#sizeof-and-where-it-stops-working",
+    "title": "Arrays",
+    "section": "sizeof — and where it stops working",
+    "text": "sizeof — and where it stops working\nin main:    sizeof a = 40      (10 ints)\ninside f:   sizeof a = 8       (a pointer)\nvoid f(int a[]) { /* sizeof a is the POINTER size here */ }\n\n\n\nnumber of elements, where declared\nsizeof a / sizeof a[0]\n\n\ninside a function\nimpossible — pass the length\n\n\n\nThis is why every array function takes a length:\nvoid f(int a[], int n)",
+    "crumbs": [
+      "Quick Reference",
+      "Arrays"
+    ]
+  },
+  {
+    "objectID": "reference/arrays.html#d",
+    "href": "reference/arrays.html#d",
+    "title": "Arrays",
+    "section": "2-D",
+    "text": "2-D\nsizeof m        = 48      (3 × 4 × 4)\nsizeof m[0]     = 16      (one row)\nsizeof m[0][0]  = 4\nrows = sizeof m / sizeof m[0] = 3\nStored row after row. To reach m[i][j] the machine computes i*COLS + j — which is why:\n\n\n\nparameter\n\n\n\n\n\nint m[3][4]\nfine\n\n\nint m[][4]\nfine — rows not needed\n\n\nint m[3][]\nrejected\n\n\nint m[][]\nrejected\n\n\n\nThe column count is part of the type and travels with the parameter. The row count does not.",
+    "crumbs": [
+      "Quick Reference",
+      "Arrays"
+    ]
+  },
+  {
+    "objectID": "reference/arrays.html#passing-to-a-function",
+    "href": "reference/arrays.html#passing-to-a-function",
+    "title": "Arrays",
+    "section": "Passing to a function",
+    "text": "Passing to a function\n\n\n\n\n\n\n\nan array argument becomes a pointer to its first element\nno copy is made\n\n\nso the function can change the caller’s elements\n\n\n\nand no & is written at the call\nf(a), not f(&a)\n\n\nint a[] and int *a in a parameter list\nmean the same thing",
+    "crumbs": [
+      "Quick Reference",
+      "Arrays"
+    ]
+  },
+  {
+    "objectID": "reference/arrays.html#walking",
+    "href": "reference/arrays.html#walking",
+    "title": "Arrays",
+    "section": "Walking",
+    "text": "Walking\nfor (int i = 0; i &lt; n; i++)      /* by index   */\n    …a[i]…\n\nint *p = a;                       /* by pointer */\n…*(p + i)…                        /* same as a[i] */\na[i] is *(a + i).",
+    "crumbs": [
+      "Quick Reference",
+      "Arrays"
+    ]
+  },
+  {
+    "objectID": "reference/arrays.html#traps",
+    "href": "reference/arrays.html#traps",
+    "title": "Arrays",
+    "section": "Traps",
+    "text": "Traps\n\n\n\n\n\n\n\na[n] where the array has n\none past the end\n\n\nsizeof inside a function\ngives the pointer size\n\n\nforgetting the length parameter\nthe function cannot recover it\n\n\nint a[n] with n read at run time\navoid; fixed sizes until malloc in W13\n\n\ncomparing arrays with ==\ncompares addresses, not contents",
+    "crumbs": [
+      "Quick Reference",
+      "Arrays"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html",
+    "href": "reference/pointers.html",
+    "title": "Pointers",
+    "section": "",
+    "text": "The two operators\n*p on the right reads; on the left writes.",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#the-two-operators",
+    "href": "reference/pointers.html#the-two-operators",
+    "title": "Pointers",
+    "section": "",
+    "text": "&x\nthe address of x\n\n\n*p\nthe value at the address in p\n\n\n\nint x = 5;\nint *p = &x;     /* p holds the address of x */\nprintf(\"%d\", *p);  /* 5 */\n*p = 7;            /* x is now 7, without naming x */",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#declaring",
+    "href": "reference/pointers.html#declaring",
+    "title": "Pointers",
+    "section": "Declaring",
+    "text": "Declaring\nint *p;          /* read: *p is an int, so p points at an int */\nint *p, q;       /* p is a pointer. q is a plain int.         */\nint *p, *q;      /* two pointers                              */\nThe * binds to the variable, not the type. One declaration per line avoids this entirely.",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#arithmetic-counts-items-not-bytes",
+    "href": "reference/pointers.html#arithmetic-counts-items-not-bytes",
+    "title": "Pointers",
+    "section": "Arithmetic counts items, not bytes",
+    "text": "Arithmetic counts items, not bytes\nint a[5]; int *p = a;\n(p + 1) - p      /* 1  — one int, not one byte   */\nsizeof(int)      /* 4  — so the address moved 4  */\n\n\n\npointer type\np + 1 moves\n\n\n\n\nint *\n4 bytes\n\n\nchar *\n1 byte\n\n\ndouble *\n8 bytes\n\n\n\n(Byte counts are sizeof the pointed-to type on the lab machines. The rule — one whole item — never changes.)",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#with-arrays",
+    "href": "reference/pointers.html#with-arrays",
+    "title": "Pointers",
+    "section": "With arrays",
+    "text": "With arrays\n\n\n\na[i]\nis exactly *(a + i)\n\n\nan array argument\nbecomes a pointer to its first element\n\n\nint a[] and int *a as parameters\nthe same thing\n\n\nsizeof on that parameter\nthe pointer size, not the array",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#null",
+    "href": "reference/pointers.html#null",
+    "title": "Pointers",
+    "section": "NULL",
+    "text": "NULL\nint *p = NULL;          /* not pointing at anything yet */\nif (p != NULL) *p = 5;  /* test before dereferencing    */",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#printing-an-address",
+    "href": "reference/pointers.html#printing-an-address",
+    "title": "Pointers",
+    "section": "Printing an address",
+    "text": "Printing an address\nprintf(\"%p\\n\", (void *)p);     /* differs on every run */",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#why-pointers-exist",
+    "href": "reference/pointers.html#why-pointers-exist",
+    "title": "Pointers",
+    "section": "Why pointers exist",
+    "text": "Why pointers exist\n\n\n\n\n\n\n\nlet a function change the caller’s variable\nf(&x) with void f(int *n)\n\n\nreturn more than one answer\nvoid minMax(int a[], int n, int *lo, int *hi)\n\n\nhand over an array without copying it\nf(a)",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/pointers.html#the-five-mistakes",
+    "href": "reference/pointers.html#the-five-mistakes",
+    "title": "Pointers",
+    "section": "The five mistakes",
+    "text": "The five mistakes\n\n\n\n\n\n\n\ndereferencing a pointer never given an address\nundefined behaviour\n\n\np = 7 instead of *p = 7\nthe compiler complains; recent ones reject it outright\n\n\np = q where *p = *q was meant\nlegal, silent, wrong\n\n\nreturning &local\nundefined — the storage is gone\n\n\nwalking past the end of an array\nundefined\n\n\n\nThree of those five are undefined behaviour — the first, the fourth and the fifth. The standard says nothing about what happens, so do not learn what your compiler does with them.",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html",
+    "href": "reference/strings.html",
+    "title": "Strings",
+    "section": "",
+    "text": "Declaring\nA string is a char array ending in '\\0' — the null terminator. There is no string type.",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html#declaring",
+    "href": "reference/strings.html#declaring",
+    "title": "Strings",
+    "section": "",
+    "text": "char s[] = \"level\";      /* 6 chars: l e v e l \\0 — writable copy */\nchar big[20] = \"hello\";  /* 20 chars, room to grow                */\nchar *p = \"level\";       /* points at a literal — DO NOT modify   */\n\n\n\nindex\n0\n1\n2\n3\n4\n5\n\n\n\n\nchar s[] = \"level\"\nl\ne\nv\ne\nl\n\\0",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html#sizeof-vs-strlen",
+    "href": "reference/strings.html#sizeof-vs-strlen",
+    "title": "Strings",
+    "section": "sizeof vs strlen",
+    "text": "sizeof vs strlen\nchar s[] = \"level\";\nsizeof s  = 6      all the boxes, including the '\\0'\nstrlen(s) = 5      characters before the '\\0'\n\n\n\n\nanswered\nsurvives being passed to a function\n\n\n\n\nsizeof\nat compile time\nno — gives the pointer size\n\n\nstrlen\nat run time, by walking\nyes",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html#string.h",
+    "href": "reference/strings.html#string.h",
+    "title": "Strings",
+    "section": "string.h",
+    "text": "string.h\n\n\n\nstrlen(s)\ncharacters before the '\\0'\n\n\nstrcpy(dst, src)\ncopy, terminator included\n\n\nstrcat(dst, src)\nappend\n\n\nstrcmp(a, b)\n0 means equal; sign otherwise\n\n\n\nchar big[20] = \"hello\";       /* room to grow — this matters */\nstrcat(big, \" there\");        /* big is now \"hello there\"    */\n\nstrcmp(\"abc\", \"abc\")          /*  0        */\nstrcmp(\"Zebra\", \"apple\")      /*  negative  ('Z' is 90, 'a' is 97) */\n\n\n\n\n\n\nThe first argument to strcpy and strcat must be a writable array with room. Never a string literal: strcat(\"hello\", \" there\") compiles without a warning and then crashes.\n\n\n\n\n\n\n\n\n\nstrcmp is not alphabetical — it compares character codes, and every capital sorts before every lowercase.\nstrcpy and strcat do not check that the destination is big enough.",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html#walking",
+    "href": "reference/strings.html#walking",
+    "title": "Strings",
+    "section": "Walking",
+    "text": "Walking\nint n = 0;\nwhile (s[n] != '\\0') n++;        /* length by hand */\n\nfor (int i = 0; s[i] != '\\0'; i++)\n    …s[i]…",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html#reading",
+    "href": "reference/strings.html#reading",
+    "title": "Strings",
+    "section": "Reading",
+    "text": "Reading\nchar w[50];\nscanf(\"%49s\", w);     /* no &; limit is one less than the size */\n%s stops at the first whitespace — space, tab or newline. One word, not a line.",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html#characters",
+    "href": "reference/strings.html#characters",
+    "title": "Strings",
+    "section": "Characters",
+    "text": "Characters\n\n\n\nTest\n\n\n\n\n\nis a letter\n(c&gt;='a'&&c&lt;='z') \\|\\| (c&gt;='A'&&c&lt;='Z')\n\n\nis a digit\nc &gt;= '0' && c &lt;= '9'\n\n\ndigit to number\nc - '0'\n\n\n\nChanging case needs a guard. The formulas only work on a letter already in the other case, and give nonsense otherwise:\nchar toUpper(char c) {\n    if (c &gt;= 'a' && c &lt;= 'z') return c - 'a' + 'A';\n    return c;                      /* leave everything else alone */\n}\nchar toLower(char c) {\n    if (c &gt;= 'A' && c &lt;= 'Z') return c - 'A' + 'a';\n    return c;\n}\nApplied without the guard: '5' - 'a' + 'A' is 21, and 'a' - 'A' + 'a' overflows a signed char to −127.\n'a' - 'A' is 32, but write - 'a' + 'A': it says what it means.\n\n\n\n\n\n\n&lt;ctype.h&gt; provides isalpha, isdigit, isspace, toupper, tolower, already guarded. Writing them by hand once is the exercise; using the library afterwards is sensible.",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/strings.html#traps",
+    "href": "reference/strings.html#traps",
+    "title": "Strings",
+    "section": "Traps",
+    "text": "Traps\n\n\n\nforgetting the '\\0'\nevery string function runs off the end\n\n\nsizeof for the length after passing\ngives the pointer size\n\n\nif (strcmp(a,b))\ntrue when they differ\n\n\nmodifying char *p = \"literal\"\nundefined behaviour\n\n\nscanf(\"%s\", s) with no limit\nwrites past the array",
+    "crumbs": [
+      "Quick Reference",
+      "Strings"
+    ]
+  },
+  {
+    "objectID": "reference/functions.html",
+    "href": "reference/functions.html",
+    "title": "Functions",
+    "section": "",
+    "text": "Declaration and definition\nDeclare before use, or define above the caller. A declaration ends in ;, a definition in }.",
+    "crumbs": [
+      "Quick Reference",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "reference/functions.html#declaration-and-definition",
+    "href": "reference/functions.html#declaration-and-definition",
+    "title": "Functions",
+    "section": "",
+    "text": "int  square(int n);          /* declaration: name, what goes in, what comes out */\nvoid bump(int *n);\n\nint main(void) { … }\n\nint  square(int n) { return n * n; }      /* definition: the body */\nvoid bump(int *n)  { *n = *n + 1; }",
+    "crumbs": [
+      "Quick Reference",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "reference/functions.html#by-value-by-address",
+    "href": "reference/functions.html#by-value-by-address",
+    "title": "Functions",
+    "section": "By value, by address",
+    "text": "By value, by address\nsquare(5)  = 25        value in, value out\nx before bump = 5\nbump(&x)\nx after  bump = 6      address in, the caller's variable changed\n\n\n\n\nWrite\nParameter\n\n\n\n\nread a value\nf(x)\nint n\n\n\nchange the caller’s variable\nf(&x)\nint *n\n\n\npass an array\nf(a) — no &\nint a[] or int *a\n\n\n\nA parameter is a local variable holding a copy. Assigning to it changes nothing outside.",
+    "crumbs": [
+      "Quick Reference",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "reference/functions.html#return",
+    "href": "reference/functions.html#return",
+    "title": "Functions",
+    "section": "return",
+    "text": "return\n\n\n\none value only\nfor more, use pointer parameters\n\n\nvoid\nreturns nothing; return; alone is allowed\n\n\nnon-void\nmust return on every path\n\n\nreturn inside a loop\nleaves the function, not just the loop\n\n\n\nvoid minMax(int a[], int n, int *lo, int *hi);   /* two answers, no return */",
+    "crumbs": [
+      "Quick Reference",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "reference/functions.html#scope",
+    "href": "reference/functions.html#scope",
+    "title": "Functions",
+    "section": "Scope",
+    "text": "Scope\nint g;                       /* global: everywhere below it  */\nvoid f(void){\n    static int calls = 0;    /* survives between calls       */\n    int fresh = 0;           /* new every call               */\n}\nSee Scope and lifetime.",
+    "crumbs": [
+      "Quick Reference",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "reference/functions.html#traps",
+    "href": "reference/functions.html#traps",
+    "title": "Functions",
+    "section": "Traps",
+    "text": "Traps\n\n\n\n\n\n\n\nno declaration before the call\nthe compiler complains about an undeclared function — wording varies\n\n\nfalling off the end of a non-void function\nundefined behaviour if the caller uses the value\n\n\nreturning &local\nundefined — the storage is gone\n\n\nint f()\nold style, no checking; write int f(void)\n\n\nchanging a parameter and expecting the caller to see it\nit got a copy",
+    "crumbs": [
+      "Quick Reference",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "reference/scope.html",
+    "href": "reference/scope.html",
+    "title": "Scope and Lifetime",
+    "section": "",
+    "text": "The table\nScope = where the name can be used. Lifetime = how long the storage exists. Different questions.\nstatic inside a function changes the lifetime, not the scope.",
+    "crumbs": [
+      "Quick Reference",
+      "Scope and Lifetime"
+    ]
+  },
+  {
+    "objectID": "reference/scope.html#the-table",
+    "href": "reference/scope.html#the-table",
+    "title": "Scope and Lifetime",
+    "section": "",
+    "text": "Declared\nScope\nLifetime\n\n\n\n\nin a block { }\nthat block, from the declaration down\nuntil the block ends\n\n\nfunction parameter\nthe function body\nuntil it returns\n\n\noutside all functions\nevery function below it in the file\nwhole program\n\n\noutside all functions, static\nthe same, but no other file can reach it\nwhole program\n\n\nin a block, static\nthat block only\nwhole program",
+    "crumbs": [
+      "Quick Reference",
+      "Scope and Lifetime"
+    ]
+  },
+  {
+    "objectID": "reference/scope.html#one-program-all-of-it",
+    "href": "reference/scope.html#one-program-all-of-it",
+    "title": "Scope and Lifetime",
+    "section": "One program, all of it",
+    "text": "One program, all of it\n#include &lt;stdio.h&gt;\n\nint g = 1;                    /* global: whole program            */\nstatic int fileOnly = 2;      /* global, this file only           */\n\nvoid counter(void){\n    static int calls = 0;     /* keeps its value between calls    */\n    int fresh = 0;            /* new every call                   */\n    calls++; fresh++;\n    printf(\"  calls=%d fresh=%d\\n\", calls, fresh);\n}\n\nint main(void){\n    int x = 10;\n    printf(\"g=%d fileOnly=%d x=%d\\n\", g, fileOnly, x);\n    {\n        int x = 20;           /* shadows the outer x in this block */\n        printf(\"inner block x=%d\\n\", x);\n    }\n    printf(\"after the block x=%d\\n\", x);\n    counter(); counter(); counter();\n    for (int i = 0; i &lt; 2; i++) { int t = i * 10; printf(\"  loop i=%d t=%d\\n\", i, t); }\n    return 0;\n}\ng=1 fileOnly=2 x=10\ninner block x=20\nafter the block x=10\n  calls=1 fresh=1\n  calls=2 fresh=1\n  calls=3 fresh=1\n  loop i=0 t=0\n  loop i=1 t=10\n\n\n\n\n\n\n\nIn that output\nBecause\n\n\n\n\ninner x is 20, outer still 10\nthe inner int x is a second variable — shadowing\n\n\ncalls = 1, 2, 3\nstatic — storage survives the return, initialised once\n\n\nfresh = 1 every time\nordinary local — created and destroyed each call\n\n\ni, t\nscoped to the loop; using them after it is an error",
+    "crumbs": [
+      "Quick Reference",
+      "Scope and Lifetime"
+    ]
+  },
+  {
+    "objectID": "reference/scope.html#parameters-are-copies",
+    "href": "reference/scope.html#parameters-are-copies",
+    "title": "Scope and Lifetime",
+    "section": "Parameters are copies",
+    "text": "Parameters are copies\nvoid addOne(int n)        { n = n + 1; }     /* changes the copy only */\nvoid reallyAddOne(int *n) { *n = *n + 1; }   /* changes the caller's  */\n(Two different names — defining addOne twice is an error.)",
+    "crumbs": [
+      "Quick Reference",
+      "Scope and Lifetime"
+    ]
+  },
+  {
+    "objectID": "reference/scope.html#traps",
+    "href": "reference/scope.html#traps",
+    "title": "Scope and Lifetime",
+    "section": "Traps",
+    "text": "Traps\n\n\n\n\n\n\n\naccidental shadowing\nlegal, silent; a value “not changing” is often a shadow\n\n\nblock variable used after the block\nundeclared identifier — the declaration is inside braces it should be outside\n\n\nreturning &local\nundefined behaviour; storage is gone, may appear to work\n\n\nglobals as a shortcut\nanything can change them, nothing records what did",
+    "crumbs": [
+      "Quick Reference",
+      "Scope and Lifetime"
+    ]
+  },
+  {
+    "objectID": "reference/scope.html#rules-of-thumb",
+    "href": "reference/scope.html#rules-of-thumb",
+    "title": "Scope and Lifetime",
+    "section": "Rules of thumb",
+    "text": "Rules of thumb\n\nDeclare in the smallest block that needs it.\nSame name in nested scopes → rename one.\nstatic local only when a value must survive between calls.\nGlobals: almost never in this course.",
+    "crumbs": [
+      "Quick Reference",
+      "Scope and Lifetime"
+    ]
+  },
+  {
+    "objectID": "reference/errors.html",
+    "href": "reference/errors.html",
+    "title": "Compiler Errors, Decoded",
+    "section": "",
+    "text": "Read the FIRST error, not the last\nAlways compile with warnings on:\nOne mistake often produces a cascade. Fix the top one and recompile; the rest frequently vanish.",
+    "crumbs": [
+      "Quick Reference",
+      "Compiler Errors, Decoded"
+    ]
+  },
+  {
+    "objectID": "reference/errors.html#the-common-ones",
+    "href": "reference/errors.html#the-common-ones",
+    "title": "Compiler Errors, Decoded",
+    "section": "The common ones",
+    "text": "The common ones\n\n\n\n\n\n\n\n\nMessage\nMeans\nFix\n\n\n\n\nexpected ';' …\nmissing semicolon. clang names the line it is missing from; gcc usually names the line after it\nadd ;\n\n\nuse of undeclared identifier 'y'\nname not declared, or misspelt, or out of scope\ndeclare it; check spelling and braces\n\n\ncall to undeclared function 'foo'\nno declaration above the call, or a missing #include\ndeclare it, or add the header\n\n\nundefined reference to 'main' (gcc) · Undefined symbols … \"_main\" (macOS)\nlinker, not compiler: no main\nyou compiled a file with no main\n\n\nundefined reference to 'sqrt'\ndeclared but not linked\nadd -lm\n\n\nformat specifies type 'int *' but the argument has type 'int'\nscanf missing &\n&x\n\n\nformat specifies type 'float *' … 'double *'\n%f for a double in scanf\nuse %lf\n\n\nsizeof on array function parameter\nthe parameter is a pointer\npass the length separately\n\n\n& has lower precedence than ==\nprecedence trap\nparenthesise\n\n\nvariable 'x' is uninitialized when used here\nread before any value was stored\ninitialise it\n\n\ncontrol reaches end of non-void function\na path with no return\nreturn on every path\n\n\nunused variable 'x'\nharmless, but often a typo elsewhere\nremove it, or use it",
+    "crumbs": [
+      "Quick Reference",
+      "Compiler Errors, Decoded"
+    ]
+  },
+  {
+    "objectID": "reference/errors.html#compiler-or-linker",
+    "href": "reference/errors.html#compiler-or-linker",
+    "title": "Compiler Errors, Decoded",
+    "section": "Compiler or linker?",
+    "text": "Compiler or linker?\n\n\n\n\n\n\n\nnames a file and line\ncompiler — a syntax or type problem\n\n\nsays undefined symbol / reference, no line\nlinker — something was declared but never defined, or a library is missing",
+    "crumbs": [
+      "Quick Reference",
+      "Compiler Errors, Decoded"
+    ]
+  },
+  {
+    "objectID": "reference/errors.html#when-it-will-not-run",
+    "href": "reference/errors.html#when-it-will-not-run",
+    "title": "Compiler Errors, Decoded",
+    "section": "When it will not run",
+    "text": "When it will not run\n\n\n\n\n\n\n\nPermission denied\nchmod +x prog\n\n\ncommand not found\nwrite ./prog, not prog\n\n\nnothing happens\nit is waiting for input — or an infinite loop; Ctrl-C\n\n\nSegmentation fault\na bad pointer or an out-of-bounds index. There is no line number. Narrow it with printf, or rebuild with -g -fsanitize=address and run again — that names the offending line",
+    "crumbs": [
+      "Quick Reference",
+      "Compiler Errors, Decoded"
+    ]
+  },
+  {
     "objectID": "cs1100-cse-iitm-2021/index.html",
     "href": "cs1100-cse-iitm-2021/index.html",
     "title": "CS1100 Lectures (IIT Madras)",
@@ -2613,7 +3350,7 @@
     "href": "resources.html",
     "title": "Resources",
     "section": "",
-    "text": "Textbooks",
+    "text": "Quick Reference\nTen short lookup sheets written for this course — the things worth having in front of you while you type. See the Quick Reference section: printf / scanf · data types · precedence · control flow · arrays · pointers · strings · functions · scope · compiler errors.",
     "crumbs": [
       "Reference Material",
       "Resources"
@@ -2623,8 +3360,8 @@
     "objectID": "resources.html#textbooks",
     "href": "resources.html#textbooks",
     "title": "Resources",
-    "section": "",
-    "text": "Kernighan, Brian, and Dennis Ritchie. The C Programming Language. 2nd ed. Prentice Hall, 1988. ISBN: 9780131103627. — the classic; strongly recommended.\nRobert W. Sebesta. Concepts of Programming Languages. Pearson Education, 2019.\nRichard Johnsonbaugh and Martin Kalin. Object-Oriented Programming in C++. Macmillan USA, 1994.",
+    "section": "Textbooks",
+    "text": "Textbooks\n\nKernighan, Brian, and Dennis Ritchie. The C Programming Language. 2nd ed. Prentice Hall, 1988. ISBN: 9780131103627. — the classic; strongly recommended.\nRobert W. Sebesta. Concepts of Programming Languages. Pearson Education, 2019.\nRichard Johnsonbaugh and Martin Kalin. Object-Oriented Programming in C++. Macmillan USA, 1994.",
     "crumbs": [
       "Reference Material",
       "Resources"

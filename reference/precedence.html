@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W04: Number Systems (Lec 4) · Data Types – CS-1-01 (MO)</title>
+<title>Operator Precedence – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/w05.html" rel="next">
-<link href="../weeks/w03.html" rel="prev">
+<link href="../reference/control-flow.html" rel="next">
+<link href="../reference/data-types.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/precedence.html">Operator Precedence</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,13 +147,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w01.html" class="sidebar-item-text sidebar-link">
@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">W04: Number Systems (Lec 4) · Data Types</span></a>
   </div>
 </li>
@@ -372,13 +372,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Quick Reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
@@ -399,7 +399,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/precedence.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/precedence.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Operator Precedence</span></a>
   </div>
 </li>
@@ -480,18 +480,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link active" data-scroll-target="#in-class">In Class</a></li>
-  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#the-ones-that-actually-bite" id="toc-the-ones-that-actually-bite" class="nav-link active" data-scroll-target="#the-ones-that-actually-bite">The ones that actually bite</a></li>
+  <li><a href="#pointers-and" id="toc-pointers-and" class="nav-link" data-scroll-target="#pointers-and">Pointers and <code>++</code></a></li>
+  <li><a href="#wall-warns-you" id="toc-wall-warns-you" class="nav-link" data-scroll-target="#wall-warns-you"><code>-Wall</code> warns you</a></li>
+  <li><a href="#rule-of-thumb" id="toc-rule-of-thumb" class="nav-link" data-scroll-target="#rule-of-thumb">Rule of thumb</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/precedence.html">Operator Precedence</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W04: Number Systems (Lec 4) · Data Types</h1>
+<h1 class="title">Operator Precedence</h1>
 </div>
 
 
@@ -508,25 +509,184 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Mon Aug 24 &amp; Tue Aug 25, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 2 close-out (number systems) · 3 — C program structure; data types</p>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<ul>
-<li><strong>Number systems, from <a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a></strong> — the representation thread closed out on Prof.&nbsp;Agrawal’s slides, after CT-1. Reference decks: <a href="../materials/w02-deck-03-number-systems.html">Deck 03 — Number Systems</a> and <a href="../materials/w03-deck-05-complements-overflow.html">Deck 05 — Complements &amp; Overflow</a>.</li>
-<li><strong>Data types</strong> — the wardrobe of basic types (<code>char</code>, <code>int</code>, <code>float</code>, <code>double</code>) as <em>size + reading convention</em>, each with the edge of its world; <code>sizeof</code>. Deck: <a href="../materials/w03-deck-07-types-operators.html">Deck 07 — Types, Assignments &amp; Operators</a>.</li>
-</ul>
+<p><em>Highest first. Within a row, apply in the associativity direction.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Operators</th>
+<th>Associativity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>()</code> <code>[]</code> <code>-&gt;</code> <code>.</code> <strong>postfix</strong> <code>++</code> <code>--</code></td>
+<td>left → right</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>!</code> <code>~</code> <strong>prefix</strong> <code>++</code> <code>--</code> unary <code>+</code> <code>-</code> <code>*</code>(deref) <code>&amp;</code>(address) <code>(cast)</code> <code>sizeof</code></td>
+<td>right → left</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>*</code> <code>/</code> <code>%</code></td>
+<td>left → right</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>+</code> <code>-</code></td>
+<td>left → right</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td>
+<td>left → right</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code></td>
+<td>left → right</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><code>==</code> <code>!=</code></td>
+<td>left → right</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><code>&amp;</code></td>
+<td>left → right</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td><code>^</code></td>
+<td>left → right</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><code>\|</code></td>
+<td>left → right</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td><code>&amp;&amp;</code></td>
+<td>left → right</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td><code>\|\|</code></td>
+<td>left → right</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><code>?:</code></td>
+<td>right → left</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code> …</td>
+<td>right → left</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td><code>,</code></td>
+<td>left → right</td>
+</tr>
+</tbody>
+</table>
+<section id="the-ones-that-actually-bite" class="level2">
+<h2 class="anchored" data-anchor-id="the-ones-that-actually-bite">The ones that actually bite</h2>
+<p><em>All verified by running them.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 30%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Written</th>
+<th style="text-align: right;">Gives</th>
+<th>Because</th>
+<th>You meant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x &amp; 1 == 0</code></td>
+<td style="text-align: right;"><code>0</code></td>
+<td><code>==</code> is <strong>tighter</strong> than <code>&amp;</code></td>
+<td><code>(x &amp; 1) == 0</code> → <code>1</code></td>
+</tr>
+<tr class="even">
+<td><code>x &lt;&lt; 1 + 2</code></td>
+<td style="text-align: right;"><code>32</code></td>
+<td><code>+</code> is tighter than <code>&lt;&lt;</code></td>
+<td><code>(x &lt;&lt; 1) + 2</code> → <code>10</code></td>
+</tr>
+<tr class="odd">
+<td><code>!x &amp; 1</code></td>
+<td style="text-align: right;"><code>0</code></td>
+<td><code>!</code> is tighter than <code>&amp;</code></td>
+<td><code>!(x &amp; 1)</code> → <code>1</code></td>
+</tr>
+<tr class="even">
+<td><code>1 &lt; 2 &lt; 3</code></td>
+<td style="text-align: right;"><code>1</code></td>
+<td><code>(1&lt;2)</code> is <code>1</code>, then <code>1&lt;3</code></td>
+<td>chained compares do not work</td>
+</tr>
+<tr class="odd">
+<td><code>3 &gt; 2 &gt; 1</code></td>
+<td style="text-align: right;"><code>0</code></td>
+<td><code>(3&gt;2)</code> is <code>1</code>, then <code>1&gt;1</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Recent compilers refuse the last two outright:</p>
+<pre><code>error: chained comparison 'X &lt; Y &lt; Z' does not behave the same
+       as a mathematical expression</code></pre>
+<p><em>(with <code>x = 4</code>)</em></p>
 </section>
-<section id="after-class" class="level2">
-<h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<ul>
-<li>Run <code>sizeof</code> on every basic type on your own machine and write the table down. Which of those numbers are guaranteed by C, and which are just what <em>our</em> compiler chose?</li>
-<li>For each type, name a value it cannot hold. What happens if you try?</li>
-</ul>
+<section id="pointers-and" class="level2">
+<h2 class="anchored" data-anchor-id="pointers-and">Pointers and <code>++</code></h2>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><code>*p++</code></td>
+<td>the value at <code>p</code>, <strong>then</strong> advance <code>p</code></td>
+</tr>
+<tr class="even">
+<td><code>(*p)++</code></td>
+<td>the value at <code>p</code>, <strong>then</strong> increase that value</td>
+</tr>
+<tr class="odd">
+<td><code>*++p</code></td>
+<td>advance <code>p</code> first, then the value</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="pagal-notes" class="level2">
-<h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<section id="wall-warns-you" class="level2">
+<h2 class="anchored" data-anchor-id="wall-warns-you"><code>-Wall</code> warns you</h2>
+<pre><code>warning: &amp; has lower precedence than ==; == will be evaluated first
+warning: operator '&lt;&lt;' has lower precedence than '+'; '+' will be evaluated first</code></pre>
+<p>Wording differs between compilers; GNU gcc says “suggest parentheses around …”. Either way, <code>-Wall</code> finds them.</p>
+</section>
+<section id="rule-of-thumb" class="level2">
+<h2 class="anchored" data-anchor-id="rule-of-thumb">Rule of thumb</h2>
+<blockquote class="blockquote">
+<p>If you have to think about precedence, add parentheses. The compiler does not care; the next reader does.</p>
+</blockquote>
 
 
 </section>
@@ -939,13 +1099,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/w03.html" class="pagination-link" aria-label="W03: Complements, Overflow · First C Program">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">W03: Complements, Overflow · First C Program</span>
+      <a href="../reference/data-types.html" class="pagination-link" aria-label="Data Types">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data Types</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/w05.html" class="pagination-link" aria-label="W05: From Source to Executable">
-        <span class="nav-page-text">W05: From Source to Executable</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/control-flow.html" class="pagination-link" aria-label="Control Flow">
+        <span class="nav-page-text">Control Flow</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

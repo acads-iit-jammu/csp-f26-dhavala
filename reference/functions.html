@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W04: Number Systems (Lec 4) · Data Types – CS-1-01 (MO)</title>
+<title>Functions – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/w05.html" rel="next">
-<link href="../weeks/w03.html" rel="prev">
+<link href="../reference/scope.html" rel="next">
+<link href="../reference/strings.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/functions.html">Functions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,13 +182,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w01.html" class="sidebar-item-text sidebar-link">
@@ -174,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">W04: Number Systems (Lec 4) · Data Types</span></a>
   </div>
 </li>
@@ -372,13 +407,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Quick Reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
@@ -429,7 +464,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/functions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Functions</span></a>
   </div>
 </li>
@@ -480,18 +515,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link active" data-scroll-target="#in-class">In Class</a></li>
-  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#declaration-and-definition" id="toc-declaration-and-definition" class="nav-link active" data-scroll-target="#declaration-and-definition">Declaration and definition</a></li>
+  <li><a href="#by-value-by-address" id="toc-by-value-by-address" class="nav-link" data-scroll-target="#by-value-by-address">By value, by address</a></li>
+  <li><a href="#return" id="toc-return" class="nav-link" data-scroll-target="#return">return</a></li>
+  <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope">Scope</a></li>
+  <li><a href="#traps" id="toc-traps" class="nav-link" data-scroll-target="#traps">Traps</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/functions.html">Functions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W04: Number Systems (Lec 4) · Data Types</h1>
+<h1 class="title">Functions</h1>
 </div>
 
 
@@ -508,25 +545,114 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Mon Aug 24 &amp; Tue Aug 25, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 2 close-out (number systems) · 3 — C program structure; data types</p>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<ul>
-<li><strong>Number systems, from <a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a></strong> — the representation thread closed out on Prof.&nbsp;Agrawal’s slides, after CT-1. Reference decks: <a href="../materials/w02-deck-03-number-systems.html">Deck 03 — Number Systems</a> and <a href="../materials/w03-deck-05-complements-overflow.html">Deck 05 — Complements &amp; Overflow</a>.</li>
-<li><strong>Data types</strong> — the wardrobe of basic types (<code>char</code>, <code>int</code>, <code>float</code>, <code>double</code>) as <em>size + reading convention</em>, each with the edge of its world; <code>sizeof</code>. Deck: <a href="../materials/w03-deck-07-types-operators.html">Deck 07 — Types, Assignments &amp; Operators</a>.</li>
-</ul>
+<section id="declaration-and-definition" class="level2">
+<h2 class="anchored" data-anchor-id="declaration-and-definition">Declaration and definition</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span>  square<span class="op">(</span><span class="dt">int</span> n<span class="op">);</span>          <span class="co">/* declaration: name, what goes in, what comes out */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bump<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>n<span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span> … <span class="op">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span>  square<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> n <span class="op">*</span> n<span class="op">;</span> <span class="op">}</span>      <span class="co">/* definition: the body */</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bump<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>n<span class="op">)</span>  <span class="op">{</span> <span class="op">*</span>n <span class="op">=</span> <span class="op">*</span>n <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Declare before use, or define above the caller. A declaration ends in <code>;</code>, a definition in <code>}</code>.</p>
 </section>
-<section id="after-class" class="level2">
-<h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<ul>
-<li>Run <code>sizeof</code> on every basic type on your own machine and write the table down. Which of those numbers are guaranteed by C, and which are just what <em>our</em> compiler chose?</li>
-<li>For each type, name a value it cannot hold. What happens if you try?</li>
-</ul>
+<section id="by-value-by-address" class="level2">
+<h2 class="anchored" data-anchor-id="by-value-by-address">By value, by address</h2>
+<pre><code>square(5)  = 25        value in, value out
+x before bump = 5
+bump(&amp;x)
+x after  bump = 6      address in, the caller's variable changed</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Write</th>
+<th>Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>read a value</td>
+<td><code>f(x)</code></td>
+<td><code>int n</code></td>
+</tr>
+<tr class="even">
+<td>change the caller’s variable</td>
+<td><code>f(&amp;x)</code></td>
+<td><code>int *n</code></td>
+</tr>
+<tr class="odd">
+<td>pass an array</td>
+<td><code>f(a)</code> — no <code>&amp;</code></td>
+<td><code>int a[]</code> or <code>int *a</code></td>
+</tr>
+</tbody>
+</table>
+<p>A parameter is a local variable holding a <strong>copy</strong>. Assigning to it changes nothing outside.</p>
 </section>
-<section id="pagal-notes" class="level2">
-<h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<section id="return" class="level2">
+<h2 class="anchored" data-anchor-id="return">return</h2>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>one value only</td>
+<td>for more, use pointer parameters</td>
+</tr>
+<tr class="even">
+<td><code>void</code></td>
+<td>returns nothing; <code>return;</code> alone is allowed</td>
+</tr>
+<tr class="odd">
+<td>non-<code>void</code></td>
+<td>must return on <strong>every</strong> path</td>
+</tr>
+<tr class="even">
+<td><code>return</code> inside a loop</td>
+<td>leaves the function, not just the loop</td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> minMax<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>lo<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>hi<span class="op">);</span>   <span class="co">/* two answers, no return */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="scope" class="level2">
+<h2 class="anchored" data-anchor-id="scope">Scope</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> g<span class="op">;</span>                       <span class="co">/* global: everywhere below it  */</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> calls <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>    <span class="co">/* survives between calls       */</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> fresh <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>           <span class="co">/* new every call               */</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>See <a href="../reference/scope.html">Scope and lifetime</a>.</p>
+</section>
+<section id="traps" class="level2">
+<h2 class="anchored" data-anchor-id="traps">Traps</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>no declaration before the call</td>
+<td>the compiler complains about an undeclared function — wording varies</td>
+</tr>
+<tr class="even">
+<td>falling off the end of a non-<code>void</code> function</td>
+<td><strong>undefined behaviour</strong> if the caller uses the value</td>
+</tr>
+<tr class="odd">
+<td>returning <code>&amp;local</code></td>
+<td><strong>undefined</strong> — the storage is gone</td>
+</tr>
+<tr class="even">
+<td><code>int f()</code></td>
+<td>old style, no checking; write <code>int f(void)</code></td>
+</tr>
+<tr class="odd">
+<td>changing a parameter and expecting the caller to see it</td>
+<td>it got a copy</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
@@ -939,13 +1065,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/w03.html" class="pagination-link" aria-label="W03: Complements, Overflow · First C Program">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">W03: Complements, Overflow · First C Program</span>
+      <a href="../reference/strings.html" class="pagination-link" aria-label="Strings">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Strings</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/w05.html" class="pagination-link" aria-label="W05: From Source to Executable">
-        <span class="nav-page-text">W05: From Source to Executable</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/scope.html" class="pagination-link" aria-label="Scope and Lifetime">
+        <span class="nav-page-text">Scope and Lifetime</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

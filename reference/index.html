@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W04: Number Systems (Lec 4) · Data Types – CS-1-01 (MO)</title>
+<title>Quick Reference – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/w05.html" rel="next">
-<link href="../weeks/w03.html" rel="prev">
+<link href="../reference/printf-scanf.html" rel="next">
+<link href="../notebooks/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,13 +147,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w01.html" class="sidebar-item-text sidebar-link">
@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">W04: Number Systems (Lec 4) · Data Types</span></a>
   </div>
 </li>
@@ -372,16 +372,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Quick Reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Quick Reference</span></a>
   </div>
 </li>
@@ -475,23 +475,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link active" data-scroll-target="#in-class">In Class</a></li>
-  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W04: Number Systems (Lec 4) · Data Types</h1>
+<h1 class="title">Quick Reference</h1>
 </div>
 
 
@@ -508,28 +500,59 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Mon Aug 24 &amp; Tue Aug 25, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 2 close-out (number systems) · 3 — C program structure; data types</p>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<ul>
-<li><strong>Number systems, from <a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a></strong> — the representation thread closed out on Prof.&nbsp;Agrawal’s slides, after CT-1. Reference decks: <a href="../materials/w02-deck-03-number-systems.html">Deck 03 — Number Systems</a> and <a href="../materials/w03-deck-05-complements-overflow.html">Deck 05 — Complements &amp; Overflow</a>.</li>
-<li><strong>Data types</strong> — the wardrobe of basic types (<code>char</code>, <code>int</code>, <code>float</code>, <code>double</code>) as <em>size + reading convention</em>, each with the edge of its world; <code>sizeof</code>. Deck: <a href="../materials/w03-deck-07-types-operators.html">Deck 07 — Types, Assignments &amp; Operators</a>.</li>
-</ul>
-</section>
-<section id="after-class" class="level2">
-<h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<ul>
-<li>Run <code>sizeof</code> on every basic type on your own machine and write the table down. Which of those numbers are guaranteed by C, and which are just what <em>our</em> compiler chose?</li>
-<li>For each type, name a value it cannot hold. What happens if you try?</li>
-</ul>
-</section>
-<section id="pagal-notes" class="level2">
-<h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<p>Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. <strong>Every example was compiled and run before it was printed.</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Sheet</th>
+<th>For</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="../reference/printf-scanf.html">printf / scanf</a></td>
+<td><code>%d</code> <code>%u</code> <code>%zu</code> <code>%.2f</code>, and why <code>scanf</code> read nothing</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/data-types.html">Data types</a></td>
+<td>sizes, ranges, integer division, overflow</td>
+</tr>
+<tr class="odd">
+<td><a href="../reference/precedence.html">Operator precedence</a></td>
+<td>the table, and the five that actually bite</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/control-flow.html">Control flow</a></td>
+<td><code>break</code> vs <code>continue</code>, <code>switch</code> fall-through, loop traps</td>
+</tr>
+<tr class="odd">
+<td><a href="../reference/arrays.html">Arrays</a></td>
+<td>1-D and 2-D, <code>sizeof</code>, why the length must travel</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/pointers.html">Pointers</a></td>
+<td><code>&amp;</code> and <code>*</code>, arithmetic, <code>NULL</code>, the four mistakes</td>
+</tr>
+<tr class="odd">
+<td><a href="../reference/strings.html">Strings</a></td>
+<td><code>'\0'</code>, <code>sizeof</code> vs <code>strlen</code>, <code>string.h</code>, character tests</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/functions.html">Functions</a></td>
+<td>declaration vs definition, by value vs by address</td>
+</tr>
+<tr class="odd">
+<td><a href="../reference/scope.html">Scope and lifetime</a></td>
+<td>which <code>x</code> a name means; why a value did not survive</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/errors.html">Compiler errors</a></td>
+<td>what the message means, and where to look</td>
+</tr>
+</tbody>
+</table>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -939,13 +962,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/w03.html" class="pagination-link" aria-label="W03: Complements, Overflow · First C Program">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">W03: Complements, Overflow · First C Program</span>
+      <a href="../notebooks/index.html" class="pagination-link" aria-label="Notebooks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notebooks</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/w05.html" class="pagination-link" aria-label="W05: From Source to Executable">
-        <span class="nav-page-text">W05: From Source to Executable</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/printf-scanf.html" class="pagination-link" aria-label="printf / scanf">
+        <span class="nav-page-text">printf / scanf</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

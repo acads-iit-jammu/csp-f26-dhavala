@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W04: Number Systems (Lec 4) · Data Types – CS-1-01 (MO)</title>
+<title>Strings – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/w05.html" rel="next">
-<link href="../weeks/w03.html" rel="prev">
+<link href="../reference/functions.html" rel="next">
+<link href="../reference/pointers.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/strings.html">Strings</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,13 +182,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w01.html" class="sidebar-item-text sidebar-link">
@@ -174,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">W04: Number Systems (Lec 4) · Data Types</span></a>
   </div>
 </li>
@@ -372,13 +407,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Quick Reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
@@ -423,7 +458,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/strings.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/strings.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Strings</span></a>
   </div>
 </li>
@@ -480,18 +515,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link active" data-scroll-target="#in-class">In Class</a></li>
-  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#declaring" id="toc-declaring" class="nav-link active" data-scroll-target="#declaring">Declaring</a></li>
+  <li><a href="#sizeof-vs-strlen" id="toc-sizeof-vs-strlen" class="nav-link" data-scroll-target="#sizeof-vs-strlen">sizeof vs strlen</a></li>
+  <li><a href="#string.h" id="toc-string.h" class="nav-link" data-scroll-target="#string.h">string.h</a></li>
+  <li><a href="#walking" id="toc-walking" class="nav-link" data-scroll-target="#walking">Walking</a></li>
+  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a></li>
+  <li><a href="#characters" id="toc-characters" class="nav-link" data-scroll-target="#characters">Characters</a></li>
+  <li><a href="#traps" id="toc-traps" class="nav-link" data-scroll-target="#traps">Traps</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/strings.html">Strings</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W04: Number Systems (Lec 4) · Data Types</h1>
+<h1 class="title">Strings</h1>
 </div>
 
 
@@ -508,25 +547,199 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Mon Aug 24 &amp; Tue Aug 25, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 2 close-out (number systems) · 3 — C program structure; data types</p>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<ul>
-<li><strong>Number systems, from <a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a></strong> — the representation thread closed out on Prof.&nbsp;Agrawal’s slides, after CT-1. Reference decks: <a href="../materials/w02-deck-03-number-systems.html">Deck 03 — Number Systems</a> and <a href="../materials/w03-deck-05-complements-overflow.html">Deck 05 — Complements &amp; Overflow</a>.</li>
-<li><strong>Data types</strong> — the wardrobe of basic types (<code>char</code>, <code>int</code>, <code>float</code>, <code>double</code>) as <em>size + reading convention</em>, each with the edge of its world; <code>sizeof</code>. Deck: <a href="../materials/w03-deck-07-types-operators.html">Deck 07 — Types, Assignments &amp; Operators</a>.</li>
-</ul>
+<p>A string is a <code>char</code> array ending in <code>'\0'</code> — the <strong>null terminator</strong>. There is no string type.</p>
+<section id="declaring" class="level2">
+<h2 class="anchored" data-anchor-id="declaring">Declaring</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> s<span class="op">[]</span> <span class="op">=</span> <span class="st">"level"</span><span class="op">;</span>      <span class="co">/* 6 chars: l e v e l \0 — writable copy */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> big<span class="op">[</span><span class="dv">20</span><span class="op">]</span> <span class="op">=</span> <span class="st">"hello"</span><span class="op">;</span>  <span class="co">/* 20 chars, room to grow                */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>p <span class="op">=</span> <span class="st">"level"</span><span class="op">;</span>       <span class="co">/* points at a literal — DO NOT modify   */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>char s[] = "level"</code></td>
+<td><code>l</code></td>
+<td><code>e</code></td>
+<td><code>v</code></td>
+<td><code>e</code></td>
+<td><code>l</code></td>
+<td><code>\0</code></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="after-class" class="level2">
-<h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<ul>
-<li>Run <code>sizeof</code> on every basic type on your own machine and write the table down. Which of those numbers are guaranteed by C, and which are just what <em>our</em> compiler chose?</li>
-<li>For each type, name a value it cannot hold. What happens if you try?</li>
-</ul>
+<section id="sizeof-vs-strlen" class="level2">
+<h2 class="anchored" data-anchor-id="sizeof-vs-strlen">sizeof vs strlen</h2>
+<pre><code>char s[] = "level";
+sizeof s  = 6      all the boxes, including the '\0'
+strlen(s) = 5      characters before the '\0'</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>answered</th>
+<th>survives being passed to a function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sizeof</code></td>
+<td>at compile time</td>
+<td><strong>no</strong> — gives the pointer size</td>
+</tr>
+<tr class="even">
+<td><code>strlen</code></td>
+<td>at run time, by walking</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="pagal-notes" class="level2">
-<h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<section id="string.h" class="level2">
+<h2 class="anchored" data-anchor-id="string.h">string.h</h2>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><code>strlen(s)</code></td>
+<td>characters before the <code>'\0'</code></td>
+</tr>
+<tr class="even">
+<td><code>strcpy(dst, src)</code></td>
+<td>copy, terminator included</td>
+</tr>
+<tr class="odd">
+<td><code>strcat(dst, src)</code></td>
+<td>append</td>
+</tr>
+<tr class="even">
+<td><code>strcmp(a, b)</code></td>
+<td><strong>0 means equal</strong>; sign otherwise</td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> big<span class="op">[</span><span class="dv">20</span><span class="op">]</span> <span class="op">=</span> <span class="st">"hello"</span><span class="op">;</span>       <span class="co">/* room to grow — this matters */</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>strcat<span class="op">(</span>big<span class="op">,</span> <span class="st">" there"</span><span class="op">);</span>        <span class="co">/* big is now "hello there"    */</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>strcmp<span class="op">(</span><span class="st">"abc"</span><span class="op">,</span> <span class="st">"abc"</span><span class="op">)</span>          <span class="co">/*  0        */</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>strcmp<span class="op">(</span><span class="st">"Zebra"</span><span class="op">,</span> <span class="st">"apple"</span><span class="op">)</span>      <span class="co">/*  negative  ('Z' is 90, 'a' is 97) */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The first argument to <code>strcpy</code> and <code>strcat</code> must be a <strong>writable array with room</strong>. Never a string literal: <code>strcat("hello", " there")</code> compiles without a warning and then crashes.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>strcmp</code> is <strong>not alphabetical</strong> — it compares character codes, and every capital sorts before every lowercase.</p>
+<p><code>strcpy</code> and <code>strcat</code> do <strong>not</strong> check that the destination is big enough.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="walking" class="level2">
+<h2 class="anchored" data-anchor-id="walking">Walking</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>s<span class="op">[</span>n<span class="op">]</span> <span class="op">!=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">)</span> n<span class="op">++;</span>        <span class="co">/* length by hand */</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> s<span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    …s<span class="op">[</span>i<span class="op">]</span>…</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> w<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">"</span><span class="sc">%49s</span><span class="st">"</span><span class="op">,</span> w<span class="op">);</span>     <span class="co">/* no &amp;; limit is one less than the size */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>%s</code> stops at the first <strong>whitespace</strong> — space, tab or newline. One word, not a line.</p>
+</section>
+<section id="characters" class="level2">
+<h2 class="anchored" data-anchor-id="characters">Characters</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Test</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>is a letter</td>
+<td><code>(c&gt;='a'&amp;&amp;c&lt;='z') \|\| (c&gt;='A'&amp;&amp;c&lt;='Z')</code></td>
+</tr>
+<tr class="even">
+<td>is a digit</td>
+<td><code>c &gt;= '0' &amp;&amp; c &lt;= '9'</code></td>
+</tr>
+<tr class="odd">
+<td>digit to number</td>
+<td><code>c - '0'</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Changing case needs a guard.</strong> The formulas only work on a letter already in the other case, and give nonsense otherwise:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> toUpper<span class="op">(</span><span class="dt">char</span> c<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">'a'</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">'z'</span><span class="op">)</span> <span class="cf">return</span> c <span class="op">-</span> <span class="ch">'a'</span> <span class="op">+</span> <span class="ch">'A'</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c<span class="op">;</span>                      <span class="co">/* leave everything else alone */</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> toLower<span class="op">(</span><span class="dt">char</span> c<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">'A'</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">'Z'</span><span class="op">)</span> <span class="cf">return</span> c <span class="op">-</span> <span class="ch">'A'</span> <span class="op">+</span> <span class="ch">'a'</span><span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Applied without the guard: <code>'5' - 'a' + 'A'</code> is 21, and <code>'a' - 'A' + 'a'</code> overflows a signed <code>char</code> to −127.</p>
+<p><code>'a' - 'A'</code> is 32, but write <code>- 'a' + 'A'</code>: it says what it means.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>&lt;ctype.h&gt;</code> provides <code>isalpha</code>, <code>isdigit</code>, <code>isspace</code>, <code>toupper</code>, <code>tolower</code>, already guarded. Writing them by hand once is the exercise; using the library afterwards is sensible.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="traps" class="level2">
+<h2 class="anchored" data-anchor-id="traps">Traps</h2>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>forgetting the <code>'\0'</code></td>
+<td>every string function runs off the end</td>
+</tr>
+<tr class="even">
+<td><code>sizeof</code> for the length after passing</td>
+<td>gives the pointer size</td>
+</tr>
+<tr class="odd">
+<td><code>if (strcmp(a,b))</code></td>
+<td>true when they <strong>differ</strong></td>
+</tr>
+<tr class="even">
+<td>modifying <code>char *p = "literal"</code></td>
+<td><strong>undefined behaviour</strong></td>
+</tr>
+<tr class="odd">
+<td><code>scanf("%s", s)</code> with no limit</td>
+<td>writes past the array</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
@@ -939,13 +1152,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/w03.html" class="pagination-link" aria-label="W03: Complements, Overflow · First C Program">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">W03: Complements, Overflow · First C Program</span>
+      <a href="../reference/pointers.html" class="pagination-link" aria-label="Pointers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Pointers</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/w05.html" class="pagination-link" aria-label="W05: From Source to Executable">
-        <span class="nav-page-text">W05: From Source to Executable</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/functions.html" class="pagination-link" aria-label="Functions">
+        <span class="nav-page-text">Functions</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W04: Number Systems (Lec 4) · Data Types – CS-1-01 (MO)</title>
+<title>Pointers – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/w05.html" rel="next">
-<link href="../weeks/w03.html" rel="prev">
+<link href="../reference/strings.html" rel="next">
+<link href="../reference/arrays.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/pointers.html">Pointers</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,13 +182,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w01.html" class="sidebar-item-text sidebar-link">
@@ -174,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/w04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">W04: Number Systems (Lec 4) · Data Types</span></a>
   </div>
 </li>
@@ -372,13 +407,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Quick Reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reference/index.html" class="sidebar-item-text sidebar-link">
@@ -417,7 +452,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/pointers.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/pointers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Pointers</span></a>
   </div>
 </li>
@@ -480,18 +515,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link active" data-scroll-target="#in-class">In Class</a></li>
-  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#the-two-operators" id="toc-the-two-operators" class="nav-link active" data-scroll-target="#the-two-operators">The two operators</a></li>
+  <li><a href="#declaring" id="toc-declaring" class="nav-link" data-scroll-target="#declaring">Declaring</a></li>
+  <li><a href="#arithmetic-counts-items-not-bytes" id="toc-arithmetic-counts-items-not-bytes" class="nav-link" data-scroll-target="#arithmetic-counts-items-not-bytes">Arithmetic counts items, not bytes</a></li>
+  <li><a href="#with-arrays" id="toc-with-arrays" class="nav-link" data-scroll-target="#with-arrays">With arrays</a></li>
+  <li><a href="#null" id="toc-null" class="nav-link" data-scroll-target="#null">NULL</a></li>
+  <li><a href="#printing-an-address" id="toc-printing-an-address" class="nav-link" data-scroll-target="#printing-an-address">Printing an address</a></li>
+  <li><a href="#why-pointers-exist" id="toc-why-pointers-exist" class="nav-link" data-scroll-target="#why-pointers-exist">Why pointers exist</a></li>
+  <li><a href="#the-five-mistakes" id="toc-the-five-mistakes" class="nav-link" data-scroll-target="#the-five-mistakes">The five mistakes</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w04.html">W04: Number Systems (Lec 4) · Data Types</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/index.html">Quick Reference</a></li><li class="breadcrumb-item"><a href="../reference/pointers.html">Pointers</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W04: Number Systems (Lec 4) · Data Types</h1>
+<h1 class="title">Pointers</h1>
 </div>
 
 
@@ -508,25 +548,148 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Mon Aug 24 &amp; Tue Aug 25, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 2 close-out (number systems) · 3 — C program structure; data types</p>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<ul>
-<li><strong>Number systems, from <a href="../cs1100-cse-iitm-2021/slides/Lec4.pdf">Lec 4</a></strong> — the representation thread closed out on Prof.&nbsp;Agrawal’s slides, after CT-1. Reference decks: <a href="../materials/w02-deck-03-number-systems.html">Deck 03 — Number Systems</a> and <a href="../materials/w03-deck-05-complements-overflow.html">Deck 05 — Complements &amp; Overflow</a>.</li>
-<li><strong>Data types</strong> — the wardrobe of basic types (<code>char</code>, <code>int</code>, <code>float</code>, <code>double</code>) as <em>size + reading convention</em>, each with the edge of its world; <code>sizeof</code>. Deck: <a href="../materials/w03-deck-07-types-operators.html">Deck 07 — Types, Assignments &amp; Operators</a>.</li>
-</ul>
+<section id="the-two-operators" class="level2">
+<h2 class="anchored" data-anchor-id="the-two-operators">The two operators</h2>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><code>&amp;x</code></td>
+<td>the <strong>address</strong> of <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>*p</code></td>
+<td>the <strong>value</strong> at the address in <code>p</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span>     <span class="co">/* p holds the address of x */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span>  <span class="co">/* 5 */</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="dv">7</span><span class="op">;</span>            <span class="co">/* x is now 7, without naming x */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>*p</code> on the <strong>right</strong> reads; on the <strong>left</strong> writes.</p>
 </section>
-<section id="after-class" class="level2">
-<h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<ul>
-<li>Run <code>sizeof</code> on every basic type on your own machine and write the table down. Which of those numbers are guaranteed by C, and which are just what <em>our</em> compiler chose?</li>
-<li>For each type, name a value it cannot hold. What happens if you try?</li>
-</ul>
+<section id="declaring" class="level2">
+<h2 class="anchored" data-anchor-id="declaring">Declaring</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p<span class="op">;</span>          <span class="co">/* read: *p is an int, so p points at an int */</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p<span class="op">,</span> q<span class="op">;</span>       <span class="co">/* p is a pointer. q is a plain int.         */</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p<span class="op">,</span> <span class="op">*</span>q<span class="op">;</span>      <span class="co">/* two pointers                              */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>*</code> binds to the <strong>variable</strong>, not the type. One declaration per line avoids this entirely.</p>
 </section>
-<section id="pagal-notes" class="level2">
-<h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<section id="arithmetic-counts-items-not-bytes" class="level2">
+<h2 class="anchored" data-anchor-id="arithmetic-counts-items-not-bytes">Arithmetic counts items, not bytes</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">[</span><span class="dv">5</span><span class="op">];</span> <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">(</span>p <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">-</span> p      <span class="co">/* 1  — one int, not one byte   */</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">)</span>      <span class="co">/* 4  — so the address moved 4  */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>pointer type</th>
+<th><code>p + 1</code> moves</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>int *</code></td>
+<td>4 bytes</td>
+</tr>
+<tr class="even">
+<td><code>char *</code></td>
+<td>1 byte</td>
+</tr>
+<tr class="odd">
+<td><code>double *</code></td>
+<td>8 bytes</td>
+</tr>
+</tbody>
+</table>
+<p>(Byte counts are <code>sizeof</code> the pointed-to type on the lab machines. The <em>rule</em> — one whole item — never changes.)</p>
+</section>
+<section id="with-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="with-arrays">With arrays</h2>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><code>a[i]</code></td>
+<td>is exactly <code>*(a + i)</code></td>
+</tr>
+<tr class="even">
+<td>an array argument</td>
+<td>becomes a pointer to its first element</td>
+</tr>
+<tr class="odd">
+<td><code>int a[]</code> and <code>int *a</code> as parameters</td>
+<td>the same thing</td>
+</tr>
+<tr class="even">
+<td><code>sizeof</code> on that parameter</td>
+<td>the pointer size, not the array</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="null" class="level2">
+<h2 class="anchored" data-anchor-id="null">NULL</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> NULL<span class="op">;</span>          <span class="co">/* not pointing at anything yet */</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>p <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">*</span>p <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  <span class="co">/* test before dereferencing    */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="printing-an-address" class="level2">
+<h2 class="anchored" data-anchor-id="printing-an-address">Printing an address</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%p\n</span><span class="st">"</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>p<span class="op">);</span>     <span class="co">/* differs on every run */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="why-pointers-exist" class="level2">
+<h2 class="anchored" data-anchor-id="why-pointers-exist">Why pointers exist</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>let a function change the caller’s variable</td>
+<td><code>f(&amp;x)</code> with <code>void f(int *n)</code></td>
+</tr>
+<tr class="even">
+<td>return more than one answer</td>
+<td><code>void minMax(int a[], int n, int *lo, int *hi)</code></td>
+</tr>
+<tr class="odd">
+<td>hand over an array without copying it</td>
+<td><code>f(a)</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-five-mistakes" class="level2">
+<h2 class="anchored" data-anchor-id="the-five-mistakes">The five mistakes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>dereferencing a pointer never given an address</td>
+<td><strong>undefined behaviour</strong></td>
+</tr>
+<tr class="even">
+<td><code>p = 7</code> instead of <code>*p = 7</code></td>
+<td>the compiler complains; recent ones reject it outright</td>
+</tr>
+<tr class="odd">
+<td><code>p = q</code> where <code>*p = *q</code> was meant</td>
+<td>legal, silent, wrong</td>
+</tr>
+<tr class="even">
+<td>returning <code>&amp;local</code></td>
+<td><strong>undefined</strong> — the storage is gone</td>
+</tr>
+<tr class="odd">
+<td>walking past the end of an array</td>
+<td><strong>undefined</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Three of those five are <strong>undefined behaviour</strong> — the first, the fourth and the fifth. The standard says nothing about what happens, so do not learn what your compiler does with them.</p>
 
 
 </section>
@@ -939,13 +1102,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/w03.html" class="pagination-link" aria-label="W03: Complements, Overflow · First C Program">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">W03: Complements, Overflow · First C Program</span>
+      <a href="../reference/arrays.html" class="pagination-link" aria-label="Arrays">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Arrays</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/w05.html" class="pagination-link" aria-label="W05: From Source to Executable">
-        <span class="nav-page-text">W05: From Source to Executable</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/strings.html" class="pagination-link" aria-label="Strings">
+        <span class="nav-page-text">Strings</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
