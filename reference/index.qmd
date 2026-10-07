@@ -13,4 +13,5 @@ Lookup sheets — the things worth having in front of you while you type, that n
 | [Strings](strings.qmd) | `'\0'`, `sizeof` vs `strlen`, `string.h`, character tests |
 | [Functions](functions.qmd) | declaration vs definition, by value vs by address |
 | [Scope and lifetime](scope.qmd) | which `x` a name means; why a value did not survive |
+| [Storage classes](storage-classes.qmd) | `static`, `extern`, `register`, `auto`; globals and linkage |
 | [Compiler errors](errors.qmd) | what the message means, and where to look |

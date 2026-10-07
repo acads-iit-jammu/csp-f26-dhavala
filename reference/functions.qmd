@@ -54,7 +54,7 @@ void f(void){
 }
 ```
 
-See [Scope and lifetime](scope.qmd).
+See [Scope and lifetime](scope.qmd) and [Storage classes](storage-classes.qmd).
 
 ## Traps
 

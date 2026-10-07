@@ -12,7 +12,7 @@
 | outside all functions, `static` | the same, **but no other file can reach it** | whole program |
 | in a block, `static` | that block only | **whole program** |
 
-`static` inside a function changes the **lifetime**, not the scope.
+`static` inside a function changes the **lifetime**, not the scope. For `static`, `extern`, `register` and `auto` in full, see [Storage classes](storage-classes.qmd).
 
 ## One program, all of it
 

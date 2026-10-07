@@ -84,6 +84,7 @@ book:
         - reference/strings.qmd
         - reference/functions.qmd
         - reference/scope.qmd
+        - reference/storage-classes.qmd
         - reference/errors.qmd
     - part: "Reference Material"
       chapters:

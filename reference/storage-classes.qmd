@@ -1,0 +1,118 @@
+# Storage Classes {.unnumbered}
+
+The four words you may put in front of a declaration: `auto`, `register`, `static`, `extern`.
+
+They control **lifetime** (how long the storage exists) and **linkage** (whether another file can reach the name). They do not change scope — for that see [Scope and lifetime](scope.qmd).
+
+## The table
+
+| Written | Where it is legal | Lifetime | Reachable from another file |
+|---|---|---|---|
+| *(nothing)*, inside a function | in a block | until the block ends | no |
+| *(nothing)*, outside all functions | at file level | whole program | **yes** |
+| `auto` | in a block | until the block ends | no |
+| `register` | in a block | until the block ends | no |
+| `static` | in a block | **whole program** | no |
+| `static` | at file level | whole program | **no** |
+| `extern` | anywhere | whole program | refers to a definition elsewhere |
+
+Two rows do completely different jobs with the same word — `static` is the one to be careful about.
+
+## static
+
+```c
+void counter(void){
+    static int calls = 0;    /* created once, survives every return */
+    int fresh = 0;           /* new each call                       */
+    calls++; fresh++;
+}
+```
+
+```
+calls=1 fresh=1
+calls=2 fresh=1
+calls=3 fresh=1
+```
+
+| `static` on … | does |
+|---|---|
+| a **local** variable | keeps the value between calls; initialised **once**, not on each call |
+| a **file-level** variable or function | hides it from other files |
+
+## extern, and what static at file level prevents
+
+```c
+/* a.c */  int shared = 42;          /* the definition */
+/* b.c */  extern int shared;        /* "defined elsewhere, trust me" */
+```
+
+```
+shared from the other file = 42
+```
+
+Make it `static int shared = 42;` in `a.c` and the same two files no longer link:
+
+```
+Undefined symbols … referenced from …
+```
+
+That is the point of file-level `static`: it keeps a name private to one file, so another file cannot reach it even with `extern`.
+
+| | |
+|---|---|
+| **definition** | reserves the storage — exactly one, in one file |
+| **declaration** (`extern`) | promises it exists — may appear in many files |
+
+## register
+
+A **hint** that a variable will be used heavily. Modern compilers decide this for themselves and ignore the hint, so you will rarely write it.
+
+One rule survives and is enforced: **you cannot take the address of a `register` variable.**
+
+```c
+register int x = 5;
+int *p = &x;        /* error: address of register variable requested */
+```
+
+```c
+register int x = 5;
+x++;                /* fine — x=6 */
+```
+
+So `register` cannot be used with anything you need a pointer to, which rules out arrays you intend to pass to a function.
+
+## auto
+
+The default for a variable declared inside a block. Writing it changes nothing:
+
+```c
+auto int x = 3;     /* identical to: int x = 3; */
+```
+
+You will see it in old code and in textbooks. Do not write it.
+
+::: {.callout-note}
+C++ and newer languages reuse `auto` to mean "work out the type for me". In C it has never meant that.
+:::
+
+## Globals: when, and the cost
+
+A file-level variable is in scope for every function below it.
+
+| | |
+|---|---|
+| any function can change it | nothing records which one did |
+| two functions can disagree about its state | the bug is in neither of them |
+| it makes a function's behaviour depend on invisible input | the signature no longer tells you what it needs |
+
+Prefer passing values in as parameters and returning them out. Use a global when the alternative is genuinely worse — and in this course, that is almost never.
+
+## Choosing
+
+| You want | Use |
+|---|---|
+| an ordinary variable | nothing — just declare it |
+| a value to survive between calls to one function | `static` on the local |
+| a helper variable or function private to one file | `static` at file level |
+| one variable shared by several files | define it in one file, `extern` it in the others |
+| speed | nothing — write clear code and let the compiler optimise |
