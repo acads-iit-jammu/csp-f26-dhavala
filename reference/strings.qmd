@@ -1,0 +1,90 @@
+# Strings {.unnumbered}
+
+A string is a `char` array ending in `'\0'`. There is no string type.
+
+## Declaring
+
+```c
+char s[] = "level";      /* 6 chars: l e v e l \0 — writable copy */
+char big[20] = "hello";  /* 20 chars, room to grow                */
+char *p = "level";       /* points at a literal — DO NOT modify   */
+```
+
+| index | 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|---|
+| `char s[] = "level"` | `l` | `e` | `v` | `e` | `l` | `\0` |
+
+## sizeof vs strlen
+
+```
+char s[] = "level";
+sizeof s  = 6      all the boxes, including the '\0'
+strlen(s) = 5      characters before the '\0'
+```
+
+| | answered | survives being passed to a function |
+|---|---|---|
+| `sizeof` | at compile time | **no** — gives the pointer size |
+| `strlen` | at run time, by walking | yes |
+
+## string.h
+
+| | |
+|---|---|
+| `strlen(s)` | characters before the `'\0'` |
+| `strcpy(dst, src)` | copy, terminator included |
+| `strcat(dst, src)` | append |
+| `strcmp(a, b)` | **0 means equal**; sign otherwise |
+
+```
+strcat("hello", " there")  ->  hello there
+strcmp("abc","abc")        ->  0
+strcmp("Zebra","apple")    ->  negative   ('Z' is 90, 'a' is 97)
+```
+
+::: {.callout-warning}
+`strcmp` is **not alphabetical** — it compares character codes, and every capital sorts before every lowercase.
+
+`strcpy` and `strcat` do **not** check that the destination is big enough.
+:::
+
+## Walking
+
+```c
+int n = 0;
+while (s[n] != '\0') n++;        /* length by hand */
+
+for (int i = 0; s[i] != '\0'; i++)
+    …s[i]…
+```
+
+## Reading
+
+```c
+char w[50];
+scanf("%49s", w);     /* no &; limit is one less than the size */
+```
+
+`%s` stops at the first **space** — one word, not a line.
+
+## Characters
+
+| | |
+|---|---|
+| is a letter | `(c>='a'&&c<='z') \|\| (c>='A'&&c<='Z')` |
+| is a digit | `c >= '0' && c <= '9'` |
+| to capital | `c - 'a' + 'A'` |
+| to small | `c - 'A' + 'a'` |
+| digit to number | `c - '0'` |
+
+`'a' - 'A'` is 32, but write `- 'a' + 'A'`: it says what it means.
+
+## Traps
+
+| | |
+|---|---|
+| forgetting the `'\0'` | every string function runs off the end |
+| `sizeof` for the length after passing | gives the pointer size |
+| `if (strcmp(a,b))` | true when they **differ** |
+| modifying `char *p = "literal"` | **undefined behaviour** |
+| `scanf("%s", s)` with no limit | writes past the array |

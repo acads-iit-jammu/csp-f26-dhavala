@@ -1,0 +1,72 @@
+# Data Types {.unnumbered}
+
+*Sizes and ranges below were printed by a program on a 64-bit machine; the lab machines agree.*
+
+## Integers
+
+| type | bytes | range |
+|---|---:|---|
+| `char` | 1 | −128 … 127 *(signed on the lab machines)* |
+| `unsigned char` | 1 | 0 … 255 |
+| `short` | 2 | −32 768 … 32 767 |
+| `unsigned short` | 2 | 0 … 65 535 |
+| `int` | 4 | −2 147 483 648 … 2 147 483 647 |
+| `unsigned int` | 4 | 0 … 4 294 967 295 |
+| `long` | 8 | ±9.22 × 10¹⁸ |
+| `long long` | 8 | ±9.22 × 10¹⁸ |
+
+Whether plain `char` is signed is **not** fixed by the standard. Use `signed char` or `unsigned char` when it matters.
+
+## Floating point
+
+| type | bytes | largest | reliable digits |
+|---|---:|---|---:|
+| `float` | 4 | ~3.4 × 10³⁸ | 6 |
+| `double` | 8 | ~1.8 × 10³⁰⁸ | 15 |
+
+Use `double` unless you have a reason not to.
+
+## Division and `%`
+
+```
+  7 / 2   = 3       7 % 2   = 1
+ -7 / 2   = -3     -7 % 2   = -1
+  7 / -2  = -3      7 % -2  = 1
+```
+
+| | |
+|---|---|
+| both operands `int` | **integer** division, remainder truncated toward zero |
+| `%` sign | follows the **left** operand |
+| one operand `double` | the whole division is `double` |
+
+```c
+7 / 2        /* 3   */
+7.0 / 2      /* 3.5 */
+7 / 2.0      /* 3.5 */
+(double)7/2  /* 3.5 */
+```
+
+`%` does not work on `double` at all.
+
+## Overflow
+
+| | |
+|---|---|
+| **signed** overflow | **undefined behaviour** — not "wraps round" |
+| **unsigned** overflow | wraps modulo 2ⁿ, defined |
+| `12!` | fits an `int` |
+| `13!` | does not |
+| `20!` | fits a `long long` |
+| `21!` | does not |
+
+## Sizes at a glance
+
+```c
+sizeof(int)        /* 4  */
+sizeof(char)       /* 1, always */
+sizeof arr         /* whole array, only where it was declared */
+sizeof ptr         /* 8, the pointer — not what it points at  */
+```
+
+`sizeof` yields `size_t` → print with `%zu`.

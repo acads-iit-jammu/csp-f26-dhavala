@@ -1,0 +1,48 @@
+# Compiler Errors, Decoded {.unnumbered}
+
+Always compile with warnings on:
+
+```bash
+gcc -Wall -Wextra prog.c -o prog
+```
+
+::: {.callout-note}
+Messages below were captured from a real compile. **Wording differs between compilers** — the lab machines use GNU gcc, this text came from clang. The part that always matters is **`file:line:column`**: go there first.
+:::
+
+## Read the FIRST error, not the last
+
+One mistake often produces a cascade. Fix the top one and recompile; the rest frequently vanish.
+
+## The common ones
+
+| Message | Means | Fix |
+|---|---|---|
+| `expected ';' at end of declaration` | missing semicolon — usually on the line **above** the one named | add `;` |
+| `use of undeclared identifier 'y'` | name not declared, or misspelt, or out of scope | declare it; check spelling and braces |
+| `call to undeclared function 'foo'` | no declaration above the call, or a missing `#include` | declare it, or add the header |
+| `Undefined symbols … "_main"` | **linker**, not compiler: no `main` | you compiled a file with no `main` |
+| `undefined reference to 'sqrt'` | declared but not linked | add `-lm` |
+| `format specifies type 'int *' but the argument has type 'int'` | `scanf` missing `&` | `&x` |
+| `format specifies type 'float *' … 'double *'` | `%f` for a `double` in `scanf` | use `%lf` |
+| `sizeof on array function parameter` | the parameter is a pointer | pass the length separately |
+| `& has lower precedence than ==` | precedence trap | parenthesise |
+| `variable 'x' is uninitialized when used here` | read before any value was stored | initialise it |
+| `control reaches end of non-void function` | a path with no `return` | return on every path |
+| `unused variable 'x'` | harmless, but often a typo elsewhere | remove it, or use it |
+
+## Compiler or linker?
+
+| | |
+|---|---|
+| names a **file and line** | compiler — a syntax or type problem |
+| says **undefined symbol / reference**, no line | linker — something was declared but never defined, or a library is missing |
+
+## When it will not run
+
+| | |
+|---|---|
+| `Permission denied` | `chmod +x prog` |
+| `command not found` | write `./prog`, not `prog` |
+| nothing happens | it is waiting for input — or an infinite loop; **Ctrl-C** |
+| `Segmentation fault` | a bad pointer or an out-of-bounds index. No line number: compile with `-g` and narrow it with `printf` |

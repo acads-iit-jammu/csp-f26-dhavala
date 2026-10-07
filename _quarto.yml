@@ -76,7 +76,15 @@ book:
       chapters:
         - reference/index.qmd
         - reference/printf-scanf.qmd
+        - reference/data-types.qmd
+        - reference/precedence.qmd
+        - reference/control-flow.qmd
+        - reference/arrays.qmd
+        - reference/pointers.qmd
+        - reference/strings.qmd
+        - reference/functions.qmd
         - reference/scope.qmd
+        - reference/errors.qmd
     - part: "Reference Material"
       chapters:
         - cs1100-cse-iitm-2021/index.qmd

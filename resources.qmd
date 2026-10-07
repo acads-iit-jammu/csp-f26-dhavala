@@ -2,7 +2,7 @@
 
 ## Quick Reference
 
-Short lookup sheets written for this course — the things worth having in front of you while you type. See the [Quick Reference](reference/index.qmd) section: [printing and reading](reference/printf-scanf.qmd), [scope and lifetime](reference/scope.qmd).
+Ten short lookup sheets written for this course — the things worth having in front of you while you type. See the [Quick Reference](reference/index.qmd) section: [printf / scanf](reference/printf-scanf.qmd) · [data types](reference/data-types.qmd) · [precedence](reference/precedence.qmd) · [control flow](reference/control-flow.qmd) · [arrays](reference/arrays.qmd) · [pointers](reference/pointers.qmd) · [strings](reference/strings.qmd) · [functions](reference/functions.qmd) · [scope](reference/scope.qmd) · [compiler errors](reference/errors.qmd).
 
 ## Textbooks
 

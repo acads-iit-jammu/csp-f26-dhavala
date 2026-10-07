@@ -1,10 +1,16 @@
 # Quick Reference {.unnumbered}
 
-Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. Every example was compiled and run before it was printed.
+Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. **Every example was compiled and run before it was printed.**
 
 | Sheet | For |
 |---|---|
 | [printf / scanf](printf-scanf.qmd) | `%d` `%u` `%zu` `%.2f`, and why `scanf` read nothing |
+| [Data types](data-types.qmd) | sizes, ranges, integer division, overflow |
+| [Operator precedence](precedence.qmd) | the table, and the five that actually bite |
+| [Control flow](control-flow.qmd) | `break` vs `continue`, `switch` fall-through, loop traps |
+| [Arrays](arrays.qmd) | 1-D and 2-D, `sizeof`, why the length must travel |
+| [Pointers](pointers.qmd) | `&` and `*`, arithmetic, `NULL`, the four mistakes |
+| [Strings](strings.qmd) | `'\0'`, `sizeof` vs `strlen`, `string.h`, character tests |
+| [Functions](functions.qmd) | declaration vs definition, by value vs by address |
 | [Scope and lifetime](scope.qmd) | which `x` a name means; why a value did not survive |
-
-**Planned:** data types and ranges · operator precedence · control flow · arrays · pointers · strings and `string.h` · functions.
+| [Compiler errors](errors.qmd) | what the message means, and where to look |

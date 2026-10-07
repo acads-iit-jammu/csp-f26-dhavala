@@ -1,0 +1,86 @@
+# Arrays {.unnumbered}
+
+## Declaring
+
+```c
+int  a[10];                     /* 10 ints, values undefined   */
+int  b[5] = {1,2,3,4,5};
+int  c[5] = {0};                /* first 0, rest also 0        */
+int  d[]  = {1,2,3};            /* size taken from the list: 3 */
+int  m[3][4];                   /* 3 rows, 4 columns           */
+```
+
+Indices run `0 … n-1`. `a[10]` in an array of 10 is **out of bounds** — undefined behaviour, and C will not stop you.
+
+## sizeof — and where it stops working
+
+```
+in main:    sizeof a = 40      (10 ints)
+inside f:   sizeof a = 8       (a pointer)
+```
+
+```c
+void f(int a[]) { /* sizeof a is the POINTER size here */ }
+```
+
+| | |
+|---|---|
+| number of elements, where declared | `sizeof a / sizeof a[0]` |
+| inside a function | **impossible** — pass the length |
+
+This is why every array function takes a length:
+
+```c
+void f(int a[], int n)
+```
+
+## 2-D
+
+```
+sizeof m        = 48      (3 × 4 × 4)
+sizeof m[0]     = 16      (one row)
+sizeof m[0][0]  = 4
+rows = sizeof m / sizeof m[0] = 3
+```
+
+Stored **row after row**. To reach `m[i][j]` the machine computes `i*COLS + j` — which is why:
+
+| parameter | |
+|---|---|
+| `int m[3][4]` | fine |
+| `int m[][4]` | fine — rows not needed |
+| `int m[3][]` | **rejected** |
+| `int m[][]` | **rejected** |
+
+The **column** count is part of the type and travels with the parameter. The **row** count does not.
+
+## Passing to a function
+
+| | |
+|---|---|
+| an array argument becomes a **pointer** to its first element | no copy is made |
+| so the function **can change** the caller's elements | |
+| and no `&` is written at the call | `f(a)`, not `f(&a)` |
+| `int a[]` and `int *a` in a parameter list | mean the same thing |
+
+## Walking
+
+```c
+for (int i = 0; i < n; i++)      /* by index   */
+    …a[i]…
+
+int *p = a;                       /* by pointer */
+…*(p + i)…                        /* same as a[i] */
+```
+
+`a[i]` **is** `*(a + i)`.
+
+## Traps
+
+| | |
+|---|---|
+| `a[n]` where the array has `n` | one past the end |
+| `sizeof` inside a function | gives the pointer size |
+| forgetting the length parameter | the function cannot recover it |
+| `int a[n]` with `n` read at run time | avoid; fixed sizes until `malloc` in W13 |
+| comparing arrays with `==` | compares addresses, not contents |

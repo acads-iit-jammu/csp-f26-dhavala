@@ -1,0 +1,67 @@
+# Functions {.unnumbered}
+
+## Declaration and definition
+
+```c
+int  square(int n);          /* declaration: name, what goes in, what comes out */
+void bump(int *n);
+
+int main(void) { … }
+
+int  square(int n) { return n * n; }      /* definition: the body */
+void bump(int *n)  { *n = *n + 1; }
+```
+
+Declare before use, or define above the caller. A declaration ends in `;`, a definition in `}`.
+
+## By value, by address
+
+```
+square(5)  = 25        value in, value out
+x before bump = 5
+bump(&x)
+x after  bump = 6      address in, the caller's variable changed
+```
+
+| | Write | Parameter |
+|---|---|---|
+| read a value | `f(x)` | `int n` |
+| change the caller's variable | `f(&x)` | `int *n` |
+| pass an array | `f(a)` — no `&` | `int a[]` or `int *a` |
+
+A parameter is a local variable holding a **copy**. Assigning to it changes nothing outside.
+
+## return
+
+| | |
+|---|---|
+| one value only | for more, use pointer parameters |
+| `void` | returns nothing; `return;` alone is allowed |
+| non-`void` | must return on **every** path |
+| `return` inside a loop | leaves the function, not just the loop |
+
+```c
+void minMax(int a[], int n, int *lo, int *hi);   /* two answers, no return */
+```
+
+## Scope
+
+```c
+int g;                       /* global: everywhere below it  */
+void f(void){
+    static int calls = 0;    /* survives between calls       */
+    int fresh = 0;           /* new every call               */
+}
+```
+
+See [Scope and lifetime](scope.qmd).
+
+## Traps
+
+| | |
+|---|---|
+| no declaration before the call | `error: call to undeclared function` |
+| falling off the end of a non-`void` function | returns garbage |
+| returning `&local` | **undefined** — the storage is gone |
+| `int f()` | old style, no checking; write `int f(void)` |
+| changing a parameter and expecting the caller to see it | it got a copy |

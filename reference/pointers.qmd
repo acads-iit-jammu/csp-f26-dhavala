@@ -1,0 +1,83 @@
+# Pointers {.unnumbered}
+
+## The two operators
+
+| | |
+|---|---|
+| `&x` | the **address** of `x` |
+| `*p` | the **value** at the address in `p` |
+
+```c
+int x = 5;
+int *p = &x;     /* p holds the address of x */
+printf("%d", *p);  /* 5 */
+*p = 7;            /* x is now 7, without naming x */
+```
+
+`*p` on the **right** reads; on the **left** writes.
+
+## Declaring
+
+```c
+int *p;          /* read: *p is an int, so p points at an int */
+int *p, q;       /* p is a pointer. q is a plain int.         */
+int *p, *q;      /* two pointers                              */
+```
+
+The `*` binds to the **variable**, not the type. One declaration per line avoids this entirely.
+
+## Arithmetic counts items, not bytes
+
+```c
+int a[5]; int *p = a;
+(p + 1) - p      /* 1  — one int, not one byte   */
+sizeof(int)      /* 4  — so the address moved 4  */
+```
+
+| pointer type | `p + 1` moves |
+|---|---|
+| `int *` | 4 bytes |
+| `char *` | 1 byte |
+| `double *` | 8 bytes |
+
+## With arrays
+
+| | |
+|---|---|
+| `a[i]` | is exactly `*(a + i)` |
+| an array argument | becomes a pointer to its first element |
+| `int a[]` and `int *a` as parameters | the same thing |
+| `sizeof` on that parameter | the pointer size, not the array |
+
+## NULL
+
+```c
+int *p = NULL;          /* not pointing at anything yet */
+if (p != NULL) *p = 5;  /* test before dereferencing    */
+```
+
+## Printing an address
+
+```c
+printf("%p\n", (void *)p);     /* differs on every run */
+```
+
+## Why pointers exist
+
+| | |
+|---|---|
+| let a function change the caller's variable | `f(&x)` with `void f(int *n)` |
+| return more than one answer | `void minMax(int a[], int n, int *lo, int *hi)` |
+| hand over an array without copying it | `f(a)` |
+
+## The four mistakes
+
+| | |
+|---|---|
+| dereferencing a pointer never given an address | **undefined behaviour** |
+| `p = 7` instead of `*p = 7` | compiler **rejects** it |
+| `p = q` where `*p = *q` was meant | legal, silent, wrong |
+| returning `&local` | **undefined** — the storage is gone |
+| walking past the end of an array | **undefined** |
+
+Three of those are undefined behaviour: the standard says nothing about what happens. Do not learn what your compiler does with them.

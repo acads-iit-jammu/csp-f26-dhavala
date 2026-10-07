@@ -1,0 +1,63 @@
+# Control Flow {.unnumbered}
+
+## Forms
+
+```c
+if (cond) { … }
+else if (cond) { … }
+else { … }
+
+while (cond) { … }                 /* may run zero times */
+do { … } while (cond);             /* runs at least once */
+for (init; cond; step) { … }
+
+switch (expr) {
+    case 1:  … break;
+    case 2:  … break;
+    default: …
+}
+```
+
+## break and continue
+
+```
+for (i=0; i<5; i++) { if (i==3) break;    printf("%d ", i); }   ->  0 1 2
+for (i=0; i<5; i++) { if (i==3) continue; printf("%d ", i); }   ->  0 1 2 4
+```
+
+| | |
+|---|---|
+| `break` | leaves the **nearest** enclosing loop or `switch` |
+| `continue` | skips to the next iteration of the nearest loop |
+| `break` in a `switch` inside a loop | leaves the **switch**, not the loop |
+
+## switch fall-through
+
+```
+switch (2) { case 1: "one " case 2: "two " case 3: "three " default: "def" }
+   without break  ->  two three def
+   with    break  ->  two
+```
+
+A `case` without `break` falls into the next one. Occasionally useful; usually a bug.
+
+`switch` works on integers and `char` only — **not** `double`, not strings.
+
+## do-while runs first, tests after
+
+```
+do    { … } while (0);    ->  body ran once
+while (0) { … }           ->  body never ran
+```
+
+The classic bug: "do it, then check" runs once even when asked for zero.
+
+## Traps
+
+| | |
+|---|---|
+| `if (x = 5)` | assigns, then tests 5 → always true. You meant `==` |
+| `for (i=0; i<n; i++);` | the `;` **is** the body; the braces run once after |
+| dangling `else` | binds to the **nearest** unmatched `if` — brace it |
+| `while (i < n)` with no change to `i` | infinite; stop it with **Ctrl-C** |
+| comparing `double` with `==` | rounding makes it unreliable; compare a difference against a tolerance |

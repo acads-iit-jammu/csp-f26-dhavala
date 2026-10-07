@@ -1,0 +1,54 @@
+# Operator Precedence {.unnumbered}
+
+*Highest first. Within a row, apply in the associativity direction.*
+
+| | Operators | Associativity |
+|---|---|---|
+| 1 | `()` `[]` `->` `.` | left → right |
+| 2 | `!` `~` `++` `--` unary `+` `-` `*`(deref) `&`(address) `(cast)` `sizeof` | right → left |
+| 3 | `*` `/` `%` | left → right |
+| 4 | `+` `-` | left → right |
+| 5 | `<<` `>>` | left → right |
+| 6 | `<` `<=` `>` `>=` | left → right |
+| 7 | `==` `!=` | left → right |
+| 8 | `&` | left → right |
+| 9 | `^` | left → right |
+| 10 | `\|` | left → right |
+| 11 | `&&` | left → right |
+| 12 | `\|\|` | left → right |
+| 13 | `?:` | right → left |
+| 14 | `=` `+=` `-=` `*=` `/=` `%=` … | right → left |
+| 15 | `,` | left → right |
+
+## The ones that actually bite
+
+*All verified by running them.*
+
+| Written | Gives | Because | You meant |
+|---|---:|---|---|
+| `x & 1 == 0` | `0` | `==` is **tighter** than `&` | `(x & 1) == 0` → `1` |
+| `x << 1 + 2` | `32` | `+` is tighter than `<<` | `(x << 1) + 2` → `10` |
+| `!x & 1` | `0` | `!` is tighter than `&` | `!(x & 1)` → `1` |
+| `1 < 2 < 3` | `1` | `(1<2)` is `1`, then `1<3` | chained compares do not work |
+| `3 > 2 > 1` | `0` | `(3>2)` is `1`, then `1>1` | — |
+
+*(with `x = 4`)*
+
+## Pointers and `++`
+
+| | |
+|---|---|
+| `*p++` | the value at `p`, **then** advance `p` |
+| `(*p)++` | the value at `p`, **then** increase that value |
+| `*++p` | advance `p` first, then the value |
+
+## `-Wall` warns you
+
+```
+warning: & has lower precedence than ==; == will be evaluated first
+warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first
+```
+
+## Rule of thumb
+
+> If you have to think about precedence, add parentheses. The compiler does not care; the next reader does.
