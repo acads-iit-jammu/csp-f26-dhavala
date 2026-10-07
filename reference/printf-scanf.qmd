@@ -1,0 +1,69 @@
+# printf / scanf {.unnumbered}
+
+*Every output below is what the program actually printed.*
+
+## Conversions
+
+| | type | prints |
+|---|---|---|
+| `%d` `%i` | `int` | `-42` |
+| `%u` | `unsigned` | `42` |
+| `%ld` | `long` | `1234567890` |
+| `%lld` | `long long` | `9000000000` |
+| `%zu` | `size_t` (`sizeof`, `strlen`) | `4` |
+| `%f` | `double` *and* `float` | `2.718282` |
+| `%e` | `double`, exponent | `2.718282e+00` |
+| `%g` | `double`, shorter form | `2.71828` |
+| `%c` | `char` | `A` |
+| `%s` | string | `hi` |
+| `%x` | `int`, hex | `ff` |
+| `%o` | `int`, octal | `10` |
+| `%p` | pointer — cast `(void *)p` | differs on every run |
+| `%%` | literal `%` | `%` |
+
+## Width and precision
+
+| | |
+|---|---|
+| `%5d` | `[   42]` |
+| `%-5d` | `[42   ]` |
+| `%05d` | `[00042]` |
+| `%.2f` | `[3.14]` |
+| `%8.3f` | `[   3.142]` |
+| `%.3s` | `[abc]` |
+
+## printf vs scanf — the one that catches everyone
+
+| | `printf` | `scanf` |
+|---|---|---|
+| `float` | `%f` | `%f` |
+| `double` | `%f` | **`%lf`** |
+
+## scanf rules
+
+| Rule | |
+|---|---|
+| needs the address | `scanf("%d", &i)` |
+| **except arrays** | `scanf("%19s", s)` — no `&` |
+| always limit `%s` | `char s[50]` → `%49s` |
+| `%s` stops at a space | reads one **word**, not a line |
+| check the return | number of items filled |
+
+```c
+int i; double d; float f; char c; char s[20];
+if (scanf("%d %lf %f %c %19s", &i, &d, &f, &c, s) != 5) return 1;
+```
+
+input `7 2.5 1.5 Z hello` →
+
+```
+i=7 d=2.500 f=1.500 c=Z s=hello
+```
+
+## Three mistakes `-Wall` catches
+
+```c
+scanf("%f", &d);   /* d is double  */   warning: expects 'float *' but argument is 'double *'
+scanf("%d", i);    /* missing &    */   warning: expects 'int *'   but argument is 'int'
+scanf("%s", &s);   /* & on array   */   warning: expects 'char *'  but argument is 'char (*)[20]'
+```

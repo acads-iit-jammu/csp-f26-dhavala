@@ -72,6 +72,11 @@ book:
       chapters:
         - materials/index.qmd
         - notebooks/index.qmd
+    - part: "Quick Reference"
+      chapters:
+        - reference/index.qmd
+        - reference/printf-scanf.qmd
+        - reference/scope.qmd
     - part: "Reference Material"
       chapters:
         - cs1100-cse-iitm-2021/index.qmd

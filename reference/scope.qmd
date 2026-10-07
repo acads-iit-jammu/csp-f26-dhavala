@@ -1,0 +1,85 @@
+# Scope and Lifetime {.unnumbered}
+
+**Scope** = where the name can be used. **Lifetime** = how long the storage exists. Different questions.
+
+## The table
+
+| Declared | Scope | Lifetime |
+|---|---|---|
+| in a block `{ }` | that block, from the declaration down | until the block ends |
+| function parameter | the function body | until it returns |
+| outside all functions | every function below it in the file | whole program |
+| outside all functions, `static` | that file only | whole program |
+| in a block, `static` | that block only | **whole program** |
+
+`static` inside a function changes the **lifetime**, not the scope.
+
+## One program, all of it
+
+```c
+#include <stdio.h>
+
+int g = 1;                    /* global: whole program            */
+static int fileOnly = 2;      /* global, this file only           */
+
+void counter(void){
+    static int calls = 0;     /* keeps its value between calls    */
+    int fresh = 0;            /* new every call                   */
+    calls++; fresh++;
+    printf("  calls=%d fresh=%d\n", calls, fresh);
+}
+
+int main(void){
+    int x = 10;
+    printf("g=%d fileOnly=%d x=%d\n", g, fileOnly, x);
+    {
+        int x = 20;           /* shadows the outer x in this block */
+        printf("inner block x=%d\n", x);
+    }
+    printf("after the block x=%d\n", x);
+    counter(); counter(); counter();
+    for (int i = 0; i < 2; i++) { int t = i * 10; printf("  loop i=%d t=%d\n", i, t); }
+    return 0;
+}
+```
+
+```
+g=1 fileOnly=2 x=10
+inner block x=20
+after the block x=10
+  calls=1 fresh=1
+  calls=2 fresh=1
+  calls=3 fresh=1
+  loop i=0 t=0
+  loop i=1 t=10
+```
+
+| In that output | Because |
+|---|---|
+| inner `x` is 20, outer still 10 | the inner `int x` is a **second** variable — shadowing |
+| `calls` = 1, 2, 3 | `static` — storage survives the return, initialised once |
+| `fresh` = 1 every time | ordinary local — created and destroyed each call |
+| `i`, `t` | scoped to the loop; using them after it is an error |
+
+## Parameters are copies
+
+```c
+void addOne(int n) { n = n + 1; }    /* changes the copy only */
+void addOne(int *n) { *n = *n + 1; } /* changes the caller's  */
+```
+
+## Traps
+
+| | |
+|---|---|
+| accidental shadowing | legal, silent; a value "not changing" is often a shadow |
+| block variable used after the block | `undeclared identifier` — the declaration is inside braces it should be outside |
+| returning `&local` | undefined behaviour; storage is gone, may appear to work |
+| globals as a shortcut | anything can change them, nothing records what did |
+
+## Rules of thumb
+
+1. Declare in the smallest block that needs it.
+2. Same name in nested scopes → rename one.
+3. `static` local only when a value must survive between calls.
+4. Globals: almost never in this course.

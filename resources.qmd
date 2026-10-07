@@ -1,5 +1,9 @@
 # Resources {.unnumbered}
 
+## Quick Reference
+
+Short lookup sheets written for this course — the things worth having in front of you while you type. See the [Quick Reference](reference/index.qmd) section: [printing and reading](reference/printf-scanf.qmd), [scope and lifetime](reference/scope.qmd).
+
 ## Textbooks
 
 1. Kernighan, Brian, and Dennis Ritchie. *The C Programming Language*. 2nd ed. Prentice Hall, 1988. ISBN: 9780131103627. — **the** classic; strongly recommended.
