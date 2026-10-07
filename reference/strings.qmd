@@ -1,6 +1,6 @@
 # Strings {.unnumbered}
 
-A string is a `char` array ending in `'\0'`. There is no string type.
+A string is a `char` array ending in `'\0'` — the **null terminator**. There is no string type.
 
 ## Declaring
 
@@ -36,11 +36,17 @@ strlen(s) = 5      characters before the '\0'
 | `strcat(dst, src)` | append |
 | `strcmp(a, b)` | **0 means equal**; sign otherwise |
 
+```c
+char big[20] = "hello";       /* room to grow — this matters */
+strcat(big, " there");        /* big is now "hello there"    */
+
+strcmp("abc", "abc")          /*  0        */
+strcmp("Zebra", "apple")      /*  negative  ('Z' is 90, 'a' is 97) */
 ```
-strcat("hello", " there")  ->  hello there
-strcmp("abc","abc")        ->  0
-strcmp("Zebra","apple")    ->  negative   ('Z' is 90, 'a' is 97)
-```
+
+::: {.callout-important}
+The first argument to `strcpy` and `strcat` must be a **writable array with room**. Never a string literal: `strcat("hello", " there")` compiles without a warning and then crashes.
+:::
 
 ::: {.callout-warning}
 `strcmp` is **not alphabetical** — it compares character codes, and every capital sorts before every lowercase.
@@ -65,19 +71,36 @@ char w[50];
 scanf("%49s", w);     /* no &; limit is one less than the size */
 ```
 
-`%s` stops at the first **space** — one word, not a line.
+`%s` stops at the first **whitespace** — space, tab or newline. One word, not a line.
 
 ## Characters
 
-| | |
+| Test | |
 |---|---|
 | is a letter | `(c>='a'&&c<='z') \|\| (c>='A'&&c<='Z')` |
 | is a digit | `c >= '0' && c <= '9'` |
-| to capital | `c - 'a' + 'A'` |
-| to small | `c - 'A' + 'a'` |
 | digit to number | `c - '0'` |
 
+**Changing case needs a guard.** The formulas only work on a letter already in the other case, and give nonsense otherwise:
+
+```c
+char toUpper(char c) {
+    if (c >= 'a' && c <= 'z') return c - 'a' + 'A';
+    return c;                      /* leave everything else alone */
+}
+char toLower(char c) {
+    if (c >= 'A' && c <= 'Z') return c - 'A' + 'a';
+    return c;
+}
+```
+
+Applied without the guard: `'5' - 'a' + 'A'` is 21, and `'a' - 'A' + 'a'` overflows a signed `char` to −127.
+
 `'a' - 'A'` is 32, but write `- 'a' + 'A'`: it says what it means.
+
+::: {.callout-note}
+`<ctype.h>` provides `isalpha`, `isdigit`, `isspace`, `toupper`, `tolower`, already guarded. Writing them by hand once is the exercise; using the library afterwards is sensible.
+:::
 
 ## Traps
 

@@ -28,7 +28,7 @@ for (i=0; i<5; i++) { if (i==3) continue; printf("%d ", i); }   ->  0 1 2 4
 | | |
 |---|---|
 | `break` | leaves the **nearest** enclosing loop or `switch` |
-| `continue` | skips to the next iteration of the nearest loop |
+| `continue` | skips to the next iteration of the nearest loop — in a `for`, the **step still runs**; in a `do…while`, it jumps to the **condition test** |
 | `break` in a `switch` inside a loop | leaves the **switch**, not the loop |
 
 ## switch fall-through
@@ -57,7 +57,7 @@ The classic bug: "do it, then check" runs once even when asked for zero.
 | | |
 |---|---|
 | `if (x = 5)` | assigns, then tests 5 → always true. You meant `==` |
-| `for (i=0; i<n; i++);` | the `;` **is** the body; the braces run once after |
+| `for (i=0; i<n; i++);` | the `;` **is** the body — the loop does nothing `n` times, and whatever follows runs once |
 | dangling `else` | binds to the **nearest** unmatched `if` — brace it |
 | `while (i < n)` with no change to `i` | infinite; stop it with **Ctrl-C** |
 | comparing `double` with `==` | rounding makes it unreliable; compare a difference against a tolerance |

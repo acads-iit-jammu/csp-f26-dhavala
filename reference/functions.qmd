@@ -60,8 +60,8 @@ See [Scope and lifetime](scope.qmd).
 
 | | |
 |---|---|
-| no declaration before the call | `error: call to undeclared function` |
-| falling off the end of a non-`void` function | returns garbage |
+| no declaration before the call | the compiler complains about an undeclared function — wording varies |
+| falling off the end of a non-`void` function | **undefined behaviour** if the caller uses the value |
 | returning `&local` | **undefined** — the storage is gone |
 | `int f()` | old style, no checking; write `int f(void)` |
 | changing a parameter and expecting the caller to see it | it got a copy |

@@ -4,8 +4,8 @@
 
 | | Operators | Associativity |
 |---|---|---|
-| 1 | `()` `[]` `->` `.` | left → right |
-| 2 | `!` `~` `++` `--` unary `+` `-` `*`(deref) `&`(address) `(cast)` `sizeof` | right → left |
+| 1 | `()` `[]` `->` `.` **postfix** `++` `--` | left → right |
+| 2 | `!` `~` **prefix** `++` `--` unary `+` `-` `*`(deref) `&`(address) `(cast)` `sizeof` | right → left |
 | 3 | `*` `/` `%` | left → right |
 | 4 | `+` `-` | left → right |
 | 5 | `<<` `>>` | left → right |
@@ -32,6 +32,13 @@
 | `1 < 2 < 3` | `1` | `(1<2)` is `1`, then `1<3` | chained compares do not work |
 | `3 > 2 > 1` | `0` | `(3>2)` is `1`, then `1>1` | — |
 
+Recent compilers refuse the last two outright:
+
+```
+error: chained comparison 'X < Y < Z' does not behave the same
+       as a mathematical expression
+```
+
 *(with `x = 4`)*
 
 ## Pointers and `++`
@@ -48,6 +55,8 @@
 warning: & has lower precedence than ==; == will be evaluated first
 warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first
 ```
+
+Wording differs between compilers; GNU gcc says "suggest parentheses around …". Either way, `-Wall` finds them.
 
 ## Rule of thumb
 

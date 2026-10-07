@@ -12,10 +12,12 @@
 | `unsigned short` | 2 | 0 … 65 535 |
 | `int` | 4 | −2 147 483 648 … 2 147 483 647 |
 | `unsigned int` | 4 | 0 … 4 294 967 295 |
-| `long` | 8 | ±9.22 × 10¹⁸ |
+| `long` | 8 | ±9.22 × 10¹⁸ — *4 bytes on Windows* |
 | `long long` | 8 | ±9.22 × 10¹⁸ |
 
 Whether plain `char` is signed is **not** fixed by the standard. Use `signed char` or `unsigned char` when it matters.
+
+Only the *minimums* are guaranteed: `int` ≥ 16 bits, `long` ≥ 32, `long long` ≥ 64. The sizes above hold on the lab machines and on macOS; on Windows `long` is 4 bytes. The portable names are in `<limits.h>` — `INT_MAX`, `LONG_MIN`, and so on — and in `<float.h>` for `FLT_MAX`, `DBL_DIG`.
 
 ## Floating point
 
@@ -36,7 +38,7 @@ Use `double` unless you have a reason not to.
 
 | | |
 |---|---|
-| both operands `int` | **integer** division, remainder truncated toward zero |
+| both operands `int` | **integer** division: the **quotient** is truncated toward zero |
 | `%` sign | follows the **left** operand |
 | one operand `double` | the whole division is `double` |
 
@@ -49,6 +51,10 @@ Use `double` unless you have a reason not to.
 
 `%` does not work on `double` at all.
 
+::: {.callout-important}
+`x / 0` and `x % 0` are **undefined behaviour**, not an error value — the program typically crashes. Test the divisor first.
+:::
+
 ## Overflow
 
 | | |
@@ -59,6 +65,16 @@ Use `double` unless you have a reason not to.
 | `13!` | does not |
 | `20!` | fits a `long long` |
 | `21!` | does not |
+
+## Mixing signed and unsigned
+
+In an expression with both, the signed value is converted to **unsigned**. So this is false:
+
+```c
+if (-1 < strlen(s))     /* strlen returns size_t: -1 becomes huge */
+```
+
+Compare lengths as `int`, or keep both sides unsigned.
 
 ## Sizes at a glance
 

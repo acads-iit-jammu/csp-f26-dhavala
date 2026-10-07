@@ -9,7 +9,7 @@
 | in a block `{ }` | that block, from the declaration down | until the block ends |
 | function parameter | the function body | until it returns |
 | outside all functions | every function below it in the file | whole program |
-| outside all functions, `static` | that file only | whole program |
+| outside all functions, `static` | the same, **but no other file can reach it** | whole program |
 | in a block, `static` | that block only | **whole program** |
 
 `static` inside a function changes the **lifetime**, not the scope.
@@ -64,9 +64,11 @@ after the block x=10
 ## Parameters are copies
 
 ```c
-void addOne(int n) { n = n + 1; }    /* changes the copy only */
-void addOne(int *n) { *n = *n + 1; } /* changes the caller's  */
+void addOne(int n)        { n = n + 1; }     /* changes the copy only */
+void reallyAddOne(int *n) { *n = *n + 1; }   /* changes the caller's  */
 ```
+
+(Two different names — defining `addOne` twice is an error.)
 
 ## Traps
 

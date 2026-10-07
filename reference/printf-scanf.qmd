@@ -6,9 +6,10 @@
 
 | | type | prints |
 |---|---|---|
-| `%d` `%i` | `int` | `-42` |
+| `%d` | `int` | `-42` |
+| `%i` | `int` — same as `%d` here; **differs in `scanf`** | `-42` |
 | `%u` | `unsigned` | `42` |
-| `%ld` | `long` | `1234567890` |
+| `%ld` | `long` | `3000000000` |
 | `%lld` | `long long` | `9000000000` |
 | `%zu` | `size_t` (`sizeof`, `strlen`) | `4` |
 | `%f` | `double` *and* `float` | `2.718282` |
@@ -16,8 +17,8 @@
 | `%g` | `double`, shorter form | `2.71828` |
 | `%c` | `char` | `A` |
 | `%s` | string | `hi` |
-| `%x` | `int`, hex | `ff` |
-| `%o` | `int`, octal | `10` |
+| `%x` | `unsigned`, hex | `ff` |
+| `%o` | `unsigned`, octal | `10` |
 | `%p` | pointer — cast `(void *)p` | differs on every run |
 | `%%` | literal `%` | `%` |
 
@@ -32,12 +33,15 @@
 | `%8.3f` | `[   3.142]` |
 | `%.3s` | `[abc]` |
 
-## printf vs scanf — the one that catches everyone
+## printf vs scanf — the two that catch everyone
 
 | | `printf` | `scanf` |
 |---|---|---|
 | `float` | `%f` | `%f` |
 | `double` | `%f` | **`%lf`** |
+| `%i` | same as `%d` | reads the **base** from the text |
+
+`scanf("%i", &n)` on `010` gives **8**, not 10 — a leading zero means octal. Use `%d`.
 
 ## scanf rules
 
@@ -46,8 +50,9 @@
 | needs the address | `scanf("%d", &i)` |
 | **except arrays** | `scanf("%19s", s)` — no `&` |
 | always limit `%s` | `char s[50]` → `%49s` |
-| `%s` stops at a space | reads one **word**, not a line |
-| check the return | number of items filled |
+| `%s` stops at whitespace | space, tab or newline — one **word**, not a line |
+| check the return | see below |
+| `%c` reads the next character | **including a leftover newline** — see below |
 
 ```c
 int i; double d; float f; char c; char s[20];
@@ -60,10 +65,39 @@ input `7 2.5 1.5 Z hello` →
 i=7 d=2.500 f=1.500 c=Z s=hello
 ```
 
+## The `%c` trap
+
+`%c` is the one conversion that does **not** skip whitespace, so it picks up the newline the previous `scanf` left behind:
+
+```
+scanf("%d", &n);  scanf("%c", &c);     ->  c is '\n'
+scanf("%d", &n);  scanf(" %c", &c);    ->  c is 'Z'
+```
+
+The space before `%c` is doing real work. Note the worked example above has one.
+
+## What scanf returns
+
+| returns | means |
+|---|---|
+| a count | how many items it filled |
+| `0` | input present but it did not match |
+| `EOF` (−1) | nothing left to read |
+
+A retry loop that does not consume the offending characters spins forever — after a mismatch they are still waiting.
+
 ## Three mistakes `-Wall` catches
 
 ```c
-scanf("%f", &d);   /* d is double  */   warning: expects 'float *' but argument is 'double *'
-scanf("%d", i);    /* missing &    */   warning: expects 'int *'   but argument is 'int'
-scanf("%s", &s);   /* & on array   */   warning: expects 'char *'  but argument is 'char (*)[20]'
+scanf("%f", &d);   /* d is double */
+scanf("%d", i);    /* missing &   */
+scanf("%s", &s);   /* & on array  */
 ```
+
+```
+format specifies type 'float *' but the argument has type 'double *' [-Wformat]
+format specifies type 'int *' but the argument has type 'int' [-Wformat]
+format specifies type 'char *' but the argument has type 'char (*)[20]' [-Wformat]
+```
+
+Wording differs between compilers — GNU gcc says "expects argument of type …". None of them is silent **if you ask**, which is why `-Wall` is worth typing every time.

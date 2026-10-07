@@ -40,6 +40,8 @@ sizeof(int)      /* 4  — so the address moved 4  */
 | `char *` | 1 byte |
 | `double *` | 8 bytes |
 
+(Byte counts are `sizeof` the pointed-to type on the lab machines. The *rule* — one whole item — never changes.)
+
 ## With arrays
 
 | | |
@@ -70,14 +72,14 @@ printf("%p\n", (void *)p);     /* differs on every run */
 | return more than one answer | `void minMax(int a[], int n, int *lo, int *hi)` |
 | hand over an array without copying it | `f(a)` |
 
-## The four mistakes
+## The five mistakes
 
 | | |
 |---|---|
 | dereferencing a pointer never given an address | **undefined behaviour** |
-| `p = 7` instead of `*p = 7` | compiler **rejects** it |
+| `p = 7` instead of `*p = 7` | the compiler complains; recent ones reject it outright |
 | `p = q` where `*p = *q` was meant | legal, silent, wrong |
 | returning `&local` | **undefined** — the storage is gone |
 | walking past the end of an array | **undefined** |
 
-Three of those are undefined behaviour: the standard says nothing about what happens. Do not learn what your compiler does with them.
+Three of those five are **undefined behaviour** — the first, the fourth and the fifth. The standard says nothing about what happens, so do not learn what your compiler does with them.
