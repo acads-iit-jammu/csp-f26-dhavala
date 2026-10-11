@@ -478,6 +478,115 @@ Use `.` when you have the structure, `->` when you have a pointer to it.
 There is a second reason to pass by address. A `struct Student` here is 32 bytes; a larger record might be hundreds. Passing by value copies all of it on every call. Passing a pointer copies 8 bytes whatever the structure's size.
 :::
 
+## 4b · A worked problem: is this point inside this rectangle?
+
+Everything so far has been machinery. Here is a small problem that uses it, and it is the
+one we will do in class.
+
+**A structure can hold another structure.** A rectangle, for our purposes, is fixed by two
+corners — and a corner is a point, which we already have:
+
+```c
+struct Point { int x, y; };
+
+struct Rect {
+    struct Point lo;            /* bottom-left corner */
+    struct Point hi;            /* top-right corner   */
+};
+```
+
+`struct Rect` contains two `struct Point`s, so reaching a coordinate takes two steps:
+`r.lo` is a `struct Point`, and `r.lo.x` is the `int` inside it. Read it left to right —
+*the rectangle's low corner's x*.
+
+```c
+struct Rect box = { {0, 0}, {4, 3} };    /* braces inside braces: one per member */
+printf("%d\n", box.hi.x);                /* 4 */
+```
+
+**The question.** Given a rectangle and a point, is the point inside? Say the edge counts
+as inside. A point is inside exactly when its `x` lies between the two `x` limits **and**
+its `y` lies between the two `y` limits — four conditions, all of which must hold:
+
+```c
+int inside(struct Rect r, struct Point p)
+{
+    return p.x >= r.lo.x && p.x <= r.hi.x &&
+           p.y >= r.lo.y && p.y <= r.hi.y;
+}
+```
+
+Two things worth noticing. The function takes **two whole structures by value** — four
+`int`s copied in total, which is nothing, and it does not modify either, so there is no
+reason to pass addresses here (§4). And it returns `int` used as a yes/no: `1` for
+inside, `0` for outside, which is how C has answered every true/false question since W06.
+
+```c
+#include <stdio.h>
+
+struct Point { int x, y; };
+
+struct Rect {
+    struct Point lo;            /* bottom-left corner */
+    struct Point hi;            /* top-right corner   */
+};
+
+/* 1 if p is inside r, 0 if not. A point on the edge counts as inside. */
+int inside(struct Rect r, struct Point p)
+{
+    return p.x >= r.lo.x && p.x <= r.hi.x &&
+           p.y >= r.lo.y && p.y <= r.hi.y;
+}
+
+int main(void)
+{
+    struct Rect  box      = { {0, 0}, {4, 3} };
+    struct Point tests[5] = { {2, 1}, {5, 1}, {0, 0}, {4, 3}, {2, 4} };
+    int i;
+
+    printf("rectangle: (%d,%d) to (%d,%d)\n\n",
+           box.lo.x, box.lo.y, box.hi.x, box.hi.y);
+
+    for (i = 0; i < 5; i++) {
+        if (inside(box, tests[i]))
+            printf("(%d, %d)  inside\n",  tests[i].x, tests[i].y);
+        else
+            printf("(%d, %d)  outside\n", tests[i].x, tests[i].y);
+    }
+    return 0;
+}
+```
+
+```
+rectangle: (0,0) to (4,3)
+
+(2, 1)  inside
+(5, 1)  outside
+(0, 0)  inside
+(4, 3)  inside
+(2, 4)  outside
+```
+
+Look at which test points were chosen, because choosing them is half the work:
+
+| Point | Why it is in the list |
+|---|---|
+| `(2,1)` | plainly inside — the easy case |
+| `(5,1)` | `x` too large, `y` fine — catches checking only one coordinate |
+| `(0,0)` | the low corner itself — the edge case our rule says is inside |
+| `(4,3)` | the high corner — the other edge |
+| `(2,4)` | `x` fine, `y` too large — the mirror of the second |
+
+A test set that is all easy cases proves nothing. Two of these five sit exactly on the
+boundary, which is where `>=` against `>` decides the answer — and where this program
+would be wrong if we had meant *strictly* inside.
+
+::: {.callout-note}
+**To try.** Change both `>=` to `>` and both `<=` to `<`, and re-run. Which lines change?
+That one-character difference is the whole distinction between *inside* and *strictly
+inside*, and it is the kind of thing a specification has to say out loud.
+:::
+
 ## 5 · Arrays of structures
 
 This is where the three-parallel-arrays problem disappears.
@@ -573,6 +682,7 @@ Predict before you run.
 | `d08` | `list[i].marks` against `list->marks` — when is each right? |
 | `d09` | `snprintf(name, 20, "%s", "Subrahmanyan Chandrasekhar")` — what does it **return**, and what is in `name`? |
 | `d10` | `scanf("%19s", name)` on the input `Ravi Kumar` — what is in `name`? |
+| `d11` | `struct Rect r = {{0,0},{4,3}};` — what is `r.hi.x`, and what does `r.hi` on its own mean? |
 
 ## Questions to Bring Back
 
@@ -745,10 +855,10 @@ while (n < 50 &&
 
 | | |
 |---|---|
-| `d11` | open a file that does not exist with `"r"` — what does `fopen` return? |
-| `d12` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
-| `d13` | `fscanf` with three conversions on a line that has two — what does it return? |
-| `d14` | run the reader when `marks.txt` is empty — what does it print? |
+| `d12` | open a file that does not exist with `"r"` — what does `fopen` return? |
+| `d13` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
+| `d14` | `fscanf` with three conversions on a line that has two — what does it return? |
+| `d15` | run the reader when `marks.txt` is empty — what does it print? |
 
 ## Questions to Bring Back
 
