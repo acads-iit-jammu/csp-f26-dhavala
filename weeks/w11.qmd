@@ -353,8 +353,8 @@ Run it four ways:
 Name: Ravi Kumar
 stored: [Ravi Kumar]  (10 characters)
 
-Name: Venkatasubramanian Iyer
-warning: name truncated — needed 24 bytes, the field holds 20
+Name: Venkatasubramanian Ramaseshan
+warning: name truncated — needed 30 bytes, the field holds 20
 stored: [Venkatasubramanian ]  (19 characters)
 
 Name:
@@ -541,7 +541,7 @@ Predict before you run.
 | `d06` | `if (a == b)` for two structures — does it compile? |
 | `d07` | `sizeof(struct Pad)` for `{char c; int n;}` against `sizeof(char)+sizeof(int)` |
 | `d08` | `list[i].marks` against `list->marks` — when is each right? |
-| `d09` | `snprintf(name, 20, "%s", "Venkatasubramanian Iyer")` — what does it **return**, and what is in `name`? |
+| `d09` | `snprintf(name, 20, "%s", "Venkatasubramanian Ramaseshan")` — what does it **return**, and what is in `name`? |
 | `d10` | `scanf("%19s", name)` on the input `Ravi Kumar` — what is in `name`? |
 
 ## Questions to Bring Back
