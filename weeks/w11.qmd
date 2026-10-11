@@ -12,9 +12,14 @@
 
 ## Pre-read
 
-- [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) · [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf)
+- **Structures:** [Lec 29](../cs1100-cse-iitm-2021/slides/Lec29.pdf) — *introduction to structures* — and [Lec 30](../cs1100-cse-iitm-2021/slides/Lec30.pdf) — *more on structures*
+- **For the recap in §0:** [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) and [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf) cover character arrays, string length, comparing strings and palindromes
 - The [W10 notes](w10.qmd), sections 9 to 13. Both of this week's topics stand on pointers: a structure is usually passed by address, and a `FILE *` is a pointer.
 - [Quick Reference: strings](../reference/strings.qmd) and [pointers](../reference/pointers.qmd)
+
+::: {.callout-note}
+The CS1100 series ends at Lec 30, with structures. **There is no lecture in it on file handling**, so for Tuesday these notes and the [Quick Reference](../reference/index.qmd) are your source.
+:::
 
 ## Code You Can Copy
 
@@ -24,15 +29,11 @@ Every program below was compiled with `gcc -Wall -Wextra` and run, and the outpu
 
 # Monday
 
-## 0 · Three string operations we have not written down
+## 0 · Recap — strings, on one page
 
-Last week covered strings as an *idea* — an array of characters ending in `'\0'`, the palindrome walk — and `strcmp`, including the part everyone gets wrong: **it returns zero when the strings are equal**, so `if (strcmp(a, b))` runs when they *differ*.
+A string is an array of characters ending in `'\0'`. Everything else follows from that. Here is the whole of what you need, in one program, before we move on.
 
-What we have not written down is how to **get a string in** and the two functions that build one. Ten minutes, then structures.
-
-::: {.callout-note}
-Electrical have already sat Lab 08 and will have met these the hard way. Mechanical and Materials sit it on **Wed Oct 14**, where five of the ten write drills are exactly this. Everyone needs it for Class Test-2.
-:::
+This is also the page to revise from for Class Test-2.
 
 ```c
 #include <stdio.h>
@@ -71,9 +72,11 @@ joined: levellevel
 | **`scanf("%49s", a)`** | reads one **word**, stopping at the first space. **No `&`** — an array name is already an address, which is why this differs from `scanf("%d", &n)`. The 49 is one less than the array size and is not optional: plain `%s` will write past the end |
 | **`strlen(a)`** | how many characters come **before** the `'\0'` — so always one less than `sizeof a` for an array that is exactly full. It walks the array to find out, which is why it still works after the array has been passed to a function and `sizeof` no longer does |
 | **`strcat(a, b)`** | appends `b` onto the end of `a`, moving the terminator. `a` must already have room; nothing checks. `strcpy(a, b)` is the same but overwrites rather than appends |
-| `strcmp(a, b)` | *(covered)* zero means equal |
+| **`strcmp(a, b)`** | **zero means equal** — so `if (strcmp(a, b))` runs when they *differ*, which is almost always a bug. Write `== 0` when you mean "the same" |
 
-The [strings reference sheet](../reference/strings.qmd) has the rest on one page, including the character tests `e1` and `e4` of Lab 08 need.
+Two of these carry most of the mistakes. `scanf` is the one where the missing `&` is *correct* — an array name is already an address — and `strcmp` is the one whose return value reads backwards.
+
+The [strings reference sheet](../reference/strings.qmd) has the rest on one page, including the character tests that Lab 08's `e1` and `e4` need.
 
 ## 1 · A record is more than one value
 
@@ -324,7 +327,171 @@ Predict before you run.
 
 # Tuesday — File Input and Output
 
-*To be posted after Monday's class.* `fopen` and `FILE *`, `fclose`, `fscanf` and `fprintf`, reading until the end of a file, and checking whether `fopen` actually succeeded.
+## 7 · The same reading and writing, with a name attached
+
+Everything you have written so far reads from the keyboard and writes to the screen. Those are just two streams the program is handed when it starts. A **file** is the same idea with a name, and you open and close it yourself.
+
+Four functions, and you already know two of them in another form:
+
+| | |
+|---|---|
+| `fopen(name, mode)` | opens the file, hands back a `FILE *` |
+| `fclose(f)` | closes it, and makes sure everything written is actually on disk |
+| `fprintf(f, …)` | exactly `printf`, with the stream as the first argument |
+| `fscanf(f, …)` | exactly `scanf`, with the stream as the first argument |
+
+The mode is a string:
+
+| Mode | Means |
+|---|---|
+| `"r"` | read. The file must already exist |
+| `"w"` | write. Creates the file, and **empties it if it exists** |
+| `"a"` | append. Creates if needed, writes at the end |
+
+::: {.callout-warning}
+`"w"` discards whatever was in the file, immediately, before you write anything. Opening your data file with `"w"` instead of `"r"` destroys it.
+:::
+
+## 8 · Writing a file
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    FILE *f = fopen("marks.txt", "w");      /* "w" = write, start empty */
+
+    if (f == NULL) {
+        printf("could not open marks.txt for writing\n");
+        return 1;
+    }
+
+    fprintf(f, "%d %s %.1f\n", 11, "Asha",  91.5);
+    fprintf(f, "%d %s %.1f\n", 12, "Bilal", 78.0);
+    fprintf(f, "%d %s %.1f\n", 13, "Chen",  84.5);
+
+    fclose(f);
+    printf("wrote marks.txt\n");
+    return 0;
+}
+```
+
+```
+wrote marks.txt
+```
+
+and `marks.txt` now holds:
+
+```
+11 Asha 91.5
+12 Bilal 78.0
+13 Chen 84.5
+```
+
+`fprintf(f, …)` is `printf` with one extra argument at the front. Everything you know about `%d`, `%s` and `%.1f` carries over unchanged.
+
+## 9 · `FILE *` is a pointer, and it can be NULL
+
+```c
+FILE *f = fopen("no-such-file.txt", "r");
+if (f == NULL) { … }
+```
+
+```
+fopen returned NULL — the file is not there
+```
+
+**`fopen` is the one library call in this course that routinely fails**, and it fails for ordinary reasons: the file does not exist, the name is misspelt, you are in the wrong directory, you lack permission. It does not crash — it returns `NULL`, and your program crashes later if you ignore that.
+
+Check it every time. The `NULL` from W10 §8 is doing real work here.
+
+## 10 · Reading a file back
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    FILE *f = fopen("marks.txt", "r");      /* "r" = read */
+    int roll, n = 0;
+    char name[20];
+    double marks, total = 0.0;
+
+    if (f == NULL) {
+        printf("could not open marks.txt for reading\n");
+        return 1;
+    }
+
+    while (fscanf(f, "%d %19s %lf", &roll, name, &marks) == 3) {
+        printf("%d %-6s %.1f\n", roll, name, marks);
+        total += marks;
+        n++;
+    }
+
+    fclose(f);
+
+    if (n > 0)
+        printf("read %d students, average %.2f\n", n, total / n);
+    return 0;
+}
+```
+
+```
+11 Asha   91.5
+12 Bilal  78.0
+13 Chen   84.5
+read 3 students, average 84.67
+```
+
+**The loop condition is the whole technique.** `fscanf` returns how many items it filled, so `== 3` means "I got a complete record". When the file runs out it returns `EOF` and the loop stops. You do not need to know the number of lines in advance, and you do not need a sentinel value at the end of the file.
+
+That is the same return value you were told to check for `scanf` in §0 — here it is earning its keep.
+
+::: {.callout-note}
+Note `%19s` again, and `&roll` and `&marks` but no `&` on `name`. `fscanf` follows exactly the same rules as `scanf`, because it *is* `scanf` with a stream argument.
+:::
+
+## 11 · Putting it with structures
+
+Monday's `struct Student` and Tuesday's file are the obvious pair — a file of records read into an array of structures:
+
+```c
+struct Student cls[50];
+int n = 0;
+
+while (n < 50 &&
+       fscanf(f, "%d %19s %lf", &cls[n].roll, cls[n].name, &cls[n].marks) == 3)
+    n++;
+```
+
+`&cls[n].roll` is the address of one member of one element. The `n < 50` guard comes first so that a longer file cannot run past the end of the array — the file decides how much data arrives, and your array does not grow.
+
+## 12 · What goes wrong
+
+| | |
+|---|---|
+| not checking `fopen` | the commonest file bug by a distance; the program dies later, far from the cause |
+| opening with `"w"` to read | silently empties the file first |
+| forgetting `fclose` | written data may never reach the disk |
+| looping on `!feof(f)` | reads one time too many — test the **return of `fscanf`** instead, as above |
+| no bound when filling an array | a long file writes past the end |
+| relative paths | `"marks.txt"` means *in the directory you ran the program from*, not where the source lives |
+
+## Drills
+
+| | |
+|---|---|
+| `d09` | open a file that does not exist with `"r"` — what does `fopen` return? |
+| `d10` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
+| `d11` | `fscanf` with three conversions on a line that has two — what does it return? |
+| `d12` | run the reader when `marks.txt` is empty — what does it print? |
+
+## Questions to Bring Back
+
+6. Why is `while (fscanf(...) == 3)` better than counting the lines first?
+7. `fopen` can fail for four ordinary reasons. Name two.
+8. What is the difference between `"w"` and `"a"`, and when would using the wrong one be unrecoverable?
+9. `fprintf(f, "%d", x)` and `printf("%d", x)` differ by one argument. What is `printf` doing with that argument implicitly?
 
 ## PAGAL Notes
 

@@ -9,7 +9,7 @@ Lookup sheets — the things worth having in front of you while you type, that n
 | [Operator precedence](precedence.qmd) | the table, and the five that actually bite |
 | [Control flow](control-flow.qmd) | `break` vs `continue`, `switch` fall-through, loop traps |
 | [Arrays](arrays.qmd) | 1-D and 2-D, `sizeof`, why the length must travel |
-| [Pointers](pointers.qmd) | `&` and `*`, arithmetic, `NULL`, the four mistakes |
+| [Pointers](pointers.qmd) | `&` and `*`, arithmetic, `NULL`, pointers to pointers, the five mistakes |
 | [Strings](strings.qmd) | `'\0'`, `sizeof` vs `strlen`, `string.h`, character tests |
 | [Functions](functions.qmd) | declaration vs definition, by value vs by address |
 | [Scope and lifetime](scope.qmd) | which `x` a name means; why a value did not survive |

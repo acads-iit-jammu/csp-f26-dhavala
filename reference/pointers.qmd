@@ -64,6 +64,38 @@ if (p != NULL) *p = 5;  /* test before dereferencing    */
 printf("%p\n", (void *)p);     /* differs on every run */
 ```
 
+## Pointers to pointers
+
+A pointer is a variable, so it has an address of its own, and that address can be stored too.
+
+```c
+int a = 1;
+int *p  = &a;      /* p holds the address of a */
+int **q = &p;      /* q holds the address of p */
+```
+
+| Written | Means |
+|---|---|
+| `p` | the address of `a` |
+| `*p` | `a` |
+| `q` | the address of `p` |
+| `*q` | `p`, i.e. the address of `a` |
+| `**q` | `a` — follow it twice |
+
+Read the declaration the same way as always: `**q` is an `int`, so `q` points at an `int *`.
+
+**Why you would want one.** To let a function change the caller's *pointer*, not just the value it points at — the same reason an `int *` lets it change an `int`:
+
+```c
+void pointElsewhere(int **q, int *target) { *q = target; }
+
+int a = 1, b = 2;
+int *p = &a;
+pointElsewhere(&p, &b);     /* p now points at b */
+```
+
+This is not needed for anything in this course, and you should not reach for it. It is here because it turns up in the recommended lectures: [Lec 28](../cs1100-cse-iitm-2021/slides/Lec28.pdf), *More on pointers*, covers it as `type **ptrname`.
+
 ## Why pointers exist
 
 | | |
