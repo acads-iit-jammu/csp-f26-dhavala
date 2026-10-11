@@ -206,6 +206,169 @@ You can also set the members at the point of declaration, in order:
 struct Student s = { 42, "Asha", 91.5 };
 ```
 
+## 2b · Reading a name in, properly
+
+Everything above used a name we had already written into the program. Real input is
+harder, and it is worth doing once, carefully, because three separate things can go
+wrong.
+
+**First: `scanf("%s")` cannot read a full name.** `%s` stops at the first whitespace.
+
+```c
+char name[20];
+scanf("%19s", name);        /* input: Ravi Kumar */
+printf("[%s]\n", name);     /* prints [Ravi] — "Kumar" is still waiting */
+```
+
+For a line that may contain spaces, use `fgets`, which reads up to a newline:
+
+```c
+char line[100];
+fgets(line, sizeof line, stdin);
+```
+
+**Second: `fgets` keeps the newline.** If you type `Ravi Kumar` and press Enter, `line`
+holds `Ravi Kumar\n`. Left alone, that newline is stored in the record and prints as a
+stray line break later. Remove it if it is there:
+
+```c
+size_t len = strlen(line);
+if (len > 0 && line[len - 1] == '\n') {
+    line[len - 1] = '\0';
+    len--;
+}
+```
+
+The `len > 0` guard matters: on an empty line there is no character to examine, and
+`line[len - 1]` with `len == 0` would read `line[-1]`.
+
+**Third: the name may not fit.** `s.name` holds 20 bytes, one of which must be the
+terminator — so 19 characters at most. You now have a decision to make, and it is a
+design decision, not a syntax one:
+
+| | What it does | When it is right |
+|---|---|---|
+| **Truncate** | store the first 19 characters and carry on | the field is a display label; a shortened name is better than no record |
+| **Refuse** | reject the input and ask again | the name is data that must be correct — a mark sheet, a certificate |
+
+C gives you a clean way to do each.
+
+### Truncating: let `snprintf` do it, then ask what happened
+
+This is where the return value earns its place. `snprintf` never overflows, and it
+*reports*: it returns the length the result **would** have had, so a value at or beyond
+the size tells you characters were dropped.
+
+```c
+int n = snprintf(s.name, sizeof s.name, "%s", line);
+
+if (n < 0) {
+    printf("formatting error — nothing was stored\n");
+}
+else if ((size_t) n >= sizeof s.name) {
+    printf("name truncated: needed %d bytes, the field holds %zu\n",
+           n + 1, sizeof s.name);
+}
+```
+
+Three details worth being exact about:
+
+- `n < 0` is a genuine failure inside `snprintf` (an encoding error), not a size problem.
+  Nothing useful was stored.
+- `n` counts characters **without** the terminator, so the space actually needed is
+  `n + 1`.
+- The cast `(size_t) n` is not decoration. `n` is a signed `int` and `sizeof` is an
+  unsigned `size_t`; comparing them directly makes `gcc -Wextra` say *"comparison of
+  integers of different signs"*. Cast the one you know is non-negative — which is why
+  this comparison sits *after* the `n < 0` test.
+
+### Refusing: measure first, then `strcpy`
+
+`strcpy` was called dangerous in the box above, and that was a statement about using it
+**unchecked**. It takes no size, so it cannot refuse — but it does not need to, if you
+have already established that the string fits. Measure, decide, then copy:
+
+```c
+if (strlen(line) >= sizeof s.name) {
+    printf("name is %zu characters; the field holds %zu including the terminator\n",
+           strlen(line), sizeof s.name);
+    return 1;                       /* refuse — nothing is stored */
+}
+strcpy(s.name, line);               /* safe: we just proved it fits */
+```
+
+`>=` and not `>` is the whole boundary. `sizeof s.name` is 20, so a 19-character name
+needs 20 bytes and just fits; a 20-character name needs 21 and does not.
+
+### The whole thing
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int  roll;
+    char name[20];
+    double marks;
+};
+
+int main(void)
+{
+    struct Student s;
+    char line[100];
+    size_t len;
+    int n;
+
+    printf("Name: ");
+    if (fgets(line, sizeof line, stdin) == NULL) {
+        printf("could not read a name\n");
+        return 1;
+    }
+
+    len = strlen(line);
+    if (len > 0 && line[len - 1] == '\n') {
+        line[len - 1] = '\0';
+    }
+
+    n = snprintf(s.name, sizeof s.name, "%s", line);
+
+    if (n < 0) {
+        printf("formatting error — nothing was stored\n");
+        return 1;
+    }
+    if ((size_t) n >= sizeof s.name) {
+        printf("warning: name truncated — needed %d bytes, the field holds %zu\n",
+               n + 1, sizeof s.name);
+    }
+
+    printf("stored: [%s]  (%zu characters)\n", s.name, strlen(s.name));
+    return 0;
+}
+```
+
+Run it four ways:
+
+```
+Name: Ravi Kumar
+stored: [Ravi Kumar]  (10 characters)
+
+Name: Venkatasubramanian Iyer
+warning: name truncated — needed 24 bytes, the field holds 20
+stored: [Venkatasubramanian ]  (19 characters)
+
+Name:
+stored: []  (0 characters)
+
+Name: could not read a name          <- end of input, no line at all
+```
+
+::: {.callout-note}
+Notice the shape of that program, because it is the shape of most real input code: one
+line actually does the work, and the rest establishes that doing it is safe. That ratio
+does not mean something has gone wrong. It is what handling input looks like when you
+take the edges seriously — and the edges are where marks, and later data, are lost.
+:::
+
 ## 3 · A structure is a value: it copies
 
 ```c
@@ -377,6 +540,8 @@ Predict before you run.
 | `d06` | `if (a == b)` for two structures — does it compile? |
 | `d07` | `sizeof(struct Pad)` for `{char c; int n;}` against `sizeof(char)+sizeof(int)` |
 | `d08` | `list[i].marks` against `list->marks` — when is each right? |
+| `d09` | `snprintf(name, 20, "%s", "Venkatasubramanian Iyer")` — what does it **return**, and what is in `name`? |
+| `d10` | `scanf("%19s", name)` on the input `Ravi Kumar` — what is in `name`? |
 
 ## Questions to Bring Back
 
@@ -549,10 +714,10 @@ while (n < 50 &&
 
 | | |
 |---|---|
-| `d09` | open a file that does not exist with `"r"` — what does `fopen` return? |
-| `d10` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
-| `d11` | `fscanf` with three conversions on a line that has two — what does it return? |
-| `d12` | run the reader when `marks.txt` is empty — what does it print? |
+| `d11` | open a file that does not exist with `"r"` — what does `fopen` return? |
+| `d12` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
+| `d13` | `fscanf` with three conversions on a line that has two — what does it return? |
+| `d14` | run the reader when `marks.txt` is empty — what does it print? |
 
 ## Questions to Bring Back
 
