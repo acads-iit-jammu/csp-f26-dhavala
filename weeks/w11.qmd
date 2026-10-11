@@ -499,4 +499,175 @@ while (n < 50 &&
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal column. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning: the week's informal column.*
+
+**The interview that does not ask you to write code.**
+
+In May 2026 Google began piloting a change to its software engineering interview. One of
+the traditional coding rounds — the kind you prepare for on LeetCode — was replaced with
+something called a **code comprehension** round. You are given a codebase you have never
+seen. You are given Gemini to help you. And you are asked to read it, find the bugs,
+explain the design decisions, and suggest what you would improve.
+
+It reached us through [a post by Shreyas Naphad](https://x.com/NaphadShreyas/status/2108750616034185499)
+on 10 October 2026, so — following the Week 1 habit — we checked it before repeating it.
+
+| Claim | Standing |
+|---|---|
+| Google is piloting an AI-assisted round for junior and mid-level roles on select US teams | confirmed; a Google spokesperson confirmed candidates use Gemini |
+| The internal description is "human-led, AI-assisted" | reported from an internal document |
+| It evaluates prompt engineering, output validation, and debugging | reported consistently |
+| 200–500 lines, 60 minutes, three phases in a CoderPad environment | reported in secondary coverage; not an official Google figure |
+
+The precise numbers may drift. The direction will not, and the direction is the point.
+
+---
+
+**A second account, and how to weigh it.**
+
+The news travelled loudly. The
+[r/leetcode thread](https://www.reddit.com/r/leetcode/comments/1wck65h/leetcode_grind_is_dead_google_is_changing_swe/)
+discussing it is titled *"LeetCode grind is dead."* It is posted by a **throwaway account
+claiming to be a Googler** — which is to say, unverifiable. Read it anyway; it is where
+your seniors are arguing about your job. But weigh it correctly, and notice that weighing
+it correctly is the same skill the new round is testing.
+
+The post claims Google is rolling out two **AI Fluency** rounds:
+
+> **AI Debugging:** Dropping you into a massive, messy legacy repo to see if you can
+> actually use AI to locate, diagnose, and patch complex bugs in real time.
+>
+> **AI System Design:** Architecting end-to-end systems while actively using AI to
+> evaluate trade-offs, draft interfaces, and pressure-test edge cases.
+
+And then: *"Pure DSA won't carry loops anymore."*
+
+Now read the **edit** at the bottom of that same post: *"2 DSA rounds will still be there,
+and it's for all L3-L5 roles."*
+
+That edit quietly demolishes the headline above it. Two algorithm rounds remain. Nothing
+here says stop learning loops, arrays, recursion or complexity — and it could not, because
+**you cannot judge code you could not have written.** An AI's wrong answer looks exactly
+like its right answer until you know the subject well enough to tell them apart. That is
+the whole reason this course does not skip pointers, memory, or the compiler.
+
+So: the anonymous claim is unverified, its headline overshoots, and its own correction
+contradicts it — and *underneath all that* it still agrees with the part Google actually
+confirmed. Hold all four of those thoughts at once. That is what reading critically looks
+like, and you will do it far more often with generated code than with Reddit posts.
+
+What is dying is not the algorithms. It is the idea that reciting them is enough.
+
+---
+
+**You already read more code than you write.**
+
+*Clean Code* opens with the claim that "the ratio of time spent reading versus writing is
+well over 10 to 1." Treat that as an experienced assertion rather than a measurement —
+nobody ran a stopwatch on the industry. But you do not need the number, because you have
+your own evidence from this semester.
+
+Count honestly. In Lab 07 — the Game of Life, the largest program you have written so
+far — how long did you spend typing, and how long did you spend staring at code that
+already existed? The starter file. The spec comment. Your partner's `countNeighbours`.
+A compiler error pointing at line 23. Your own loop from twenty minutes ago that no
+longer looked familiar. The typing was the short part. It is always the short part.
+
+What is new is not the ratio. What is new is the size of the thing you must read.
+
+---
+
+**The blocks got bigger.**
+
+A 300-line file used to arrive slowly. Someone wrote it over days, you reviewed it in
+pieces, and you absorbed it at roughly the speed it was produced.
+
+Now you can ask for 300 lines and have them in ten seconds. The production side got
+faster by orders of magnitude. **Your reading speed did not change at all.** That gap is
+the whole story of this decade, and it is why the interview moved.
+
+This is also the honest reason your `struct` work this week matters more than it looks.
+Compare these two, which store the same thing:
+
+```c
+int   rolls[100];      char  names[100][20];      double marks[100];
+```
+```c
+struct Student { int roll; char name[20]; double marks; };
+struct Student cls[100];
+```
+
+The first is three arrays that you must personally remember to keep in step. The second
+*says what it is*. A reader meeting `cls[i].marks` knows something; a reader meeting
+`marks[i]` has to go hunting for whether `i` still means what it meant forty lines ago.
+You have just learned your first tool for making a large program readable — which is to
+say, your first tool for making a large program possible.
+
+---
+
+**Taste and judgement are two different things.**
+
+The round asks for both, and it is worth separating them.
+
+| | The question | Can the machine answer it? |
+|---|---|---|
+| **Judgement** | Is this *correct*? Does it hold at the edges, on empty input, when the file will not open? | It can help — and it will also assert correctness confidently and be wrong |
+| **Taste** | Is this *good*? Is this the right decomposition, the right name, the right thing to store? | No. It has no stake in who maintains this in two years |
+
+Judgement is the skill this course has been drilling since Week 1: predict the output
+before you run it, say what the function *ensures*, ask for the evidence. Taste is
+newer, and it is what structures start teaching you — not "does this compile" but "is
+this the right set of fields?" There is no compiler error for a bad design. There is
+only a program that becomes harder to change every week until somebody rewrites it.
+
+Taste is built the slow way: by reading a great deal of code, by writing something
+badly and then having to extend it, and by noticing the difference. There is no prompt
+for it.
+
+---
+
+**Architect is a job description, not a promotion.**
+
+The old career story was: write code for some years, and eventually you will be allowed
+to design systems. That ladder is being compressed from the bottom. The commodity rung —
+turn a clear specification into syntax — is the rung the machine now stands on.
+
+What is left is the work above it: deciding what should exist, how the parts divide, what
+each part promises the others, and whether what came back is actually right. Week 1 called
+this **Specify → Express → Verify**, and said the machine took the middle step. The Google
+round is simply that claim showing up in a hiring process. They did not stop testing
+Express — the algorithm rounds are still there, as we just established. They **added** a
+round that tests Verify directly, with the machine sitting right there on the desk, which
+is harder to fake and much closer to the job.
+
+Notice what the anonymous post called its second round: **AI System Design** — and note
+that it is claimed for **L3**, which is the level you would enter at. Architecting
+end-to-end systems, weighing trade-offs, drafting interfaces, pressure-testing edge
+cases. Whether or not that specific round exists as described, the shape of the claim is
+the shape every confirmed source points to: design work has moved down the ladder, to the
+first rung.
+
+So the uncomfortable framing — *you must become architects* — is not career advice for
+your thirties. It is a description of the entry-level job.
+
+Which is why a five-line `struct` declaration deserves more of your attention than it
+instinctively gets. Choosing what goes inside `struct Student` is a design decision with
+no compiler to check it: it is the smallest honest instance of the work above. You will
+not practise architecture by waiting for a big system. You practise it on the small ones,
+on purpose, now.
+
+---
+
+**You have been sitting this round all semester.**
+
+Look at how your labs are actually graded. Band A is automated: your code compiles and
+passes the vectors. Band B is a person pointing at a line you submitted and asking you to
+explain it — and a member who cannot explain their own code resubmits, whatever the score
+says.
+
+That is a code comprehension round. We did not design it to imitate Google; we designed it
+because it is the only honest way to grade work that an AI could have produced. The
+industry arrived at the same instrument for the same reason. There is no trick to
+preparing for it, at Google or here. Read more code than you write. Be able to say what
+every line you submit is for. And when something works and you do not know why, treat
+that as an unfinished problem rather than a finished one.
