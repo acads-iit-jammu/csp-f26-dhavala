@@ -6,26 +6,321 @@
 
 ::: {.callout-important}
 **Class Test-2 opens on Oct 14**, the day after Tuesday's lecture. It covers W10 and W11: pointers, strings, structures and file input/output.
+
+**Lab 09** is on this material: EE on Tue Oct 13, Mechanical and Materials on Wed Oct 21.
 :::
-
-## Plan
-
-**Monday — structures, and pointers to them.** A structure groups several values of different types under one name, which is what you need as soon as a record has more than one field. Declaring a structure, reading and writing its members, passing one to a function by value and by address, arrays of structures, and the `->` notation for reaching a member through a pointer.
-
-**Tuesday — file input and output.** Programs so far have read from the keyboard and written to the screen. A file is the same idea with a name attached: `fopen` gives you a `FILE *`, `fclose` gives it back, and `fscanf` and `fprintf` work like the versions you already know. Reading until the end of the file, and checking whether `fopen` actually succeeded.
 
 ## Pre-read
 
 - [Lec 17](../cs1100-cse-iitm-2021/slides/Lec17.pdf) · [Lec 18](../cs1100-cse-iitm-2021/slides/Lec18.pdf)
-- The [W10 notes](w10.qmd). Both of this week's topics are built on pointers: a structure is usually passed by address, and a `FILE *` is a pointer.
+- The [W10 notes](w10.qmd), sections 9 to 13. Both of this week's topics stand on pointers: a structure is usually passed by address, and a `FILE *` is a pointer.
+- [Quick Reference: strings](../reference/strings.qmd) and [pointers](../reference/pointers.qmd)
 
-## In Class
+## Code You Can Copy
 
-*To be posted.*
+Every program below was compiled with `gcc -Wall -Wextra` and run, and the output shown is what it actually printed.
+
+---
+
+# Monday
+
+## 0 · First, the half of strings we only talked about
+
+Last week ended with strings as an *idea* — an array of characters with a `'\0'` at the end, and the palindrome walk. This is the mechanical half, and you need it for Lab 08 and for the test.
+
+Four things, all of which appear in Lab 08:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+    char a[50], b[50];
+
+    printf("Enter two words: ");
+    if (scanf("%49s %49s", a, b) != 2) return 1;
+
+    printf("a = \"%s\", length %zu\n", a, strlen(a));
+    printf("b = \"%s\", length %zu\n", b, strlen(b));
+
+    if (strcmp(a, b) == 0) printf("they are the same word\n");
+    else                   printf("they are different words\n");
+
+    strcat(a, b);
+    printf("joined: %s\n", a);
+    return 0;
+}
+```
+
+Typing `level level`:
+
+```
+a = "level", length 5
+b = "level", length 5
+they are the same word
+joined: levellevel
+```
+
+| | |
+|---|---|
+| `scanf("%49s", a)` | reads one **word**. No `&` — an array name is already an address. The 49 is one less than the array size, and it is not optional |
+| `strlen(a)` | characters **before** the `'\0'`, so one less than `sizeof a` |
+| `strcmp(a, b)` | **zero means equal**. `if (strcmp(a,b))` runs when they *differ*, which is almost always a bug |
+| `strcat(a, b)` | appends `b` onto the end of `a`. `a` must have room — it is not checked |
+
+That is the whole of what you need. The [strings reference sheet](../reference/strings.qmd) has the rest on one page.
+
+## 1 · A record is more than one value
+
+A student has a roll number, a name and a mark. Three arrays kept in step is one way:
+
+```c
+int    roll[50];
+char   name[50][20];
+double marks[50];
+```
+
+It works, and it is miserable. Nothing links `roll[7]` to `name[7]`; sorting means moving three arrays together; adding a field means changing every function. A **structure** gives the three fields one name:
+
+```c
+struct Student {
+    int  roll;
+    char name[20];
+    double marks;
+};
+```
+
+That declares a **type**, not a variable — it reserves no storage. It says what a `struct Student` is made of.
+
+## 2 · Making one and using it
+
+```c
+#include <stdio.h>
+
+struct Student {
+    int  roll;
+    char name[20];
+    double marks;
+};
+
+int main(void)
+{
+    struct Student s;
+
+    s.roll = 42;
+    snprintf(s.name, sizeof s.name, "%s", "Asha");
+    s.marks = 91.5;
+
+    printf("roll  = %d\n", s.roll);
+    printf("name  = %s\n", s.name);
+    printf("marks = %.1f\n", s.marks);
+    return 0;
+}
+```
+
+```
+roll  = 42
+name  = Asha
+marks = 91.5
+```
+
+The `.` reaches a member. `s.roll` is an `int` and behaves like any other `int`.
+
+Note the name is set with `snprintf`, not `=`. `s.name` is an **array**, and you cannot assign to an array — `s.name = "Asha"` does not compile. Copying characters into it is the only way. `strcpy(s.name, "Asha")` does the same job.
+
+You can also set the members at the point of declaration, in order:
+
+```c
+struct Student s = { 42, "Asha", 91.5 };
+```
+
+## 3 · A structure is a value: it copies
+
+```c
+#include <stdio.h>
+struct Point { int x, y; };
+int main(void)
+{
+    struct Point a = { 1, 2 };
+    struct Point b = a;          /* a whole-structure copy */
+    b.x = 99;
+    printf("a.x = %d   b.x = %d   (assignment copies every member)\n", a.x, b.x);
+    printf("sizeof(struct Point) = %zu, two ints = %zu\n", sizeof(struct Point), 2*sizeof(int));
+    return 0;
+}
+```
+
+```
+a.x = 1   b.x = 99   (assignment copies every member)
+sizeof(struct Point) = 8, two ints = 8
+```
+
+Unlike an array, a structure **can** be assigned, and the assignment copies every member. This is worth noticing, because it is the one place C copies a compound object for you.
+
+::: {.callout-warning}
+You still cannot **compare** two structures:
+
+```c
+if (a == b)     /* error: invalid operands to binary expression */
+```
+
+Compare the members you care about, one at a time.
+:::
+
+## 4 · Passing one to a function
+
+A structure is passed **by value**, like an `int` — the function gets a copy, and changes to it are lost:
+
+```c
+#include <stdio.h>
+
+struct Point { int x, y; };
+
+void moveCopy(struct Point p)    { p.x = 99; }          /* gets a copy      */
+void moveReal(struct Point *p)   { p->x = 99; }         /* gets the address */
+
+int main(void)
+{
+    struct Point a = { 1, 2 };
+
+    moveCopy(a);
+    printf("after moveCopy(a),  a.x = %d\n", a.x);
+
+    moveReal(&a);
+    printf("after moveReal(&a), a.x = %d\n", a.x);
+
+    printf("(*p).y and p->y mean the same thing: %d\n", a.y);
+    return 0;
+}
+```
+
+```
+after moveCopy(a),  a.x = 1
+after moveReal(&a), a.x = 99
+(*p).y and p->y mean the same thing: 2
+```
+
+This is exactly W10's rule, now applied to a bigger object. To change the caller's structure, pass its address.
+
+**And the arrow.** When you have a pointer to a structure, reaching a member needs the pointer dereferenced first. `*p.x` does not work, because `.` binds tighter than `*` — it would mean `*(p.x)`. You would have to write `(*p).x`, and that is so common C gives it a shorthand:
+
+> `p->x` means `(*p).x`
+
+Use `.` when you have the structure, `->` when you have a pointer to it.
+
+::: {.callout-note}
+There is a second reason to pass by address. A `struct Student` here is 32 bytes; a larger record might be hundreds. Passing by value copies all of it on every call. Passing a pointer copies 8 bytes whatever the structure's size.
+:::
+
+## 5 · Arrays of structures
+
+This is where the three-parallel-arrays problem disappears.
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int  roll;
+    char name[20];
+    double marks;
+};
+
+/* fills in one student through a pointer; returns nothing */
+void readStudent(struct Student *s, int roll, char name[], double marks)
+{
+    s->roll = roll;
+    strcpy(s->name, name);
+    s->marks = marks;
+}
+
+double average(struct Student list[], int n)
+{
+    double total = 0.0;
+    for (int i = 0; i < n; i++)
+        total += list[i].marks;
+    return total / n;
+}
+
+int main(void)
+{
+    struct Student cls[3];
+
+    readStudent(&cls[0], 11, "Asha",  91.5);
+    readStudent(&cls[1], 12, "Bilal", 78.0);
+    readStudent(&cls[2], 13, "Chen",  84.5);
+
+    for (int i = 0; i < 3; i++)
+        printf("%d %-6s %.1f\n", cls[i].roll, cls[i].name, cls[i].marks);
+
+    printf("average = %.2f\n", average(cls, 3));
+    return 0;
+}
+```
+
+```
+11 Asha   91.5
+12 Bilal  78.0
+13 Chen   84.5
+average = 84.67
+```
+
+Three things to read off that program.
+
+**`cls` is an array like any other.** It is passed to `average` as a pointer and needs its length, exactly as in W10 §7. Nothing new.
+
+**`list[i].marks` has no arrow**, because `list[i]` is a structure, not a pointer. **`s->roll` does**, because `s` is one.
+
+**`&cls[0]`** is the address of one element — the same `&` on an array element you used in Lab 07's `swap(&a[lo], &a[hi])`.
+
+## 6 · One thing that will surprise you
+
+```c
+struct Pad { char c; int n; };
+```
+
+```
+char+int struct = 8, members sum to 5
+```
+
+A structure can be **larger than its members added up**. The compiler inserts unused bytes so that each member starts at an address the machine can read efficiently — here, three bytes after the `char` so the `int` starts at a multiple of 4. This is called **padding**.
+
+You do not need to control it. You do need to know that `sizeof(struct X)` is the authority and arithmetic on member sizes is not.
+
+## Drills
+
+Predict before you run.
+
+| | |
+|---|---|
+| `d01` | `struct Point a = {1,2}; struct Point b = a; b.x = 9;` — what is `a.x`? |
+| `d02` | a function taking `struct Point p` sets `p.x = 9` — what does the caller see? |
+| `d03` | the same function taking `struct Point *p` — what now? |
+| `d04` | `p->y` against `(*p).y` — do they print the same? |
+| `d05` | `s.name = "Asha";` — does it compile? |
+| `d06` | `if (a == b)` for two structures — does it compile? |
+| `d07` | `sizeof(struct Pad)` for `{char c; int n;}` against `sizeof(char)+sizeof(int)` |
+| `d08` | `list[i].marks` against `list->marks` — when is each right? |
+
+## Questions to Bring Back
+
+1. Three parallel arrays and an array of structures hold the same data. Name one operation that is clearly easier with the structure, and say why.
+2. `moveCopy` and `moveReal` differ by one character in the parameter and one in the body. Explain what each hands to the function.
+3. Why can a structure be assigned with `=` when an array cannot?
+4. When is `p->x` wrong and `p.x` right?
+5. `sizeof` a structure can exceed the sum of its members. What is the compiler doing, and why does it not matter to your code?
 
 ## After Class
 
-*To be posted.* **Lab 09** covers this material: EE on Tue Oct 13, Mechanical and Materials on Wed Oct 21.
+- Rewrite Lab 08's `e1` (count letters, digits and others) so that it fills in a `struct Counts` through a pointer instead of three separate `int *` parameters. Which version would you rather extend to also count spaces?
+- **Lab 09** is on this material and on Tuesday's: EE Tue Oct 13, Mechanical and Materials Wed Oct 21.
+
+---
+
+# Tuesday — File Input and Output
+
+*To be posted after Monday's class.* `fopen` and `FILE *`, `fclose`, `fscanf` and `fprintf`, reading until the end of a file, and checking whether `fopen` actually succeeded.
 
 ## PAGAL Notes
 
