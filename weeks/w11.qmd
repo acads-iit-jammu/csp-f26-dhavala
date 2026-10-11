@@ -284,9 +284,10 @@ Three details worth being exact about:
 
 ### Refusing: measure first, then `strcpy`
 
-`strcpy` was called dangerous in the box above, and that was a statement about using it
-**unchecked**. It takes no size, so it cannot refuse — but it does not need to, if you
-have already established that the string fits. Measure, decide, then copy:
+The box above said `strcpy` takes no size and so *cannot refuse* an oversized name. That
+is true, and it is the whole of the objection: it describes `strcpy` used **unchecked**.
+A function that cannot refuse does not need to, once you have already established that
+the string fits. So measure, decide, then copy:
 
 ```c
 if (strlen(line) >= sizeof s.name) {
