@@ -15,3 +15,10 @@ Lookup sheets — the things worth having in front of you while you type, that n
 | [Scope and lifetime](scope.qmd) | which `x` a name means; why a value did not survive |
 | [Storage classes](storage-classes.qmd) | `static`, `extern`, `register`, `auto`; globals and linkage |
 | [Compiler errors](errors.qmd) | what the message means, and where to look |
+
+---
+
+Each sheet ends with a pointer into the [**GNU C Reference Manual**](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html) — the
+authoritative description of the language. Where a sheet covers something the manual does
+not (`printf`/`scanf`, compiler warnings), it says so and points you at the right
+document instead.

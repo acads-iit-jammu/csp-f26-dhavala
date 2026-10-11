@@ -86,3 +86,7 @@ sizeof ptr         /* 8, the pointer — not what it points at  */
 ```
 
 `sizeof` yields `size_t` → print with `%zu`.
+
+---
+
+**In the GNU C Manual:** [§2.1 Primitive Data Types](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Primitive-Data-Types) · [§2.1.1 Integer Types](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Integer-Types-1)

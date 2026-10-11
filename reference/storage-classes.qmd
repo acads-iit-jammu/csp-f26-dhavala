@@ -1,6 +1,8 @@
 # Storage Classes {.unnumbered}
 
-The words you may put in front of a declaration: `auto`, `register`, `static`, `extern`.
+The words you may put in front of a declaration: `auto`, `register`, `static`, `extern`. The [GNU C Manual](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Storage-Class-Specifiers-1) lists exactly these four:
+
+> There are four storage class specifiers that you can prepend to your variable declarations which change how the variables are stored in memory: `auto`, `extern`, `register`, and `static`.
 
 They control **lifetime** (how long the storage exists) and **linkage** (whether another file can reach the name) — except `register`, which controls neither and does only one thing, below. For scope itself see [Scope and lifetime](scope.qmd).
 
@@ -145,7 +147,7 @@ register int a[3] = {1,2,3};
 a[0] = 9;           /* error: address of register variable requested */
 ```
 
-The only thing you may do with a `register` array is `sizeof`.
+The only thing you may do with a `register` array is `sizeof`. The manual states the rule directly, under [array subscripts](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1): "you cannot subscript an array having the `register` storage class."
 
 ## auto
 
@@ -188,3 +190,7 @@ Prefer parameters in and return values out. Use a global when the alternative is
 | a helper function or variable private to one file | `static` at file level |
 | one variable shared by several files | define it in one `.c`, `extern` it in a header both include |
 | speed | nothing — write clear code and let the compiler optimise |
+
+---
+
+**In the GNU C Manual:** [§2.9 Storage Class Specifiers](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Storage-Class-Specifiers-1) · [§5.9 Static Functions](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Static-Functions-1)

@@ -293,7 +293,11 @@ char+int struct = 8, members sum to 5
 
 A structure can be **larger than its members added up**. The compiler inserts unused bytes so that each member starts at an address the machine can read efficiently — here, three bytes after the `char` so the `int` starts at a multiple of 4. This is called **padding**.
 
-You do not need to control it. You do need to know that `sizeof(struct X)` is the authority and arithmetic on member sizes is not.
+You do not need to control it. You do need to know that `sizeof(struct X)` is the authority and arithmetic on member sizes is not. The [GNU C Reference Manual](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Size-of-Structures-1) says as much:
+
+> The size of a structure type is equal to the sum of the size of all of its members,
+> possibly including padding to cause the structure type to align to a particular byte
+> boundary.
 
 ## Drills
 

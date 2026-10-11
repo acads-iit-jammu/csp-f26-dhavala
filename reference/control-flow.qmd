@@ -61,3 +61,7 @@ The classic bug: "do it, then check" runs once even when asked for zero.
 | dangling `else` | binds to the **nearest** unmatched `if` — brace it |
 | `while (i < n)` with no change to `i` | infinite; stop it with **Ctrl-C** |
 | comparing `double` with `==` | rounding makes it unreliable; compare a difference against a tolerance |
+
+---
+
+**In the GNU C Manual:** [§4 Statements](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Statements-1) · [§4.11 The break Statement](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#The-break-Statement-1)

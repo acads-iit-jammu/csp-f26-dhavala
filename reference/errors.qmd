@@ -46,3 +46,7 @@ One mistake often produces a cascade. Fix the top one and recompile; the rest fr
 | `command not found` | write `./prog`, not `prog` |
 | nothing happens | it is waiting for input — or an infinite loop; **Ctrl-C** |
 | `Segmentation fault` | a bad pointer or an out-of-bounds index. There is no line number. Narrow it with `printf`, or rebuild with `-g -fsanitize=address` and run again — that names the offending line |
+
+---
+
+**Not in the GNU C Manual** — compiler diagnostics are a property of the compiler, not the language. `gcc --help=warnings` lists every warning flag your compiler knows.

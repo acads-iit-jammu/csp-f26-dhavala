@@ -65,3 +65,7 @@ See [Scope and lifetime](scope.qmd) and [Storage classes](storage-classes.qmd).
 | returning `&local` | **undefined** — the storage is gone |
 | `int f()` | old style, no checking; write `int f(void)` |
 | changing a parameter and expecting the caller to see it | it got a copy |
+
+---
+
+**In the GNU C Manual:** [§5 Functions](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Functions-1) · [§5.4 Function Parameters](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Function-Parameters-1)

@@ -185,7 +185,15 @@ The last three lines of that output are equal, and that is not a coincidence. In
 
 > `a[i]` means exactly `*(a + i)`
 
-The subscript notation is a shorthand for pointer arithmetic. This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why `int a[]` and `int *a` mean the same thing in a parameter list, and why the function can change the caller's array.
+The subscript notation is a shorthand for pointer arithmetic. This is not a convention or a
+compiler habit — it is how the language defines subscripting. The
+[GNU C Reference Manual](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1) states it as the definition:
+
+> The array subscript expression `A[i]` is defined as being identical to the expression
+> `(*((A)+(i)))`. This means that many uses of an array name are equivalent to a pointer
+> expression.
+
+This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why `int a[]` and `int *a` mean the same thing in a parameter list, and why the function can change the caller's array.
 
 ## 7 · Why a function is usually told how long an array is
 

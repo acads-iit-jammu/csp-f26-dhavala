@@ -61,3 +61,7 @@ Wording differs between compilers; GNU gcc says "suggest parentheses around …"
 ## Rule of thumb
 
 > If you have to think about precedence, add parentheses. The compiler does not care; the next reader does.
+
+---
+
+**In the GNU C Manual:** [§3.19 Operator Precedence](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Operator-Precedence-1)

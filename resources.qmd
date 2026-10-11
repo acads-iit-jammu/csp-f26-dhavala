@@ -17,6 +17,21 @@ Ten short lookup sheets written for this course — the things worth having in f
 
 ## Online Material
 
+### The GNU C Reference Manual
+
+📘 [**The GNU C Reference Manual**](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html) — the authoritative description of the C
+*language* as GCC implements it: types, operators, statements, arrays, pointers,
+functions, structures, scope and storage classes. It is short, precise, and free. Lecture
+notes and the [quick-reference sheets](reference/index.qmd) cite it by section, so when a
+sheet and your intuition disagree, this is the tie-breaker.
+
+Note what it is **not**: a library manual. `printf`, `scanf` and the file functions are
+part of the standard *library*, not the language, and are documented separately in the
+[GNU C Library manual](https://www.gnu.org/software/libc/manual/) — or by `man 3 printf`
+on a lab machine.
+
+*Published by the Free Software Foundation under the GNU Free Documentation License.*
+
 ### The C Programming Laboratory (IIT Jammu lab manual)
 
 📕 [**The C Programming Laboratory**](labs/CLab3_Aroof.pdf) — the department's shared lab

@@ -101,3 +101,7 @@ format specifies type 'char *' but the argument has type 'char (*)[20]' [-Wforma
 ```
 
 Wording differs between compilers — GNU gcc says "expects argument of type …". None of them is silent **if you ask**, which is why `-Wall` is worth typing every time.
+
+---
+
+**Not in the GNU C Manual.** It documents the *language*; `printf` and `scanf` belong to the standard *library*. For those, see the [GNU C Library manual](https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html), or `man 3 printf` on a lab machine.

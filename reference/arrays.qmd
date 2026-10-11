@@ -73,7 +73,9 @@ int *p = a;                       /* by pointer */
 …*(p + i)…                        /* same as a[i] */
 ```
 
-`a[i]` **is** `*(a + i)`.
+`a[i]` **is** `*(a + i)`. The [GNU C Manual](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1) puts it exactly:
+
+> The array subscript expression `A[i]` is defined as being identical to the expression `(*((A)+(i)))`. This means that many uses of an array name are equivalent to a pointer expression.
 
 ## Traps
 
@@ -84,3 +86,7 @@ int *p = a;                       /* by pointer */
 | forgetting the length parameter | the function cannot recover it |
 | `int a[n]` with `n` read at run time | avoid; fixed sizes until `malloc` in W13 |
 | comparing arrays with `==` | compares addresses, not contents |
+
+---
+
+**In the GNU C Manual:** [§2.5 Arrays](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Arrays-1) · [§3.13 Array Subscripts](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1)

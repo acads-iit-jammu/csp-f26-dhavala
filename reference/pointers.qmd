@@ -115,3 +115,7 @@ This is not needed for anything in this course, and you should not reach for it.
 | walking past the end of an array | **undefined** |
 
 Three of those five are **undefined behaviour** — the first, the fourth and the fifth. The standard says nothing about what happens, so do not learn what your compiler does with them.
+
+---
+
+**In the GNU C Manual:** [§2.6 Pointers](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Pointers-1) · [§3.10 Pointer Operators](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Pointer-Operators-1)
