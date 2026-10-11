@@ -1,24 +1,262 @@
-# Lab 09: Structures and File Input/Output {.unnumbered}
+# Lab 09: Structures and Files {.unnumbered}
 
 | | Electrical | Mechanical & Materials |
 |---|---|---|
 | **Date** | Tue Oct 13, 2026 | Wed Oct 21, 2026 |
 | **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
 
-**Syllabus practical modules:** 4 and 8 — tuples and dictionaries; file handling
+**Lab pack:** [lab09.tar.gz](../labs/lab09.tar.gz). It is already on the lab machines. You can also download it to practise at home.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Syllabus practical modules:** 4 and 8 — records, and file handling.
 
-**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
+**Evaluation:** This lab is graded, with the same weight as the others inside the 20% lab component. It is marked in three tiers:
 
-## Pre-Lab
+| | | Each | Total |
+|---|---|---:|---:|
+| **Write drills** `w01`–`w10` | one line of C each | 1 | **10** |
+| **Blanks** `b1`–`b5` | one loop or line each | 5 | **25** |
+| **Problems** `e1`–`e4` | specification only | 10 | **40** |
 
-*To be posted — what to read/install before the session.*
+That is 75 marks from the programs. The remaining 25 come from observed work and a short viva, in which you will be asked to explain your own code.
 
-## Exercises
+The **read drills** (`./drill.sh`) are **not** marked.
 
-*To be posted before the session.*
+You may work in teams of one or two. If you are a pair, swap who types at the halfway point.
 
-## Submission
+::: {.callout-note}
+This lab follows the Week 11 lectures: Monday on structures, Tuesday on files. The [Week 11 notes](../weeks/w11.qmd) contain everything you need. Problem `e1` is the point-in-rectangle problem worked through in Monday's lecture.
+:::
 
-Submission instructions will be provided in the lab.
+## The shape of this lab
+
+One idea, carried through three stages:
+
+> a record is several values under one name
+> → many records in an array, and questions you can ask of the whole set
+> → the records come from a **file**, and your answers go back into one
+
+The write drills build the notation, the blanks use it on an array of records, and the last two problems replace the keyboard with a file.
+
+Every starter file has a **`BEFORE`** line naming the drills it rests on. If you are stuck, that line tells you what to go and do first.
+
+## The minimum C you need today
+
+Everything in this lab is built from these lines.
+
+```c
+struct Student {             /* a type: several values under one name     */
+    int    roll;
+    char   name[20];
+    double cgpa;
+};
+
+struct Student s;            /* now a variable of that type               */
+s.roll = 1001;               /* reach a member with a dot                 */
+scanf("%d %19s %lf", &s.roll, s.name, &s.cgpa);   /* note: no & on name   */
+
+struct Student a[32];        /* an array of records                       */
+a[i].cgpa                    /* index first, then member                  */
+
+struct Student *p = &s;      /* a pointer to a record                     */
+p->cgpa                      /* which uses -> instead of .                */
+
+FILE *f = fopen("students.txt", "r");       /* open for reading           */
+if (f == NULL) { ... }                      /* ALWAYS check this          */
+while (fscanf(f, "%d %19s %lf", &r, nm, &c) == 3) { ... }   /* to the end */
+fclose(f);
+```
+
+Three places where almost all the mistakes happen:
+
+**`&s.roll` has an `&`, `s.name` does not.** Both are members of the same structure in the same `scanf`. The difference is that `name` is an **array**, and an array name is already an address. Drills `w10` and `b1` are about exactly this.
+
+**A `double` is read with `%lf`, not `%f`.** `%f` is for printing a double and for reading a `float`. Read a `double` with `%f` and the value you get back is wrong.
+
+**Compare programme codes with `strcmp`, never with `==`.** `a == b` on two character arrays compares *addresses*, which are never equal, so the test is silently always false.
+
+## Act 0 · Getting started (10 minutes)
+
+The pack is already on the lab machines. If it is not on yours, download it:
+
+```bash
+wget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab09.tar.gz
+tar xzf lab09.tar.gz
+cd lab09
+./install.sh
+```
+
+`install.sh` makes your workspace and puts you inside it. Your prompt will read `[lab09 OK ...]`. If it does not, you are in the wrong place — run `./where.sh` and it will tell you what to type.
+
+Then start the recorder, which is your proof of work:
+
+```bash
+script session.txt
+```
+
+## Act 1 · Read drills (15 minutes, not marked)
+
+```bash
+./drill.sh --all
+```
+
+Ten short programs. For each one you type what you think it will print, and only then does it run.
+
+| Drills | What they are about |
+|---|---|
+| `d01`–`d03` | what a structure is, and what `b = a` does |
+| `d04`–`d05` | by value against by address — the same function, twice |
+| `d06`–`d08` | arrays of records, `->`, and a structure inside a structure |
+| `d09` | `sizeof` a structure, and why it is not the sum of its parts |
+| `d10` | comparing programme codes with `strcmp` |
+
+These carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.
+
+## Act 2 · Write drills (20 minutes, 1 mark each)
+
+Ten files, `w01.c` to `w10.c`. In each one, everything is written except a single line, and the comment tells you what that line must do.
+
+| | What you write |
+|---|---|
+| `w01` | read two numbers straight into the members of a structure |
+| `w02` | read members of two different types |
+| `w03` | copy a structure, change the copy, leave the original alone |
+| `w04` | a function body that gets a structure **by value** |
+| `w05` | the same, but **by address** — compare the two |
+| `w06` | read three records into an array |
+| `w07` | reach members through a pointer, with `->` |
+| `w08` | read into a structure that holds two other structures |
+| `w09` | find the largest member in an array of records |
+| `w10` | read a name and a programme code |
+
+`w04` and `w05` are a matched pair. Do them one after the other: the first cannot change the caller's record and the second can, and that is the whole lesson.
+
+## How to work on one problem
+
+The steps are the same for all nineteen. Using `w01.c` as the example:
+
+```bash
+vim w01.c                # open it and write the missing line
+gcc w01.c -o w01         # compile it
+./w01 < w01_sample.txt   # run it on the sample input
+./check.sh w01           # once it runs, have it marked
+```
+
+Plain `gcc`. No `-lm`, no other flags.
+
+**Every problem has a ready-made input file**, named `<problem>_sample.txt`, and each one reproduces the `EXAMPLE` printed at the top of that starter:
+
+```bash
+$ ./w01 < w01_sample.txt
+x=3 y=4
+$ ./b5_topper < b5_sample.txt
+topper=1002
+```
+
+::: {.callout-tip}
+Compile and run it yourself before running `./check.sh`. Running it shows you what your program does; the checker only tells you whether the answer is right.
+:::
+
+## Act 3 · Blanks (25 minutes, 5 marks each)
+
+Everything around the gap is written for you. Write the missing loop or line.
+
+| File | What it must do | Its last line must end with |
+|---|---|---|
+| `b1_make.c` | build one complete record and print it back | `<roll> <name> <cgpa>` |
+| `b2_arrow.c` | the same record, reached through a pointer | `roll=<R> cgpa=<C>` |
+| `b3_average.c` | the average cgpa over an array of records | `average=<A>` |
+| `b4_above.c` | how many records are **strictly** above 7.00 | `above=<N>` |
+| `b5_topper.c` | the roll of the record with the highest cgpa | `topper=<R>` |
+
+::: {.callout-tip}
+`b4` and `b5` both turn on one character. *Strictly above* means `> 7.0`, so a cgpa of exactly 7.00 does **not** count — one of the test cases is three students at exactly 7.00 and expects `above=0`. In `b5`, a tie goes to the **first** of the tied students, which you get for free by testing with `>` and not `>=`.
+:::
+
+## Act 4 · Problems (40 minutes, 10 marks each)
+
+Specification only. You write the whole program.
+
+| Problem | What it must do | Its last line must end with |
+|---|---|---|
+| `e1.c` | is a point inside a rectangle? | `inside` or `outside` |
+| `e2.c` | the topper, from a list of records | `topper=<roll> <name>` |
+| `e3.c` | **reads `students.txt`** — which programme has the most students above 7 | `program=<code> count=<N>` |
+| `e4.c` | **reads `students.txt`, writes `passed.txt`** | `passed=<N>` |
+
+**`e1` is Monday's lecture problem.** Two structures — a `Point`, and a `Rect` made of two `Point`s — and a function returning 1 or 0. Four conditions, all of which must hold. A point exactly on an edge counts as inside, and two of the test cases sit exactly on the boundary to check that you meant `>=` and not `>`.
+
+**`e2`** is `b5` with more to report. Keep the **index** of the best record, not a copy of the cgpa: you owe the caller two facts about that student, and the cgpa alone cannot tell you the name.
+
+### `e3` and `e4` do not read the keyboard
+
+These two read the file `students.txt`, which is already in your workspace. Run them with no input at all:
+
+```bash
+gcc e3.c -o e3
+./e3
+```
+
+Each line of `students.txt` holds one record:
+
+```
+1001 Ravi EE 8.20
+1002 Asha ME 6.50
+1003 Iqbal EE 7.10
+```
+
+and the file ends when it ends — you are **not** told in advance how many lines there are. That is what this pattern is for:
+
+```c
+while (fscanf(f, "%d %19s %7s %lf", &roll, name, prog, &cgpa) == 4) {
+    ...
+}
+```
+
+It stops as soon as a read does not deliver all four items, which is what happens at the end of the file.
+
+**`e3`** needs three counters and no array at all — you never have to store the records. Ties, including the case where nobody is above 7, go to whichever programme appears **first in the file**.
+
+**`e4`** writes a file as well as reading one. Open it with `fopen("passed.txt", "w")` and **`fclose` it when you are done** — what you have written may still be sitting in a buffer until you do. If nobody qualifies, `passed.txt` must still exist, and be empty.
+
+::: {.callout-important}
+`e4` is graded **twice**: the line you print *and* the contents of `passed.txt`. A correct count on screen earns nothing if the file was never written. The checker deletes any old `passed.txt` before each test, so a file left over from an earlier run cannot be mistaken for this one.
+:::
+
+### How the checking works
+
+`./check.sh e1` compiles *your* source and runs it on two kinds of input: a fixed set chosen in advance, labelled `public`, and a set generated fresh at that moment from the range in the `GIVEN` line, labelled `random`. A program that only reproduces the printed example will fail as soon as a new input is drawn.
+
+For `e3` and `e4` the checker writes a fresh `students.txt` before each test and gives your program an **empty** keyboard input. If you left a `scanf` in, your program will sit waiting for something that never comes, and you will see `TIMEOUT` rather than a wrong answer.
+
+## Act 5 · Check your marks, fix, and submit (10 minutes)
+
+```bash
+./check.sh          # everything
+./check.sh e3       # one problem, while you are working on it
+```
+
+Marks are given **per test case**, not all-or-nothing, so fixing one failing case is always worth doing, even in the last few minutes. Treat the total as an estimate: some vectors are drawn fresh each run, so the number can move by a mark or two.
+
+When you are finished, or when time is called:
+
+```bash
+./check.sh --bundle
+```
+
+::: {.callout-important}
+The bundle is written to the directory **above** your workspace, named `lab09_<rolls>_<branch>_w<NN>.tar.gz`. Take it with you: upload it to Moodle and email a copy to yourself. The lab machines are wiped between sessions.
+:::
+
+## If you finish early (not marked)
+
+1. Make `e3` report the programme with the **highest average** cgpa instead of the most students above 7. Which parts of the loop change, and which do not?
+2. Make `e4` write the name next to each roll, and check it. Then undo that and make it write a header line first, and check that. The checker rejects both — read its two complaints and work out which line of `passed.txt` it is objecting to in each case.
+3. Add a `struct Rect` function `int overlap(struct Rect a, struct Rect b)` that says whether two rectangles overlap at all. Start from `e1`: two rectangles miss each other exactly when one is entirely to one side of the other.
+
+## Before you leave
+
+Be ready to answer these out loud.
+
+1. In `w04` nothing changed and in `w05` it did. The function body was almost the same. What was different?
+2. In `e3`, why `strcmp` and not `==`?
+3. What would your `e4` do if `students.txt` were not there? Did you try it?
