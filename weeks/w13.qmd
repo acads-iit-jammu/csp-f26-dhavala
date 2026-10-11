@@ -25,4 +25,140 @@
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal column. To be posted.*
+*PAGAL — Perspectives on Algorithms, Generative AI & Learning: the week's informal column.*
+
+**Next door in Jagti, they were discussing your job.**
+
+On 9–10 October, on the IIM Jammu campus in Jagti — the same village as this institute —
+there was a conference called the
+[**J&K GCC Summit 2026**](https://www.iimj.ac.in/gcc_summit/), organised with the
+Government of Jammu & Kashmir under the theme *"Unlocking J&K's GCC Potential for
+Building Growth Ecosystem & Catalysing Investment."* Over 300 delegates. The Lieutenant
+Governor gave the inaugural address and the Chief Minister the valedictory. Six panels
+over two days, two of which were about you:
+
+> **Panel 4** — GCC Innovation and Technology: *Unlocking Tier-2 and Tier-3 Advantage*
+>
+> **Panel 5** — *The Future of GCC Talent and Workforce Transformation*
+
+A **Global Capability Centre** is what used to be dismissed as a "back office" and no
+longer is. It is a centre a multinational owns and staffs itself, increasingly doing the
+engineering rather than supporting it. The numbers the summit put up:
+
+| | |
+|---|---|
+| GCCs operating in India | 2,117+ |
+| Professionals employed | 1.9 million+ |
+| GCCs in Tier-II and Tier-III cities | 220+ |
+| Projected workforce growth by 2030 | 39% |
+| **Share of the future workforce from non-metro locations** | **84%** |
+
+*(Figures as presented by the summit, sourced to Zinnov, NASSCOM, EY, BCG and McKinsey.)*
+
+Read the last row again, because it is the one that concerns this classroom. The argument
+of the entire summit was that this work is moving to places like Jammu — and that the
+binding constraint is not real estate or policy or bandwidth. It is whether there are
+enough people here who can do the work.
+
+That is an unusually direct thing for a first-year programming class to be told. The
+question of whether such a centre opens in this city, and whether it does serious
+engineering when it does, is partly a question about the people sitting in this room.
+
+---
+
+**What the industry leaders actually emphasised.**
+
+The programme is on the website; the emphasis is not. What came back from those panels
+was consistent, and it was not about any particular technology.
+
+**Continuous learning, as a condition of the job rather than a virtue.** Not "keep
+learning" as a motivational poster. The stronger claim: that the specific tools you are
+hired for will be substantially replaced during your employment, so the only durable
+qualification is the demonstrated ability to pick up the next thing quickly. What you
+know is a depreciating asset. How fast you learn is not.
+
+**Compressing onboarding.** This one is measurable, which is why industry cares about it.
+How long before a new engineer can safely change something? It used to be months. The
+pressure now is to make it weeks. And notice what that is actually a demand for: it is a
+demand that you can be dropped into a large unfamiliar codebase and become useful
+quickly. That is precisely the skill [last week's column](w11.qmd#pagal-notes) was about,
+and which Google now runs an interview round on. Two completely different institutions —
+a hiring process in California, a talent panel in Jagti — arriving at the same
+requirement in the same month.
+
+**Judgement early, not after a decade.** The expectation voiced repeatedly was that
+juniors will move from *producing* work to *judging* work far sooner than before, because
+the production is increasingly done by AI. The junior role is shifting from "write this"
+to "decide whether this is right, and whether it is the right thing."
+
+If that sounds familiar, it should. Week 1 of this course drew it as **Specify → Express →
+Verify** and claimed the machine was taking the middle step. That was our argument. It is
+now also the argument of a room full of people who hire engineers. We did not get that
+from them and they did not get it from us; it is simply what the situation looks like from
+both ends.
+
+---
+
+**The part that was not about skills at all.**
+
+Here is what genuinely stood out. In a summit about technology, investment and AI, the
+talent discussion kept returning to things that are not skills: **grit, trustworthiness,
+ownership, the willingness to say you do not know.**
+
+That is easy to dismiss as the soft part of a corporate panel. It is worth taking
+seriously instead, because there is a reason it is getting *more* weight rather than less.
+
+When producing code was the bottleneck, you could measure someone by output. That
+measurement is now broken: anyone can produce plausible output. So what remains to
+evaluate a person on? Whether their work can be relied upon. Whether they say "I checked
+this" only when they checked it. Whether they stay with a hard problem past the point
+where it stops being interesting. Whether, when they do not understand something, they
+say so instead of shipping it and hoping.
+
+The skill landscape moves every few years. These do not. They are also, inconveniently,
+the ones you cannot acquire the night before.
+
+---
+
+**Which brings us, honestly, to `malloc` and `free`.**
+
+This is not a stretch, and it is why this column sits in this particular week.
+
+`free` is a promise that nobody checks. If you forget it, your program still compiles.
+It still produces the right answer. It passes the tests. It passes code review, most of
+the time. The leak shows up weeks later as a service that degrades overnight, and by then
+it is somebody else's night.
+
+There is no compiler error for a broken promise. C gives you the memory because you asked,
+and it believes you when you imply you will give it back. The language has no opinion
+about whether you do. Nothing in this course so far has worked that way: a missing
+semicolon is caught instantly, a wrong answer is caught by the grader. A leak is the first
+thing you will write that is wrong in a way that only hurts someone who is not you, and
+only later.
+
+So when a panel in Jagti says *trustworthy* and you think that sounds like an HR word,
+remember that this week you will write your first code that requires you to be trusted.
+That is all the word means. Not a personality trait — a property of your work that holds
+when nobody is looking at it.
+
+Recursion, on Tuesday, asks something related. To write a recursive function you must
+trust the call you are making — assume it returns the right answer for the smaller
+problem — while remaining entirely responsible for the base case and for making progress
+towards it. Trust the part you delegate; own the part that makes it terminate. That is
+also, more or less, a description of working with an AI.
+
+---
+
+**What to do about it, concretely.**
+
+The summit's message to this region was that the work is coming here if the people are
+here. Three things follow, none of them dramatic:
+
+1. **Get fast at reading code you did not write.** It is the measurable thing industry
+   is now optimising for, under the name "onboarding." The drills are practice at it.
+2. **Protect the ability to judge.** Use every tool you like — but stay able to say *why*
+   an answer is right, because that is the part being hired for.
+3. **Be someone whose work holds up unobserved.** `free` what you `malloc`. Say when you
+   do not know. Finish the hard one.
+
+The third is the one that will feel least like computer science and will matter longest.

@@ -32,6 +32,21 @@ From the [IIT Jammu academic calendar for 1^st^ year UG students, Semester 2026-
 
 ^\*^ Class tests are conducted with internal arrangements; exact date/time will be announced in class and on this page.
 
+::: {.callout-important}
+## Class Test-2 scope
+
+**Class Test-2 covers everything taught after the Mid-Semester Examination** — Weeks
+[09](weeks/w09.qmd), [10](weeks/w10.qmd) and [11](weeks/w11.qmd):
+
+- **W09** — functions: declaration, definition and call; **scope**; call by value and by reference; bisection
+- **W10** — **pointers**: `&` and `*`, pointer arithmetic, arrays as pointers, why a length must travel; **strings**: character arrays, `'\0'`, `string.h`
+- **W11** — **structures** and `->`; **file input and output**: `FILE *`, `fopen`/`fclose`, reading to end of file
+
+Everything up to and including W07 was examined in the Mid-Semester Examination and is
+not the focus here — though pointers cannot be revised without arrays, and structures
+cannot be revised without functions, so the earlier material does not disappear.
+:::
+
 **Institute holidays that affect our slots:** Wed Aug 26 (Milad-un-Nabi), Mon Oct 19 & Tue Oct 20 (Dussehra), Mon Nov 9 (Govardhan Puja), Tue Nov 10 (Declared Holiday), Wed Nov 11 (Bhai Duj).
 
 ## Assessment
