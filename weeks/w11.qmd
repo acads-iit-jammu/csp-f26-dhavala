@@ -145,7 +145,60 @@ marks = 91.5
 
 The `.` reaches a member. `s.roll` is an `int` and behaves like any other `int`.
 
-Note the name is set with `snprintf`, not `=`. `s.name` is an **array**, and you cannot assign to an array — `s.name = "Asha"` does not compile. Copying characters into it is the only way. `strcpy(s.name, "Asha")` does the same job.
+Note the name is set with `snprintf`, not `=`. `s.name` is an **array**, and you cannot assign to an array — `s.name = "Asha"` does not compile. Copying characters into it is the only way.
+
+::: {.callout-note}
+## New here: `snprintf`
+
+**`snprintf` is `printf` that writes into a character array instead of onto the screen.**
+Same format strings, same `%d` and `%s` and `%.2f` — different destination.
+
+```c
+snprintf(where, how_big, "format", ...);
+```
+
+| Argument | Meaning |
+|---|---|
+| `where` | the character array to write into |
+| `how_big` | its **total size in bytes** — `snprintf` will never write more than this |
+| `"format", ...` | exactly as in `printf` |
+
+```c
+char small[8];
+snprintf(small, sizeof small, "%s", "Asha");        /* small is now "Asha"    */
+snprintf(small, sizeof small, "%s-%d", "ID", 42);   /* small is now "ID-42"   */
+```
+
+**Why the size argument matters.** `strcpy(s.name, "Asha")` does the same job here and
+is shorter, but it takes no size, so it cannot refuse. Hand it a name longer than the
+array and it writes straight past the end into whatever is next — the classic C bug, and
+undefined behaviour. `snprintf` cannot do that. It copies what fits, terminates with
+`'\0'`, and stops:
+
+```c
+char small[8];
+snprintf(small, sizeof small, "%s", "Parvinder");   /* small is "Parvind"     */
+```
+
+Seven characters and the terminator: eight bytes, exactly the size you declared.
+Truncated, but never out of bounds.
+
+**Write the size as `sizeof`, not as a number you typed.** In the program above,
+`sizeof s.name` is 20, and it stays correct by itself if you later widen the field to
+`char name[40]`. A hand-written `20` would quietly become wrong.
+
+One catch, from [W10 §7](w10.qmd). `sizeof` only gives you the array's real size where
+the array is *declared*. Inside a function that received it as a parameter it is a
+pointer, and `sizeof` gives 8 — the size of the address, not of the 20 bytes behind it.
+So in a function like `void setName(char dest[], int n)`, the length must still be passed
+in as `n`, exactly as it was for every array function you wrote in W09.
+
+Both `printf` and `snprintf` return the number of characters they *would* have written.
+So a return value of `9` from a buffer of `8` is how you detect that truncation happened.
+
+`snprintf` is declared in `stdio.h`, which you already include; `strcpy` needs
+`string.h`.
+:::
 
 You can also set the members at the point of declaration, in order:
 
