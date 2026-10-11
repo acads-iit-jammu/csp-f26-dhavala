@@ -347,21 +347,47 @@ int main(void)
 }
 ```
 
-Run it four ways:
+Run it four times, giving it something different each time. In each block below, the
+text after `Name: ` is what you typed; every other line is the program's own output.
+
+**1 · A name that fits.** Type it and press Enter.
 
 ```
 Name: Ravi Kumar
 stored: [Ravi Kumar]  (10 characters)
+```
 
+**2 · A name that does not fit.** 26 characters offered, 19 stored.
+
+```
 Name: Subrahmanyan Chandrasekhar
 warning: name truncated — needed 27 bytes, the field holds 20
 stored: [Subrahmanyan Chandr]  (19 characters)
+```
 
+**3 · Press Enter without typing anything.** `fgets` succeeds — it read a line, and that
+line happens to be empty. The newline is stripped, `line` becomes `""`, and an empty name
+is stored. Note what does *not* happen: this is not an error, and the program has no way
+to tell it apart from a name of zero characters, because that is exactly what it is.
+
+```
 Name:
 stored: []  (0 characters)
-
-Name: could not read a name          <- end of input, no line at all
 ```
+
+**4 · Give it no input at all.** Press **Ctrl-D** on an empty line — on Linux and macOS
+that signals end of input — or run the program with its input redirected from an empty
+file, `./a.out < /dev/null`. There is now no line to read, so `fgets` returns `NULL` and
+the program stops instead of using `line`, which was never filled in.
+
+```
+Name: could not read a name
+```
+
+Cases 3 and 4 look similar on screen and are completely different underneath: in **3**
+`fgets` worked and gave you an empty string, in **4** it failed and gave you nothing at
+all. Checking `fgets(...) == NULL` is how you tell them apart, and it is why that check
+is the first thing in the program.
 
 `snprintf` counts bytes, not words. The second name is cut after `Chandr` because that
 is where byte 19 falls — truncation has no idea what a word is, and will happily leave
