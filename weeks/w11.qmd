@@ -660,12 +660,40 @@ on purpose, now.
 
 **You have been sitting this round all semester.**
 
-Look at how your labs are actually graded. Band A is automated: your code compiles and
-passes the vectors. Band B is a person pointing at a line you submitted and asking you to
-explain it — and a member who cannot explain their own code resubmits, whatever the score
-says.
+Start with the part of the lab nobody grades. Open `drill.sh` and read the comment at
+the top of it:
 
-That is a code comprehension round. We did not design it to imitate Google; we designed it
+> Each drill: you SEE it, you WRITE your prediction, and only THEN does it run.
+> **Predicting is the exercise. Running is just the marking.**
+
+That is a code comprehension round. You are handed code you did not write, you are not
+allowed to execute it, and you must say what it does. No marks ride on it, which is
+exactly why it works: there is nothing to perform and nowhere to hide. When the drill
+logs a miss it tells you *"logged as a miss — that is the useful kind. Ask why before
+moving on."* A miss is the only part of the lab that reliably teaches you something,
+because it is the precise location where what you believed about C and what C actually
+does came apart.
+
+Be clear about the scale, though. A drill is a dozen lines and tests one idea — that
+`a[i]` is `*(a+i)`, that `strcmp` returns zero for *equal*, that `sizeof` collapses to 8
+inside a function. Google's round is 200–500 lines of unfamiliar code with bugs hidden
+in the interactions between parts, and the hard thing there is not any single line but
+holding the whole shape in your head. The drills are that skill in miniature — the same
+move, at a fortieth of the scale.
+
+But it is the same move, and it is the one that scales. Nobody reads a 500-line file by
+reading 500 lines. You read it by forming a guess about what a part does, checking the
+guess cheaply, and being willing to find out you were wrong. Every drill is one
+repetition of that loop. There have been drills in every pack since Lab 03, and by the
+end of Lab 07 you had done fifty-three of them. That is fifty-three times you committed
+to a claim about unfamiliar code before the machine told you the answer.
+
+Then look at how the labs are actually graded. Band A is automated: your code compiles
+and passes the vectors. Band B is a person pointing at a line you submitted and asking
+you to explain it — and a member who cannot explain their own code resubmits, whatever
+the score says.
+
+That is the same round again, with marks attached. We did not design it to imitate Google; we designed it
 because it is the only honest way to grade work that an AI could have produced. The
 industry arrived at the same instrument for the same reason. There is no trick to
 preparing for it, at Google or here. Read more code than you write. Be able to say what
