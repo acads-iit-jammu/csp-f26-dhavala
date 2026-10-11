@@ -24,11 +24,15 @@ Every program below was compiled with `gcc -Wall -Wextra` and run, and the outpu
 
 # Monday
 
-## 0 · First, the half of strings we only talked about
+## 0 · Three string operations we have not written down
 
-Last week ended with strings as an *idea* — an array of characters with a `'\0'` at the end, and the palindrome walk. This is the mechanical half, and you need it for Lab 08 and for the test.
+Last week covered strings as an *idea* — an array of characters ending in `'\0'`, the palindrome walk — and `strcmp`, including the part everyone gets wrong: **it returns zero when the strings are equal**, so `if (strcmp(a, b))` runs when they *differ*.
 
-Four things, all of which appear in Lab 08:
+What we have not written down is how to **get a string in** and the two functions that build one. Ten minutes, then structures.
+
+::: {.callout-note}
+Electrical have already sat Lab 08 and will have met these the hard way. Mechanical and Materials sit it on **Wed Oct 14**, where five of the ten write drills are exactly this. Everyone needs it for Class Test-2.
+:::
 
 ```c
 #include <stdio.h>
@@ -64,12 +68,12 @@ joined: levellevel
 
 | | |
 |---|---|
-| `scanf("%49s", a)` | reads one **word**. No `&` — an array name is already an address. The 49 is one less than the array size, and it is not optional |
-| `strlen(a)` | characters **before** the `'\0'`, so one less than `sizeof a` |
-| `strcmp(a, b)` | **zero means equal**. `if (strcmp(a,b))` runs when they *differ*, which is almost always a bug |
-| `strcat(a, b)` | appends `b` onto the end of `a`. `a` must have room — it is not checked |
+| **`scanf("%49s", a)`** | reads one **word**, stopping at the first space. **No `&`** — an array name is already an address, which is why this differs from `scanf("%d", &n)`. The 49 is one less than the array size and is not optional: plain `%s` will write past the end |
+| **`strlen(a)`** | how many characters come **before** the `'\0'` — so always one less than `sizeof a` for an array that is exactly full. It walks the array to find out, which is why it still works after the array has been passed to a function and `sizeof` no longer does |
+| **`strcat(a, b)`** | appends `b` onto the end of `a`, moving the terminator. `a` must already have room; nothing checks. `strcpy(a, b)` is the same but overwrites rather than appends |
+| `strcmp(a, b)` | *(covered)* zero means equal |
 
-That is the whole of what you need. The [strings reference sheet](../reference/strings.qmd) has the rest on one page.
+The [strings reference sheet](../reference/strings.qmd) has the rest on one page, including the character tests `e1` and `e4` of Lab 08 need.
 
 ## 1 · A record is more than one value
 
