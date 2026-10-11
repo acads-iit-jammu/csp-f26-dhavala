@@ -226,7 +226,7 @@ It stops as soon as a read does not deliver all four items, which is what happen
 
 `./check.sh e1` compiles *your* source and runs it on two kinds of input: a fixed set chosen in advance, labelled `public`, and a set generated fresh at that moment from the range in the `GIVEN` line, labelled `random`. A program that only reproduces the printed example will fail as soon as a new input is drawn.
 
-For `e3` and `e4` the checker writes a fresh `students.txt` before each test and gives your program an **empty** keyboard input. If you left a `scanf` in, your program will sit waiting for something that never comes, and you will see `TIMEOUT` rather than a wrong answer.
+For `e3` and `e4` the checker writes a fresh `students.txt` before each test and gives your program an **empty** keyboard input. A leftover `scanf` will not hang: it finds no input, returns `EOF`, and leaves your variable holding whatever it held before. So the symptom is a wrong answer from a program that looked like it ran fine — which is exactly why you should check what `scanf` returned rather than assume it worked.
 
 ## Act 5 · Check your marks, fix, and submit (10 minutes)
 
@@ -235,7 +235,10 @@ For `e3` and `e4` the checker writes a fresh `students.txt` before each test and
 ./check.sh e3       # one problem, while you are working on it
 ```
 
-Marks are given **per test case**, not all-or-nothing, so fixing one failing case is always worth doing, even in the last few minutes. Treat the total as an estimate: some vectors are drawn fresh each run, so the number can move by a mark or two.
+Marks are given **per test case**, not all-or-nothing, so fixing a failing case is worth doing even in the last few minutes. Two caveats, so the number does not surprise you:
+
+- Each problem's mark is rounded to a whole number. A write drill is worth 1 mark over 5 cases, so passing 2 of 5 rounds to 0 and 3 of 5 rounds to 1. On the 10-mark problems every case really does carry its own share.
+- Some cases are drawn fresh each run, so the total can move by a mark or two between checks. Treat it as an estimate.
 
 When you are finished, or when time is called:
 
