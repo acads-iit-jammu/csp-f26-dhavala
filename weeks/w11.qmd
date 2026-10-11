@@ -353,15 +353,19 @@ Run it four ways:
 Name: Ravi Kumar
 stored: [Ravi Kumar]  (10 characters)
 
-Name: Venkatasubramanian Ramaseshan
-warning: name truncated — needed 30 bytes, the field holds 20
-stored: [Venkatasubramanian ]  (19 characters)
+Name: Subrahmanyan Chandrasekhar
+warning: name truncated — needed 27 bytes, the field holds 20
+stored: [Subrahmanyan Chandr]  (19 characters)
 
 Name:
 stored: []  (0 characters)
 
 Name: could not read a name          <- end of input, no line at all
 ```
+
+`snprintf` counts bytes, not words. The second name is cut after `Chandr` because that
+is where byte 19 falls — truncation has no idea what a word is, and will happily leave
+you half of one.
 
 ::: {.callout-note}
 Notice the shape of that program, because it is the shape of most real input code: one
@@ -541,7 +545,7 @@ Predict before you run.
 | `d06` | `if (a == b)` for two structures — does it compile? |
 | `d07` | `sizeof(struct Pad)` for `{char c; int n;}` against `sizeof(char)+sizeof(int)` |
 | `d08` | `list[i].marks` against `list->marks` — when is each right? |
-| `d09` | `snprintf(name, 20, "%s", "Venkatasubramanian Ramaseshan")` — what does it **return**, and what is in `name`? |
+| `d09` | `snprintf(name, 20, "%s", "Subrahmanyan Chandrasekhar")` — what does it **return**, and what is in `name`? |
 | `d10` | `scanf("%19s", name)` on the input `Ravi Kumar` — what is in `name`? |
 
 ## Questions to Bring Back
