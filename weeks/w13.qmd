@@ -136,10 +136,32 @@ semicolon is caught instantly, a wrong answer is caught by the grader. A leak is
 thing you will write that is wrong in a way that only hurts someone who is not you, and
 only later.
 
-So when a panel in Jagti says *trustworthy* and you think that sounds like an HR word,
-remember that this week you will write your first code that requires you to be trusted.
-That is all the word means. Not a personality trait — a property of your work that holds
-when nobody is looking at it.
+Now separate two things the word *trustworthy* is doing, because they are not the same
+and the connection between them is the whole point.
+
+| | What it means | Where it lives |
+|---|---|---|
+| **A trustworthy work product** | the program does what it claims, including the parts nobody inspected — it frees what it allocated, it handles the file that would not open | in the artefact |
+| **A trustworthy person** | colleagues can rely on what you hand them and on what you say about it, without re-checking everything themselves | in you |
+
+`free` is the first kind. That is a fact about your code.
+
+The panellists in Jagti were arguing about the second kind. That is a claim about a
+person, and it is the one being hired for — because, as above, output is no longer
+evidence of anything.
+
+The connection runs one way, and it is worth being exact about the direction. **Nobody
+becomes trustworthy by resolving to be trustworthy.** You become trustworthy by
+producing trustworthy work, enough times, that people stop needing to verify it. The
+trait is the accumulated residue of the artefacts. It is built out of instances — this
+`free` that you did not skip, this edge case you checked before claiming it worked, this
+time you said "I am not sure" when the easier thing was to say nothing.
+
+Which is why a memory leak is a slightly larger matter than it appears. It is not a
+character flaw; it is a bug. But the habit that prevents it — finishing the part nobody
+will inspect — is the same habit that, repeated for a few years, is what people mean
+when they call someone reliable. You do not get to build that later. You are building it
+now, or not, in whichever way you handle the `free` that nobody is going to check.
 
 Recursion, on Tuesday, asks something related. To write a recursive function you must
 trust the call you are making — assume it returns the right answer for the smaller
@@ -158,7 +180,8 @@ here. Three things follow, none of them dramatic:
    is now optimising for, under the name "onboarding." The drills are practice at it.
 2. **Protect the ability to judge.** Use every tool you like — but stay able to say *why*
    an answer is right, because that is the part being hired for.
-3. **Be someone whose work holds up unobserved.** `free` what you `malloc`. Say when you
-   do not know. Finish the hard one.
+3. **Build the trait out of the artefacts.** `free` what you `malloc`. Say when you do
+   not know. Finish the hard one. Each is a small piece of work that holds up
+   unobserved, and that is the only material the reputation is ever made of.
 
 The third is the one that will feel least like computer science and will matter longest.
