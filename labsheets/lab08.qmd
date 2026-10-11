@@ -102,8 +102,8 @@ Ten short programs. For each one you type what you think it will print, and only
 |---|---|
 | `d01`–`d03` | what `*` and `&` actually do, and that the `*` binds to the variable |
 | `d04`–`d06` | pointers and arrays, and the `sizeof` trap |
-| `d07`–`d09` | strings, the terminator, and what `strcmp` returns |
-| `d10` | passing by value |
+| `d07`–`d09` | strings, the terminator, and counting the comparisons a palindrome test makes |
+| `d10` | what `strcmp` returns when the strings are equal |
 
 These carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.
 
