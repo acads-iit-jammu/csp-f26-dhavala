@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
+ <span class="menu-text">Lab 09: Structures and Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -585,6 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p><strong>Lab 08 is on pointers and strings</strong>, and follows these two lectures: EE on Tue Oct 6, Mechanical and Materials on Wed Oct 14.</p>
+<p><strong>This week is in scope for Class Test-2</strong> (window Oct 14–22), which covers everything taught after the mid-semester examination: W09, W10 and W11.</p>
 </div>
 </div>
 </div>
@@ -772,7 +773,11 @@ a[2]        = 30
 <blockquote class="blockquote">
 <p><code>a[i]</code> means exactly <code>*(a + i)</code></p>
 </blockquote>
-<p>The subscript notation is a shorthand for pointer arithmetic. This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why <code>int a[]</code> and <code>int *a</code> mean the same thing in a parameter list, and why the function can change the caller’s array.</p>
+<p>The subscript notation is a shorthand for pointer arithmetic. This is not a convention or a compiler habit — it is how the language defines subscripting. The <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1">GNU C Reference Manual</a> states it as the definition:</p>
+<blockquote class="blockquote">
+<p>The array subscript expression <code>A[i]</code> is defined as being identical to the expression <code>(*((A)+(i)))</code>. This means that many uses of an array name are equivalent to a pointer expression.</p>
+</blockquote>
+<p>This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why <code>int a[]</code> and <code>int *a</code> mean the same thing in a parameter list, and why the function can change the caller’s array.</p>
 </section>
 <section id="why-a-function-is-usually-told-how-long-an-array-is" class="level2">
 <h2 class="anchored" data-anchor-id="why-a-function-is-usually-told-how-long-an-array-is">7 · Why a function is usually told how long an array is</h2>

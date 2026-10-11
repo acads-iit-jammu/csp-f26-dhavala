@@ -64,7 +64,7 @@
     "href": "course.html#important-dates",
     "title": "Course",
     "section": "Important Dates",
-    "text": "Important Dates\nFrom the IIT Jammu academic calendar for 1st year UG students, Semester 2026-01:\n\n\n\nEvent\nDates\n\n\n\n\nCommencement of classes\nMonday, Aug 3, 2026\n\n\nClass Test-1*\nAug 19 – Aug 25, 2026\n\n\nMid-semester feedback (by students)\nSep 9 – Sep 15, 2026\n\n\nMid-Semester Examination\nSep 18 – Sep 23, 2026\n\n\nClass Test-2*\nOct 14 – Oct 22, 2026\n\n\nLast day of classes\nFriday, Nov 20, 2026\n\n\nEnd-semester feedback (by students)\nNov 12 – Nov 17, 2026\n\n\nEnd-Semester Examination\nNov 23 – Nov 30, 2026\n\n\nGrades visible to students\nDec 15, 2026\n\n\n\n* Class tests are conducted with internal arrangements; exact date/time will be announced in class and on this page.\nInstitute holidays that affect our slots: Wed Aug 26 (Milad-un-Nabi), Mon Oct 19 & Tue Oct 20 (Dussehra), Mon Nov 9 (Govardhan Puja), Tue Nov 10 (Declared Holiday), Wed Nov 11 (Bhai Duj).",
+    "text": "Important Dates\nFrom the IIT Jammu academic calendar for 1st year UG students, Semester 2026-01:\n\n\n\nEvent\nDates\n\n\n\n\nCommencement of classes\nMonday, Aug 3, 2026\n\n\nClass Test-1*\nAug 19 – Aug 25, 2026\n\n\nMid-semester feedback (by students)\nSep 9 – Sep 15, 2026\n\n\nMid-Semester Examination\nSep 18 – Sep 23, 2026\n\n\nClass Test-2*\nOct 14 – Oct 22, 2026\n\n\nLast day of classes\nFriday, Nov 20, 2026\n\n\nEnd-semester feedback (by students)\nNov 12 – Nov 17, 2026\n\n\nEnd-Semester Examination\nNov 23 – Nov 30, 2026\n\n\nGrades visible to students\nDec 15, 2026\n\n\n\n* Class tests are conducted with internal arrangements; exact date/time will be announced in class and on this page.\n\n\n\n\n\n\nImportantClass Test-2 scope\n\n\n\nClass Test-2 covers everything taught after the Mid-Semester Examination — Weeks 09, 10 and 11:\n\nW09 — functions: declaration, definition and call; scope; call by value and by reference; bisection\nW10 — pointers: & and *, pointer arithmetic, arrays as pointers, why a length must travel; strings: character arrays, '\\0', string.h\nW11 — structures and -&gt;; file input and output: FILE *, fopen/fclose, reading to end of file\n\nEverything up to and including W07 was examined in the Mid-Semester Examination and is not the focus here — though pointers cannot be revised without arrays, and structures cannot be revised without functions, so the earlier material does not disappear.\n\n\nInstitute holidays that affect our slots: Wed Aug 26 (Milad-un-Nabi), Mon Oct 19 & Tue Oct 20 (Dussehra), Mon Nov 9 (Govardhan Puja), Tue Nov 10 (Declared Holiday), Wed Nov 11 (Bhai Duj).",
     "crumbs": [
       "Course"
     ]
@@ -1051,7 +1051,7 @@
     "href": "weeks/w10.html#arrays-and-pointers",
     "title": "W10: Pointers and Strings",
     "section": "6 · Arrays and pointers",
-    "text": "6 · Arrays and pointers\nThe last three lines of that output are equal, and that is not a coincidence. In C, for any array a and index i:\n\na[i] means exactly *(a + i)\n\nThe subscript notation is a shorthand for pointer arithmetic. This is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why int a[] and int *a mean the same thing in a parameter list, and why the function can change the caller’s array.",
+    "text": "6 · Arrays and pointers\nThe last three lines of that output are equal, and that is not a coincidence. In C, for any array a and index i:\n\na[i] means exactly *(a + i)\n\nThe subscript notation is a shorthand for pointer arithmetic. This is not a convention or a compiler habit — it is how the language defines subscripting. The GNU C Reference Manual states it as the definition:\n\nThe array subscript expression A[i] is defined as being identical to the expression (*((A)+(i))). This means that many uses of an array name are equivalent to a pointer expression.\n\nThis is also the rule behind something you met in W09: when an array is passed to a function, the array name is converted to a pointer to its first element. That is why int a[] and int *a mean the same thing in a parameter list, and why the function can change the caller’s array.",
     "crumbs": [
       "Weekly Notes",
       "W10: Pointers and Strings"
@@ -1227,7 +1227,7 @@
     "href": "weeks/w11.html",
     "title": "W11: Structures and File Input/Output",
     "section": "",
-    "text": "Plan\nDates: Mon Oct 12 & Tue Oct 13, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 6 — structures; file handling\nMonday — structures, and pointers to them. A structure groups several values of different types under one name, which is what you need as soon as a record has more than one field. Declaring a structure, reading and writing its members, passing one to a function by value and by address, arrays of structures, and the -&gt; notation for reaching a member through a pointer.\nTuesday — file input and output. Programs so far have read from the keyboard and written to the screen. A file is the same idea with a name attached: fopen gives you a FILE *, fclose gives it back, and fscanf and fprintf work like the versions you already know. Reading until the end of the file, and checking whether fopen actually succeeded.",
+    "text": "Pre-read\nDates: Mon Oct 12 & Tue Oct 13, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 6 — structures; file handling",
     "crumbs": [
       "Weekly Notes",
       "W11: Structures and File Input/Output"
@@ -1237,19 +1237,140 @@
     "objectID": "weeks/w11.html#pre-read",
     "href": "weeks/w11.html#pre-read",
     "title": "W11: Structures and File Input/Output",
-    "section": "Pre-read",
-    "text": "Pre-read\n\nLec 17 · Lec 18\nThe W10 notes. Both of this week’s topics are built on pointers: a structure is usually passed by address, and a FILE * is a pointer.",
+    "section": "",
+    "text": "Structures: Lec 29 — introduction to structures — and Lec 30 — more on structures\nFor the recap in §0: Lec 17 and Lec 18 cover character arrays, string length, comparing strings and palindromes\nThe W10 notes, sections 9 to 13. Both of this week’s topics stand on pointers: a structure is usually passed by address, and a FILE * is a pointer.\nQuick Reference: strings and pointers\n\n\n\n\n\n\n\nThe CS1100 series ends at Lec 30, with structures. There is no lecture in it on file handling, so for Tuesday these notes and the Quick Reference are your source.",
     "crumbs": [
       "Weekly Notes",
       "W11: Structures and File Input/Output"
     ]
   },
   {
-    "objectID": "weeks/w11.html#in-class",
-    "href": "weeks/w11.html#in-class",
+    "objectID": "weeks/w11.html#code-you-can-copy",
+    "href": "weeks/w11.html#code-you-can-copy",
     "title": "W11: Structures and File Input/Output",
-    "section": "In Class",
-    "text": "In Class\nTo be posted.",
+    "section": "Code You Can Copy",
+    "text": "Code You Can Copy\nEvery program below was compiled with gcc -Wall -Wextra and run, and the output shown is what it actually printed.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#recap-strings-on-one-page",
+    "href": "weeks/w11.html#recap-strings-on-one-page",
+    "title": "W11: Structures and File Input/Output",
+    "section": "0 · Recap — strings, on one page",
+    "text": "0 · Recap — strings, on one page\nA string is an array of characters ending in '\\0'. Everything else follows from that. Here is the whole of what you need, in one program, before we move on.\nThis is also the page to revise from for Class Test-2 — along with the W09 and W10 notes, since the test covers all three weeks.\n#include &lt;stdio.h&gt;\n#include &lt;string.h&gt;\n\nint main(void)\n{\n    char a[50], b[50];\n\n    printf(\"Enter two words: \");\n    if (scanf(\"%49s %49s\", a, b) != 2) return 1;\n\n    printf(\"a = \\\"%s\\\", length %zu\\n\", a, strlen(a));\n    printf(\"b = \\\"%s\\\", length %zu\\n\", b, strlen(b));\n\n    if (strcmp(a, b) == 0) printf(\"they are the same word\\n\");\n    else                   printf(\"they are different words\\n\");\n\n    strcat(a, b);\n    printf(\"joined: %s\\n\", a);\n    return 0;\n}\nTyping level level:\na = \"level\", length 5\nb = \"level\", length 5\nthey are the same word\njoined: levellevel\n\n\n\n\n\n\n\nscanf(\"%49s\", a)\nreads one word, stopping at the first space. No & — an array name is already an address, which is why this differs from scanf(\"%d\", &n). The 49 is one less than the array size and is not optional: plain %s will write past the end\n\n\nstrlen(a)\nhow many characters come before the '\\0' — so always one less than sizeof a for an array that is exactly full. It walks the array to find out, which is why it still works after the array has been passed to a function and sizeof no longer does\n\n\nstrcat(a, b)\nappends b onto the end of a, moving the terminator. a must already have room; nothing checks. strcpy(a, b) is the same but overwrites rather than appends\n\n\nstrcmp(a, b)\nzero means equal — so if (strcmp(a, b)) runs when they differ, which is almost always a bug. Write == 0 when you mean “the same”\n\n\n\nTwo of these carry most of the mistakes. scanf is the one where the missing & is correct — an array name is already an address — and strcmp is the one whose return value reads backwards.\nThe strings reference sheet has the rest on one page, including the character tests that Lab 08’s e1 and e4 need.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#a-record-is-more-than-one-value",
+    "href": "weeks/w11.html#a-record-is-more-than-one-value",
+    "title": "W11: Structures and File Input/Output",
+    "section": "1 · A record is more than one value",
+    "text": "1 · A record is more than one value\nA student has a roll number, a name and a mark. Three arrays kept in step is one way:\nint    roll[50];\nchar   name[50][20];\ndouble marks[50];\nIt works, and it is miserable. Nothing links roll[7] to name[7]; sorting means moving three arrays together; adding a field means changing every function. A structure gives the three fields one name:\nstruct Student {\n    int  roll;\n    char name[20];\n    double marks;\n};\nThat declares a type, not a variable — it reserves no storage. It says what a struct Student is made of.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#making-one-and-using-it",
+    "href": "weeks/w11.html#making-one-and-using-it",
+    "title": "W11: Structures and File Input/Output",
+    "section": "2 · Making one and using it",
+    "text": "2 · Making one and using it\n#include &lt;stdio.h&gt;\n\nstruct Student {\n    int  roll;\n    char name[20];\n    double marks;\n};\n\nint main(void)\n{\n    struct Student s;\n\n    s.roll = 42;\n    snprintf(s.name, sizeof s.name, \"%s\", \"Asha\");\n    s.marks = 91.5;\n\n    printf(\"roll  = %d\\n\", s.roll);\n    printf(\"name  = %s\\n\", s.name);\n    printf(\"marks = %.1f\\n\", s.marks);\n    return 0;\n}\nroll  = 42\nname  = Asha\nmarks = 91.5\nThe . reaches a member. s.roll is an int and behaves like any other int.\nNote the name is set with snprintf, not =. s.name is an array, and you cannot assign to an array — s.name = \"Asha\" does not compile. Copying characters into it is the only way.\n\n\n\n\n\n\nNoteNew here: snprintf\n\n\n\nsnprintf is printf that writes into a character array instead of onto the screen. Same format strings, same %d and %s and %.2f — different destination.\nsnprintf(where, how_big, \"format\", ...);\n\n\n\n\n\n\n\nArgument\nMeaning\n\n\n\n\nwhere\nthe character array to write into\n\n\nhow_big\nits total size in bytes — snprintf will never write more than this\n\n\n\"format\", ...\nexactly as in printf\n\n\n\nchar small[8];\nsnprintf(small, sizeof small, \"%s\", \"Asha\");        /* small is now \"Asha\"    */\nsnprintf(small, sizeof small, \"%s-%d\", \"ID\", 42);   /* small is now \"ID-42\"   */\nWhy the size argument matters. strcpy(s.name, \"Asha\") does the same job here and is shorter, but it takes no size, so it cannot refuse. Hand it a name longer than the array and it writes straight past the end into whatever is next — the classic C bug, and undefined behaviour. snprintf cannot do that. It copies what fits, terminates with '\\0', and stops:\nchar small[8];\nsnprintf(small, sizeof small, \"%s\", \"Parvinder\");   /* small is \"Parvind\"     */\nSeven characters and the terminator: eight bytes, exactly the size you declared. Truncated, but never out of bounds.\nWrite the size as sizeof, not as a number you typed. In the program above, sizeof s.name is 20, and it stays correct by itself if you later widen the field to char name[40]. A hand-written 20 would quietly become wrong.\nOne catch, from W10 §7. sizeof only gives you the array’s real size where the array is declared. Inside a function that received it as a parameter it is a pointer, and sizeof gives 8 — the size of the address, not of the 20 bytes behind it. So in a function like void setName(char dest[], int n), the length must still be passed in as n, exactly as it was for every array function you wrote in W09.\nBoth printf and snprintf return the number of characters they would have written. So a return value of 9 from a buffer of 8 is how you detect that truncation happened.\nsnprintf is declared in stdio.h, which you already include; strcpy needs string.h.\n\n\nYou can also set the members at the point of declaration, in order:\nstruct Student s = { 42, \"Asha\", 91.5 };",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#b-reading-a-name-in-properly",
+    "href": "weeks/w11.html#b-reading-a-name-in-properly",
+    "title": "W11: Structures and File Input/Output",
+    "section": "2b · Reading a name in, properly",
+    "text": "2b · Reading a name in, properly\nEverything above used a name we had already written into the program. Real input is harder, and it is worth doing once, carefully, because three separate things can go wrong.\nFirst: scanf(\"%s\") cannot read a full name. %s stops at the first whitespace.\nchar name[20];\nscanf(\"%19s\", name);        /* input: Ravi Kumar */\nprintf(\"[%s]\\n\", name);     /* prints [Ravi] — \"Kumar\" is still waiting */\nFor a line that may contain spaces, use fgets, which reads up to a newline:\nchar line[100];\nfgets(line, sizeof line, stdin);\nSecond: fgets keeps the newline. If you type Ravi Kumar and press Enter, line holds Ravi Kumar\\n. Left alone, that newline is stored in the record and prints as a stray line break later. Remove it if it is there:\nsize_t len = strlen(line);\nif (len &gt; 0 && line[len - 1] == '\\n') {\n    line[len - 1] = '\\0';\n    len--;\n}\nThe len &gt; 0 guard matters: on an empty line there is no character to examine, and line[len - 1] with len == 0 would read line[-1].\nThird: the name may not fit. s.name holds 20 bytes, one of which must be the terminator — so 19 characters at most. You now have a decision to make, and it is a design decision, not a syntax one:\n\n\n\n\n\n\n\n\n\nWhat it does\nWhen it is right\n\n\n\n\nTruncate\nstore the first 19 characters and carry on\nthe field is a display label; a shortened name is better than no record\n\n\nRefuse\nreject the input and ask again\nthe name is data that must be correct — a mark sheet, a certificate\n\n\n\nC gives you a clean way to do each.\n\nTruncating: let snprintf do it, then ask what happened\nThis is where the return value earns its place. snprintf never overflows, and it reports: it returns the length the result would have had, so a value at or beyond the size tells you characters were dropped.\nint n = snprintf(s.name, sizeof s.name, \"%s\", line);\n\nif (n &lt; 0) {\n    printf(\"formatting error — nothing was stored\\n\");\n}\nelse if ((size_t) n &gt;= sizeof s.name) {\n    printf(\"name truncated: needed %d bytes, the field holds %zu\\n\",\n           n + 1, sizeof s.name);\n}\nThree details worth being exact about:\n\nn &lt; 0 is a genuine failure inside snprintf (an encoding error), not a size problem. Nothing useful was stored.\nn counts characters without the terminator, so the space actually needed is n + 1.\nThe cast (size_t) n is not decoration. n is a signed int and sizeof is an unsigned size_t; comparing them directly makes gcc -Wextra say “comparison of integers of different signs”. Cast the one you know is non-negative — which is why this comparison sits after the n &lt; 0 test.\n\n\n\nRefusing: measure first, then strcpy\nThe box above said strcpy takes no size and so cannot refuse an oversized name. That is true, and it is the whole of the objection: it describes strcpy used unchecked. A function that cannot refuse does not need to, once you have already established that the string fits. So measure, decide, then copy:\nif (strlen(line) &gt;= sizeof s.name) {\n    printf(\"name is %zu characters; the field holds %zu including the terminator\\n\",\n           strlen(line), sizeof s.name);\n    return 1;                       /* refuse — nothing is stored */\n}\nstrcpy(s.name, line);               /* safe: we just proved it fits */\n&gt;= and not &gt; is the whole boundary. sizeof s.name is 20, so a 19-character name needs 20 bytes and just fits; a 20-character name needs 21 and does not.\n\n\nThe whole thing\n#include &lt;stdio.h&gt;\n#include &lt;string.h&gt;\n\nstruct Student {\n    int  roll;\n    char name[20];\n    double marks;\n};\n\nint main(void)\n{\n    struct Student s;\n    char line[100];\n    size_t len;\n    int n;\n\n    printf(\"Name: \");\n    if (fgets(line, sizeof line, stdin) == NULL) {\n        printf(\"could not read a name\\n\");\n        return 1;\n    }\n\n    len = strlen(line);\n    if (len &gt; 0 && line[len - 1] == '\\n') {\n        line[len - 1] = '\\0';\n    }\n\n    n = snprintf(s.name, sizeof s.name, \"%s\", line);\n\n    if (n &lt; 0) {\n        printf(\"formatting error — nothing was stored\\n\");\n        return 1;\n    }\n    if ((size_t) n &gt;= sizeof s.name) {\n        printf(\"warning: name truncated — needed %d bytes, the field holds %zu\\n\",\n               n + 1, sizeof s.name);\n    }\n\n    printf(\"stored: [%s]  (%zu characters)\\n\", s.name, strlen(s.name));\n    return 0;\n}\nRun it four times, giving it something different each time. In each block below, the text after Name: is what you typed; every other line is the program’s own output.\n1 · A name that fits. Type it and press Enter.\nName: Ravi Kumar\nstored: [Ravi Kumar]  (10 characters)\n2 · A name that does not fit. 26 characters offered, 19 stored.\nName: Subrahmanyan Chandrasekhar\nwarning: name truncated — needed 27 bytes, the field holds 20\nstored: [Subrahmanyan Chandr]  (19 characters)\n3 · Press Enter without typing anything. fgets succeeds — it read a line, and that line happens to be empty. The newline is stripped, line becomes \"\", and an empty name is stored. Note what does not happen: this is not an error, and the program has no way to tell it apart from a name of zero characters, because that is exactly what it is.\nName:\nstored: []  (0 characters)\n4 · Give it no input at all. Press Ctrl-D on an empty line — on Linux and macOS that signals end of input — or run the program with its input redirected from an empty file, ./a.out &lt; /dev/null. There is now no line to read, so fgets returns NULL and the program stops instead of using line, which was never filled in.\nName: could not read a name\nCases 3 and 4 look similar on screen and are completely different underneath: in 3 fgets worked and gave you an empty string, in 4 it failed and gave you nothing at all. Checking fgets(...) == NULL is how you tell them apart, and it is why that check is the first thing in the program.\nsnprintf counts bytes, not words. The second name is cut after Chandr because that is where byte 19 falls — truncation has no idea what a word is, and will happily leave you half of one.\n\n\n\n\n\n\nNotice the shape of that program, because it is the shape of most real input code: one line actually does the work, and the rest establishes that doing it is safe. That ratio does not mean something has gone wrong. It is what handling input looks like when you take the edges seriously — and the edges are where marks, and later data, are lost.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#a-structure-is-a-value-it-copies",
+    "href": "weeks/w11.html#a-structure-is-a-value-it-copies",
+    "title": "W11: Structures and File Input/Output",
+    "section": "3 · A structure is a value: it copies",
+    "text": "3 · A structure is a value: it copies\n#include &lt;stdio.h&gt;\nstruct Point { int x, y; };\nint main(void)\n{\n    struct Point a = { 1, 2 };\n    struct Point b = a;          /* a whole-structure copy */\n    b.x = 99;\n    printf(\"a.x = %d   b.x = %d   (assignment copies every member)\\n\", a.x, b.x);\n    printf(\"sizeof(struct Point) = %zu, two ints = %zu\\n\", sizeof(struct Point), 2*sizeof(int));\n    return 0;\n}\na.x = 1   b.x = 99   (assignment copies every member)\nsizeof(struct Point) = 8, two ints = 8\nUnlike an array, a structure can be assigned, and the assignment copies every member. This is worth noticing, because it is the one place C copies a compound object for you.\n\n\n\n\n\n\nYou still cannot compare two structures:\nif (a == b)     /* error: invalid operands to binary expression */\nCompare the members you care about, one at a time.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#passing-one-to-a-function",
+    "href": "weeks/w11.html#passing-one-to-a-function",
+    "title": "W11: Structures and File Input/Output",
+    "section": "4 · Passing one to a function",
+    "text": "4 · Passing one to a function\nA structure is passed by value, like an int — the function gets a copy, and changes to it are lost:\n#include &lt;stdio.h&gt;\n\nstruct Point { int x, y; };\n\nvoid moveCopy(struct Point p)    { p.x = 99; }          /* gets a copy      */\nvoid moveReal(struct Point *p)   { p-&gt;x = 99; }         /* gets the address */\n\nint main(void)\n{\n    struct Point a = { 1, 2 };\n\n    moveCopy(a);\n    printf(\"after moveCopy(a),  a.x = %d\\n\", a.x);\n\n    moveReal(&a);\n    printf(\"after moveReal(&a), a.x = %d\\n\", a.x);\n\n    printf(\"(*p).y and p-&gt;y mean the same thing: %d\\n\", a.y);\n    return 0;\n}\nafter moveCopy(a),  a.x = 1\nafter moveReal(&a), a.x = 99\n(*p).y and p-&gt;y mean the same thing: 2\nThis is exactly W10’s rule, now applied to a bigger object. To change the caller’s structure, pass its address.\nAnd the arrow. When you have a pointer to a structure, reaching a member needs the pointer dereferenced first. *p.x does not work, because . binds tighter than * — it would mean *(p.x). You would have to write (*p).x, and that is so common C gives it a shorthand:\n\np-&gt;x means (*p).x\n\nUse . when you have the structure, -&gt; when you have a pointer to it.\n\n\n\n\n\n\nThere is a second reason to pass by address. A struct Student here is 32 bytes; a larger record might be hundreds. Passing by value copies all of it on every call. Passing a pointer copies 8 bytes whatever the structure’s size.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#b-a-worked-problem-is-this-point-inside-this-rectangle",
+    "href": "weeks/w11.html#b-a-worked-problem-is-this-point-inside-this-rectangle",
+    "title": "W11: Structures and File Input/Output",
+    "section": "4b · A worked problem: is this point inside this rectangle?",
+    "text": "4b · A worked problem: is this point inside this rectangle?\nEverything so far has been machinery. Here is a small problem that uses it, and it is the one we will do in class.\nA structure can hold another structure. A rectangle, for our purposes, is fixed by two corners — and a corner is a point, which we already have:\nstruct Point { int x, y; };\n\nstruct Rect {\n    struct Point lo;            /* bottom-left corner */\n    struct Point hi;            /* top-right corner   */\n};\nstruct Rect contains two struct Points, so reaching a coordinate takes two steps: r.lo is a struct Point, and r.lo.x is the int inside it. Read it left to right — the rectangle’s low corner’s x.\nstruct Rect box = { {0, 0}, {4, 3} };    /* braces inside braces: one per member */\nprintf(\"%d\\n\", box.hi.x);                /* 4 */\nThe question. Given a rectangle and a point, is the point inside? Say the edge counts as inside. A point is inside exactly when its x lies between the two x limits and its y lies between the two y limits — four conditions, all of which must hold:\nint inside(struct Rect r, struct Point p)\n{\n    return p.x &gt;= r.lo.x && p.x &lt;= r.hi.x &&\n           p.y &gt;= r.lo.y && p.y &lt;= r.hi.y;\n}\nTwo things worth noticing. The function takes two whole structures by value — four ints copied in total, which is nothing, and it does not modify either, so there is no reason to pass addresses here (§4). And it returns int used as a yes/no: 1 for inside, 0 for outside, which is how C has answered every true/false question since W06.\n#include &lt;stdio.h&gt;\n\nstruct Point { int x, y; };\n\nstruct Rect {\n    struct Point lo;            /* bottom-left corner */\n    struct Point hi;            /* top-right corner   */\n};\n\n/* 1 if p is inside r, 0 if not. A point on the edge counts as inside. */\nint inside(struct Rect r, struct Point p)\n{\n    return p.x &gt;= r.lo.x && p.x &lt;= r.hi.x &&\n           p.y &gt;= r.lo.y && p.y &lt;= r.hi.y;\n}\n\nint main(void)\n{\n    struct Rect  box      = { {0, 0}, {4, 3} };\n    struct Point tests[5] = { {2, 1}, {5, 1}, {0, 0}, {4, 3}, {2, 4} };\n    int i;\n\n    printf(\"rectangle: (%d,%d) to (%d,%d)\\n\\n\",\n           box.lo.x, box.lo.y, box.hi.x, box.hi.y);\n\n    for (i = 0; i &lt; 5; i++) {\n        if (inside(box, tests[i]))\n            printf(\"(%d, %d)  inside\\n\",  tests[i].x, tests[i].y);\n        else\n            printf(\"(%d, %d)  outside\\n\", tests[i].x, tests[i].y);\n    }\n    return 0;\n}\nrectangle: (0,0) to (4,3)\n\n(2, 1)  inside\n(5, 1)  outside\n(0, 0)  inside\n(4, 3)  inside\n(2, 4)  outside\nLook at which test points were chosen, because choosing them is half the work:\n\n\n\n\n\n\n\nPoint\nWhy it is in the list\n\n\n\n\n(2,1)\nplainly inside — the easy case\n\n\n(5,1)\nx too large, y fine — catches checking only one coordinate\n\n\n(0,0)\nthe low corner itself — the edge case our rule says is inside\n\n\n(4,3)\nthe high corner — the other edge\n\n\n(2,4)\nx fine, y too large — the mirror of the second\n\n\n\nA test set that is all easy cases proves nothing. Two of these five sit exactly on the boundary, which is where &gt;= against &gt; decides the answer — and where this program would be wrong if we had meant strictly inside.\n\n\n\n\n\n\nTo try. Change both &gt;= to &gt; and both &lt;= to &lt;, and re-run. Which lines change? That one-character difference is the whole distinction between inside and strictly inside, and it is the kind of thing a specification has to say out loud.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#arrays-of-structures",
+    "href": "weeks/w11.html#arrays-of-structures",
+    "title": "W11: Structures and File Input/Output",
+    "section": "5 · Arrays of structures",
+    "text": "5 · Arrays of structures\nThis is where the three-parallel-arrays problem disappears.\n#include &lt;stdio.h&gt;\n#include &lt;string.h&gt;\n\nstruct Student {\n    int  roll;\n    char name[20];\n    double marks;\n};\n\n/* fills in one student through a pointer; returns nothing */\nvoid readStudent(struct Student *s, int roll, char name[], double marks)\n{\n    s-&gt;roll = roll;\n    strcpy(s-&gt;name, name);\n    s-&gt;marks = marks;\n}\n\ndouble average(struct Student list[], int n)\n{\n    double total = 0.0;\n    for (int i = 0; i &lt; n; i++)\n        total += list[i].marks;\n    return total / n;\n}\n\nint main(void)\n{\n    struct Student cls[3];\n\n    readStudent(&cls[0], 11, \"Asha\",  91.5);\n    readStudent(&cls[1], 12, \"Bilal\", 78.0);\n    readStudent(&cls[2], 13, \"Chen\",  84.5);\n\n    for (int i = 0; i &lt; 3; i++)\n        printf(\"%d %-6s %.1f\\n\", cls[i].roll, cls[i].name, cls[i].marks);\n\n    printf(\"average = %.2f\\n\", average(cls, 3));\n    return 0;\n}\n11 Asha   91.5\n12 Bilal  78.0\n13 Chen   84.5\naverage = 84.67\nThree things to read off that program.\ncls is an array like any other. It is passed to average as a pointer and needs its length, exactly as in W10 §7. Nothing new.\nlist[i].marks has no arrow, because list[i] is a structure, not a pointer. s-&gt;roll does, because s is one.\n&cls[0] is the address of one element — the same & on an array element you used in Lab 07’s swap(&a[lo], &a[hi]).",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#one-thing-that-will-surprise-you",
+    "href": "weeks/w11.html#one-thing-that-will-surprise-you",
+    "title": "W11: Structures and File Input/Output",
+    "section": "6 · One thing that will surprise you",
+    "text": "6 · One thing that will surprise you\nstruct Pad { char c; int n; };\nchar+int struct = 8, members sum to 5\nA structure can be larger than its members added up. The compiler inserts unused bytes so that each member starts at an address the machine can read efficiently — here, three bytes after the char so the int starts at a multiple of 4. This is called padding.\nYou do not need to control it. You do need to know that sizeof(struct X) is the authority and arithmetic on member sizes is not. The GNU C Reference Manual says as much:\n\nThe size of a structure type is equal to the sum of the size of all of its members, possibly including padding to cause the structure type to align to a particular byte boundary.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#drills",
+    "href": "weeks/w11.html#drills",
+    "title": "W11: Structures and File Input/Output",
+    "section": "Drills",
+    "text": "Drills\nPredict before you run.\n\n\n\n\n\n\n\nd01\nstruct Point a = {1,2}; struct Point b = a; b.x = 9; — what is a.x?\n\n\nd02\na function taking struct Point p sets p.x = 9 — what does the caller see?\n\n\nd03\nthe same function taking struct Point *p — what now?\n\n\nd04\np-&gt;y against (*p).y — do they print the same?\n\n\nd05\ns.name = \"Asha\"; — does it compile?\n\n\nd06\nif (a == b) for two structures — does it compile?\n\n\nd07\nsizeof(struct Pad) for {char c; int n;} against sizeof(char)+sizeof(int)\n\n\nd08\nlist[i].marks against list-&gt;marks — when is each right?\n\n\nd09\nsnprintf(name, 20, \"%s\", \"Subrahmanyan Chandrasekhar\") — what does it return, and what is in name?\n\n\nd10\nscanf(\"%19s\", name) on the input Ravi Kumar — what is in name?\n\n\nd11\nstruct Rect r = {{0,0},{4,3}}; — what is r.hi.x, and what does r.hi on its own mean?",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#questions-to-bring-back",
+    "href": "weeks/w11.html#questions-to-bring-back",
+    "title": "W11: Structures and File Input/Output",
+    "section": "Questions to Bring Back",
+    "text": "Questions to Bring Back\n\nThree parallel arrays and an array of structures hold the same data. Name one operation that is clearly easier with the structure, and say why.\nmoveCopy and moveReal differ by one character in the parameter and one in the body. Explain what each hands to the function.\nWhy can a structure be assigned with = when an array cannot?\nWhen is p-&gt;x wrong and p.x right?\nsizeof a structure can exceed the sum of its members. What is the compiler doing, and why does it not matter to your code?",
     "crumbs": [
       "Weekly Notes",
       "W11: Structures and File Input/Output"
@@ -1260,7 +1381,95 @@
     "href": "weeks/w11.html#after-class",
     "title": "W11: Structures and File Input/Output",
     "section": "After Class",
-    "text": "After Class\nTo be posted. Lab 09 covers this material: EE on Tue Oct 13, Mechanical and Materials on Wed Oct 21.",
+    "text": "After Class\n\nRewrite Lab 08’s e1 (count letters, digits and others) so that it fills in a struct Counts through a pointer instead of three separate int * parameters. Which version would you rather extend to also count spaces?\nLab 09 is on this material and on Tuesday’s: EE Tue Oct 13, Mechanical and Materials Wed Oct 21.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#the-same-reading-and-writing-with-a-name-attached",
+    "href": "weeks/w11.html#the-same-reading-and-writing-with-a-name-attached",
+    "title": "W11: Structures and File Input/Output",
+    "section": "7 · The same reading and writing, with a name attached",
+    "text": "7 · The same reading and writing, with a name attached\nEverything you have written so far reads from the keyboard and writes to the screen. Those are just two streams the program is handed when it starts. A file is the same idea with a name, and you open and close it yourself.\nFour functions, and you already know two of them in another form:\n\n\n\n\n\n\n\nfopen(name, mode)\nopens the file, hands back a FILE *\n\n\nfclose(f)\ncloses it, and makes sure everything written is actually on disk\n\n\nfprintf(f, …)\nexactly printf, with the stream as the first argument\n\n\nfscanf(f, …)\nexactly scanf, with the stream as the first argument\n\n\n\nThe mode is a string:\n\n\n\nMode\nMeans\n\n\n\n\n\"r\"\nread. The file must already exist\n\n\n\"w\"\nwrite. Creates the file, and empties it if it exists\n\n\n\"a\"\nappend. Creates if needed, writes at the end\n\n\n\n\n\n\n\n\n\n\"w\" discards whatever was in the file, immediately, before you write anything. Opening your data file with \"w\" instead of \"r\" destroys it.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#writing-a-file",
+    "href": "weeks/w11.html#writing-a-file",
+    "title": "W11: Structures and File Input/Output",
+    "section": "8 · Writing a file",
+    "text": "8 · Writing a file\n#include &lt;stdio.h&gt;\n\nint main(void)\n{\n    FILE *f = fopen(\"marks.txt\", \"w\");      /* \"w\" = write, start empty */\n\n    if (f == NULL) {\n        printf(\"could not open marks.txt for writing\\n\");\n        return 1;\n    }\n\n    fprintf(f, \"%d %s %.1f\\n\", 11, \"Asha\",  91.5);\n    fprintf(f, \"%d %s %.1f\\n\", 12, \"Bilal\", 78.0);\n    fprintf(f, \"%d %s %.1f\\n\", 13, \"Chen\",  84.5);\n\n    fclose(f);\n    printf(\"wrote marks.txt\\n\");\n    return 0;\n}\nwrote marks.txt\nand marks.txt now holds:\n11 Asha 91.5\n12 Bilal 78.0\n13 Chen 84.5\nfprintf(f, …) is printf with one extra argument at the front. Everything you know about %d, %s and %.1f carries over unchanged.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#file-is-a-pointer-and-it-can-be-null",
+    "href": "weeks/w11.html#file-is-a-pointer-and-it-can-be-null",
+    "title": "W11: Structures and File Input/Output",
+    "section": "9 · FILE * is a pointer, and it can be NULL",
+    "text": "9 · FILE * is a pointer, and it can be NULL\nFILE *f = fopen(\"no-such-file.txt\", \"r\");\nif (f == NULL) { … }\nfopen returned NULL — the file is not there\nfopen is the one library call in this course that routinely fails, and it fails for ordinary reasons: the file does not exist, the name is misspelt, you are in the wrong directory, you lack permission. It does not crash — it returns NULL, and your program crashes later if you ignore that.\nCheck it every time. The NULL from W10 §8 is doing real work here.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#reading-a-file-back",
+    "href": "weeks/w11.html#reading-a-file-back",
+    "title": "W11: Structures and File Input/Output",
+    "section": "10 · Reading a file back",
+    "text": "10 · Reading a file back\n#include &lt;stdio.h&gt;\n\nint main(void)\n{\n    FILE *f = fopen(\"marks.txt\", \"r\");      /* \"r\" = read */\n    int roll, n = 0;\n    char name[20];\n    double marks, total = 0.0;\n\n    if (f == NULL) {\n        printf(\"could not open marks.txt for reading\\n\");\n        return 1;\n    }\n\n    while (fscanf(f, \"%d %19s %lf\", &roll, name, &marks) == 3) {\n        printf(\"%d %-6s %.1f\\n\", roll, name, marks);\n        total += marks;\n        n++;\n    }\n\n    fclose(f);\n\n    if (n &gt; 0)\n        printf(\"read %d students, average %.2f\\n\", n, total / n);\n    return 0;\n}\n11 Asha   91.5\n12 Bilal  78.0\n13 Chen   84.5\nread 3 students, average 84.67\nThe loop condition is the whole technique. fscanf returns how many items it filled, so == 3 means “I got a complete record”. When the file runs out it returns EOF and the loop stops. You do not need to know the number of lines in advance, and you do not need a sentinel value at the end of the file.\nThat is the same return value you were told to check for scanf in §0 — here it is earning its keep.\n\n\n\n\n\n\nNote %19s again, and &roll and &marks but no & on name. fscanf follows exactly the same rules as scanf, because it is scanf with a stream argument.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#putting-it-with-structures",
+    "href": "weeks/w11.html#putting-it-with-structures",
+    "title": "W11: Structures and File Input/Output",
+    "section": "11 · Putting it with structures",
+    "text": "11 · Putting it with structures\nMonday’s struct Student and Tuesday’s file are the obvious pair — a file of records read into an array of structures:\nstruct Student cls[50];\nint n = 0;\n\nwhile (n &lt; 50 &&\n       fscanf(f, \"%d %19s %lf\", &cls[n].roll, cls[n].name, &cls[n].marks) == 3)\n    n++;\n&cls[n].roll is the address of one member of one element. The n &lt; 50 guard comes first so that a longer file cannot run past the end of the array — the file decides how much data arrives, and your array does not grow.",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#what-goes-wrong",
+    "href": "weeks/w11.html#what-goes-wrong",
+    "title": "W11: Structures and File Input/Output",
+    "section": "12 · What goes wrong",
+    "text": "12 · What goes wrong\n\n\n\n\n\n\n\nnot checking fopen\nthe commonest file bug by a distance; the program dies later, far from the cause\n\n\nopening with \"w\" to read\nsilently empties the file first\n\n\nforgetting fclose\nwritten data may never reach the disk\n\n\nlooping on !feof(f)\nreads one time too many — test the return of fscanf instead, as above\n\n\nno bound when filling an array\na long file writes past the end\n\n\nrelative paths\n\"marks.txt\" means in the directory you ran the program from, not where the source lives",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#drills-1",
+    "href": "weeks/w11.html#drills-1",
+    "title": "W11: Structures and File Input/Output",
+    "section": "Drills",
+    "text": "Drills\n\n\n\n\n\n\n\nd12\nopen a file that does not exist with \"r\" — what does fopen return?\n\n\nd13\nwrite three lines, then open the same file with \"w\" again and write one. How many lines are in it?\n\n\nd14\nfscanf with three conversions on a line that has two — what does it return?\n\n\nd15\nrun the reader when marks.txt is empty — what does it print?",
+    "crumbs": [
+      "Weekly Notes",
+      "W11: Structures and File Input/Output"
+    ]
+  },
+  {
+    "objectID": "weeks/w11.html#questions-to-bring-back-1",
+    "href": "weeks/w11.html#questions-to-bring-back-1",
+    "title": "W11: Structures and File Input/Output",
+    "section": "Questions to Bring Back",
+    "text": "Questions to Bring Back\n\nWhy is while (fscanf(...) == 3) better than counting the lines first?\nfopen can fail for four ordinary reasons. Name two.\nWhat is the difference between \"w\" and \"a\", and when would using the wrong one be unrecoverable?\nfprintf(f, \"%d\", x) and printf(\"%d\", x) differ by one argument. What is printf doing with that argument implicitly?",
     "crumbs": [
       "Weekly Notes",
       "W11: Structures and File Input/Output"
@@ -1271,7 +1480,7 @@
     "href": "weeks/w11.html#pagal-notes",
     "title": "W11: Structures and File Input/Output",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal column. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning: the week’s informal column.\nThe interview that does not ask you to write code.\nIn May 2026 Google began piloting a change to its software engineering interview. One of the traditional coding rounds — the kind you prepare for on LeetCode — was replaced with something called a code comprehension round. You are given a codebase you have never seen. You are given Gemini to help you. And you are asked to read it, find the bugs, explain the design decisions, and suggest what you would improve.\nIt reached us through a post by Shreyas Naphad on 10 October 2026, so — following the Week 1 habit — we checked it before repeating it.\n\n\n\n\n\n\n\nClaim\nStanding\n\n\n\n\nGoogle is piloting an AI-assisted round for junior and mid-level roles on select US teams\nconfirmed; a Google spokesperson confirmed candidates use Gemini\n\n\nThe internal description is “human-led, AI-assisted”\nreported from an internal document\n\n\nIt evaluates prompt engineering, output validation, and debugging\nreported consistently\n\n\n200–500 lines, 60 minutes, three phases in a CoderPad environment\nreported in secondary coverage; not an official Google figure\n\n\n\nThe precise numbers may drift. The direction will not, and the direction is the point.\n\nA second account, and how to weigh it.\nThe news travelled loudly. The r/leetcode thread discussing it is titled “LeetCode grind is dead.” It is posted by a throwaway account claiming to be a Googler — which is to say, unverifiable. Read it anyway; it is where your seniors are arguing about your job. But weigh it correctly, and notice that weighing it correctly is the same skill the new round is testing.\nThe post claims Google is rolling out two AI Fluency rounds:\n\nAI Debugging: Dropping you into a massive, messy legacy repo to see if you can actually use AI to locate, diagnose, and patch complex bugs in real time.\nAI System Design: Architecting end-to-end systems while actively using AI to evaluate trade-offs, draft interfaces, and pressure-test edge cases.\n\nAnd then: “Pure DSA won’t carry loops anymore.”\nNow read the edit at the bottom of that same post: “2 DSA rounds will still be there, and it’s for all L3-L5 roles.”\nThat edit quietly demolishes the headline above it. Two algorithm rounds remain. Nothing here says stop learning loops, arrays, recursion or complexity — and it could not, because you cannot judge code you could not have written. An AI’s wrong answer looks exactly like its right answer until you know the subject well enough to tell them apart. That is the whole reason this course does not skip pointers, memory, or the compiler.\nSo: the anonymous claim is unverified, its headline overshoots, and its own correction contradicts it — and underneath all that it still agrees with the part Google actually confirmed. Hold all four of those thoughts at once. That is what reading critically looks like, and you will do it far more often with generated code than with Reddit posts.\nWhat is dying is not the algorithms. It is the idea that reciting them is enough.\n\nYou already read more code than you write.\nClean Code opens with the claim that “the ratio of time spent reading versus writing is well over 10 to 1.” Treat that as an experienced assertion rather than a measurement — nobody ran a stopwatch on the industry. But you do not need the number, because you have your own evidence from this semester.\nCount honestly. In Lab 07 — the Game of Life, the largest program you have written so far — how long did you spend typing, and how long did you spend staring at code that already existed? The starter file. The spec comment. Your partner’s countNeighbours. A compiler error pointing at line 23. Your own loop from twenty minutes ago that no longer looked familiar. The typing was the short part. It is always the short part.\nWhat is new is not the ratio. What is new is the size of the thing you must read.\n\nThe blocks got bigger.\nA 300-line file used to arrive slowly. Someone wrote it over days, you reviewed it in pieces, and you absorbed it at roughly the speed it was produced.\nNow you can ask for 300 lines and have them in ten seconds. The production side got faster by orders of magnitude. Your reading speed did not change at all. That gap is the whole story of this decade, and it is why the interview moved.\nThis is also the honest reason your struct work this week matters more than it looks. Compare these two, which store the same thing:\nint   rolls[100];      char  names[100][20];      double marks[100];\nstruct Student { int roll; char name[20]; double marks; };\nstruct Student cls[100];\nThe first is three arrays that you must personally remember to keep in step. The second says what it is. A reader meeting cls[i].marks knows something; a reader meeting marks[i] has to go hunting for whether i still means what it meant forty lines ago. You have just learned your first tool for making a large program readable — which is to say, your first tool for making a large program possible.\n\nTaste and judgement are two different things.\nThe round asks for both, and it is worth separating them.\n\n\n\n\n\n\n\n\n\nThe question\nCan the machine answer it?\n\n\n\n\nJudgement\nIs this correct? Does it hold at the edges, on empty input, when the file will not open?\nIt can help — and it will also assert correctness confidently and be wrong\n\n\nTaste\nIs this good? Is this the right decomposition, the right name, the right thing to store?\nNo. It has no stake in who maintains this in two years\n\n\n\nJudgement is the skill this course has been drilling since Week 1: predict the output before you run it, say what the function ensures, ask for the evidence. Taste is newer, and it is what structures start teaching you — not “does this compile” but “is this the right set of fields?” There is no compiler error for a bad design. There is only a program that becomes harder to change every week until somebody rewrites it.\nTaste is built the slow way: by reading a great deal of code, by writing something badly and then having to extend it, and by noticing the difference. There is no prompt for it.\n\nArchitect is a job description, not a promotion.\nThe old career story was: write code for some years, and eventually you will be allowed to design systems. That ladder is being compressed from the bottom. The commodity rung — turn a clear specification into syntax — is the rung the machine now stands on.\nWhat is left is the work above it: deciding what should exist, how the parts divide, what each part promises the others, and whether what came back is actually right. Week 1 called this Specify → Express → Verify, and said the machine took the middle step. The Google round is simply that claim showing up in a hiring process. They did not stop testing Express — the algorithm rounds are still there, as we just established. They added a round that tests Verify directly, with the machine sitting right there on the desk, which is harder to fake and much closer to the job.\nNotice what the anonymous post called its second round: AI System Design — and note that it is claimed for L3, which is the level you would enter at. Architecting end-to-end systems, weighing trade-offs, drafting interfaces, pressure-testing edge cases. Whether or not that specific round exists as described, the shape of the claim is the shape every confirmed source points to: design work has moved down the ladder, to the first rung.\nSo the uncomfortable framing — you must become architects — is not career advice for your thirties. It is a description of the entry-level job.\nWhich is why a five-line struct declaration deserves more of your attention than it instinctively gets. Choosing what goes inside struct Student is a design decision with no compiler to check it: it is the smallest honest instance of the work above. You will not practise architecture by waiting for a big system. You practise it on the small ones, on purpose, now.\n\nYou have been sitting this round all semester.\nStart with the part of the lab nobody grades. Open drill.sh and read the comment at the top of it:\n\nEach drill: you SEE it, you WRITE your prediction, and only THEN does it run. Predicting is the exercise. Running is just the marking.\n\nThat is a code comprehension round. You are handed code you did not write, you are not allowed to execute it, and you must say what it does. No marks ride on it, which is exactly why it works: there is nothing to perform and nowhere to hide. When the drill logs a miss it tells you “logged as a miss — that is the useful kind. Ask why before moving on.” A miss is the only part of the lab that reliably teaches you something, because it is the precise location where what you believed about C and what C actually does came apart.\nBe clear about the scale, though. A drill is a dozen lines and tests one idea — that a[i] is *(a+i), that strcmp returns zero for equal, that sizeof collapses to 8 inside a function. Google’s round is 200–500 lines of unfamiliar code with bugs hidden in the interactions between parts, and the hard thing there is not any single line but holding the whole shape in your head. The drills are that skill in miniature — the same move, at a fortieth of the scale.\nBut it is the same move, and it is the one that scales. Nobody reads a 500-line file by reading 500 lines. You read it by forming a guess about what a part does, checking the guess cheaply, and being willing to find out you were wrong. Every drill is one repetition of that loop. There have been drills in every pack since Lab 03, and by the end of Lab 07 you had done fifty-three of them. That is fifty-three times you committed to a claim about unfamiliar code before the machine told you the answer.\nThen look at how the labs are actually graded. Band A is automated: your code compiles and passes the vectors. Band B is a person pointing at a line you submitted and asking you to explain it — and a member who cannot explain their own code resubmits, whatever the score says.\nThat is the same round again, with marks attached. We did not design it to imitate Google; we designed it because it is the only honest way to grade work that an AI could have produced. The industry arrived at the same instrument for the same reason. There is no trick to preparing for it, at Google or here. Read more code than you write. Be able to say what every line you submit is for. And when something works and you do not know why, treat that as an unfinished problem rather than a finished one.",
     "crumbs": [
       "Weekly Notes",
       "W11: Structures and File Input/Output"
@@ -1337,7 +1546,7 @@
     "href": "weeks/w13.html#pagal-notes",
     "title": "W13: Dynamic Memory and Recursion",
     "section": "PAGAL Notes",
-    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week’s informal column. To be posted.",
+    "text": "PAGAL Notes\nPAGAL — Perspectives on Algorithms, Generative AI & Learning: the week’s informal column.\nNext door in Jagti, they were discussing your job.\nOn 9–10 October, on the IIM Jammu campus in Jagti — the same village as this institute — there was a conference called the J&K GCC Summit 2026, organised with the Government of Jammu & Kashmir under the theme “Unlocking J&K’s GCC Potential for Building Growth Ecosystem & Catalysing Investment.” Over 300 delegates. The Lieutenant Governor gave the inaugural address and the Chief Minister the valedictory. Six panels over two days, two of which were about you:\n\nPanel 4 — GCC Innovation and Technology: Unlocking Tier-2 and Tier-3 Advantage\nPanel 5 — The Future of GCC Talent and Workforce Transformation\n\nA Global Capability Centre is what used to be dismissed as a “back office” and no longer is. It is a centre a multinational owns and staffs itself, increasingly doing the engineering rather than supporting it. The numbers the summit put up:\n\n\n\nGCCs operating in India\n2,117+\n\n\nProfessionals employed\n1.9 million+\n\n\nGCCs in Tier-II and Tier-III cities\n220+\n\n\nProjected workforce growth by 2030\n39%\n\n\nShare of the future workforce from non-metro locations\n84%\n\n\n\n(Figures as presented by the summit, sourced to Zinnov, NASSCOM, EY, BCG and McKinsey.)\nRead the last row again, because it is the one that concerns this classroom. The argument of the entire summit was that this work is moving to places like Jammu — and that the binding constraint is not real estate or policy or bandwidth. It is whether there are enough people here who can do the work.\nThat is an unusually direct thing for a first-year programming class to be told. The question of whether such a centre opens in this city, and whether it does serious engineering when it does, is partly a question about the people sitting in this room.\n\nWhat the industry leaders actually emphasised.\nThe programme is on the website; the emphasis is not. What came back from those panels was consistent, and it was not about any particular technology.\nContinuous learning, as a condition of the job rather than a virtue. Not “keep learning” as a motivational poster. The stronger claim: that the specific tools you are hired for will be substantially replaced during your employment, so the only durable qualification is the demonstrated ability to pick up the next thing quickly. What you know is a depreciating asset. How fast you learn is not.\nCompressing onboarding. This one is measurable, which is why industry cares about it. How long before a new engineer can safely change something? It used to be months. The pressure now is to make it weeks. And notice what that is actually a demand for: it is a demand that you can be dropped into a large unfamiliar codebase and become useful quickly. That is precisely the skill last week’s column was about, and which Google now runs an interview round on. Two completely different institutions — a hiring process in California, a talent panel in Jagti — arriving at the same requirement in the same month.\nJudgement early, not after a decade. The expectation voiced repeatedly was that juniors will move from producing work to judging work far sooner than before, because the production is increasingly done by AI. The junior role is shifting from “write this” to “decide whether this is right, and whether it is the right thing.”\nIf that sounds familiar, it should. Week 1 of this course drew it as Specify → Express → Verify and claimed the machine was taking the middle step. That was our argument. It is now also the argument of a room full of people who hire engineers. We did not get that from them and they did not get it from us; it is simply what the situation looks like from both ends.\n\nThe part that was not about skills at all.\nHere is what genuinely stood out. In a summit about technology, investment and AI, the talent discussion kept returning to things that are not skills: grit, trustworthiness, ownership, the willingness to say you do not know.\nThat is easy to dismiss as the soft part of a corporate panel. It is worth taking seriously instead, because there is a reason it is getting more weight rather than less.\nWhen producing code was the bottleneck, you could measure someone by output. That measurement is now broken: anyone can produce plausible output. So what remains to evaluate a person on? Whether their work can be relied upon. Whether they say “I checked this” only when they checked it. Whether they stay with a hard problem past the point where it stops being interesting. Whether, when they do not understand something, they say so instead of shipping it and hoping.\nThe skill landscape moves every few years. These do not. They are also, inconveniently, the ones you cannot acquire the night before.\n\nWhich brings us, honestly, to malloc and free.\nThis is not a stretch, and it is why this column sits in this particular week.\nfree is a promise that nobody checks. If you forget it, your program still compiles. It still produces the right answer. It passes the tests. It passes code review, most of the time. The leak shows up weeks later as a service that degrades overnight, and by then it is somebody else’s night.\nThere is no compiler error for a broken promise. C gives you the memory because you asked, and it believes you when you imply you will give it back. The language has no opinion about whether you do. Nothing in this course so far has worked that way: a missing semicolon is caught instantly, a wrong answer is caught by the grader. A leak is the first thing you will write that is wrong in a way that only hurts someone who is not you, and only later.\nNow separate two things the word trustworthy is doing, because they are not the same and the connection between them is the whole point.\n\n\n\n\n\n\n\n\n\nWhat it means\nWhere it lives\n\n\n\n\nA trustworthy work product\nthe program does what it claims, including the parts nobody inspected — it frees what it allocated, it handles the file that would not open\nin the artefact\n\n\nA trustworthy person\ncolleagues can rely on what you hand them and on what you say about it, without re-checking everything themselves\nin you\n\n\n\nfree is the first kind. That is a fact about your code.\nThe panellists in Jagti were arguing about the second kind. That is a claim about a person, and it is the one being hired for — because, as above, output is no longer evidence of anything.\nThe connection runs one way, and it is worth being exact about the direction. Nobody becomes trustworthy by resolving to be trustworthy. You become trustworthy by producing trustworthy work, enough times, that people stop needing to verify it. The trait is the accumulated residue of the artefacts. It is built out of instances — this free that you did not skip, this edge case you checked before claiming it worked, this time you said “I am not sure” when the easier thing was to say nothing.\nWhich is why a memory leak is a slightly larger matter than it appears. It is not a character flaw; it is a bug. But the habit that prevents it — finishing the part nobody will inspect — is the same habit that, repeated for a few years, is what people mean when they call someone reliable. You do not get to build that later. You are building it now, or not, in whichever way you handle the free that nobody is going to check.\nRecursion, on Tuesday, asks something related. To write a recursive function you must trust the call you are making — assume it returns the right answer for the smaller problem — while remaining entirely responsible for the base case and for making progress towards it. Trust the part you delegate; own the part that makes it terminate. That is also, more or less, a description of working with an AI.\n\nWhat to do about it, concretely.\nThe summit’s message to this region was that the work is coming here if the people are here. Three things follow, none of them dramatic:\n\nGet fast at reading code you did not write. It is the measurable thing industry is now optimising for, under the name “onboarding.” The drills are practice at it.\nProtect the ability to judge. Use every tool you like — but stay able to say why an answer is right, because that is the part being hired for.\nBuild the trait out of the artefacts. free what you malloc. Say when you do not know. Finish the hard one. Each is a small piece of work that holds up unobserved, and that is the only material the reputation is ever made of.\n\nThe third is the one that will feel least like computer science and will matter longest.",
     "crumbs": [
       "Weekly Notes",
       "W13: Dynamic Memory and Recursion"
@@ -2360,7 +2569,7 @@
     "href": "labsheets/lab08.html#act-1-read-drills-15-minutes-not-marked",
     "title": "Lab 08: Pointers and Strings",
     "section": "Act 1 · Read drills (15 minutes, not marked)",
-    "text": "Act 1 · Read drills (15 minutes, not marked)\n./drill.sh --all\nTen short programs. For each one you type what you think it will print, and only then does it run.\n\n\n\n\n\n\n\nDrills\nWhat they are about\n\n\n\n\nd01–d03\nwhat * and & actually do, and that the * binds to the variable\n\n\nd04–d06\npointers and arrays, and the sizeof trap\n\n\nd07–d09\nstrings, the terminator, and what strcmp returns\n\n\nd10\npassing by value\n\n\n\nThese carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.",
+    "text": "Act 1 · Read drills (15 minutes, not marked)\n./drill.sh --all\nTen short programs. For each one you type what you think it will print, and only then does it run.\n\n\n\n\n\n\n\nDrills\nWhat they are about\n\n\n\n\nd01–d03\nwhat * and & actually do, and that the * binds to the variable\n\n\nd04–d06\npointers and arrays, and the sizeof trap\n\n\nd07–d09\nstrings, the terminator, and counting the comparisons a palindrome test makes\n\n\nd10\nwhat strcmp returns when the strings are equal\n\n\n\nThese carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.",
     "crumbs": [
       "Lab Sheets",
       "Lab 08: Pointers and Strings"
@@ -2446,34 +2655,133 @@
   {
     "objectID": "labsheets/lab09.html",
     "href": "labsheets/lab09.html",
-    "title": "Lab 09: Structures and File Input/Output",
+    "title": "Lab 09: Structures and Files",
     "section": "",
-    "text": "Pre-Lab\nSyllabus practical modules: 4 and 8 — tuples and dictionaries; file handling\nEvaluation: Graded — equal weight within the 20% lab component.\nLab manual: The C Programming Laboratory — the department’s shared reference (vim §1 · the compilation model §2.5 · types and #define §2.7–2.8 · the operator precedence table §2.9–2.10 · printf/scanf §3). This sheet is self-contained; the manual is there when you want more.\nTo be posted — what to read/install before the session.",
+    "text": "The shape of this lab\nLab pack: lab09.tar.gz. It is already on the lab machines. You can also download it to practise at home.\nSyllabus practical modules: 4 and 8 — records, and file handling.\nEvaluation: This lab is graded, with the same weight as the others inside the 20% lab component. It is marked in three tiers:\nThat is 75 marks from the programs. The remaining 25 come from observed work and a short viva, in which you will be asked to explain your own code.\nThe read drills (./drill.sh) are not marked.\nYou may work in teams of one or two. If you are a pair, swap who types at the halfway point.\nOne idea, carried through three stages:\nThe write drills build the notation, the blanks use it on an array of records, and the last two problems replace the keyboard with a file.\nEvery starter file has a BEFORE line naming the drills it rests on. If you are stuck, that line tells you what to go and do first.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 09: Structures and File Input/Output"
+      "Lab 09: Structures and Files"
     ]
   },
   {
-    "objectID": "labsheets/lab09.html#exercises",
-    "href": "labsheets/lab09.html#exercises",
-    "title": "Lab 09: Structures and File Input/Output",
-    "section": "Exercises",
-    "text": "Exercises\nTo be posted before the session.",
+    "objectID": "labsheets/lab09.html#the-shape-of-this-lab",
+    "href": "labsheets/lab09.html#the-shape-of-this-lab",
+    "title": "Lab 09: Structures and Files",
+    "section": "",
+    "text": "a record is several values under one name → many records in an array, and questions you can ask of the whole set → the records come from a file, and your answers go back into one",
     "crumbs": [
       "Lab Sheets",
-      "Lab 09: Structures and File Input/Output"
+      "Lab 09: Structures and Files"
     ]
   },
   {
-    "objectID": "labsheets/lab09.html#submission",
-    "href": "labsheets/lab09.html#submission",
-    "title": "Lab 09: Structures and File Input/Output",
-    "section": "Submission",
-    "text": "Submission\nSubmission instructions will be provided in the lab.",
+    "objectID": "labsheets/lab09.html#the-minimum-c-you-need-today",
+    "href": "labsheets/lab09.html#the-minimum-c-you-need-today",
+    "title": "Lab 09: Structures and Files",
+    "section": "The minimum C you need today",
+    "text": "The minimum C you need today\nEverything in this lab is built from these lines.\nstruct Student {             /* a type: several values under one name     */\n    int    roll;\n    char   name[20];\n    double cgpa;\n};\n\nstruct Student s;            /* now a variable of that type               */\ns.roll = 1001;               /* reach a member with a dot                 */\nscanf(\"%d %19s %lf\", &s.roll, s.name, &s.cgpa);   /* note: no & on name   */\n\nstruct Student a[32];        /* an array of records                       */\na[i].cgpa                    /* index first, then member                  */\n\nstruct Student *p = &s;      /* a pointer to a record                     */\np-&gt;cgpa                      /* which uses -&gt; instead of .                */\n\nFILE *f = fopen(\"students.txt\", \"r\");       /* open for reading           */\nif (f == NULL) { ... }                      /* ALWAYS check this          */\nwhile (fscanf(f, \"%d %19s %lf\", &r, nm, &c) == 3) { ... }   /* to the end */\nfclose(f);\nThree places where almost all the mistakes happen:\n&s.roll has an &, s.name does not. Both are members of the same structure in the same scanf. The difference is that name is an array, and an array name is already an address. Drills w10 and b1 are about exactly this.\nA double is read with %lf, not %f. %f is for printing a double and for reading a float. Read a double with %f and the value you get back is wrong.\nCompare programme codes with strcmp, never with ==. a == b on two character arrays compares addresses, which are never equal, so the test is silently always false.",
     "crumbs": [
       "Lab Sheets",
-      "Lab 09: Structures and File Input/Output"
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#act-0-getting-started-10-minutes",
+    "href": "labsheets/lab09.html#act-0-getting-started-10-minutes",
+    "title": "Lab 09: Structures and Files",
+    "section": "Act 0 · Getting started (10 minutes)",
+    "text": "Act 0 · Getting started (10 minutes)\nThe pack is already on the lab machines. If it is not on yours, download it:\nwget https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab09.tar.gz\ntar xzf lab09.tar.gz\ncd lab09\n./install.sh\ninstall.sh makes your workspace and puts you inside it. Your prompt will read [lab09 OK ...]. If it does not, you are in the wrong place — run ./where.sh and it will tell you what to type.\nThen start the recorder, which is your proof of work:\nscript session.txt",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#act-1-read-drills-15-minutes-not-marked",
+    "href": "labsheets/lab09.html#act-1-read-drills-15-minutes-not-marked",
+    "title": "Lab 09: Structures and Files",
+    "section": "Act 1 · Read drills (15 minutes, not marked)",
+    "text": "Act 1 · Read drills (15 minutes, not marked)\n./drill.sh --all\nTen short programs. For each one you type what you think it will print, and only then does it run.\n\n\n\n\n\n\n\nDrills\nWhat they are about\n\n\n\n\nd01–d03\nwhat a structure is, and what b = a does\n\n\nd04–d05\nby value against by address — the same function, twice\n\n\nd06–d08\narrays of records, -&gt;, and a structure inside a structure\n\n\nd09\nsizeof a structure, and why it is not the sum of its parts\n\n\nd10\ncomparing programme codes with strcmp\n\n\n\nThese carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#act-2-write-drills-20-minutes-1-mark-each",
+    "href": "labsheets/lab09.html#act-2-write-drills-20-minutes-1-mark-each",
+    "title": "Lab 09: Structures and Files",
+    "section": "Act 2 · Write drills (20 minutes, 1 mark each)",
+    "text": "Act 2 · Write drills (20 minutes, 1 mark each)\nTen files, w01.c to w10.c. In each one, everything is written except a single line, and the comment tells you what that line must do.\n\n\n\n\nWhat you write\n\n\n\n\nw01\nread two numbers straight into the members of a structure\n\n\nw02\nread members of two different types\n\n\nw03\ncopy a structure, change the copy, leave the original alone\n\n\nw04\na function body that gets a structure by value\n\n\nw05\nthe same, but by address — compare the two\n\n\nw06\nread three records into an array\n\n\nw07\nreach members through a pointer, with -&gt;\n\n\nw08\nread into a structure that holds two other structures\n\n\nw09\nfind the largest member in an array of records\n\n\nw10\nread a name and a programme code\n\n\n\nw04 and w05 are a matched pair. Do them one after the other: the first cannot change the caller’s record and the second can, and that is the whole lesson.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#how-to-work-on-one-problem",
+    "href": "labsheets/lab09.html#how-to-work-on-one-problem",
+    "title": "Lab 09: Structures and Files",
+    "section": "How to work on one problem",
+    "text": "How to work on one problem\nThe steps are the same for all nineteen. Using w01.c as the example:\nvim w01.c                # open it and write the missing line\ngcc w01.c -o w01         # compile it\n./w01 &lt; w01_sample.txt   # run it on the sample input\n./check.sh w01           # once it runs, have it marked\nPlain gcc. No -lm, no other flags.\nEvery problem has a ready-made input file, named &lt;problem&gt;_sample.txt, and each one reproduces the EXAMPLE printed at the top of that starter:\n$ ./w01 &lt; w01_sample.txt\nx=3 y=4\n$ ./b5_topper &lt; b5_sample.txt\ntopper=1002\n\n\n\n\n\n\nCompile and run it yourself before running ./check.sh. Running it shows you what your program does; the checker only tells you whether the answer is right.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#act-3-blanks-25-minutes-5-marks-each",
+    "href": "labsheets/lab09.html#act-3-blanks-25-minutes-5-marks-each",
+    "title": "Lab 09: Structures and Files",
+    "section": "Act 3 · Blanks (25 minutes, 5 marks each)",
+    "text": "Act 3 · Blanks (25 minutes, 5 marks each)\nEverything around the gap is written for you. Write the missing loop or line.\n\n\n\n\n\n\n\n\nFile\nWhat it must do\nIts last line must end with\n\n\n\n\nb1_make.c\nbuild one complete record and print it back\n&lt;roll&gt; &lt;name&gt; &lt;cgpa&gt;\n\n\nb2_arrow.c\nthe same record, reached through a pointer\nroll=&lt;R&gt; cgpa=&lt;C&gt;\n\n\nb3_average.c\nthe average cgpa over an array of records\naverage=&lt;A&gt;\n\n\nb4_above.c\nhow many records are strictly above 7.00\nabove=&lt;N&gt;\n\n\nb5_topper.c\nthe roll of the record with the highest cgpa\ntopper=&lt;R&gt;\n\n\n\n\n\n\n\n\n\nb4 and b5 both turn on one character. Strictly above means &gt; 7.0, so a cgpa of exactly 7.00 does not count — one of the test cases is three students at exactly 7.00 and expects above=0. In b5, a tie goes to the first of the tied students, which you get for free by testing with &gt; and not &gt;=.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#act-4-problems-40-minutes-10-marks-each",
+    "href": "labsheets/lab09.html#act-4-problems-40-minutes-10-marks-each",
+    "title": "Lab 09: Structures and Files",
+    "section": "Act 4 · Problems (40 minutes, 10 marks each)",
+    "text": "Act 4 · Problems (40 minutes, 10 marks each)\nSpecification only. You write the whole program.\n\n\n\n\n\n\n\n\nProblem\nWhat it must do\nIts last line must end with\n\n\n\n\ne1.c\nis a point inside a rectangle?\ninside or outside\n\n\ne2.c\nthe topper, from a list of records\ntopper=&lt;roll&gt; &lt;name&gt;\n\n\ne3.c\nreads students.txt — which programme has the most students above 7\nprogram=&lt;code&gt; count=&lt;N&gt;\n\n\ne4.c\nreads students.txt, writes passed.txt\npassed=&lt;N&gt;\n\n\n\ne1 is Monday’s lecture problem. Two structures — a Point, and a Rect made of two Points — and a function returning 1 or 0. Four conditions, all of which must hold. A point exactly on an edge counts as inside, and two of the test cases sit exactly on the boundary to check that you meant &gt;= and not &gt;.\ne2 is b5 with more to report. Keep the index of the best record, not a copy of the cgpa: you owe the caller two facts about that student, and the cgpa alone cannot tell you the name.\n\ne3 and e4 do not read the keyboard\nThese two read the file students.txt, which is already in your workspace. Run them with no input at all:\ngcc e3.c -o e3\n./e3\nEach line of students.txt holds one record:\n1001 Ravi EE 8.20\n1002 Asha ME 6.50\n1003 Iqbal EE 7.10\nand the file ends when it ends — you are not told in advance how many lines there are. That is what this pattern is for:\nwhile (fscanf(f, \"%d %19s %7s %lf\", &roll, name, prog, &cgpa) == 4) {\n    ...\n}\nIt stops as soon as a read does not deliver all four items, which is what happens at the end of the file.\ne3 needs three counters and no array at all — you never have to store the records. Ties, including the case where nobody is above 7, go to whichever programme appears first in the file.\ne4 writes a file as well as reading one. Open it with fopen(\"passed.txt\", \"w\") and fclose it when you are done — what you have written may still be sitting in a buffer until you do. If nobody qualifies, passed.txt must still exist, and be empty.\n\n\n\n\n\n\ne4 is graded twice: the line you print and the contents of passed.txt. A correct count on screen earns nothing if the file was never written. The checker deletes any old passed.txt before each test, so a file left over from an earlier run cannot be mistaken for this one.\n\n\n\n\n\nHow the checking works\n./check.sh e1 compiles your source and runs it on two kinds of input: a fixed set chosen in advance, labelled public, and a set generated fresh at that moment from the range in the GIVEN line, labelled random. A program that only reproduces the printed example will fail as soon as a new input is drawn.\nFor e3 and e4 the checker writes a fresh students.txt before each test and gives your program an empty keyboard input. A leftover scanf will not hang: it finds no input, returns EOF, and leaves your variable holding whatever it held before. So the symptom is a wrong answer from a program that looked like it ran fine — which is exactly why you should check what scanf returned rather than assume it worked.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#act-5-check-your-marks-fix-and-submit-10-minutes",
+    "href": "labsheets/lab09.html#act-5-check-your-marks-fix-and-submit-10-minutes",
+    "title": "Lab 09: Structures and Files",
+    "section": "Act 5 · Check your marks, fix, and submit (10 minutes)",
+    "text": "Act 5 · Check your marks, fix, and submit (10 minutes)\n./check.sh          # everything\n./check.sh e3       # one problem, while you are working on it\nMarks are given per test case, not all-or-nothing, so fixing a failing case is worth doing even in the last few minutes. Two caveats, so the number does not surprise you:\n\nEach problem’s mark is rounded to a whole number. A write drill is worth 1 mark over 5 cases, so passing 2 of 5 rounds to 0 and 3 of 5 rounds to 1. On the 10-mark problems every case really does carry its own share.\nSome cases are drawn fresh each run, so the total can move by a mark or two between checks. Treat it as an estimate.\n\nWhen you are finished, or when time is called:\n./check.sh --bundle\n\n\n\n\n\n\nThe bundle is written to the directory above your workspace, named lab09_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz. Take it with you: upload it to Moodle and email a copy to yourself. The lab machines are wiped between sessions.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#if-you-finish-early-not-marked",
+    "href": "labsheets/lab09.html#if-you-finish-early-not-marked",
+    "title": "Lab 09: Structures and Files",
+    "section": "If you finish early (not marked)",
+    "text": "If you finish early (not marked)\n\nMake e3 report the programme with the highest average cgpa instead of the most students above 7. Which parts of the loop change, and which do not?\nMake e4 write the name next to each roll, and check it. Then undo that and make it write a header line first, and check that. The checker rejects both — read its two complaints and work out which line of passed.txt it is objecting to in each case.\nAdd a struct Rect function int overlap(struct Rect a, struct Rect b) that says whether two rectangles overlap at all. Start from e1: two rectangles miss each other exactly when one is entirely to one side of the other.",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
+    ]
+  },
+  {
+    "objectID": "labsheets/lab09.html#before-you-leave",
+    "href": "labsheets/lab09.html#before-you-leave",
+    "title": "Lab 09: Structures and Files",
+    "section": "Before you leave",
+    "text": "Before you leave\nBe ready to answer these out loud.\n\nIn w04 nothing changed and in w05 it did. The function body was almost the same. What was different?\nIn e3, why strcmp and not ==?\nWhat would your e4 do if students.txt were not there? Did you try it?",
+    "crumbs": [
+      "Lab Sheets",
+      "Lab 09: Structures and Files"
     ]
   },
   {
@@ -2602,7 +2910,7 @@
     "href": "reference/index.html",
     "title": "Quick Reference",
     "section": "",
-    "text": "Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. Every example was compiled and run before it was printed.\n\n\n\nSheet\nFor\n\n\n\n\nprintf / scanf\n%d %u %zu %.2f, and why scanf read nothing\n\n\nData types\nsizes, ranges, integer division, overflow\n\n\nOperator precedence\nthe table, and the five that actually bite\n\n\nControl flow\nbreak vs continue, switch fall-through, loop traps\n\n\nArrays\n1-D and 2-D, sizeof, why the length must travel\n\n\nPointers\n& and *, arithmetic, NULL, the four mistakes\n\n\nStrings\n'\\0', sizeof vs strlen, string.h, character tests\n\n\nFunctions\ndeclaration vs definition, by value vs by address\n\n\nScope and lifetime\nwhich x a name means; why a value did not survive\n\n\nStorage classes\nstatic, extern, register, auto; globals and linkage\n\n\nCompiler errors\nwhat the message means, and where to look",
+    "text": "Lookup sheets — the things worth having in front of you while you type, that no lecture can usefully recite. Every example was compiled and run before it was printed.\n\n\n\nSheet\nFor\n\n\n\n\nprintf / scanf\n%d %u %zu %.2f, and why scanf read nothing\n\n\nData types\nsizes, ranges, integer division, overflow\n\n\nOperator precedence\nthe table, and the five that actually bite\n\n\nControl flow\nbreak vs continue, switch fall-through, loop traps\n\n\nArrays\n1-D and 2-D, sizeof, why the length must travel\n\n\nPointers\n& and *, arithmetic, NULL, pointers to pointers, the five mistakes\n\n\nStrings\n'\\0', sizeof vs strlen, string.h, character tests\n\n\nFunctions\ndeclaration vs definition, by value vs by address\n\n\nScope and lifetime\nwhich x a name means; why a value did not survive\n\n\nStorage classes\nstatic, extern, register, auto; globals and linkage\n\n\nCompiler errors\nwhat the message means, and where to look\n\n\n\n\nEach sheet ends with a pointer into the GNU C Reference Manual — the authoritative description of the language. Where a sheet covers something the manual does not (printf/scanf, compiler warnings), it says so and points you at the right document instead.",
     "crumbs": [
       "Quick Reference",
       "Quick Reference"
@@ -2690,7 +2998,7 @@
     "href": "reference/printf-scanf.html#three-mistakes--wall-catches",
     "title": "printf / scanf",
     "section": "Three mistakes -Wall catches",
-    "text": "Three mistakes -Wall catches\nscanf(\"%f\", &d);   /* d is double */\nscanf(\"%d\", i);    /* missing &   */\nscanf(\"%s\", &s);   /* & on array  */\nformat specifies type 'float *' but the argument has type 'double *' [-Wformat]\nformat specifies type 'int *' but the argument has type 'int' [-Wformat]\nformat specifies type 'char *' but the argument has type 'char (*)[20]' [-Wformat]\nWording differs between compilers — GNU gcc says “expects argument of type …”. None of them is silent if you ask, which is why -Wall is worth typing every time.",
+    "text": "Three mistakes -Wall catches\nscanf(\"%f\", &d);   /* d is double */\nscanf(\"%d\", i);    /* missing &   */\nscanf(\"%s\", &s);   /* & on array  */\nformat specifies type 'float *' but the argument has type 'double *' [-Wformat]\nformat specifies type 'int *' but the argument has type 'int' [-Wformat]\nformat specifies type 'char *' but the argument has type 'char (*)[20]' [-Wformat]\nWording differs between compilers — GNU gcc says “expects argument of type …”. None of them is silent if you ask, which is why -Wall is worth typing every time.\n\nNot in the GNU C Manual. It documents the language; printf and scanf belong to the standard library. For those, see the GNU C Library manual, or man 3 printf on a lab machine.",
     "crumbs": [
       "Quick Reference",
       "printf / scanf"
@@ -2767,7 +3075,7 @@
     "href": "reference/data-types.html#sizes-at-a-glance",
     "title": "Data Types",
     "section": "Sizes at a glance",
-    "text": "Sizes at a glance\nsizeof(int)        /* 4  */\nsizeof(char)       /* 1, always */\nsizeof arr         /* whole array, only where it was declared */\nsizeof ptr         /* 8, the pointer — not what it points at  */\nsizeof yields size_t → print with %zu.",
+    "text": "Sizes at a glance\nsizeof(int)        /* 4  */\nsizeof(char)       /* 1, always */\nsizeof arr         /* whole array, only where it was declared */\nsizeof ptr         /* 8, the pointer — not what it points at  */\nsizeof yields size_t → print with %zu.\n\nIn the GNU C Manual: §2.1 Primitive Data Types · §2.1.1 Integer Types",
     "crumbs": [
       "Quick Reference",
       "Data Types"
@@ -2822,7 +3130,7 @@
     "href": "reference/precedence.html#rule-of-thumb",
     "title": "Operator Precedence",
     "section": "Rule of thumb",
-    "text": "Rule of thumb\n\nIf you have to think about precedence, add parentheses. The compiler does not care; the next reader does.",
+    "text": "Rule of thumb\n\nIf you have to think about precedence, add parentheses. The compiler does not care; the next reader does.\n\n\nIn the GNU C Manual: §3.19 Operator Precedence",
     "crumbs": [
       "Quick Reference",
       "Operator Precedence"
@@ -2888,7 +3196,7 @@
     "href": "reference/control-flow.html#traps",
     "title": "Control Flow",
     "section": "Traps",
-    "text": "Traps\n\n\n\n\n\n\n\nif (x = 5)\nassigns, then tests 5 → always true. You meant ==\n\n\nfor (i=0; i&lt;n; i++);\nthe ; is the body — the loop does nothing n times, and whatever follows runs once\n\n\ndangling else\nbinds to the nearest unmatched if — brace it\n\n\nwhile (i &lt; n) with no change to i\ninfinite; stop it with Ctrl-C\n\n\ncomparing double with ==\nrounding makes it unreliable; compare a difference against a tolerance",
+    "text": "Traps\n\n\n\n\n\n\n\nif (x = 5)\nassigns, then tests 5 → always true. You meant ==\n\n\nfor (i=0; i&lt;n; i++);\nthe ; is the body — the loop does nothing n times, and whatever follows runs once\n\n\ndangling else\nbinds to the nearest unmatched if — brace it\n\n\nwhile (i &lt; n) with no change to i\ninfinite; stop it with Ctrl-C\n\n\ncomparing double with ==\nrounding makes it unreliable; compare a difference against a tolerance\n\n\n\n\nIn the GNU C Manual: §4 Statements · §4.11 The break Statement",
     "crumbs": [
       "Quick Reference",
       "Control Flow"
@@ -2954,7 +3262,7 @@
     "href": "reference/arrays.html#walking",
     "title": "Arrays",
     "section": "Walking",
-    "text": "Walking\nfor (int i = 0; i &lt; n; i++)      /* by index   */\n    …a[i]…\n\nint *p = a;                       /* by pointer */\n…*(p + i)…                        /* same as a[i] */\na[i] is *(a + i).",
+    "text": "Walking\nfor (int i = 0; i &lt; n; i++)      /* by index   */\n    …a[i]…\n\nint *p = a;                       /* by pointer */\n…*(p + i)…                        /* same as a[i] */\na[i] is *(a + i). The GNU C Manual puts it exactly:\n\nThe array subscript expression A[i] is defined as being identical to the expression (*((A)+(i))). This means that many uses of an array name are equivalent to a pointer expression.",
     "crumbs": [
       "Quick Reference",
       "Arrays"
@@ -2965,7 +3273,7 @@
     "href": "reference/arrays.html#traps",
     "title": "Arrays",
     "section": "Traps",
-    "text": "Traps\n\n\n\n\n\n\n\na[n] where the array has n\none past the end\n\n\nsizeof inside a function\ngives the pointer size\n\n\nforgetting the length parameter\nthe function cannot recover it\n\n\nint a[n] with n read at run time\navoid; fixed sizes until malloc in W13\n\n\ncomparing arrays with ==\ncompares addresses, not contents",
+    "text": "Traps\n\n\n\n\n\n\n\na[n] where the array has n\none past the end\n\n\nsizeof inside a function\ngives the pointer size\n\n\nforgetting the length parameter\nthe function cannot recover it\n\n\nint a[n] with n read at run time\navoid; fixed sizes until malloc in W13\n\n\ncomparing arrays with ==\ncompares addresses, not contents\n\n\n\n\nIn the GNU C Manual: §2.5 Arrays · §3.13 Array Subscripts",
     "crumbs": [
       "Quick Reference",
       "Arrays"
@@ -3049,6 +3357,17 @@
     ]
   },
   {
+    "objectID": "reference/pointers.html#pointers-to-pointers",
+    "href": "reference/pointers.html#pointers-to-pointers",
+    "title": "Pointers",
+    "section": "Pointers to pointers",
+    "text": "Pointers to pointers\nA pointer is a variable, so it has an address of its own, and that address can be stored too.\nint a = 1;\nint *p  = &a;      /* p holds the address of a */\nint **q = &p;      /* q holds the address of p */\n\n\n\nWritten\nMeans\n\n\n\n\np\nthe address of a\n\n\n*p\na\n\n\nq\nthe address of p\n\n\n*q\np, i.e. the address of a\n\n\n**q\na — follow it twice\n\n\n\nRead the declaration the same way as always: **q is an int, so q points at an int *.\nWhy you would want one. To let a function change the caller’s pointer, not just the value it points at — the same reason an int * lets it change an int:\nvoid pointElsewhere(int **q, int *target) { *q = target; }\n\nint a = 1, b = 2;\nint *p = &a;\npointElsewhere(&p, &b);     /* p now points at b */\nThis is not needed for anything in this course, and you should not reach for it. It is here because it turns up in the recommended lectures: Lec 28, More on pointers, covers it as type **ptrname.",
+    "crumbs": [
+      "Quick Reference",
+      "Pointers"
+    ]
+  },
+  {
     "objectID": "reference/pointers.html#why-pointers-exist",
     "href": "reference/pointers.html#why-pointers-exist",
     "title": "Pointers",
@@ -3064,7 +3383,7 @@
     "href": "reference/pointers.html#the-five-mistakes",
     "title": "Pointers",
     "section": "The five mistakes",
-    "text": "The five mistakes\n\n\n\n\n\n\n\ndereferencing a pointer never given an address\nundefined behaviour\n\n\np = 7 instead of *p = 7\nthe compiler complains; recent ones reject it outright\n\n\np = q where *p = *q was meant\nlegal, silent, wrong\n\n\nreturning &local\nundefined — the storage is gone\n\n\nwalking past the end of an array\nundefined\n\n\n\nThree of those five are undefined behaviour — the first, the fourth and the fifth. The standard says nothing about what happens, so do not learn what your compiler does with them.",
+    "text": "The five mistakes\n\n\n\n\n\n\n\ndereferencing a pointer never given an address\nundefined behaviour\n\n\np = 7 instead of *p = 7\nthe compiler complains; recent ones reject it outright\n\n\np = q where *p = *q was meant\nlegal, silent, wrong\n\n\nreturning &local\nundefined — the storage is gone\n\n\nwalking past the end of an array\nundefined\n\n\n\nThree of those five are undefined behaviour — the first, the fourth and the fifth. The standard says nothing about what happens, so do not learn what your compiler does with them.\n\nIn the GNU C Manual: §2.6 Pointers · §3.10 Pointer Operators",
     "crumbs": [
       "Quick Reference",
       "Pointers"
@@ -3152,7 +3471,7 @@
     "href": "reference/strings.html#traps",
     "title": "Strings",
     "section": "Traps",
-    "text": "Traps\n\n\n\nforgetting the '\\0'\nevery string function runs off the end\n\n\nsizeof for the length after passing\ngives the pointer size\n\n\nif (strcmp(a,b))\ntrue when they differ\n\n\nmodifying char *p = \"literal\"\nundefined behaviour\n\n\nscanf(\"%s\", s) with no limit\nwrites past the array",
+    "text": "Traps\n\n\n\nforgetting the '\\0'\nevery string function runs off the end\n\n\nsizeof for the length after passing\ngives the pointer size\n\n\nif (strcmp(a,b))\ntrue when they differ\n\n\nmodifying char *p = \"literal\"\nundefined behaviour\n\n\nscanf(\"%s\", s) with no limit\nwrites past the array\n\n\n\n\nIn the GNU C Manual: §2.5.5 Arrays as Strings · §1.3.4 String Constants",
     "crumbs": [
       "Quick Reference",
       "Strings"
@@ -3218,7 +3537,7 @@
     "href": "reference/functions.html#traps",
     "title": "Functions",
     "section": "Traps",
-    "text": "Traps\n\n\n\n\n\n\n\nno declaration before the call\nthe compiler complains about an undeclared function — wording varies\n\n\nfalling off the end of a non-void function\nundefined behaviour if the caller uses the value\n\n\nreturning &local\nundefined — the storage is gone\n\n\nint f()\nold style, no checking; write int f(void)\n\n\nchanging a parameter and expecting the caller to see it\nit got a copy",
+    "text": "Traps\n\n\n\n\n\n\n\nno declaration before the call\nthe compiler complains about an undeclared function — wording varies\n\n\nfalling off the end of a non-void function\nundefined behaviour if the caller uses the value\n\n\nreturning &local\nundefined — the storage is gone\n\n\nint f()\nold style, no checking; write int f(void)\n\n\nchanging a parameter and expecting the caller to see it\nit got a copy\n\n\n\n\nIn the GNU C Manual: §5 Functions · §5.4 Function Parameters",
     "crumbs": [
       "Quick Reference",
       "Functions"
@@ -3229,7 +3548,7 @@
     "href": "reference/scope.html",
     "title": "Scope and Lifetime",
     "section": "",
-    "text": "The table\nScope = where the name can be used. Lifetime = how long the storage exists. Different questions.",
+    "text": "The table\nScope = where the name can be used. Lifetime = how long the storage exists. Different questions.\nThe GNU C Manual puts the first one well:",
     "crumbs": [
       "Quick Reference",
       "Scope and Lifetime"
@@ -3284,7 +3603,7 @@
     "href": "reference/scope.html#rules-of-thumb",
     "title": "Scope and Lifetime",
     "section": "Rules of thumb",
-    "text": "Rules of thumb\n1. Declare a variable in the smallest block that needs it.\nIf a variable is only used inside a loop, declare it inside the loop. The compiler then refuses to let you use it anywhere else, which turns a whole class of mistake into an error you see immediately instead of a wrong answer you have to hunt for.\nint total = 0;\nfor (int i = 0; i &lt; n; i++) {    /* i belongs to the loop        */\n    int doubled = a[i] * 2;      /* doubled belongs to one pass  */\n    total += doubled;\n}\n/* using i or doubled here is an error — which is the point */\nIt also keeps the reader’s job small: a name declared three lines above is one you can still see, and one declared at the top of a 60-line function is not.\n2. If the same name appears in nested scopes, rename one of them.\nThe inner declaration shadows the outer one: both exist, and the name refers to whichever is nearer. This is legal, so the compiler says nothing, and the symptom is a value that “refuses to change”.\nint count = 0;\nfor (int i = 0; i &lt; n; i++) {\n    int count = 0;        /* a SECOND count — the outer one never moves */\n    count++;\n}\nprintf(\"%d\\n\", count);    /* prints 0, not n */\nRename the inner one (seen, local, anything) and the bug cannot occur. Note this applies to function parameters too: a parameter named count shadows a global count for the whole function body.\n-Wall -Wextra does not warn about this. The flag that does is -Wshadow, and it is not switched on by default:\nwarning: declaration shadows a local variable [-Wshadow]\n3. Use a static local only when a value genuinely must survive between calls.\nThe legitimate cases are narrow — counting how many times a function has run, remembering a result that is expensive to recompute, holding a one-time setup flag.\nvoid logLine(char s[]) {\n    static int lineNo = 0;       /* survives; numbers the output */\n    lineNo++;\n    printf(\"%d: %s\\n\", lineNo, s);\n}\nThe cost is that the function is no longer predictable from its arguments alone: calling it twice with the same input gives different output. That makes it harder to test and harder to reason about, so it should be a decision, not a convenience. If the caller could just as easily pass the value in and get it back, do that instead.\n4. Avoid globals in this course — pass values in and return them out.\nA global is in scope for every function below it, so any of them can change it and nothing records which one did. When the value is wrong you have no shortlist of suspects, and the function’s signature no longer tells you what it depends on.\nint total;                    /* global */\nvoid addTo(int x) { total += x; }     /* what else touches total? you must read everything */\n\nint addTo(int total, int x) { return total + x; }   /* better: it is all in the signature */\nThe exception is a genuine program-wide constant, and for that prefer #define MAX 100 or const, which cannot be modified by accident.",
+    "text": "Rules of thumb\n1. Declare a variable in the smallest block that needs it.\nIf a variable is only used inside a loop, declare it inside the loop. The compiler then refuses to let you use it anywhere else, which turns a whole class of mistake into an error you see immediately instead of a wrong answer you have to hunt for.\nint total = 0;\nfor (int i = 0; i &lt; n; i++) {    /* i belongs to the loop        */\n    int doubled = a[i] * 2;      /* doubled belongs to one pass  */\n    total += doubled;\n}\n/* using i or doubled here is an error — which is the point */\nIt also keeps the reader’s job small: a name declared three lines above is one you can still see, and one declared at the top of a 60-line function is not.\n2. If the same name appears in nested scopes, rename one of them.\nThe inner declaration shadows the outer one: both exist, and the name refers to whichever is nearer. This is legal, so the compiler says nothing, and the symptom is a value that “refuses to change”.\nint count = 0;\nfor (int i = 0; i &lt; n; i++) {\n    int count = 0;        /* a SECOND count — the outer one never moves */\n    count++;\n}\nprintf(\"%d\\n\", count);    /* prints 0, not n */\nRename the inner one (seen, local, anything) and the bug cannot occur. Note this applies to function parameters too: a parameter named count shadows a global count for the whole function body.\n-Wall -Wextra does not warn about this. The flag that does is -Wshadow, and it is not switched on by default:\nwarning: declaration shadows a local variable [-Wshadow]\n3. Use a static local only when a value genuinely must survive between calls.\nThe legitimate cases are narrow — counting how many times a function has run, remembering a result that is expensive to recompute, holding a one-time setup flag.\nvoid logLine(char s[]) {\n    static int lineNo = 0;       /* survives; numbers the output */\n    lineNo++;\n    printf(\"%d: %s\\n\", lineNo, s);\n}\nThe cost is that the function is no longer predictable from its arguments alone: calling it twice with the same input gives different output. That makes it harder to test and harder to reason about, so it should be a decision, not a convenience. If the caller could just as easily pass the value in and get it back, do that instead.\n4. Avoid globals in this course — pass values in and return them out.\nA global is in scope for every function below it, so any of them can change it and nothing records which one did. When the value is wrong you have no shortlist of suspects, and the function’s signature no longer tells you what it depends on.\nint total;                    /* global */\nvoid addTo(int x) { total += x; }     /* what else touches total? you must read everything */\n\nint addTo(int total, int x) { return total + x; }   /* better: it is all in the signature */\nThe exception is a genuine program-wide constant, and for that prefer #define MAX 100 or const, which cannot be modified by accident.\n\nIn the GNU C Manual: §6.2 Scope · §4.8 Blocks",
     "crumbs": [
       "Quick Reference",
       "Scope and Lifetime"
@@ -3295,7 +3614,7 @@
     "href": "reference/storage-classes.html",
     "title": "Storage Classes",
     "section": "",
-    "text": "The table\nThe words you may put in front of a declaration: auto, register, static, extern.\nThey control lifetime (how long the storage exists) and linkage (whether another file can reach the name) — except register, which controls neither and does only one thing, below. For scope itself see Scope and lifetime.\nstatic is the one to watch: the same word does two different jobs depending on where it is written.",
+    "text": "The table\nThe words you may put in front of a declaration: auto, register, static, extern. The GNU C Manual lists exactly these four:\nThey control lifetime (how long the storage exists) and linkage (whether another file can reach the name) — except register, which controls neither and does only one thing, below. For scope itself see Scope and lifetime.\nstatic is the one to watch: the same word does two different jobs depending on where it is written.",
     "crumbs": [
       "Quick Reference",
       "Storage Classes"
@@ -3361,7 +3680,7 @@
     "href": "reference/storage-classes.html#register",
     "title": "Storage Classes",
     "section": "register",
-    "text": "register\nA hint that a variable will be used heavily. Modern compilers allocate registers themselves and ignore it, so you will rarely write it.\nOne rule is still enforced: you cannot take the address of a register variable.\nregister int x = 5;\nx++;                /* fine — x is 6 */\nint *p = &x;        /* error: address of register variable requested */\nThat rules it out for arrays altogether, not just arrays you pass to a function: a[0] means *(a + 0), which needs the array’s address.\nregister int a[3] = {1,2,3};\na[0] = 9;           /* error: address of register variable requested */\nThe only thing you may do with a register array is sizeof.",
+    "text": "register\nA hint that a variable will be used heavily. Modern compilers allocate registers themselves and ignore it, so you will rarely write it.\nOne rule is still enforced: you cannot take the address of a register variable.\nregister int x = 5;\nx++;                /* fine — x is 6 */\nint *p = &x;        /* error: address of register variable requested */\nThat rules it out for arrays altogether, not just arrays you pass to a function: a[0] means *(a + 0), which needs the array’s address.\nregister int a[3] = {1,2,3};\na[0] = 9;           /* error: address of register variable requested */\nThe only thing you may do with a register array is sizeof. The manual states the rule directly, under array subscripts: “you cannot subscript an array having the register storage class.”",
     "crumbs": [
       "Quick Reference",
       "Storage Classes"
@@ -3394,7 +3713,7 @@
     "href": "reference/storage-classes.html#choosing",
     "title": "Storage Classes",
     "section": "Choosing",
-    "text": "Choosing\n\n\n\n\n\n\n\nYou want\nUse\n\n\n\n\nan ordinary variable\nnothing — just declare it\n\n\na value to survive between calls to one function\nstatic on the local\n\n\na helper function or variable private to one file\nstatic at file level\n\n\none variable shared by several files\ndefine it in one .c, extern it in a header both include\n\n\nspeed\nnothing — write clear code and let the compiler optimise",
+    "text": "Choosing\n\n\n\n\n\n\n\nYou want\nUse\n\n\n\n\nan ordinary variable\nnothing — just declare it\n\n\na value to survive between calls to one function\nstatic on the local\n\n\na helper function or variable private to one file\nstatic at file level\n\n\none variable shared by several files\ndefine it in one .c, extern it in a header both include\n\n\nspeed\nnothing — write clear code and let the compiler optimise\n\n\n\n\nIn the GNU C Manual: §2.9 Storage Class Specifiers · §5.9 Static Functions",
     "crumbs": [
       "Quick Reference",
       "Storage Classes"
@@ -3438,7 +3757,7 @@
     "href": "reference/errors.html#when-it-will-not-run",
     "title": "Compiler Errors, Decoded",
     "section": "When it will not run",
-    "text": "When it will not run\n\n\n\n\n\n\n\nPermission denied\nchmod +x prog\n\n\ncommand not found\nwrite ./prog, not prog\n\n\nnothing happens\nit is waiting for input — or an infinite loop; Ctrl-C\n\n\nSegmentation fault\na bad pointer or an out-of-bounds index. There is no line number. Narrow it with printf, or rebuild with -g -fsanitize=address and run again — that names the offending line",
+    "text": "When it will not run\n\n\n\n\n\n\n\nPermission denied\nchmod +x prog\n\n\ncommand not found\nwrite ./prog, not prog\n\n\nnothing happens\nit is waiting for input — or an infinite loop; Ctrl-C\n\n\nSegmentation fault\na bad pointer or an out-of-bounds index. There is no line number. Narrow it with printf, or rebuild with -g -fsanitize=address and run again — that names the offending line\n\n\n\n\nNot in the GNU C Manual — compiler diagnostics are a property of the compiler, not the language. gcc --help=warnings lists every warning flag your compiler knows.",
     "crumbs": [
       "Quick Reference",
       "Compiler Errors, Decoded"
@@ -3493,7 +3812,7 @@
     "href": "resources.html#online-material",
     "title": "Resources",
     "section": "Online Material",
-    "text": "Online Material\n\nThe C Programming Laboratory (IIT Jammu lab manual)\n📕 The C Programming Laboratory — the department’s shared lab manual for this course: the vim editor, the C compilation model (§2.5), variables and types, the operator precedence table (§2.10), and printf/scanf. Lecture decks and lab sheets cite it by section number, so it is worth keeping open.\nPrepared by Aroof Aimen, Dept. of CSE, IIT Jammu — Laboratory Manual Part II, August 2026. Reproduced here with thanks.\n\n\nMIT OCW 6.087: Practical Programming in C\nMIT OpenCourseWare 6.087 (IAP 2010) is an excellent, compact companion to this course, with full lecture notes, labs, and assignments (with solutions):\n\nLecture notes\nLabs\nAssignments\n\nCourtesy of MIT OpenCourseWare; used under CC BY-NC-SA.\n\n\nCS1100: Introduction to Programming (IIT Madras)\nLecture slides from Prof. Shweta Agrawal’s CS1100 are mirrored on the CS1100 lectures page, reused with permission from Prof. Agrawal and the CSE Department, IIT Madras.",
+    "text": "Online Material\n\nThe GNU C Reference Manual\n📘 The GNU C Reference Manual — the authoritative description of the C language as GCC implements it: types, operators, statements, arrays, pointers, functions, structures, scope and storage classes. It is short, precise, and free. Lecture notes and the quick-reference sheets cite it by section, so when a sheet and your intuition disagree, this is the tie-breaker.\nNote what it is not: a library manual. printf, scanf and the file functions are part of the standard library, not the language, and are documented separately in the GNU C Library manual — or by man 3 printf on a lab machine.\nPublished by the Free Software Foundation under the GNU Free Documentation License.\n\n\nThe C Programming Laboratory (IIT Jammu lab manual)\n📕 The C Programming Laboratory — the department’s shared lab manual for this course: the vim editor, the C compilation model (§2.5), variables and types, the operator precedence table (§2.10), and printf/scanf. Lecture decks and lab sheets cite it by section number, so it is worth keeping open.\nPrepared by Aroof Aimen, Dept. of CSE, IIT Jammu — Laboratory Manual Part II, August 2026. Reproduced here with thanks.\n\n\nMIT OCW 6.087: Practical Programming in C\nMIT OpenCourseWare 6.087 (IAP 2010) is an excellent, compact companion to this course, with full lecture notes, labs, and assignments (with solutions):\n\nLecture notes\nLabs\nAssignments\n\nCourtesy of MIT OpenCourseWare; used under CC BY-NC-SA.\n\n\nCS1100: Introduction to Programming (IIT Madras)\nLecture slides from Prof. Shweta Agrawal’s CS1100 are mirrored on the CS1100 lectures page, reused with permission from Prof. Agrawal and the CSE Department, IIT Madras.",
     "crumbs": [
       "Reference Material",
       "Resources"

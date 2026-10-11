@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
+ <span class="menu-text">Lab 09: Structures and Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -791,6 +791,8 @@ scanf("%d", &amp;n);  scanf(" %c", &amp;c);    -&gt;  c is 'Z'</code></pre>
 format specifies type 'int *' but the argument has type 'int' [-Wformat]
 format specifies type 'char *' but the argument has type 'char (*)[20]' [-Wformat]</code></pre>
 <p>Wording differs between compilers — GNU gcc says “expects argument of type …”. None of them is silent <strong>if you ask</strong>, which is why <code>-Wall</code> is worth typing every time.</p>
+<hr>
+<p><strong>Not in the GNU C Manual.</strong> It documents the <em>language</em>; <code>printf</code> and <code>scanf</code> belong to the standard <em>library</em>. For those, see the <a href="https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html">GNU C Library manual</a>, or <code>man 3 printf</code> on a lab machine.</p>
 
 
 </section>

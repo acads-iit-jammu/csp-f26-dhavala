@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 09: Structures and File Input/Output – CS-1-01 (MO)</title>
+<title>Lab 09: Structures and Files – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab09.html">Lab 09: Structures and File Input/Output</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab09.html">Lab 09: Structures and Files</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -324,7 +359,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
+ <span class="menu-text">Lab 09: Structures and Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -486,18 +521,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#the-shape-of-this-lab" id="toc-the-shape-of-this-lab" class="nav-link active" data-scroll-target="#the-shape-of-this-lab">The shape of this lab</a></li>
+  <li><a href="#the-minimum-c-you-need-today" id="toc-the-minimum-c-you-need-today" class="nav-link" data-scroll-target="#the-minimum-c-you-need-today">The minimum C you need today</a></li>
+  <li><a href="#act-0-getting-started-10-minutes" id="toc-act-0-getting-started-10-minutes" class="nav-link" data-scroll-target="#act-0-getting-started-10-minutes">Act 0 · Getting started (10 minutes)</a></li>
+  <li><a href="#act-1-read-drills-15-minutes-not-marked" id="toc-act-1-read-drills-15-minutes-not-marked" class="nav-link" data-scroll-target="#act-1-read-drills-15-minutes-not-marked">Act 1 · Read drills (15 minutes, not marked)</a></li>
+  <li><a href="#act-2-write-drills-20-minutes-1-mark-each" id="toc-act-2-write-drills-20-minutes-1-mark-each" class="nav-link" data-scroll-target="#act-2-write-drills-20-minutes-1-mark-each">Act 2 · Write drills (20 minutes, 1 mark each)</a></li>
+  <li><a href="#how-to-work-on-one-problem" id="toc-how-to-work-on-one-problem" class="nav-link" data-scroll-target="#how-to-work-on-one-problem">How to work on one problem</a></li>
+  <li><a href="#act-3-blanks-25-minutes-5-marks-each" id="toc-act-3-blanks-25-minutes-5-marks-each" class="nav-link" data-scroll-target="#act-3-blanks-25-minutes-5-marks-each">Act 3 · Blanks (25 minutes, 5 marks each)</a></li>
+  <li><a href="#act-4-problems-40-minutes-10-marks-each" id="toc-act-4-problems-40-minutes-10-marks-each" class="nav-link" data-scroll-target="#act-4-problems-40-minutes-10-marks-each">Act 4 · Problems (40 minutes, 10 marks each)</a>
+  <ul class="collapse">
+  <li><a href="#e3-and-e4-do-not-read-the-keyboard" id="toc-e3-and-e4-do-not-read-the-keyboard" class="nav-link" data-scroll-target="#e3-and-e4-do-not-read-the-keyboard"><code>e3</code> and <code>e4</code> do not read the keyboard</a></li>
+  <li><a href="#how-the-checking-works" id="toc-how-the-checking-works" class="nav-link" data-scroll-target="#how-the-checking-works">How the checking works</a></li>
+  </ul></li>
+  <li><a href="#act-5-check-your-marks-fix-and-submit-10-minutes" id="toc-act-5-check-your-marks-fix-and-submit-10-minutes" class="nav-link" data-scroll-target="#act-5-check-your-marks-fix-and-submit-10-minutes">Act 5 · Check your marks, fix, and submit (10 minutes)</a></li>
+  <li><a href="#if-you-finish-early-not-marked" id="toc-if-you-finish-early-not-marked" class="nav-link" data-scroll-target="#if-you-finish-early-not-marked">If you finish early (not marked)</a></li>
+  <li><a href="#before-you-leave" id="toc-before-you-leave" class="nav-link" data-scroll-target="#before-you-leave">Before you leave</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab09.html">Lab 09: Structures and File Input/Output</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab09.html">Lab 09: Structures and Files</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 09: Structures and File Input/Output</h1>
+<h1 class="title">Lab 09: Structures and Files</h1>
 </div>
 
 
@@ -535,20 +582,386 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical modules:</strong> 4 and 8 — tuples and dictionaries; file handling</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
-<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<p><strong>Lab pack:</strong> <a href="../labs/lab09.tar.gz">lab09.tar.gz</a>. It is already on the lab machines. You can also download it to practise at home.</p>
+<p><strong>Syllabus practical modules:</strong> 4 and 8 — records, and file handling.</p>
+<p><strong>Evaluation:</strong> This lab is graded, with the same weight as the others inside the 20% lab component. It is marked in three tiers:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th style="text-align: right;">Each</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Write drills</strong> <code>w01</code>–<code>w10</code></td>
+<td>one line of C each</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;"><strong>10</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Blanks</strong> <code>b1</code>–<code>b5</code></td>
+<td>one loop or line each</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;"><strong>25</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Problems</strong> <code>e1</code>–<code>e4</code></td>
+<td>specification only</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;"><strong>40</strong></td>
+</tr>
+</tbody>
+</table>
+<p>That is 75 marks from the programs. The remaining 25 come from observed work and a short viva, in which you will be asked to explain your own code.</p>
+<p>The <strong>read drills</strong> (<code>./drill.sh</code>) are <strong>not</strong> marked.</p>
+<p>You may work in teams of one or two. If you are a pair, swap who types at the halfway point.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This lab follows the Week 11 lectures: Monday on structures, Tuesday on files. The <a href="../weeks/w11.html">Week 11 notes</a> contain everything you need. Problem <code>e1</code> is the point-in-rectangle problem worked through in Monday’s lecture.</p>
+</div>
+</div>
+</div>
+<section id="the-shape-of-this-lab" class="level2">
+<h2 class="anchored" data-anchor-id="the-shape-of-this-lab">The shape of this lab</h2>
+<p>One idea, carried through three stages:</p>
+<blockquote class="blockquote">
+<p>a record is several values under one name → many records in an array, and questions you can ask of the whole set → the records come from a <strong>file</strong>, and your answers go back into one</p>
+</blockquote>
+<p>The write drills build the notation, the blanks use it on an array of records, and the last two problems replace the keyboard with a file.</p>
+<p>Every starter file has a <strong><code>BEFORE</code></strong> line naming the drills it rests on. If you are stuck, that line tells you what to go and do first.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="the-minimum-c-you-need-today" class="level2">
+<h2 class="anchored" data-anchor-id="the-minimum-c-you-need-today">The minimum C you need today</h2>
+<p>Everything in this lab is built from these lines.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">{</span>             <span class="co">/* a type: several values under one name     */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span>    roll<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span>   name<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> cgpa<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student s<span class="op">;</span>            <span class="co">/* now a variable of that type               */</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>s<span class="op">.</span>roll <span class="op">=</span> <span class="dv">1001</span><span class="op">;</span>               <span class="co">/* reach a member with a dot                 */</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>s<span class="op">.</span>roll<span class="op">,</span> s<span class="op">.</span>name<span class="op">,</span> <span class="op">&amp;</span>s<span class="op">.</span>cgpa<span class="op">);</span>   <span class="co">/* note: no &amp; on name   */</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student a<span class="op">[</span><span class="dv">32</span><span class="op">];</span>        <span class="co">/* an array of records                       */</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>a<span class="op">[</span>i<span class="op">].</span>cgpa                    <span class="co">/* index first, then member                  */</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>      <span class="co">/* a pointer to a record                     */</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>p<span class="op">-&gt;</span>cgpa                      <span class="co">/* which uses -&gt; instead of .                */</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">"students.txt"</span><span class="op">,</span> <span class="st">"r"</span><span class="op">);</span>       <span class="co">/* open for reading           */</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> <span class="op">...</span> <span class="op">}</span>                      <span class="co">/* ALWAYS check this          */</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>r<span class="op">,</span> nm<span class="op">,</span> <span class="op">&amp;</span>c<span class="op">)</span> <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span> <span class="op">...</span> <span class="op">}</span>   <span class="co">/* to the end */</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>fclose<span class="op">(</span>f<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Three places where almost all the mistakes happen:</p>
+<p><strong><code>&amp;s.roll</code> has an <code>&amp;</code>, <code>s.name</code> does not.</strong> Both are members of the same structure in the same <code>scanf</code>. The difference is that <code>name</code> is an <strong>array</strong>, and an array name is already an address. Drills <code>w10</code> and <code>b1</code> are about exactly this.</p>
+<p><strong>A <code>double</code> is read with <code>%lf</code>, not <code>%f</code>.</strong> <code>%f</code> is for printing a double and for reading a <code>float</code>. Read a <code>double</code> with <code>%f</code> and the value you get back is wrong.</p>
+<p><strong>Compare programme codes with <code>strcmp</code>, never with <code>==</code>.</strong> <code>a == b</code> on two character arrays compares <em>addresses</em>, which are never equal, so the test is silently always false.</p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="act-0-getting-started-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="act-0-getting-started-10-minutes">Act 0 · Getting started (10 minutes)</h2>
+<p>The pack is already on the lab machines. If it is not on yours, download it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab09.tar.gz</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf lab09.tar.gz</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab09</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./install.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>install.sh</code> makes your workspace and puts you inside it. Your prompt will read <code>[lab09 OK ...]</code>. If it does not, you are in the wrong place — run <code>./where.sh</code> and it will tell you what to type.</p>
+<p>Then start the recorder, which is your proof of work:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="act-1-read-drills-15-minutes-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-read-drills-15-minutes-not-marked">Act 1 · Read drills (15 minutes, not marked)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ten short programs. For each one you type what you think it will print, and only then does it run.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Drills</th>
+<th>What they are about</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d01</code>–<code>d03</code></td>
+<td>what a structure is, and what <code>b = a</code> does</td>
+</tr>
+<tr class="even">
+<td><code>d04</code>–<code>d05</code></td>
+<td>by value against by address — the same function, twice</td>
+</tr>
+<tr class="odd">
+<td><code>d06</code>–<code>d08</code></td>
+<td>arrays of records, <code>-&gt;</code>, and a structure inside a structure</td>
+</tr>
+<tr class="even">
+<td><code>d09</code></td>
+<td><code>sizeof</code> a structure, and why it is not the sum of its parts</td>
+</tr>
+<tr class="odd">
+<td><code>d10</code></td>
+<td>comparing programme codes with <code>strcmp</code></td>
+</tr>
+</tbody>
+</table>
+<p>These carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.</p>
+</section>
+<section id="act-2-write-drills-20-minutes-1-mark-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-2-write-drills-20-minutes-1-mark-each">Act 2 · Write drills (20 minutes, 1 mark each)</h2>
+<p>Ten files, <code>w01.c</code> to <code>w10.c</code>. In each one, everything is written except a single line, and the comment tells you what that line must do.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>What you write</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>w01</code></td>
+<td>read two numbers straight into the members of a structure</td>
+</tr>
+<tr class="even">
+<td><code>w02</code></td>
+<td>read members of two different types</td>
+</tr>
+<tr class="odd">
+<td><code>w03</code></td>
+<td>copy a structure, change the copy, leave the original alone</td>
+</tr>
+<tr class="even">
+<td><code>w04</code></td>
+<td>a function body that gets a structure <strong>by value</strong></td>
+</tr>
+<tr class="odd">
+<td><code>w05</code></td>
+<td>the same, but <strong>by address</strong> — compare the two</td>
+</tr>
+<tr class="even">
+<td><code>w06</code></td>
+<td>read three records into an array</td>
+</tr>
+<tr class="odd">
+<td><code>w07</code></td>
+<td>reach members through a pointer, with <code>-&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>w08</code></td>
+<td>read into a structure that holds two other structures</td>
+</tr>
+<tr class="odd">
+<td><code>w09</code></td>
+<td>find the largest member in an array of records</td>
+</tr>
+<tr class="even">
+<td><code>w10</code></td>
+<td>read a name and a programme code</td>
+</tr>
+</tbody>
+</table>
+<p><code>w04</code> and <code>w05</code> are a matched pair. Do them one after the other: the first cannot change the caller’s record and the second can, and that is the whole lesson.</p>
+</section>
+<section id="how-to-work-on-one-problem" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-work-on-one-problem">How to work on one problem</h2>
+<p>The steps are the same for all nineteen. Using <code>w01.c</code> as the example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> w01.c                <span class="co"># open it and write the missing line</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> w01.c <span class="at">-o</span> w01         <span class="co"># compile it</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./w01</span> <span class="op">&lt;</span> w01_sample.txt   <span class="co"># run it on the sample input</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> w01           <span class="co"># once it runs, have it marked</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Plain <code>gcc</code>. No <code>-lm</code>, no other flags.</p>
+<p><strong>Every problem has a ready-made input file</strong>, named <code>&lt;problem&gt;_sample.txt</code>, and each one reproduces the <code>EXAMPLE</code> printed at the top of that starter:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./w01 <span class="op">&lt;</span> w01_sample.txt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">x</span><span class="op">=</span>3 <span class="va">y</span><span class="op">=</span>4</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./b5_topper <span class="op">&lt;</span> b5_sample.txt</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">topper</span><span class="op">=</span>1002</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Compile and run it yourself before running <code>./check.sh</code>. Running it shows you what your program does; the checker only tells you whether the answer is right.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-3-blanks-25-minutes-5-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-3-blanks-25-minutes-5-marks-each">Act 3 · Blanks (25 minutes, 5 marks each)</h2>
+<p>Everything around the gap is written for you. Write the missing loop or line.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it must do</th>
+<th>Its last line must end with</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>b1_make.c</code></td>
+<td>build one complete record and print it back</td>
+<td><code>&lt;roll&gt; &lt;name&gt; &lt;cgpa&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>b2_arrow.c</code></td>
+<td>the same record, reached through a pointer</td>
+<td><code>roll=&lt;R&gt; cgpa=&lt;C&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>b3_average.c</code></td>
+<td>the average cgpa over an array of records</td>
+<td><code>average=&lt;A&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>b4_above.c</code></td>
+<td>how many records are <strong>strictly</strong> above 7.00</td>
+<td><code>above=&lt;N&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>b5_topper.c</code></td>
+<td>the roll of the record with the highest cgpa</td>
+<td><code>topper=&lt;R&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>b4</code> and <code>b5</code> both turn on one character. <em>Strictly above</em> means <code>&gt; 7.0</code>, so a cgpa of exactly 7.00 does <strong>not</strong> count — one of the test cases is three students at exactly 7.00 and expects <code>above=0</code>. In <code>b5</code>, a tie goes to the <strong>first</strong> of the tied students, which you get for free by testing with <code>&gt;</code> and not <code>&gt;=</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="act-4-problems-40-minutes-10-marks-each" class="level2">
+<h2 class="anchored" data-anchor-id="act-4-problems-40-minutes-10-marks-each">Act 4 · Problems (40 minutes, 10 marks each)</h2>
+<p>Specification only. You write the whole program.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>What it must do</th>
+<th>Its last line must end with</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>e1.c</code></td>
+<td>is a point inside a rectangle?</td>
+<td><code>inside</code> or <code>outside</code></td>
+</tr>
+<tr class="even">
+<td><code>e2.c</code></td>
+<td>the topper, from a list of records</td>
+<td><code>topper=&lt;roll&gt; &lt;name&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>e3.c</code></td>
+<td><strong>reads <code>students.txt</code></strong> — which programme has the most students above 7</td>
+<td><code>program=&lt;code&gt; count=&lt;N&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>e4.c</code></td>
+<td><strong>reads <code>students.txt</code>, writes <code>passed.txt</code></strong></td>
+<td><code>passed=&lt;N&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>e1</code> is Monday’s lecture problem.</strong> Two structures — a <code>Point</code>, and a <code>Rect</code> made of two <code>Point</code>s — and a function returning 1 or 0. Four conditions, all of which must hold. A point exactly on an edge counts as inside, and two of the test cases sit exactly on the boundary to check that you meant <code>&gt;=</code> and not <code>&gt;</code>.</p>
+<p><strong><code>e2</code></strong> is <code>b5</code> with more to report. Keep the <strong>index</strong> of the best record, not a copy of the cgpa: you owe the caller two facts about that student, and the cgpa alone cannot tell you the name.</p>
+<section id="e3-and-e4-do-not-read-the-keyboard" class="level3">
+<h3 class="anchored" data-anchor-id="e3-and-e4-do-not-read-the-keyboard"><code>e3</code> and <code>e4</code> do not read the keyboard</h3>
+<p>These two read the file <code>students.txt</code>, which is already in your workspace. Run them with no input at all:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> e3.c <span class="at">-o</span> e3</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./e3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each line of <code>students.txt</code> holds one record:</p>
+<pre><code>1001 Ravi EE 8.20
+1002 Asha ME 6.50
+1003 Iqbal EE 7.10</code></pre>
+<p>and the file ends when it ends — you are <strong>not</strong> told in advance how many lines there are. That is what this pattern is for:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%7s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> prog<span class="op">,</span> <span class="op">&amp;</span>cgpa<span class="op">)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It stops as soon as a read does not deliver all four items, which is what happens at the end of the file.</p>
+<p><strong><code>e3</code></strong> needs three counters and no array at all — you never have to store the records. Ties, including the case where nobody is above 7, go to whichever programme appears <strong>first in the file</strong>.</p>
+<p><strong><code>e4</code></strong> writes a file as well as reading one. Open it with <code>fopen("passed.txt", "w")</code> and <strong><code>fclose</code> it when you are done</strong> — what you have written may still be sitting in a buffer until you do. If nobody qualifies, <code>passed.txt</code> must still exist, and be empty.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><code>e4</code> is graded <strong>twice</strong>: the line you print <em>and</em> the contents of <code>passed.txt</code>. A correct count on screen earns nothing if the file was never written. The checker deletes any old <code>passed.txt</code> before each test, so a file left over from an earlier run cannot be mistaken for this one.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="how-the-checking-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-the-checking-works">How the checking works</h3>
+<p><code>./check.sh e1</code> compiles <em>your</em> source and runs it on two kinds of input: a fixed set chosen in advance, labelled <code>public</code>, and a set generated fresh at that moment from the range in the <code>GIVEN</code> line, labelled <code>random</code>. A program that only reproduces the printed example will fail as soon as a new input is drawn.</p>
+<p>For <code>e3</code> and <code>e4</code> the checker writes a fresh <code>students.txt</code> before each test and gives your program an <strong>empty</strong> keyboard input. A leftover <code>scanf</code> will not hang: it finds no input, returns <code>EOF</code>, and leaves your variable holding whatever it held before. So the symptom is a wrong answer from a program that looked like it ran fine — which is exactly why you should check what <code>scanf</code> returned rather than assume it worked.</p>
+</section>
+</section>
+<section id="act-5-check-your-marks-fix-and-submit-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="act-5-check-your-marks-fix-and-submit-10-minutes">Act 5 · Check your marks, fix, and submit (10 minutes)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e3       <span class="co"># one problem, while you are working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Marks are given <strong>per test case</strong>, not all-or-nothing, so fixing a failing case is worth doing even in the last few minutes. Two caveats, so the number does not surprise you:</p>
+<ul>
+<li>Each problem’s mark is rounded to a whole number. A write drill is worth 1 mark over 5 cases, so passing 2 of 5 rounds to 0 and 3 of 5 rounds to 1. On the 10-mark problems every case really does carry its own share.</li>
+<li>Some cases are drawn fresh each run, so the total can move by a mark or two between checks. Treat it as an estimate.</li>
+</ul>
+<p>When you are finished, or when time is called:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The bundle is written to the directory <strong>above</strong> your workspace, named <code>lab09_&lt;rolls&gt;_&lt;branch&gt;_w&lt;NN&gt;.tar.gz</code>. Take it with you: upload it to Moodle and email a copy to yourself. The lab machines are wiped between sessions.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="if-you-finish-early-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="if-you-finish-early-not-marked">If you finish early (not marked)</h2>
+<ol type="1">
+<li>Make <code>e3</code> report the programme with the <strong>highest average</strong> cgpa instead of the most students above 7. Which parts of the loop change, and which do not?</li>
+<li>Make <code>e4</code> write the name next to each roll, and check it. Then undo that and make it write a header line first, and check that. The checker rejects both — read its two complaints and work out which line of <code>passed.txt</code> it is objecting to in each case.</li>
+<li>Add a <code>struct Rect</code> function <code>int overlap(struct Rect a, struct Rect b)</code> that says whether two rectangles overlap at all. Start from <code>e1</code>: two rectangles miss each other exactly when one is entirely to one side of the other.</li>
+</ol>
+</section>
+<section id="before-you-leave" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-leave">Before you leave</h2>
+<p>Be ready to answer these out loud.</p>
+<ol type="1">
+<li>In <code>w04</code> nothing changed and in <code>w05</code> it did. The function body was almost the same. What was different?</li>
+<li>In <code>e3</code>, why <code>strcmp</code> and not <code>==</code>?</li>
+<li>What would your <code>e4</code> do if <code>students.txt</code> were not there? Did you try it?</li>
+</ol>
 
 
 </section>

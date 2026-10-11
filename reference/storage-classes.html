@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
+ <span class="menu-text">Lab 09: Structures and Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -555,7 +555,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The words you may put in front of a declaration: <code>auto</code>, <code>register</code>, <code>static</code>, <code>extern</code>.</p>
+<p>The words you may put in front of a declaration: <code>auto</code>, <code>register</code>, <code>static</code>, <code>extern</code>. The <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Storage-Class-Specifiers-1">GNU C Manual</a> lists exactly these four:</p>
+<blockquote class="blockquote">
+<p>There are four storage class specifiers that you can prepend to your variable declarations which change how the variables are stored in memory: <code>auto</code>, <code>extern</code>, <code>register</code>, and <code>static</code>.</p>
+</blockquote>
 <p>They control <strong>lifetime</strong> (how long the storage exists) and <strong>linkage</strong> (whether another file can reach the name) — except <code>register</code>, which controls neither and does only one thing, below. For scope itself see <a href="../reference/scope.html">Scope and lifetime</a>.</p>
 <section id="the-table" class="level2">
 <h2 class="anchored" data-anchor-id="the-table">The table</h2>
@@ -764,7 +767,7 @@ calls=3 fresh=1</code></pre>
 <p>That rules it out for <strong>arrays altogether</strong>, not just arrays you pass to a function: <code>a[0]</code> means <code>*(a + 0)</code>, which needs the array’s address.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">register</span> <span class="dt">int</span> a<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">};</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">9</span><span class="op">;</span>           <span class="co">/* error: address of register variable requested */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The only thing you may do with a <code>register</code> array is <code>sizeof</code>.</p>
+<p>The only thing you may do with a <code>register</code> array is <code>sizeof</code>. The manual states the rule directly, under <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1">array subscripts</a>: “you cannot subscript an array having the <code>register</code> storage class.”</p>
 </section>
 <section id="auto" class="level2">
 <h2 class="anchored" data-anchor-id="auto">auto</h2>
@@ -845,6 +848,8 @@ calls=3 fresh=1</code></pre>
 </tr>
 </tbody>
 </table>
+<hr>
+<p><strong>In the GNU C Manual:</strong> <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Storage-Class-Specifiers-1">§2.9 Storage Class Specifiers</a> · <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Static-Functions-1">§5.9 Static Functions</a></p>
 
 
 </section>

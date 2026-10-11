@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
+ <span class="menu-text">Lab 09: Structures and Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -650,7 +650,10 @@ rows = sizeof m / sizeof m[0] = 3</code></pre>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> a<span class="op">;</span>                       <span class="co">/* by pointer */</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>…<span class="op">*(</span>p <span class="op">+</span> i<span class="op">)</span>…                        <span class="co">/* same as a[i] */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>a[i]</code> <strong>is</strong> <code>*(a + i)</code>.</p>
+<p><code>a[i]</code> <strong>is</strong> <code>*(a + i)</code>. The <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1">GNU C Manual</a> puts it exactly:</p>
+<blockquote class="blockquote">
+<p>The array subscript expression <code>A[i]</code> is defined as being identical to the expression <code>(*((A)+(i)))</code>. This means that many uses of an array name are equivalent to a pointer expression.</p>
+</blockquote>
 </section>
 <section id="traps" class="level2">
 <h2 class="anchored" data-anchor-id="traps">Traps</h2>
@@ -682,6 +685,8 @@ rows = sizeof m / sizeof m[0] = 3</code></pre>
 </tr>
 </tbody>
 </table>
+<hr>
+<p><strong>In the GNU C Manual:</strong> <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Arrays-1">§2.5 Arrays</a> · <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Array-Subscripts-1">§3.13 Array Subscripts</a></p>
 
 
 </section>

@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 09: Structures and File Input/Output</span></a>
+ <span class="menu-text">Lab 09: Structures and Files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -527,6 +527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#with-arrays" id="toc-with-arrays" class="nav-link" data-scroll-target="#with-arrays">With arrays</a></li>
   <li><a href="#null" id="toc-null" class="nav-link" data-scroll-target="#null">NULL</a></li>
   <li><a href="#printing-an-address" id="toc-printing-an-address" class="nav-link" data-scroll-target="#printing-an-address">Printing an address</a></li>
+  <li><a href="#pointers-to-pointers" id="toc-pointers-to-pointers" class="nav-link" data-scroll-target="#pointers-to-pointers">Pointers to pointers</a></li>
   <li><a href="#why-pointers-exist" id="toc-why-pointers-exist" class="nav-link" data-scroll-target="#why-pointers-exist">Why pointers exist</a></li>
   <li><a href="#the-five-mistakes" id="toc-the-five-mistakes" class="nav-link" data-scroll-target="#the-five-mistakes">The five mistakes</a></li>
   </ul>
@@ -642,6 +643,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="printing-an-address">Printing an address</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%p\n</span><span class="st">"</span><span class="op">,</span> <span class="op">(</span><span class="dt">void</span> <span class="op">*)</span>p<span class="op">);</span>     <span class="co">/* differs on every run */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="pointers-to-pointers" class="level2">
+<h2 class="anchored" data-anchor-id="pointers-to-pointers">Pointers to pointers</h2>
+<p>A pointer is a variable, so it has an address of its own, and that address can be stored too.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p  <span class="op">=</span> <span class="op">&amp;</span>a<span class="op">;</span>      <span class="co">/* p holds the address of a */</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">**</span>q <span class="op">=</span> <span class="op">&amp;</span>p<span class="op">;</span>      <span class="co">/* q holds the address of p */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Written</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>p</code></td>
+<td>the address of <code>a</code></td>
+</tr>
+<tr class="even">
+<td><code>*p</code></td>
+<td><code>a</code></td>
+</tr>
+<tr class="odd">
+<td><code>q</code></td>
+<td>the address of <code>p</code></td>
+</tr>
+<tr class="even">
+<td><code>*q</code></td>
+<td><code>p</code>, i.e.&nbsp;the address of <code>a</code></td>
+</tr>
+<tr class="odd">
+<td><code>**q</code></td>
+<td><code>a</code> — follow it twice</td>
+</tr>
+</tbody>
+</table>
+<p>Read the declaration the same way as always: <code>**q</code> is an <code>int</code>, so <code>q</code> points at an <code>int *</code>.</p>
+<p><strong>Why you would want one.</strong> To let a function change the caller’s <em>pointer</em>, not just the value it points at — the same reason an <code>int *</code> lets it change an <code>int</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> pointElsewhere<span class="op">(</span><span class="dt">int</span> <span class="op">**</span>q<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>target<span class="op">)</span> <span class="op">{</span> <span class="op">*</span>q <span class="op">=</span> target<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>a<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>pointElsewhere<span class="op">(&amp;</span>p<span class="op">,</span> <span class="op">&amp;</span>b<span class="op">);</span>     <span class="co">/* p now points at b */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is not needed for anything in this course, and you should not reach for it. It is here because it turns up in the recommended lectures: <a href="../cs1100-cse-iitm-2021/slides/Lec28.pdf">Lec 28</a>, <em>More on pointers</em>, covers it as <code>type **ptrname</code>.</p>
+</section>
 <section id="why-pointers-exist" class="level2">
 <h2 class="anchored" data-anchor-id="why-pointers-exist">Why pointers exist</h2>
 <table class="caption-top table">
@@ -696,6 +742,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Three of those five are <strong>undefined behaviour</strong> — the first, the fourth and the fifth. The standard says nothing about what happens, so do not learn what your compiler does with them.</p>
+<hr>
+<p><strong>In the GNU C Manual:</strong> <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Pointers-1">§2.6 Pointers</a> · <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Pointer-Operators-1">§3.10 Pointer Operators</a></p>
 
 
 </section>
