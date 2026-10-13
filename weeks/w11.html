@@ -546,6 +546,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#writing-a-file" id="toc-writing-a-file" class="nav-link" data-scroll-target="#writing-a-file">8 · Writing a file</a></li>
   <li><a href="#file-is-a-pointer-and-it-can-be-null" id="toc-file-is-a-pointer-and-it-can-be-null" class="nav-link" data-scroll-target="#file-is-a-pointer-and-it-can-be-null">9 · <code>FILE *</code> is a pointer, and it can be NULL</a></li>
   <li><a href="#reading-a-file-back" id="toc-reading-a-file-back" class="nav-link" data-scroll-target="#reading-a-file-back">10 · Reading a file back</a></li>
+  <li><a href="#b-what-eof-actually-is" id="toc-b-what-eof-actually-is" class="nav-link" data-scroll-target="#b-what-eof-actually-is">10b · What <code>EOF</code> actually is</a>
+  <ul class="collapse">
+  <li><a href="#what-fscanf-returns-in-every-case" id="toc-what-fscanf-returns-in-every-case" class="nav-link" data-scroll-target="#what-fscanf-returns-in-every-case">What <code>fscanf</code> returns, in every case</a></li>
+  </ul></li>
+  <li><a href="#c-fscanf-does-not-read-lines" id="toc-c-fscanf-does-not-read-lines" class="nav-link" data-scroll-target="#c-fscanf-does-not-read-lines">10c · <code>fscanf</code> does not read lines</a></li>
+  <li><a href="#d-when-the-layout-does-matter-separators" id="toc-d-when-the-layout-does-matter-separators" class="nav-link" data-scroll-target="#d-when-the-layout-does-matter-separators">10d · When the layout does matter: separators</a>
+  <ul class="collapse">
+  <li><a href="#fixed-width-columns" id="toc-fixed-width-columns" class="nav-link" data-scroll-target="#fixed-width-columns">Fixed-width columns</a></li>
+  </ul></li>
+  <li><a href="#e-the-other-way-one-line-at-a-time" id="toc-e-the-other-way-one-line-at-a-time" class="nav-link" data-scroll-target="#e-the-other-way-one-line-at-a-time">10e · The other way: one line at a time</a></li>
   <li><a href="#putting-it-with-structures" id="toc-putting-it-with-structures" class="nav-link" data-scroll-target="#putting-it-with-structures">11 · Putting it with structures</a></li>
   <li><a href="#what-goes-wrong" id="toc-what-goes-wrong" class="nav-link" data-scroll-target="#what-goes-wrong">12 · What goes wrong</a></li>
   <li><a href="#drills-1" id="toc-drills-1" class="nav-link" data-scroll-target="#drills-1">Drills</a></li>
@@ -1251,15 +1261,210 @@ read 3 students, average 84.67</code></pre>
 </div>
 </div>
 </section>
+<section id="b-what-eof-actually-is" class="level2">
+<h2 class="anchored" data-anchor-id="b-what-eof-actually-is">10b · What <code>EOF</code> actually is</h2>
+<p>The loop above stops “when the file runs out”, and it is worth being exact about what that means, because the usual picture of it is wrong.</p>
+<p><strong>There is no EOF character in the file.</strong> Look at a one-record file byte by byte:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> printf <span class="st">'11 Asha 91.5\n'</span> <span class="op">&gt;</span> one.txt</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> wc <span class="at">-c</span> <span class="op">&lt;</span> one.txt</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">13</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> od <span class="at">-c</span> one.txt</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0000000</span>   1   1       A   s   h   a       9   1   .   5  <span class="dt">\n</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0000015</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Thirteen bytes: the twelve you can see, and the newline. There is no thirteenth marker, no special byte at the end. The file simply <strong>stops</strong>.</p>
+<p>So <code>EOF</code> is not something <em>in</em> the data. It is a value the library hands <strong>back to you</strong> to say <em>“there was nothing left to read”</em>. It is a macro from <code>stdio.h</code>, and on this machine — on essentially every machine — it is <code>-1</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"EOF is the value </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> EOF<span class="op">);</span>     <span class="co">/* EOF is the value -1 */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It is negative on purpose: a count of successfully read items can be <code>0</code>, <code>1</code>, <code>2</code>, …, so a negative value is free to mean something different without ever colliding with a real answer.</p>
+<section id="what-fscanf-returns-in-every-case" class="level3">
+<h3 class="anchored" data-anchor-id="what-fscanf-returns-in-every-case">What <code>fscanf</code> returns, in every case</h3>
+<p>That gives <code>fscanf</code> four distinct things to tell you, and the difference matters:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Your file holds</th>
+<th><code>fscanf(f, "%d %19s %lf", …)</code> returns</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>11 Asha 91.5</code></td>
+<td><code>3</code></td>
+<td>a complete record</td>
+</tr>
+<tr class="even">
+<td><code>11 Asha</code></td>
+<td><code>2</code></td>
+<td><strong>partial</strong> — two fields matched, the third ran out</td>
+</tr>
+<tr class="odd">
+<td><code>hello there</code></td>
+<td><code>0</code></td>
+<td>nothing matched: the first conversion already failed</td>
+</tr>
+<tr class="even">
+<td><em>(nothing left)</em></td>
+<td><code>-1</code> (<code>EOF</code>)</td>
+<td>the file ended before anything could be read</td>
+</tr>
+</tbody>
+</table>
+<p>All four were produced by running exactly that call on exactly those files.</p>
+<p>This is why the loop is written <code>== 3</code> and not <code>!= EOF</code>. <code>!= EOF</code> would keep going on a partial or malformed record, using whichever variables happened to be filled and whatever junk was in the rest. <code>== 3</code> means <em>“I got everything I asked for”</em>, and stops for any other reason — clean end, short line, or rubbish.</p>
+</section>
+</section>
+<section id="c-fscanf-does-not-read-lines" class="level2">
+<h2 class="anchored" data-anchor-id="c-fscanf-does-not-read-lines">10c · <code>fscanf</code> does not read lines</h2>
+<p>Here is the misconception worth spending a minute on. <code>fscanf</code> looks line-oriented because our file has one record per line. It is not. <strong><code>fscanf</code> reads conversions, not lines</strong>, and <code>%d</code>, <code>%s</code> and <code>%lf</code> each begin by skipping over <em>any</em> amount of whitespace — spaces, tabs, and newlines alike.</p>
+<p>A newline is simply whitespace. <code>fscanf</code> cannot see the difference between these five files:</p>
+<pre><code>layout A       layout B                    layout C      layout D          layout E
+11 Asha 91.5   11 Asha 91.5 12 Bilal 78.0  11            11⇥Asha⇥91.5        11   Asha    91.5
+12 Bilal 78.0                              Asha          12⇥Bilal⇥78.0
+                                           91.5                               12  Bilal 78.0
+                                           12
+                                           Bilal
+                                           78.0</code></pre>
+<p>One record per line; both records on one line; one <em>field</em> per line; tab-separated; and ragged with blank lines. Running the same loop — <code>while (fscanf(f, "%d %19s %lf", &amp;roll, name, &amp;marks) == 3)</code> — on each of the five gives the identical answer every time:</p>
+<pre><code>got: 11 Asha 91.5
+got: 12 Bilal 78.0
+-&gt; 2 records</code></pre>
+<p>Two consequences, one convenient and one dangerous.</p>
+<p><strong>The convenient one:</strong> you never have to worry about how the data is spread across lines, or about extra blank lines, or about whether someone used tabs. Whitespace is whitespace.</p>
+<p><strong>The dangerous one:</strong> a missing field does not stop at the end of the line. If one record is short, <code>fscanf</code> walks straight onto the next line looking for what it is owed, and from then on every record is shifted by one field. The file is not corrupt and the program does not crash — the answers are just quietly wrong. If that matters to you, read a line at a time instead (§10e).</p>
+</section>
+<section id="d-when-the-layout-does-matter-separators" class="level2">
+<h2 class="anchored" data-anchor-id="d-when-the-layout-does-matter-separators">10d · When the layout does matter: separators</h2>
+<p>Everything above works because the fields are separated by whitespace <em>and no field contains any</em>. Break the second half of that and the whole approach collapses:</p>
+<pre><code>11 Ravi Kumar 91.5</code></pre>
+<pre><code>-&gt; 0 records</code></pre>
+<p>Not one record, not a wrong record — <strong>zero</strong>. <code>%19s</code> reads <code>Ravi</code> and stops at the space, then <code>%lf</code> is handed <code>Kumar</code> and fails, so the count is 2, not 3, and the loop never starts. A name with a space in it cannot be read by whitespace-separated conversions, and no amount of care with <code>%s</code> will fix it: the separator and the data have become the same character.</p>
+<p>The fix is to choose a separator the data cannot contain, and say so in the format. <code>%19[^,]</code> means <em>“up to 19 characters, none of which is a comma”</em> — a set, not a word:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Format that reads it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>11,Ravi Kumar,91.5</code></td>
+<td><code>"%d,%19[^,],%lf"</code></td>
+</tr>
+<tr class="even">
+<td><code>11⇥Ravi Kumar⇥91.5</code> (tabs)</td>
+<td><code>"%d\t%19[^\t]\t%lf"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Both give <code>[11] [Ravi Kumar] [91.5]</code>. Note what changed: the format now contains the separator <em>literally</em>, so <code>fscanf</code> has to match a comma or a tab exactly where one is expected. It has stopped being whitespace-driven.</p>
+<section id="fixed-width-columns" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-width-columns">Fixed-width columns</h3>
+<p>Some data has no separators at all — just columns at known positions, which is how a great deal of older scientific and administrative data is stored:</p>
+<pre><code>011Asha      091.5
+012Bilal     078.0</code></pre>
+<p>A number between <code>%</code> and the letter is a <strong>maximum field width</strong>: <code>%3d</code> reads at most three digits, <code>%10c</code> reads exactly ten characters whatever they are.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sscanf<span class="op">(</span>line<span class="op">,</span> <span class="st">"</span><span class="sc">%3d%10c%5lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> <span class="op">&amp;</span>m<span class="op">);</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>name<span class="op">[</span><span class="dv">10</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span>                 <span class="co">/* %c does NOT add a terminator - you must */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>roll=11 name=[Asha      ] marks=91.5
+roll=12 name=[Bilal     ] marks=78.0</code></pre>
+<p>Two things to notice: <code>%c</code> does not append <code>'\0'</code>, so you add it yourself, and the name keeps its padding spaces, because in fixed-width data the padding <em>is</em> the field. Trim it if you need to.</p>
+</section>
+</section>
+<section id="e-the-other-way-one-line-at-a-time" class="level2">
+<h2 class="anchored" data-anchor-id="e-the-other-way-one-line-at-a-time">10e · The other way: one line at a time</h2>
+<p>When the data really is line-oriented — when a short line should be reported rather than silently absorbed into the next — read lines yourself and parse each one separately. <code>sscanf</code> is <code>scanf</code> reading from a string instead of a stream, so the format you already know carries over unchanged:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">"ragged.txt"</span><span class="op">,</span> <span class="st">"r"</span><span class="op">);</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> line<span class="op">[</span><span class="dv">256</span><span class="op">];</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lineno <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> good <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> roll<span class="op">;</span>  <span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span>  <span class="dt">double</span> m<span class="op">;</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> printf<span class="op">(</span><span class="st">"could not open ragged.txt</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>line<span class="op">,</span> <span class="kw">sizeof</span> line<span class="op">,</span> f<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>        lineno<span class="op">++;</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>line<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">)</span> <span class="cf">continue</span><span class="op">;</span>                    <span class="co">/* blank line */</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>sscanf<span class="op">(</span>line<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> <span class="op">&amp;</span>m<span class="op">)</span> <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>            good<span class="op">++;</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"line </span><span class="sc">%d</span><span class="st"> ok : </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%s</span><span class="st"> </span><span class="sc">%.1f\n</span><span class="st">"</span><span class="op">,</span> lineno<span class="op">,</span> roll<span class="op">,</span> name<span class="op">,</span> m<span class="op">);</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">"line </span><span class="sc">%d</span><span class="st"> BAD: </span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> lineno<span class="op">,</span> line<span class="op">);</span>      <span class="co">/* line keeps its \n */</span></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"-&gt; </span><span class="sc">%d</span><span class="st"> good of </span><span class="sc">%d</span><span class="st"> lines</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> good<span class="op">,</span> lineno<span class="op">);</span></span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Give it a <code>ragged.txt</code> that is deliberately messy — a blank line, a line that is not a record at all, and a record missing its last field:</p>
+<pre><code>11 Asha 91.5
+
+this line is broken
+12 Bilal 78.0
+13 Chen</code></pre>
+<pre><code>line 1 ok : 11 Asha 91.5
+line 3 BAD: this line is broken
+line 4 ok : 12 Bilal 78.0
+line 5 BAD: 13 Chen
+-&gt; 2 good of 5 lines</code></pre>
+<p>That is the whole reason to prefer it: <strong>a bad line is confined to its line</strong>, and you can say <em>which</em> one. The <code>fscanf</code> loop of §10 would have stopped dead at line 3 and reported two records, with no indication that anything was wrong.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Use <code>fscanf</code> on the stream</th>
+<th>Use <code>fgets</code> + <code>sscanf</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Layout</td>
+<td>may be spread any way over lines</td>
+<td>one record per line</td>
+</tr>
+<tr class="even">
+<td>A bad record</td>
+<td>stops the loop, silently</td>
+<td>reported, with its line number, and skipped</td>
+</tr>
+<tr class="odd">
+<td>Fields with spaces</td>
+<td>impossible</td>
+<td>possible, and you control the splitting</td>
+</tr>
+<tr class="even">
+<td>Code</td>
+<td>one line</td>
+<td>a loop and a check</td>
+</tr>
+</tbody>
+</table>
+<p>For Lab 09 either will do, because the roster is well formed and names are one word. Know that the second exists for when they are not.</p>
+</section>
 <section id="putting-it-with-structures" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-with-structures">11 · Putting it with structures</h2>
 <p>Monday’s <code>struct Student</code> and Tuesday’s file are the obvious pair — a file of records read into an array of structures:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student cls<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">50</span> <span class="op">&amp;&amp;</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>       fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>cls<span class="op">[</span>n<span class="op">].</span>roll<span class="op">,</span> cls<span class="op">[</span>n<span class="op">].</span>name<span class="op">,</span> <span class="op">&amp;</span>cls<span class="op">[</span>n<span class="op">].</span>marks<span class="op">)</span> <span class="op">==</span> <span class="dv">3</span><span class="op">)</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    n<span class="op">++;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student cls<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">50</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>       fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>cls<span class="op">[</span>n<span class="op">].</span>roll<span class="op">,</span> cls<span class="op">[</span>n<span class="op">].</span>name<span class="op">,</span> <span class="op">&amp;</span>cls<span class="op">[</span>n<span class="op">].</span>marks<span class="op">)</span> <span class="op">==</span> <span class="dv">3</span><span class="op">)</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    n<span class="op">++;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>&amp;cls[n].roll</code> is the address of one member of one element. The <code>n &lt; 50</code> guard comes first so that a longer file cannot run past the end of the array — the file decides how much data arrives, and your array does not grow.</p>
 </section>
 <section id="what-goes-wrong" class="level2">
@@ -1284,7 +1489,7 @@ read 3 students, average 84.67</code></pre>
 </tr>
 <tr class="even">
 <td>looping on <code>!feof(f)</code></td>
-<td>reads one time too many — test the <strong>return of <code>fscanf</code></strong> instead, as above</td>
+<td>processes the last record <strong>twice</strong> — see below</td>
 </tr>
 <tr class="odd">
 <td>no bound when filling an array</td>
@@ -1296,6 +1501,29 @@ read 3 students, average 84.67</code></pre>
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Why <code>while (!feof(f))</code> is wrong
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It reads plausibly — <em>“while we are not at the end of the file”</em> — and it is the single most common file-handling bug in C. On the two-record file from §8:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(!</span>feof<span class="op">(</span>f<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> <span class="op">&amp;</span>marks<span class="op">);</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"iteration </span><span class="sc">%d</span><span class="st">: </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%s</span><span class="st"> </span><span class="sc">%.1f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">++</span>n<span class="op">,</span> roll<span class="op">,</span> name<span class="op">,</span> marks<span class="op">);</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>iteration 1: 11 Asha 91.5
+iteration 2: 12 Bilal 78.0
+iteration 3: 12 Bilal 78.0        &lt;- the last record, again
+-&gt; 3 iterations for 2 records</code></pre>
+<p>The reason is the order of events. <code>feof</code> does not look ahead; it reports whether a read has <strong>already</strong> failed. After the second record the file position sits just past the last byte, but nothing has tried to read beyond it yet, so <code>feof</code> is still false. The loop runs once more, the <code>fscanf</code> finally fails, and because its return value is being ignored, <code>roll</code>, <code>name</code> and <code>marks</code> are left holding the previous record — which is then printed as if it were new.</p>
+<p>Test the <strong>read</strong>, not the stream: <code>while (fscanf(...) == 3)</code> asks the question at the moment it can actually be answered.</p>
+</div>
+</div>
 </section>
 <section id="drills-1" class="level2">
 <h2 class="anchored" data-anchor-id="drills-1">Drills</h2>
@@ -1321,6 +1549,18 @@ read 3 students, average 84.67</code></pre>
 <td><code>d14</code></td>
 <td>run the reader when <code>marks.txt</code> is empty — what does it print?</td>
 </tr>
+<tr class="odd">
+<td><code>d15</code></td>
+<td>the same reader on a file with <strong>all the fields on one line</strong> — how many records?</td>
+</tr>
+<tr class="even">
+<td><code>d16</code></td>
+<td><code>fscanf(f, "%d %19s %lf", …)</code> on the line <code>11 Ravi Kumar 91.5</code> — what does it <strong>return</strong>?</td>
+</tr>
+<tr class="odd">
+<td><code>d17</code></td>
+<td><code>while (!feof(f))</code> over a 2-record file — how many iterations, and why?</td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -1339,7 +1579,7 @@ read 3 students, average 84.67</code></pre>
 <section id="new-here-snprintf" class="level3">
 <h3 class="anchored" data-anchor-id="new-here-snprintf">New here: <code>snprintf</code></h3>
 <p><strong><code>snprintf</code> is <code>printf</code> that writes into a character array instead of onto the screen.</strong> Same format strings, same <code>%d</code> and <code>%s</code> and <code>%.2f</code> — different destination.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>where<span class="op">,</span> how_big<span class="op">,</span> <span class="st">"format"</span><span class="op">,</span> <span class="op">...);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>where<span class="op">,</span> how_big<span class="op">,</span> <span class="st">"format"</span><span class="op">,</span> <span class="op">...);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1366,12 +1606,12 @@ read 3 students, average 84.67</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> small<span class="op">[</span><span class="dv">8</span><span class="op">];</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>small<span class="op">,</span> <span class="kw">sizeof</span> small<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> <span class="st">"Asha"</span><span class="op">);</span>        <span class="co">/* small is now "Asha"    */</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>small<span class="op">,</span> <span class="kw">sizeof</span> small<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">-</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="st">"ID"</span><span class="op">,</span> <span class="dv">42</span><span class="op">);</span>   <span class="co">/* small is now "ID-42"   */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> small<span class="op">[</span><span class="dv">8</span><span class="op">];</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>small<span class="op">,</span> <span class="kw">sizeof</span> small<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> <span class="st">"Asha"</span><span class="op">);</span>        <span class="co">/* small is now "Asha"    */</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>small<span class="op">,</span> <span class="kw">sizeof</span> small<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">-</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="st">"ID"</span><span class="op">,</span> <span class="dv">42</span><span class="op">);</span>   <span class="co">/* small is now "ID-42"   */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Why the size argument matters.</strong> <code>strcpy(s.name, "Asha")</code> does the same job here and is shorter, but it takes no size, so it cannot refuse. Hand it a name longer than the array and it writes straight past the end into whatever is next — the classic C bug, and undefined behaviour. <code>snprintf</code> cannot do that. It copies what fits, terminates with <code>'\0'</code>, and stops:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> small<span class="op">[</span><span class="dv">8</span><span class="op">];</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>small<span class="op">,</span> <span class="kw">sizeof</span> small<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> <span class="st">"Parvinder"</span><span class="op">);</span>   <span class="co">/* small is "Parvind"     */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> small<span class="op">[</span><span class="dv">8</span><span class="op">];</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>snprintf<span class="op">(</span>small<span class="op">,</span> <span class="kw">sizeof</span> small<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> <span class="st">"Parvinder"</span><span class="op">);</span>   <span class="co">/* small is "Parvind"     */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Seven characters and the terminator: eight bytes, exactly the size you declared. Truncated, but never out of bounds.</p>
 <p><strong>Write the size as <code>sizeof</code>, not as a number you typed.</strong> For the <code>struct Student</code> of §2, whose <code>name</code> member is <code>char name[20]</code>, <code>sizeof s.name</code> is 20 — and it stays correct by itself if you later widen the field to <code>char name[40]</code>. A hand-written <code>20</code> would quietly become wrong.</p>
 <p>One catch, from <a href="../weeks/w10.html">W10 §7</a>. <code>sizeof</code> only gives you the array’s real size where the array is <em>declared</em>. Inside a function that received it as a parameter it is a pointer, and <code>sizeof</code> gives 8 — the size of the address, not of the 20 bytes behind it. So in a function like <code>void setName(char dest[], int n)</code>, the length must still be passed in as <code>n</code>, exactly as it was for every array function you wrote in W09.</p>
@@ -1382,18 +1622,18 @@ read 3 students, average 84.67</code></pre>
 <h3 class="anchored" data-anchor-id="reading-a-name-in-properly">Reading a name in, properly</h3>
 <p>So far the name has always been one we wrote into the program ourselves — <code>"Asha"</code>, in a line of source. Real input is harder, and it is worth doing once, carefully, because three separate things can go wrong.</p>
 <p><strong>First: <code>scanf("%s")</code> cannot read a full name.</strong> <code>%s</code> stops at the first whitespace.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">"</span><span class="sc">%19s</span><span class="st">"</span><span class="op">,</span> name<span class="op">);</span>        <span class="co">/* input: Ravi Kumar */</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"[</span><span class="sc">%s</span><span class="st">]</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> name<span class="op">);</span>     <span class="co">/* prints [Ravi] — "Kumar" is still waiting */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">"</span><span class="sc">%19s</span><span class="st">"</span><span class="op">,</span> name<span class="op">);</span>        <span class="co">/* input: Ravi Kumar */</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"[</span><span class="sc">%s</span><span class="st">]</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> name<span class="op">);</span>     <span class="co">/* prints [Ravi] — "Kumar" is still waiting */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For a line that may contain spaces, use <code>fgets</code>, which reads up to a newline:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> line<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fgets<span class="op">(</span>line<span class="op">,</span> <span class="kw">sizeof</span> line<span class="op">,</span> stdin<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> line<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>fgets<span class="op">(</span>line<span class="op">,</span> <span class="kw">sizeof</span> line<span class="op">,</span> stdin<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Second: <code>fgets</code> keeps the newline.</strong> If you type <code>Ravi Kumar</code> and press Enter, <code>line</code> holds <code>Ravi Kumar\n</code>. Left alone, that newline is stored in the record and prints as a stray line break later. Remove it if it is there:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dt">size_t</span> len <span class="op">=</span> strlen<span class="op">(</span>line<span class="op">);</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>len <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">==</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    len<span class="op">--;</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="dt">size_t</span> len <span class="op">=</span> strlen<span class="op">(</span>line<span class="op">);</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>len <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">==</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    len<span class="op">--;</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>len &gt; 0</code> guard matters: on an empty line there is no character to examine, and <code>line[len - 1]</code> with <code>len == 0</code> would read <code>line[-1]</code>.</p>
 <p><strong>Third: the name may not fit.</strong> <code>s.name</code> holds 20 bytes, one of which must be the terminator — so 19 characters at most. You now have a decision to make, and it is a design decision, not a syntax one:</p>
 <table class="caption-top table">
@@ -1426,15 +1666,15 @@ read 3 students, average 84.67</code></pre>
 <section id="truncating-let-snprintf-do-it-then-ask-what-happened" class="level4">
 <h4 class="anchored" data-anchor-id="truncating-let-snprintf-do-it-then-ask-what-happened">Truncating: let <code>snprintf</code> do it, then ask what happened</h4>
 <p>This is where the return value earns its place. <code>snprintf</code> never overflows, and it <em>reports</em>: it returns the length the result <strong>would</strong> have had, so a value at or beyond the size tells you characters were dropped.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n <span class="op">=</span> snprintf<span class="op">(</span>s<span class="op">.</span>name<span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> line<span class="op">);</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"formatting error — nothing was stored</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> <span class="op">((</span><span class="dt">size_t</span><span class="op">)</span> n <span class="op">&gt;=</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"name truncated: needed </span><span class="sc">%d</span><span class="st"> bytes, the field holds </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>           n <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">);</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n <span class="op">=</span> snprintf<span class="op">(</span>s<span class="op">.</span>name<span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> line<span class="op">);</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"formatting error — nothing was stored</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> <span class="op">((</span><span class="dt">size_t</span><span class="op">)</span> n <span class="op">&gt;=</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"name truncated: needed </span><span class="sc">%d</span><span class="st"> bytes, the field holds </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>           n <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">);</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Three details worth being exact about:</p>
 <ul>
 <li><code>n &lt; 0</code> is a genuine failure inside <code>snprintf</code> (an encoding error), not a size problem. Nothing useful was stored.</li>
@@ -1445,57 +1685,57 @@ read 3 students, average 84.67</code></pre>
 <section id="refusing-measure-first-then-strcpy" class="level4">
 <h4 class="anchored" data-anchor-id="refusing-measure-first-then-strcpy">Refusing: measure first, then <code>strcpy</code></h4>
 <p>The box above said <code>strcpy</code> takes no size and so <em>cannot refuse</em> an oversized name. That is true, and it is the whole of the objection: it describes <code>strcpy</code> used <strong>unchecked</strong>. A function that cannot refuse does not need to, once you have already established that the string fits. So measure, decide, then copy:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>strlen<span class="op">(</span>line<span class="op">)</span> <span class="op">&gt;=</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"name is </span><span class="sc">%zu</span><span class="st"> characters; the field holds </span><span class="sc">%zu</span><span class="st"> including the terminator</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>           strlen<span class="op">(</span>line<span class="op">),</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">);</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span>                       <span class="co">/* refuse — nothing is stored */</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>strcpy<span class="op">(</span>s<span class="op">.</span>name<span class="op">,</span> line<span class="op">);</span>               <span class="co">/* safe: we just proved it fits */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>strlen<span class="op">(</span>line<span class="op">)</span> <span class="op">&gt;=</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"name is </span><span class="sc">%zu</span><span class="st"> characters; the field holds </span><span class="sc">%zu</span><span class="st"> including the terminator</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>           strlen<span class="op">(</span>line<span class="op">),</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">);</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span>                       <span class="co">/* refuse — nothing is stored */</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>strcpy<span class="op">(</span>s<span class="op">.</span>name<span class="op">,</span> line<span class="op">);</span>               <span class="co">/* safe: we just proved it fits */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>&gt;=</code> and not <code>&gt;</code> is the whole boundary. <code>sizeof s.name</code> is 20, so a 19-character name needs 20 bytes and just fits; a 20-character name needs 21 and does not.</p>
 </section>
 <section id="the-whole-thing" class="level4">
 <h4 class="anchored" data-anchor-id="the-whole-thing">The whole thing</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">{</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span>  roll<span class="op">;</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> marks<span class="op">;</span></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Student s<span class="op">;</span></span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> line<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> len<span class="op">;</span></span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n<span class="op">;</span></span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Name: "</span><span class="op">);</span></span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fgets<span class="op">(</span>line<span class="op">,</span> <span class="kw">sizeof</span> line<span class="op">,</span> stdin<span class="op">)</span> <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"could not read a name</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>    len <span class="op">=</span> strlen<span class="op">(</span>line<span class="op">);</span></span>
-<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>len <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">==</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>        line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span></span>
-<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> snprintf<span class="op">(</span>s<span class="op">.</span>name<span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> line<span class="op">);</span></span>
-<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"formatting error — nothing was stored</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span><span class="dt">size_t</span><span class="op">)</span> n <span class="op">&gt;=</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"warning: name truncated — needed </span><span class="sc">%d</span><span class="st"> bytes, the field holds </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span></span>
-<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>               n <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">);</span></span>
-<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"stored: [</span><span class="sc">%s</span><span class="st">]  (</span><span class="sc">%zu</span><span class="st"> characters)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> s<span class="op">.</span>name<span class="op">,</span> strlen<span class="op">(</span>s<span class="op">.</span>name<span class="op">));</span></span>
-<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">{</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span>  roll<span class="op">;</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> marks<span class="op">;</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Student s<span class="op">;</span></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> line<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> len<span class="op">;</span></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n<span class="op">;</span></span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Name: "</span><span class="op">);</span></span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fgets<span class="op">(</span>line<span class="op">,</span> <span class="kw">sizeof</span> line<span class="op">,</span> stdin<span class="op">)</span> <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"could not read a name</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a>    len <span class="op">=</span> strlen<span class="op">(</span>line<span class="op">);</span></span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>len <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">==</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a>        line<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> snprintf<span class="op">(</span>s<span class="op">.</span>name<span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">,</span> <span class="st">"</span><span class="sc">%s</span><span class="st">"</span><span class="op">,</span> line<span class="op">);</span></span>
+<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-30"><a href="#cb55-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"formatting error — nothing was stored</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span><span class="dt">size_t</span><span class="op">)</span> n <span class="op">&gt;=</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"warning: name truncated — needed </span><span class="sc">%d</span><span class="st"> bytes, the field holds </span><span class="sc">%zu\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a>               n <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">sizeof</span> s<span class="op">.</span>name<span class="op">);</span></span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb55-38"><a href="#cb55-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-39"><a href="#cb55-39" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"stored: [</span><span class="sc">%s</span><span class="st">]  (</span><span class="sc">%zu</span><span class="st"> characters)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> s<span class="op">.</span>name<span class="op">,</span> strlen<span class="op">(</span>s<span class="op">.</span>name<span class="op">));</span></span>
+<span id="cb55-40"><a href="#cb55-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb55-41"><a href="#cb55-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Run it four times, giving it something different each time. In each block below, the text after <code>Name:</code> is what you typed; every other line is the program’s own output.</p>
 <p><strong>1 · A name that fits.</strong> Type it and press Enter.</p>
 <pre><code>Name: Ravi Kumar
@@ -1612,9 +1852,9 @@ stored: []  (0 characters)</code></pre>
 <p>A 300-line file used to arrive slowly. Someone wrote it over days, you reviewed it in pieces, and you absorbed it at roughly the speed it was produced.</p>
 <p>Now you can ask for 300 lines and have them in ten seconds. The production side got faster by orders of magnitude. <strong>Your reading speed did not change at all.</strong> That gap is the whole story of this decade, and it is why the interview moved.</p>
 <p>This is also the honest reason your <code>struct</code> work this week matters more than it looks. Compare these two, which store the same thing:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span>   rolls<span class="op">[</span><span class="dv">100</span><span class="op">];</span>      <span class="dt">char</span>  names<span class="op">[</span><span class="dv">100</span><span class="op">][</span><span class="dv">20</span><span class="op">];</span>      <span class="dt">double</span> marks<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">{</span> <span class="dt">int</span> roll<span class="op">;</span> <span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span> <span class="dt">double</span> marks<span class="op">;</span> <span class="op">};</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student cls<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span>   rolls<span class="op">[</span><span class="dv">100</span><span class="op">];</span>      <span class="dt">char</span>  names<span class="op">[</span><span class="dv">100</span><span class="op">][</span><span class="dv">20</span><span class="op">];</span>      <span class="dt">double</span> marks<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">{</span> <span class="dt">int</span> roll<span class="op">;</span> <span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span> <span class="dt">double</span> marks<span class="op">;</span> <span class="op">};</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student cls<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The first is three arrays that you must personally remember to keep in step. The second <em>says what it is</em>. A reader meeting <code>cls[i].marks</code> knows something; a reader meeting <code>marks[i]</code> has to go hunting for whether <code>i</code> still means what it meant forty lines ago. You have just learned your first tool for making a large program readable — which is to say, your first tool for making a large program possible.</p>
 <hr>
 <p><strong>Taste and judgement are two different things.</strong></p>
