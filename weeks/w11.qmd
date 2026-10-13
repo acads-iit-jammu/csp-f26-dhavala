@@ -145,7 +145,7 @@ marks = 91.5
 
 The `.` reaches a member. `s.roll` is an `int` and behaves like any other `int`.
 
-Note the name is set with `snprintf`, not `=`. `s.name` is an **array**, and you cannot assign to an array — `s.name = "Asha"` does not compile. Copying characters into it is the only way.
+Note the name is set with `snprintf`, not `=`. `s.name` is an **array**, and you cannot assign to an array — `s.name = "Asha"` does not compile. To fill that member *on its own*, copying the characters in is the only way. There is one way round it, and it is worth waiting for: assigning a **whole structure** copies the name too, with no copying function at all. That is §3.
 
 ::: {.callout-note}
 ## New here: `snprintf`
@@ -423,6 +423,68 @@ sizeof(struct Point) = 8, two ints = 8
 
 Unlike an array, a structure **can** be assigned, and the assignment copies every member. This is worth noticing, because it is the one place C copies a compound object for you.
 
+### Which means a name can be assigned after all
+
+Look at what that buys you when a member *is* an array. Everything below is a single
+line, and there is no `strcpy`, no `snprintf`, no `fgets` anywhere in the program:
+
+```c
+#include <stdio.h>
+
+struct Student {
+    int  roll;
+    char name[20];
+    double marks;
+};
+
+int main(void)
+{
+    struct Student a = { 42, "Asha", 91.5 };   /* 1 - set up at declaration   */
+
+    struct Student b;
+    b = a;                                     /* 2 - whole-structure copy    */
+    b.roll = 43;                               /*     only the roll differs   */
+
+    struct Student c;
+    c = (struct Student){ 77, "Ravi Kumar", 88.0 };   /* 3 - a fresh record,
+                                                             in one line      */
+
+    printf("a: %d %s %.1f\n", a.roll, a.name, a.marks);
+    printf("b: %d %s %.1f\n", b.roll, b.name, b.marks);
+    printf("c: %d %s %.1f\n", c.roll, c.name, c.marks);
+    return 0;
+}
+```
+
+```
+a: 42 Asha 91.5
+b: 43 Asha 91.5
+c: 77 Ravi Kumar 88.0
+```
+
+Three things to take from it.
+
+**`b = a` copied the name.** `b.name` holds `"Asha"` and nobody called a copying
+function. The twenty bytes were copied because they are part of the structure, and the
+structure was assigned.
+
+**Form 3 is new notation.** `(struct Student){ 77, "Ravi Kumar", 88.0 }` builds an
+unnamed `struct Student` on the spot and assigns it. The braces list the members in
+declaration order, exactly as in form 1 — the difference is that form 1 only works
+*at the declaration*, while this one works at any point afterwards. It is the one-line
+way to overwrite a whole record.
+
+**None of this contradicts §2.** `b.name = a.name` still does not compile:
+
+```c
+b.name = a.name;     /* error: array type 'char[20]' is not assignable */
+```
+
+The array member cannot be assigned on its own. The structure containing it can, and
+when it is, the array goes along with it. That is the whole distinction — and it is why
+you reach for `snprintf` when you are filling in one field, and for `=` when you have a
+whole record to hand.
+
 ::: {.callout-warning}
 You still cannot **compare** two structures:
 
@@ -683,6 +745,7 @@ Predict before you run.
 | `d09` | `snprintf(name, 20, "%s", "Subrahmanyan Chandrasekhar")` — what does it **return**, and what is in `name`? |
 | `d10` | `scanf("%19s", name)` on the input `Ravi Kumar` — what is in `name`? |
 | `d11` | `struct Rect r = {{0,0},{4,3}};` — what is `r.hi.x`, and what does `r.hi` on its own mean? |
+| `d12` | `struct Student a = {1,"Asha",9.0}, b; b = a;` — what is in `b.name`? Compare with `d05` |
 
 ## Questions to Bring Back
 
@@ -855,10 +918,10 @@ while (n < 50 &&
 
 | | |
 |---|---|
-| `d12` | open a file that does not exist with `"r"` — what does `fopen` return? |
-| `d13` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
-| `d14` | `fscanf` with three conversions on a line that has two — what does it return? |
-| `d15` | run the reader when `marks.txt` is empty — what does it print? |
+| `d13` | open a file that does not exist with `"r"` — what does `fopen` return? |
+| `d14` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
+| `d15` | `fscanf` with three conversions on a line that has two — what does it return? |
+| `d16` | run the reader when `marks.txt` is empty — what does it print? |
 
 ## Questions to Bring Back
 
