@@ -2741,11 +2741,11 @@
     ]
   },
   {
-    "objectID": "labsheets/lab09.html#act-1-read-drills-15-minutes-not-marked",
-    "href": "labsheets/lab09.html#act-1-read-drills-15-minutes-not-marked",
+    "objectID": "labsheets/lab09.html#act-1-read-drills-20-minutes-not-marked",
+    "href": "labsheets/lab09.html#act-1-read-drills-20-minutes-not-marked",
     "title": "Lab 09: Structures and Files",
-    "section": "Act 1 · Read drills (15 minutes, not marked)",
-    "text": "Act 1 · Read drills (15 minutes, not marked)\n./drill.sh --all\nTen short programs. For each one you type what you think it will print, and only then does it run.\n\n\n\n\n\n\n\nDrills\nWhat they are about\n\n\n\n\nd01–d03\nwhat a structure is, and what b = a does\n\n\nd04–d05\nby value against by address — the same function, twice\n\n\nd06–d08\narrays of records, -&gt;, and a structure inside a structure\n\n\nd09\nsizeof a structure, and why it is not the sum of its parts\n\n\nd10\ncomparing programme codes with strcmp\n\n\n\nThese carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.",
+    "section": "Act 1 · Read drills (20 minutes, not marked)",
+    "text": "Act 1 · Read drills (20 minutes, not marked)\n./drill.sh --all\nFifteen short programs. For each one you type what you think it will print, and only then does it run.\n\n\n\n\n\n\n\nDrills\nWhat they are about\n\n\n\n\nd01–d03\nwhat a structure is, and what b = a does\n\n\nd04–d05\nby value against by address — the same function, twice\n\n\nd06–d08\narrays of records, -&gt;, and a structure inside a structure\n\n\nd09\nsizeof a structure, and why it is not the sum of its parts\n\n\nd10\ncomparing programme codes with strcmp\n\n\nd11–d12\nfopen when the file is not there; what \"w\" does to one that is\n\n\nd13–d14\nwhat fscanf returns, and whether the line layout matters\n\n\nd15\nwhy while (!feof(f)) is wrong\n\n\n\nd11–d15 are the ones to do carefully. e3 and e4 are worth 20 marks between them and both stand on exactly these five facts.\nThese carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.",
     "crumbs": [
       "Lab Sheets",
       "Lab 09: Structures and Files"

@@ -524,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-shape-of-this-lab" id="toc-the-shape-of-this-lab" class="nav-link active" data-scroll-target="#the-shape-of-this-lab">The shape of this lab</a></li>
   <li><a href="#the-minimum-c-you-need-today" id="toc-the-minimum-c-you-need-today" class="nav-link" data-scroll-target="#the-minimum-c-you-need-today">The minimum C you need today</a></li>
   <li><a href="#act-0-getting-started-10-minutes" id="toc-act-0-getting-started-10-minutes" class="nav-link" data-scroll-target="#act-0-getting-started-10-minutes">Act 0 · Getting started (10 minutes)</a></li>
-  <li><a href="#act-1-read-drills-15-minutes-not-marked" id="toc-act-1-read-drills-15-minutes-not-marked" class="nav-link" data-scroll-target="#act-1-read-drills-15-minutes-not-marked">Act 1 · Read drills (15 minutes, not marked)</a></li>
+  <li><a href="#act-1-read-drills-20-minutes-not-marked" id="toc-act-1-read-drills-20-minutes-not-marked" class="nav-link" data-scroll-target="#act-1-read-drills-20-minutes-not-marked">Act 1 · Read drills (20 minutes, not marked)</a></li>
   <li><a href="#act-2-write-drills-20-minutes-1-mark-each" id="toc-act-2-write-drills-20-minutes-1-mark-each" class="nav-link" data-scroll-target="#act-2-write-drills-20-minutes-1-mark-each">Act 2 · Write drills (20 minutes, 1 mark each)</a></li>
   <li><a href="#how-to-work-on-one-problem" id="toc-how-to-work-on-one-problem" class="nav-link" data-scroll-target="#how-to-work-on-one-problem">How to work on one problem</a></li>
   <li><a href="#act-3-blanks-25-minutes-5-marks-each" id="toc-act-3-blanks-25-minutes-5-marks-each" class="nav-link" data-scroll-target="#act-3-blanks-25-minutes-5-marks-each">Act 3 · Blanks (25 minutes, 5 marks each)</a></li>
@@ -676,10 +676,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Then start the recorder, which is your proof of work:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="act-1-read-drills-15-minutes-not-marked" class="level2">
-<h2 class="anchored" data-anchor-id="act-1-read-drills-15-minutes-not-marked">Act 1 · Read drills (15 minutes, not marked)</h2>
+<section id="act-1-read-drills-20-minutes-not-marked" class="level2">
+<h2 class="anchored" data-anchor-id="act-1-read-drills-20-minutes-not-marked">Act 1 · Read drills (20 minutes, not marked)</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Ten short programs. For each one you type what you think it will print, and only then does it run.</p>
+<p>Fifteen short programs. For each one you type what you think it will print, and only then does it run.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -712,8 +712,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>d10</code></td>
 <td>comparing programme codes with <code>strcmp</code></td>
 </tr>
+<tr class="even">
+<td><code>d11</code>–<code>d12</code></td>
+<td><code>fopen</code> when the file is not there; what <code>"w"</code> does to one that is</td>
+</tr>
+<tr class="odd">
+<td><code>d13</code>–<code>d14</code></td>
+<td>what <code>fscanf</code> returns, and whether the line layout matters</td>
+</tr>
+<tr class="even">
+<td><code>d15</code></td>
+<td>why <code>while (!feof(f))</code> is wrong</td>
+</tr>
 </tbody>
 </table>
+<p><code>d11</code>–<code>d15</code> are the ones to do carefully. <code>e3</code> and <code>e4</code> are worth 20 marks between them and both stand on exactly these five facts.</p>
 <p>These carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.</p>
 </section>
 <section id="act-2-write-drills-20-minutes-1-mark-each" class="level2">
