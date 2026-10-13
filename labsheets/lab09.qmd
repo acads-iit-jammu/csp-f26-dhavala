@@ -93,13 +93,13 @@ Then start the recorder, which is your proof of work:
 script session.txt
 ```
 
-## Act 1 · Read drills (15 minutes, not marked)
+## Act 1 · Read drills (20 minutes, not marked)
 
 ```bash
 ./drill.sh --all
 ```
 
-Ten short programs. For each one you type what you think it will print, and only then does it run.
+Fifteen short programs. For each one you type what you think it will print, and only then does it run.
 
 | Drills | What they are about |
 |---|---|
@@ -108,6 +108,11 @@ Ten short programs. For each one you type what you think it will print, and only
 | `d06`–`d08` | arrays of records, `->`, and a structure inside a structure |
 | `d09` | `sizeof` a structure, and why it is not the sum of its parts |
 | `d10` | comparing programme codes with `strcmp` |
+| `d11`–`d12` | `fopen` when the file is not there; what `"w"` does to one that is |
+| `d13`–`d14` | what `fscanf` returns, and whether the line layout matters |
+| `d15` | why `while (!feof(f))` is wrong |
+
+`d11`–`d15` are the ones to do carefully. `e3` and `e4` are worth 20 marks between them and both stand on exactly these five facts.
 
 These carry no marks. A wrong prediction costs you nothing, which is exactly why you should write it down before pressing Enter.
 
