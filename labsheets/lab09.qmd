@@ -204,6 +204,33 @@ Each line of `students.txt` holds one record:
 1003 Iqbal EE 7.10
 ```
 
+::: {.callout-warning}
+## Every name in this lab is a single word, and that is a simplification
+
+Real names are not like this. `Ravi Kumar`, `Subrahmanyan Chandrasekhar`, `A R Rahman` —
+most of the names in this room have a space in them. We have excluded them on purpose,
+so that `%19s` works and today can be about **records and files** rather than about
+parsing text.
+
+Be clear about what the simplification costs, because it is not a small thing.
+`fscanf(f, "%d %19s %7s %lf", …)` on the line
+
+```
+1001 Ravi Kumar EE 8.20
+```
+
+does not read `Ravi Kumar`. `%19s` stops at the space, takes `Ravi`, hands `Kumar` to
+the `%7s` and `EE` to the `%lf`, which fails — so the call returns 3, not 4, your loop
+ends, and **the rest of the file is silently ignored**. No error, no crash, just a
+shorter answer than the data deserved.
+
+So: the code you write today is correct for the data you are given and wrong for the
+world. That is a normal and acceptable position for a teaching exercise, as long as you
+know which of the two you are in. When you need the real thing, the
+[Week 11 appendix](../weeks/w11.qmd#appendix-copying-names-safely) shows how — a
+separator the data cannot contain, or reading the line and splitting it yourself.
+:::
+
 and the file ends when it ends — you are **not** told in advance how many lines there are. That is what this pattern is for:
 
 ```c
