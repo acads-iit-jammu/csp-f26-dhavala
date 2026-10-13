@@ -900,10 +900,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>1001 Ravi EE 8.20
 1002 Asha ME 6.50
 1003 Iqbal EE 7.10</code></pre>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Every name in this lab is a single word, and that is a simplification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Real names are not like this. <code>Ravi Kumar</code>, <code>Subrahmanyan Chandrasekhar</code>, <code>A R Rahman</code> — most of the names in this room have a space in them. We have excluded them on purpose, so that <code>%19s</code> works and today can be about <strong>records and files</strong> rather than about parsing text.</p>
+<p>Be clear about what the simplification costs, because it is not a small thing. <code>fscanf(f, "%d %19s %7s %lf", …)</code> on the line</p>
+<pre><code>1001 Ravi Kumar EE 8.20</code></pre>
+<p>does not read <code>Ravi Kumar</code>. <code>%19s</code> stops at the space, takes <code>Ravi</code>, hands <code>Kumar</code> to the <code>%7s</code> and <code>EE</code> to the <code>%lf</code>, which fails — so the call returns 3, not 4, your loop ends, and <strong>the rest of the file is silently ignored</strong>. No error, no crash, just a shorter answer than the data deserved.</p>
+<p>So: the code you write today is correct for the data you are given and wrong for the world. That is a normal and acceptable position for a teaching exercise, as long as you know which of the two you are in. When you need the real thing, the <a href="../weeks/w11.html#appendix-copying-names-safely">Week 11 appendix</a> shows how — a separator the data cannot contain, or reading the line and splitting it yourself.</p>
+</div>
+</div>
 <p>and the file ends when it ends — you are <strong>not</strong> told in advance how many lines there are. That is what this pattern is for:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%7s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> prog<span class="op">,</span> <span class="op">&amp;</span>cgpa<span class="op">)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%7s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> prog<span class="op">,</span> <span class="op">&amp;</span>cgpa<span class="op">)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It stops as soon as a read does not deliver all four items, which is what happens at the end of the file.</p>
 <p><strong><code>e3</code></strong> needs no array of records at all — you never have to store them. Three counters, one per programme, get you the counts. The tie rule needs one more thing: ties, including the case where nobody is above 7, go to whichever programme appears <strong>first in the file</strong>, so you also have to remember <em>where each programme first appeared</em> — and that includes appearances by students below 7.00, who still put their programme on the page. Six small variables in total, and no array of students.</p>
 <p><strong><code>e4</code></strong> writes a file as well as reading one. Open it with <code>fopen("passed.txt", "w")</code> and <strong><code>fclose</code> it when you are done</strong> — what you have written may still be sitting in a buffer until you do. If nobody qualifies, <code>passed.txt</code> must still exist, and be empty.</p>
@@ -926,15 +943,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="act-5-check-your-marks-fix-and-submit-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="act-5-check-your-marks-fix-and-submit-10-minutes">Act 5 · Check your marks, fix, and submit (10 minutes)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e3       <span class="co"># one problem, while you are working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e3       <span class="co"># one problem, while you are working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Marks are given <strong>per test case</strong>, not all-or-nothing, so fixing a failing case is worth doing even in the last few minutes. Two caveats, so the number does not surprise you:</p>
 <ul>
 <li>Each problem’s mark is rounded to a whole number. A write drill is worth 1 mark over 5 cases, so passing 2 of 5 rounds to 0 and 3 of 5 rounds to 1. On the 10-mark problems every case really does carry its own share.</li>
 <li>Some cases are drawn fresh each run, so the total can move by a mark or two between checks. Treat it as an estimate.</li>
 </ul>
 <p>When you are finished, or when time is called:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
