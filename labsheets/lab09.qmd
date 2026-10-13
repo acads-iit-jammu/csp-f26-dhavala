@@ -120,18 +120,18 @@ These carry no marks. A wrong prediction costs you nothing, which is exactly why
 
 Ten files, `w01.c` to `w10.c`. In each one, everything is written except a single line, and the comment tells you what that line must do.
 
-| | What you write |
-|---|---|
-| `w01` | read two numbers straight into the members of a structure |
-| `w02` | read members of two different types |
-| `w03` | copy a structure, change the copy, leave the original alone |
-| `w04` | a function body that gets a structure **by value** |
-| `w05` | the same, but **by address** — compare the two |
-| `w06` | read three records into an array |
-| `w07` | reach members through a pointer, with `->` |
-| `w08` | read into a structure that holds two other structures |
-| `w09` | find the largest member in an array of records |
-| `w10` | read a name and a programme code |
+| | What you write | Clue |
+|---|---|---|
+| `w01` | read two numbers straight into the members of a structure | `&p.x` is the address of the **member**, not of `p` |
+| `w02` | read members of two different types | a `double` is read with `%lf`. `%f` there is undefined behaviour, not a near miss |
+| `w03` | copy a structure, change the copy, leave the original alone | two lines: the first copies, the second changes the copy |
+| `w04` | a function body that gets a structure **by value** | write it, run it, watch nothing happen — that *is* the result |
+| `w05` | the same, but **by address** — compare the two | `p` is a pointer, so the member is spelt `p->x` |
+| `w06` | read three records into an array | `&a[i].x` — index first, then member, then take the address |
+| `w07` | reach members through a pointer, with `->` | aim `q` at `p` first; no `&` in the `printf` |
+| `w08` | read into a structure that holds two other structures | four addresses, two levels deep: `&r.lo.x`, `&r.lo.y`, `&r.hi.x`, `&r.hi.y` |
+| `w09` | find the largest member in an array of records | keep the **index** of the best, not the value |
+| `w10` | read a name and a programme code | no `&` on `s.name` — an array is already an address. Bound both: `%19s`, `%7s` |
 
 `w04` and `w05` are a matched pair. Do them one after the other: the first cannot change the caller's record and the second can, and that is the whole lesson.
 
@@ -165,13 +165,13 @@ Compile and run it yourself before running `./check.sh`. Running it shows you wh
 
 Everything around the gap is written for you. Write the missing loop or line.
 
-| File | What it must do | Its last line must end with |
-|---|---|---|
-| `b1_make.c` | build one complete record and print it back | `<roll> <name> <cgpa>` |
-| `b2_arrow.c` | the same record, reached through a pointer | `roll=<R> cgpa=<C>` |
-| `b3_average.c` | the average cgpa over an array of records | `average=<A>` |
-| `b4_above.c` | how many records are **strictly** above 7.00 | `above=<N>` |
-| `b5_topper.c` | the roll of the record with the highest cgpa | `topper=<R>` |
+| File | What it must do | Ends with | Clue |
+|---|---|---|---|
+| `b1_make.c` | build one complete record and print it back | `<roll> <name> <cgpa>` | one `scanf`, three conversions. `&` on roll and cgpa, none on name. Print with `%.2f` |
+| `b2_arrow.c` | the same record, reached through a pointer | `roll=<R> cgpa=<C>` | use `p`, not `s`. `&p->roll` works because `->` binds tighter than `&` |
+| `b3_average.c` | the average cgpa over an array of records | `average=<A>` | one loop to add, then one `printf`. `total` is a `double`, so the division is real |
+| `b4_above.c` | how many records are **strictly** above 7.00 | `above=<N>` | `>` and not `>=`. One test case is three students at exactly 7.00, expecting `above=0` |
+| `b5_topper.c` | the roll of the record with the highest cgpa | `topper=<R>` | the index again, as in `w09`. `>` keeps the **earlier** student on a tie; `>=` would not |
 
 ::: {.callout-tip}
 `b4` and `b5` both turn on one character. *Strictly above* means `> 7.0`, so a cgpa of exactly 7.00 does **not** count — one of the test cases is three students at exactly 7.00 and expects `above=0`. In `b5`, a tie goes to the **first** of the tied students, which you get for free by testing with `>` and not `>=`.
@@ -188,9 +188,54 @@ Specification only. You write the whole program.
 | `e3.c` | **reads `students.txt`** — which programme has the most students above 7 | `program=<code> count=<N>` |
 | `e4.c` | **reads `students.txt`, writes `passed.txt`** | `passed=<N>` |
 
-**`e1` is Monday's lecture problem.** Two structures — a `Point`, and a `Rect` made of two `Point`s — and a function returning 1 or 0. Four conditions, all of which must hold. A point exactly on an edge counts as inside, and two of the test cases sit exactly on the boundary to check that you meant `>=` and not `>`.
+Each of the four has a **shape** below: the skeleton, with the thinking left to you. Fill in the `...`.
 
-**`e2`** is `b5` with more to report. Keep the **index** of the best record, not a copy of the cgpa: you owe the caller two facts about that student, and the cgpa alone cannot tell you the name.
+### `e1` — the shape
+
+Monday's lecture problem. Name things so the conditions read like the maths.
+
+```c
+struct Point { int x, y; };
+struct Rect  { struct Point lo, hi; };
+
+int inside(struct Rect r, struct Point p)
+{
+    return  ... four comparisons joined by && ... ;
+}
+
+int main(void) {
+    struct Rect  r;
+    struct Point p;
+    scanf(...);                  /* the four corner numbers, into r.lo and r.hi */
+    scanf(...);                  /* the point, into p                           */
+    if (inside(r, p)) printf("inside\n");
+    else              printf("outside\n");
+}
+```
+
+`r.lo.x` is two steps: `r.lo` is a `Point`, `.x` is the `int` in it. Both structures go in **by value** — nothing is modified and six `int`s is nothing to copy, so no `&` and no `*` anywhere. A point exactly on an edge counts as inside, and two test cases sit on the boundary to check you meant `>=` and not `>`.
+
+### `e2` — the shape
+
+`b5` with more to report.
+
+```c
+struct Student { int roll; char name[20]; char program[8]; double cgpa; };
+
+int main(void) {
+    struct Student a[64];
+    int n, i, best = 0;
+
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+        scanf(...);              /* one scanf, all four members of a[i] */
+    for (i = 1; i < n; i++)
+        if (...) best = i;       /* compare against a[best]             */
+    printf("topper=%d %s\n", ..., ...);
+}
+```
+
+Keep the **index** of the best, not a copy of the cgpa — you owe two facts about that student and a number alone cannot tell you the name. Start `best = 0` and begin the second loop at `i = 1`: the first student leads until someone beats them. Test with `>`, so a tie keeps the earlier one.
 
 ### `e3` and `e4` do not read the keyboard
 
@@ -246,9 +291,54 @@ while (fscanf(f, "%d %19s %7s %lf", &roll, name, prog, &cgpa) == 4) {
 
 It stops as soon as a read does not deliver all four items, which is what happens at the end of the file.
 
-**`e3`** needs no array of records at all — you never have to store them. Three counters, one per programme, get you the counts. The tie rule needs one more thing: ties, including the case where nobody is above 7, go to whichever programme appears **first in the file**, so you also have to remember *where each programme first appeared* — and that includes appearances by students below 7.00, who still put their programme on the page. Six small variables in total, and no array of students.
+### `e3` — the shape
 
-**`e4`** writes a file as well as reading one. Open it with `fopen("passed.txt", "w")` and **`fclose` it when you are done** — what you have written may still be sitting in a buffer until you do. If nobody qualifies, `passed.txt` must still exist, and be empty.
+No array of records at all — you never store a student.
+
+```c
+char PROG[3][4] = { "EE", "ME", "MM" };
+int  count[3]   = { 0, 0, 0 };        /* how many above 7.00        */
+int  firstAt[3] = { -1, -1, -1 };     /* the row each FIRST appeared */
+int  row = 0;
+
+/* read one record at a time; for each one:
+       find which of the three programmes it is   (strcmp against PROG[i])
+       if this is its first sighting, note the row
+       if the cgpa is above 7.00, add one to its count
+       row++
+   then walk i = 1, 2 and keep the better of count[i] and count[best]  */
+```
+
+Six small variables and a row counter do the whole job. `-1` means *not seen yet* — do not use a value that could **be** a row, like `999`, because a long enough file would reach it. A programme can appear with nobody above 7.00; it still appeared, so its `firstAt` must still be set. On a tie the smaller `firstAt` wins, and a programme never seen loses to one that was.
+
+### `e4` — the shape
+
+You have **two files open at once**, so give them two names that say which is which. `f` and `g` will cost you an hour.
+
+```c
+int main(void) {
+    FILE *in_file  = fopen("students.txt", "r");
+    FILE *out_file = fopen("passed.txt",   "w");
+    struct Student s;
+    int passed = 0;
+
+    if (in_file  == NULL) { ... report, return 1 ... }
+    if (out_file == NULL) { ... report, return 1 ... }
+
+    while (fscanf(in_file, ...) == 4) {
+        if ( ... above 7.00 ... ) {
+            fprintf(out_file, "%d\n", s.roll);
+            passed++;
+        }
+    }
+
+    fclose(in_file);
+    fclose(out_file);
+    printf("passed=%d\n", passed);
+}
+```
+
+`fscanf` **reads from** `in_file`; `fprintf` **writes to** `out_file`. Each takes its file as the first argument, and if you swap them the compiler will not stop you — the data will simply go nowhere. Check **both** `fopen`s: the input can be missing, and the output can fail too, on a full or read-only disk. `fclose(out_file)` is not optional: what you wrote may still be in a buffer, and the checker reads the file after your program exits. This is `e3`'s loop with two extra lines in it, so get `e3` right first. And nobody qualifying is a valid answer — `passed.txt` exists, is empty, and you print `passed=0`.
 
 ::: {.callout-important}
 `e4` is graded **twice**: the line you print *and* the contents of `passed.txt`. A correct count on screen earns nothing if the file was never written. The checker deletes any old `passed.txt` before each test, so a file left over from an earlier run cannot be mistaken for this one.
