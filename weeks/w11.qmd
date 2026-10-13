@@ -52,7 +52,7 @@ This is also the page to revise from for Class Test-2 — along with the [W09](w
 
 int main(void)
 {
-    char a[50], b[50];
+    char a[100], b[50];       /* a must hold BOTH words, so it is the bigger one */
 
     printf("Enter two words: ");
     if (scanf("%49s %49s", a, b) != 2) return 1;
@@ -150,8 +150,9 @@ Note the name is set with `snprintf`, not `=`. `s.name` is an **array**, and you
 ::: {.callout-note}
 `snprintf` is new, and so is reading a name in from the keyboard without it going
 wrong. Neither is really about structures, so both are in the
-[appendix](#appendix-copying-names-safely) at the end of these notes — read it before
-Lab 09, where `e2` needs it. For now all you need is that
+[appendix](#appendix-copying-names-safely) at the end of these notes. Lab 09 does not
+require it — its names are single words, which `%19s` reads — but it is what you will
+need the first time a name has a space in it. For now all you need is that
 `snprintf(s.name, sizeof s.name, "%s", text)` is `printf` writing into a character
 array instead of onto the screen, and that it cannot overrun the array.
 :::
@@ -340,8 +341,8 @@ int inside(struct Rect r, struct Point p)
 }
 ```
 
-Two things worth noticing. The function takes **two whole structures by value** — four
-`int`s copied in total, which is nothing, and it does not modify either, so there is no
+Two things worth noticing. The function takes **two whole structures by value** — six
+`int`s copied in total (four in the rectangle, two in the point), which is nothing, and it does not modify either, so there is no
 reason to pass addresses here (§4). And it returns `int` used as a yes/no: `1` for
 inside, `0` for outside, which is how C has answered every true/false question since W06.
 
@@ -494,6 +495,11 @@ You do not need to control it. You do need to know that `sizeof(struct X)` is th
 
 Predict before you run.
 
+::: {.callout-note}
+These are the **lecture** drills, numbered for this page. The lab pack has its own set,
+run with `./drill.sh`, numbered independently — `d05` here is not `d05` there.
+:::
+
 | | |
 |---|---|
 | `d01` | `struct Point a = {1,2}; struct Point b = a; b.x = 9;` — what is `a.x`? |
@@ -533,7 +539,7 @@ Four functions, and you already know two of them in another form:
 | | |
 |---|---|
 | `fopen(name, mode)` | opens the file, hands back a `FILE *` |
-| `fclose(f)` | closes it, and makes sure everything written is actually on disk |
+| `fclose(f)` | flushes everything still buffered to the system, then closes the stream |
 | `fprintf(f, …)` | exactly `printf`, with the stream as the first argument |
 | `fscanf(f, …)` | exactly `scanf`, with the stream as the first argument |
 
@@ -668,8 +674,9 @@ Thirteen bytes: the twelve you can see, and the newline. There is no thirteenth 
 no special byte at the end. The file simply **stops**.
 
 So `EOF` is not something *in* the data. It is a value the library hands **back to you**
-to say *"there was nothing left to read"*. It is a macro from `stdio.h`, and on this
-machine — on essentially every machine — it is `-1`:
+to say *"there was nothing left to read"*. It is a macro from `stdio.h`. The standard
+guarantees only that it is **negative**; in practice, everywhere you are likely to meet,
+it is `-1`:
 
 ```c
 printf("EOF is the value %d\n", EOF);     /* EOF is the value -1 */
@@ -688,9 +695,16 @@ That gives `fscanf` four distinct things to tell you, and the difference matters
 | `11 Asha 91.5` | `3` | a complete record |
 | `11 Asha` | `2` | **partial** — two fields matched, the third ran out |
 | `hello there` | `0` | nothing matched: the first conversion already failed |
-| *(nothing left)* | `-1` (`EOF`) | the file ended before anything could be read |
+| *(nothing left)* | `EOF` | input ended, or failed, before the **first** conversion |
 
 All four were produced by running exactly that call on exactly those files.
+
+Two refinements worth knowing. `EOF` comes back only when the input ends *before the
+first* conversion — if it ends partway through, you get the count so far, which is the
+`2` in the second row. And `EOF` does not distinguish "the file ended" from "the read
+failed": for that there is `feof(f)` against `ferror(f)`. For a file you opened
+yourself and are reading to the end, the end is overwhelmingly the reason, which is why
+`== 3` is enough for this course.
 
 This is why the loop is written `== 3` and not `!= EOF`. `!= EOF` would keep going on a
 partial or malformed record, using whichever variables happened to be filled and
@@ -767,9 +781,27 @@ The fix is to choose a separator the data cannot contain, and say so in the form
 | `11,Ravi Kumar,91.5` | `"%d,%19[^,],%lf"` |
 | `11⇥Ravi Kumar⇥91.5` (tabs) | `"%d\t%19[^\t]\t%lf"` |
 
-Both give `[11] [Ravi Kumar] [91.5]`. Note what changed: the format now contains the
-separator *literally*, so `fscanf` has to match a comma or a tab exactly where one is
-expected. It has stopped being whitespace-driven.
+Both give `[11] [Ravi Kumar] [91.5]`. The work is done by the **scan set** `%19[^,]`,
+which reads characters until it meets one it was told to exclude, rather than stopping at
+the first space.
+
+::: {.callout-warning}
+The comma in that format is matched **literally**. The `\t` in the other one is **not**.
+Any whitespace character in a format — a space, a `\t`, a newline — is a *whitespace
+directive*: it matches any run of whitespace, including none at all. So the tab format
+above will happily read a space-separated line too:
+
+```c
+fscanf(f, "%d\t%19[^\t]\t%lf", &roll, name, &m);   /* on "11 Ravi Kumar 91.5" */
+```
+
+The `%d` takes `11`, the `\t` matches the space, and `%19[^\t]` then swallows
+`Ravi Kumar 91.5` whole, because it excludes only tabs. The call returns **2**.
+
+If a separator must really be there, it has to be a character that is not whitespace —
+a comma, a semicolon, a `|`. For genuinely tab-separated data, read the line with
+`fgets` and split it yourself (§10e).
+:::
 
 ### Fixed-width columns
 
@@ -781,8 +813,16 @@ great deal of older scientific and administrative data is stored:
 012Bilal     078.0
 ```
 
-A number between `%` and the letter is a **maximum field width**: `%3d` reads at most
-three digits, `%10c` reads exactly ten characters whatever they are.
+A number between `%` and the letter is a **maximum field width** measured in
+*characters*, not digits: `%3d` consumes at most three characters, and a minus sign is
+one of them, so `%3d` on `-12` reads −12 and on `-123` reads only −12. `%10c` takes ten
+characters whatever they are.
+
+Two cautions. `%3d` still **skips leading whitespace** first, so it is not strictly
+positional — it finds the next number and then limits how much of it it takes. And a
+width is a *maximum*, not a requirement: `%10c` against a two-character line succeeds
+with two. Fixed-width parsing therefore assumes the columns really are complete and in
+place; check the return value before trusting the fields.
 
 ```c
 sscanf(line, "%3d%10c%5lf", &roll, name, &m);
@@ -821,6 +861,7 @@ int main(void)
         lineno++;
         if (line[0] == '\n') continue;                    /* blank line */
 
+
         if (sscanf(line, "%d %19s %lf", &roll, name, &m) == 3) {
             good++;
             printf("line %d ok : %d %s %.1f\n", lineno, roll, name, m);
@@ -854,9 +895,23 @@ line 5 BAD: 13 Chen
 -> 2 good of 5 lines
 ```
 
+::: {.callout-note}
+`fgets` reads **at most `sizeof line - 1` characters**, stopping early at a newline. So
+one call is one line only while the lines are shorter than the buffer: give it a line of
+300 characters and a 256-byte buffer, and you get that line in two pieces, counted as
+two. It keeps the `'\n'` when it found one — and the last line of a file need not have
+one at all. It returns the buffer on success and `NULL` when it read nothing, whether
+because the file ended or because the read failed.
+
+For this course, sizing the buffer comfortably above the longest line you expect is the
+whole of the technique.
+:::
+
 That is the whole reason to prefer it: **a bad line is confined to its line**, and you
-can say *which* one. The `fscanf` loop of §10 would have stopped dead at line 3 and
-reported two records, with no indication that anything was wrong.
+can say *which* one. Run the `fscanf` loop of §10 on the same file and it reports **one**
+record and stops — it reaches `this line is broken`, fails to convert `this` to an `int`,
+and ends the loop. The two perfectly good records further down are never seen, and
+nothing says so.
 
 | | Use `fscanf` on the stream | Use `fgets` + `sscanf` |
 |---|---|---|
@@ -889,7 +944,7 @@ while (n < 50 &&
 |---|---|
 | not checking `fopen` | the commonest file bug by a distance; the program dies later, far from the cause |
 | opening with `"w"` to read | silently empties the file first |
-| forgetting `fclose` | written data may never reach the disk |
+| forgetting `fclose` | data can sit in a buffer unwritten; returning from `main` flushes it, but a crash or `_exit` does not |
 | looping on `!feof(f)` | processes the last record **twice** — see below |
 | no bound when filling an array | a long file writes past the end |
 | relative paths | `"marks.txt"` means *in the directory you ran the program from*, not where the source lives |
@@ -898,7 +953,8 @@ while (n < 50 &&
 ## Why `while (!feof(f))` is wrong
 
 It reads plausibly — *"while we are not at the end of the file"* — and it is the single
-most common file-handling bug in C. On the two-record file from §8:
+most common file-handling bug in C. Put just two records in a file —
+`11 Asha 91.5` and `12 Bilal 78.0`, each on its own line — and read it like this:
 
 ```c
 while (!feof(f)) {
@@ -914,12 +970,16 @@ iteration 3: 12 Bilal 78.0        <- the last record, again
 -> 3 iterations for 2 records
 ```
 
-The reason is the order of events. `feof` does not look ahead; it reports whether a read
-has **already** failed. After the second record the file position sits just past the
-last byte, but nothing has tried to read beyond it yet, so `feof` is still false. The
-loop runs once more, the `fscanf` finally fails, and because its return value is being
-ignored, `roll`, `name` and `marks` are left holding the previous record — which is then
-printed as if it were new.
+The reason is the order of events. `feof` does not look ahead; it reports a flag that is
+set only **after** a read has already run off the end. After the second record the file
+still holds its final newline, and nothing has tried to read past it, so the flag is
+clear and `feof` is false. The loop runs once more, that `fscanf` finally fails, and
+because its return value is being ignored, `roll`, `name` and `marks` are left holding
+the previous record — which is printed again as if it were new.
+
+The duplicate is the common symptom, not the only one. On a file whose next line is not
+a record at all, `fscanf` returns `0` without reaching the end, so the flag is never set
+and the same bad line is retried **forever**.
 
 Test the **read**, not the stream: `while (fscanf(...) == 3)` asks the question at the
 moment it can actually be answered.
@@ -998,8 +1058,11 @@ pointer, and `sizeof` gives 8 — the size of the address, not of the 20 bytes b
 So in a function like `void setName(char dest[], int n)`, the length must still be passed
 in as `n`, exactly as it was for every array function you wrote in W09.
 
-Both `printf` and `snprintf` return the number of characters they *would* have written.
-So a return value of `9` from a buffer of `8` is how you detect that truncation happened.
+The two returns are not quite the same thing. `printf` gives the number of characters it
+actually sent. `snprintf` gives the length the result **would** have had, not counting
+the terminator — which is exactly what makes it useful: a return of `26` from a buffer of
+`20` is how you learn that truncation happened. Both return a negative value if the
+formatting itself fails, in which case do not use what is in the buffer.
 
 `snprintf` is declared in `stdio.h`, which you already include; `strcpy` needs
 `string.h`.

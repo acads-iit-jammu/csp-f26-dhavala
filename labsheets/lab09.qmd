@@ -70,7 +70,7 @@ Three places where almost all the mistakes happen:
 
 **`&s.roll` has an `&`, `s.name` does not.** Both are members of the same structure in the same `scanf`. The difference is that `name` is an **array**, and an array name is already an address. Drills `w10` and `b1` are about exactly this.
 
-**A `double` is read with `%lf`, not `%f`.** `%f` is for printing a double and for reading a `float`. Read a `double` with `%f` and the value you get back is wrong.
+**A `double` is read with `%lf`, not `%f`.** `%f` is for *printing* a double, and for *reading* a `float`. Handing `scanf` a `%f` with the address of a `double` is undefined behaviour — it is not that you get a wrong number, it is that the standard says nothing at all about what happens, and in practice it writes four bytes into an eight-byte variable and leaves the rest as it was. Use `%lf` to read, `%f` to print.
 
 **Compare programme codes with `strcmp`, never with `==`.** `a == b` on two character arrays compares *addresses*, which are never equal, so the test is silently always false.
 
@@ -214,7 +214,7 @@ while (fscanf(f, "%d %19s %7s %lf", &roll, name, prog, &cgpa) == 4) {
 
 It stops as soon as a read does not deliver all four items, which is what happens at the end of the file.
 
-**`e3`** needs three counters and no array at all — you never have to store the records. Ties, including the case where nobody is above 7, go to whichever programme appears **first in the file**.
+**`e3`** needs no array of records at all — you never have to store them. Three counters, one per programme, get you the counts. The tie rule needs one more thing: ties, including the case where nobody is above 7, go to whichever programme appears **first in the file**, so you also have to remember *where each programme first appeared* — and that includes appearances by students below 7.00, who still put their programme on the page. Six small variables in total, and no array of students.
 
 **`e4`** writes a file as well as reading one. Open it with `fopen("passed.txt", "w")` and **`fclose` it when you are done** — what you have written may still be sitting in a buffer until you do. If nobody qualifies, `passed.txt` must still exist, and be empty.
 
