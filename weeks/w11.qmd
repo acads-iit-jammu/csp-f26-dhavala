@@ -148,56 +148,12 @@ The `.` reaches a member. `s.roll` is an `int` and behaves like any other `int`.
 Note the name is set with `snprintf`, not `=`. `s.name` is an **array**, and you cannot assign to an array — `s.name = "Asha"` does not compile. To fill that member *on its own*, copying the characters in is the only way. There is one way round it, and it is worth waiting for: assigning a **whole structure** copies the name too, with no copying function at all. That is §3.
 
 ::: {.callout-note}
-## New here: `snprintf`
-
-**`snprintf` is `printf` that writes into a character array instead of onto the screen.**
-Same format strings, same `%d` and `%s` and `%.2f` — different destination.
-
-```c
-snprintf(where, how_big, "format", ...);
-```
-
-| Argument | Meaning |
-|---|---|
-| `where` | the character array to write into |
-| `how_big` | its **total size in bytes** — `snprintf` will never write more than this |
-| `"format", ...` | exactly as in `printf` |
-
-```c
-char small[8];
-snprintf(small, sizeof small, "%s", "Asha");        /* small is now "Asha"    */
-snprintf(small, sizeof small, "%s-%d", "ID", 42);   /* small is now "ID-42"   */
-```
-
-**Why the size argument matters.** `strcpy(s.name, "Asha")` does the same job here and
-is shorter, but it takes no size, so it cannot refuse. Hand it a name longer than the
-array and it writes straight past the end into whatever is next — the classic C bug, and
-undefined behaviour. `snprintf` cannot do that. It copies what fits, terminates with
-`'\0'`, and stops:
-
-```c
-char small[8];
-snprintf(small, sizeof small, "%s", "Parvinder");   /* small is "Parvind"     */
-```
-
-Seven characters and the terminator: eight bytes, exactly the size you declared.
-Truncated, but never out of bounds.
-
-**Write the size as `sizeof`, not as a number you typed.** In the program above,
-`sizeof s.name` is 20, and it stays correct by itself if you later widen the field to
-`char name[40]`. A hand-written `20` would quietly become wrong.
-
-One catch, from [W10 §7](w10.qmd). `sizeof` only gives you the array's real size where
-the array is *declared*. Inside a function that received it as a parameter it is a
-pointer, and `sizeof` gives 8 — the size of the address, not of the 20 bytes behind it.
-So in a function like `void setName(char dest[], int n)`, the length must still be passed
-in as `n`, exactly as it was for every array function you wrote in W09.
-
-Both `printf` and `snprintf` return the number of characters they *would* have written.
-So a return value of `9` from a buffer of `8` is how you detect that truncation happened.
-
-`snprintf` is declared in `stdio.h`, which you already include; `strcpy` needs
-`string.h`.
+`snprintf` is new, and so is reading a name in from the keyboard without it going
+wrong. Neither is really about structures, so both are in the
+[appendix](#appendix-copying-names-safely) at the end of these notes — read it before
+Lab 09, where `e2` needs it. For now all you need is that
+`snprintf(s.name, sizeof s.name, "%s", text)` is `printf` writing into a character
+array instead of onto the screen, and that it cannot overrun the array.
 :::
 
 You can also set the members at the point of declaration, in order:
@@ -205,200 +161,6 @@ You can also set the members at the point of declaration, in order:
 ```c
 struct Student s = { 42, "Asha", 91.5 };
 ```
-
-## 2b · Reading a name in, properly
-
-Everything above used a name we had already written into the program. Real input is
-harder, and it is worth doing once, carefully, because three separate things can go
-wrong.
-
-**First: `scanf("%s")` cannot read a full name.** `%s` stops at the first whitespace.
-
-```c
-char name[20];
-scanf("%19s", name);        /* input: Ravi Kumar */
-printf("[%s]\n", name);     /* prints [Ravi] — "Kumar" is still waiting */
-```
-
-For a line that may contain spaces, use `fgets`, which reads up to a newline:
-
-```c
-char line[100];
-fgets(line, sizeof line, stdin);
-```
-
-**Second: `fgets` keeps the newline.** If you type `Ravi Kumar` and press Enter, `line`
-holds `Ravi Kumar\n`. Left alone, that newline is stored in the record and prints as a
-stray line break later. Remove it if it is there:
-
-```c
-size_t len = strlen(line);
-if (len > 0 && line[len - 1] == '\n') {
-    line[len - 1] = '\0';
-    len--;
-}
-```
-
-The `len > 0` guard matters: on an empty line there is no character to examine, and
-`line[len - 1]` with `len == 0` would read `line[-1]`.
-
-**Third: the name may not fit.** `s.name` holds 20 bytes, one of which must be the
-terminator — so 19 characters at most. You now have a decision to make, and it is a
-design decision, not a syntax one:
-
-| | What it does | When it is right |
-|---|---|---|
-| **Truncate** | store the first 19 characters and carry on | the field is a display label; a shortened name is better than no record |
-| **Refuse** | reject the input and ask again | the name is data that must be correct — a mark sheet, a certificate |
-
-C gives you a clean way to do each.
-
-### Truncating: let `snprintf` do it, then ask what happened
-
-This is where the return value earns its place. `snprintf` never overflows, and it
-*reports*: it returns the length the result **would** have had, so a value at or beyond
-the size tells you characters were dropped.
-
-```c
-int n = snprintf(s.name, sizeof s.name, "%s", line);
-
-if (n < 0) {
-    printf("formatting error — nothing was stored\n");
-}
-else if ((size_t) n >= sizeof s.name) {
-    printf("name truncated: needed %d bytes, the field holds %zu\n",
-           n + 1, sizeof s.name);
-}
-```
-
-Three details worth being exact about:
-
-- `n < 0` is a genuine failure inside `snprintf` (an encoding error), not a size problem.
-  Nothing useful was stored.
-- `n` counts characters **without** the terminator, so the space actually needed is
-  `n + 1`.
-- The cast `(size_t) n` is not decoration. `n` is a signed `int` and `sizeof` is an
-  unsigned `size_t`; comparing them directly makes `gcc -Wextra` say *"comparison of
-  integers of different signs"*. Cast the one you know is non-negative — which is why
-  this comparison sits *after* the `n < 0` test.
-
-### Refusing: measure first, then `strcpy`
-
-The box above said `strcpy` takes no size and so *cannot refuse* an oversized name. That
-is true, and it is the whole of the objection: it describes `strcpy` used **unchecked**.
-A function that cannot refuse does not need to, once you have already established that
-the string fits. So measure, decide, then copy:
-
-```c
-if (strlen(line) >= sizeof s.name) {
-    printf("name is %zu characters; the field holds %zu including the terminator\n",
-           strlen(line), sizeof s.name);
-    return 1;                       /* refuse — nothing is stored */
-}
-strcpy(s.name, line);               /* safe: we just proved it fits */
-```
-
-`>=` and not `>` is the whole boundary. `sizeof s.name` is 20, so a 19-character name
-needs 20 bytes and just fits; a 20-character name needs 21 and does not.
-
-### The whole thing
-
-```c
-#include <stdio.h>
-#include <string.h>
-
-struct Student {
-    int  roll;
-    char name[20];
-    double marks;
-};
-
-int main(void)
-{
-    struct Student s;
-    char line[100];
-    size_t len;
-    int n;
-
-    printf("Name: ");
-    if (fgets(line, sizeof line, stdin) == NULL) {
-        printf("could not read a name\n");
-        return 1;
-    }
-
-    len = strlen(line);
-    if (len > 0 && line[len - 1] == '\n') {
-        line[len - 1] = '\0';
-    }
-
-    n = snprintf(s.name, sizeof s.name, "%s", line);
-
-    if (n < 0) {
-        printf("formatting error — nothing was stored\n");
-        return 1;
-    }
-    if ((size_t) n >= sizeof s.name) {
-        printf("warning: name truncated — needed %d bytes, the field holds %zu\n",
-               n + 1, sizeof s.name);
-    }
-
-    printf("stored: [%s]  (%zu characters)\n", s.name, strlen(s.name));
-    return 0;
-}
-```
-
-Run it four times, giving it something different each time. In each block below, the
-text after `Name: ` is what you typed; every other line is the program's own output.
-
-**1 · A name that fits.** Type it and press Enter.
-
-```
-Name: Ravi Kumar
-stored: [Ravi Kumar]  (10 characters)
-```
-
-**2 · A name that does not fit.** 26 characters offered, 19 stored.
-
-```
-Name: Subrahmanyan Chandrasekhar
-warning: name truncated — needed 27 bytes, the field holds 20
-stored: [Subrahmanyan Chandr]  (19 characters)
-```
-
-**3 · Press Enter without typing anything.** `fgets` succeeds — it read a line, and that
-line happens to be empty. The newline is stripped, `line` becomes `""`, and an empty name
-is stored. Note what does *not* happen: this is not an error, and the program has no way
-to tell it apart from a name of zero characters, because that is exactly what it is.
-
-```
-Name:
-stored: []  (0 characters)
-```
-
-**4 · Give it no input at all.** Press **Ctrl-D** on an empty line — on Linux and macOS
-that signals end of input — or run the program with its input redirected from an empty
-file, `./a.out < /dev/null`. There is now no line to read, so `fgets` returns `NULL` and
-the program stops instead of using `line`, which was never filled in.
-
-```
-Name: could not read a name
-```
-
-Cases 3 and 4 look similar on screen and are completely different underneath: in **3**
-`fgets` worked and gave you an empty string, in **4** it failed and gave you nothing at
-all. Checking `fgets(...) == NULL` is how you tell them apart, and it is why that check
-is the first thing in the program.
-
-`snprintf` counts bytes, not words. The second name is cut after `Chandr` because that
-is where byte 19 falls — truncation has no idea what a word is, and will happily leave
-you half of one.
-
-::: {.callout-note}
-Notice the shape of that program, because it is the shape of most real input code: one
-line actually does the work, and the rest establishes that doing it is safe. That ratio
-does not mean something has gone wrong. It is what handling input looks like when you
-take the edges seriously — and the edges are where marks, and later data, are lost.
-:::
 
 ## 3 · A structure is a value: it copies
 
@@ -742,10 +504,8 @@ Predict before you run.
 | `d06` | `if (a == b)` for two structures — does it compile? |
 | `d07` | `sizeof(struct Pad)` for `{char c; int n;}` against `sizeof(char)+sizeof(int)` |
 | `d08` | `list[i].marks` against `list->marks` — when is each right? |
-| `d09` | `snprintf(name, 20, "%s", "Subrahmanyan Chandrasekhar")` — what does it **return**, and what is in `name`? |
-| `d10` | `scanf("%19s", name)` on the input `Ravi Kumar` — what is in `name`? |
-| `d11` | `struct Rect r = {{0,0},{4,3}};` — what is `r.hi.x`, and what does `r.hi` on its own mean? |
-| `d12` | `struct Student a = {1,"Asha",9.0}, b; b = a;` — what is in `b.name`? Compare with `d05` |
+| `d09` | `struct Rect r = {{0,0},{4,3}};` — what is `r.hi.x`, and what does `r.hi` on its own mean? |
+| `d10` | `struct Student a = {1,"Asha",9.0}, b; b = a;` — what is in `b.name`? Compare with `d05` |
 
 ## Questions to Bring Back
 
@@ -918,10 +678,10 @@ while (n < 50 &&
 
 | | |
 |---|---|
-| `d13` | open a file that does not exist with `"r"` — what does `fopen` return? |
-| `d14` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
-| `d15` | `fscanf` with three conversions on a line that has two — what does it return? |
-| `d16` | run the reader when `marks.txt` is empty — what does it print? |
+| `d11` | open a file that does not exist with `"r"` — what does `fopen` return? |
+| `d12` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
+| `d13` | `fscanf` with three conversions on a line that has two — what does it return? |
+| `d14` | run the reader when `marks.txt` is empty — what does it print? |
 
 ## Questions to Bring Back
 
@@ -929,6 +689,271 @@ while (n < 50 &&
 7. `fopen` can fail for four ordinary reasons. Name two.
 8. What is the difference between `"w"` and `"a"`, and when would using the wrong one be unrecoverable?
 9. `fprintf(f, "%d", x)` and `printf("%d", x)` differ by one argument. What is `printf` doing with that argument implicitly?
+
+## Appendix · Copying names safely
+
+*Not about structures. It is here because `struct Student` has a `char name[20]` in it,
+and getting text into a fixed-size array without losing part of it — or running off the
+end — is a separate skill with its own traps. Kept out of the main sections so that
+those can be about records. You need this for Lab 09's `e2`.*
+
+### New here: `snprintf`
+
+
+**`snprintf` is `printf` that writes into a character array instead of onto the screen.**
+Same format strings, same `%d` and `%s` and `%.2f` — different destination.
+
+```c
+snprintf(where, how_big, "format", ...);
+```
+
+| Argument | Meaning |
+|---|---|
+| `where` | the character array to write into |
+| `how_big` | its **total size in bytes** — `snprintf` will never write more than this |
+| `"format", ...` | exactly as in `printf` |
+
+```c
+char small[8];
+snprintf(small, sizeof small, "%s", "Asha");        /* small is now "Asha"    */
+snprintf(small, sizeof small, "%s-%d", "ID", 42);   /* small is now "ID-42"   */
+```
+
+**Why the size argument matters.** `strcpy(s.name, "Asha")` does the same job here and
+is shorter, but it takes no size, so it cannot refuse. Hand it a name longer than the
+array and it writes straight past the end into whatever is next — the classic C bug, and
+undefined behaviour. `snprintf` cannot do that. It copies what fits, terminates with
+`'\0'`, and stops:
+
+```c
+char small[8];
+snprintf(small, sizeof small, "%s", "Parvinder");   /* small is "Parvind"     */
+```
+
+Seven characters and the terminator: eight bytes, exactly the size you declared.
+Truncated, but never out of bounds.
+
+**Write the size as `sizeof`, not as a number you typed.** For the `struct Student` of
+§2, whose `name` member is `char name[20]`, `sizeof s.name` is
+20 — and it stays correct by itself if you later widen the field to `char name[40]`. A
+hand-written `20` would quietly become wrong.
+
+One catch, from [W10 §7](w10.qmd). `sizeof` only gives you the array's real size where
+the array is *declared*. Inside a function that received it as a parameter it is a
+pointer, and `sizeof` gives 8 — the size of the address, not of the 20 bytes behind it.
+So in a function like `void setName(char dest[], int n)`, the length must still be passed
+in as `n`, exactly as it was for every array function you wrote in W09.
+
+Both `printf` and `snprintf` return the number of characters they *would* have written.
+So a return value of `9` from a buffer of `8` is how you detect that truncation happened.
+
+`snprintf` is declared in `stdio.h`, which you already include; `strcpy` needs
+`string.h`.
+
+### Reading a name in, properly
+
+So far the name has always been one we wrote into the program ourselves — `"Asha"`, in
+a line of source. Real input is harder, and it is worth doing once, carefully, because
+three separate things can go wrong.
+
+**First: `scanf("%s")` cannot read a full name.** `%s` stops at the first whitespace.
+
+```c
+char name[20];
+scanf("%19s", name);        /* input: Ravi Kumar */
+printf("[%s]\n", name);     /* prints [Ravi] — "Kumar" is still waiting */
+```
+
+For a line that may contain spaces, use `fgets`, which reads up to a newline:
+
+```c
+char line[100];
+fgets(line, sizeof line, stdin);
+```
+
+**Second: `fgets` keeps the newline.** If you type `Ravi Kumar` and press Enter, `line`
+holds `Ravi Kumar\n`. Left alone, that newline is stored in the record and prints as a
+stray line break later. Remove it if it is there:
+
+```c
+size_t len = strlen(line);
+if (len > 0 && line[len - 1] == '\n') {
+    line[len - 1] = '\0';
+    len--;
+}
+```
+
+The `len > 0` guard matters: on an empty line there is no character to examine, and
+`line[len - 1]` with `len == 0` would read `line[-1]`.
+
+**Third: the name may not fit.** `s.name` holds 20 bytes, one of which must be the
+terminator — so 19 characters at most. You now have a decision to make, and it is a
+design decision, not a syntax one:
+
+| | What it does | When it is right |
+|---|---|---|
+| **Truncate** | store the first 19 characters and carry on | the field is a display label; a shortened name is better than no record |
+| **Refuse** | reject the input and ask again | the name is data that must be correct — a mark sheet, a certificate |
+
+C gives you a clean way to do each.
+
+#### Truncating: let `snprintf` do it, then ask what happened
+
+This is where the return value earns its place. `snprintf` never overflows, and it
+*reports*: it returns the length the result **would** have had, so a value at or beyond
+the size tells you characters were dropped.
+
+```c
+int n = snprintf(s.name, sizeof s.name, "%s", line);
+
+if (n < 0) {
+    printf("formatting error — nothing was stored\n");
+}
+else if ((size_t) n >= sizeof s.name) {
+    printf("name truncated: needed %d bytes, the field holds %zu\n",
+           n + 1, sizeof s.name);
+}
+```
+
+Three details worth being exact about:
+
+- `n < 0` is a genuine failure inside `snprintf` (an encoding error), not a size problem.
+  Nothing useful was stored.
+- `n` counts characters **without** the terminator, so the space actually needed is
+  `n + 1`.
+- The cast `(size_t) n` is not decoration. `n` is a signed `int` and `sizeof` is an
+  unsigned `size_t`; comparing them directly makes `gcc -Wextra` say *"comparison of
+  integers of different signs"*. Cast the one you know is non-negative — which is why
+  this comparison sits *after* the `n < 0` test.
+
+#### Refusing: measure first, then `strcpy`
+
+The box above said `strcpy` takes no size and so *cannot refuse* an oversized name. That
+is true, and it is the whole of the objection: it describes `strcpy` used **unchecked**.
+A function that cannot refuse does not need to, once you have already established that
+the string fits. So measure, decide, then copy:
+
+```c
+if (strlen(line) >= sizeof s.name) {
+    printf("name is %zu characters; the field holds %zu including the terminator\n",
+           strlen(line), sizeof s.name);
+    return 1;                       /* refuse — nothing is stored */
+}
+strcpy(s.name, line);               /* safe: we just proved it fits */
+```
+
+`>=` and not `>` is the whole boundary. `sizeof s.name` is 20, so a 19-character name
+needs 20 bytes and just fits; a 20-character name needs 21 and does not.
+
+#### The whole thing
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int  roll;
+    char name[20];
+    double marks;
+};
+
+int main(void)
+{
+    struct Student s;
+    char line[100];
+    size_t len;
+    int n;
+
+    printf("Name: ");
+    if (fgets(line, sizeof line, stdin) == NULL) {
+        printf("could not read a name\n");
+        return 1;
+    }
+
+    len = strlen(line);
+    if (len > 0 && line[len - 1] == '\n') {
+        line[len - 1] = '\0';
+    }
+
+    n = snprintf(s.name, sizeof s.name, "%s", line);
+
+    if (n < 0) {
+        printf("formatting error — nothing was stored\n");
+        return 1;
+    }
+    if ((size_t) n >= sizeof s.name) {
+        printf("warning: name truncated — needed %d bytes, the field holds %zu\n",
+               n + 1, sizeof s.name);
+    }
+
+    printf("stored: [%s]  (%zu characters)\n", s.name, strlen(s.name));
+    return 0;
+}
+```
+
+Run it four times, giving it something different each time. In each block below, the
+text after `Name: ` is what you typed; every other line is the program's own output.
+
+**1 · A name that fits.** Type it and press Enter.
+
+```
+Name: Ravi Kumar
+stored: [Ravi Kumar]  (10 characters)
+```
+
+**2 · A name that does not fit.** 26 characters offered, 19 stored.
+
+```
+Name: Subrahmanyan Chandrasekhar
+warning: name truncated — needed 27 bytes, the field holds 20
+stored: [Subrahmanyan Chandr]  (19 characters)
+```
+
+**3 · Press Enter without typing anything.** `fgets` succeeds — it read a line, and that
+line happens to be empty. The newline is stripped, `line` becomes `""`, and an empty name
+is stored. Note what does *not* happen: this is not an error, and the program has no way
+to tell it apart from a name of zero characters, because that is exactly what it is.
+
+```
+Name:
+stored: []  (0 characters)
+```
+
+**4 · Give it no input at all.** Press **Ctrl-D** on an empty line — on Linux and macOS
+that signals end of input — or run the program with its input redirected from an empty
+file, `./a.out < /dev/null`. There is now no line to read, so `fgets` returns `NULL` and
+the program stops instead of using `line`, which was never filled in.
+
+```
+Name: could not read a name
+```
+
+Cases 3 and 4 look similar on screen and are completely different underneath: in **3**
+`fgets` worked and gave you an empty string, in **4** it failed and gave you nothing at
+all. Checking `fgets(...) == NULL` is how you tell them apart, and it is why that check
+is the first thing in the program.
+
+`snprintf` counts bytes, not words. The second name is cut after `Chandr` because that
+is where byte 19 falls — truncation has no idea what a word is, and will happily leave
+you half of one.
+
+::: {.callout-note}
+Notice the shape of that program, because it is the shape of most real input code: one
+line actually does the work, and the rest establishes that doing it is safe. That ratio
+does not mean something has gone wrong. It is what handling input looks like when you
+take the edges seriously — and the edges are where marks, and later data, are lost.
+:::
+
+### Drills
+
+Predict before you run.
+
+| | |
+|---|---|
+| `n1` | `snprintf(name, 20, "%s", "Subrahmanyan Chandrasekhar")` — what does it **return**, and what is in `name`? |
+| `n2` | `scanf("%19s", name)` on the input `Ravi Kumar` — what is in `name`? |
+| `n3` | `fgets(line, sizeof line, stdin)` on the input `Ravi Kumar` — how does `line` differ from what `n2` gave? |
+| `n4` | the same `fgets` when you press Enter without typing anything — what does it return, and what is in `line`? |
 
 ## PAGAL Notes
 
