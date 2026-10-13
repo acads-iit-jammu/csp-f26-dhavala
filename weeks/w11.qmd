@@ -648,6 +648,226 @@ That is the same return value you were told to check for `scanf` in §0 — here
 Note `%19s` again, and `&roll` and `&marks` but no `&` on `name`. `fscanf` follows exactly the same rules as `scanf`, because it *is* `scanf` with a stream argument.
 :::
 
+## 10b · What `EOF` actually is
+
+The loop above stops "when the file runs out", and it is worth being exact about what
+that means, because the usual picture of it is wrong.
+
+**There is no EOF character in the file.** Look at a one-record file byte by byte:
+
+```bash
+$ printf '11 Asha 91.5\n' > one.txt
+$ wc -c < one.txt
+13
+$ od -c one.txt
+0000000   1   1       A   s   h   a       9   1   .   5  \n
+0000015
+```
+
+Thirteen bytes: the twelve you can see, and the newline. There is no thirteenth marker,
+no special byte at the end. The file simply **stops**.
+
+So `EOF` is not something *in* the data. It is a value the library hands **back to you**
+to say *"there was nothing left to read"*. It is a macro from `stdio.h`, and on this
+machine — on essentially every machine — it is `-1`:
+
+```c
+printf("EOF is the value %d\n", EOF);     /* EOF is the value -1 */
+```
+
+It is negative on purpose: a count of successfully read items can be `0`, `1`, `2`, …,
+so a negative value is free to mean something different without ever colliding with a
+real answer.
+
+### What `fscanf` returns, in every case
+
+That gives `fscanf` four distinct things to tell you, and the difference matters:
+
+| Your file holds | `fscanf(f, "%d %19s %lf", …)` returns | Meaning |
+|---|---|---|
+| `11 Asha 91.5` | `3` | a complete record |
+| `11 Asha` | `2` | **partial** — two fields matched, the third ran out |
+| `hello there` | `0` | nothing matched: the first conversion already failed |
+| *(nothing left)* | `-1` (`EOF`) | the file ended before anything could be read |
+
+All four were produced by running exactly that call on exactly those files.
+
+This is why the loop is written `== 3` and not `!= EOF`. `!= EOF` would keep going on a
+partial or malformed record, using whichever variables happened to be filled and
+whatever junk was in the rest. `== 3` means *"I got everything I asked for"*, and stops
+for any other reason — clean end, short line, or rubbish.
+
+## 10c · `fscanf` does not read lines
+
+Here is the misconception worth spending a minute on. `fscanf` looks line-oriented
+because our file has one record per line. It is not. **`fscanf` reads conversions, not
+lines**, and `%d`, `%s` and `%lf` each begin by skipping over *any* amount of
+whitespace — spaces, tabs, and newlines alike.
+
+A newline is simply whitespace. `fscanf` cannot see the difference between these five
+files:
+
+```
+layout A       layout B                    layout C      layout D          layout E
+11 Asha 91.5   11 Asha 91.5 12 Bilal 78.0  11            11⇥Asha⇥91.5        11   Asha    91.5
+12 Bilal 78.0                              Asha          12⇥Bilal⇥78.0
+                                           91.5                               12  Bilal 78.0
+                                           12
+                                           Bilal
+                                           78.0
+```
+
+One record per line; both records on one line; one *field* per line; tab-separated;
+and ragged with blank lines. Running the same loop — `while (fscanf(f, "%d %19s %lf",
+&roll, name, &marks) == 3)` — on each of the five gives the identical answer every
+time:
+
+```
+got: 11 Asha 91.5
+got: 12 Bilal 78.0
+-> 2 records
+```
+
+Two consequences, one convenient and one dangerous.
+
+**The convenient one:** you never have to worry about how the data is spread across
+lines, or about extra blank lines, or about whether someone used tabs. Whitespace is
+whitespace.
+
+**The dangerous one:** a missing field does not stop at the end of the line. If one
+record is short, `fscanf` walks straight onto the next line looking for what it is
+owed, and from then on every record is shifted by one field. The file is not corrupt
+and the program does not crash — the answers are just quietly wrong. If that matters
+to you, read a line at a time instead (§10e).
+
+## 10d · When the layout does matter: separators
+
+Everything above works because the fields are separated by whitespace *and no field
+contains any*. Break the second half of that and the whole approach collapses:
+
+```
+11 Ravi Kumar 91.5
+```
+
+```
+-> 0 records
+```
+
+Not one record, not a wrong record — **zero**. `%19s` reads `Ravi` and stops at the
+space, then `%lf` is handed `Kumar` and fails, so the count is 2, not 3, and the loop
+never starts. A name with a space in it cannot be read by whitespace-separated
+conversions, and no amount of care with `%s` will fix it: the separator and the data
+have become the same character.
+
+The fix is to choose a separator the data cannot contain, and say so in the format.
+`%19[^,]` means *"up to 19 characters, none of which is a comma"* — a set, not a word:
+
+| File | Format that reads it |
+|---|---|
+| `11,Ravi Kumar,91.5` | `"%d,%19[^,],%lf"` |
+| `11⇥Ravi Kumar⇥91.5` (tabs) | `"%d\t%19[^\t]\t%lf"` |
+
+Both give `[11] [Ravi Kumar] [91.5]`. Note what changed: the format now contains the
+separator *literally*, so `fscanf` has to match a comma or a tab exactly where one is
+expected. It has stopped being whitespace-driven.
+
+### Fixed-width columns
+
+Some data has no separators at all — just columns at known positions, which is how a
+great deal of older scientific and administrative data is stored:
+
+```
+011Asha      091.5
+012Bilal     078.0
+```
+
+A number between `%` and the letter is a **maximum field width**: `%3d` reads at most
+three digits, `%10c` reads exactly ten characters whatever they are.
+
+```c
+sscanf(line, "%3d%10c%5lf", &roll, name, &m);
+name[10] = '\0';                 /* %c does NOT add a terminator - you must */
+```
+
+```
+roll=11 name=[Asha      ] marks=91.5
+roll=12 name=[Bilal     ] marks=78.0
+```
+
+Two things to notice: `%c` does not append `'\0'`, so you add it yourself, and the name
+keeps its padding spaces, because in fixed-width data the padding *is* the field. Trim
+it if you need to.
+
+## 10e · The other way: one line at a time
+
+When the data really is line-oriented — when a short line should be reported rather
+than silently absorbed into the next — read lines yourself and parse each one
+separately. `sscanf` is `scanf` reading from a string instead of a stream, so the
+format you already know carries over unchanged:
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    FILE *f = fopen("ragged.txt", "r");
+    char line[256];
+    int lineno = 0, good = 0;
+    int roll;  char name[20];  double m;
+
+    if (f == NULL) { printf("could not open ragged.txt\n"); return 1; }
+
+    while (fgets(line, sizeof line, f) != NULL) {
+        lineno++;
+        if (line[0] == '\n') continue;                    /* blank line */
+
+        if (sscanf(line, "%d %19s %lf", &roll, name, &m) == 3) {
+            good++;
+            printf("line %d ok : %d %s %.1f\n", lineno, roll, name, m);
+        } else {
+            printf("line %d BAD: %s", lineno, line);      /* line keeps its \n */
+        }
+    }
+
+    fclose(f);
+    printf("-> %d good of %d lines\n", good, lineno);
+    return 0;
+}
+```
+
+Give it a `ragged.txt` that is deliberately messy — a blank line, a line that is not a
+record at all, and a record missing its last field:
+
+```
+11 Asha 91.5
+
+this line is broken
+12 Bilal 78.0
+13 Chen
+```
+
+```
+line 1 ok : 11 Asha 91.5
+line 3 BAD: this line is broken
+line 4 ok : 12 Bilal 78.0
+line 5 BAD: 13 Chen
+-> 2 good of 5 lines
+```
+
+That is the whole reason to prefer it: **a bad line is confined to its line**, and you
+can say *which* one. The `fscanf` loop of §10 would have stopped dead at line 3 and
+reported two records, with no indication that anything was wrong.
+
+| | Use `fscanf` on the stream | Use `fgets` + `sscanf` |
+|---|---|---|
+| Layout | may be spread any way over lines | one record per line |
+| A bad record | stops the loop, silently | reported, with its line number, and skipped |
+| Fields with spaces | impossible | possible, and you control the splitting |
+| Code | one line | a loop and a check |
+
+For Lab 09 either will do, because the roster is well formed and names are one word.
+Know that the second exists for when they are not.
+
 ## 11 · Putting it with structures
 
 Monday's `struct Student` and Tuesday's file are the obvious pair — a file of records read into an array of structures:
@@ -670,9 +890,40 @@ while (n < 50 &&
 | not checking `fopen` | the commonest file bug by a distance; the program dies later, far from the cause |
 | opening with `"w"` to read | silently empties the file first |
 | forgetting `fclose` | written data may never reach the disk |
-| looping on `!feof(f)` | reads one time too many — test the **return of `fscanf`** instead, as above |
+| looping on `!feof(f)` | processes the last record **twice** — see below |
 | no bound when filling an array | a long file writes past the end |
 | relative paths | `"marks.txt"` means *in the directory you ran the program from*, not where the source lives |
+
+::: {.callout-warning}
+## Why `while (!feof(f))` is wrong
+
+It reads plausibly — *"while we are not at the end of the file"* — and it is the single
+most common file-handling bug in C. On the two-record file from §8:
+
+```c
+while (!feof(f)) {
+    fscanf(f, "%d %19s %lf", &roll, name, &marks);
+    printf("iteration %d: %d %s %.1f\n", ++n, roll, name, marks);
+}
+```
+
+```
+iteration 1: 11 Asha 91.5
+iteration 2: 12 Bilal 78.0
+iteration 3: 12 Bilal 78.0        <- the last record, again
+-> 3 iterations for 2 records
+```
+
+The reason is the order of events. `feof` does not look ahead; it reports whether a read
+has **already** failed. After the second record the file position sits just past the
+last byte, but nothing has tried to read beyond it yet, so `feof` is still false. The
+loop runs once more, the `fscanf` finally fails, and because its return value is being
+ignored, `roll`, `name` and `marks` are left holding the previous record — which is then
+printed as if it were new.
+
+Test the **read**, not the stream: `while (fscanf(...) == 3)` asks the question at the
+moment it can actually be answered.
+:::
 
 ## Drills
 
@@ -682,6 +933,9 @@ while (n < 50 &&
 | `d12` | write three lines, then open the same file with `"w"` again and write one. How many lines are in it? |
 | `d13` | `fscanf` with three conversions on a line that has two — what does it return? |
 | `d14` | run the reader when `marks.txt` is empty — what does it print? |
+| `d15` | the same reader on a file with **all the fields on one line** — how many records? |
+| `d16` | `fscanf(f, "%d %19s %lf", …)` on the line `11 Ravi Kumar 91.5` — what does it **return**? |
+| `d17` | `while (!feof(f))` over a 2-record file — how many iterations, and why? |
 
 ## Questions to Bring Back
 
