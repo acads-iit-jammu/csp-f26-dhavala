@@ -530,7 +530,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#act-3-blanks-25-minutes-5-marks-each" id="toc-act-3-blanks-25-minutes-5-marks-each" class="nav-link" data-scroll-target="#act-3-blanks-25-minutes-5-marks-each">Act 3 · Blanks (25 minutes, 5 marks each)</a></li>
   <li><a href="#act-4-problems-40-minutes-10-marks-each" id="toc-act-4-problems-40-minutes-10-marks-each" class="nav-link" data-scroll-target="#act-4-problems-40-minutes-10-marks-each">Act 4 · Problems (40 minutes, 10 marks each)</a>
   <ul class="collapse">
+  <li><a href="#e1-the-shape" id="toc-e1-the-shape" class="nav-link" data-scroll-target="#e1-the-shape"><code>e1</code> — the shape</a></li>
+  <li><a href="#e2-the-shape" id="toc-e2-the-shape" class="nav-link" data-scroll-target="#e2-the-shape"><code>e2</code> — the shape</a></li>
   <li><a href="#e3-and-e4-do-not-read-the-keyboard" id="toc-e3-and-e4-do-not-read-the-keyboard" class="nav-link" data-scroll-target="#e3-and-e4-do-not-read-the-keyboard"><code>e3</code> and <code>e4</code> do not read the keyboard</a></li>
+  <li><a href="#e3-the-shape" id="toc-e3-the-shape" class="nav-link" data-scroll-target="#e3-the-shape"><code>e3</code> — the shape</a></li>
+  <li><a href="#e4-the-shape" id="toc-e4-the-shape" class="nav-link" data-scroll-target="#e4-the-shape"><code>e4</code> — the shape</a></li>
   <li><a href="#how-the-checking-works" id="toc-how-the-checking-works" class="nav-link" data-scroll-target="#how-the-checking-works">How the checking works</a></li>
   </ul></li>
   <li><a href="#act-5-check-your-marks-fix-and-submit-10-minutes" id="toc-act-5-check-your-marks-fix-and-submit-10-minutes" class="nav-link" data-scroll-target="#act-5-check-your-marks-fix-and-submit-10-minutes">Act 5 · Check your marks, fix, and submit (10 minutes)</a></li>
@@ -733,52 +737,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="act-2-write-drills-20-minutes-1-mark-each">Act 2 · Write drills (20 minutes, 1 mark each)</h2>
 <p>Ten files, <code>w01.c</code> to <code>w10.c</code>. In each one, everything is written except a single line, and the comment tells you what that line must do.</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>What you write</th>
+<th>Clue</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>w01</code></td>
 <td>read two numbers straight into the members of a structure</td>
+<td><code>&amp;p.x</code> is the address of the <strong>member</strong>, not of <code>p</code></td>
 </tr>
 <tr class="even">
 <td><code>w02</code></td>
 <td>read members of two different types</td>
+<td>a <code>double</code> is read with <code>%lf</code>. <code>%f</code> there is undefined behaviour, not a near miss</td>
 </tr>
 <tr class="odd">
 <td><code>w03</code></td>
 <td>copy a structure, change the copy, leave the original alone</td>
+<td>two lines: the first copies, the second changes the copy</td>
 </tr>
 <tr class="even">
 <td><code>w04</code></td>
 <td>a function body that gets a structure <strong>by value</strong></td>
+<td>write it, run it, watch nothing happen — that <em>is</em> the result</td>
 </tr>
 <tr class="odd">
 <td><code>w05</code></td>
 <td>the same, but <strong>by address</strong> — compare the two</td>
+<td><code>p</code> is a pointer, so the member is spelt <code>p-&gt;x</code></td>
 </tr>
 <tr class="even">
 <td><code>w06</code></td>
 <td>read three records into an array</td>
+<td><code>&amp;a[i].x</code> — index first, then member, then take the address</td>
 </tr>
 <tr class="odd">
 <td><code>w07</code></td>
 <td>reach members through a pointer, with <code>-&gt;</code></td>
+<td>aim <code>q</code> at <code>p</code> first; no <code>&amp;</code> in the <code>printf</code></td>
 </tr>
 <tr class="even">
 <td><code>w08</code></td>
 <td>read into a structure that holds two other structures</td>
+<td>four addresses, two levels deep: <code>&amp;r.lo.x</code>, <code>&amp;r.lo.y</code>, <code>&amp;r.hi.x</code>, <code>&amp;r.hi.y</code></td>
 </tr>
 <tr class="odd">
 <td><code>w09</code></td>
 <td>find the largest member in an array of records</td>
+<td>keep the <strong>index</strong> of the best, not the value</td>
 </tr>
 <tr class="even">
 <td><code>w10</code></td>
 <td>read a name and a programme code</td>
+<td>no <code>&amp;</code> on <code>s.name</code> — an array is already an address. Bound both: <code>%19s</code>, <code>%7s</code></td>
 </tr>
 </tbody>
 </table>
@@ -813,15 +833,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Everything around the gap is written for you. Write the missing loop or line.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>File</th>
 <th>What it must do</th>
-<th>Its last line must end with</th>
+<th>Ends with</th>
+<th>Clue</th>
 </tr>
 </thead>
 <tbody>
@@ -829,26 +851,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>b1_make.c</code></td>
 <td>build one complete record and print it back</td>
 <td><code>&lt;roll&gt; &lt;name&gt; &lt;cgpa&gt;</code></td>
+<td>one <code>scanf</code>, three conversions. <code>&amp;</code> on roll and cgpa, none on name. Print with <code>%.2f</code></td>
 </tr>
 <tr class="even">
 <td><code>b2_arrow.c</code></td>
 <td>the same record, reached through a pointer</td>
 <td><code>roll=&lt;R&gt; cgpa=&lt;C&gt;</code></td>
+<td>use <code>p</code>, not <code>s</code>. <code>&amp;p-&gt;roll</code> works because <code>-&gt;</code> binds tighter than <code>&amp;</code></td>
 </tr>
 <tr class="odd">
 <td><code>b3_average.c</code></td>
 <td>the average cgpa over an array of records</td>
 <td><code>average=&lt;A&gt;</code></td>
+<td>one loop to add, then one <code>printf</code>. <code>total</code> is a <code>double</code>, so the division is real</td>
 </tr>
 <tr class="even">
 <td><code>b4_above.c</code></td>
 <td>how many records are <strong>strictly</strong> above 7.00</td>
 <td><code>above=&lt;N&gt;</code></td>
+<td><code>&gt;</code> and not <code>&gt;=</code>. One test case is three students at exactly 7.00, expecting <code>above=0</code></td>
 </tr>
 <tr class="odd">
 <td><code>b5_topper.c</code></td>
 <td>the roll of the record with the highest cgpa</td>
 <td><code>topper=&lt;R&gt;</code></td>
+<td>the index again, as in <code>w09</code>. <code>&gt;</code> keeps the <strong>earlier</strong> student on a tie; <code>&gt;=</code> would not</td>
 </tr>
 </tbody>
 </table>
@@ -902,13 +929,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><strong><code>e1</code> is Monday’s lecture problem.</strong> Two structures — a <code>Point</code>, and a <code>Rect</code> made of two <code>Point</code>s — and a function returning 1 or 0. Four conditions, all of which must hold. A point exactly on an edge counts as inside, and two of the test cases sit exactly on the boundary to check that you meant <code>&gt;=</code> and not <code>&gt;</code>.</p>
-<p><strong><code>e2</code></strong> is <code>b5</code> with more to report. Keep the <strong>index</strong> of the best record, not a copy of the cgpa: you owe the caller two facts about that student, and the cgpa alone cannot tell you the name.</p>
+<p>Each of the four has a <strong>shape</strong> below: the skeleton, with the thinking left to you. Fill in the <code>...</code>.</p>
+<section id="e1-the-shape" class="level3">
+<h3 class="anchored" data-anchor-id="e1-the-shape"><code>e1</code> — the shape</h3>
+<p>Monday’s lecture problem. Name things so the conditions read like the maths.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Point <span class="op">{</span> <span class="dt">int</span> x<span class="op">,</span> y<span class="op">;</span> <span class="op">};</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Rect  <span class="op">{</span> <span class="kw">struct</span> Point lo<span class="op">,</span> hi<span class="op">;</span> <span class="op">};</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> inside<span class="op">(</span><span class="kw">struct</span> Rect r<span class="op">,</span> <span class="kw">struct</span> Point p<span class="op">)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>  <span class="op">...</span> four comparisons joined by <span class="op">&amp;&amp;</span> <span class="op">...</span> <span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Rect  r<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Point p<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(...);</span>                  <span class="co">/* the four corner numbers, into r.lo and r.hi */</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(...);</span>                  <span class="co">/* the point, into p                           */</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>inside<span class="op">(</span>r<span class="op">,</span> p<span class="op">))</span> printf<span class="op">(</span><span class="st">"inside</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>              printf<span class="op">(</span><span class="st">"outside</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>r.lo.x</code> is two steps: <code>r.lo</code> is a <code>Point</code>, <code>.x</code> is the <code>int</code> in it. Both structures go in <strong>by value</strong> — nothing is modified and six <code>int</code>s is nothing to copy, so no <code>&amp;</code> and no <code>*</code> anywhere. A point exactly on an edge counts as inside, and two test cases sit on the boundary to check you meant <code>&gt;=</code> and not <code>&gt;</code>.</p>
+</section>
+<section id="e2-the-shape" class="level3">
+<h3 class="anchored" data-anchor-id="e2-the-shape"><code>e2</code> — the shape</h3>
+<p><code>b5</code> with more to report.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">{</span> <span class="dt">int</span> roll<span class="op">;</span> <span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span> <span class="dt">char</span> program<span class="op">[</span><span class="dv">8</span><span class="op">];</span> <span class="dt">double</span> cgpa<span class="op">;</span> <span class="op">};</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Student a<span class="op">[</span><span class="dv">64</span><span class="op">];</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n<span class="op">,</span> i<span class="op">,</span> best <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>n<span class="op">);</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(...);</span>              <span class="co">/* one scanf, all four members of a[i] */</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(...)</span> best <span class="op">=</span> i<span class="op">;</span>       <span class="co">/* compare against a[best]             */</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"topper=</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> <span class="op">...,</span> <span class="op">...);</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Keep the <strong>index</strong> of the best, not a copy of the cgpa — you owe two facts about that student and a number alone cannot tell you the name. Start <code>best = 0</code> and begin the second loop at <code>i = 1</code>: the first student leads until someone beats them. Test with <code>&gt;</code>, so a tie keeps the earlier one.</p>
+</section>
 <section id="e3-and-e4-do-not-read-the-keyboard" class="level3">
 <h3 class="anchored" data-anchor-id="e3-and-e4-do-not-read-the-keyboard"><code>e3</code> and <code>e4</code> do not read the keyboard</h3>
 <p>These two read the file <code>students.txt</code>, which is already in your workspace. Run them with no input at all:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> e3.c <span class="at">-o</span> e3</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./e3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> e3.c <span class="at">-o</span> e3</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./e3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Each line of <code>students.txt</code> holds one record:</p>
 <pre><code>1001 Ravi EE 8.20
 1002 Asha ME 6.50
@@ -931,12 +996,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>and the file ends when it ends — you are <strong>not</strong> told in advance how many lines there are. That is what this pattern is for:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%7s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> prog<span class="op">,</span> <span class="op">&amp;</span>cgpa<span class="op">)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>f<span class="op">,</span> <span class="st">"</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%19s</span><span class="st"> </span><span class="sc">%7s</span><span class="st"> </span><span class="sc">%lf</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>roll<span class="op">,</span> name<span class="op">,</span> prog<span class="op">,</span> <span class="op">&amp;</span>cgpa<span class="op">)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It stops as soon as a read does not deliver all four items, which is what happens at the end of the file.</p>
-<p><strong><code>e3</code></strong> needs no array of records at all — you never have to store them. Three counters, one per programme, get you the counts. The tie rule needs one more thing: ties, including the case where nobody is above 7, go to whichever programme appears <strong>first in the file</strong>, so you also have to remember <em>where each programme first appeared</em> — and that includes appearances by students below 7.00, who still put their programme on the page. Six small variables in total, and no array of students.</p>
-<p><strong><code>e4</code></strong> writes a file as well as reading one. Open it with <code>fopen("passed.txt", "w")</code> and <strong><code>fclose</code> it when you are done</strong> — what you have written may still be sitting in a buffer until you do. If nobody qualifies, <code>passed.txt</code> must still exist, and be empty.</p>
+</section>
+<section id="e3-the-shape" class="level3">
+<h3 class="anchored" data-anchor-id="e3-the-shape"><code>e3</code> — the shape</h3>
+<p>No array of records at all — you never store a student.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> PROG<span class="op">[</span><span class="dv">3</span><span class="op">][</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="st">"EE"</span><span class="op">,</span> <span class="st">"ME"</span><span class="op">,</span> <span class="st">"MM"</span> <span class="op">};</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span>  count<span class="op">[</span><span class="dv">3</span><span class="op">]</span>   <span class="op">=</span> <span class="op">{</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span> <span class="op">};</span>        <span class="co">/* how many above 7.00        */</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span>  firstAt<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span> <span class="op">-</span><span class="dv">1</span> <span class="op">};</span>     <span class="co">/* the row each FIRST appeared */</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span>  row <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">/* read one record at a time; for each one:</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">       find which of the three programmes it is   (strcmp against PROG[i])</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">       if this is its first sighting, note the row</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">       if the cgpa is above 7.00, add one to its count</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">       row++</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">   then walk i = 1, 2 and keep the better of count[i] and count[best]  */</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Six small variables and a row counter do the whole job. <code>-1</code> means <em>not seen yet</em> — do not use a value that could <strong>be</strong> a row, like <code>999</code>, because a long enough file would reach it. A programme can appear with nobody above 7.00; it still appeared, so its <code>firstAt</code> must still be set. On a tie the smaller <code>firstAt</code> wins, and a programme never seen loses to one that was.</p>
+</section>
+<section id="e4-the-shape" class="level3">
+<h3 class="anchored" data-anchor-id="e4-the-shape"><code>e4</code> — the shape</h3>
+<p>You have <strong>two files open at once</strong>, so give them two names that say which is which. <code>f</code> and <code>g</code> will cost you an hour.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>in_file  <span class="op">=</span> fopen<span class="op">(</span><span class="st">"students.txt"</span><span class="op">,</span> <span class="st">"r"</span><span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>out_file <span class="op">=</span> fopen<span class="op">(</span><span class="st">"passed.txt"</span><span class="op">,</span>   <span class="st">"w"</span><span class="op">);</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Student s<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> passed <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>in_file  <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> <span class="op">...</span> report<span class="op">,</span> <span class="cf">return</span> <span class="dv">1</span> <span class="op">...</span> <span class="op">}</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>out_file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span> <span class="op">...</span> report<span class="op">,</span> <span class="cf">return</span> <span class="dv">1</span> <span class="op">...</span> <span class="op">}</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>in_file<span class="op">,</span> <span class="op">...)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span> <span class="op">...</span> above <span class="fl">7.00</span> <span class="op">...</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>            fprintf<span class="op">(</span>out_file<span class="op">,</span> <span class="st">"</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> s<span class="op">.</span>roll<span class="op">);</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>            passed<span class="op">++;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>in_file<span class="op">);</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>out_file<span class="op">);</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"passed=</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> passed<span class="op">);</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>fscanf</code> <strong>reads from</strong> <code>in_file</code>; <code>fprintf</code> <strong>writes to</strong> <code>out_file</code>. Each takes its file as the first argument, and if you swap them the compiler will not stop you — the data will simply go nowhere. Check <strong>both</strong> <code>fopen</code>s: the input can be missing, and the output can fail too, on a full or read-only disk. <code>fclose(out_file)</code> is not optional: what you wrote may still be in a buffer, and the checker reads the file after your program exits. This is <code>e3</code>’s loop with two extra lines in it, so get <code>e3</code> right first. And nobody qualifying is a valid answer — <code>passed.txt</code> exists, is empty, and you print <code>passed=0</code>.</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -956,15 +1060,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="act-5-check-your-marks-fix-and-submit-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="act-5-check-your-marks-fix-and-submit-10-minutes">Act 5 · Check your marks, fix, and submit (10 minutes)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e3       <span class="co"># one problem, while you are working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span>          <span class="co"># everything</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> e3       <span class="co"># one problem, while you are working on it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Marks are given <strong>per test case</strong>, not all-or-nothing, so fixing a failing case is worth doing even in the last few minutes. Two caveats, so the number does not surprise you:</p>
 <ul>
 <li>Each problem’s mark is rounded to a whole number. A write drill is worth 1 mark over 5 cases, so passing 2 of 5 rounds to 0 and 3 of 5 rounds to 1. On the 10-mark problems every case really does carry its own share.</li>
 <li>Some cases are drawn fresh each run, so the total can move by a mark or two between checks. Treat it as an estimate.</li>
 </ul>
 <p>When you are finished, or when time is called:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
