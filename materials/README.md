@@ -1,1 +1,1 @@
-Student-facing files (handouts, scans, starter code) referenced from week notes and lab sheets. Solutions and question papers go in `private/`, never here.
+Student-facing files (handouts, scans, starter code) referenced from week notes and lab sheets. Exam papers and solutions remain in `private/` unless the instructor explicitly requests a student-facing copy here. Preparing a copy does not authorize publishing.
