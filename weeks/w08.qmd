@@ -5,3 +5,7 @@
 ::: {.callout-important}
 No classes this week — mid-semester examinations (Sep 18–23). Syllabus coverage: W01–W07. Best of luck!
 :::
+
+## Midterm solutions
+
+📕 **[Download the worked solutions](../materials/midterm-solutions.pdf)** — the questions and worked answers for the mid-semester examination (best 4 of 6 per section), covering Weeks 01–07. Try each question before reading its solution.

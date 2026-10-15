@@ -71,6 +71,7 @@ cannot be revised without functions, so the earlier material does not disappear.
 | Paper | Solutions |
 |---|---|
 | Class Test 1 (Aug 2026) — number systems, complements, overflow, the compile model | 📕 [**Worked solutions**](materials/ct1-solutions.pdf) |
+| Midterm (Sep 2026) — Weeks 01–07 | 📕 [**Worked solutions**](materials/midterm-solutions.pdf) |
 
 : {tbl-colwidths="[70,30]"}
 

@@ -29,4 +29,6 @@ Interactive artifacts, handouts, and other student-facing files used in lectures
 | 📽️ [Deck 09 — From Source to Executable](w05-deck-09-source-to-executable.html) | W05 Monday: Lab 03's checked three worked through, then the compilation pipeline — preprocessor, compiler, assembler, linker — each stage stopped and inspected, ending at `nm` and the `U printf` that explains why linkers exist. | [Week 05](../weeks/w05.qmd) |
 | 🐢 [The Turtle Computer](w01-turtle-computer.html) | Your first programming language: ten words, one turtle, no typing. Six missions in which each new word is *invented* because a problem demands it — and the reward comes only when the machine's output matches your intention. | [Week 01](../weeks/w01.qmd), Lab 01 |
 
+| 📕 [Midterm — worked solutions](midterm-solutions.pdf) | Questions and worked answers for the mid-semester examination covering Weeks 01–07 (best 4 of 6 per section). | [Week 08](../weeks/w08.qmd) |
+
 : {tbl-colwidths="[30,50,20]"}
