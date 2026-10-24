@@ -76,6 +76,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -490,7 +519,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#pre-read" id="toc-pre-read" class="nav-link" data-scroll-target="#pre-read">Pre-read</a></li>
   <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a>
+  <ul class="collapse">
+  <li><a href="#softmax-fix" id="toc-softmax-fix" class="nav-link" data-scroll-target="#softmax-fix">Tuesday, 27 October: Even the arithmetic underneath AI needs debugging</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -634,8 +666,21 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Build the trait out of the artefacts.</strong> <code>free</code> what you <code>malloc</code>. Say when you do not know. Finish the hard one. Each is a small piece of work that holds up unobserved, and that is the only material the reputation is ever made of.</li>
 </ol>
 <p>The third is the one that will feel least like computer science and will matter longest.</p>
+<section id="softmax-fix" class="level3">
+<h3 class="anchored" data-anchor-id="softmax-fix">Tuesday, 27 October: Even the arithmetic underneath AI needs debugging</h3>
+<p>Remember the <a href="../weeks/w02.html">Pentium division bug</a>: Thomas Nicely noticed that a trusted processor gave inconsistent answers. Remember Java’s binary-search bug: <code>(low + high) / 2</code> could overflow before the division happened. A mathematically sensible expression failed on a machine with finite integers. Humans investigated both. <a href="https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/">Joshua Bloch’s account</a></p>
+<p>Now consider <strong>softmax</strong>, which converts scores into probabilities inside many AI systems. Barron and colleagues describe two numerical bugs in standard softmax and cross-entropy implementations. Subtracting the largest input already guards against exponential overflow, but rounding can still erase a small learning signal. Another failure produces a non-zero learning signal even when a student model’s scores exactly match its teacher’s. <a href="https://jonbarron.info/softmaxfix/">Paper and demonstration</a></p>
+<p>Here is the numerical trap in miniature. For a tiny positive <span class="math inline">\(u\)</span>,</p>
+<p><span class="math display">\[
+\frac{1}{1+u}-1 = -\frac{u}{1+u}.
+\]</span></p>
+<p>On paper, they are equal. On a computer, <code>1 + u</code> may round to exactly <code>1</code>. The first expression then becomes zero; the second can preserve the small negative value.</p>
+<p>This is <strong>loss of precision</strong>, occurring before <span class="math inline">\(u\)</span> itself becomes too small to represent. <strong>Overflow</strong> exceeds the available range; <strong>underflow</strong> concerns values near the bottom of that range. Avoiding those extremes does not guarantee accurate arithmetic. The paper’s fixes rearrange computations to preserve information that the usual formulas discard. <a href="https://jonbarron.info/softmaxfix/">Technical explanation</a></p>
+<p>The reported Gemini assistance adds a striking possibility: AI helping humans repair the numerical machinery used to train AI. <strong>That attribution remains unverified here</strong>: the paper does not mention Gemini, and we could not independently verify the details in the <a href="https://x.com/jon_barron/status/2113707885486375022">linked discussion</a>. The collaboration we should aim for is clear: ask the model to challenge an implementation, propose counterexamples and compare alternative formulas. Then reproduce the failure and test the proposed repair.</p>
+<p>For a first-year programmer, this is why representation, precision and boundary cases matter. They reach all the way from your C exercises to modern AI. You need enough understanding to recognise a useful diagnosis—and enough discipline to demand evidence before shipping the fix.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
