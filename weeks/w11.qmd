@@ -5,17 +5,12 @@
 **Syllabus module:** 6 — structures; file handling
 
 ::: {.callout-important}
-**Class Test-2 opens on Oct 14**, the day after Tuesday's lecture (window: Oct 14–22).
+**Class Test-2: Thursday, 22 October 2026, duration 1 hour (EE/ME/MT).**
 
-**Scope: everything taught after the Mid-Semester Examination** — that is W09, W10 and W11:
-
-| Week | What is in scope |
-|---|---|
-| [W09](w09.qmd) | functions — declaration, definition, call; **scope**; call by value and by reference; bisection |
-| [W10](w10.qmd) | **pointers** — `&` and `*`, pointer arithmetic, arrays as pointers, why a length must travel; **strings** — character arrays, `'\0'`, `string.h` |
-| [W11](w11.qmd) | **structures** and `->`; **file input and output** — `FILE *`, `fopen`/`fclose`, reading to end of file |
-
-Note that W09 is in scope. The test is not limited to the last two weeks.
+The scope is **functions, pointers, structures and strings**, using relevant material
+from W09–W11 and Labs 07–09. This week's **structures** material is included;
+**file handling is excluded**. Earlier arrays, branching, loops and arithmetic may
+be used. See the [confirmed coverage and format](../course.qmd#ct2).
 
 **Lab 09** is on this material: EE on Tue Oct 13, Mechanical and Materials on Wed Oct 21.
 :::

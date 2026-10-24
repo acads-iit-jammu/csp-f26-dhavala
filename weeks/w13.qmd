@@ -185,3 +185,46 @@ here. Three things follow, none of them dramatic:
    unobserved, and that is the only material the reputation is ever made of.
 
 The third is the one that will feel least like computer science and will matter longest.
+
+### Tuesday, 27 October: Even the arithmetic underneath AI needs debugging {#softmax-fix}
+
+Remember the [Pentium division bug](w02.qmd): Thomas Nicely noticed that a trusted
+processor gave inconsistent answers. Remember Java's binary-search bug:
+`(low + high) / 2` could overflow before the division happened. A mathematically
+sensible expression failed on a machine with finite integers. Humans investigated
+both. [Joshua Bloch's account](https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/)
+
+Now consider **softmax**, which converts scores into probabilities inside many AI
+systems. Barron and colleagues describe two numerical bugs in standard softmax and
+cross-entropy implementations. Subtracting the largest input already guards against
+exponential overflow, but rounding can still erase a small learning signal. Another
+failure produces a non-zero learning signal even when a student model's scores exactly
+match its teacher's. [Paper and demonstration](https://jonbarron.info/softmaxfix/)
+
+Here is the numerical trap in miniature. For a tiny positive $u$,
+
+$$
+\frac{1}{1+u}-1 = -\frac{u}{1+u}.
+$$
+
+On paper, they are equal. On a computer, `1 + u` may round to exactly `1`. The first
+expression then becomes zero; the second can preserve the small negative value.
+
+This is **loss of precision**, occurring before $u$ itself becomes too small to
+represent. **Overflow** exceeds the available range; **underflow** concerns values
+near the bottom of that range. Avoiding those extremes does not guarantee accurate
+arithmetic. The paper's fixes rearrange computations to preserve information that the
+usual formulas discard. [Technical explanation](https://jonbarron.info/softmaxfix/)
+
+The reported Gemini assistance adds a striking possibility: AI helping humans repair
+the numerical machinery used to train AI. **That attribution remains unverified here**:
+the paper does not mention Gemini, and we could not independently verify the details
+in the [linked discussion](https://x.com/jon_barron/status/2113707885486375022).
+The collaboration we should aim for is clear: ask the model to challenge an
+implementation, propose counterexamples and compare alternative formulas. Then
+reproduce the failure and test the proposed repair.
+
+For a first-year programmer, this is why representation, precision and boundary cases
+matter. They reach all the way from your C exercises to modern AI. You need enough
+understanding to recognise a useful diagnosis—and enough discipline to demand evidence
+before shipping the fix.

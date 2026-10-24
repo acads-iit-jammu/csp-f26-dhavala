@@ -9,8 +9,10 @@ First week back after the mid-semester examination. **Lab 07 is Functions and th
 Life** — EE on Tue Sep 29, the afternoon of Tuesday's 8 am lecture; Mech & Materials on
 Wed Oct 7.
 
-**This week is in scope for Class Test-2** (window Oct 14–22), which covers everything
-taught after the mid-semester examination: W09, W10 and W11.
+**Class Test-2: Thursday, 22 October 2026, duration 1 hour (EE/ME/MT).**
+Revise the functions, pointers, structures and strings covered in Weeks 09–11 and
+Labs 07–09. See the [confirmed coverage and format](../course.qmd#ct2);
+file handling is excluded.
 :::
 
 ## Pre-read
