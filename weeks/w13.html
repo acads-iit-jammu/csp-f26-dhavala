@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -515,9 +550,33 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#plan" id="toc-plan" class="nav-link active" data-scroll-target="#plan">Plan</a></li>
-  <li><a href="#pre-read" id="toc-pre-read" class="nav-link" data-scroll-target="#pre-read">Pre-read</a></li>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
+  <li><a href="#application-storing-sensor-readings" id="toc-application-storing-sensor-readings" class="nav-link active" data-scroll-target="#application-storing-sensor-readings">Application: storing sensor readings</a></li>
+  <li><a href="#lecture-overview" id="toc-lecture-overview" class="nav-link" data-scroll-target="#lecture-overview">Lecture overview</a>
+  <ul class="collapse">
+  <li><a href="#monday-26-october-dynamic-memory-allocation" id="toc-monday-26-october-dynamic-memory-allocation" class="nav-link" data-scroll-target="#monday-26-october-dynamic-memory-allocation">Monday, 26 October — Dynamic memory allocation</a></li>
+  <li><a href="#tuesday-27-october-recursion" id="toc-tuesday-27-october-recursion" class="nav-link" data-scroll-target="#tuesday-27-october-recursion">Tuesday, 27 October — Recursion</a></li>
+  </ul></li>
+  <li><a href="#pre-read-and-source-mapping" id="toc-pre-read-and-source-mapping" class="nav-link" data-scroll-target="#pre-read-and-source-mapping">Pre-read and source mapping</a></li>
+  <li><a href="#monday-notes-allocating-and-owning-memory" id="toc-monday-notes-allocating-and-owning-memory" class="nav-link" data-scroll-target="#monday-notes-allocating-and-owning-memory">Monday notes: allocating and owning memory</a>
+  <ul class="collapse">
+  <li><a href="#when-dynamic-allocation-is-needed" id="toc-when-dynamic-allocation-is-needed" class="nav-link" data-scroll-target="#when-dynamic-allocation-is-needed">When dynamic allocation is needed</a></li>
+  <li><a href="#allocation-functions" id="toc-allocation-functions" class="nav-link" data-scroll-target="#allocation-functions">Allocation functions</a></li>
+  <li><a href="#appropriate-inefficient-and-incorrect-uses" id="toc-appropriate-inefficient-and-incorrect-uses" class="nav-link" data-scroll-target="#appropriate-inefficient-and-incorrect-uses">Appropriate, inefficient and incorrect uses</a></li>
+  <li><a href="#runnable-examples" id="toc-runnable-examples" class="nav-link" data-scroll-target="#runnable-examples">Runnable examples</a></li>
+  <li><a href="#malloc-reserve-storage-then-initialise-it" id="toc-malloc-reserve-storage-then-initialise-it" class="nav-link" data-scroll-target="#malloc-reserve-storage-then-initialise-it"><code>malloc</code>: reserve storage, then initialise it</a></li>
+  <li><a href="#calloc-reserve-storage-with-zeroed-bytes" id="toc-calloc-reserve-storage-with-zeroed-bytes" class="nav-link" data-scroll-target="#calloc-reserve-storage-with-zeroed-bytes"><code>calloc</code>: reserve storage with zeroed bytes</a></li>
+  <li><a href="#realloc-change-the-allocation-size" id="toc-realloc-change-the-allocation-size" class="nav-link" data-scroll-target="#realloc-change-the-allocation-size"><code>realloc</code>: change the allocation size</a></li>
+  <li><a href="#free-aliases-and-ownership" id="toc-free-aliases-and-ownership" class="nav-link" data-scroll-target="#free-aliases-and-ownership"><code>free</code>, aliases and ownership</a></li>
+  <li><a href="#follow-up-dynamically-allocated-structures-and-strings" id="toc-follow-up-dynamically-allocated-structures-and-strings" class="nav-link" data-scroll-target="#follow-up-dynamically-allocated-structures-and-strings">Follow-up: dynamically allocated structures and strings</a></li>
+  </ul></li>
+  <li><a href="#tuesday-notes-recursion" id="toc-tuesday-notes-recursion" class="nav-link" data-scroll-target="#tuesday-notes-recursion">Tuesday notes: recursion</a>
+  <ul class="collapse">
+  <li><a href="#when-recursion-is-useful" id="toc-when-recursion-is-useful" class="nav-link" data-scroll-target="#when-recursion-is-useful">When recursion is useful</a></li>
+  <li><a href="#recursive-functions-base-case-smaller-problem-return" id="toc-recursive-functions-base-case-smaller-problem-return" class="nav-link" data-scroll-target="#recursive-functions-base-case-smaller-problem-return">Recursive functions: base case, smaller problem, return</a></li>
+  <li><a href="#factorial-one-recursive-call-and-pending-multiplication" id="toc-factorial-one-recursive-call-and-pending-multiplication" class="nav-link" data-scroll-target="#factorial-one-recursive-call-and-pending-multiplication">Factorial: one recursive call and pending multiplication</a></li>
+  <li><a href="#recursive-maximum-an-array-and-its-current-length" id="toc-recursive-maximum-an-array-and-its-current-length" class="nav-link" data-scroll-target="#recursive-maximum-an-array-and-its-current-length">Recursive maximum: an array and its current length</a></li>
+  <li><a href="#virahankafibonacci-two-recursive-calls-and-repeated-work" id="toc-virahankafibonacci-two-recursive-calls-and-repeated-work" class="nav-link" data-scroll-target="#virahankafibonacci-two-recursive-calls-and-repeated-work">Virahanka/Fibonacci: two recursive calls and repeated work</a></li>
+  </ul></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a>
   <ul class="collapse">
@@ -550,25 +609,617 @@ window.Quarto = {
 
 <p><strong>Dates:</strong> Mon Oct 26 &amp; Tue Oct 27, 2026 · 8:00–8:50 am · 12LH3004</p>
 <p><strong>Syllabus module:</strong> 5 — dynamic memory allocation; functions and recursion</p>
-<section id="plan" class="level2">
-<h2 class="anchored" data-anchor-id="plan">Plan</h2>
-<p><strong>Monday — dynamic memory allocation.</strong> Every array you have declared so far had its size fixed when the program was compiled. That is a real limit: you cannot read a list whose length you only discover while running. <code>malloc</code> asks for memory while the program runs and returns its address; <code>free</code> gives it back. The stack and the heap as two different places, why <code>malloc</code> can fail and what it returns when it does, and the three mistakes that follow: leaking memory, using it after freeing it, and freeing it twice.</p>
-<p><strong>Tuesday — recursion.</strong> A function that calls itself. The base case that stops it, the recursive case that makes progress towards the base case, and what the call stack looks like while it runs — which is easier to picture now that Monday has separated the stack from the heap.</p>
+<section id="application-storing-sensor-readings" class="level2">
+<h2 class="anchored" data-anchor-id="application-storing-sensor-readings">Application: storing sensor readings</h2>
+<p>A temperature sensor sends readings to a program. If the number of readings is known in advance and remains fixed, an array of that size is suitable. For example, <code>int readings[100];</code> can store 100 readings.</p>
+<p>If the recording continues beyond 100 readings, this array cannot be enlarged. The program needs more storage while retaining the readings already collected. Dynamic memory allocation allows the program to request storage at runtime and resize it as more readings arrive. Resizing may move the data to a new location.</p>
+<p>After collecting the readings, the program may need to find the maximum. One recursive approach finds the maximum of the first <code>n - 1</code> readings and compares it with the last reading. The lectures cover allocation first, followed by recursive functions.</p>
 </section>
-<section id="pre-read" class="level2">
-<h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
+<section id="lecture-overview" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-overview">Lecture overview</h2>
+<section id="monday-26-october-dynamic-memory-allocation" class="level3">
+<h3 class="anchored" data-anchor-id="monday-26-october-dynamic-memory-allocation">Monday, 26 October — Dynamic memory allocation</h3>
+<p><strong>Learning goal:</strong> allocate storage, initialise it, pass it to a function, resize it safely and release it once. Distinguish the lifetime of a pointer from the lifetime of the object it refers to. Dynamic allocation gives control over storage size and lifetime; it is not the only way C can express a runtime-sized array.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Teaching sequence</th>
+<th>Supporting artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Start with the need: a fixed array is full, or a result must outlive the function that creates it. Compare storage choices.</td>
+<td>Then start the allocation trace; distinguish a pointer from its allocation.</td>
+</tr>
+<tr class="even">
+<td><code>malloc</code>, <code>sizeof *p</code>, failure checking, initialisation, array access and <code>free</code>.</td>
+<td>Step through allocate → write → release; compare <code>calloc</code>.</td>
+</tr>
+<tr class="odd">
+<td>Resize a populated array. Preserve the old pointer if <code>realloc</code> fails.</td>
+<td>Run both resize scenarios; explain which values survive.</td>
+</tr>
+<tr class="even">
+<td>Aliases, dangling pointers, double-free and losing the last pointer. Connect to arrays of structures.</td>
+<td>Alias and leak scenarios; students explain before advancing.</td>
+</tr>
+<tr class="odd">
+<td>Exit check: repair an allocation/cleanup fragment and explain ownership.</td>
+<td>Revisit one scenario without its explanation.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../materials/w13-memory-lab.html"><strong>Open the memory explorer: Who owns this memory?</strong></a></p>
+<p>The explorer is a conceptual trace, not a live allocator. Released storage is never read to demonstrate a bug. Addresses are symbolic; failed allocation is a selectable scenario. The longer string-copy example and further allocation exercises belong in reading/lab practice.</p>
+</section>
+<section id="tuesday-27-october-recursion" class="level3">
+<h3 class="anchored" data-anchor-id="tuesday-27-october-recursion">Tuesday, 27 October — Recursion</h3>
+<p><strong>Learning goal:</strong> identify the base case, explain progress towards it, and trace the work done after a recursive call returns. Each invocation has its own parameters and locals; an array argument still refers to the caller’s data.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Teaching sequence</th>
+<th>Supporting artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Derive factorial from the smaller problem; include <code>0!</code>.</td>
+<td>Predict <code>fact(3)</code> before running the trace.</td>
+</tr>
+<tr class="even">
+<td>Descend into calls, pause the caller, then unwind the returns.</td>
+<td>Step through the stack; identify each pending multiplication.</td>
+</tr>
+<tr class="odd">
+<td>Find the largest element in an array recursively. Pass Monday’s allocated array without copying it.</td>
+<td>Maximum trace, including the singleton base case.</td>
+</tr>
+<tr class="even">
+<td>Virahanka/Fibonacci: two smaller problems and repeated work.</td>
+<td>Compare call counts for small inputs.</td>
+</tr>
+<tr class="odd">
+<td>Diagnose a missing base case, non-shrinking input and a missing return; exit prediction.</td>
+<td>Reset a trace and ask students to explain the next state.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../materials/w13-recursion-lab.html"><strong>Open the recursion explorer: Where does a recursive call return?</strong></a></p>
+<p>The explorer uses small inputs and shows logical call frames. It does not imply that recursion is always faster or that compilers must use this exact physical stack layout. Binomial coefficients, balanced recursive maximum and recursive binary search are reading extensions. See also the <a href="#softmax-fix">Tuesday PAGAL discussion</a>.</p>
+</section>
+</section>
+<section id="pre-read-and-source-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="pre-read-and-source-mapping">Pre-read and source mapping</h2>
+<p>Adapted from <strong>Prof.&nbsp;Shweta Agrawal’s CS1100 lectures, IIT Madras</strong>, with permission. The runnable teaching examples below include allocation checks, bounded inputs and cleanup; the original slide examples should not be copied without checking these.</p>
 <ul>
-<li><a href="../cs1100-cse-iitm-2021/slides/Lec19.pdf">Lec 19</a> · <a href="../cs1100-cse-iitm-2021/slides/Lec20.pdf">Lec 20</a> · <a href="../cs1100-cse-iitm-2021/slides/Lec24.pdf">Lec 24</a></li>
-<li>The <a href="../weeks/w10.html">W10 notes</a> on pointers. <code>malloc</code> returns an address, so everything this week rests on that.</li>
+<li><strong>Monday:</strong> <a href="../cs1100-cse-iitm-2021/slides/Lec28.pdf">Lecture 28</a>, allocation and independent string storage; <a href="../cs1100-cse-iitm-2021/slides/Lec30.pdf">Lecture 30</a>, dynamically allocated structures.</li>
+<li><strong>Tuesday:</strong> <a href="../cs1100-cse-iitm-2021/slides/Lec24.pdf">Lecture 24</a>, factorial, call flow, Virahanka/Fibonacci and recursive maximum; <a href="../cs1100-cse-iitm-2021/slides/Lec26.pdf">Lecture 26</a>, recursive maximum and depth.</li>
+<li>Recap: <a href="../weeks/w10.html">W10 pointers</a> and <a href="../weeks/w11.html">W11 structures</a>.</li>
 </ul>
 </section>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<p><em>To be posted.</em></p>
+<section id="monday-notes-allocating-and-owning-memory" class="level2">
+<h2 class="anchored" data-anchor-id="monday-notes-allocating-and-owning-memory">Monday notes: allocating and owning memory</h2>
+<section id="when-dynamic-allocation-is-needed" class="level3">
+<h3 class="anchored" data-anchor-id="when-dynamic-allocation-is-needed">When dynamic allocation is needed</h3>
+<p>Consider the sensor application. The program initially has room for 100 readings. After 100 readings have been stored, another reading arrives. Writing it to <code>readings[100]</code> would be out of bounds. Changing a variable that holds the count does not change the array’s capacity.</p>
+<p>One solution is to create a larger array, copy the existing readings into it and continue recording. Dynamically allocated storage provides a resizing operation, <code>realloc</code>, for this purpose. It can enlarge the existing allocation or move the data to a larger allocation. The program does not need to copy the readings itself. It must check whether resizing succeeded and use the returned pointer.</p>
+<p>Dynamic allocation also supports two related requirements:</p>
+<ul>
+<li><strong>A size determined at runtime.</strong> The program reads the number of records from a file and allocates space for that number.</li>
+<li><strong>Data needed after a function returns.</strong> A function allocates and fills an array, then returns its pointer to the caller. The caller uses the array and later releases it. Returning a pointer to an ordinary local array would be invalid because that array ceases to exist when the function returns.</li>
+</ul>
+<p>Alternatively, the caller can provide an array and pass its capacity to the function. This is suitable when the caller can determine the required capacity.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Storage choice</th>
+<th>What it can do</th>
+<th>What it cannot do</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ordinary local array, e.g.&nbsp;<code>int a[100];</code></td>
+<td>Hold up to its fixed capacity during the block’s execution</td>
+<td>Grow that array object or keep it alive after leaving its block</td>
+</tr>
+<tr class="even">
+<td>Variable-length local array, e.g.&nbsp;<code>int a[n];</code>, where supported</td>
+<td>Choose its size when its declaration executes</td>
+<td>Resize the existing array or extend its lifetime past its scope; support is optional in C11</td>
+</tr>
+<tr class="odd">
+<td>Static array</td>
+<td>Keep storage for the duration of the program</td>
+<td>Grow its fixed capacity or automatically give each function call an independent result</td>
+</tr>
+<tr class="even">
+<td>Dynamically allocated storage</td>
+<td>Choose a size at runtime, resize storage and control when it is released</td>
+<td>Guarantee allocation success, unlimited memory or automatic cleanup</td>
+</tr>
+</tbody>
+</table>
+<p>A variable-length array can also use a size determined at runtime, where supported. Its size cannot subsequently change, and its lifetime ends on leaving its scope. Dynamic allocation is useful when these restrictions do not suit the application.</p>
+</section>
+<section id="allocation-functions" class="level3">
+<h3 class="anchored" data-anchor-id="allocation-functions">Allocation functions</h3>
+<p><code>malloc</code> and <code>calloc</code> allocate storage. <code>realloc</code> resizes an allocation. <code>free</code> releases it. These functions are declared in <code>&lt;stdlib.h&gt;</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Need</th>
+<th>Choose</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Store values that will all be assigned before use</td>
+<td><code>malloc</code></td>
+<td>No initial values are requested; write the elements before reading them</td>
+</tr>
+<tr class="even">
+<td>Start an integer counter array at zero</td>
+<td><code>calloc</code></td>
+<td>Zeroed bytes give these integer elements their required initial zero values</td>
+</tr>
+<tr class="odd">
+<td>Change the capacity while retaining existing contents</td>
+<td><code>realloc</code></td>
+<td>Preserves contents up to the smaller of the old and new sizes on success</td>
+</tr>
+<tr class="even">
+<td>Finish using an allocation</td>
+<td><code>free</code></td>
+<td>Releases that storage for reuse</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>length</strong> is the number of readings stored. The <strong>capacity</strong> is the number that can fit. For example, after enlarging a full array from 100 to 200 elements, the length is still 100. The added elements must be assigned values before use.</p>
+</section>
+<section id="appropriate-inefficient-and-incorrect-uses" class="level3">
+<h3 class="anchored" data-anchor-id="appropriate-inefficient-and-incorrect-uses">Appropriate, inefficient and incorrect uses</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Appropriate use</th>
+<th>Correct but potentially wasteful</th>
+<th>Incorrect use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Read n values, assigning every element</td>
+<td><code>malloc</code>, check, then fill</td>
+<td><code>calloc</code> when every zero will immediately be overwritten; its zero-initialisation is unnecessary for this algorithm</td>
+<td>Read an element from <code>malloc</code> storage before assigning it</td>
+</tr>
+<tr class="even">
+<td>Start n integer counters</td>
+<td><code>calloc</code>, check, then increment</td>
+<td><code>calloc</code> followed by another loop assigning zero</td>
+<td>Use uninitialised <code>malloc</code> elements as counters; <code>malloc</code> plus an explicit zeroing loop is valid</td>
+</tr>
+<tr class="odd">
+<td>Append many values</td>
+<td>Grow capacity in chunks, then fill the added elements</td>
+<td>Call <code>realloc</code> for every single append; repeated moves can repeatedly copy old data</td>
+<td>Write past capacity, or assume the added elements are already zero</td>
+</tr>
+<tr class="even">
+<td>Resize an existing allocation</td>
+<td>Keep the old pointer until a temporary result has been checked</td>
+<td>Allocate a new block, copy and free the old one manually when <code>realloc</code> suffices</td>
+<td>Overwrite the only pointer with a failed <code>realloc</code> result, losing access to the old allocation</td>
+</tr>
+<tr class="odd">
+<td>Repeat a calculation with the same buffer size</td>
+<td>Reuse the buffer while it is needed; free it at the end</td>
+<td>Allocate and free a replacement buffer on every iteration without a need for separate storage</td>
+<td>Keep overwriting the last owning pointer without freeing its previous allocation</td>
+</tr>
+<tr class="even">
+<td>Finish using shared storage</td>
+<td>Free once after its last use; stop using every alias</td>
+<td>Keep an unnecessarily large allocation alive until much later</td>
+<td>Free twice, access freed storage, or treat <code>p = NULL</code> as a substitute for <code>free(p)</code></td>
+</tr>
+</tbody>
+</table>
+<p>For repeated appends, increasing capacity from 100 to 200, then to 400, reduces the number of resize requests. It also reserves space that may remain unused. Resizing by one element each time may require repeated copying. Actual allocation costs depend on the implementation. <code>calloc</code> is not necessarily slower than <code>malloc</code>; its zero-initialisation is unnecessary when every element will be immediately overwritten.</p>
+</section>
+<section id="runnable-examples" class="level3">
+<h3 class="anchored" data-anchor-id="runnable-examples">Runnable examples</h3>
+<p>The structure and string examples are follow-up reading. Every <strong>complete program</strong> below is independent: copy one into <code>example.c</code>, compile, and run it. No keyboard input is needed; change the initial values to experiment. Syntax summaries are reference fragments, not complete programs.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cc</span> <span class="at">-std</span><span class="op">=</span>c11 <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-Wpedantic</span> example.c <span class="at">-o</span> example</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./example</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="malloc-reserve-storage-then-initialise-it" class="level3">
+<h3 class="anchored" data-anchor-id="malloc-reserve-storage-then-initialise-it"><code>malloc</code>: reserve storage, then initialise it</h3>
+<p>Use <code>malloc</code> when the program will assign each element before reading it. The example allocates three integers, assigns their values and computes their sum. The count is fixed here so the output is reproducible; the same expression can use a validated count read at runtime.</p>
+<p><strong>Definition and syntax:</strong> <code>malloc(bytes)</code> from <code>&lt;stdlib.h&gt;</code> reserves the requested number of bytes and returns a pointer to them, or <code>NULL</code> on failure. For an array of <code>n</code> elements, use <code>int *p = malloc(n * sizeof *p);</code>. <code>sizeof *p</code> is the size of one pointed-to element; for this <code>int</code> expression it does not dereference <code>p</code> at runtime. C does not require a cast of the returned pointer.</p>
+<p><strong>Initialisation:</strong> the pointer receives the returned address; the elements remain uninitialised. Check <code>p</code>, then assign each element before reading it.</p>
+<p><strong>Usage:</strong> <code>p[i]</code> accesses element <code>i</code>, just as with an array. Pass both the pointer and the element count to functions; a pointer does not remember the array length.</p>
+<p><strong>Cautions:</strong> indices must be from <code>0</code> to <code>n - 1</code>. For a count obtained from input, validate that it is positive and that <code>n * sizeof *p</code> fits in <code>size_t</code> before allocating. For example, with a validated <code>size_t n</code>, reject <code>n &gt; SIZE_MAX / sizeof *p</code> (<code>SIZE_MAX</code> is provided by <code>&lt;stdint.h&gt;</code>). The examples here use fixed small positive counts. <code>sizeof p</code> is the size of the pointer, not the allocated array.</p>
+<p><strong>Complete program — allocate, initialise, pass to a function, release:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sum<span class="op">(</span><span class="dt">const</span> <span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> a<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span>n <span class="op">*</span> <span class="kw">sizeof</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Allocation failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        p<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">(</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Sum = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> sum<span class="op">(</span>p<span class="op">,</span> n<span class="op">));</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output on allocation success:</p>
+<pre class="text"><code>Sum = 60</code></pre>
+</section>
+<section id="calloc-reserve-storage-with-zeroed-bytes" class="level3">
+<h3 class="anchored" data-anchor-id="calloc-reserve-storage-with-zeroed-bytes"><code>calloc</code>: reserve storage with zeroed bytes</h3>
+<p>Suppose the program counts readings in three temperature ranges. Each counter must start at zero. <code>calloc</code> provides zero-initialised integer storage. <code>malloc</code> followed by a loop assigning zero is also valid.</p>
+<p><strong>Definition and syntax:</strong> <code>calloc(count, element_size)</code> allocates storage for <code>count</code> elements and sets all its bytes to zero. Use <code>int *p = calloc(n, sizeof *p);</code> and check for <code>NULL</code>.</p>
+<p><strong>Initialisation and usage:</strong> for an integer array, these zeroed bytes represent integer zero. Read or update its elements using <code>p[i]</code>; release it with <code>free</code>.</p>
+<p><strong>Cautions:</strong> do not generalise this to portable initialisation of every possible C type: all-bits-zero is not guaranteed to represent a null pointer or every floating-point zero. <code>calloc</code> still can fail and still needs cleanup.</p>
+<p><strong>Complete program:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>counts <span class="op">=</span> calloc<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="kw">sizeof</span> <span class="op">*</span>counts<span class="op">);</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>counts <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Allocation failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Initially: </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> counts<span class="op">[</span><span class="dv">0</span><span class="op">],</span> counts<span class="op">[</span><span class="dv">1</span><span class="op">],</span> counts<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    counts<span class="op">[</span><span class="dv">1</span><span class="op">]++;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"After update: </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> counts<span class="op">[</span><span class="dv">0</span><span class="op">],</span> counts<span class="op">[</span><span class="dv">1</span><span class="op">],</span> counts<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>counts<span class="op">);</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output on allocation success:</p>
+<pre class="text"><code>Initially: 0 0 0
+After update: 0 1 0</code></pre>
+</section>
+<section id="realloc-change-the-allocation-size" class="level3">
+<h3 class="anchored" data-anchor-id="realloc-change-the-allocation-size"><code>realloc</code>: change the allocation size</h3>
+<p>The example starts with two stored readings and increases capacity to four. <code>realloc</code> preserves the two existing values on success. The program then assigns values to the two added elements.</p>
+<p><strong>Definition and syntax:</strong> <code>realloc(p, new_bytes)</code> attempts to resize an existing allocation. Use a temporary pointer: <code>int *tmp = realloc(p, new_n * sizeof *p);</code>. For a positive new size, failure returns <code>NULL</code> and leaves the original allocation valid. Success preserves the contents up to the smaller of the old and new sizes.</p>
+<p><strong>Initialisation and usage:</strong> check <code>tmp</code> first, then assign <code>p = tmp</code> on success. Initialise any added elements before reading them. The allocation can move.</p>
+<p><strong>Cautions:</strong> direct assignment <code>p = realloc(p, ...)</code> can lose the only pointer to the original allocation on failure. After success, use the returned pointer; previous aliases into the old allocation must no longer be used, even if the returned address happens to be unchanged. Avoid zero-size requests: use <code>free</code> when the intended action is to release storage.</p>
+<p><strong>Complete program:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> <span class="kw">sizeof</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Allocation failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    p<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    p<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>tmp <span class="op">=</span> realloc<span class="op">(</span>p<span class="op">,</span> <span class="dv">4</span> <span class="op">*</span> <span class="kw">sizeof</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>tmp <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">/* p is still valid. This program chooses to clean up and exit. */</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Resize failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> tmp<span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    p<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    p<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="dv">8</span><span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Values: </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> p<span class="op">[</span><span class="dv">0</span><span class="op">],</span> p<span class="op">[</span><span class="dv">1</span><span class="op">],</span> p<span class="op">[</span><span class="dv">2</span><span class="op">],</span> p<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output on allocation success:</p>
+<pre class="text"><code>Values: 7 2 5 8</code></pre>
+</section>
+<section id="free-aliases-and-ownership" class="level3">
+<h3 class="anchored" data-anchor-id="free-aliases-and-ownership"><code>free</code>, aliases and ownership</h3>
+<p>Once the program no longer needs the readings, it releases their storage with <code>free</code>. The allocation remains in use until it is released, even if the pointer that originally held its address goes out of scope. If two pointers refer to the same allocation, it must still be freed only once.</p>
+<p><strong>Definition and syntax:</strong> <code>free(p)</code> releases an allocation. It does not delete the pointer variable or assign <code>NULL</code> to it. <code>free(NULL)</code> is permitted.</p>
+<p><strong>Initialisation and usage:</strong> initialise a pointer to <code>NULL</code> when it does not yet refer to an object. Decide which part of the program is responsible for releasing an allocation; this is its <em>owner</em>. <code>int *q = p;</code> copies the pointer, not the array.</p>
+<p><strong>Cautions:</strong> release an allocation exactly once, using its starting pointer from an allocation function. Do not free a local array, <code>p + 1</code>, or already freed storage. Do not dereference, print or compare a stale pointer value after release. Assigning <code>p = NULL</code> does not fix other aliases. Assigning <code>NULL</code> without first releasing the last reachable allocation causes a leak.</p>
+<p><strong>Complete program — two pointers, one allocation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Allocation failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>q <span class="op">=</span> p<span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>q <span class="op">=</span> <span class="dv">9</span><span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Through p: </span><span class="sc">%d</span><span class="st">; through q: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">,</span> <span class="op">*</span>q<span class="op">);</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>p<span class="op">);</span>             <span class="co">/* Release the shared allocation once. */</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> NULL<span class="op">;</span>            <span class="co">/* Overwrite the stale alias; do not read it. */</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Both pointers reset</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output on allocation success:</p>
+<pre class="text"><code>Through p: 9; through q: 9
+Both pointers reset</code></pre>
+</section>
+<section id="follow-up-dynamically-allocated-structures-and-strings" class="level3">
+<h3 class="anchored" data-anchor-id="follow-up-dynamically-allocated-structures-and-strings">Follow-up: dynamically allocated structures and strings</h3>
+<p>A record array can use dynamically allocated storage in the same way as an integer array. A string requires space for its characters and terminating null character. The example creates an independent string copy, then changes the original string.</p>
+<p><strong>Definition and syntax:</strong> <code>struct Point *p = malloc(n * sizeof *p);</code> allocates an array of structures. Access an element’s field with <code>p[i].x</code>; <code>p-&gt;x</code> means <code>(*p).x</code>, the field of the first pointed-to structure.</p>
+<p><strong>Initialisation and usage:</strong> assign the fields before reading them. A dynamically allocated string needs room for its characters <strong>and</strong> the terminating <code>'\0'</code>: <code>char *copy = malloc(strlen(source) + 1);</code>. After checking, <code>strcpy(copy, source)</code> copies the characters and terminator; both string functions require <code>&lt;string.h&gt;</code>.</p>
+<p><strong>Cautions:</strong> <code>char *copy = source</code> only copies an address. Allocating a structure with a pointer member does not allocate storage for that member’s target. Likewise, freeing the structure does not automatically free separately allocated targets. Here <code>source</code> is a valid, terminated, fixed-size string and the destination is large enough; <code>strcpy</code> itself does not check bounds.</p>
+<p><strong>Complete program:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Point <span class="op">{</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Point <span class="op">*</span>points <span class="op">=</span> malloc<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> <span class="kw">sizeof</span> <span class="op">*</span>points<span class="op">);</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>points <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Allocation failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    points<span class="op">[</span><span class="dv">0</span><span class="op">].</span>x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    points<span class="op">[</span><span class="dv">0</span><span class="op">].</span>y <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    points<span class="op">[</span><span class="dv">1</span><span class="op">].</span>x <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    points<span class="op">[</span><span class="dv">1</span><span class="op">].</span>y <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> source<span class="op">[]</span> <span class="op">=</span> <span class="st">"lab"</span><span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>copy <span class="op">=</span> malloc<span class="op">(</span>strlen<span class="op">(</span>source<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>copy <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>points<span class="op">);</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Allocation failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>copy<span class="op">,</span> source<span class="op">);</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    source<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'L'</span><span class="op">;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"First point: (</span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> points<span class="op">-&gt;</span>x<span class="op">,</span> points<span class="op">-&gt;</span>y<span class="op">);</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Second point: (</span><span class="sc">%d</span><span class="st">, </span><span class="sc">%d</span><span class="st">)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> points<span class="op">[</span><span class="dv">1</span><span class="op">].</span>x<span class="op">,</span> points<span class="op">[</span><span class="dv">1</span><span class="op">].</span>y<span class="op">);</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Source: </span><span class="sc">%s</span><span class="st">; independent copy: </span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> source<span class="op">,</span> copy<span class="op">);</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>copy<span class="op">);</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>points<span class="op">);</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output on allocation success:</p>
+<pre class="text"><code>First point: (1, 2)
+Second point: (3, 4)
+Source: Lab; independent copy: lab</code></pre>
+</section>
+</section>
+<section id="tuesday-notes-recursion" class="level2">
+<h2 class="anchored" data-anchor-id="tuesday-notes-recursion">Tuesday notes: recursion</h2>
+<section id="when-recursion-is-useful" class="level3">
+<h3 class="anchored" data-anchor-id="when-recursion-is-useful">When recursion is useful</h3>
+<p>Consider finding the maximum of the stored readings. For one reading, that reading is the maximum. For <code>n</code> readings, compare the last reading with the maximum of the first <code>n - 1</code> readings. A function can perform this calculation by calling itself with <code>n - 1</code> and using the returned value.</p>
+<p>This is a recursive solution. It has three parts:</p>
+<ol type="1">
+<li><strong>Base case:</strong> return the sole reading when <code>n == 1</code>.</li>
+<li><strong>Recursive call:</strong> find the maximum for <code>n - 1</code> readings.</li>
+<li><strong>Result:</strong> compare the returned maximum with the last reading and return the larger value.</li>
+</ol>
+<p>A loop can also find the maximum and uses less extra storage than this recursive version. Recursion is useful when describing a problem through smaller instances makes its implementation easier to follow. Its cost depends on the number of calls, the maximum call depth and any repeated calculations.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Implementation choice</th>
+<th>Limitation or error to avoid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scan an array or compute a running sum</td>
+<td>A loop is usually sufficient</td>
+<td>A recursive scan adds call depth proportional to the array length</td>
+</tr>
+<tr class="even">
+<td>Solve a problem using smaller instances of itself</td>
+<td>Use recursion with a base case and a decreasing problem size</td>
+<td>A missing base case or unchanged argument can prevent termination</td>
+</tr>
+<tr class="odd">
+<td>Compute Fibonacci values</td>
+<td>A loop can retain the preceding two values</td>
+<td>Direct recursion repeatedly computes the same subproblems</td>
+</tr>
+<tr class="even">
+<td>Use a recursive answer in the caller</td>
+<td>Store or return the function’s result</td>
+<td>Printing the result does not return it to the caller</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="recursive-functions-base-case-smaller-problem-return" class="level3">
+<h3 class="anchored" data-anchor-id="recursive-functions-base-case-smaller-problem-return">Recursive functions: base case, smaller problem, return</h3>
+<p><strong>Definition and syntax:</strong> a recursive function calls itself. It uses ordinary C function syntax: <code>return_type name(parameters) { /* body */ }</code>. Place its definition before the first call, or provide a matching prototype. Each call has its own parameters and automatic local variables.</p>
+<p><strong>Initialisation:</strong> give the first call a valid starting argument. Every execution path must either reach a base case or move towards one. Initialise local values before using them; a local variable in one invocation is not the same variable as one in another invocation.</p>
+<p><strong>Usage:</strong> describe the answer in terms of a smaller instance, then combine that answer with the work left in the caller. <code>return</code> passes a result to the caller; printing a result does not return it.</p>
+<p><strong>Cautions:</strong> a base case that is never reached does not stop recursion. Inputs must move towards it. Non-void functions must return a value on every reachable path. Deep recursion can exhaust execution resources; recursion is not automatically faster or more memory-efficient than a loop.</p>
+</section>
+<section id="factorial-one-recursive-call-and-pending-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="factorial-one-recursive-call-and-pending-multiplication">Factorial: one recursive call and pending multiplication</h3>
+<p>For <code>5!</code>, the recursive call computes <code>4!</code>. The caller then multiplies that result by 5. This example shows how execution resumes after a recursive call returns.</p>
+<p><strong>Definition:</strong> for nonnegative integers, (0! = 1) and (n! = n(n-1)!) for (n &gt; 0). <strong>Call syntax:</strong> <code>factorial(n)</code>.</p>
+<p><strong>Initialisation and usage:</strong> start with <code>n</code> in <code>0..12</code> in this example. The base case returns <code>1</code>; each waiting caller multiplies the returned answer by its own <code>n</code>. We use <code>unsigned long</code>, which can represent all these results on conforming C implementations.</p>
+<p><strong>Cautions:</strong> a negative input moves away from the base case in this implementation. Large factorials exceed the integer type’s range; unsigned arithmetic wrapping is not a correct factorial result. The input bound is part of this function’s contract.</p>
+<p><strong>Complete program:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Precondition: 0 &lt;= n &amp;&amp; n &lt;= 12. */</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">long</span> factorial<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">long</span> smaller <span class="op">=</span> factorial<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">long</span><span class="op">)</span>n <span class="op">*</span> smaller<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">||</span> n <span class="op">&gt;</span> <span class="dv">12</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Use n from 0 to 12</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">! = </span><span class="sc">%lu\n</span><span class="st">"</span><span class="op">,</span> n<span class="op">,</span> factorial<span class="op">(</span>n<span class="op">));</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"0! = </span><span class="sc">%lu\n</span><span class="st">"</span><span class="op">,</span> factorial<span class="op">(</span><span class="dv">0</span><span class="op">));</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output:</p>
+<pre class="text"><code>5! = 120
+0! = 1</code></pre>
+<p>For <code>factorial(3)</code>, calls descend through <code>3, 2, 1, 0</code>. Returns carry <code>1, 1, 2, 6</code> back up. The multiplication happens after the smaller call returns.</p>
+</section>
+<section id="recursive-maximum-an-array-and-its-current-length" class="level3">
+<h3 class="anchored" data-anchor-id="recursive-maximum-an-array-and-its-current-length">Recursive maximum: an array and its current length</h3>
+<p>To find the largest reading, first find the maximum of the first <code>n - 1</code> readings. Then compare that result with the last reading. The recursive calls use the same array; they do not copy it.</p>
+<p><strong>Definition:</strong> the maximum of one element is that element. For a longer array, compare the last element with the maximum of the preceding elements. <strong>Call syntax:</strong> <code>largest(a, n)</code>, where <code>n &gt;= 1</code> and <code>a</code> points to at least <code>n</code> initialised integers.</p>
+<p><strong>Initialisation and usage:</strong> start with the full length. Each recursive call uses <code>n - 1</code>. <code>maxOfPrefix</code> holds the maximum of the first <code>n - 1</code> elements. The array elements are shared between calls; passing an array does not copy them. <code>const</code> prevents this function from modifying elements through <code>a</code>.</p>
+<p><strong>Cautions:</strong> an empty array has no maximum under this contract. Do not use zero as the base answer: that fails for all-negative data. This version makes <code>n</code> calls and has linear recursion depth; a loop avoids that depth.</p>
+<p><strong>Complete program — connect recursion to Monday’s allocation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">/* Precondition: n &gt;= 1; a points to at least n initialised ints. */</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> largest<span class="op">(</span><span class="dt">const</span> <span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> maxOfPrefix <span class="op">=</span> largest<span class="op">(</span>a<span class="op">,</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a<span class="op">[</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">&gt;</span> maxOfPrefix<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a<span class="op">[</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> maxOfPrefix<span class="op">;</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>a <span class="op">=</span> malloc<span class="op">(</span>n <span class="op">*</span> <span class="kw">sizeof</span> <span class="op">*</span>a<span class="op">);</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Allocation failed</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">4</span><span class="op">;</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">;</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    a<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">9</span><span class="op">;</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    a<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Maximum = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> largest<span class="op">(</span>a<span class="op">,</span> n<span class="op">));</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Singleton maximum = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> largest<span class="op">(</span>a<span class="op">,</span> <span class="dv">1</span><span class="op">));</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>a<span class="op">);</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output on allocation success:</p>
+<pre class="text"><code>Maximum = -1
+Singleton maximum = -4</code></pre>
+</section>
+<section id="virahankafibonacci-two-recursive-calls-and-repeated-work" class="level3">
+<h3 class="anchored" data-anchor-id="virahankafibonacci-two-recursive-calls-and-repeated-work">Virahanka/Fibonacci: two recursive calls and repeated work</h3>
+<p>Each Fibonacci value depends on two preceding values. A direct recursive implementation computes both, but may recompute the same value in several calls.</p>
+<p><strong>Definition:</strong> using the indexing here, (F(0)=0), (F(1)=1), and (F(n)=F(n-1)+F(n-2)) for (n). <strong>Call syntax:</strong> <code>fib(n)</code>.</p>
+<p><strong>Initialisation and usage:</strong> begin with a nonnegative <code>n</code>; this demonstration limits it to <code>0..10</code>. Store each smaller answer, then add them. The two separate statements make the order of the calls explicit.</p>
+<p><strong>Cautions:</strong> <code>fib(5)</code> computes <code>fib(3)</code> more than once. Repeated subproblems make this direct version expensive as <code>n</code> grows; a loop can compute the sequence with linear work and constant extra storage. Large results also overflow. A branching call tree does not mean that all its calls are active simultaneously: one branch returns before the next statement starts the other.</p>
+<p><strong>Complete program:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Precondition for this demonstration: 0 &lt;= n &amp;&amp; n &lt;= 10. */</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> fib<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n<span class="op">;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> left <span class="op">=</span> fib<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> right <span class="op">=</span> fib<span class="op">(</span>n <span class="op">-</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> left <span class="op">+</span> right<span class="op">;</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">||</span> n <span class="op">&gt;</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Use n from 0 to 10</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"F(</span><span class="sc">%d</span><span class="st">) = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> n<span class="op">,</span> fib<span class="op">(</span>n<span class="op">));</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"F(0) = </span><span class="sc">%d</span><span class="st">; F(1) = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> fib<span class="op">(</span><span class="dv">0</span><span class="op">),</span> fib<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Expected output:</p>
+<pre class="text"><code>F(6) = 8
+F(0) = 0; F(1) = 1</code></pre>
+</section>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>To be posted.</em> <strong>Lab 10</strong> covers this material: EE on Tue Oct 27, Mechanical and Materials on Wed Oct 28.</p>
+<p><a href="../labsheets/lab10.html"><strong>Lab 10: Dynamic Memory and Recursion</strong></a> covers both topics equally, through read drills, write drills, FIBs and programming exercises. EE meets on Tue Oct 27; Mechanical and Materials on Wed Oct 28. <a href="../labs/lab10.tar.gz">Download the student pack</a>.</p>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
@@ -628,27 +1279,23 @@ window.Quarto = {
 <p>Now separate two things the word <em>trustworthy</em> is doing, because they are not the same and the connection between them is the whole point.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>What it means</th>
-<th>Where it lives</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>A trustworthy work product</strong></td>
 <td>the program does what it claims, including the parts nobody inspected — it frees what it allocated, it handles the file that would not open</td>
-<td>in the artefact</td>
 </tr>
 <tr class="even">
 <td><strong>A trustworthy person</strong></td>
 <td>colleagues can rely on what you hand them and on what you say about it, without re-checking everything themselves</td>
-<td>in you</td>
 </tr>
 </tbody>
 </table>

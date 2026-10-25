@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -486,9 +521,39 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#what-you-will-practise" id="toc-what-you-will-practise" class="nav-link active" data-scroll-target="#what-you-will-practise">What you will practise</a></li>
+  <li><a href="#pre-lab-the-c-you-need" id="toc-pre-lab-the-c-you-need" class="nav-link" data-scroll-target="#pre-lab-the-c-you-need">Pre-lab: the C you need</a></li>
+  <li><a href="#get-started" id="toc-get-started" class="nav-link" data-scroll-target="#get-started">Get started</a></li>
+  <li><a href="#read-drills-comprehension" id="toc-read-drills-comprehension" class="nav-link" data-scroll-target="#read-drills-comprehension">Read drills: comprehension</a></li>
+  <li><a href="#how-to-work-on-the-marked-tasks" id="toc-how-to-work-on-the-marked-tasks" class="nav-link" data-scroll-target="#how-to-work-on-the-marked-tasks">How to work on the marked tasks</a></li>
+  <li><a href="#write-drills-focused-additions" id="toc-write-drills-focused-additions" class="nav-link" data-scroll-target="#write-drills-focused-additions">Write drills: focused additions</a>
+  <ul class="collapse">
+  <li><a href="#w01-allocate-an-integer-array" id="toc-w01-allocate-an-integer-array" class="nav-link" data-scroll-target="#w01-allocate-an-integer-array">w01 — Allocate an integer array</a></li>
+  <li><a href="#w02-check-the-pointer" id="toc-w02-check-the-pointer" class="nav-link" data-scroll-target="#w02-check-the-pointer">w02 — Check the pointer</a></li>
+  <li><a href="#w03-initialise-allocated-elements" id="toc-w03-initialise-allocated-elements" class="nav-link" data-scroll-target="#w03-initialise-allocated-elements">w03 — Initialise allocated elements</a></li>
+  <li><a href="#w04-release-and-reset" id="toc-w04-release-and-reset" class="nav-link" data-scroll-target="#w04-release-and-reset">w04 — Release and reset</a></li>
+  <li><a href="#w05-factorial-base-case" id="toc-w05-factorial-base-case" class="nav-link" data-scroll-target="#w05-factorial-base-case">w05 — Factorial base case</a></li>
+  <li><a href="#w06-progress-towards-the-base-case" id="toc-w06-progress-towards-the-base-case" class="nav-link" data-scroll-target="#w06-progress-towards-the-base-case">w06 — Progress towards the base case</a></li>
+  <li><a href="#w07-capture-the-recursive-result" id="toc-w07-capture-the-recursive-result" class="nav-link" data-scroll-target="#w07-capture-the-recursive-result">w07 — Capture the recursive result</a></li>
+  <li><a href="#w08-combine-two-returned-answers" id="toc-w08-combine-two-returned-answers" class="nav-link" data-scroll-target="#w08-combine-two-returned-answers">w08 — Combine two returned answers</a></li>
+  </ul></li>
+  <li><a href="#fibs-code-completion" id="toc-fibs-code-completion" class="nav-link" data-scroll-target="#fibs-code-completion">FIBs: code completion</a>
+  <ul class="collapse">
+  <li><a href="#b1-an-independent-string-copy" id="toc-b1-an-independent-string-copy" class="nav-link" data-scroll-target="#b1-an-independent-string-copy">b1 — An independent string copy</a></li>
+  <li><a href="#b2-resize-without-losing-ownership" id="toc-b2-resize-without-losing-ownership" class="nav-link" data-scroll-target="#b2-resize-without-losing-ownership">b2 — Resize without losing ownership</a></li>
+  <li><a href="#b3-recursive-digit-sum" id="toc-b3-recursive-digit-sum" class="nav-link" data-scroll-target="#b3-recursive-digit-sum">b3 — Recursive digit sum</a></li>
+  <li><a href="#b4-count-matches-recursively" id="toc-b4-count-matches-recursively" class="nav-link" data-scroll-target="#b4-count-matches-recursively">b4 — Count matches recursively</a></li>
+  </ul></li>
+  <li><a href="#exercises-complete-functions" id="toc-exercises-complete-functions" class="nav-link" data-scroll-target="#exercises-complete-functions">Exercises: complete functions</a>
+  <ul class="collapse">
+  <li><a href="#e1-filter-readings-into-a-new-array" id="toc-e1-filter-readings-into-a-new-array" class="nav-link" data-scroll-target="#e1-filter-readings-into-a-new-array">e1 — Filter readings into a new array</a></li>
+  <li><a href="#e2-append-records-and-find-the-best" id="toc-e2-append-records-and-find-the-best" class="nav-link" data-scroll-target="#e2-append-records-and-find-the-best">e2 — Append records and find the best</a></li>
+  <li><a href="#e3-recursive-palindrome" id="toc-e3-recursive-palindrome" class="nav-link" data-scroll-target="#e3-recursive-palindrome">e3 — Recursive palindrome</a></li>
+  <li><a href="#e4-recursive-first-occurrence" id="toc-e4-recursive-first-occurrence" class="nav-link" data-scroll-target="#e4-recursive-first-occurrence">e4 — Recursive first occurrence</a></li>
+  </ul></li>
+  <li><a href="#check-and-submit" id="toc-check-and-submit" class="nav-link" data-scroll-target="#check-and-submit">Check and submit</a></li>
+  <li><a href="#before-you-leave" id="toc-before-you-leave" class="nav-link" data-scroll-target="#before-you-leave">Before you leave</a></li>
+  <li><a href="#if-you-finish-early" id="toc-if-you-finish-early" class="nav-link" data-scroll-target="#if-you-finish-early">If you finish early</a></li>
   </ul>
 </nav>
     </div>
@@ -538,17 +603,377 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Syllabus practical module:</strong> 5 — pointers, dynamic memory and recursion</p>
 <p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
 <p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<p><strong>Lab pack:</strong> <a href="../labs/lab10.tar.gz">lab10.tar.gz</a>.</p>
+<section id="what-you-will-practise" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-practise">What you will practise</h2>
+<p>One common lab for <strong>EE / ME / MT</strong>: half dynamic memory allocation and half recursion. Read code and predict its behaviour, complete missing parts, then write complete functions. The <a href="../weeks/w13.html">W13 notes</a> contain runnable examples.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Allocation</th>
+<th>Recursion</th>
+<th style="text-align: right;">Marks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Read drills</td>
+<td>d01–d05</td>
+<td>d06–d10</td>
+<td style="text-align: right;">Practice, unmarked</td>
+</tr>
+<tr class="even">
+<td>Write drills</td>
+<td>w01–w04</td>
+<td>w05–w08</td>
+<td style="text-align: right;">8 × 1 = 8</td>
+</tr>
+<tr class="odd">
+<td>FIBs</td>
+<td>b1–b2</td>
+<td>b3–b4</td>
+<td style="text-align: right;">4 × 6 = 24</td>
+</tr>
+<tr class="even">
+<td>Exercises</td>
+<td>e1–e2</td>
+<td>e3–e4</td>
+<td style="text-align: right;">4 × 12 = 48</td>
+</tr>
+<tr class="odd">
+<td>Explanation/source review</td>
+<td>10 marks</td>
+<td>10 marks</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td><strong>50</strong></td>
+<td><strong>50</strong></td>
+<td style="text-align: right;"><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Work alone or in a pair. Swap who types halfway; both members must be able to explain both topics. A member who cannot explain their code must resubmit solo.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
+<section id="pre-lab-the-c-you-need" class="level2">
+<h2 class="anchored" data-anchor-id="pre-lab-the-c-you-need">Pre-lab: the C you need</h2>
+<p>Use <code>&lt;stdlib.h&gt;</code> for allocation, <code>&lt;string.h&gt;</code> for <code>strlen</code> and <code>strcpy</code>, and <code>&lt;stdio.h&gt;</code> for input/output. The starters include these headers.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Construct</th>
+<th>Meaning and caution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>int *p = malloc(n * sizeof *p);</code></td>
+<td>Reserve n ints. Check for NULL, then initialise elements before reading.</td>
+</tr>
+<tr class="even">
+<td><code>int *p = calloc(n, sizeof *p);</code></td>
+<td>Reserve n ints initially equal to zero. Still check and later free.</td>
+</tr>
+<tr class="odd">
+<td><code>int *tmp = realloc(p, new_n * sizeof *p);</code></td>
+<td>For a positive size, failure leaves p valid. On success use tmp; old pointer values must no longer be used. Initialise added elements.</td>
+</tr>
+<tr class="even">
+<td><code>free(p); p = NULL;</code></td>
+<td>Release once, then reset this pointer. Other aliases are not repaired.</td>
+</tr>
+<tr class="odd">
+<td><code>malloc(strlen(source) + 1)</code></td>
+<td>Reserve characters plus the terminating null character.</td>
+</tr>
+<tr class="even">
+<td><code>p[i].value</code> and <code>p-&gt;value</code></td>
+<td>Access a structure-array element or the first pointed-to structure.</td>
+</tr>
+<tr class="odd">
+<td><code>int result = f(smaller_argument);</code></td>
+<td>Suspend this call, collect the recursive result, then continue.</td>
+</tr>
+</tbody>
+</table>
+<p>A recursive function needs a <strong>base case</strong>, <strong>progress towards it</strong>, and the correct <strong>returned result</strong>. Every call has its own parameters and locals; an array argument still refers to shared data. Recursion is required where specified; a loop producing the same output does not fulfil that requirement.</p>
+<p>Use the <a href="../materials/w13-memory-lab.html">memory explorer</a> and <a href="../materials/w13-recursion-lab.html">recursion explorer</a> to rehearse the concepts. These follow Prof.&nbsp;Shweta Agrawal’s CS1100 lectures, IIT Madras, used with permission.</p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="get-started" class="level2">
+<h2 class="anchored" data-anchor-id="get-started">Get started</h2>
+<p>Download and extract the pack if it is not already on your machine:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://acads-iit-jammu.github.io/csp-f26-dhavala/labs/lab10.tar.gz</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xzf lab10.tar.gz</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab10</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./install.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The installer creates your workspace and opens it with a <code>[lab10 OK ...]</code> prompt. At home, supply <code>--branch ee</code>, <code>--branch me</code> or <code>--branch mt</code> if needed. Use <code>./where.sh</code> if you lose your place. Reinstallation preserves your edited files. Start the transcript inside the workspace:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span> session.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="read-drills-comprehension" class="level2">
+<h2 class="anchored" data-anchor-id="read-drills-comprehension">Read drills: comprehension</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./drill.sh</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Predict the output before running each program. These drills are unmarked.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>d01</td>
+<td>Allocated array, initialisation and pointer access</td>
+</tr>
+<tr class="even">
+<td>d02</td>
+<td>Integer values after calloc and an update</td>
+</tr>
+<tr class="odd">
+<td>d03</td>
+<td>Two pointers to one allocation</td>
+</tr>
+<tr class="even">
+<td>d04</td>
+<td>Preserved values after a successful resize</td>
+</tr>
+<tr class="odd">
+<td>d05</td>
+<td>Cleanup after a deliberately simulated failed resize</td>
+</tr>
+<tr class="even">
+<td>d06</td>
+<td>Statements before and after a recursive call</td>
+</tr>
+<tr class="odd">
+<td>d07</td>
+<td>Factorial, including zero</td>
+</tr>
+<tr class="even">
+<td>d08</td>
+<td>Each invocation’s own local variables</td>
+</tr>
+<tr class="odd">
+<td>d09</td>
+<td>Maximum of a shorter prefix</td>
+</tr>
+<tr class="even">
+<td>d10</td>
+<td>Repeated calls in Fibonacci</td>
+</tr>
+</tbody>
+</table>
+<p>For discussion: why can we not predict an output from reading freed storage? Why does assigning NULL to one pointer not repair its aliases? Do not run invalid memory operations to discover an answer.</p>
+</section>
+<section id="how-to-work-on-the-marked-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-work-on-the-marked-tasks">How to work on the marked tasks</h2>
+<p>Every starter contains its GIVEN, TASK, input contract and <code>BEFORE</code> prerequisites. Edit only the numbered TODO regions, retaining the signatures and supplied driver. <strong>A TODO may contain several statements; there is no line-count restriction.</strong> Remove its <code>#error</code> directive when you complete it. Unfinished starters deliberately do not compile. Write drills need a small addition; FIBs complete parts of an algorithm; exercises require complete function bodies.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> b1.c</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-std</span><span class="op">=</span>c11 <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-Wpedantic</span> b1.c <span class="at">-o</span> b1</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./b1</span> <span class="op">&lt;</span> b1_sample.txt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> b1_expected.txt</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> b1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Every task has a separate sample-input and expected-output file. Inputs meet the stated bounds; invalid-input parsing is not part of this lab. Do not add prompts. On allocation failure follow the specified function contract; supplied drivers print <code>allocation-failed</code> and return 1. Regular output tests assume allocation success, but failure handling and cleanup remain part of source review.</p>
+</section>
+<section id="write-drills-focused-additions" class="level2">
+<h2 class="anchored" data-anchor-id="write-drills-focused-additions">Write drills: focused additions</h2>
+<section id="w01-allocate-an-integer-array" class="level3">
+<h3 class="anchored" data-anchor-id="w01-allocate-an-integer-array">w01 — Allocate an integer array</h3>
+<p><strong>Before:</strong> d01. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> n in 1..20; value in -100..100. Input: n value.</p>
+<p>Allocate n ints using malloc and sizeof *p.</p>
+<p>Sample input (<code>w01_sample.txt</code>):</p>
+<pre class="text"><code>3 7</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>first=7 last=7</code></pre>
+</section>
+<section id="w02-check-the-pointer" class="level3">
+<h3 class="anchored" data-anchor-id="w02-check-the-pointer">w02 — Check the pointer</h3>
+<p><strong>Before:</strong> d05. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> flag is 0 or 1; value in -100..100. Input: flag value.</p>
+<p>Return -1 if p is NULL; otherwise return *p.&nbsp;The driver simulates the two possible pointer states without trying to exhaust memory.</p>
+<p>Sample input (<code>w02_sample.txt</code>):</p>
+<pre class="text"><code>0 9</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>result=-1</code></pre>
+</section>
+<section id="w03-initialise-allocated-elements" class="level3">
+<h3 class="anchored" data-anchor-id="w03-initialise-allocated-elements">w03 — Initialise allocated elements</h3>
+<p><strong>Before:</strong> d01 d02 w01. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> n in 1..20; start in -100..100. Input: n start.</p>
+<p>Set p[i] to start + i for every valid index.</p>
+<p>Sample input (<code>w03_sample.txt</code>):</p>
+<pre class="text"><code>4 -2</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>values: -2 -1 0 1</code></pre>
+</section>
+<section id="w04-release-and-reset" class="level3">
+<h3 class="anchored" data-anchor-id="w04-release-and-reset">w04 — Release and reset</h3>
+<p><strong>Before:</strong> d03 d05. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> value in -100..100. Input: value.</p>
+<p>Release the allocation once, then set p to NULL.</p>
+<p>Sample input (<code>w04_sample.txt</code>):</p>
+<pre class="text"><code>7</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>value=7
+reset=1</code></pre>
+</section>
+<section id="w05-factorial-base-case" class="level3">
+<h3 class="anchored" data-anchor-id="w05-factorial-base-case">w05 — Factorial base case</h3>
+<p><strong>Before:</strong> d07. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> n in 0..12. Input: n.</p>
+<p>Complete the base case, including 0!.</p>
+<p>Sample input (<code>w05_sample.txt</code>):</p>
+<pre class="text"><code>5</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>factorial=120</code></pre>
+</section>
+<section id="w06-progress-towards-the-base-case" class="level3">
+<h3 class="anchored" data-anchor-id="w06-progress-towards-the-base-case">w06 — Progress towards the base case</h3>
+<p><strong>Before:</strong> d06. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> n in 0..20. Input: n.</p>
+<p>Return 1 + … + n recursively; sum_to(0) is 0.</p>
+<p>Sample input (<code>w06_sample.txt</code>):</p>
+<pre class="text"><code>4</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>sum=10</code></pre>
+</section>
+<section id="w07-capture-the-recursive-result" class="level3">
+<h3 class="anchored" data-anchor-id="w07-capture-the-recursive-result">w07 — Capture the recursive result</h3>
+<p><strong>Before:</strong> d09. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> n in 1..20, then n integers in -100..100.</p>
+<p>Find the maximum recursively. maxOfPrefix must hold the maximum of the first n-1 elements.</p>
+<p>Sample input (<code>w07_sample.txt</code>):</p>
+<pre class="text"><code>4 -4 -2 -9 -1</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>maximum=-1</code></pre>
+</section>
+<section id="w08-combine-two-returned-answers" class="level3">
+<h3 class="anchored" data-anchor-id="w08-combine-two-returned-answers">w08 — Combine two returned answers</h3>
+<p><strong>Before:</strong> d10. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> n in 0..10. Input: n.</p>
+<p>F(0)=0, F(1)=1; combine the two returned Fibonacci values.</p>
+<p>Sample input (<code>w08_sample.txt</code>):</p>
+<pre class="text"><code>6</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>fib=8</code></pre>
+</section>
+</section>
+<section id="fibs-code-completion" class="level2">
+<h2 class="anchored" data-anchor-id="fibs-code-completion">FIBs: code completion</h2>
+<section id="b1-an-independent-string-copy" class="level3">
+<h3 class="anchored" data-anchor-id="b1-an-independent-string-copy">b1 — An independent string copy</h3>
+<p><strong>Before:</strong> w01 w02 d03. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> One word, 1..30 ASCII letters. Input: word.</p>
+<p>Complete copy_word: return independently allocated, terminated storage containing source; return NULL on failure. strcpy is allowed. Driver changes source after copying.</p>
+<p>Sample input (<code>b1_sample.txt</code>):</p>
+<pre class="text"><code>lab</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>source=#ab copy=lab</code></pre>
+</section>
+<section id="b2-resize-without-losing-ownership" class="level3">
+<h3 class="anchored" data-anchor-id="b2-resize-without-losing-ownership">b2 — Resize without losing ownership</h3>
+<p><strong>Before:</strong> d04 w01 w02 w03 w04. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> old_n in 1..10, new_n in old_n+1..20, fill in -100..100; then old_n ints in -100..100. Input: old_n new_n fill values.</p>
+<p>grow returns the resized array with preserved old values and added elements equal to fill. On failure return NULL and leave the original allocation valid; the caller frees it. Use realloc.</p>
+<p>Sample input (<code>b2_sample.txt</code>):</p>
+<pre class="text"><code>2 4 5 7 2</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>values: 7 2 5 5</code></pre>
+</section>
+<section id="b3-recursive-digit-sum" class="level3">
+<h3 class="anchored" data-anchor-id="b3-recursive-digit-sum">b3 — Recursive digit sum</h3>
+<p><strong>Before:</strong> w05 w06. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> n in 0..999999. Input: n.</p>
+<p>Return the sum of decimal digits recursively, including n=0. Use recursion, not loops.</p>
+<p>Sample input (<code>b3_sample.txt</code>):</p>
+<pre class="text"><code>2040</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>digit-sum=6</code></pre>
+</section>
+<section id="b4-count-matches-recursively" class="level3">
+<h3 class="anchored" data-anchor-id="b4-count-matches-recursively">b4 — Count matches recursively</h3>
+<p><strong>Before:</strong> w06 w07. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> n in 0..20, target in -5..5; then n ints in -5..5. Input: n target values.</p>
+<p>Return the number of target occurrences among the first n elements. Use recursion, not loops.</p>
+<p>Sample input (<code>b4_sample.txt</code>):</p>
+<pre class="text"><code>5 2 2 1 2 3 2</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>count=3</code></pre>
+</section>
+</section>
+<section id="exercises-complete-functions" class="level2">
+<h2 class="anchored" data-anchor-id="exercises-complete-functions">Exercises: complete functions</h2>
+<section id="e1-filter-readings-into-a-new-array" class="level3">
+<h3 class="anchored" data-anchor-id="e1-filter-readings-into-a-new-array">e1 — Filter readings into a new array</h3>
+<p><strong>Before:</strong> w01 w02 w03 w04 b1. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> n in 1..20, threshold in -100..100; then n ints in -100..100. Input: n threshold values.</p>
+<p>Write filter. Retain values &gt;= threshold in original order, without changing a. Return a separately allocated array and write its count through out_count. For no matches return NULL and set count=0. On allocation failure return NULL and set count=-1. Caller owns and frees the result. No static result array.</p>
+<p>Sample input (<code>e1_sample.txt</code>):</p>
+<pre class="text"><code>5 3 1 3 5 2 3</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>count=3 values: 3 5 3</code></pre>
+</section>
+<section id="e2-append-records-and-find-the-best" class="level3">
+<h3 class="anchored" data-anchor-id="e2-append-records-and-find-the-best">e2 — Append records and find the best</h3>
+<p><strong>Before:</strong> b2 w04. <strong>Topic:</strong> allocation.</p>
+<p><strong>Given:</strong> n and m in 1..10; then n first-batch records and m second-batch records, each id value. IDs are unique integers in 1..1000; values in -100..100. Input: n m records.</p>
+<p>Write join_readings and best_index. join_readings must malloc space for the first batch, copy it, realloc for both batches, and append the second batch in order. Return NULL on either failure and release anything allocated inside the function. Do not change inputs. Caller frees successful result. best_index returns the zero-based index of the largest value; ties keep the earliest record.</p>
+<p>Sample input (<code>e2_sample.txt</code>):</p>
+<pre class="text"><code>2 2 11 7 22 9 33 9 44 2</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>records: 11:7 22:9 33:9 44:2
+best=22 value=9</code></pre>
+</section>
+<section id="e3-recursive-palindrome" class="level3">
+<h3 class="anchored" data-anchor-id="e3-recursive-palindrome">e3 — Recursive palindrome</h3>
+<p><strong>Before:</strong> b3 b4. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> One word, 1..30 ASCII letters. Comparison is case-sensitive. Input: word.</p>
+<p>Write palindrome(s,left,right) for the inclusive range. Return 1 for a palindrome, otherwise 0. A range with left&gt;=right is a palindrome. Compare ends and recurse inward; no loops, reversal library or string copy inside this function. Do not change s.</p>
+<p>Sample input (<code>e3_sample.txt</code>):</p>
+<pre class="text"><code>level</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>palindrome=1</code></pre>
+</section>
+<section id="e4-recursive-first-occurrence" class="level3">
+<h3 class="anchored" data-anchor-id="e4-recursive-first-occurrence">e4 — Recursive first occurrence</h3>
+<p><strong>Before:</strong> b4. <strong>Topic:</strong> recursion.</p>
+<p><strong>Given:</strong> n in 0..20, target in -5..5, start in 0..n; then n ints in -5..5. Input: n target start values.</p>
+<p>Write first_index: return the smallest index i with start&lt;=i&lt;n and a[i]==target, or -1 if absent. Indices are zero-based. Use recursion, not loops; stop before accessing a[n]. Do not change a.</p>
+<p>Sample input (<code>e4_sample.txt</code>):</p>
+<pre class="text"><code>6 2 1 2 4 2 2 1 2</code></pre>
+<p>Expected output:</p>
+<pre class="text"><code>index=2</code></pre>
+</section>
+</section>
+<section id="check-and-submit" class="level2">
+<h2 class="anchored" data-anchor-id="check-and-submit">Check and submit</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each program is checked against four public cases and eight fresh random cases from its GIVEN. <code>PUBLIC-CASES.txt</code> lists the public cases. The checker compares the whole output, ignoring whitespace differences, and requires successful termination. Extra prompts and debug messages fail. Random tests prevent memorising the sample.</p>
+<p>Partial credit is awarded per case, then each problem’s mark is rounded to the nearest whole mark (half rounds up). The displayed total can vary as random cases change. Eighty marks come from programs; twenty come from explaining your own code and reviewing ownership/cleanup and recursive implementation. Output alone cannot prove these properties.</p>
+<p>When done, type <code>exit</code> to stop the recording shell, then bundle from your workspace:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./check.sh</span> <span class="at">--bundle</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This bundles partial work too. Keep <code>TEAM.txt</code> and <code>session.txt</code>. The archive is written <strong>above</strong> your workspace, named <code>lab10_&lt;rolls&gt;_&lt;branch&gt;_w13.tar.gz</code> for this week. Upload it as directed by the instructor and keep a copy outside the lab machine.</p>
+</section>
+<section id="before-you-leave" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-leave">Before you leave</h2>
+<p>Be ready to explain both an allocation problem and a recursion problem:</p>
+<ul>
+<li>Who owns each allocation, and what happens if resizing fails?</li>
+<li>How is a copied string different from a copied pointer?</li>
+<li>What are the base case, progressing argument and returned value in your function?</li>
+<li>What happens for no matches, a singleton, or a search starting at the end?</li>
+</ul>
+</section>
+<section id="if-you-finish-early" class="level2">
+<h2 class="anchored" data-anchor-id="if-you-finish-early">If you finish early</h2>
+<p>Unmarked extensions: compare the call counts of recursive and iterative Fibonacci; then explain how you would append a third batch to E2 without losing the existing records on allocation failure. Keep your submitted solutions within their original contracts.</p>
 
 
 </section>
