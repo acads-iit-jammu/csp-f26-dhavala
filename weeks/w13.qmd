@@ -4,24 +4,660 @@
 
 **Syllabus module:** 5 — dynamic memory allocation; functions and recursion
 
-## Plan
+## Application: storing sensor readings
 
-**Monday — dynamic memory allocation.** Every array you have declared so far had its size fixed when the program was compiled. That is a real limit: you cannot read a list whose length you only discover while running. `malloc` asks for memory while the program runs and returns its address; `free` gives it back. The stack and the heap as two different places, why `malloc` can fail and what it returns when it does, and the three mistakes that follow: leaking memory, using it after freeing it, and freeing it twice.
+A temperature sensor sends readings to a program. If the number of readings is
+known in advance and remains fixed, an array of that size is suitable. For example,
+`int readings[100];` can store 100 readings.
 
-**Tuesday — recursion.** A function that calls itself. The base case that stops it, the recursive case that makes progress towards the base case, and what the call stack looks like while it runs — which is easier to picture now that Monday has separated the stack from the heap.
+If the recording continues beyond 100 readings, this array cannot be enlarged.
+The program needs more storage while retaining the readings already collected.
+Dynamic memory allocation allows the program to request storage at runtime and
+resize it as more readings arrive. Resizing may move the data to a new location.
 
-## Pre-read
+After collecting the readings, the program may need to find the maximum. One
+recursive approach finds the maximum of the first `n - 1` readings and compares
+it with the last reading. The lectures cover allocation first, followed by
+recursive functions.
 
-- [Lec 19](../cs1100-cse-iitm-2021/slides/Lec19.pdf) · [Lec 20](../cs1100-cse-iitm-2021/slides/Lec20.pdf) · [Lec 24](../cs1100-cse-iitm-2021/slides/Lec24.pdf)
-- The [W10 notes](w10.qmd) on pointers. `malloc` returns an address, so everything this week rests on that.
+## Lecture overview
 
-## In Class
+### Monday, 26 October — Dynamic memory allocation
 
-*To be posted.*
+**Learning goal:** allocate storage, initialise it, pass it to a function, resize it
+safely and release it once. Distinguish the lifetime of a pointer from the lifetime
+of the object it refers to. Dynamic allocation gives control over storage size and
+lifetime; it is not the only way C can express a runtime-sized array.
+
+| Teaching sequence | Supporting artifact |
+|---|---|
+| Start with the need: a fixed array is full, or a result must outlive the function that creates it. Compare storage choices. | Then start the allocation trace; distinguish a pointer from its allocation. |
+| `malloc`, `sizeof *p`, failure checking, initialisation, array access and `free`. | Step through allocate → write → release; compare `calloc`. |
+| Resize a populated array. Preserve the old pointer if `realloc` fails. | Run both resize scenarios; explain which values survive. |
+| Aliases, dangling pointers, double-free and losing the last pointer. Connect to arrays of structures. | Alias and leak scenarios; students explain before advancing. |
+| Exit check: repair an allocation/cleanup fragment and explain ownership. | Revisit one scenario without its explanation. |
+
+[**Open the memory explorer: Who owns this memory?**](../materials/w13-memory-lab.html)
+
+The explorer is a conceptual trace, not a live allocator. Released storage is never
+read to demonstrate a bug. Addresses are symbolic; failed allocation is a selectable
+scenario. The longer string-copy example and further allocation exercises belong in
+reading/lab practice.
+
+### Tuesday, 27 October — Recursion
+
+**Learning goal:** identify the base case, explain progress towards it, and trace the
+work done after a recursive call returns. Each invocation has its own parameters and
+locals; an array argument still refers to the caller's data.
+
+| Teaching sequence | Supporting artifact |
+|---|---|
+| Derive factorial from the smaller problem; include `0!`. | Predict `fact(3)` before running the trace. |
+| Descend into calls, pause the caller, then unwind the returns. | Step through the stack; identify each pending multiplication. |
+| Find the largest element in an array recursively. Pass Monday's allocated array without copying it. | Maximum trace, including the singleton base case. |
+| Virahanka/Fibonacci: two smaller problems and repeated work. | Compare call counts for small inputs. |
+| Diagnose a missing base case, non-shrinking input and a missing return; exit prediction. | Reset a trace and ask students to explain the next state. |
+
+[**Open the recursion explorer: Where does a recursive call return?**](../materials/w13-recursion-lab.html)
+
+The explorer uses small inputs and shows logical call frames. It does not imply that
+recursion is always faster or that compilers must use this exact physical stack layout.
+Binomial coefficients, balanced recursive maximum and recursive binary search are
+reading extensions. See also the [Tuesday PAGAL discussion](#softmax-fix).
+
+## Pre-read and source mapping
+
+Adapted from **Prof. Shweta Agrawal's CS1100 lectures, IIT Madras**, with permission.
+The runnable teaching examples below include allocation checks, bounded inputs and
+cleanup; the original slide examples should not be copied without checking these.
+
+- **Monday:** [Lecture 28](../cs1100-cse-iitm-2021/slides/Lec28.pdf), allocation and independent string storage; [Lecture 30](../cs1100-cse-iitm-2021/slides/Lec30.pdf), dynamically allocated structures.
+- **Tuesday:** [Lecture 24](../cs1100-cse-iitm-2021/slides/Lec24.pdf), factorial, call flow, Virahanka/Fibonacci and recursive maximum; [Lecture 26](../cs1100-cse-iitm-2021/slides/Lec26.pdf), recursive maximum and depth.
+- Recap: [W10 pointers](w10.qmd) and [W11 structures](w11.qmd).
+
+## Monday notes: allocating and owning memory
+
+### When dynamic allocation is needed
+
+Consider the sensor application. The program initially has room for 100 readings.
+After 100 readings have been stored, another reading arrives. Writing it to
+`readings[100]` would be out of bounds. Changing a variable that holds the count
+does not change the array's capacity.
+
+One solution is to create a larger array, copy the existing readings into it and
+continue recording. Dynamically allocated storage provides a resizing operation,
+`realloc`, for this purpose. It can enlarge the existing allocation or move the
+data to a larger allocation. The program does not need to copy the readings
+itself. It must check whether resizing succeeded and use the returned pointer.
+
+Dynamic allocation also supports two related requirements:
+
+- **A size determined at runtime.** The program reads the number of records from
+  a file and allocates space for that number.
+- **Data needed after a function returns.** A function allocates and fills an
+  array, then returns its pointer to the caller. The caller uses the array and
+  later releases it. Returning a pointer to an ordinary local array would be
+  invalid because that array ceases to exist when the function returns.
+
+Alternatively, the caller can provide an array and pass its capacity to the
+function. This is suitable when the caller can determine the required capacity.
+
+| Storage choice | What it can do | What it cannot do |
+|---|---|---|
+| Ordinary local array, e.g. `int a[100];` | Hold up to its fixed capacity during the block's execution | Grow that array object or keep it alive after leaving its block |
+| Variable-length local array, e.g. `int a[n];`, where supported | Choose its size when its declaration executes | Resize the existing array or extend its lifetime past its scope; support is optional in C11 |
+| Static array | Keep storage for the duration of the program | Grow its fixed capacity or automatically give each function call an independent result |
+| Dynamically allocated storage | Choose a size at runtime, resize storage and control when it is released | Guarantee allocation success, unlimited memory or automatic cleanup |
+
+A variable-length array can also use a size determined at runtime, where supported.
+Its size cannot subsequently change, and its lifetime ends on leaving its scope.
+Dynamic allocation is useful when these restrictions do not suit the application.
+
+### Allocation functions
+
+`malloc` and `calloc` allocate storage. `realloc` resizes an allocation. `free`
+releases it. These functions are declared in `<stdlib.h>`.
+
+| Need | Choose | Reason |
+|---|---|---|
+| Store values that will all be assigned before use | `malloc` | No initial values are requested; write the elements before reading them |
+| Start an integer counter array at zero | `calloc` | Zeroed bytes give these integer elements their required initial zero values |
+| Change the capacity while retaining existing contents | `realloc` | Preserves contents up to the smaller of the old and new sizes on success |
+| Finish using an allocation | `free` | Releases that storage for reuse |
+
+The **length** is the number of readings stored. The **capacity** is the number
+that can fit. For example, after enlarging a full array from 100 to 200 elements,
+the length is still 100. The added elements must be assigned values before use.
+
+### Appropriate, inefficient and incorrect uses
+
+| Situation | Appropriate use | Correct but potentially wasteful | Incorrect use |
+|---|---|---|---|
+| Read n values, assigning every element | `malloc`, check, then fill | `calloc` when every zero will immediately be overwritten; its zero-initialisation is unnecessary for this algorithm | Read an element from `malloc` storage before assigning it |
+| Start n integer counters | `calloc`, check, then increment | `calloc` followed by another loop assigning zero | Use uninitialised `malloc` elements as counters; `malloc` plus an explicit zeroing loop is valid |
+| Append many values | Grow capacity in chunks, then fill the added elements | Call `realloc` for every single append; repeated moves can repeatedly copy old data | Write past capacity, or assume the added elements are already zero |
+| Resize an existing allocation | Keep the old pointer until a temporary result has been checked | Allocate a new block, copy and free the old one manually when `realloc` suffices | Overwrite the only pointer with a failed `realloc` result, losing access to the old allocation |
+| Repeat a calculation with the same buffer size | Reuse the buffer while it is needed; free it at the end | Allocate and free a replacement buffer on every iteration without a need for separate storage | Keep overwriting the last owning pointer without freeing its previous allocation |
+| Finish using shared storage | Free once after its last use; stop using every alias | Keep an unnecessarily large allocation alive until much later | Free twice, access freed storage, or treat `p = NULL` as a substitute for `free(p)` |
+
+For repeated appends, increasing capacity from 100 to 200, then to 400, reduces
+the number of resize requests. It also reserves space that may remain unused.
+Resizing by one element each time may require repeated copying. Actual allocation
+costs depend on the implementation. `calloc` is not necessarily slower than
+`malloc`; its zero-initialisation is unnecessary when every element will be
+immediately overwritten.
+
+### Runnable examples
+
+The structure and string examples are follow-up reading. Every **complete program** below is independent: copy one into
+`example.c`, compile, and run it. No keyboard input is needed; change the initial
+values to experiment. Syntax summaries are reference fragments, not complete programs.
+
+```sh
+cc -std=c11 -Wall -Wextra -Wpedantic example.c -o example
+./example
+```
+
+### `malloc`: reserve storage, then initialise it
+
+Use `malloc` when the program will assign each element before reading it. The example allocates three integers, assigns their values and computes their sum. The count is fixed here so the output is reproducible; the same expression can use a validated count read at runtime.
+
+**Definition and syntax:** `malloc(bytes)` from `<stdlib.h>` reserves the requested
+number of bytes and returns a pointer to them, or `NULL` on failure. For an array of
+`n` elements, use `int *p = malloc(n * sizeof *p);`. `sizeof *p` is the size of one
+pointed-to element; for this `int` expression it does not dereference `p` at runtime.
+C does not require a cast of the returned pointer.
+
+**Initialisation:** the pointer receives the returned address; the elements remain
+uninitialised. Check `p`, then assign each element before reading it.
+
+**Usage:** `p[i]` accesses element `i`, just as with an array. Pass both the pointer
+and the element count to functions; a pointer does not remember the array length.
+
+**Cautions:** indices must be from `0` to `n - 1`. For a count obtained from input,
+validate that it is positive and that `n * sizeof *p` fits in `size_t` before
+allocating. For example, with a validated `size_t n`, reject
+`n > SIZE_MAX / sizeof *p` (`SIZE_MAX` is provided by `<stdint.h>`).
+The examples here use fixed small positive counts. `sizeof p` is the size of the
+pointer, not the allocated array.
+
+**Complete program — allocate, initialise, pass to a function, release:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int sum(const int a[], int n)
+{
+    int total = 0;
+    for (int i = 0; i < n; i++) {
+        total += a[i];
+    }
+    return total;
+}
+
+int main(void)
+{
+    int n = 3;
+    int *p = malloc(n * sizeof *p);
+    if (p == NULL) {
+        fprintf(stderr, "Allocation failed\n");
+        return 1;
+    }
+    for (int i = 0; i < n; i++) {
+        p[i] = (i + 1) * 10;
+    }
+    printf("Sum = %d\n", sum(p, n));
+    free(p);
+    p = NULL;
+    return 0;
+}
+```
+
+Expected output on allocation success:
+
+```text
+Sum = 60
+```
+
+### `calloc`: reserve storage with zeroed bytes
+
+Suppose the program counts readings in three temperature ranges. Each counter must start at zero. `calloc` provides zero-initialised integer storage. `malloc` followed by a loop assigning zero is also valid.
+
+**Definition and syntax:** `calloc(count, element_size)` allocates storage for
+`count` elements and sets all its bytes to zero. Use
+`int *p = calloc(n, sizeof *p);` and check for `NULL`.
+
+**Initialisation and usage:** for an integer array, these zeroed bytes represent
+integer zero. Read or update its elements using `p[i]`; release it with `free`.
+
+**Cautions:** do not generalise this to portable initialisation of every possible
+C type: all-bits-zero is not guaranteed to represent a null pointer or every
+floating-point zero. `calloc` still can fail and still needs cleanup.
+
+**Complete program:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *counts = calloc(3, sizeof *counts);
+    if (counts == NULL) {
+        fprintf(stderr, "Allocation failed\n");
+        return 1;
+    }
+    printf("Initially: %d %d %d\n", counts[0], counts[1], counts[2]);
+    counts[1]++;
+    printf("After update: %d %d %d\n", counts[0], counts[1], counts[2]);
+    free(counts);
+    return 0;
+}
+```
+
+Expected output on allocation success:
+
+```text
+Initially: 0 0 0
+After update: 0 1 0
+```
+
+### `realloc`: change the allocation size
+
+The example starts with two stored readings and increases capacity to four. `realloc` preserves the two existing values on success. The program then assigns values to the two added elements.
+
+**Definition and syntax:** `realloc(p, new_bytes)` attempts to resize an existing
+allocation. Use a temporary pointer: `int *tmp = realloc(p, new_n * sizeof *p);`.
+For a positive new size, failure returns `NULL` and leaves the original allocation
+valid. Success preserves the contents up to the smaller of the old and new sizes.
+
+**Initialisation and usage:** check `tmp` first, then assign `p = tmp` on success.
+Initialise any added elements before reading them. The allocation can move.
+
+**Cautions:** direct assignment `p = realloc(p, ...)` can lose the only pointer to
+the original allocation on failure. After success, use the returned pointer;
+previous aliases into the old allocation must no longer be used, even if the
+returned address happens to be unchanged. Avoid zero-size requests: use `free`
+when the intended action is to release storage.
+
+**Complete program:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *p = malloc(2 * sizeof *p);
+    if (p == NULL) {
+        fprintf(stderr, "Allocation failed\n");
+        return 1;
+    }
+    p[0] = 7;
+    p[1] = 2;
+
+    int *tmp = realloc(p, 4 * sizeof *p);
+    if (tmp == NULL) {
+        /* p is still valid. This program chooses to clean up and exit. */
+        fprintf(stderr, "Resize failed\n");
+        free(p);
+        return 1;
+    }
+    p = tmp;
+    p[2] = 5;
+    p[3] = 8;
+    printf("Values: %d %d %d %d\n", p[0], p[1], p[2], p[3]);
+    free(p);
+    return 0;
+}
+```
+
+Expected output on allocation success:
+
+```text
+Values: 7 2 5 8
+```
+
+### `free`, aliases and ownership
+
+Once the program no longer needs the readings, it releases their storage with `free`. The allocation remains in use until it is released, even if the pointer that originally held its address goes out of scope. If two pointers refer to the same allocation, it must still be freed only once.
+
+**Definition and syntax:** `free(p)` releases an allocation. It does not delete the
+pointer variable or assign `NULL` to it. `free(NULL)` is permitted.
+
+**Initialisation and usage:** initialise a pointer to `NULL` when it does not yet
+refer to an object. Decide which part of the program is responsible for releasing
+an allocation; this is its *owner*. `int *q = p;` copies the pointer, not the array.
+
+**Cautions:** release an allocation exactly once, using its starting pointer from
+an allocation function. Do not free a local array, `p + 1`, or already freed storage.
+Do not dereference, print or compare a stale pointer value after release. Assigning
+`p = NULL` does not fix other aliases. Assigning `NULL` without first releasing the
+last reachable allocation causes a leak.
+
+**Complete program — two pointers, one allocation:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *p = malloc(sizeof *p);
+    if (p == NULL) {
+        fprintf(stderr, "Allocation failed\n");
+        return 1;
+    }
+    *p = 7;
+    int *q = p;
+    *q = 9;
+    printf("Through p: %d; through q: %d\n", *p, *q);
+    free(p);             /* Release the shared allocation once. */
+    p = NULL;
+    q = NULL;            /* Overwrite the stale alias; do not read it. */
+    printf("Both pointers reset\n");
+    return 0;
+}
+```
+
+Expected output on allocation success:
+
+```text
+Through p: 9; through q: 9
+Both pointers reset
+```
+
+### Follow-up: dynamically allocated structures and strings
+
+A record array can use dynamically allocated storage in the same way as an integer array. A string requires space for its characters and terminating null character. The example creates an independent string copy, then changes the original string.
+
+**Definition and syntax:** `struct Point *p = malloc(n * sizeof *p);` allocates
+an array of structures. Access an element's field with `p[i].x`; `p->x` means
+`(*p).x`, the field of the first pointed-to structure.
+
+**Initialisation and usage:** assign the fields before reading them. A dynamically
+allocated string needs room for its characters **and** the terminating `'\0'`:
+`char *copy = malloc(strlen(source) + 1);`. After checking, `strcpy(copy, source)`
+copies the characters and terminator; both string functions require `<string.h>`.
+
+**Cautions:** `char *copy = source` only copies an address. Allocating a structure
+with a pointer member does not allocate storage for that member's target. Likewise,
+freeing the structure does not automatically free separately allocated targets.
+Here `source` is a valid, terminated, fixed-size string and the destination is large
+enough; `strcpy` itself does not check bounds.
+
+**Complete program:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Point {
+    int x;
+    int y;
+};
+
+int main(void)
+{
+    struct Point *points = malloc(2 * sizeof *points);
+    if (points == NULL) {
+        fprintf(stderr, "Allocation failed\n");
+        return 1;
+    }
+    points[0].x = 1;
+    points[0].y = 2;
+    points[1].x = 3;
+    points[1].y = 4;
+
+    char source[] = "lab";
+    char *copy = malloc(strlen(source) + 1);
+    if (copy == NULL) {
+        free(points);
+        fprintf(stderr, "Allocation failed\n");
+        return 1;
+    }
+    strcpy(copy, source);
+    source[0] = 'L';
+    printf("First point: (%d, %d)\n", points->x, points->y);
+    printf("Second point: (%d, %d)\n", points[1].x, points[1].y);
+    printf("Source: %s; independent copy: %s\n", source, copy);
+    free(copy);
+    free(points);
+    return 0;
+}
+```
+
+Expected output on allocation success:
+
+```text
+First point: (1, 2)
+Second point: (3, 4)
+Source: Lab; independent copy: lab
+```
+
+## Tuesday notes: recursion
+
+### When recursion is useful
+
+Consider finding the maximum of the stored readings. For one reading, that reading
+is the maximum. For `n` readings, compare the last reading with the maximum of the
+first `n - 1` readings. A function can perform this calculation by calling itself
+with `n - 1` and using the returned value.
+
+This is a recursive solution. It has three parts:
+
+1. **Base case:** return the sole reading when `n == 1`.
+2. **Recursive call:** find the maximum for `n - 1` readings.
+3. **Result:** compare the returned maximum with the last reading and return the larger value.
+
+A loop can also find the maximum and uses less extra storage than this recursive
+version. Recursion is useful when describing a problem through smaller instances
+makes its implementation easier to follow. Its cost depends on the number of calls,
+the maximum call depth and any repeated calculations.
+
+| Task | Implementation choice | Limitation or error to avoid |
+|---|---|---|
+| Scan an array or compute a running sum | A loop is usually sufficient | A recursive scan adds call depth proportional to the array length |
+| Solve a problem using smaller instances of itself | Use recursion with a base case and a decreasing problem size | A missing base case or unchanged argument can prevent termination |
+| Compute Fibonacci values | A loop can retain the preceding two values | Direct recursion repeatedly computes the same subproblems |
+| Use a recursive answer in the caller | Store or return the function's result | Printing the result does not return it to the caller |
+
+### Recursive functions: base case, smaller problem, return
+
+**Definition and syntax:** a recursive function calls itself. It uses ordinary C
+function syntax: `return_type name(parameters) { /* body */ }`. Place its definition
+before the first call, or provide a matching prototype. Each call has its own
+parameters and automatic local variables.
+
+**Initialisation:** give the first call a valid starting argument. Every execution
+path must either reach a base case or move towards one. Initialise local values
+before using them; a local variable in one invocation is not the same variable as
+one in another invocation.
+
+**Usage:** describe the answer in terms of a smaller instance, then combine that
+answer with the work left in the caller. `return` passes a result to the caller;
+printing a result does not return it.
+
+**Cautions:** a base case that is never reached does not stop recursion. Inputs
+must move towards it. Non-void functions must return a value on every reachable
+path. Deep recursion can exhaust execution resources; recursion is not automatically
+faster or more memory-efficient than a loop.
+
+### Factorial: one recursive call and pending multiplication
+
+For `5!`, the recursive call computes `4!`. The caller then multiplies that result by 5. This example shows how execution resumes after a recursive call returns.
+
+**Definition:** for nonnegative integers, \(0! = 1\) and
+\(n! = n(n-1)!\) for \(n > 0\). **Call syntax:** `factorial(n)`.
+
+**Initialisation and usage:** start with `n` in `0..12` in this example. The base
+case returns `1`; each waiting caller multiplies the returned answer by its own `n`.
+We use `unsigned long`, which can represent all these results on conforming C
+implementations.
+
+**Cautions:** a negative input moves away from the base case in this implementation.
+Large factorials exceed the integer type's range; unsigned arithmetic wrapping is
+not a correct factorial result. The input bound is part of this function's contract.
+
+**Complete program:**
+
+```c
+#include <stdio.h>
+
+/* Precondition: 0 <= n && n <= 12. */
+unsigned long factorial(int n)
+{
+    if (n == 0) {
+        return 1;
+    }
+    unsigned long smaller = factorial(n - 1);
+    return (unsigned long)n * smaller;
+}
+
+int main(void)
+{
+    int n = 5;
+    if (n < 0 || n > 12) {
+        fprintf(stderr, "Use n from 0 to 12\n");
+        return 1;
+    }
+    printf("%d! = %lu\n", n, factorial(n));
+    printf("0! = %lu\n", factorial(0));
+    return 0;
+}
+```
+
+Expected output:
+
+```text
+5! = 120
+0! = 1
+```
+
+For `factorial(3)`, calls descend through `3, 2, 1, 0`. Returns carry `1, 1, 2, 6`
+back up. The multiplication happens after the smaller call returns.
+
+### Recursive maximum: an array and its current length
+
+To find the largest reading, first find the maximum of the first `n - 1` readings. Then compare that result with the last reading. The recursive calls use the same array; they do not copy it.
+
+**Definition:** the maximum of one element is that element. For a longer array,
+compare the last element with the maximum of the preceding elements.
+**Call syntax:** `largest(a, n)`, where `n >= 1` and `a` points to at least `n`
+initialised integers.
+
+**Initialisation and usage:** start with the full length. Each recursive call uses
+`n - 1`. `maxOfPrefix` holds the maximum of the first `n - 1` elements.
+The array elements are shared between calls; passing an array does not
+copy them. `const` prevents this function from modifying elements through `a`.
+
+**Cautions:** an empty array has no maximum under this contract. Do not use zero
+as the base answer: that fails for all-negative data. This version makes `n` calls
+and has linear recursion depth; a loop avoids that depth.
+
+**Complete program — connect recursion to Monday's allocation:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Precondition: n >= 1; a points to at least n initialised ints. */
+int largest(const int a[], int n)
+{
+    if (n == 1) {
+        return a[0];
+    }
+    int maxOfPrefix = largest(a, n - 1);
+    if (a[n - 1] > maxOfPrefix) {
+        return a[n - 1];
+    }
+    return maxOfPrefix;
+}
+
+int main(void)
+{
+    int n = 4;
+    int *a = malloc(n * sizeof *a);
+    if (a == NULL) {
+        fprintf(stderr, "Allocation failed\n");
+        return 1;
+    }
+    a[0] = -4;
+    a[1] = -2;
+    a[2] = -9;
+    a[3] = -1;
+    printf("Maximum = %d\n", largest(a, n));
+    printf("Singleton maximum = %d\n", largest(a, 1));
+    free(a);
+    return 0;
+}
+```
+
+Expected output on allocation success:
+
+```text
+Maximum = -1
+Singleton maximum = -4
+```
+
+### Virahanka/Fibonacci: two recursive calls and repeated work
+
+Each Fibonacci value depends on two preceding values. A direct recursive implementation computes both, but may recompute the same value in several calls.
+
+**Definition:** using the indexing here, \(F(0)=0\), \(F(1)=1\), and
+\(F(n)=F(n-1)+F(n-2)\) for \(n\geq2\). **Call syntax:** `fib(n)`.
+
+**Initialisation and usage:** begin with a nonnegative `n`; this demonstration limits
+it to `0..10`. Store each smaller answer, then add them. The two separate statements
+make the order of the calls explicit.
+
+**Cautions:** `fib(5)` computes `fib(3)` more than once. Repeated subproblems make
+this direct version expensive as `n` grows; a loop can compute the sequence with
+linear work and constant extra storage. Large results also overflow. A branching
+call tree does not mean that all its calls are active simultaneously: one branch
+returns before the next statement starts the other.
+
+**Complete program:**
+
+```c
+#include <stdio.h>
+
+/* Precondition for this demonstration: 0 <= n && n <= 10. */
+int fib(int n)
+{
+    if (n <= 1) {
+        return n;
+    }
+    int left = fib(n - 1);
+    int right = fib(n - 2);
+    return left + right;
+}
+
+int main(void)
+{
+    int n = 6;
+    if (n < 0 || n > 10) {
+        fprintf(stderr, "Use n from 0 to 10\n");
+        return 1;
+    }
+    printf("F(%d) = %d\n", n, fib(n));
+    printf("F(0) = %d; F(1) = %d\n", fib(0), fib(1));
+    return 0;
+}
+```
+
+Expected output:
+
+```text
+F(6) = 8
+F(0) = 0; F(1) = 1
+```
 
 ## After Class
 
-*To be posted.* **Lab 10** covers this material: EE on Tue Oct 27, Mechanical and Materials on Wed Oct 28.
+[**Lab 10: Dynamic Memory and Recursion**](../labsheets/lab10.qmd) covers both topics equally, through read drills, write drills, FIBs and programming exercises. EE meets on Tue Oct 27; Mechanical and Materials on Wed Oct 28. [Download the student pack](../labs/lab10.tar.gz).
 
 ## PAGAL Notes
 
@@ -140,7 +776,7 @@ Now separate two things the word *trustworthy* is doing, because they are not th
 and the connection between them is the whole point.
 
 | | What it means | Where it lives |
-|---|---|---|
+|---|---|
 | **A trustworthy work product** | the program does what it claims, including the parts nobody inspected — it frees what it allocated, it handles the file that would not open | in the artefact |
 | **A trustworthy person** | colleagues can rely on what you hand them and on what you say about it, without re-checking everything themselves | in you |
 
