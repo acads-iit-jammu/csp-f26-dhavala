@@ -4,6 +4,19 @@
 
 **Syllabus module:** 5 — dynamic memory allocation; functions and recursion
 
+## Additional classes this week
+
+**Thursday, October 29 and Friday, October 30, 2026** are make-up classes for the
+October 19–20 holidays.
+
+| Date | Session |
+|---|---|
+| Thu Oct 29 | [MU-1: File and error handling](mu1.qmd) |
+| Fri Oct 30 | [MU-2](mu2.qmd): tentative guest lecture by **Prof. Nirmal Sancheti** |
+
+The guest speaker's participation is tentative. The talk title and guest-session
+details will be announced.
+
 ## Application: storing sensor readings
 
 A temperature sensor sends readings to a program. If the number of readings is

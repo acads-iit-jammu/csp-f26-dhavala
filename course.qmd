@@ -25,6 +25,7 @@ From the [IIT Jammu academic calendar for 1^st^ year UG students, Semester 2026-
 | Mid-semester feedback (by students) | Sep 9 – Sep 15, 2026 |
 | **Mid-Semester Examination** | **Sep 18 – Sep 23, 2026** |
 | Class Test-2^\*^ | **Thursday, Oct 22, 2026 — 1 hour (EE/ME/MT)** |
+| Make-up classes for the Oct 19–20 holidays | Thursday, Oct 29 and Friday, Oct 30, 2026 |
 | Last day of classes | Friday, Nov 20, 2026 |
 | End-semester feedback (by students) | Nov 12 – Nov 17, 2026 |
 | **End-Semester Examination** | **Nov 23 – Nov 30, 2026** |
@@ -87,13 +88,24 @@ Section C (program/function completion), 15 marks. No negative marking.
 The solutions restate every question, so you can re-attempt the paper before reading the
 answer.
 
+## Guest Lectures (Tentative)
+
+| Date | Speaker(s) | Session |
+|---|---|---|
+| Friday, Oct 30, 2026 | Prof. Nirmal Sancheti | [Make-up class MU-2](weeks/mu2.qmd), during W13 |
+| Monday, Nov 16, 2026 | Dr. Aalok Thakkar | [W16](weeks/w16.qmd) |
+| Tuesday, Nov 17, 2026 | Snehashish Ghosh and Sai Nikhilesh | [W16](weeks/w16.qmd) |
+
+Speaker participation is tentative. Talk titles and guest-session details will be announced.
+The make-up class dates, October 29 and 30, are confirmed.
+
 ## Weekly Plan (Lectures)
 
 The plan below is **tentative** and will be adjusted as the semester progresses. Slides marked *Lec n* are from [CS1100, IIT Madras](./cs1100-cse-iitm-2021/index.qmd), reused with permission — see [acknowledgements](./index.qmd#acknowledgements). Additional notes will be posted as we go.
 
 Each week's page carries Pre-read, In-Class, and After-Class sections — and ends with **PAGAL Notes** (*Perspectives on Algorithms, Generative AI & Learning*): an informal, blog-style weekly column on how that week's material looks in the age of AI.
 
-| Week | Dates (Mon, Tue) | Topics | Materials |
+| Week | Dates | Topics | Materials |
 |:---:|---|---|---|
 | [01](weeks/w01.qmd) | Aug 3, Aug 4 | Introduction: computer science, algorithms, computer hardware & software | [Lec 1](cs1100-cse-iitm-2021/slides/Lec1.pdf) · [Lec 3](cs1100-cse-iitm-2021/slides/Lec3.pdf) |
 | [02](weeks/w02.qmd) | Aug 10, Aug 11 | *Mon:* the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). *Tue:* number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32 | [Deck 04](materials/w02-deck-04-computer-revisited.html) · [Toy Computer](materials/w02-toy-computer.html) · [Under the Hood 1–3](materials/w02-under-the-hood-1-parts.html) · [Deck 03](materials/w02-deck-03-number-systems.html) · [Lec 3](cs1100-cse-iitm-2021/slides/Lec3.pdf) |
@@ -107,15 +119,15 @@ Each week's page carries Pre-read, In-Class, and After-Class sections — and en
 | [10](weeks/w10.qmd) | Oct 5, Oct 6 | **Pointers** — addresses, `&` and `*`, pointer arithmetic, arrays as pointers, and why an array function needs a length. **Strings** — character arrays and the `'\0'` terminator, `strlen`, palindromes, `string.h` | [Lec 15](cs1100-cse-iitm-2021/slides/Lec15.pdf) |
 | [11](weeks/w11.qmd) | Oct 12, Oct 13 | **Structures** and pointers to structures; `->`. **File input and output** — `FILE *`, `fopen`/`fclose`, reading to end of file. *CT2: Thursday, Oct 22; see the confirmed scope above* | [Lec 17](cs1100-cse-iitm-2021/slides/Lec17.pdf) · [Lec 18](cs1100-cse-iitm-2021/slides/Lec18.pdf) |
 | [12](weeks/w12.qmd) | Oct 19, Oct 20 | **Dussehra holidays — no classes** | — |
-| [13](weeks/w13.qmd) | Oct 26, Oct 27 | **Dynamic memory allocation** — `malloc`, `calloc`, `realloc`, `free`; stack and heap; leaks and dangling pointers. **Recursion** — base case, recursive case, the call stack | [Lec 19](cs1100-cse-iitm-2021/slides/Lec19.pdf) · [Lec 20](cs1100-cse-iitm-2021/slides/Lec20.pdf) · [Lec 24](cs1100-cse-iitm-2021/slides/Lec24.pdf) |
+| [13](weeks/w13.qmd) | Oct 26, Oct 27; make-ups Oct 29–30 | **Dynamic memory allocation** — `malloc`, `calloc`, `realloc`, `free`; stack and heap; leaks and dangling pointers. **Recursion** — base case, recursive case, the call stack. **Make-up classes:** Oct 29 and 30 (see MU-1/MU-2); tentative guest lecture by Prof. Nirmal Sancheti on Oct 30 | [Lec 19](cs1100-cse-iitm-2021/slides/Lec19.pdf) · [Lec 20](cs1100-cse-iitm-2021/slides/Lec20.pdf) · [Lec 24](cs1100-cse-iitm-2021/slides/Lec24.pdf) |
 | [14](weeks/w14.qmd) | Nov 2, Nov 3 | **Full problems I** — no new features; complete problems solved end to end, using arrays, functions, pointers, strings, structures, files and dynamic memory together | — |
 | [15](weeks/w15.qmd) | Nov 9, Nov 10 | **Holidays (Govardhan Puja, Declared Holiday) — no classes** | — |
-| [16](weeks/w16.qmd) | Nov 16, Nov 17 | **Full problems II** — larger problems, more of the design left to the class; revision of whatever proved hardest | — |
-| [MU-1](weeks/mu1.qmd) | *TBA* | **Make-up class:** file handling and error handling (`fopen`/`fclose`, formatted file I/O, `errno`, `perror`); header files and modular builds | [OCW L4](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec04/) · [OCW L10](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec10/) · [OCW L3](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec03/) |
-| [MU-2](weeks/mu2.qmd) | *TBA* | **Make-up class:** applications; brief of object-oriented programming; course wrap-up | [Wrap-up](cs1100-cse-iitm-2021/slides/wrapping-up.pdf) · Notes (TBP) |
+| [16](weeks/w16.qmd) | Nov 16, Nov 17 | **Tentative guest lectures:** Mon — Dr. Aalok Thakkar; Tue — Snehashish Ghosh and Sai Nikhilesh. Revision materials will be provided separately | — |
+| [MU-1](weeks/mu1.qmd) | Thu Oct 29 | **Make-up class:** file handling and error handling (`fopen`/`fclose`, formatted file I/O, `errno`, `perror`); header files and modular builds | [OCW L4](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec04/) · [OCW L10](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec10/) · [OCW L3](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec03/) |
+| [MU-2](weeks/mu2.qmd) | Fri Oct 30 | **Make-up class:** tentative guest lecture by Prof. Nirmal Sancheti; talk title to be announced | — |
 
 : {tbl-colwidths="[7,18,50,25]"}
 
 ::: {.callout-note}
-The syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the **two make-up classes (MU-1, MU-2) are required**, not optional. They will be scheduled on designated compensatory days and announced in class and here. Materials marked *OCW* are from [MIT OCW 6.087](./resources.qmd) (CC BY-NC-SA).
+The syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the **two make-up classes (MU-1, MU-2) are required**, not optional. They are scheduled for **Thursday, October 29 (MU-1)** and **Friday, October 30 (MU-2)**, to make up for the October 19–20 holidays. The W13 and MU entries refer to the same two sessions. Materials marked *OCW* are from [MIT OCW 6.087](./resources.qmd) (CC BY-NC-SA).
 :::

@@ -1,12 +1,14 @@
 # MU-1: File & Error Handling (Make-up) {.unnumbered}
 
-**Dates:** Date TBA (compensatory day) · 8:00–8:50 am · 12LH3004
+**Dates:** Thu Oct 29, 2026 (make-up class) · 8:00–8:50 am · 12LH3004
 
 **Syllabus module:** 6 — Function pointers; structure, union; file handling; error handling (3 h)
 
 ::: {.callout-important}
 Covers: `fopen`/`fclose`, formatted file I/O, `errno`, `perror`; header files and modular builds.
 :::
+
+This is one of the two make-up classes for the October 19–20 holidays.
 
 ## Pre-read
 

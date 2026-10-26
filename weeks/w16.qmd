@@ -1,8 +1,8 @@
-# W16: Full Problems II {.unnumbered}
+# W16: Guest Lectures (Tentative) {.unnumbered}
 
 **Dates:** Mon Nov 16 & Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004
 
-**Syllabus modules:** 5 and 6 — applied together
+**Focus:** guest lectures and semester revision; talk titles to be announced.
 
 ::: {.callout-note}
 Last teaching week of the semester. The end-semester examination is Nov 23–30.
@@ -10,13 +10,17 @@ Last teaching week of the semester. The end-semester examination is Nov 23–30.
 
 ## Plan
 
-A second week of complete problems, continuing W14. Larger problems, assembled from parts you have already written, with more of the design left to you.
+| Date | Tentative speaker(s) |
+|---|---|
+| Monday, November 16, 2026 | **Dr. Aalok Thakkar** |
+| Tuesday, November 17, 2026 | **Snehashish Ghosh and Sai Nikhilesh** |
 
-This is also the week to revisit whatever the class found hardest during the semester, so bring questions.
+Speaker participation is tentative. Talk titles and guest-session details will be
+announced. Revision problems and supporting materials will be provided separately.
 
 ## In Class
 
-*To be posted.*
+Guest lecture materials will be added when available.
 
 ## After Class
 

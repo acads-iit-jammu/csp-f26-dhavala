@@ -1,8 +1,13 @@
-# MU-2: Applications & Wrap-up (Make-up) {.unnumbered}
+# MU-2: Guest Lecture (Make-up) {.unnumbered}
 
-**Dates:** Date TBA (compensatory day) · 8:00–8:50 am · 12LH3004
+**Dates:** Fri Oct 30, 2026 (make-up class) · 8:00–8:50 am · 12LH3004
 
-**Syllabus module:** 8 — Applications; brief of object-oriented programming (1 h)
+This is one of the two make-up classes for the October 19–20 holidays.
+
+**Tentative speaker:** Prof. Nirmal Sancheti.
+
+The class date is confirmed; speaker participation is tentative. The talk title
+and guest-session details will be announced.
 
 ## Pre-read
 
@@ -10,8 +15,7 @@
 
 ## In Class
 
-- [Wrap-up](../cs1100-cse-iitm-2021/slides/wrapping-up.pdf) — Course summary and takeaways
-- Notes (to be posted) — applications; a brief of object-oriented programming
+Guest lecture materials will be added when available.
 
 ## After Class
 
