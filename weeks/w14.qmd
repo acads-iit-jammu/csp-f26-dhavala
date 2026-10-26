@@ -6,15 +6,16 @@
 
 ## Plan
 
-No new language features this week. Both lectures are spent solving complete problems, of the size and shape you will meet in the end-semester examination, using everything from the semester at once: arrays, functions, pointers, strings, structures, files and dynamic memory.
+No new language features this week. We will apply the programming concepts covered in the course to formulate problems, choose data representations, design algorithms and check proposed solutions.
 
-The emphasis is on the part that is usually skipped. Reading a problem statement and deciding what the data actually is. Choosing between an array and allocated memory. Deciding which parts become functions and what each one promises. Then writing it, and checking it against the statement rather than against a hope.
-
-A worked problem will be developed on the board across both lectures rather than presented finished.
+- **Monday, November 2:** classroom team discussion, with a 40-minute breakout to develop a solution on paper.
+- **Tuesday, November 3:** synthesis and presentations of findings by selected teams or individuals, followed by discussion.
 
 ## In Class
 
-*To be posted.*
+[Download the password-protected activity handout](../materials/group-discussion.pdf).
+
+The handout contains the worksheet, group and problem allocations, team deliverables and presentation instructions.
 
 ## After Class
 
