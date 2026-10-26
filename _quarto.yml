@@ -30,6 +30,7 @@ book:
   chapters:
     - index.qmd
     - course.qmd
+    - groups.qmd
     - syllabus.qmd
     - labs.qmd
     - part: "Weekly Notes"
