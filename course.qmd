@@ -76,10 +76,6 @@ Section C (program/function completion), 15 marks. No negative marking.
 - **Lab evaluation:** Lab 1 (setup) is not graded. Labs 2 onwards carry equal weight, totalling 20%.
 - **Hackathon:** details (format and date) will be announced in class and on this page.
 
-### Group activity
-
-[Group assignments](groups.qmd). Activity instructions will be provided separately.
-
 ### Past papers
 
 | Paper | Solutions |
