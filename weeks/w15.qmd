@@ -12,6 +12,8 @@ No classes — Govardhan Puja (Mon Nov 9) and Declared Holiday (Tue Nov 10).
 
 **The model can write the code. You own what ships.**
 
+![AI-assisted learning requires active participation.](../materials/ai-bridge.png){#fig-ai-bridge fig-alt="Students cross a bridge labelled Attempt, Question, Code, Test and Explain, with an AI companion asking why their solution works. A professor waits on the far bank. A shortcut labelled Let AI do all the thinking leads into a valley labelled Brain Rot and AI Rot."}
+
 Two videos for the holiday week:
 
 - [Miles Cranmer — **How to Avoid AI Brain Rot**](https://www.youtube.com/watch?v=uXC7OuCas2Q&t=1s)
