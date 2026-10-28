@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 11: Problem Solving I – CS-1-01 (MO)</title>
+<title>Lab 11: Git, IDE and Debugging Tutorial – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab11.html">Lab 11: Problem Solving I</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab11.html">Lab 11: Git, IDE and Debugging Tutorial</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -235,7 +235,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W14: Full Problems I</span></a>
+ <span class="menu-text">W14: Group Activity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -253,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/mu1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">MU-1: File &amp; Error Handling (Make-up)</span></a>
+ <span class="menu-text">MU-1: Reading and Debugging C (Make-up)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -336,7 +336,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab11.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab 11: Problem Solving I</span></a>
+ <span class="menu-text">Lab 11: Git, IDE and Debugging Tutorial</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -486,18 +486,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab" id="toc-pre-lab" class="nav-link active" data-scroll-target="#pre-lab">Pre-Lab</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
+  <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial">Tutorial</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab11.html">Lab 11: Problem Solving I</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labsheets/lab01.html">Lab Sheets</a></li><li class="breadcrumb-item"><a href="../labsheets/lab11.html">Lab 11: Git, IDE and Debugging Tutorial</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 11: Problem Solving I</h1>
+<h1 class="title">Lab 11: Git, IDE and Debugging Tutorial</h1>
 </div>
 
 
@@ -525,8 +524,8 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><strong>Date</strong></td>
-<td>Tue Nov 3, 2026</td>
-<td>Wed Nov 4, 2026</td>
+<td>Tue Nov 17, 2026</td>
+<td>Wed Nov 18, 2026</td>
 </tr>
 <tr class="even">
 <td><strong>Time</strong></td>
@@ -535,20 +534,21 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>Syllabus practical module:</strong> 11 — Problem solving (GATE, ACM ICPC)</p>
-<p><strong>Evaluation:</strong> Graded — equal weight within the 20% lab component.</p>
-<p><strong>Lab manual:</strong> <a href="../labs/CLab3_Aroof.pdf">The C Programming Laboratory</a> — the department’s shared reference (vim §1 · the compilation model §2.5 · types and <code>#define</code> §2.7–2.8 · the operator precedence table §2.9–2.10 · <code>printf</code>/<code>scanf</code> §3). This sheet is self-contained; the manual is there when you want more.</p>
-<section id="pre-lab" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab">Pre-Lab</h2>
-<p><em>To be posted — what to read/install before the session.</em></p>
+<p><strong>Format:</strong> Git, IDE and debugging tutorial during the usual lab slots. The November 9–10 holiday notes are self-study preparation; no class or attendance is scheduled on those holidays.</p>
+<p><strong>Evaluation:</strong> attendance only. The tutorial work is not graded; no graded submission.</p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>We have learnt C. Practise using development tools to edit, run, track and debug a program.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p><em>To be posted before the session.</em></p>
-</section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submission instructions will be provided in the lab.</p>
+<section id="tutorial" class="level2">
+<h2 class="anchored" data-anchor-id="tutorial">Tutorial</h2>
+<p>Follow the <a href="../weeks/w15.html#coding-tools-self-study">W15 self-study notes</a>:</p>
+<ul>
+<li><strong>Git:</strong> record a version, make a small change, inspect the diff and commit it.</li>
+<li><strong>IDE:</strong> open a C project in VS Code, navigate its files, compile and run it.</li>
+<li><strong>Debugging:</strong> use GDB through VS Code to set a breakpoint, inspect variables and step through execution. Fix an incorrect result and rerun the tests.</li>
+</ul>
+<p>Use a previous C lab for practice. Work at your own pace; the notes include videos and interactive learning resources.</p>
 
 
 </section>

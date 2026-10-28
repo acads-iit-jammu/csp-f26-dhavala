@@ -235,7 +235,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W14: Full Problems I</span></a>
+ <span class="menu-text">W14: Group Activity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -253,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/mu1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">MU-1: File &amp; Error Handling (Make-up)</span></a>
+ <span class="menu-text">MU-1: Reading and Debugging C (Make-up)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -336,7 +336,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 11: Problem Solving I</span></a>
+ <span class="menu-text">Lab 11: Git, IDE and Debugging Tutorial</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -486,7 +486,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link active" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#revisit-the-make-up-classes" id="toc-revisit-the-make-up-classes" class="nav-link active" data-scroll-target="#revisit-the-make-up-classes">Revisit the make-up classes</a></li>
+  <li><a href="#coding-tools-self-study" id="toc-coding-tools-self-study" class="nav-link" data-scroll-target="#coding-tools-self-study">Coding tools: self-study</a>
+  <ul class="collapse">
+  <li><a href="#november-9-from-learning-c-to-developing-programs" id="toc-november-9-from-learning-c-to-developing-programs" class="nav-link" data-scroll-target="#november-9-from-learning-c-to-developing-programs">November 9: From learning C to developing programs</a></li>
+  <li><a href="#november-10-finding-and-fixing-bugs" id="toc-november-10-finding-and-fixing-bugs" class="nav-link" data-scroll-target="#november-10-finding-and-fixing-bugs">November 10: Finding and fixing bugs</a></li>
+  <li><a href="#materials-and-reference-reading" id="toc-materials-and-reference-reading" class="nav-link" data-scroll-target="#materials-and-reference-reading">Materials and reference reading</a></li>
+  </ul></li>
+  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a>
+  <ul class="collapse">
+  <li><a href="#where-to-go-next" id="toc-where-to-go-next" class="nav-link" data-scroll-target="#where-to-go-next">Where to go next</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -512,7 +522,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Mon Nov 9 &amp; Tue Nov 10, 2026 · 8:00–8:50 am · 12LH3004</p>
+<p><strong>Dates:</strong> Mon Nov 9 &amp; Tue Nov 10, 2026 · holiday self-study; no scheduled class</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -523,6 +533,45 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<section id="revisit-the-make-up-classes" class="level2">
+<h2 class="anchored" data-anchor-id="revisit-the-make-up-classes">Revisit the make-up classes</h2>
+<ul>
+<li><a href="../weeks/mu1.html">MU1 — Reading and debugging C; Jeetu and constrained programming</a> — October 29.</li>
+<li><a href="../weeks/mu2.html">MU2 — Guest lecture</a> — October 30.</li>
+</ul>
+</section>
+<section id="coding-tools-self-study" class="level2">
+<h2 class="anchored" data-anchor-id="coding-tools-self-study">Coding tools: self-study</h2>
+<p>These self-study activities prepare you for <a href="../labsheets/lab11.html">Lab 11: Git, IDE and Debugging Tutorial</a>, held in the usual lab slots on <strong>November 17 (EE) and November 18 (ME/MT)</strong>. Lab 11 records attendance only; tutorial work is not graded. No attendance is taken during holiday self-study.</p>
+<p>These materials are for independent study during the holiday period. November 9 and 10 are suggested study days, not scheduled classes. Work through the tasks at a convenient time.</p>
+<p>Use the C program from the <a href="../weeks/mu1.html">October 29 reading session</a> throughout. The aim is to learn how to inspect, change, test and record an existing program.</p>
+<section id="november-9-from-learning-c-to-developing-programs" class="level3">
+<h3 class="anchored" data-anchor-id="november-9-from-learning-c-to-developing-programs">November 9: From learning C to developing programs</h3>
+<p>We have learnt C. How do we now work with it to develop a program? We need tools to organise files, edit and run code, and keep track of changes.</p>
+<ul>
+<li><strong>Git</strong> records changes to our code so that we can compare versions and work with others. Start with the <a href="https://www.youtube.com/watch?v=CvUiKWv2-C0">beginner video</a>, try <a href="https://learngitbranching.js.org/">Learn Git Branching</a>, and use <a href="https://git-scm.com/learn">Git’s self-paced resources</a> as a reference.</li>
+<li><strong>An IDE (Integrated Development Environment)</strong> brings development tools together. Watch the <a href="https://www.youtube.com/watch?v=f8_uF_IDV50">VS Code introduction</a>. Other IDEs and coding editors include Eclipse, Cursor and Google Antigravity. We will use VS Code as our reference; you do not need to install several tools.</li>
+</ul>
+<p><strong>Try it:</strong> open a previous C lab in VS Code, compile and run it, then make one small change. Use Git to record the original version, inspect the change and commit the updated version. Git can be used locally without a GitHub account.</p>
+<p>This is holiday self-study. Work at your own pace.</p>
+</section>
+<section id="november-10-finding-and-fixing-bugs" class="level3">
+<h3 class="anchored" data-anchor-id="november-10-finding-and-fixing-bugs">November 10: Finding and fixing bugs</h3>
+<p>A program may compile and run but produce the wrong result. A debugger helps us pause execution, inspect variables and follow the program one step at a time.</p>
+<p><strong>GDB</strong> is a debugger commonly used with C. It can be used from a terminal or through VS Code’s C/C++ debugging support. Watch <a href="https://www.youtube.com/watch?v=3HiLLByBWkg">Getting Started with Debugging in VS Code</a> for an introduction to the interface. For C setup, use the <a href="https://code.visualstudio.com/docs/cpp/config-linux">GCC/GDB guide for Linux</a>.</p>
+<p><strong>Try it:</strong> use a small C program with an incorrect result. Write down the expected result, build with debug information, set a breakpoint and inspect the variables. Practise Step Over, Step Into and Step Out. Find where the state first becomes incorrect, fix the cause, rerun your tests and commit the correction with Git.</p>
+<p>This is holiday self-study. Work at your own pace.</p>
+</section>
+<section id="materials-and-reference-reading" class="level3">
+<h3 class="anchored" data-anchor-id="materials-and-reference-reading">Materials and reference reading</h3>
+<p>The course practice bundle will contain the reading program, a separate debugging variant, small input/output tests, and build/debug configuration. It will be linked here when ready.</p>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/cpp/config-linux">VS Code: GCC on Linux</a>. This guide uses C++ examples; the course bundle will use C source files and GCC.</li>
+<li><a href="https://code.visualstudio.com/docs/debugtest/debugging">VS Code: Debugging</a>, especially breakpoints, stepping, variables and the call stack.</li>
+</ul>
+<p>Use AI for questions and explanations after making your own prediction. For the debugging exercise, locate the incorrect state yourself before asking for a proposed fix.</p>
+</section>
+</section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
 <p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning: the week’s informal column.</em></p>
@@ -551,8 +600,16 @@ Figure&nbsp;1: AI-assisted learning requires active participation.
 <p>Let me attempt it first. Ask one question at a time. Challenge my assumptions and ask me to predict the result. Give a small hint when I am stuck. Ask me for a counterexample and a test before showing a solution.</p>
 </blockquote>
 <p>Debate the answer. Challenge the model too: it can be wrong. Run the tests, explain why a proposed fix works, then close the chat and solve a small variation yourself. The useful measure of the session is what you can now understand, judge and do.</p>
+<section id="where-to-go-next" class="level3">
+<h3 class="anchored" data-anchor-id="where-to-go-next">Where to go next</h3>
+<p>We have learnt a language and started using development tools. A natural next step is <strong>Data Structures and Algorithms</strong>: how to organise data and choose efficient methods. IIT Jammu’s <a href="https://iitjammu.ac.in/academics/timetable/2025/2/BT_first_year.pdf">published first-year timetable</a> lists this as <strong>CS-1-02(MO)</strong>. Databases, operating systems, networks and system design complement this foundation by explaining how larger software systems store data, communicate and remain reliable.</p>
+<p>For a view of how development is changing, explore Stanford’s <a href="https://themodernsoftware.dev/"><strong>The Modern Software Developer</strong></a>. It examines working with coding agents, specifications, tools and evaluation. Treat it as a direction for further study alongside stronger programming foundations; the full course assumes more experience than this introductory course.</p>
+<p>Consider three questions: <strong>who writes software, for whom, and how?</strong> Agents can increasingly write and review code, and may also help prepare specifications. Software may be used by other agents through interfaces and tools. Humans still need to identify worthwhile problems, set constraints, judge evidence and take responsibility for the result.</p>
+<p>One possible opportunity is <strong>just-in-time software development</strong>: creating and testing a small tool when a particular need arises. For example, a materials engineer might need a tool for comparing a new batch of test measurements. This could complement subscription software with tools built for a specific task. Such tools still need validation, appropriate data access and a clear owner.</p>
+<p>Develop a systems perspective: understand how software, data, hardware and people interact. Build depth in at least one area—agriculture, materials, VLSI or another field—and learn to work across disciplines. Domain knowledge helps you decide what should be built and whether its results make sense.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -963,8 +1020,8 @@ Figure&nbsp;1: AI-assisted learning requires active participation.
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/w14.html" class="pagination-link" aria-label="W14: Full Problems I">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">W14: Full Problems I</span>
+      <a href="../weeks/w14.html" class="pagination-link" aria-label="W14: Group Activity">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">W14: Group Activity</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

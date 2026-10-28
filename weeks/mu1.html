@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MU-1: File &amp; Error Handling (Make-up) – CS-1-01 (MO)</title>
+<title>MU-1: Reading and Debugging C (Make-up) – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: File &amp; Error Handling (Make-up)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: Reading and Debugging C (Make-up)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -235,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">W14: Full Problems I</span></a>
+ <span class="menu-text">W14: Group Activity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -253,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/mu1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">MU-1: File &amp; Error Handling (Make-up)</span></a>
+ <span class="menu-text">MU-1: Reading and Debugging C (Make-up)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -336,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../labsheets/lab11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 11: Problem Solving I</span></a>
+ <span class="menu-text">Lab 11: Git, IDE and Debugging Tutorial</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -486,19 +521,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-read" id="toc-pre-read" class="nav-link active" data-scroll-target="#pre-read">Pre-read</a></li>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
+  <li><a href="#reading-another-authors-c-program-tic-tac-toe" id="toc-reading-another-authors-c-program-tic-tac-toe" class="nav-link" data-scroll-target="#reading-another-authors-c-program-tic-tac-toe">Reading another author’s C program: Tic-Tac-Toe</a>
+  <ul class="collapse">
+  <li><a href="#start-with-the-specification" id="toc-start-with-the-specification" class="nav-link" data-scroll-target="#start-with-the-specification">1. Start with the specification</a></li>
+  <li><a href="#read-breadth-first-data-signatures-and-main" id="toc-read-breadth-first-data-signatures-and-main" class="nav-link" data-scroll-target="#read-breadth-first-data-signatures-and-main">2. Read breadth first: data, signatures and <code>main</code></a></li>
+  <li><a href="#identify-the-representation" id="toc-identify-the-representation" class="nav-link" data-scroll-target="#identify-the-representation">3. Identify the representation</a></li>
+  <li><a href="#design-question-why-is-the-board-global" id="toc-design-question-why-is-the-board-global" class="nav-link" data-scroll-target="#design-question-why-is-the-board-global">Design question: why is the board global?</a></li>
+  <li><a href="#read-each-function-in-detail" id="toc-read-each-function-in-detail" class="nav-link" data-scroll-target="#read-each-function-in-detail">4. Read each function in detail</a></li>
+  <li><a href="#trace-one-complete-game" id="toc-trace-one-complete-game" class="nav-link" data-scroll-target="#trace-one-complete-game">5. Trace one complete game</a></li>
+  <li><a href="#compile-run-and-test" id="toc-compile-run-and-test" class="nav-link" data-scroll-target="#compile-run-and-test">6. Compile, run and test</a></li>
+  <li><a href="#review-the-design-against-what-we-have-learnt" id="toc-review-the-design-against-what-we-have-learnt" class="nav-link" data-scroll-target="#review-the-design-against-what-we-have-learnt">7. Review the design against what we have learnt</a></li>
+  <li><a href="#optional-extension-a-minimax-opponent" id="toc-optional-extension-a-minimax-opponent" class="nav-link" data-scroll-target="#optional-extension-a-minimax-opponent">Optional extension: a minimax opponent</a></li>
+  </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#interesting-c-examples" id="toc-interesting-c-examples" class="nav-link" data-scroll-target="#interesting-c-examples">Interesting C examples</a></li>
+  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a>
+  <ul class="collapse">
+  <li><a href="#jeetu-how-much-of-a-language-do-we-need" id="toc-jeetu-how-much-of-a-language-do-we-need" class="nav-link" data-scroll-target="#jeetu-how-much-of-a-language-do-we-need">Jeetu: how much of a language do we need?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: File &amp; Error Handling (Make-up)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: Reading and Debugging C (Make-up)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">MU-1: File &amp; Error Handling (Make-up)</h1>
+<h1 class="title">MU-1: Reading and Debugging C (Make-up)</h1>
 </div>
 
 
@@ -515,40 +566,432 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Thu Oct 29, 2026 (make-up class) · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Syllabus module:</strong> 6 — Function pointers; structure, union; file handling; error handling (3 h)</p>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Covers: <code>fopen</code>/<code>fclose</code>, formatted file I/O, <code>errno</code>, <code>perror</code>; header files and modular builds.</p>
-</div>
-</div>
-</div>
+<p><strong>Date:</strong> Thu Oct 29, 2026 (make-up class) · 8:00–8:50 am · 12LH3004</p>
 <p>This is one of the two make-up classes for the October 19–20 holidays.</p>
-<section id="pre-read" class="level2">
-<h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>Read a C program written by someone else, explain how it works, and check that explanation by tracing its execution. This session applies concepts already covered in the course.</p>
 </section>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
+<section id="reading-another-authors-c-program-tic-tac-toe" class="level2">
+<h2 class="anchored" data-anchor-id="reading-another-authors-c-program-tic-tac-toe">Reading another author’s C program: Tic-Tac-Toe</h2>
+<p>We will read the <strong>two-human-player version</strong> of <a href="https://github.com/Cukowski/Tic-Tac-Toe-Tutorials/tree/main/Tic-Tac-Toe%20Basic">Cukowski’s Tic-Tac-Toe tutorial</a>. The accompanying <a href="https://www.youtube.com/watch?v=co8znQEXHug">live-coding video</a> shows its development. An AI opponent is an optional extension, not part of the basic game.</p>
+<p>These notes refer to <a href="https://github.com/Cukowski/Tic-Tac-Toe-Tutorials/blob/cd51f6dbe7531a47e56efeb14d5ffaa172b901e5/Tic-Tac-Toe%20Basic/TicTacToe.c">this source revision</a>. Keep the original source open beside the notes. We first understand the game, then map the program, and only then examine individual functions.</p>
+<section id="start-with-the-specification" class="level3">
+<h3 class="anchored" data-anchor-id="start-with-the-specification">1. Start with the specification</h3>
+<p>Two players, X and O, take turns placing their symbol on a 3 × 3 board. X moves first. A move specifies a row and column, each numbered 1 to 3. The cell must be empty. An invalid numeric move is rejected and the same player tries again.</p>
+<p>A player wins by occupying all three cells of a row, column or diagonal. If the board is full and neither player has won, the game is a draw. Stop after a win or draw; otherwise switch players.</p>
+<p>This gives us five operations: initialise the board, display it, accept a legal move, detect a winner and detect a full board. The implementation must also coordinate their order.</p>
+<p><strong>Input limitation:</strong> the original program assumes that each attempt supplies two integers. It does not safely handle letters or end-of-input. We will distinguish its intended game rules from this implementation limitation.</p>
+</section>
+<section id="read-breadth-first-data-signatures-and-main" class="level3">
+<h3 class="anchored" data-anchor-id="read-breadth-first-data-signatures-and-main">2. Read breadth first: data, signatures and <code>main</code></h3>
+<p>First scan the file without tracing the bodies of the helper functions. It contains one global board, five helper functions and <code>main</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function as written</th>
+<th>Inputs and result</th>
+<th>Role in the plan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>void initializeBoard()</code></td>
+<td>No arguments; changes the global board</td>
+<td>Mark every cell empty.</td>
+</tr>
+<tr class="even">
+<td><code>void displayBoard()</code></td>
+<td>Reads the board; prints to the terminal</td>
+<td>Show the current position.</td>
+</tr>
+<tr class="odd">
+<td><code>void playerMove(char player)</code></td>
+<td>Receives a copy of the player’s symbol; changes the board</td>
+<td>Keep asking until a legal numeric move is entered.</td>
+</tr>
+<tr class="even">
+<td><code>char checkWinner()</code></td>
+<td>Reads the board; returns <code>'X'</code>, <code>'O'</code> or <code>' '</code></td>
+<td>Identify a winner, if any.</td>
+</tr>
+<tr class="odd">
+<td><code>int isBoardFull()</code></td>
+<td>Reads the board; returns 0 or 1</td>
+<td>Report whether any empty cell remains.</td>
+</tr>
+<tr class="even">
+<td><code>int main()</code></td>
+<td>Coordinates the game; returns a process status</td>
+<td>Initialise, repeat turns, then finish.</td>
+</tr>
+</tbody>
+</table>
+<p>The global board is an <strong>implicit input</strong> to several functions. A signature alone does not reveal all the data a function uses or changes. <code>playerMove</code> does not return a board: it updates shared storage directly.</p>
+<p>In C11, prefer <code>(void)</code> for functions taking no arguments, for example <code>char checkWinner(void)</code>. The source uses the older empty-parentheses form, which can trigger compiler warnings.</p>
+<p>Read <code>main</code> using each helper’s role before opening its body:</p>
+<pre class="text"><code>Set winner to empty and current player to X
+Initialise the board
+Repeat:
+    Display the board
+    Accept a move from the current player
+    Check for a winner
+    If someone won: display, announce and stop
+    If the board is full: display, announce a draw and stop
+    Switch players</code></pre>
+<p><strong>Why this order?</strong> A ninth move can fill the board and win at the same time. Check for a win before declaring a draw. Switching players belongs after both ending checks.</p>
+<p><strong>Concepts from class:</strong> functions, arguments, return values and scope (W09); conditionals and loops (W05–W06). This reading method lets us understand the overall plan before tracing every statement.</p>
+</section>
+<section id="identify-the-representation" class="level3">
+<h3 class="anchored" data-anchor-id="identify-the-representation">3. Identify the representation</h3>
+<p><code>SIZE</code> is a preprocessor macro whose value is 3. <code>board</code> is a global two-dimensional array of <code>char</code>. Each cell holds one of three values:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Stored value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>' '</code></td>
+<td>Empty cell: a space character</td>
+</tr>
+<tr class="even">
+<td><code>'X'</code></td>
+<td>X occupies the cell</td>
+</tr>
+<tr class="odd">
+<td><code>'O'</code></td>
+<td>O occupies the cell</td>
+</tr>
+</tbody>
+</table>
+<p>A displayed coordinate such as row 2, column 3 corresponds to <code>board[1][2]</code>: the user counts from 1, while array indices start at 0.</p>
+<p>This is <strong>not an array of C strings</strong>. Each row contains three game cells, with no extra space reserved for a null terminator. The display function prints individual characters with <code>%c</code>, not rows with <code>%s</code>.</p>
+<p>Global storage is initially zero-initialised, but zero is not the chosen empty-cell marker. <code>initializeBoard</code> must write spaces before play begins.</p>
+<p><strong>Concepts from class:</strong> character values, macros and preprocessing (W03–W05), arrays and nested loops (W07), two-dimensional arrays (W09), characters versus null-terminated strings (W10).</p>
+</section>
+<section id="design-question-why-is-the-board-global" class="level3">
+<h3 class="anchored" data-anchor-id="design-question-why-is-the-board-global">Design question: why is the board global?</h3>
+<p><code>board</code> is declared outside all functions, before their definitions. Its name has <strong>file scope</strong>, so the functions below that declaration can refer to it directly. The array has static storage duration: it exists for the entire execution of the program.</p>
+<p>When <code>initializeBoard</code> writes <code>board[i][j]</code>, <strong>no board argument has been passed</strong>. The function finds the name through scope and changes the shared array. The same is true when <code>playerMove</code> records a move. In contrast, <code>i</code> and <code>j</code> are local loop variables, and <code>player</code> is a local parameter containing a copy of the supplied character.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Where its name is available</th>
+<th>What it represents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>board</code></td>
+<td>File scope, from its declaration onward</td>
+<td>The shared game board</td>
+</tr>
+<tr class="even">
+<td><code>currentPlayer</code>, <code>winner</code></td>
+<td>Inside <code>main</code>’s block</td>
+<td>State used to coordinate turns</td>
+</tr>
+<tr class="odd">
+<td><code>player</code></td>
+<td>Inside <code>playerMove</code></td>
+<td>A copied argument identifying the player</td>
+</tr>
+<tr class="even">
+<td><code>row</code>, <code>col</code></td>
+<td>Inside <code>playerMove</code>’s block</td>
+<td>One attempted move</td>
+</tr>
+<tr class="odd">
+<td><code>i</code>, <code>j</code> declared in <code>for</code> headers</td>
+<td>Within their respective loops</td>
+<td>Traversal indices</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why might the author choose this?</strong> The application has one board and is contained in one small file. Sharing it avoids repeating an array parameter in every function and keeps the initial example short.</p>
+<p><strong>What does that choice cost?</strong> A call such as <code>checkWinner()</code> does not show which board it examines. Functions can accidentally change shared state. Tests must reset that state, and using two independent boards becomes awkward. These costs grow as the program grows.</p>
+<p>An alternative interface makes the dependency explicit:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> initializeBoard<span class="op">(</span><span class="dt">char</span> game<span class="op">[</span>SIZE<span class="op">][</span>SIZE<span class="op">]);</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> checkWinner<span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> game<span class="op">[</span>SIZE<span class="op">][</span>SIZE<span class="op">]);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The caller would supply <code>board</code> to each function. In a C function parameter, this two-dimensional array declaration is adjusted to a pointer to a row; <strong>C still passes that pointer by value</strong>. The array is not copied. Writes through the first parameter affect the caller’s board, while <code>const</code> in the second interface prevents element writes through that parameter. Scope and parameter passing are different mechanisms for reaching the data.</p>
+<p><strong>Question the design:</strong> is a shared global board reasonable for this small demonstration? What would you change if the program needed to compare several possible boards, run independent games or test functions separately? Explicit parameters help make those dependencies visible; they do not automatically copy or isolate the board.</p>
+</section>
+<section id="read-each-function-in-detail" class="level3">
+<h3 class="anchored" data-anchor-id="read-each-function-in-detail">4. Read each function in detail</h3>
+<section id="initializeboard-establish-the-starting-state" class="level4">
+<h4 class="anchored" data-anchor-id="initializeboard-establish-the-starting-state"><code>initializeBoard</code>: establish the starting state</h4>
+<p>The outer loop selects a row; the inner loop visits its columns. Each visit assigns the empty-cell marker. On return, all nine cells contain spaces.</p>
+<p>Trace the visited indices: <code>(0,0)</code>, <code>(0,1)</code>, <code>(0,2)</code>, then <code>(1,0)</code>, and so on. Both bounds use <code>&lt; SIZE</code>, so the loops never visit index 3.</p>
+<p><strong>Concepts:</strong> nested loops, array bounds, assignment and initialisation. <strong>Check:</strong> what changes if the loops use <code>&lt;= SIZE</code>?</p>
+</section>
+<section id="displayboard-turn-data-into-a-visible-board" class="level4">
+<h4 class="anchored" data-anchor-id="displayboard-turn-data-into-a-visible-board"><code>displayBoard</code>: turn data into a visible board</h4>
+<p>The nested loops print each cell. A vertical separator is printed only when another column follows; a horizontal separator is printed only when another row follows. Newlines finish the rows.</p>
+<p>The function reads the board but does not alter it. This separates the game’s state from how it is displayed.</p>
+<p><strong>Concepts:</strong> formatted output, <code>%c</code>, nested loops and boundary conditions. <strong>Check:</strong> why are separator conditions based on <code>SIZE - 1</code>?</p>
+</section>
+<section id="playermove-validate-before-writing" class="level4">
+<h4 class="anchored" data-anchor-id="playermove-validate-before-writing"><code>playerMove</code>: validate before writing</h4>
+<p>The parameter <code>player</code> is passed by value. The local variables <code>row</code> and <code>col</code> receive input through their addresses, supplied to <code>scanf</code> using <code>&amp;</code>.</p>
+<p>The legality condition checks these facts in order:</p>
+<ol type="1">
+<li>The row is between 1 and 3.</li>
+<li>The column is between 1 and 3.</li>
+<li>The corresponding cell is empty.</li>
+</ol>
+<p>C’s <code>&amp;&amp;</code> evaluates left to right and stops when an operand is false. Consequently, for successfully read integer inputs, the board access is reached only after the coordinates have passed the range checks. The order prevents an out-of-range numeric move from becoming an invalid array access.</p>
+<p>A legal move writes the symbol and executes <code>break</code>. This leaves the input loop and returns to <code>main</code>. An occupied or out-of-range numeric move prints a message and repeats the loop; it does not consume the player’s turn.</p>
+<p><strong>Concepts:</strong> pass by value and local variables (W09), addresses and pointer arguments (W10), short-circuit conditions, indexing, loops and <code>break</code> (W05–W07).</p>
+<p><strong>Review finding:</strong> <code>scanf</code> returns the number of successful conversions. Here it must return 2 before either coordinate is used. The original ignores that return value. Failed input can leave a variable uninitialised or unchanged; an invalid token can remain unread. A robust version needs a defined retry or exit path, not just the existing range check.</p>
+</section>
+<section id="checkwinner-inspect-the-eight-possible-winning-lines" class="level4">
+<h4 class="anchored" data-anchor-id="checkwinner-inspect-the-eight-possible-winning-lines"><code>checkWinner</code>: inspect the eight possible winning lines</h4>
+<p>For each index <code>i</code>, the function checks row <code>i</code> and column <code>i</code>. Three iterations therefore examine six lines. Two separate conditions examine the diagonals.</p>
+<p>Each check requires equal symbols <strong>and a nonempty cell</strong>. Equality alone would incorrectly identify three spaces as a winning line. The winning symbol is returned immediately. If no line wins, the final return value is the space character.</p>
+<p>The space result means <strong>no winner</strong>, not necessarily <strong>draw</strong>. The caller must still ask whether the board is full.</p>
+<p><strong>Concepts:</strong> indexed comparisons, Boolean expressions, loops, early return and a <code>char</code> return value. <strong>Check:</strong> draw the eight winning lines and match each to a source condition.</p>
+</section>
+<section id="isboardfull-search-for-a-counterexample" class="level4">
+<h4 class="anchored" data-anchor-id="isboardfull-search-for-a-counterexample"><code>isBoardFull</code>: search for a counterexample</h4>
+<p>The function returns 0 as soon as it finds an empty cell. It returns 1 only after inspecting every cell without finding one.</p>
+<p>The position of the final return matters. Returning 1 after the first occupied cell would establish only that one cell is occupied, not that the entire board is full.</p>
+<p><strong>Concepts:</strong> array traversal, search, early return and integer truth values. <strong>Check:</strong> consider a board whose only empty cell is the final cell visited.</p>
+</section>
+<section id="return-to-main-switching-players" class="level4">
+<h4 class="anchored" data-anchor-id="return-to-main-switching-players">Return to <code>main</code>: switching players</h4>
+<p>The original uses C’s conditional operator:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>currentPlayer <span class="op">=</span> <span class="op">(</span>currentPlayer <span class="op">==</span> <span class="ch">'X'</span><span class="op">)</span> <span class="op">?</span> <span class="ch">'O'</span> <span class="op">:</span> <span class="ch">'X'</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Its syntax is <code>condition ? value_if_true : value_if_false</code>. It chooses a value; the assignment stores that value in <code>currentPlayer</code>. For this statement, the equivalent familiar form is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>currentPlayer <span class="op">==</span> <span class="ch">'X'</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    currentPlayer <span class="op">=</span> <span class="ch">'O'</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    currentPlayer <span class="op">=</span> <span class="ch">'X'</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The conditional operator is explained here because it is less familiar than the <code>if-else</code> form used in class. The game’s logic does not depend on using it.</p>
+</section>
+</section>
+<section id="trace-one-complete-game" class="level3">
+<h3 class="anchored" data-anchor-id="trace-one-complete-game">5. Trace one complete game</h3>
+<p>All coordinates below use the player’s 1-based numbering.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Turn</th>
+<th>Player</th>
+<th>Row, column</th>
+<th>Result after the move</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>X</td>
+<td>1, 1</td>
+<td>No winner; O plays next.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>O</td>
+<td>2, 1</td>
+<td>No winner; X plays next.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>X</td>
+<td>1, 2</td>
+<td>No winner; O plays next.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>O</td>
+<td>2, 2</td>
+<td>No winner; X plays next.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>X</td>
+<td>1, 3</td>
+<td>First row contains X, X, X; announce X and stop.</td>
+</tr>
+</tbody>
+</table>
+<p>After each move, annotate the changed cell, <code>currentPlayer</code>, the returned <code>winner</code>, and the next branch in <code>main</code>. Only one cell changes per accepted move.</p>
+</section>
+<section id="compile-run-and-test" class="level3">
+<h3 class="anchored" data-anchor-id="compile-run-and-test">6. Compile, run and test</h3>
+<p>Download or clone the repository, then compile the original file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Cukowski/Tic-Tac-Toe-Tutorials.git</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Tic-Tac-Toe-Tutorials</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-std</span><span class="op">=</span>c11 <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-pedantic</span> <span class="st">"Tic-Tac-Toe Basic/TicTacToe.c"</span> <span class="at">-o</span> tictactoe</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./tictactoe</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Enter the coordinates from the trace, one pair per prompt. The final announcement is <code>Player X wins!</code>. Some compilers warn about the empty parameter lists discussed above.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Test</th>
+<th>What to check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X wins the first row</td>
+<td>The game ends immediately after X’s winning move.</td>
+</tr>
+<tr class="even">
+<td>O wins a column or diagonal</td>
+<td>Winner detection works for both symbols and different directions.</td>
+</tr>
+<tr class="odd">
+<td>Nine moves without a winner</td>
+<td>The game announces a tie.</td>
+</tr>
+<tr class="even">
+<td>Attempt an occupied cell</td>
+<td>The board stays unchanged and the same player retries.</td>
+</tr>
+<tr class="odd">
+<td>Enter row 0 or column 4</td>
+<td>The numeric move is rejected before indexing the board.</td>
+</tr>
+<tr class="even">
+<td>Win on the ninth move</td>
+<td>A full board with a winner is not announced as a tie.</td>
+</tr>
+</tbody>
+</table>
+<p>A draw sequence is <code>(1,1), (1,2), (1,3), (2,2), (2,1), (2,3), (3,2), (3,1), (3,3)</code>, alternating X and O. These numeric-input paths are suitable for running the original. Nonnumeric input and end-of-input require the input-handling correction described above.</p>
+</section>
+<section id="review-the-design-against-what-we-have-learnt" class="level3">
+<h3 class="anchored" data-anchor-id="review-the-design-against-what-we-have-learnt">7. Review the design against what we have learnt</h3>
+<p>The basic program uses functions, global and local scope, character and two-dimensional arrays, nested loops, branching, short-circuit evaluation, pointer arguments for input, and formatted output. It does <strong>not</strong> require structures, dynamic allocation, file handling or recursion. A program should use the constructs its problem needs.</p>
+<p>Three useful improvements to discuss:</p>
 <ul>
-<li><a href="https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec04/">OCW L4</a> — More control flow; input and output</li>
-<li><a href="https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec10/">OCW L10</a> — C standard library: <code>stdio.h</code>, <code>stdlib.h</code>, <code>assert.h</code>, …</li>
-<li><a href="https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec03/">OCW L3</a> — Functions and modular programming (header files)</li>
+<li>Check input conversion and define what happens on invalid text or end-of-input.</li>
+<li>Pass the board explicitly to functions so their dependencies are visible.</li>
+<li>Make the board-size assumption consistent. Although <code>SIZE</code> is a macro, the winner tests, input limits and printed separators are written specifically for 3 × 3 play. Changing the macro alone does not generalise the game.</li>
 </ul>
+<p>These observations are part of reading another author’s code: understand its successful path, identify its assumptions, and distinguish a working example from a fully robust application.</p>
+</section>
+<section id="optional-extension-a-minimax-opponent" class="level3">
+<h3 class="anchored" data-anchor-id="optional-extension-a-minimax-opponent">Optional extension: a minimax opponent</h3>
+<p>Keep two human players for the basic exercise. Interested students can explore the repository’s <a href="https://github.com/Cukowski/Tic-Tac-Toe-Tutorials/tree/main/Tic-Tac-Toe%20AI">AI version</a> and its minimax explanation.</p>
+<p>Tic-Tac-Toe can be modelled as a two-player zero-sum game: from the computer’s perspective, assign a win +1, a loss -1 and a draw 0; the opponent’s payoff is the negative. Minimax examines possible moves, assumes the opponent also chooses optimally, and selects the move with the best guaranteed outcome. This is a game-search algorithm; it does not require a trained model.</p>
+<p>For each candidate move, place a symbol, recursively evaluate the resulting position, then restore the empty cell before trying the next move. Terminal positions provide the base cases. This connects recursion, state restoration and testing. Full correct search from the empty board allows optimal play to guarantee a draw or better; it does not guarantee a win against another optimal player.</p>
+</section>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>Further practice: <a href="../weeks/w15.html#coding-tools-self-study">holiday self-study on Git, IDE use and debugging</a>.</p>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<p>Write a short explanation of the program’s data flow and one test that would help detect an incorrect change. Keep it for the holiday tools practice.</p>
+</section>
+<section id="interesting-c-examples" class="level2">
+<h2 class="anchored" data-anchor-id="interesting-c-examples">Interesting C examples</h2>
+<p>These are optional examples to explore. Read a small part of a project and trace its data before trying to understand the entire codebase.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Example</th>
+<th>What to explore</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/antirez/kilo">Kilo — text editor</a></td>
+<td>Rows of text, strings, dynamic allocation and the <code>editorRowsToString</code> function.</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/mevdschee/2048.c">2048 — console game</a></td>
+<td>Arrays, movement and merging; <code>countEmpty</code>, <code>findTarget</code> and <code>slideArray</code>. Tile values are stored as exponents, with zero for an empty cell.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/raysan5/raylib-games/blob/master/classics/src/snake.c">Snake — raylib example</a></td>
+<td>Structures, arrays of segments, movement and collision checks. Graphics and keyboard input use raylib.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Advanced references:</strong> <a href="https://github.com/redis/redis/blob/unstable/src/adlist.c">Redis linked lists</a> for linked data structures, and <a href="https://github.com/codeplea/tinyexpr">TinyExpr</a> for expression parsing and evaluation. These go beyond the introductory reading activity.</p>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<section id="jeetu-how-much-of-a-language-do-we-need" class="level3">
+<h3 class="anchored" data-anchor-id="jeetu-how-much-of-a-language-do-we-need">Jeetu: how much of a language do we need?</h3>
+<div id="fig-jeetu-cartoon" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A student asks whether code is now in Hindi. The teacher replies that students still need to apply the reasoning themselves. The board shows Jeetu code and the compilation path from Jeetu to C to an executable.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jeetu-cartoon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../materials/jeetu-cartoon.png" class="img-fluid figure-img" alt="A student asks whether code is now in Hindi. The teacher replies that students still need to apply the reasoning themselves. The board shows Jeetu code and the compilation path from Jeetu to C to an executable.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jeetu-cartoon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Jeetu: the keywords can change; the reasoning is still yours.
+</figcaption>
+</figure>
+</div>
+<p><a href="https://github.com/dhavala-iitjmu/jeetu/blob/main/assets/jeetu-cartoon.png">Cartoon source: Jeetu repository</a>.</p>
+<p><a href="https://github.com/dhavala-iitjmu/jeetu"><strong>Jeetu</strong></a> is a small educational language with Devanagari keywords. It compiles into readable C, then into an executable. Its <code>अगर</code> and <code>जब तक</code> correspond to <code>if</code> and <code>while</code>. Jeetu also supports functions and other features; today we ask what happens if we deliberately restrict what we use.</p>
+<p><strong>Recall our <a href="../materials/w05-floor-ceil-notes.html">floor and ceiling exercise</a>.</strong> We worked out the result without calling the floor or ceiling operations. This is <em>constrained programming</em>: temporarily removing a convenient operation to understand how it can be constructed from simpler ones.</p>
+<section id="do-we-need-for-switch-and-functions" class="level4">
+<h4 class="anchored" data-anchor-id="do-we-need-for-switch-and-functions">Do we need <code>for</code>, <code>switch</code> and functions?</h4>
+<p>Allow variables, assignment, arithmetic, comparisons, <code>if-else</code> and <code>while</code>. Keep <code>main</code> and standard input/output as the C program’s surrounding machinery; do not introduce additional functions for the exercise.</p>
+<ul>
+<li><strong><code>for</code>:</strong> move initialisation before a <code>while</code>, and the update to the end of its body. If the original contains <code>continue</code>, preserve its update behaviour too.</li>
+<li><strong><code>switch</code>:</strong> independent cases can become an <code>if-else</code> chain. Deliberate fall-through needs additional care.</li>
+<li><strong>Functions:</strong> a simple call can be expanded at its call site. General calls and recursion require explicit control state and storage for suspended work; merely copying the body is not sufficient.</li>
+</ul>
+<p><strong>Try this:</strong> explain what the following complete program computes. It uses neither a <code>for</code> loop nor an additional function.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">48</span><span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> b <span class="op">=</span> <span class="dv">18</span><span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>a <span class="op">!=</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>a <span class="op">&gt;</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            a <span class="op">=</span> a <span class="op">-</span> b<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            b <span class="op">=</span> b <span class="op">-</span> a<span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">);</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It prints <code>6</code>, the greatest common divisor. For positive inputs, each subtraction preserves the common divisors and reduces <code>a + b</code>. What goes wrong if one input is zero? Multiplication, division and remainder are not needed for this algorithm.</p>
+</section>
+<section id="does-this-make-the-language-turing-complete" class="level4">
+<h4 class="anchored" data-anchor-id="does-this-make-the-language-turing-complete">Does this make the language Turing complete?</h4>
+<p><strong>Turing completeness</strong> means being able to simulate any Turing machine, given arbitrarily much time and memory. It does not mean solving every conceivable problem, or solving computable problems efficiently.</p>
+<p><code>if</code> and <code>while</code> alone are not enough: we also need operations on data and a way to represent potentially unbounded state. With a fixed number of ordinary fixed-width C integers and no other growing storage, that condition is absent. If our theoretical integer variables are unbounded, a counter-machine construction can establish universality.</p>
+<p>Jeetu takes another route: its <a href="https://github.com/dhavala-iitjmu/jeetu/blob/main/docs/turing-completeness.md">Turing-completeness argument</a> uses two arbitrarily growable sequences to represent the tape on either side of a machine’s current cell. Conditions select a transition and a loop repeats it. The actual executable still has finite memory and can run out of resources. Compiling to C, or computing GCD, is not itself a proof of Turing completeness.</p>
+</section>
+<section id="why-keep-the-other-constructs" class="level4">
+<h4 class="anchored" data-anchor-id="why-keep-the-other-constructs">Why keep the other constructs?</h4>
+<p>Functions organise behaviour; arrays and structures organise data; different loops express common patterns clearly. They help us read, test, debug and maintain programs even when they add no fundamental computational power.</p>
+<p><strong>Closing question:</strong> if two programs compute the same result, what makes one easier to understand and trust? Computational power, efficiency and ease of expression are different considerations. Use restrictions to learn how a construct works, then choose useful abstractions when developing software.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
