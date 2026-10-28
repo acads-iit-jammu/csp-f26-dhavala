@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MU-1: Reading and Debugging C (Make-up) – CS-1-01 (MO)</title>
+<title>MU-1: Jeetu, Constrained Programming and Code Reading (Make-up) – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: Reading and Debugging C (Make-up)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: Jeetu, Constrained Programming and Code Reading (Make-up)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/mu1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">MU-1: Reading and Debugging C (Make-up)</span></a>
+ <span class="menu-text">MU-1: Jeetu, Constrained Programming and Code Reading (Make-up)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -522,7 +522,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
-  <li><a href="#reading-another-authors-c-program-tic-tac-toe" id="toc-reading-another-authors-c-program-tic-tac-toe" class="nav-link" data-scroll-target="#reading-another-authors-c-program-tic-tac-toe">Reading another author’s C program: Tic-Tac-Toe</a>
+  <li><a href="#reading-tic-tac-toe" id="toc-reading-tic-tac-toe" class="nav-link" data-scroll-target="#reading-tic-tac-toe">Reading another author’s C program: Tic-Tac-Toe</a>
   <ul class="collapse">
   <li><a href="#start-with-the-specification" id="toc-start-with-the-specification" class="nav-link" data-scroll-target="#start-with-the-specification">1. Start with the specification</a></li>
   <li><a href="#read-breadth-first-data-signatures-and-main" id="toc-read-breadth-first-data-signatures-and-main" class="nav-link" data-scroll-target="#read-breadth-first-data-signatures-and-main">2. Read breadth first: data, signatures and <code>main</code></a></li>
@@ -547,9 +547,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: Reading and Debugging C (Make-up)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu1.html">MU-1: Jeetu, Constrained Programming and Code Reading (Make-up)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">MU-1: Reading and Debugging C (Make-up)</h1>
+<h1 class="title">MU-1: Jeetu, Constrained Programming and Code Reading (Make-up)</h1>
 </div>
 
 
@@ -570,10 +570,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is one of the two make-up classes for the October 19–20 holidays.</p>
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>Read a C program written by someone else, explain how it works, and check that explanation by tracing its execution. This session applies concepts already covered in the course.</p>
+<p>Begin with Jeetu and constrained programming: how a small set of constructs can express computations, and why richer abstractions remain useful. Then read the two-player Tic-Tac-Toe program, starting with its specification, mapping the functions and overall flow, and examining each function in detail.</p>
+<p><strong>Class sequence:</strong> <a href="#pagal-notes">Jeetu and constrained programming</a>, followed by <a href="#reading-tic-tac-toe">reading Tic-Tac-Toe</a>. Debugger practice belongs to the holiday self-study and Lab 11.</p>
 </section>
-<section id="reading-another-authors-c-program-tic-tac-toe" class="level2">
-<h2 class="anchored" data-anchor-id="reading-another-authors-c-program-tic-tac-toe">Reading another author’s C program: Tic-Tac-Toe</h2>
+<section id="reading-tic-tac-toe" class="level2">
+<h2 class="anchored" data-anchor-id="reading-tic-tac-toe">Reading another author’s C program: Tic-Tac-Toe</h2>
 <p>We will read the <strong>two-human-player version</strong> of <a href="https://github.com/Cukowski/Tic-Tac-Toe-Tutorials/tree/main/Tic-Tac-Toe%20Basic">Cukowski’s Tic-Tac-Toe tutorial</a>. The accompanying <a href="https://www.youtube.com/watch?v=co8znQEXHug">live-coding video</a> shows its development. An AI opponent is an optional extension, not part of the basic game.</p>
 <p>These notes refer to <a href="https://github.com/Cukowski/Tic-Tac-Toe-Tutorials/blob/cd51f6dbe7531a47e56efeb14d5ffaa172b901e5/Tic-Tac-Toe%20Basic/TicTacToe.c">this source revision</a>. Keep the original source open beside the notes. We first understand the game, then map the program, and only then examine individual functions.</p>
 <section id="start-with-the-specification" class="level3">
