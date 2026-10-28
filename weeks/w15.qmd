@@ -1,10 +1,53 @@
 # W15: Holiday Week {.unnumbered}
 
-**Dates:** Mon Nov 9 & Tue Nov 10, 2026 · 8:00–8:50 am · 12LH3004
+**Dates:** Mon Nov 9 & Tue Nov 10, 2026 · holiday self-study; no scheduled class
 
 ::: {.callout-important}
 No classes — Govardhan Puja (Mon Nov 9) and Declared Holiday (Tue Nov 10).
 :::
+
+## Revisit the make-up classes
+
+- [MU1 — Reading and debugging C; Jeetu and constrained programming](mu1.qmd) — October 29.
+- [MU2 — Guest lecture](mu2.qmd) — October 30.
+
+## Coding tools: self-study {#coding-tools-self-study}
+
+These self-study activities prepare you for [Lab 11: Git, IDE and Debugging Tutorial](../labsheets/lab11.qmd), held in the usual lab slots on **November 17 (EE) and November 18 (ME/MT)**. Lab 11 records attendance only; tutorial work is not graded. No attendance is taken during holiday self-study.
+
+These materials are for independent study during the holiday period. November 9 and 10 are suggested study days, not scheduled classes. Work through the tasks at a convenient time.
+
+Use the C program from the [October 29 reading session](mu1.qmd) throughout. The aim is to learn how to inspect, change, test and record an existing program.
+
+### November 9: From learning C to developing programs
+
+We have learnt C. How do we now work with it to develop a program? We need tools to organise files, edit and run code, and keep track of changes.
+
+- **Git** records changes to our code so that we can compare versions and work with others. Start with the [beginner video](https://www.youtube.com/watch?v=CvUiKWv2-C0), try [Learn Git Branching](https://learngitbranching.js.org/), and use [Git's self-paced resources](https://git-scm.com/learn) as a reference.
+- **An IDE (Integrated Development Environment)** brings development tools together. Watch the [VS Code introduction](https://www.youtube.com/watch?v=f8_uF_IDV50). Other IDEs and coding editors include Eclipse, Cursor and Google Antigravity. We will use VS Code as our reference; you do not need to install several tools.
+
+**Try it:** open a previous C lab in VS Code, compile and run it, then make one small change. Use Git to record the original version, inspect the change and commit the updated version. Git can be used locally without a GitHub account.
+
+This is holiday self-study. Work at your own pace.
+
+### November 10: Finding and fixing bugs
+
+A program may compile and run but produce the wrong result. A debugger helps us pause execution, inspect variables and follow the program one step at a time.
+
+**GDB** is a debugger commonly used with C. It can be used from a terminal or through VS Code's C/C++ debugging support. Watch [Getting Started with Debugging in VS Code](https://www.youtube.com/watch?v=3HiLLByBWkg) for an introduction to the interface. For C setup, use the [GCC/GDB guide for Linux](https://code.visualstudio.com/docs/cpp/config-linux).
+
+**Try it:** use a small C program with an incorrect result. Write down the expected result, build with debug information, set a breakpoint and inspect the variables. Practise Step Over, Step Into and Step Out. Find where the state first becomes incorrect, fix the cause, rerun your tests and commit the correction with Git.
+
+This is holiday self-study. Work at your own pace.
+
+### Materials and reference reading
+
+The course practice bundle will contain the reading program, a separate debugging variant, small input/output tests, and build/debug configuration. It will be linked here when ready.
+
+- [VS Code: GCC on Linux](https://code.visualstudio.com/docs/cpp/config-linux). This guide uses C++ examples; the course bundle will use C source files and GCC.
+- [VS Code: Debugging](https://code.visualstudio.com/docs/debugtest/debugging), especially breakpoints, stepping, variables and the call stack.
+
+Use AI for questions and explanations after making your own prediction. For the debugging exercise, locate the incorrect state yourself before asking for a proposed fix.
 
 ## PAGAL Notes
 
@@ -50,3 +93,16 @@ Try this prompt on a lab problem:
 Debate the answer. Challenge the model too: it can be wrong. Run the tests, explain
 why a proposed fix works, then close the chat and solve a small variation yourself.
 The useful measure of the session is what you can now understand, judge and do.
+
+
+### Where to go next
+
+We have learnt a language and started using development tools. A natural next step is **Data Structures and Algorithms**: how to organise data and choose efficient methods. IIT Jammu's [published first-year timetable](https://iitjammu.ac.in/academics/timetable/2025/2/BT_first_year.pdf) lists this as **CS-1-02(MO)**. Databases, operating systems, networks and system design complement this foundation by explaining how larger software systems store data, communicate and remain reliable.
+
+For a view of how development is changing, explore Stanford's [**The Modern Software Developer**](https://themodernsoftware.dev/). It examines working with coding agents, specifications, tools and evaluation. Treat it as a direction for further study alongside stronger programming foundations; the full course assumes more experience than this introductory course.
+
+Consider three questions: **who writes software, for whom, and how?** Agents can increasingly write and review code, and may also help prepare specifications. Software may be used by other agents through interfaces and tools. Humans still need to identify worthwhile problems, set constraints, judge evidence and take responsibility for the result.
+
+One possible opportunity is **just-in-time software development**: creating and testing a small tool when a particular need arises. For example, a materials engineer might need a tool for comparing a new batch of test measurements. This could complement subscription software with tools built for a specific task. Such tools still need validation, appropriate data access and a clear owner.
+
+Develop a systems perspective: understand how software, data, hardware and people interact. Build depth in at least one area—agriculture, materials, VLSI or another field—and learn to work across disciplines. Domain knowledge helps you decide what should be built and whether its results make sense.

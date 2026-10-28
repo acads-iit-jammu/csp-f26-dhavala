@@ -2,12 +2,12 @@
 
 | | Electrical | Mechanical & Materials |
 |---|---|---|
-| **Date** | Tue Nov 17, 2026 | Wed Nov 18, 2026 |
-| **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
+| **Date** | Not scheduled | Not scheduled |
+| **Time** | — | — |
 
 **Syllabus practical module:** 11 — Problem solving (GATE, ACM ICPC)
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Status:** not scheduled. The November 17–18 slots are assigned to [Lab 11](lab11.qmd).
 
 **Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
 

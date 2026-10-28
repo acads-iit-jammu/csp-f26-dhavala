@@ -22,7 +22,7 @@ See the [Course](./course.qmd) page for the week-by-week plan, and the [Labs](./
 
 ## Announcements
 
-- [22-October-2026] **Class Test-2: Thursday, 22 October, duration 1 hour, EE/ME/MT only.** Coverage: functions, pointers, structures and strings. [Full scope and format](course.qmd#ct2).
+- [22-October-2026] **Class Test-2: Thursday, 22 October, 7:00–8:30 PM, EE/ME/MT only.** Coverage: functions, pointers, structures and strings. [Assessment schedule](course.qmd#important-dates).
 
 - [26-July-2026] Course website is live.
 - [26-July-2026] Classes commence **Monday, August 3, 2026, 8:00 am**, in 12LH3004.

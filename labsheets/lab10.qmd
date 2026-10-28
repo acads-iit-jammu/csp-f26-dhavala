@@ -2,12 +2,12 @@
 
 | | Electrical | Mechanical & Materials |
 |---|---|---|
-| **Date** | Tue Oct 27, 2026 | Wed Oct 28, 2026 |
+| **Dates** | Tue Oct 27 and Tue Nov 3, 2026 | Wed Oct 28 and Wed Nov 4, 2026 |
 | **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
 
 **Syllabus practical module:** 5 — pointers, dynamic memory and recursion
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Evaluation:** Graded — equal weight within the 20% lab component. The continuation is part of Lab 10, not a separately graded lab.
 
 **Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
 

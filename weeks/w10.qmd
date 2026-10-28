@@ -9,7 +9,7 @@
 
 **Class Test-2: Thursday, 22 October 2026, duration 1 hour (EE/ME/MT).**
 Revise the functions, pointers, structures and strings covered in Weeks 09–11 and
-Labs 07–09. See the [confirmed coverage and format](../course.qmd#ct2);
+Labs 07–09. See the [assessment schedule](../course.qmd#important-dates);
 file handling is excluded.
 :::
 

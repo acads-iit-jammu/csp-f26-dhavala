@@ -5,12 +5,12 @@
 **Syllabus module:** 6 — structures; file handling
 
 ::: {.callout-important}
-**Class Test-2: Thursday, 22 October 2026, duration 1 hour (EE/ME/MT).**
+**Class Test-2: Thursday, 22 October 2026, 7:00–8:30 PM (1 hour 30 minutes; EE/ME/MT).**
 
 The scope is **functions, pointers, structures and strings**, using relevant material
 from W09–W11 and Labs 07–09. This week's **structures** material is included;
 **file handling is excluded**. Earlier arrays, branching, loops and arithmetic may
-be used. See the [confirmed coverage and format](../course.qmd#ct2).
+be used. See the [assessment schedule](../course.qmd#important-dates).
 
 **Lab 09** is on this material: EE on Tue Oct 13, Mechanical and Materials on Wed Oct 21.
 :::

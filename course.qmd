@@ -21,41 +21,19 @@ From the [IIT Jammu academic calendar for 1^st^ year UG students, Semester 2026-
 | Event | Dates |
 |---|---|
 | Commencement of classes | Monday, Aug 3, 2026 |
-| Class Test-1^\*^ | Aug 19 – Aug 25, 2026 |
+| Class Test-1^\*^ | **August 23, 2026 · 8:00–9:30 AM** |
 | Mid-semester feedback (by students) | Sep 9 – Sep 15, 2026 |
-| **Mid-Semester Examination** | **Sep 18 – Sep 23, 2026** |
-| Class Test-2^\*^ | **Thursday, Oct 22, 2026 — 1 hour (EE/ME/MT)** |
+| **Mid-Semester Examination** | **Tuesday, September 22, 2026 · 4:00–5:30 PM** |
+| Class Test-2^\*^ | **Thursday, October 22, 2026 · 7:00–8:30 PM (EE/ME/MT)** |
 | Make-up classes for the Oct 19–20 holidays | Thursday, Oct 29 and Friday, Oct 30, 2026 |
 | Last day of classes | Friday, Nov 20, 2026 |
 | End-semester feedback (by students) | Nov 12 – Nov 17, 2026 |
 | **End-Semester Examination** | **Nov 23 – Nov 30, 2026** |
 | Grades visible to students | Dec 15, 2026 |
 
-^\*^ Class tests are conducted with internal arrangements; CT2 is scheduled as shown above. The starting time and room will be announced in class.
+^\*^ Class tests are conducted with internal arrangements. CT1 and CT2 dates and times are shown above; room details are announced in class.
 
-::: {#ct2 .callout-important}
-## Class Test-2: date and coverage
 
-**Thursday, 22 October 2026 · Duration: 1 hour · EE, ME and MT sections only.**
-
-**Coverage: functions, pointers, structures and strings**, drawing on the relevant
-parts of Weeks [09](weeks/w09.qmd), [10](weeks/w10.qmd) and [11](weeks/w11.qmd),
-and Labs [07](labsheets/lab07.qmd), [08](labsheets/lab08.qmd) and [09](labsheets/lab09.qmd).
-
-- **Functions:** declaration, definition, calls, scope, return values, and changing caller variables through pointer parameters.
-- **Pointers:** addresses and dereferencing, pointer arithmetic, and the relationship between pointers and arrays.
-- **Structures:** members, copying records, arrays of structures, and pointers to structures (`.` and `->`).
-- **Strings:** character arrays, null termination, traversal and in-place processing.
-
-Arrays (including multidimensional arrays), conditionals, branching, loops, arithmetic,
-and standard input/output may be used with these topics. **File handling, dynamic
-memory allocation and recursion are not included.**
-
-**Format:** 30 marks. Each section has four questions; the best three scores count
-independently: Section A (MCQ), 6 marks; Section B (code completion), 9 marks;
-Section C (program/function completion), 15 marks. No negative marking.
-
-:::
 
 **Institute holidays that affect our slots:** Wed Aug 26 (Milad-un-Nabi), Mon Oct 19 & Tue Oct 20 (Dussehra), Mon Nov 9 (Govardhan Puja), Tue Nov 10 (Declared Holiday), Wed Nov 11 (Bhai Duj).
 
@@ -73,15 +51,15 @@ Section C (program/function completion), 15 marks. No negative marking.
 
 : {tbl-colwidths="[70,30]"}
 
-- **Lab evaluation:** Lab 1 (setup) is not graded. Labs 2 onwards carry equal weight, totalling 20%.
+- **Lab evaluation:** Lab 1 (setup) and Lab 11 (Git, IDE and debugging tutorial) are not graded. The remaining graded labs carry equal weight, totalling 20%.
 - **Hackathon:** details (format and date) will be announced in class and on this page.
 
 ### Past papers
 
 | Paper | Solutions |
 |---|---|
-| Class Test 1 (Aug 2026) — number systems, complements, overflow, the compile model | 📕 [**Worked solutions**](materials/ct1-solutions.pdf) |
-| Midterm (Sep 2026) — Weeks 01–07 | 📕 [**Worked solutions**](materials/midterm-solutions.pdf) |
+| Class Test 1 (August 23, 2026, 8:00–9:30 AM) — number systems, complements, overflow, the compile model | 📕 [**Worked solutions**](materials/ct1-solutions.pdf) |
+| Midterm (September 22, 2026, 4:00–5:30 PM) — Weeks 01–07 | 📕 [**Worked solutions**](materials/midterm-solutions.pdf) |
 
 : {tbl-colwidths="[70,30]"}
 
@@ -117,13 +95,13 @@ Each week's page carries Pre-read, In-Class, and After-Class sections — and en
 | [08](weeks/w08.qmd) | Sep 21, Sep 22 | **Mid-Semester Examinations (Sep 18–23) — no classes** | — |
 | [09](weeks/w09.qmd) | Sep 28, Sep 29 | *Mon:* **functions** — declaration, definition, call; **scope**; call by value and by reference; **bisection** — square root by halving, and why that is really root-finding; how `sin` and `sqrt` are actually computed (conceptual). *Tue:* **two-dimensional arrays** through **Conway's Game of Life** | [Lec 20](cs1100-cse-iitm-2021/slides/Lec20.pdf) · [Lec 17](cs1100-cse-iitm-2021/slides/Lec17.pdf) |
 | [10](weeks/w10.qmd) | Oct 5, Oct 6 | **Pointers** — addresses, `&` and `*`, pointer arithmetic, arrays as pointers, and why an array function needs a length. **Strings** — character arrays and the `'\0'` terminator, `strlen`, palindromes, `string.h` | [Lec 15](cs1100-cse-iitm-2021/slides/Lec15.pdf) |
-| [11](weeks/w11.qmd) | Oct 12, Oct 13 | **Structures** and pointers to structures; `->`. **File input and output** — `FILE *`, `fopen`/`fclose`, reading to end of file. *CT2: Thursday, Oct 22; see the confirmed scope above* | [Lec 17](cs1100-cse-iitm-2021/slides/Lec17.pdf) · [Lec 18](cs1100-cse-iitm-2021/slides/Lec18.pdf) |
+| [11](weeks/w11.qmd) | Oct 12, Oct 13 | **Structures** and pointers to structures; `->`. **File input and output** — `FILE *`, `fopen`/`fclose`, reading to end of file. *CT2: Thursday, Oct 22, 7:00–8:30 PM* | [Lec 17](cs1100-cse-iitm-2021/slides/Lec17.pdf) · [Lec 18](cs1100-cse-iitm-2021/slides/Lec18.pdf) |
 | [12](weeks/w12.qmd) | Oct 19, Oct 20 | **Dussehra holidays — no classes** | — |
 | [13](weeks/w13.qmd) | Oct 26, Oct 27; make-ups Oct 29–30 | **Dynamic memory allocation** — `malloc`, `calloc`, `realloc`, `free`; stack and heap; leaks and dangling pointers. **Recursion** — base case, recursive case, the call stack. **Make-up classes:** Oct 29 and 30 (see MU-1/MU-2); tentative guest lecture by Prof. Nirmal Sancheti on Oct 30 | [Lec 19](cs1100-cse-iitm-2021/slides/Lec19.pdf) · [Lec 20](cs1100-cse-iitm-2021/slides/Lec20.pdf) · [Lec 24](cs1100-cse-iitm-2021/slides/Lec24.pdf) |
 | [14](weeks/w14.qmd) | Nov 2, Nov 3 | **Programming problem-solving studio** — Nov 2: classroom team discussion (40-minute breakout); Nov 3: synthesis and presentations of findings | — |
-| [15](weeks/w15.qmd) | Nov 9, Nov 10 | **Holidays (Govardhan Puja, Declared Holiday) — no classes** | — |
+| [15](weeks/w15.qmd) | Nov 9, Nov 10 | **Holidays (Govardhan Puja, Declared Holiday) — no classes.** Self-study: Git, IDE use and debugging | [Tools study plan](weeks/w15.qmd#coding-tools-self-study) |
 | [16](weeks/w16.qmd) | Nov 16, Nov 17 | **Tentative guest lectures:** Mon — Dr. Aalok Thakkar; Tue — Snehashish Ghosh and Sai Nikhilesh. Revision materials will be provided separately | — |
-| [MU-1](weeks/mu1.qmd) | Thu Oct 29 | **Make-up class:** file handling and error handling (`fopen`/`fclose`, formatted file I/O, `errno`, `perror`); header files and modular builds | [OCW L4](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec04/) · [OCW L10](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec10/) · [OCW L3](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010/resources/mit6_087iap10_lec03/) |
+| [MU-1](weeks/mu1.qmd) | Thu Oct 29 | **Make-up class:** reading another author's C program (20-minute activity), discussion and IDE debugger demonstration | [Session plan](weeks/mu1.qmd) |
 | [MU-2](weeks/mu2.qmd) | Fri Oct 30 | **Make-up class:** tentative guest lecture by Prof. Nirmal Sancheti; talk title to be announced | — |
 
 : {tbl-colwidths="[7,18,50,25]"}

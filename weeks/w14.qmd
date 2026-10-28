@@ -1,4 +1,4 @@
-# W14: Full Problems I {.unnumbered}
+# W14: Group Activity {.unnumbered}
 
 **Dates:** Mon Nov 2 & Tue Nov 3, 2026 · 8:00–8:50 am · 12LH3004
 
@@ -20,7 +20,9 @@ The handout contains the paper worksheet, five problem statements, a blank team-
 
 ## After Class
 
-*To be posted.* **Lab 11** is problem solving: EE on Tue Nov 3, Mechanical and Materials on Wed Nov 4.
+**Lab 10 continues:** EE on Tuesday, November 3; Mechanical and Materials on Wednesday, November 4, during the usual lab slots. Continue the [dynamic memory and recursion pack](../labsheets/lab10.qmd).
+
+[Lab 11](../labsheets/lab11.qmd) is an **ungraded Git, IDE and debugging tutorial**, supported by the holiday self-study notes.
 
 ## PAGAL Notes
 

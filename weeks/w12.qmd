@@ -5,6 +5,6 @@
 ::: {.callout-important}
 No classes — Dussehra holidays (Mon Oct 19 & Tue Oct 20).
 
-**Class Test-2 is on Thursday, 22 October 2026, duration 1 hour (EE/ME/MT).**
-See the [coverage and format](../course.qmd#ct2).
+**Class Test-2 is on Thursday, 22 October 2026, 7:00–8:30 PM (1 hour 30 minutes; EE/ME/MT).**
+See the [assessment schedule](../course.qmd#important-dates).
 :::

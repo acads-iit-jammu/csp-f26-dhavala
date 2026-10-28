@@ -1,24 +1,24 @@
-# Lab 11: Problem Solving I {.unnumbered}
+# Lab 11: Git, IDE and Debugging Tutorial {.unnumbered}
 
 | | Electrical | Mechanical & Materials |
 |---|---|---|
-| **Date** | Tue Nov 3, 2026 | Wed Nov 4, 2026 |
+| **Date** | Tue Nov 17, 2026 | Wed Nov 18, 2026 |
 | **Time** | 2:00–4:00 pm | 2:00–4:00 pm |
 
-**Syllabus practical module:** 11 — Problem solving (GATE, ACM ICPC)
+**Format:** Git, IDE and debugging tutorial during the usual lab slots. The November 9–10 holiday notes are self-study preparation; no class or attendance is scheduled on those holidays.
 
-**Evaluation:** Graded — equal weight within the 20% lab component.
+**Evaluation:** attendance only. The tutorial work is not graded; no graded submission.
 
-**Lab manual:** [The C Programming Laboratory](../labs/CLab3_Aroof.pdf) — the department's shared reference (vim §1 · the compilation model §2.5 · types and `#define` §2.7–2.8 · the operator precedence table §2.9–2.10 · `printf`/`scanf` §3). This sheet is self-contained; the manual is there when you want more.
+## Purpose
 
-## Pre-Lab
+We have learnt C. Practise using development tools to edit, run, track and debug a program.
 
-*To be posted — what to read/install before the session.*
+## Tutorial
 
-## Exercises
+Follow the [W15 self-study notes](../weeks/w15.qmd#coding-tools-self-study):
 
-*To be posted before the session.*
+- **Git:** record a version, make a small change, inspect the diff and commit it.
+- **IDE:** open a C project in VS Code, navigate its files, compile and run it.
+- **Debugging:** use GDB through VS Code to set a breakpoint, inspect variables and step through execution. Fix an incorrect result and rerun the tests.
 
-## Submission
-
-Submission instructions will be provided in the lab.
+Use a previous C lab for practice. Work at your own pace; the notes include videos and interactive learning resources.

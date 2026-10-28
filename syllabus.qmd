@@ -17,6 +17,16 @@ This page reproduces the official course template for **CS-1-01 (MO) / EFL001U1M
 
 : {tbl-colwidths="[35,65]"}
 
+## Assessment Dates — 2026 Offering
+
+| Assessment | Date and time |
+|---|---|
+| Class Test 1 (CT1) | **August 23, 2026 · 8:00–9:30 AM** |
+| Mid-Semester Examination | **Tuesday, September 22, 2026 · 4:00–5:30 PM** |
+| Class Test 2 (CT2) | **Thursday, October 22, 2026 · 7:00–8:30 PM** |
+
+These dates and times apply to the EE, ME and MT sections. See the [course page](course.qmd#important-dates) for the assessment schedule and updates.
+
 ## Course Objectives
 
 This course leads the students to understand the need of programming in various disciplines, basic concepts of algorithm, the process of computational problem solving in an efficient manner, how to write simple programs using C, pointers, dynamic memory allocation, arrays, functions, recursions, file handling and error handling, and basic concepts of modularity.
