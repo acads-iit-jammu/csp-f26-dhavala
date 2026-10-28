@@ -8,7 +8,7 @@ No classes — Govardhan Puja (Mon Nov 9) and Declared Holiday (Tue Nov 10).
 
 ## Revisit the make-up classes
 
-- [MU1 — Reading and debugging C; Jeetu and constrained programming](mu1.qmd) — October 29.
+- [MU1 — Jeetu, constrained programming and reading Tic-Tac-Toe](mu1.qmd) — October 29.
 - [MU2 — Guest lecture](mu2.qmd) — October 30.
 
 ## Coding tools: self-study {#coding-tools-self-study}

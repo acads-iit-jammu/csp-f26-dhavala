@@ -1,4 +1,4 @@
-# MU-1: Reading and Debugging C (Make-up) {.unnumbered}
+# MU-1: Jeetu, Constrained Programming and Code Reading (Make-up) {.unnumbered}
 
 **Date:** Thu Oct 29, 2026 (make-up class) · 8:00–8:50 am · 12LH3004
 
@@ -6,9 +6,11 @@ This is one of the two make-up classes for the October 19–20 holidays.
 
 ## Purpose
 
-Read a C program written by someone else, explain how it works, and check that explanation by tracing its execution. This session applies concepts already covered in the course.
+Begin with Jeetu and constrained programming: how a small set of constructs can express computations, and why richer abstractions remain useful. Then read the two-player Tic-Tac-Toe program, starting with its specification, mapping the functions and overall flow, and examining each function in detail.
 
-## Reading another author's C program: Tic-Tac-Toe
+**Class sequence:** [Jeetu and constrained programming](#pagal-notes), followed by [reading Tic-Tac-Toe](#reading-tic-tac-toe). Debugger practice belongs to the holiday self-study and Lab 11.
+
+## Reading another author's C program: Tic-Tac-Toe {#reading-tic-tac-toe}
 
 We will read the **two-human-player version** of [Cukowski's Tic-Tac-Toe tutorial](https://github.com/Cukowski/Tic-Tac-Toe-Tutorials/tree/main/Tic-Tac-Toe%20Basic). The accompanying [live-coding video](https://www.youtube.com/watch?v=co8znQEXHug) shows its development. An AI opponent is an optional extension, not part of the basic game.
 

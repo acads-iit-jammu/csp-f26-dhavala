@@ -101,7 +101,7 @@ Each week's page carries Pre-read, In-Class, and After-Class sections — and en
 | [14](weeks/w14.qmd) | Nov 2, Nov 3 | **Programming problem-solving studio** — Nov 2: classroom team discussion (40-minute breakout); Nov 3: synthesis and presentations of findings | — |
 | [15](weeks/w15.qmd) | Nov 9, Nov 10 | **Holidays (Govardhan Puja, Declared Holiday) — no classes.** Self-study: Git, IDE use and debugging | [Tools study plan](weeks/w15.qmd#coding-tools-self-study) |
 | [16](weeks/w16.qmd) | Nov 16, Nov 17 | **Tentative guest lectures:** Mon — Dr. Aalok Thakkar; Tue — Snehashish Ghosh and Sai Nikhilesh. Revision materials will be provided separately | — |
-| [MU-1](weeks/mu1.qmd) | Thu Oct 29 | **Make-up class:** reading another author's C program (20-minute activity), discussion and IDE debugger demonstration | [Session plan](weeks/mu1.qmd) |
+| [MU-1](weeks/mu1.qmd) | Thu Oct 29 | **Make-up class:** Jeetu and constrained programming, followed by reading the two-player Tic-Tac-Toe C program | [Session plan](weeks/mu1.qmd) |
 | [MU-2](weeks/mu2.qmd) | Fri Oct 30 | **Make-up class:** tentative guest lecture by Prof. Nirmal Sancheti; talk title to be announced | — |
 
 : {tbl-colwidths="[7,18,50,25]"}

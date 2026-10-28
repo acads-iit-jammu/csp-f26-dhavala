@@ -11,7 +11,7 @@ October 19–20 holidays.
 
 | Date | Session |
 |---|---|
-| Thu Oct 29 | [MU-1: Reading and debugging C](mu1.qmd) |
+| Thu Oct 29 | [MU-1: Jeetu, constrained programming and code reading](mu1.qmd) |
 | Fri Oct 30 | [MU-2](mu2.qmd): tentative guest lecture by **Prof. Nirmal Sancheti** |
 
 The guest speaker's participation is tentative. The talk title and guest-session
