@@ -294,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/mu2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">MU-2: Guest Lecture (Make-up)</span></a>
+ <span class="menu-text">MU-2: Guest Lecture — Programming in the Age of AI</span></a>
   </div>
 </li>
       </ul>
@@ -985,6 +985,16 @@ Figure&nbsp;1: Jeetu: the keywords can change; the reasoning is still yours.
 <p><code>if</code> and <code>while</code> alone are not enough: we also need operations on data and a way to represent potentially unbounded state. With a fixed number of ordinary fixed-width C integers and no other growing storage, that condition is absent. If our theoretical integer variables are unbounded, a counter-machine construction can establish universality.</p>
 <p>Jeetu takes another route: its <a href="https://github.com/dhavala-iitjmu/jeetu/blob/main/docs/turing-completeness.md">Turing-completeness argument</a> uses two arbitrarily growable sequences to represent the tape on either side of a machine’s current cell. Conditions select a transition and a loop repeats it. The actual executable still has finite memory and can run out of resources. Compiling to C, or computing GCD, is not itself a proof of Turing completeness.</p>
 </section>
+<section id="game-of-life-computation-from-local-rules" class="level4">
+<h4 class="anchored" data-anchor-id="game-of-life-computation-from-local-rules">Game of Life: computation from local rules</h4>
+<p>We encountered <strong>Conway’s Game of Life</strong> in <a href="../weeks/w09.html">Week 09</a> and <a href="../labsheets/lab07.html">Lab 07</a>. Each cell’s next state depends only on its current state and its eight neighbours. All cells update simultaneously.</p>
+<p>Game of Life is also <strong>Turing complete</strong>: suitably constructed patterns can simulate a Turing machine. The computation is encoded in the arrangement of cells and unfolds as generations advance. The rules do not need explicit <code>if</code>, <code>while</code> or function syntax. Those are constructs we use in C to implement the simulator.</p>
+<p>The theoretical result assumes an unbounded grid and arbitrarily much time. Our fixed-size classroom board has only finitely many states; it cannot provide unbounded storage. Writing a Life simulator in C is not itself a proof that Life is universal.</p>
+<ul>
+<li>Watch <a href="https://www.youtube.com/watch?v=R9Plq-D1gEk">John Conway discuss the Game of Life</a>.</li>
+<li>Read <a href="https://www.cs.odu.edu/~zeil/cs390/latest/Public/turing-complete/index.html">Turing Completeness — Old Dominion University</a>, which includes Game of Life among its examples.</li>
+</ul>
+</section>
 <section id="why-keep-the-other-constructs" class="level4">
 <h4 class="anchored" data-anchor-id="why-keep-the-other-constructs">Why keep the other constructs?</h4>
 <p>Functions organise behaviour; arrays and structures organise data; different loops express common patterns clearly. They help us read, test, debug and maintain programs even when they add no fundamental computational power.</p>
@@ -1408,8 +1418,8 @@ Figure&nbsp;1: Jeetu: the keywords can change; the reasoning is still yours.
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/mu2.html" class="pagination-link" aria-label="MU-2: Guest Lecture (Make-up)">
-        <span class="nav-page-text">MU-2: Guest Lecture (Make-up)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../weeks/mu2.html" class="pagination-link" aria-label="MU-2: Guest Lecture — Programming in the Age of AI">
+        <span class="nav-page-text">MU-2: Guest Lecture — Programming in the Age of AI</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

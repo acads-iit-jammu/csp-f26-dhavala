@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MU-2: Guest Lecture (Make-up) – CS-1-01 (MO)</title>
+<title>MU-2: Guest Lecture — Programming in the Age of AI – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -76,6 +76,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -88,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu2.html">MU-2: Guest Lecture (Make-up)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu2.html">MU-2: Guest Lecture — Programming in the Age of AI</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -259,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/mu2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">MU-2: Guest Lecture (Make-up)</span></a>
+ <span class="menu-text">MU-2: Guest Lecture — Programming in the Age of AI</span></a>
   </div>
 </li>
       </ul>
@@ -486,19 +515,36 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-read" id="toc-pre-read" class="nav-link active" data-scroll-target="#pre-read">Pre-read</a></li>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
-  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
-  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
+  <li><a href="#why-learn-programming-when-ai-can-write-code" id="toc-why-learn-programming-when-ai-can-write-code" class="nav-link active" data-scroll-target="#why-learn-programming-when-ai-can-write-code">Why learn programming when AI can write code?</a></li>
+  <li><a href="#specification-making-the-requirement-unambiguous" id="toc-specification-making-the-requirement-unambiguous" class="nav-link" data-scroll-target="#specification-making-the-requirement-unambiguous">Specification: making the requirement unambiguous</a></li>
+  <li><a href="#think-about-the-whole-system" id="toc-think-about-the-whole-system" class="nav-link" data-scroll-target="#think-about-the-whole-system">Think about the whole system</a></li>
+  <li><a href="#reliability-and-edge-cases" id="toc-reliability-and-edge-cases" class="nav-link" data-scroll-target="#reliability-and-edge-cases">Reliability and edge cases</a></li>
+  <li><a href="#why-confident-ai-answers-need-checking" id="toc-why-confident-ai-answers-need-checking" class="nav-link" data-scroll-target="#why-confident-ai-answers-need-checking">Why confident AI answers need checking</a></li>
+  <li><a href="#effective-programming-efficiency-and-elegance" id="toc-effective-programming-efficiency-and-elegance" class="nav-link" data-scroll-target="#effective-programming-efficiency-and-elegance">Effective programming: efficiency and elegance</a>
+  <ul class="collapse">
+  <li><a href="#efficiency-understand-the-cost-of-the-method" id="toc-efficiency-understand-the-cost-of-the-method" class="nav-link" data-scroll-target="#efficiency-understand-the-cost-of-the-method">Efficiency: understand the cost of the method</a></li>
+  <li><a href="#elegance-make-the-code-understandable-and-maintainable" id="toc-elegance-make-the-code-understandable-and-maintainable" class="nav-link" data-scroll-target="#elegance-make-the-code-understandable-and-maintainable">Elegance: make the code understandable and maintainable</a></li>
+  </ul></li>
+  <li><a href="#ai-also-has-resource-costs" id="toc-ai-also-has-resource-costs" class="nav-link" data-scroll-target="#ai-also-has-resource-costs">AI also has resource costs</a></li>
+  <li><a href="#why-this-matters-in-ee-me-and-mt" id="toc-why-this-matters-in-ee-me-and-mt" class="nav-link" data-scroll-target="#why-this-matters-in-ee-me-and-mt">Why this matters in EE, ME and MT</a></li>
+  <li><a href="#questions-from-students" id="toc-questions-from-students" class="nav-link" data-scroll-target="#questions-from-students">Questions from students</a>
+  <ul class="collapse">
+  <li><a href="#how-should-a-beginner-approach-programming" id="toc-how-should-a-beginner-approach-programming" class="nav-link" data-scroll-target="#how-should-a-beginner-approach-programming">How should a beginner approach programming?</a></li>
+  <li><a href="#how-does-an-experienced-programmer-compare-with-ai" id="toc-how-does-an-experienced-programmer-compare-with-ai" class="nav-link" data-scroll-target="#how-does-an-experienced-programmer-compare-with-ai">How does an experienced programmer compare with AI?</a></li>
+  </ul></li>
+  <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-programming-while-using-ai" id="toc-learning-programming-while-using-ai" class="nav-link" data-scroll-target="#learning-programming-while-using-ai">Learning programming while using AI</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu2.html">MU-2: Guest Lecture (Make-up)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/mu2.html">MU-2: Guest Lecture — Programming in the Age of AI</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">MU-2: Guest Lecture (Make-up)</h1>
+<h1 class="title">MU-2: Guest Lecture — Programming in the Age of AI</h1>
 </div>
 
 
@@ -515,27 +561,104 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Dates:</strong> Fri Oct 30, 2026 (make-up class) · 8:00–8:50 am · 12LH3004</p>
-<p>This is one of the two make-up classes for the October 19–20 holidays.</p>
-<p><strong>Tentative speaker:</strong> Prof.&nbsp;Nirmal Sancheti.</p>
-<p>The class date is confirmed; speaker participation is tentative. The talk title and guest-session details will be announced.</p>
-<section id="pre-read" class="level2">
-<h2 class="anchored" data-anchor-id="pre-read">Pre-read</h2>
-<p><em>To be posted (typically by the weekend before).</em></p>
+<p><strong>Date:</strong> Fri Oct 30, 2026 (make-up class) · 8:00–8:50 am · 12LH3004</p>
+<p><strong>Speaker:</strong> <a href="https://iitgn.ac.in/faculty/cse/fac-nirmal">Prof.&nbsp;Nirmal Kumar Sancheti</a>, Visiting Professor, Computer Science and Engineering, IIT Gandhinagar</p>
+<p><strong>Scribe and notes:</strong> Soma S. Dhavala</p>
+<p>This was one of the two make-up classes for the October 19–20 holidays.</p>
+<p><em>These are my notes and recollections of Prof.&nbsp;Sancheti’s lecture, organised by theme. They paraphrase my understanding of the discussion and are not his exact words, a verbatim transcript or a speaker-approved account. Any errors or omissions are mine. Examples I have added for explanation are identified as classroom illustrations. — Soma S. Dhavala</em></p>
+<section id="why-learn-programming-when-ai-can-write-code" class="level2">
+<h2 class="anchored" data-anchor-id="why-learn-programming-when-ai-can-write-code">Why learn programming when AI can write code?</h2>
+<p>AI can produce substantial amounts of code quickly. This changes how we implement a solution, but it does not remove the need to understand the problem or judge the result. Prof.&nbsp;Sancheti emphasised that the developer remains responsible for specifying the required behaviour, comprehending the generated code and checking whether it does the right thing.</p>
+<p>These responsibilities require programming knowledge. Without it, a user may be able to ask for a program and run it, yet be unable to explain its assumptions, recognise an incorrect result or assess a proposed change. Learning the basics develops the judgment needed to make those decisions. In this context, programming “taste” means being able to distinguish a suitable, clear and reliable solution from one that merely appears to work.</p>
+<p>The goal is therefore broader than remembering syntax. We need to understand how data is represented, how control flows through a program, what an algorithm guarantees and where its limitations lie. AI can assist with implementation while the developer continues to own these decisions.</p>
 </section>
-<section id="in-class" class="level2">
-<h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<p>Guest lecture materials will be added when available.</p>
+<section id="specification-making-the-requirement-unambiguous" class="level2">
+<h2 class="anchored" data-anchor-id="specification-making-the-requirement-unambiguous">Specification: making the requirement unambiguous</h2>
+<p>A central theme was the importance of specification. Before deciding how to write a program, we must state what it should accomplish. A useful specification identifies the inputs, the expected outputs, the assumptions under which the program operates and the behaviour required for unusual or invalid inputs.</p>
+<p>This also provides a way into programming for students who are more familiar with mathematics, physics or chemistry. They already know many concepts that can become computational tasks. The next step is to turn that knowledge into instructions precise enough for a computing system to execute.</p>
+<p><strong>Classroom illustration: checking a prime number.</strong> Saying “check whether the number is prime” gives a goal. A fuller specification says that the input is an integer, that integers less than 2 are not prime, and that a prime has no positive divisors other than 1 and itself. An algorithm then determines how to test that condition. A programming language expresses the algorithm in executable form.</p>
+<p>These are related but distinct activities: defining the required result, choosing a method and implementing it. An AI-generated implementation cannot resolve an unclear requirement reliably merely by producing more code. The developer must first recognise what remains unspecified.</p>
 </section>
-<section id="after-class" class="level2">
-<h2 class="anchored" data-anchor-id="after-class">After Class</h2>
-<p><em>Practice problems and any handouts will be posted here.</em></p>
+<section id="think-about-the-whole-system" class="level2">
+<h2 class="anchored" data-anchor-id="think-about-the-whole-system">Think about the whole system</h2>
+<p>A coding model may solve an individual component well without having enough context to judge the larger system. Prof.&nbsp;Sancheti stressed the importance of architecture: how components fit together, what information passes between them and which constraints must hold across the system.</p>
+<p><strong>Classroom illustration: an inventory system.</strong> One component records a sale, another updates stock, and another produces a report. Each component may appear correct when tested separately. However, what happens if the sale is recorded but the stock update fails? What happens if the same request arrives twice? These are questions about the interaction between components, not just the correctness of a single function.</p>
+<p>The developer needs to specify those interactions and verify the resulting behaviour. Domain knowledge is especially valuable here: understanding the application helps identify requirements that are absent from a short coding prompt. A good solution must fit the system in which it will operate.</p>
+</section>
+<section id="reliability-and-edge-cases" class="level2">
+<h2 class="anchored" data-anchor-id="reliability-and-edge-cases">Reliability and edge cases</h2>
+<p>A program that works on ordinary examples can still fail on an important boundary or exceptional condition. The significance of a failure depends on the application. A rare error that destroys a database or affects an aircraft is not acceptable simply because many earlier executions succeeded. The lecture used such consequences to emphasise why reliability remains an engineering responsibility.</p>
+<p>Prof.&nbsp;Sancheti described a task he had constructed with roughly a dozen edge cases. In his account, the frontier models he tried handled only a few of them correctly. This was an illustration from his experience, not a general benchmark result. The exact task, models and counts were not recorded in these notes.</p>
+<p>The practical lesson is to make edge cases part of the specification and testing process. We should consider minimum and maximum values, empty or missing data where applicable, repeated inputs, invalid inputs and failures of other components. Tests should include cases that could expose a mistaken assumption, rather than only cases that demonstrate the intended behaviour.</p>
+<p>Passing a set of tests provides evidence, but it is not by itself a proof of reliability. We also need to reason about the algorithm, inspect the implementation and understand which conditions the tests cover. AI can help propose tests; the developer must still judge whether important cases are missing.</p>
+</section>
+<section id="why-confident-ai-answers-need-checking" class="level2">
+<h2 class="anchored" data-anchor-id="why-confident-ai-answers-need-checking">Why confident AI answers need checking</h2>
+<p>Prof.&nbsp;Sancheti recalled asking a model for information and receiving references to sources that did not exist. According to his account, it took several rounds of questioning before the model acknowledged the mistake. The example illustrated how a plausible and persistent response can create confidence without providing reliable evidence.</p>
+<p>We should not infer that an answer is correct because it is detailed, fluent or repeated consistently. A model may continue offering explanations when its information is incomplete or wrong. Repeatedly asking the same system to confirm its answer is not an independent check.</p>
+<p>For programming, useful checks include reading the code, compiling it, testing cases with known answers and comparing important claims against documentation or another independently derived result. For references, the source should be located and read. The appropriate check depends on the claim, but responsibility for accepting it remains with the person using the output.</p>
+</section>
+<section id="effective-programming-efficiency-and-elegance" class="level2">
+<h2 class="anchored" data-anchor-id="effective-programming-efficiency-and-elegance">Effective programming: efficiency and elegance</h2>
+<p>The discussion described effective programming in terms of two complementary qualities: <strong>efficiency</strong> and <strong>elegance</strong>.</p>
+<section id="efficiency-understand-the-cost-of-the-method" class="level3">
+<h3 class="anchored" data-anchor-id="efficiency-understand-the-cost-of-the-method">Efficiency: understand the cost of the method</h3>
+<p>Efficiency concerns computation time, memory use and other resources. Algorithm choice matters because the amount of work can grow very differently as the input becomes larger. Knowing that one method requires quadratic work, while another grows approximately as <span class="math inline">\(n\log n\)</span>, helps us recognise when a solution may stop being practical.</p>
+<p><strong>Classroom illustration:</strong> at <span class="math inline">\(n=1{,}000\)</span>, the expressions <span class="math inline">\(n^2\)</span> and <span class="math inline">\(n\log_2 n\)</span> are approximately 1,000,000 and 10,000 respectively. These expressions illustrate growth; they are not measured execution times. Constants, implementation details and the input also matter.</p>
+<p>A short program is not necessarily an efficient program. Likewise, quickly generated code may implement an unnecessarily expensive algorithm. Understanding algorithms enables the developer to ask whether the method is appropriate for the expected scale and to evaluate alternatives.</p>
+</section>
+<section id="elegance-make-the-code-understandable-and-maintainable" class="level3">
+<h3 class="anchored" data-anchor-id="elegance-make-the-code-understandable-and-maintainable">Elegance: make the code understandable and maintainable</h3>
+<p>Elegance was discussed in terms of readability, clean design and maintainability. Software development includes substantial work on existing code: understanding it, diagnosing problems and adapting it to new requirements. The lecture discussed approximate allocations of development effort; these notes do not treat the recalled percentages as measured industry-wide figures.</p>
+<p>Code should help a later reader understand its purpose and structure. Meaningful names, clear responsibilities, appropriate functions and explicit assumptions make changes easier to reason about. A compact expression that is difficult to understand may be less useful than a slightly longer, clearer implementation.</p>
+<p>Maintainability also affects debugging. When responsibilities are separated and data flow is clear, it is easier to identify where behaviour diverges from the requirement. This connects directly to our code-reading exercise: first understand the specification, then map the overall structure, and only then inspect individual functions.</p>
+</section>
+</section>
+<section id="ai-also-has-resource-costs" class="level2">
+<h2 class="anchored" data-anchor-id="ai-also-has-resource-costs">AI also has resource costs</h2>
+<p>Prof.&nbsp;Sancheti raised concerns about the computational, energy and infrastructure costs of AI. A generated response can require more resources than a simpler tool or a conventional search. Larger or more capable models do not automatically imply better resource efficiency.</p>
+<p>The lecture also questioned the economics of expanding AI use and the infrastructure required to support it. These were concerns raised in the discussion; no numerical comparison or measurement was supplied in the recalled account. Costs depend on the task, the model, its deployment and the alternative being compared.</p>
+<p>For a developer, the useful question is whether a tool’s benefit justifies its cost for the task. A calculator, a search, a conventional algorithm or an AI model may each be appropriate in different circumstances. Resource awareness is part of judging a solution, alongside correctness and maintainability.</p>
+</section>
+<section id="why-this-matters-in-ee-me-and-mt" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters-in-ee-me-and-mt">Why this matters in EE, ME and MT</h2>
+<p>Computing is increasingly part of engineering work across disciplines. Vehicles, industrial equipment, materials research and measurement systems combine domain-specific knowledge with software. Programming therefore has value beyond preparing someone for a conventional software-development role.</p>
+<p>Prof.&nbsp;Sancheti suggested that future demand may favour engineers who combine strong domain expertise with computational skills, and that computer science departments or roles could become leaner as these capabilities spread. This was a forward-looking view expressed in the lecture, not an established prediction about enrolment or employment.</p>
+<p>The advice for students was to develop expertise in a field while learning to use computational tools effectively. An engineer who understands the physical system can identify relevant measurements, choose meaningful assumptions and judge whether a result is plausible. Programming provides a way to express and test that understanding; AI can help carry out parts of the implementation.</p>
+</section>
+<section id="questions-from-students" class="level2">
+<h2 class="anchored" data-anchor-id="questions-from-students">Questions from students</h2>
+<section id="how-should-a-beginner-approach-programming" class="level3">
+<h3 class="anchored" data-anchor-id="how-should-a-beginner-approach-programming">How should a beginner approach programming?</h3>
+<p>Start with a problem whose meaning you understand. State the inputs and the required result, work through a small example, and describe the steps without worrying initially about language syntax. Then translate those steps into the constructs available in C.</p>
+<p>The prime-number example shows this progression. Mathematical understanding supplies the meaning; algorithmic reasoning supplies the method; the programming language supplies an executable expression of that method. Learning programming includes all three, rather than syntax alone.</p>
+</section>
+<section id="how-does-an-experienced-programmer-compare-with-ai" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-an-experienced-programmer-compare-with-ai">How does an experienced programmer compare with AI?</h3>
+<p>When asked to compare himself with AI, Prof.&nbsp;Sancheti distinguished syntax-level fluency from contextual judgment. He acknowledged that AI can be stronger at rapidly producing syntax that a person might need to look up. He placed greater value on understanding the business or engineering problem, recognising missing requirements and identifying edge cases.</p>
+<p>The numerical comparison in the exchange was an informal personal assessment, not a benchmark. The useful distinction is between producing code and understanding whether that code is the right solution for its setting.</p>
+</section>
 </section>
 <section id="pagal-notes" class="level2">
 <h2 class="anchored" data-anchor-id="pagal-notes">PAGAL Notes</h2>
-<p><em>PAGAL — Perspectives on Algorithms, Generative AI &amp; Learning — is the week’s informal, blog-style column: how this week’s material looks in the age of AI. To be posted.</em></p>
+<section id="learning-programming-while-using-ai" class="level3">
+<h3 class="anchored" data-anchor-id="learning-programming-while-using-ai">Learning programming while using AI</h3>
+<p>Prof.&nbsp;Sancheti’s remarks reinforce several teaching choices in this course. Our <a href="../labs.html">labs</a> practise and assess complementary skills: <strong>drills</strong> test code comprehension by asking students to read and trace a program; <strong>fill-in-the-blank tasks</strong> require completing a partial implementation; and <strong>exercises</strong> require writing larger portions of a solution from a specification. Together, these activities ask students to understand existing code, work within a given design and construct a solution themselves.</p>
+<p>In our <a href="../weeks/mu1.html#reading-tic-tac-toe">October 29 class</a>, we spent time reading someone else’s Tic-Tac-Toe program. We began with the game specification, mapped the functions and overall flow, and then examined the implementation and its design choices. This practises the comprehension needed to maintain software or judge code produced by AI.</p>
+<p>Next week, the <a href="../weeks/w14.html">November 2–3 group activity</a> extends this work to a simplified classroom treatment of systems. Teams will formulate a problem, identify the data and major operations, describe an algorithm, and propose tests. The November 3 synthesis will compare their assumptions and design choices. The aim is to consider how the parts fit together before writing a complete program.</p>
+<p>These activities connect the course’s language fundamentals to specification, implementation, comprehension and verification. The guest lecture reinforces why we practise all of them: producing code is one part of developing a system whose behaviour we can explain and assess.</p>
+<p>The lecture connects to our earlier discussions about using AI actively while learning. Ask a model to explain an assumption, propose a counterexample or compare two methods. Read its answer critically, test the claim and explain the conclusion in your own words.</p>
+<p>For any generated program, practise answering four questions:</p>
+<ul>
+<li>What precisely is this program required to do?</li>
+<li>How does its implementation meet that requirement?</li>
+<li>Which inputs or system conditions could make it fail?</li>
+<li>What evidence supports accepting the result?</li>
+</ul>
+<p>These questions bring specification, code comprehension, domain knowledge and verification into the same exercise. They also give a concrete purpose to learning the programming fundamentals covered in this course.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
