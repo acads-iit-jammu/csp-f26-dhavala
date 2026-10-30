@@ -1,26 +1,128 @@
-# MU-2: Guest Lecture (Make-up) {.unnumbered}
+# MU-2: Guest Lecture — Programming in the Age of AI {.unnumbered}
 
-**Dates:** Fri Oct 30, 2026 (make-up class) · 8:00–8:50 am · 12LH3004
+**Date:** Fri Oct 30, 2026 (make-up class) · 8:00–8:50 am · 12LH3004
 
-This is one of the two make-up classes for the October 19–20 holidays.
+**Speaker:** [Prof. Nirmal Kumar Sancheti](https://iitgn.ac.in/faculty/cse/fac-nirmal), Visiting Professor, Computer Science and Engineering, IIT Gandhinagar
 
-**Tentative speaker:** Prof. Nirmal Sancheti.
+**Scribe and notes:** Soma S. Dhavala
 
-The class date is confirmed; speaker participation is tentative. The talk title
-and guest-session details will be announced.
+This was one of the two make-up classes for the October 19–20 holidays.
 
-## Pre-read
+*These are my notes and recollections of Prof. Sancheti's lecture, organised by theme. They paraphrase my understanding of the discussion and are not his exact words, a verbatim transcript or a speaker-approved account. Any errors or omissions are mine. Examples I have added for explanation are identified as classroom illustrations. — Soma S. Dhavala*
 
-*To be posted (typically by the weekend before).*
+## Why learn programming when AI can write code?
 
-## In Class
+AI can produce substantial amounts of code quickly. This changes how we implement a solution, but it does not remove the need to understand the problem or judge the result. Prof. Sancheti emphasised that the developer remains responsible for specifying the required behaviour, comprehending the generated code and checking whether it does the right thing.
 
-Guest lecture materials will be added when available.
+These responsibilities require programming knowledge. Without it, a user may be able to ask for a program and run it, yet be unable to explain its assumptions, recognise an incorrect result or assess a proposed change. Learning the basics develops the judgment needed to make those decisions. In this context, programming “taste” means being able to distinguish a suitable, clear and reliable solution from one that merely appears to work.
 
-## After Class
+The goal is therefore broader than remembering syntax. We need to understand how data is represented, how control flows through a program, what an algorithm guarantees and where its limitations lie. AI can assist with implementation while the developer continues to own these decisions.
 
-*Practice problems and any handouts will be posted here.*
+## Specification: making the requirement unambiguous
+
+A central theme was the importance of specification. Before deciding how to write a program, we must state what it should accomplish. A useful specification identifies the inputs, the expected outputs, the assumptions under which the program operates and the behaviour required for unusual or invalid inputs.
+
+This also provides a way into programming for students who are more familiar with mathematics, physics or chemistry. They already know many concepts that can become computational tasks. The next step is to turn that knowledge into instructions precise enough for a computing system to execute.
+
+**Classroom illustration: checking a prime number.** Saying “check whether the number is prime” gives a goal. A fuller specification says that the input is an integer, that integers less than 2 are not prime, and that a prime has no positive divisors other than 1 and itself. An algorithm then determines how to test that condition. A programming language expresses the algorithm in executable form.
+
+These are related but distinct activities: defining the required result, choosing a method and implementing it. An AI-generated implementation cannot resolve an unclear requirement reliably merely by producing more code. The developer must first recognise what remains unspecified.
+
+## Think about the whole system
+
+A coding model may solve an individual component well without having enough context to judge the larger system. Prof. Sancheti stressed the importance of architecture: how components fit together, what information passes between them and which constraints must hold across the system.
+
+**Classroom illustration: an inventory system.** One component records a sale, another updates stock, and another produces a report. Each component may appear correct when tested separately. However, what happens if the sale is recorded but the stock update fails? What happens if the same request arrives twice? These are questions about the interaction between components, not just the correctness of a single function.
+
+The developer needs to specify those interactions and verify the resulting behaviour. Domain knowledge is especially valuable here: understanding the application helps identify requirements that are absent from a short coding prompt. A good solution must fit the system in which it will operate.
+
+## Reliability and edge cases
+
+A program that works on ordinary examples can still fail on an important boundary or exceptional condition. The significance of a failure depends on the application. A rare error that destroys a database or affects an aircraft is not acceptable simply because many earlier executions succeeded. The lecture used such consequences to emphasise why reliability remains an engineering responsibility.
+
+Prof. Sancheti described a task he had constructed with roughly a dozen edge cases. In his account, the frontier models he tried handled only a few of them correctly. This was an illustration from his experience, not a general benchmark result. The exact task, models and counts were not recorded in these notes.
+
+The practical lesson is to make edge cases part of the specification and testing process. We should consider minimum and maximum values, empty or missing data where applicable, repeated inputs, invalid inputs and failures of other components. Tests should include cases that could expose a mistaken assumption, rather than only cases that demonstrate the intended behaviour.
+
+Passing a set of tests provides evidence, but it is not by itself a proof of reliability. We also need to reason about the algorithm, inspect the implementation and understand which conditions the tests cover. AI can help propose tests; the developer must still judge whether important cases are missing.
+
+## Why confident AI answers need checking
+
+Prof. Sancheti recalled asking a model for information and receiving references to sources that did not exist. According to his account, it took several rounds of questioning before the model acknowledged the mistake. The example illustrated how a plausible and persistent response can create confidence without providing reliable evidence.
+
+We should not infer that an answer is correct because it is detailed, fluent or repeated consistently. A model may continue offering explanations when its information is incomplete or wrong. Repeatedly asking the same system to confirm its answer is not an independent check.
+
+For programming, useful checks include reading the code, compiling it, testing cases with known answers and comparing important claims against documentation or another independently derived result. For references, the source should be located and read. The appropriate check depends on the claim, but responsibility for accepting it remains with the person using the output.
+
+## Effective programming: efficiency and elegance
+
+The discussion described effective programming in terms of two complementary qualities: **efficiency** and **elegance**.
+
+### Efficiency: understand the cost of the method
+
+Efficiency concerns computation time, memory use and other resources. Algorithm choice matters because the amount of work can grow very differently as the input becomes larger. Knowing that one method requires quadratic work, while another grows approximately as $n\log n$, helps us recognise when a solution may stop being practical.
+
+**Classroom illustration:** at $n=1{,}000$, the expressions $n^2$ and $n\log_2 n$ are approximately 1,000,000 and 10,000 respectively. These expressions illustrate growth; they are not measured execution times. Constants, implementation details and the input also matter.
+
+A short program is not necessarily an efficient program. Likewise, quickly generated code may implement an unnecessarily expensive algorithm. Understanding algorithms enables the developer to ask whether the method is appropriate for the expected scale and to evaluate alternatives.
+
+### Elegance: make the code understandable and maintainable
+
+Elegance was discussed in terms of readability, clean design and maintainability. Software development includes substantial work on existing code: understanding it, diagnosing problems and adapting it to new requirements. The lecture discussed approximate allocations of development effort; these notes do not treat the recalled percentages as measured industry-wide figures.
+
+Code should help a later reader understand its purpose and structure. Meaningful names, clear responsibilities, appropriate functions and explicit assumptions make changes easier to reason about. A compact expression that is difficult to understand may be less useful than a slightly longer, clearer implementation.
+
+Maintainability also affects debugging. When responsibilities are separated and data flow is clear, it is easier to identify where behaviour diverges from the requirement. This connects directly to our code-reading exercise: first understand the specification, then map the overall structure, and only then inspect individual functions.
+
+## AI also has resource costs
+
+Prof. Sancheti raised concerns about the computational, energy and infrastructure costs of AI. A generated response can require more resources than a simpler tool or a conventional search. Larger or more capable models do not automatically imply better resource efficiency.
+
+The lecture also questioned the economics of expanding AI use and the infrastructure required to support it. These were concerns raised in the discussion; no numerical comparison or measurement was supplied in the recalled account. Costs depend on the task, the model, its deployment and the alternative being compared.
+
+For a developer, the useful question is whether a tool's benefit justifies its cost for the task. A calculator, a search, a conventional algorithm or an AI model may each be appropriate in different circumstances. Resource awareness is part of judging a solution, alongside correctness and maintainability.
+
+## Why this matters in EE, ME and MT
+
+Computing is increasingly part of engineering work across disciplines. Vehicles, industrial equipment, materials research and measurement systems combine domain-specific knowledge with software. Programming therefore has value beyond preparing someone for a conventional software-development role.
+
+Prof. Sancheti suggested that future demand may favour engineers who combine strong domain expertise with computational skills, and that computer science departments or roles could become leaner as these capabilities spread. This was a forward-looking view expressed in the lecture, not an established prediction about enrolment or employment.
+
+The advice for students was to develop expertise in a field while learning to use computational tools effectively. An engineer who understands the physical system can identify relevant measurements, choose meaningful assumptions and judge whether a result is plausible. Programming provides a way to express and test that understanding; AI can help carry out parts of the implementation.
+
+## Questions from students
+
+### How should a beginner approach programming?
+
+Start with a problem whose meaning you understand. State the inputs and the required result, work through a small example, and describe the steps without worrying initially about language syntax. Then translate those steps into the constructs available in C.
+
+The prime-number example shows this progression. Mathematical understanding supplies the meaning; algorithmic reasoning supplies the method; the programming language supplies an executable expression of that method. Learning programming includes all three, rather than syntax alone.
+
+### How does an experienced programmer compare with AI?
+
+When asked to compare himself with AI, Prof. Sancheti distinguished syntax-level fluency from contextual judgment. He acknowledged that AI can be stronger at rapidly producing syntax that a person might need to look up. He placed greater value on understanding the business or engineering problem, recognising missing requirements and identifying edge cases.
+
+The numerical comparison in the exchange was an informal personal assessment, not a benchmark. The useful distinction is between producing code and understanding whether that code is the right solution for its setting.
 
 ## PAGAL Notes
 
-*PAGAL — Perspectives on Algorithms, Generative AI & Learning — is the week's informal, blog-style column: how this week's material looks in the age of AI. To be posted.*
+### Learning programming while using AI
+
+Prof. Sancheti's remarks reinforce several teaching choices in this course. Our [labs](../labs.qmd) practise and assess complementary skills: **drills** test code comprehension by asking students to read and trace a program; **fill-in-the-blank tasks** require completing a partial implementation; and **exercises** require writing larger portions of a solution from a specification. Together, these activities ask students to understand existing code, work within a given design and construct a solution themselves.
+
+In our [October 29 class](mu1.qmd#reading-tic-tac-toe), we spent time reading someone else's Tic-Tac-Toe program. We began with the game specification, mapped the functions and overall flow, and then examined the implementation and its design choices. This practises the comprehension needed to maintain software or judge code produced by AI.
+
+Next week, the [November 2–3 group activity](w14.qmd) extends this work to a simplified classroom treatment of systems. Teams will formulate a problem, identify the data and major operations, describe an algorithm, and propose tests. The November 3 synthesis will compare their assumptions and design choices. The aim is to consider how the parts fit together before writing a complete program.
+
+These activities connect the course's language fundamentals to specification, implementation, comprehension and verification. The guest lecture reinforces why we practise all of them: producing code is one part of developing a system whose behaviour we can explain and assess.
+
+The lecture connects to our earlier discussions about using AI actively while learning. Ask a model to explain an assumption, propose a counterexample or compare two methods. Read its answer critically, test the claim and explain the conclusion in your own words.
+
+For any generated program, practise answering four questions:
+
+- What precisely is this program required to do?
+- How does its implementation meet that requirement?
+- Which inputs or system conditions could make it fail?
+- What evidence supports accepting the result?
+
+These questions bring specification, code comprehension, domain knowledge and verification into the same exercise. They also give a concrete purpose to learning the programming fundamentals covered in this course.

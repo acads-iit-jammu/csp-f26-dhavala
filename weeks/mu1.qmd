@@ -313,6 +313,17 @@ It prints `6`, the greatest common divisor. For positive inputs, each subtractio
 
 Jeetu takes another route: its [Turing-completeness argument](https://github.com/dhavala-iitjmu/jeetu/blob/main/docs/turing-completeness.md) uses two arbitrarily growable sequences to represent the tape on either side of a machine's current cell. Conditions select a transition and a loop repeats it. The actual executable still has finite memory and can run out of resources. Compiling to C, or computing GCD, is not itself a proof of Turing completeness.
 
+#### Game of Life: computation from local rules
+
+We encountered **Conway's Game of Life** in [Week 09](w09.qmd) and [Lab 07](../labsheets/lab07.qmd). Each cell's next state depends only on its current state and its eight neighbours. All cells update simultaneously.
+
+Game of Life is also **Turing complete**: suitably constructed patterns can simulate a Turing machine. The computation is encoded in the arrangement of cells and unfolds as generations advance. The rules do not need explicit `if`, `while` or function syntax. Those are constructs we use in C to implement the simulator.
+
+The theoretical result assumes an unbounded grid and arbitrarily much time. Our fixed-size classroom board has only finitely many states; it cannot provide unbounded storage. Writing a Life simulator in C is not itself a proof that Life is universal.
+
+- Watch [John Conway discuss the Game of Life](https://www.youtube.com/watch?v=R9Plq-D1gEk).
+- Read [Turing Completeness — Old Dominion University](https://www.cs.odu.edu/~zeil/cs390/latest/Public/turing-complete/index.html), which includes Game of Life among its examples.
+
 #### Why keep the other constructs?
 
 Functions organise behaviour; arrays and structures organise data; different loops express common patterns clearly. They help us read, test, debug and maintain programs even when they add no fundamental computational power.
