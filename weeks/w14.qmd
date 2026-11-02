@@ -14,7 +14,6 @@ No new language features this week. We will apply the programming concepts cover
 ## In Class
 
 - [Activity handout (4 pages)](../materials/group-discussion.pdf)
-- [Group and problem assignments (password-protected PDF)](../materials/group-assignments.pdf)
 
 The handout contains the paper worksheet, five problem statements, a blank team-member table, team deliverables and presentation instructions. Group and problem assignments are provided separately.
 
