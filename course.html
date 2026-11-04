@@ -252,6 +252,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./weeks/w17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">W17: End-Semester Examination</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./weeks/mu1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MU-1: Jeetu, Constrained Programming and Code Reading (Make-up)</span></a>
   </div>
@@ -492,7 +498,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#past-papers" id="toc-past-papers" class="nav-link" data-scroll-target="#past-papers">Past papers</a></li>
   </ul></li>
-  <li><a href="#guest-lectures-tentative" id="toc-guest-lectures-tentative" class="nav-link" data-scroll-target="#guest-lectures-tentative">Guest Lectures (Tentative)</a></li>
+  <li><a href="#guest-lectures" id="toc-guest-lectures" class="nav-link" data-scroll-target="#guest-lectures">Guest Lectures</a></li>
   <li><a href="#weekly-plan-lectures" id="toc-weekly-plan-lectures" class="nav-link" data-scroll-target="#weekly-plan-lectures">Weekly Plan (Lectures)</a></li>
   </ul>
 </nav>
@@ -562,10 +568,6 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="important-dates">Important Dates</h2>
 <p>From the <span class="smallcaps">IIT Jammu academic calendar for 1<sup>st</sup> year UG students, Semester 2026-01</span>:</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Event</th>
@@ -594,22 +596,26 @@ ul.task-list li input[type="checkbox"] {
 <td><strong>Thursday, October 22, 2026 · 7:00–8:30 PM (EE/ME/MT)</strong></td>
 </tr>
 <tr class="even">
+<td>Hackathon</td>
+<td><strong>Tuesday, November 17, 2026 · 7:00–9:00 PM</strong></td>
+</tr>
+<tr class="odd">
 <td>Make-up classes for the Oct 19–20 holidays</td>
 <td>Thursday, Oct 29 and Friday, Oct 30, 2026</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Last day of classes</td>
 <td>Friday, Nov 20, 2026</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>End-semester feedback (by students)</td>
 <td>Nov 12 – Nov 17, 2026</td>
 </tr>
-<tr class="odd">
-<td><strong>End-Semester Examination</strong></td>
-<td><strong>Nov 23 – Nov 30, 2026</strong></td>
-</tr>
 <tr class="even">
+<td><strong>End-Semester Examination</strong></td>
+<td><strong>Saturday, Nov 28, 2026 · 9:00 AM–12:00 noon</strong> · <a href="./weeks/w17.html">Scope and preparation (W17)</a></td>
+</tr>
+<tr class="odd">
 <td>Grades visible to students</td>
 <td>Dec 15, 2026</td>
 </tr>
@@ -664,7 +670,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <ul>
 <li><strong>Lab evaluation:</strong> Lab 1 (setup) and Lab 11 (Git, IDE and debugging tutorial) are not graded. The remaining graded labs carry equal weight, totalling 20%.</li>
-<li><strong>Hackathon:</strong> details (format and date) will be announced in class and on this page.</li>
+<li><strong>Hackathon:</strong> scheduled for <strong>Tuesday, November 17, 2026, 7:00–9:00 PM</strong>. Format and participation details will be shared in class.</li>
 </ul>
 <section id="past-papers" class="level3">
 <h3 class="anchored" data-anchor-id="past-papers">Past papers</h3>
@@ -693,8 +699,8 @@ ul.task-list li input[type="checkbox"] {
 <p>The solutions restate every question, so you can re-attempt the paper before reading the answer.</p>
 </section>
 </section>
-<section id="guest-lectures-tentative" class="level2">
-<h2 class="anchored" data-anchor-id="guest-lectures-tentative">Guest Lectures (Tentative)</h2>
+<section id="guest-lectures" class="level2">
+<h2 class="anchored" data-anchor-id="guest-lectures">Guest Lectures</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -707,7 +713,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>Friday, Oct 30, 2026</td>
 <td>Prof.&nbsp;Nirmal Sancheti</td>
-<td><a href="./weeks/mu2.html">Make-up class MU-2</a>, during W13</td>
+<td><a href="./weeks/mu2.html">Make-up class MU-2</a>, during W13 — delivered</td>
 </tr>
 <tr class="even">
 <td>Monday, Nov 16, 2026</td>
@@ -721,7 +727,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>Speaker participation is tentative. Talk titles and guest-session details will be announced. The make-up class dates, October 29 and 30, are confirmed.</p>
+<p>The November 16 and 17 guest lectures are tentative. Talk titles and session details will be announced. The make-up class dates, October 29 and 30, are confirmed.</p>
 </section>
 <section id="weekly-plan-lectures" class="level2">
 <h2 class="anchored" data-anchor-id="weekly-plan-lectures">Weekly Plan (Lectures)</h2>
@@ -818,7 +824,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: center;"><a href="./weeks/w13.html">13</a></td>
 <td>Oct 26, Oct 27; make-ups Oct 29–30</td>
-<td><strong>Dynamic memory allocation</strong> — <code>malloc</code>, <code>calloc</code>, <code>realloc</code>, <code>free</code>; stack and heap; leaks and dangling pointers. <strong>Recursion</strong> — base case, recursive case, the call stack. <strong>Make-up classes:</strong> Oct 29 and 30 (see MU-1/MU-2); tentative guest lecture by Prof.&nbsp;Nirmal Sancheti on Oct 30</td>
+<td><strong>Dynamic memory allocation</strong> — <code>malloc</code>, <code>calloc</code>, <code>realloc</code>, <code>free</code>; stack and heap; leaks and dangling pointers. <strong>Recursion</strong> — base case, recursive case, the call stack. <strong>Make-up classes:</strong> Oct 29 and 30 (see MU-1/MU-2); guest lecture by Prof.&nbsp;Nirmal Sancheti on Oct 30</td>
 <td><a href="cs1100-cse-iitm-2021/slides/Lec19.pdf">Lec 19</a> · <a href="cs1100-cse-iitm-2021/slides/Lec20.pdf">Lec 20</a> · <a href="cs1100-cse-iitm-2021/slides/Lec24.pdf">Lec 24</a></td>
 </tr>
 <tr class="even">
@@ -836,19 +842,25 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: center;"><a href="./weeks/w16.html">16</a></td>
 <td>Nov 16, Nov 17</td>
-<td><strong>Tentative guest lectures:</strong> Mon — Dr.&nbsp;Aalok Thakkar; Tue — Snehashish Ghosh and Sai Nikhilesh. Revision materials will be provided separately</td>
+<td><strong>Tentative guest lectures:</strong> Mon — Dr.&nbsp;Aalok Thakkar; Tue — Snehashish Ghosh and Sai Nikhilesh. <strong>Hackathon:</strong> Tue, 7:00–9:00 PM. Revision materials will be provided separately</td>
 <td>—</td>
 </tr>
 <tr class="odd">
+<td style="text-align: center;"><a href="./weeks/w17.html">17</a></td>
+<td>Nov 23–30</td>
+<td><strong>End-semester examination week.</strong> Exam: Saturday, Nov 28, 9:00 AM–12:00 noon. See <a href="./weeks/w17.html">exam scope and preparation guidance</a></td>
+<td><a href="./cs1100-cse-iitm-2021/index.html">Prof.&nbsp;Shweta Agrawal’s topic-wise lecture PDFs</a></td>
+</tr>
+<tr class="even">
 <td style="text-align: center;"><a href="./weeks/mu1.html">MU-1</a></td>
 <td>Thu Oct 29</td>
 <td><strong>Make-up class:</strong> Jeetu and constrained programming, followed by reading the two-player Tic-Tac-Toe C program</td>
 <td><a href="./weeks/mu1.html">Session plan</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;"><a href="./weeks/mu2.html">MU-2</a></td>
 <td>Fri Oct 30</td>
-<td><strong>Make-up class:</strong> tentative guest lecture by Prof.&nbsp;Nirmal Sancheti; talk title to be announced</td>
+<td><strong>Make-up class:</strong> guest lecture by Prof.&nbsp;Nirmal Sancheti (delivered)</td>
 <td>—</td>
 </tr>
 </tbody>

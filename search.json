@@ -24,7 +24,7 @@
     "href": "index.html#announcements",
     "title": "CS-1-01 (MO)",
     "section": "Announcements",
-    "text": "Announcements\n\n[22-October-2026] Class Test-2: Thursday, 22 October, 7:00–8:30 PM, EE/ME/MT only. Coverage: functions, pointers, structures and strings. Assessment schedule.\n[26-July-2026] Course website is live.\n[26-July-2026] Classes commence Monday, August 3, 2026, 8:00 am, in 12LH3004.",
+    "text": "Announcements\n\n[04-November-2026] End-Semester Examination: Saturday, 28 November 2026, 9:00 AM–12:00 noon. See W17 for scope and preparation guidance.\n[04-November-2026] Hackathon: Tuesday, 17 November 2026, 7:00–9:00 PM. Further details will be shared in class.\n[22-October-2026] Class Test-2: Thursday, 22 October, 7:00–8:30 PM, EE/ME/MT only. Coverage: functions, pointers, structures and strings. Assessment schedule.\n[26-July-2026] Course website is live.\n[26-July-2026] Classes commence Monday, August 3, 2026, 8:00 am, in 12LH3004.",
     "crumbs": [
       "Welcome"
     ]
@@ -64,7 +64,7 @@
     "href": "course.html#important-dates",
     "title": "Course",
     "section": "Important Dates",
-    "text": "Important Dates\nFrom the IIT Jammu academic calendar for 1st year UG students, Semester 2026-01:\n\n\n\n\n\n\n\nEvent\nDates\n\n\n\n\nCommencement of classes\nMonday, Aug 3, 2026\n\n\nClass Test-1*\nAugust 23, 2026 · 8:00–9:30 AM\n\n\nMid-semester feedback (by students)\nSep 9 – Sep 15, 2026\n\n\nMid-Semester Examination\nTuesday, September 22, 2026 · 4:00–5:30 PM\n\n\nClass Test-2*\nThursday, October 22, 2026 · 7:00–8:30 PM (EE/ME/MT)\n\n\nMake-up classes for the Oct 19–20 holidays\nThursday, Oct 29 and Friday, Oct 30, 2026\n\n\nLast day of classes\nFriday, Nov 20, 2026\n\n\nEnd-semester feedback (by students)\nNov 12 – Nov 17, 2026\n\n\nEnd-Semester Examination\nNov 23 – Nov 30, 2026\n\n\nGrades visible to students\nDec 15, 2026\n\n\n\n* Class tests are conducted with internal arrangements. CT1 and CT2 dates and times are shown above; room details are announced in class.\nInstitute holidays that affect our slots: Wed Aug 26 (Milad-un-Nabi), Mon Oct 19 & Tue Oct 20 (Dussehra), Mon Nov 9 (Govardhan Puja), Tue Nov 10 (Declared Holiday), Wed Nov 11 (Bhai Duj).",
+    "text": "Important Dates\nFrom the IIT Jammu academic calendar for 1st year UG students, Semester 2026-01:\n\n\n\nEvent\nDates\n\n\n\n\nCommencement of classes\nMonday, Aug 3, 2026\n\n\nClass Test-1*\nAugust 23, 2026 · 8:00–9:30 AM\n\n\nMid-semester feedback (by students)\nSep 9 – Sep 15, 2026\n\n\nMid-Semester Examination\nTuesday, September 22, 2026 · 4:00–5:30 PM\n\n\nClass Test-2*\nThursday, October 22, 2026 · 7:00–8:30 PM (EE/ME/MT)\n\n\nHackathon\nTuesday, November 17, 2026 · 7:00–9:00 PM\n\n\nMake-up classes for the Oct 19–20 holidays\nThursday, Oct 29 and Friday, Oct 30, 2026\n\n\nLast day of classes\nFriday, Nov 20, 2026\n\n\nEnd-semester feedback (by students)\nNov 12 – Nov 17, 2026\n\n\nEnd-Semester Examination\nSaturday, Nov 28, 2026 · 9:00 AM–12:00 noon · Scope and preparation (W17)\n\n\nGrades visible to students\nDec 15, 2026\n\n\n\n* Class tests are conducted with internal arrangements. CT1 and CT2 dates and times are shown above; room details are announced in class.\nInstitute holidays that affect our slots: Wed Aug 26 (Milad-un-Nabi), Mon Oct 19 & Tue Oct 20 (Dussehra), Mon Nov 9 (Govardhan Puja), Tue Nov 10 (Declared Holiday), Wed Nov 11 (Bhai Duj).",
     "crumbs": [
       "Course"
     ]
@@ -74,17 +74,17 @@
     "href": "course.html#assessment",
     "title": "Course",
     "section": "Assessment",
-    "text": "Assessment\n\n\n\n\n\n\n\nComponent\nWeight\n\n\n\n\nClass Test-1\n10%\n\n\nClass Test-2\n10%\n\n\nMid-Semester Examination\n20%\n\n\nEnd-Semester Examination\n30%\n\n\nHackathon\n10%\n\n\nRegular lab evaluation\n20%\n\n\nTotal\n100%\n\n\n\n\nLab evaluation: Lab 1 (setup) and Lab 11 (Git, IDE and debugging tutorial) are not graded. The remaining graded labs carry equal weight, totalling 20%.\nHackathon: details (format and date) will be announced in class and on this page.\n\n\nPast papers\n\n\n\n\n\n\n\nPaper\nSolutions\n\n\n\n\nClass Test 1 (August 23, 2026, 8:00–9:30 AM) — number systems, complements, overflow, the compile model\n📕 Worked solutions\n\n\nMidterm (September 22, 2026, 4:00–5:30 PM) — Weeks 01–07\n📕 Worked solutions\n\n\n\nThe solutions restate every question, so you can re-attempt the paper before reading the answer.",
+    "text": "Assessment\n\n\n\n\n\n\n\nComponent\nWeight\n\n\n\n\nClass Test-1\n10%\n\n\nClass Test-2\n10%\n\n\nMid-Semester Examination\n20%\n\n\nEnd-Semester Examination\n30%\n\n\nHackathon\n10%\n\n\nRegular lab evaluation\n20%\n\n\nTotal\n100%\n\n\n\n\nLab evaluation: Lab 1 (setup) and Lab 11 (Git, IDE and debugging tutorial) are not graded. The remaining graded labs carry equal weight, totalling 20%.\nHackathon: scheduled for Tuesday, November 17, 2026, 7:00–9:00 PM. Format and participation details will be shared in class.\n\n\nPast papers\n\n\n\n\n\n\n\nPaper\nSolutions\n\n\n\n\nClass Test 1 (August 23, 2026, 8:00–9:30 AM) — number systems, complements, overflow, the compile model\n📕 Worked solutions\n\n\nMidterm (September 22, 2026, 4:00–5:30 PM) — Weeks 01–07\n📕 Worked solutions\n\n\n\nThe solutions restate every question, so you can re-attempt the paper before reading the answer.",
     "crumbs": [
       "Course"
     ]
   },
   {
-    "objectID": "course.html#guest-lectures-tentative",
-    "href": "course.html#guest-lectures-tentative",
+    "objectID": "course.html#guest-lectures",
+    "href": "course.html#guest-lectures",
     "title": "Course",
-    "section": "Guest Lectures (Tentative)",
-    "text": "Guest Lectures (Tentative)\n\n\n\nDate\nSpeaker(s)\nSession\n\n\n\n\nFriday, Oct 30, 2026\nProf. Nirmal Sancheti\nMake-up class MU-2, during W13\n\n\nMonday, Nov 16, 2026\nDr. Aalok Thakkar\nW16\n\n\nTuesday, Nov 17, 2026\nSnehashish Ghosh and Sai Nikhilesh\nW16\n\n\n\nSpeaker participation is tentative. Talk titles and guest-session details will be announced. The make-up class dates, October 29 and 30, are confirmed.",
+    "section": "Guest Lectures",
+    "text": "Guest Lectures\n\n\n\nDate\nSpeaker(s)\nSession\n\n\n\n\nFriday, Oct 30, 2026\nProf. Nirmal Sancheti\nMake-up class MU-2, during W13 — delivered\n\n\nMonday, Nov 16, 2026\nDr. Aalok Thakkar\nW16\n\n\nTuesday, Nov 17, 2026\nSnehashish Ghosh and Sai Nikhilesh\nW16\n\n\n\nThe November 16 and 17 guest lectures are tentative. Talk titles and session details will be announced. The make-up class dates, October 29 and 30, are confirmed.",
     "crumbs": [
       "Course"
     ]
@@ -94,7 +94,7 @@
     "href": "course.html#weekly-plan-lectures",
     "title": "Course",
     "section": "Weekly Plan (Lectures)",
-    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nNumber systems completed on Lec 4 (post CT-1); data types — char/int/float/double as size + reading convention, sizeof\nLec 4 · Deck 07\n\n\n05\nAug 31, Sep 1\nMon: precedence drill, then the compilation pipeline — preprocessor, compiler, assembler, linker, each stopped and inspected (gcc -E/-S/-c, nm). Tue: loops — while, do-while, for as one idea in three costumes (straight into Lab 04)\nDeck 09 · Lec 6 · Lec 9 · Lec 12\n\n\n06\nSep 7, Sep 8\nMon: selection — if/else, ladders, switch and its break, break/continue in loops (eight runnable programs in the notes). Tue: nested loops, and patterns as geometry — a shape is a distance held constant\nLec 7 · Lec 8\n\n\n07\nSep 14, Sep 15\nMon: 1-D arrays — why a single variable cannot answer a question about the past; traversal, search with break, skipping bad records with continue, best-so-far with its index, neighbour differences. Tue: parallel arrays and 2-D on a sensor rig — why a second index beats a fifth array, and four business questions whose answers differ by interpretation, not by bugs\nLec 15\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: functions — declaration, definition, call; scope; call by value and by reference; bisection — square root by halving, and why that is really root-finding; how sin and sqrt are actually computed (conceptual). Tue: two-dimensional arrays through Conway’s Game of Life\nLec 20 · Lec 17\n\n\n10\nOct 5, Oct 6\nPointers — addresses, & and *, pointer arithmetic, arrays as pointers, and why an array function needs a length. Strings — character arrays and the '\\0' terminator, strlen, palindromes, string.h\nLec 15\n\n\n11\nOct 12, Oct 13\nStructures and pointers to structures; -&gt;. File input and output — FILE *, fopen/fclose, reading to end of file. CT2: Thursday, Oct 22, 7:00–8:30 PM\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27; make-ups Oct 29–30\nDynamic memory allocation — malloc, calloc, realloc, free; stack and heap; leaks and dangling pointers. Recursion — base case, recursive case, the call stack. Make-up classes: Oct 29 and 30 (see MU-1/MU-2); tentative guest lecture by Prof. Nirmal Sancheti on Oct 30\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nProgramming problem-solving studio — Nov 2: classroom team discussion (40-minute breakout); Nov 3: synthesis and presentations of findings\n—\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes. Self-study: Git, IDE use and debugging\nTools study plan\n\n\n16\nNov 16, Nov 17\nTentative guest lectures: Mon — Dr. Aalok Thakkar; Tue — Snehashish Ghosh and Sai Nikhilesh. Revision materials will be provided separately\n—\n\n\nMU-1\nThu Oct 29\nMake-up class: Jeetu and constrained programming, followed by reading the two-player Tic-Tac-Toe C program\nSession plan\n\n\nMU-2\nFri Oct 30\nMake-up class: tentative guest lecture by Prof. Nirmal Sancheti; talk title to be announced\n—\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They are scheduled for Thursday, October 29 (MU-1) and Friday, October 30 (MU-2), to make up for the October 19–20 holidays. The W13 and MU entries refer to the same two sessions. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
+    "text": "Weekly Plan (Lectures)\nThe plan below is tentative and will be adjusted as the semester progresses. Slides marked Lec n are from CS1100, IIT Madras, reused with permission — see acknowledgements. Additional notes will be posted as we go.\nEach week’s page carries Pre-read, In-Class, and After-Class sections — and ends with PAGAL Notes (Perspectives on Algorithms, Generative AI & Learning): an informal, blog-style weekly column on how that week’s material looks in the age of AI.\n\n\n\n\n\n\n\n\n\nWeek\nDates\nTopics\nMaterials\n\n\n\n\n01\nAug 3, Aug 4\nIntroduction: computer science, algorithms, computer hardware & software\nLec 1 · Lec 3\n\n\n02\nAug 10, Aug 11\nMon: the computer revisited — von Neumann architecture, the Toy Computer (stored programs vs calculators). Tue: number systems — radix-q, binary & hex, conversions; signed integers; fixed & floating point, IEEE FP32\nDeck 04 · Toy Computer · Under the Hood 1–3 · Deck 03 · Lec 3\n\n\n03\nAug 17, Aug 18\nMon: first C program — write/compile/run, gcc and ./ annotated, variables. Tue: types, assignments, operators & precedence (Lec 4 completed). Complements/overflow reference for CT-1. CT-1 window opens Aug 19\nDeck 06 · Deck 07 · Deck 05 · Lec 4\n\n\n04\nAug 24, Aug 25\nNumber systems completed on Lec 4 (post CT-1); data types — char/int/float/double as size + reading convention, sizeof\nLec 4 · Deck 07\n\n\n05\nAug 31, Sep 1\nMon: precedence drill, then the compilation pipeline — preprocessor, compiler, assembler, linker, each stopped and inspected (gcc -E/-S/-c, nm). Tue: loops — while, do-while, for as one idea in three costumes (straight into Lab 04)\nDeck 09 · Lec 6 · Lec 9 · Lec 12\n\n\n06\nSep 7, Sep 8\nMon: selection — if/else, ladders, switch and its break, break/continue in loops (eight runnable programs in the notes). Tue: nested loops, and patterns as geometry — a shape is a distance held constant\nLec 7 · Lec 8\n\n\n07\nSep 14, Sep 15\nMon: 1-D arrays — why a single variable cannot answer a question about the past; traversal, search with break, skipping bad records with continue, best-so-far with its index, neighbour differences. Tue: parallel arrays and 2-D on a sensor rig — why a second index beats a fifth array, and four business questions whose answers differ by interpretation, not by bugs\nLec 15\n\n\n08\nSep 21, Sep 22\nMid-Semester Examinations (Sep 18–23) — no classes\n—\n\n\n09\nSep 28, Sep 29\nMon: functions — declaration, definition, call; scope; call by value and by reference; bisection — square root by halving, and why that is really root-finding; how sin and sqrt are actually computed (conceptual). Tue: two-dimensional arrays through Conway’s Game of Life\nLec 20 · Lec 17\n\n\n10\nOct 5, Oct 6\nPointers — addresses, & and *, pointer arithmetic, arrays as pointers, and why an array function needs a length. Strings — character arrays and the '\\0' terminator, strlen, palindromes, string.h\nLec 15\n\n\n11\nOct 12, Oct 13\nStructures and pointers to structures; -&gt;. File input and output — FILE *, fopen/fclose, reading to end of file. CT2: Thursday, Oct 22, 7:00–8:30 PM\nLec 17 · Lec 18\n\n\n12\nOct 19, Oct 20\nDussehra holidays — no classes\n—\n\n\n13\nOct 26, Oct 27; make-ups Oct 29–30\nDynamic memory allocation — malloc, calloc, realloc, free; stack and heap; leaks and dangling pointers. Recursion — base case, recursive case, the call stack. Make-up classes: Oct 29 and 30 (see MU-1/MU-2); guest lecture by Prof. Nirmal Sancheti on Oct 30\nLec 19 · Lec 20 · Lec 24\n\n\n14\nNov 2, Nov 3\nProgramming problem-solving studio — Nov 2: classroom team discussion (40-minute breakout); Nov 3: synthesis and presentations of findings\n—\n\n\n15\nNov 9, Nov 10\nHolidays (Govardhan Puja, Declared Holiday) — no classes. Self-study: Git, IDE use and debugging\nTools study plan\n\n\n16\nNov 16, Nov 17\nTentative guest lectures: Mon — Dr. Aalok Thakkar; Tue — Snehashish Ghosh and Sai Nikhilesh. Hackathon: Tue, 7:00–9:00 PM. Revision materials will be provided separately\n—\n\n\n17\nNov 23–30\nEnd-semester examination week. Exam: Saturday, Nov 28, 9:00 AM–12:00 noon. See exam scope and preparation guidance\nProf. Shweta Agrawal’s topic-wise lecture PDFs\n\n\nMU-1\nThu Oct 29\nMake-up class: Jeetu and constrained programming, followed by reading the two-player Tic-Tac-Toe C program\nSession plan\n\n\nMU-2\nFri Oct 30\nMake-up class: guest lecture by Prof. Nirmal Sancheti (delivered)\n—\n\n\n\n\n\n\n\n\n\nThe syllabus allocates 28 lecture hours, but the holiday weeks above leave only 26 Mon/Tue slots — so the two make-up classes (MU-1, MU-2) are required, not optional. They are scheduled for Thursday, October 29 (MU-1) and Friday, October 30 (MU-2), to make up for the October 19–20 holidays. The W13 and MU entries refer to the same two sessions. Materials marked OCW are from MIT OCW 6.087 (CC BY-NC-SA).",
     "crumbs": [
       "Course"
     ]
@@ -124,7 +124,7 @@
     "href": "syllabus.html#assessment-dates-2026-offering",
     "title": "Syllabus",
     "section": "Assessment Dates — 2026 Offering",
-    "text": "Assessment Dates — 2026 Offering\n\n\n\n\n\n\n\nAssessment\nDate and time\n\n\n\n\nClass Test 1 (CT1)\nAugust 23, 2026 · 8:00–9:30 AM\n\n\nMid-Semester Examination\nTuesday, September 22, 2026 · 4:00–5:30 PM\n\n\nClass Test 2 (CT2)\nThursday, October 22, 2026 · 7:00–8:30 PM\n\n\n\nThese dates and times apply to the EE, ME and MT sections. See the course page for the assessment schedule and updates.",
+    "text": "Assessment Dates — 2026 Offering\n\n\n\n\n\n\n\nAssessment\nDate and time\n\n\n\n\nClass Test 1 (CT1)\nAugust 23, 2026 · 8:00–9:30 AM\n\n\nMid-Semester Examination\nTuesday, September 22, 2026 · 4:00–5:30 PM\n\n\nClass Test 2 (CT2)\nThursday, October 22, 2026 · 7:00–8:30 PM\n\n\nEnd-Semester Examination\nSaturday, November 28, 2026 · 9:00 AM–12:00 noon\n\n\n\nThese dates and times apply to the EE, ME and MT sections. See the course page for the assessment schedule and updates.\nFor examination scope and preparation guidance, see W17 — End-Semester Examination.",
     "crumbs": [
       "Syllabus"
     ]
@@ -1566,7 +1566,7 @@
     "href": "weeks/w13.html",
     "title": "W13: Dynamic Memory and Recursion",
     "section": "",
-    "text": "Additional classes this week\nDates: Mon Oct 26 & Tue Oct 27, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — dynamic memory allocation; functions and recursion\nThursday, October 29 and Friday, October 30, 2026 are make-up classes for the October 19–20 holidays.\nThe guest speaker’s participation is tentative. The talk title and guest-session details will be announced.",
+    "text": "Additional classes this week\nDates: Mon Oct 26 & Tue Oct 27, 2026 · 8:00–8:50 am · 12LH3004\nSyllabus module: 5 — dynamic memory allocation; functions and recursion\nThursday, October 29 and Friday, October 30, 2026 are make-up classes for the October 19–20 holidays.\nThe guest lecture took place on October 30.",
     "crumbs": [
       "Weekly Notes",
       "W13: Dynamic Memory and Recursion"
@@ -1577,7 +1577,7 @@
     "href": "weeks/w13.html#additional-classes-this-week",
     "title": "W13: Dynamic Memory and Recursion",
     "section": "",
-    "text": "Date\nSession\n\n\n\n\nThu Oct 29\nMU-1: Jeetu, constrained programming and code reading\n\n\nFri Oct 30\nMU-2: tentative guest lecture by Prof. Nirmal Sancheti",
+    "text": "Date\nSession\n\n\n\n\nThu Oct 29\nMU-1: Jeetu, constrained programming and code reading\n\n\nFri Oct 30\nMU-2: guest lecture by Prof. Nirmal Sancheti (delivered)",
     "crumbs": [
       "Weekly Notes",
       "W13: Dynamic Memory and Recursion"
@@ -1764,7 +1764,7 @@
     "href": "weeks/w16.html",
     "title": "W16: Guest Lectures (Tentative)",
     "section": "",
-    "text": "Plan\nDates: Mon Nov 16 & Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004\nFocus: guest lectures and semester revision; talk titles to be announced.\nSpeaker participation is tentative. Talk titles and guest-session details will be announced. Revision problems and supporting materials will be provided separately.",
+    "text": "Plan\nDates: Mon Nov 16 & Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004\nFocus: guest lectures and semester revision; talk titles to be announced.\nHackathon: Tuesday, November 17, 2026 · 7:00–9:00 pm. Further details will be shared in class.\nSpeaker participation is tentative. Talk titles and guest-session details will be announced. Revision problems and supporting materials will be provided separately.",
     "crumbs": [
       "Weekly Notes",
       "W16: Guest Lectures (Tentative)"
@@ -1812,6 +1812,39 @@
     "crumbs": [
       "Weekly Notes",
       "W16: Guest Lectures (Tentative)"
+    ]
+  },
+  {
+    "objectID": "weeks/w17.html",
+    "href": "weeks/w17.html",
+    "title": "W17: End-Semester Examination",
+    "section": "",
+    "text": "Examination scope\nSaturday, November 28, 2026 · 9:00 AM–12:00 noon\nThe examination covers everything taught through Week 13, including dynamic memory allocation and recursion. Material assigned as additional reading is also in scope. Programming concepts work together: a problem may require you to combine any of the topics covered in the course. No topic is excluded because it received less class time or seems less emphasized.\nThe paper follows the CT2 question formats:",
+    "crumbs": [
+      "Weekly Notes",
+      "W17: End-Semester Examination"
+    ]
+  },
+  {
+    "objectID": "weeks/w17.html#examination-scope",
+    "href": "weeks/w17.html#examination-scope",
+    "title": "W17: End-Semester Examination",
+    "section": "",
+    "text": "Code comprehension: multiple-choice questions about code and its behaviour.\nCode completion: write the code omitted at a marked location. A question may omit one or more lines, or a larger block of code.",
+    "crumbs": [
+      "Weekly Notes",
+      "W17: End-Semester Examination"
+    ]
+  },
+  {
+    "objectID": "weeks/w17.html#preparing-for-the-examination",
+    "href": "weeks/w17.html#preparing-for-the-examination",
+    "title": "W17: End-Semester Examination",
+    "section": "Preparing for the examination",
+    "text": "Preparing for the examination\nRevise syntax across the language, along with definitions and how constructs are declared, initialized, and used. Some details must be remembered—for example, operator precedence—and cannot always be worked out from first principles while solving a question.\nFor structured topic-wise notes, use Prof. Shweta Agrawal’s CS1100 lecture PDFs. The page lists the PDFs by lecture topic.\nPractice by coding. Read code, predict its behaviour, write solutions, run them, and compare the results. Online coding platforms can provide immediate feedback. Repeat the cycle: read, predict, write, verify.",
+    "crumbs": [
+      "Weekly Notes",
+      "W17: End-Semester Examination"
     ]
   },
   {
