@@ -1,0 +1,20 @@
+# W17: End-Semester Examination {.unnumbered}
+
+**Saturday, November 28, 2026 · 9:00 AM–12:00 noon**
+
+## Examination scope
+
+The examination covers everything taught through **Week 13**, including dynamic memory allocation and recursion. Material assigned as additional reading is also in scope. Programming concepts work together: a problem may require you to combine any of the topics covered in the course. No topic is excluded because it received less class time or seems less emphasized.
+
+The paper follows the CT2 question formats:
+
+- **Code comprehension:** multiple-choice questions about code and its behaviour.
+- **Code completion:** write the code omitted at a marked location. A question may omit one or more lines, or a larger block of code.
+
+## Preparing for the examination
+
+Revise syntax across the language, along with definitions and how constructs are declared, initialized, and used. Some details must be remembered—for example, operator precedence—and cannot always be worked out from first principles while solving a question.
+
+For structured topic-wise notes, use [Prof. Shweta Agrawal’s CS1100 lecture PDFs](../cs1100-cse-iitm-2021/index.qmd). The page lists the PDFs by lecture topic.
+
+Practice by coding. Read code, predict its behaviour, write solutions, run them, and compare the results. Online coding platforms can provide immediate feedback. Repeat the cycle: **read, predict, write, verify**.

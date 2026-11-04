@@ -12,10 +12,9 @@ October 19–20 holidays.
 | Date | Session |
 |---|---|
 | Thu Oct 29 | [MU-1: Jeetu, constrained programming and code reading](mu1.qmd) |
-| Fri Oct 30 | [MU-2](mu2.qmd): tentative guest lecture by **Prof. Nirmal Sancheti** |
+| Fri Oct 30 | [MU-2](mu2.qmd): guest lecture by **Prof. Nirmal Sancheti** (delivered) |
 
-The guest speaker's participation is tentative. The talk title and guest-session
-details will be announced.
+The guest lecture took place on October 30.
 
 ## Application: storing sensor readings
 

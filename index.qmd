@@ -22,6 +22,8 @@ See the [Course](./course.qmd) page for the week-by-week plan, and the [Labs](./
 
 ## Announcements
 
+- [04-November-2026] **End-Semester Examination:** Saturday, 28 November 2026, **9:00 AM–12:00 noon**. See [W17 for scope and preparation guidance](weeks/w17.qmd).
+- [04-November-2026] **Hackathon:** Tuesday, 17 November 2026, **7:00–9:00 PM**. Further details will be shared in class.
 - [22-October-2026] **Class Test-2: Thursday, 22 October, 7:00–8:30 PM, EE/ME/MT only.** Coverage: functions, pointers, structures and strings. [Assessment schedule](course.qmd#important-dates).
 
 - [26-July-2026] Course website is live.

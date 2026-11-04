@@ -24,8 +24,11 @@ This page reproduces the official course template for **CS-1-01 (MO) / EFL001U1M
 | Class Test 1 (CT1) | **August 23, 2026 · 8:00–9:30 AM** |
 | Mid-Semester Examination | **Tuesday, September 22, 2026 · 4:00–5:30 PM** |
 | Class Test 2 (CT2) | **Thursday, October 22, 2026 · 7:00–8:30 PM** |
+| End-Semester Examination | **Saturday, November 28, 2026 · 9:00 AM–12:00 noon** |
 
 These dates and times apply to the EE, ME and MT sections. See the [course page](course.qmd#important-dates) for the assessment schedule and updates.
+
+For examination scope and preparation guidance, see [W17 — End-Semester Examination](weeks/w17.qmd).
 
 ## Course Objectives
 

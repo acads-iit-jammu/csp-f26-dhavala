@@ -4,6 +4,7 @@ project:
   resources:
     - cs1100-cse-iitm-2021/slides/
     - materials/
+    - "!materials/classroom-engagement-game.html"
     - notebooks/
     - labs/
     - "!private/**"
@@ -50,6 +51,7 @@ book:
         - weeks/w14.qmd
         - weeks/w15.qmd
         - weeks/w16.qmd
+        - weeks/w17.qmd
         - weeks/mu1.qmd
         - weeks/mu2.qmd
     - part: "Lab Sheets"
