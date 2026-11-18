@@ -22,6 +22,7 @@ See the [Course](./course.qmd) page for the week-by-week plan, and the [Labs](./
 
 ## Announcements
 
+- [17-November-2026] **Class Test 2 solutions are available:** [CT2 solutions](materials/ct2-solutions.pdf).
 - [04-November-2026] **End-Semester Examination:** Saturday, 28 November 2026, **9:00 AM–12:00 noon**. See [W17 for scope and preparation guidance](weeks/w17.qmd).
 - [04-November-2026] **Hackathon:** Tuesday, 17 November 2026, **7:00–9:00 PM**. Before the event, confirm that you can register for and access the [HackerRank mock contest](https://www.hackerrank.com/contests/iit-jmu-mock-codeathon) using your official IIT Jammu email address.
 - [22-October-2026] **Class Test-2: Thursday, 22 October, 7:00–8:30 PM, EE/ME/MT only.** Coverage: functions, pointers, structures and strings. [Assessment schedule](course.qmd#important-dates).
