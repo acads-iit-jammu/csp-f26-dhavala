@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>W16: Guest Lectures (Tentative) – CS-1-01 (MO)</title>
+<title>W16: Guest Lectures – CS-1-01 (MO)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Guest Lectures (Tentative)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Guest Lectures</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -247,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/w16.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">W16: Guest Lectures (Tentative)</span></a>
+ <span class="menu-text">W16: Guest Lectures</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -492,8 +492,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#plan" id="toc-plan" class="nav-link active" data-scroll-target="#plan">Plan</a></li>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a></li>
+  <li><a href="#guest-lectures" id="toc-guest-lectures" class="nav-link active" data-scroll-target="#guest-lectures">Guest Lectures</a></li>
+  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In Class</a>
+  <ul class="collapse">
+  <li><a href="#from-specification-to-working-software" id="toc-from-specification-to-working-software" class="nav-link" data-scroll-target="#from-specification-to-working-software">From specification to working software</a></li>
+  </ul></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After Class</a></li>
   <li><a href="#pagal-notes" id="toc-pagal-notes" class="nav-link" data-scroll-target="#pagal-notes">PAGAL Notes</a></li>
   </ul>
@@ -502,9 +505,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Guest Lectures (Tentative)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/w01.html">Weekly Notes</a></li><li class="breadcrumb-item"><a href="../weeks/w16.html">W16: Guest Lectures</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">W16: Guest Lectures (Tentative)</h1>
+<h1 class="title">W16: Guest Lectures</h1>
 </div>
 
 
@@ -522,8 +525,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Dates:</strong> Mon Nov 16 &amp; Tue Nov 17, 2026 · 8:00–8:50 am · 12LH3004</p>
-<p><strong>Focus:</strong> guest lectures and semester revision; talk titles to be announced.</p>
-<p><strong>Hackathon:</strong> Tuesday, November 17, 2026 · 7:00–9:00 pm.</p>
+<p><strong>Focus:</strong> three guest talks on software reliability, development workflows, and building and debugging C programs.</p>
+<p><strong>Practice hackathon (not graded):</strong> Tuesday, November 17, 2026 · 7:00–9:00 pm.</p>
 <p><strong>Prerequisite:</strong> Before the event, confirm that you can register for and access the <a href="https://www.hackerrank.com/contests/iit-jmu-mock-codeathon">HackerRank mock contest</a> using your official IIT Jammu email address.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -531,35 +534,83 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Last teaching week of the semester. The end-semester examination is Nov 23–30.</p>
+<p>Last teaching week of the semester. The end-semester examination is Saturday, November 28, 9:00 am–12:00 noon.</p>
 </div>
 </div>
 </div>
-<section id="plan" class="level2">
-<h2 class="anchored" data-anchor-id="plan">Plan</h2>
+<section id="guest-lectures" class="level2">
+<h2 class="anchored" data-anchor-id="guest-lectures">Guest Lectures</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Date</th>
-<th>Tentative speaker(s)</th>
+<th>Speaker</th>
+<th>Talk</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Monday, November 16, 2026</td>
 <td><strong>Dr.&nbsp;Aalok Thakkar</strong></td>
+<td><a href="../materials/talks/aalok-thakkar-righting-code.pdf"><em>Righting Code</em> (PDF)</a></td>
 </tr>
 <tr class="even">
 <td>Tuesday, November 17, 2026</td>
-<td><strong>Snehashish Ghosh and Sai Nikhilesh</strong></td>
+<td><strong>Snehashish Ghosh</strong></td>
+<td><a href="../materials/talks/snehashish-ghosh-from-idea-to-working-code.pdf"><em>From an Idea to Working Code</em> (PDF)</a></td>
+</tr>
+<tr class="odd">
+<td>Tuesday, November 17, 2026</td>
+<td><strong>Sai Nikhilesh Reddy</strong></td>
+<td><a href="../materials/talks/sai-nikhilesh-code-debug-fix.pdf"><em>Code, Debug, &amp; Fix</em> (PDF)</a></td>
 </tr>
 </tbody>
 </table>
-<p>Speaker participation is tentative. Talk titles and guest-session details will be announced. Revision problems and supporting materials will be provided separately.</p>
 </section>
 <section id="in-class" class="level2">
 <h2 class="anchored" data-anchor-id="in-class">In Class</h2>
-<p>Guest lecture materials will be added when available.</p>
+<section id="from-specification-to-working-software" class="level3">
+<h3 class="anchored" data-anchor-id="from-specification-to-working-software">From specification to working software</h3>
+<p>The three W16 talks, together with Prof.&nbsp;Nirmal Sancheti’s earlier guest lecture, connect several ideas that have run through this course: specify the problem, reason about what a correct solution must do, implement it in a suitable environment, and verify the result.</p>
+<p><em>This synthesis reflects the instructor’s inputs and recollection of the talks. It paraphrases the discussion and is not the speakers’ exact words or a speaker-approved account.</em></p>
+<section id="start-with-a-precise-specification" class="level4">
+<h4 class="anchored" data-anchor-id="start-with-a-precise-specification">Start with a precise specification</h4>
+<p>Dr.&nbsp;Aalok Thakkar’s talk, <em>Righting Code</em>, emphasized defining the required behavior before writing the implementation. A useful analogy is to specify what a house must do and check that the design meets those requirements before building it. In programming, this means stating the inputs, outputs, assumptions, and boundary cases. His specification-first approach also connects to the design of our labs: students work from stated behavior, examine examples, and reason about what a correct program should do before filling in or writing code. This approach is discussed in his pedagogical paper, <a href="https://aalok-thakkar.github.io/publications/publications/conference/iticse2026-correctness/iticse2026-correctness.pdf"><em>A Correctness-First Introduction to Computer Science</em></a>, with Vaani Goenka.</p>
+<p>Testing belongs in this design work. Test cases can be written from the specification before the program is complete, so they help expose missing cases early. Assertions, invariants, and proofs can provide stronger reasoning about correctness; tests are still useful evidence, but passing selected tests alone does not prove that a program is correct for every permitted input.</p>
+</section>
+<section id="make-the-development-environment-support-the-work" class="level4">
+<h4 class="anchored" data-anchor-id="make-the-development-environment-support-the-work">Make the development environment support the work</h4>
+<p>Snehashish Ghosh’s talk, <em>From an Idea to Working Code</em>, showed how a dependable environment can keep attention on the problem. Tools such as an IDE, terminal, Git, and coding assistants support the work when they are set up to fit into a smooth workflow. Development is iterative: make a first version, build and run it, find problems, fix them, and repeat. A first draft with bugs is an expected part of this process.</p>
+</section>
+<section id="build-run-inspect-and-debug" class="level4">
+<h4 class="anchored" data-anchor-id="build-run-inspect-and-debug">Build, run, inspect, and debug</h4>
+<p>Sai Nikhilesh Reddy’s live session, <em>Code, Debug, &amp; Fix</em>, showed how a programmer can work through a problem: understand the specification, predict an expected result, write a small version, build it, and use breakpoints and variable inspection to find a defect rather than guessing. His GC-content example used a simple string scan over DNA sequences. The counting idea is accessible, while processing larger data makes algorithm choice and data structures increasingly important.</p>
+</section>
+<section id="how-the-course-practised-these-ideas" class="level4">
+<h4 class="anchored" data-anchor-id="how-the-course-practised-these-ideas">How the course practised these ideas</h4>
+<p>These talks reinforce the course’s practice cycle:</p>
+<ol type="1">
+<li><strong>Read and comprehend code.</strong> Lab drills ask students to trace code and predict its behavior.</li>
+<li><strong>Complete a partial solution.</strong> Fill-in-the-blank tasks ask students to connect an existing structure to a precise requirement.</li>
+<li><strong>Write a solution from a specification.</strong> Exercises ask students to design, implement, and check a larger program.</li>
+</ol>
+<p>The programming concepts studied in the course—conditions, loops, arrays, functions, strings, structures, pointers, files, dynamic memory, and recursion—work together when solving a real problem. They are tools for expressing a specification and implementing a solution that can be checked and maintained.</p>
+<p><a href="../weeks/mu2.html">Prof.&nbsp;Sancheti’s earlier lecture</a> emphasized that producing code is only one part of software development. Developers also spend time understanding requirements, reading existing code, designing systems, checking edge cases, and maintaining what has been built. The labs therefore ask students to read and reason as well as to write.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Course takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Programming is the process of turning a problem into a precise, executable description and then building confidence that the implementation behaves as specified. Coding tools and AI can support that work, while the responsibility for the specification, design choices, and verification remains with the people who ship the software.</p>
+</div>
+</div>
+</section>
+</section>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After Class</h2>
